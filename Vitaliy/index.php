@@ -1,1 +1,1 @@
-<?php echo "Hi!";  ?>
+<?php echo "Hi!:D";  ?>
