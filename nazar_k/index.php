@@ -19,6 +19,8 @@ $mx = [
    [16, 17, 18, 19, 20],
    [21, 22, 33, 24, 25]
 ];
+
+ob_start();
 foreach ($mx as $j => $value) {
 
     echo '|'.$j.'|';
@@ -33,56 +35,19 @@ foreach ($mx as $j => $value) {
 }
 array_unshift($mx, null);
 $mx = call_user_func_array('array_map', $mx);
-
-//print_r($mx);
-
-$m = count($mx);
-$n = max( array_map( 'count',  $mx ) );
-
-for ($k = 0; $k < ($m * $n); $k++){
-   
-    for ($i = 0; $i < $m; $i++){
-      
-       for ($j=0; $j<$n; $j++){
-        
-            if ($j != $n){
-                                
-                if($mx[$i][$j+1] < $mx[$i][$j]){
-                    $tmp=$mx[$i][$j+1];
-                    $mx[$i][$j+1]=$mx[$i][$j];
-                    $mx[$i][$j]=$tmp;
-                }
-            }
-           else{
-         
-                if ($mx[$i+1][$j] < $mx[$i][$j] && $i != $m){                    
-                    $tmp=$mx[$i+1][$j];
-                    $mx[$i+1][$j]=$mx[$i][$j];
-                    $mx[$i][$j]=$tmp;
-                }
-            }
-        }
-    }
-}
-//echo  $m.'+++++<br>'.$n.'++++++<br>';
-
-echo $mx[4][1]. '<br>';
 foreach ($mx as $j => $value) {
 
     echo '|'.$j.'|';
     foreach ($value as $i => $value) {
-        echo '|'.$i.'--' . $value.'|';  
-        
-      //  if (mx[j][i]<$mx)
-        
+        echo '|'.$i.'--' . $value.'|';         
     }
     echo '<br>';
     
 }
-array_unshift($mx, null);
-$mx = call_user_func_array('array_map', $mx);
+$out2 = ob_get_contents();
 
-print_r($mx);
-        ?>
+ob_end_clean();
+echo $out2;
+           ?>
     </body>
 </html>
