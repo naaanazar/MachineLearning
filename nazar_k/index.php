@@ -10,44 +10,32 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        hgjkg
+       
         <?php
-$mx = [
-   [1, 2, 3, 4, 5],
-   [6, 7, 8, 9, 10],
-   [11, 12, 45, 14, 15],
-   [16, 17, 18, 19, 20],
-   [21, 22, 33, 24, 25]
-];
-
-ob_start();
-foreach ($mx as $j => $value) {
-
-    echo '|'.$j.'|';
-    foreach ($value as $i => $value) {
-        echo '|'.$i.'--' . $value.'|';  
-        
-      //  if (mx[j][i]<$mx)
-        
-    }
-    echo '<br>';
-    
-}
-array_unshift($mx, null);
-$mx = call_user_func_array('array_map', $mx);
-foreach ($mx as $j => $value) {
-
-    echo '|'.$j.'|';
-    foreach ($value as $i => $value) {
-        echo '|'.$i.'--' . $value.'|';         
-    }
-    echo '<br>';
-    
-}
-$out2 = ob_get_contents();
-
-ob_end_clean();
-echo $out2;
-           ?>
+            $array = [
+               [1, 2, 3, 4, 5],
+               [6, 7, 8, 9, 10],
+               [11, 12, 45, 14, 15],
+               [16, 17, 18, 19, 20],
+               [21, 22, 33, 24, 25]
+            ];
+            ob_start();
+            array_out($array);
+            array_unshift($array, null);
+            $array = call_user_func_array('array_map', $array);
+            echo '<br>Result<br>';
+            array_out($array);
+            function array_out($array){
+                foreach ($array as $j => $value) {
+                foreach ($value as $i => $value) {
+                        echo ' '. $value;
+                    }
+                echo '<br>';
+                }
+            }
+            $out=ob_get_contents();
+            ob_end_clean();
+          echo $out;
+        ?>
     </body>
 </html>
