@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -24,7 +19,12 @@ and open the template in the editor.
             array_unshift($array, null);
             $array = call_user_func_array('array_map', $array);
             echo '<br>Result<br>';
-            array_out($array);
+            array_out($array);          
+            $out=ob_get_contents();
+            ob_end_clean(); 
+            write_to_file('array.html', $out);
+            
+            
             function array_out($array){
                 foreach ($array as $j => $value) {
                 foreach ($value as $i => $value) {
@@ -33,8 +33,9 @@ and open the template in the editor.
                 echo '<br>';
                 }
             }
-            $out=ob_get_contents();
-            ob_end_clean();
+            function write_to_file($file, $string){               
+                file_put_contents($file, $string,  FILE_APPEND | LOCK_EX);
+            }
           echo $out;
         ?>
     </body>
