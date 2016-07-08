@@ -19,7 +19,12 @@
             array_unshift($array, null);
             $array = call_user_func_array('array_map', $array);
             echo '<br>Result<br>';
-            array_out($array);
+            array_out($array);          
+            $out=ob_get_contents();
+            ob_end_clean(); 
+            write_to_file('array.html', $out);
+            
+            
             function array_out($array){
                 foreach ($array as $j => $value) {
                 foreach ($value as $i => $value) {
@@ -28,8 +33,9 @@
                 echo '<br>';
                 }
             }
-            $out=ob_get_contents();
-            ob_end_clean();
+            function write_to_file($file, $string){               
+                file_put_contents($file, $string,  FILE_APPEND | LOCK_EX);
+            }
           echo $out;
         ?>
     </body>
