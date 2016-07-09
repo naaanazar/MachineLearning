@@ -15,8 +15,17 @@
         $ar_zip->array_out($ar_zip->zipper($ar_zip->sort = 'DESC'));
         echo $ar_zip->string;
         
+        $rotate_array = new array_sort($array);      
+        $rotate_array->array_out($rotate_array->rotation_matrix());        
+        echo $rotate_array->string;
+        
+        $rotate_array->array_out($rotate_array->rotation_matrix($rotate_array->sort = 'DESC'));
+        echo $rotate_array->string;
+        
+        
+        $sort_asc->write_to_file(); 
         $ar_zip->write_to_file();
-        $sort_asc->write_to_file();   
+        $rotate_array->write_to_file();
         
         $out=ob_get_contents();
         ob_end_clean();           
@@ -32,6 +41,8 @@
        <?php
           echo $out;  
        ?>
+        <p>
+        <a href='array.html'>Open the recorded file</a>
        
     </body>
 </html>

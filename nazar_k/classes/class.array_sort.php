@@ -29,6 +29,7 @@ class array_sort{
             }   
             
             public function zipper(){
+                $this->sort_array();
                 $this->sort_type = 'Zipper  ' . $this->sort;
                 if ($this->sort == 'ASC'){
                     $f=1; 
@@ -45,7 +46,13 @@ class array_sort{
                         $f++;
                     }
                 }
-            }    
+            } 
+            public function rotation_matrix(){
+                $this->sort_array();
+                $this->sort_type = 'Rotate array  ' . $this->sort;
+                array_unshift($this->array, null);
+                $this->array = call_user_func_array('array_map', $this->array);
+            }
                         
             public function array_out(){
                 ob_start();
