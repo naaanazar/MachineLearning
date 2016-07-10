@@ -1,6 +1,5 @@
 <?php
 
-
 class GenerationArray {
     
     function makeArray($size) {
@@ -11,6 +10,4 @@ class GenerationArray {
         } 
         return $arrList;
     }
-    
-    
 }

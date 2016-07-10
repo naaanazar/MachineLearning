@@ -1,14 +1,6 @@
 <?php
 
 class ArraySort {
-//    public function __construct($length) {
-//        for($i = 0, $value = 1; $i <= $length - 1; $i++) {
-//            for($i2 = 0; $i2 <= $length - 1; $i2++) {
-//               $arrList[$i][$i2] = $value++;
-//            }
-//        } 
-//        return $arrList;
-//    }
 
     public function viewSortArray($viewArrays, $arraySize) {
         echo "<table>";
@@ -20,7 +12,6 @@ class ArraySort {
             echo "</tr>"; 
         } 
         echo "</table>";
-        
     }
 
     public function first($arrayOriginal, $arraySize) {
@@ -30,9 +21,7 @@ class ArraySort {
                 $sortFirst[$i2][$i] = $arrayOriginal[$i][$i2];
             }
         }
-    
-    return $sortFirst;
-         
+        return $sortFirst;  
     }
     
     public function second($arrayOriginal, $arraySize) {
@@ -47,7 +36,6 @@ class ArraySort {
                     $coup--;
                 }
             }
-            
             $counter++;
         }
         return $sortSecond;
@@ -63,20 +51,6 @@ class ArraySort {
             
              foreach($arrayOriginal as $key1 => $arr1) {
                  foreach ($arr1 as $key2 => $arr2) {
-//                     if ( isset($k1) && isset($k2) ){
-//                         if($k2 == $size) {
-//                             if($k1 == $size) {
-//                                 $k2--;
-//                             }else {
-//                                 $k1++; 
-//                             }
-//                         }else {
-//                             $k2++;
-//                         }
-//                     }else {
-//                        $k1 = $key1;
-//                        $k2 = $key2;
-//                     }
                      $sortTherd[$k1][$k2]=$arrayOriginal[$key1][$key2];
                      switch($side) {
                         case 1:
@@ -103,11 +77,8 @@ class ArraySort {
                             if($side == 1) {
                                 unset($onece);
                             }
-                            
                             break;
                      }
-                     
-                     
                  }
              }
              return $sortTherd;
