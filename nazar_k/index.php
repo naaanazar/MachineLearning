@@ -1,36 +1,32 @@
  <?php
-    require_once 'classes/class.array_sort.php';        
-        ob_start();           
-        $sort_asc= new array_sort($array);
-        $sort_asc->array_out($sort_asc->sort_array());
-        echo $sort_asc->string;
-        
-        $sort_asc->array_out($sort_asc->sort_array($sort_asc->sort = 'DESC'));
-        echo $sort_asc->string;         
-       
-        $ar_zip = new array_sort($array);      
-        $ar_zip->array_out($ar_zip->zipper());        
-        echo $ar_zip->string;
-        
-        $ar_zip->array_out($ar_zip->zipper($ar_zip->sort = 'DESC'));
-        echo $ar_zip->string;
-        
-        $rotate_array = new array_sort($array);      
-        $rotate_array->array_out($rotate_array->rotation_matrix());        
-        echo $rotate_array->string;
-        
-        $rotate_array->array_out($rotate_array->rotation_matrix($rotate_array->sort = 'DESC'));
-        echo $rotate_array->string;
-        
-        
-        $sort_asc->write_to_file(); 
-        $ar_zip->write_to_file();
-        $rotate_array->write_to_file();
-        
-        $out=ob_get_contents();
-        ob_end_clean();           
+     require_once 'classes/class.create_array.php';  
+     require_once 'classes/class.array_sort.php';  
+    if (isset($_POST['w1']) && isset($_POST['h1']) ){
+        $cr_ar = new CreateArray;
+        $array = $cr_ar->crArray($_POST['h1'], $_POST['w1']);   
+    } else {
+        require_once 'array_conf.php';
+    }
+    
+    $sort_asc= new ArraySort($array);
+    ob_start();           
+
+    $sort_asc->arrayOut($sort_asc->sortArray('ASC'));
+    $sort_asc->arrayOut($sort_asc->sortArray('DESC'));
+
+    $sort_asc->arrayOut($sort_asc->zipper('ASC'));
+    $sort_asc->arrayOut($sort_asc->zipper('DESC'));
+
+    $sort_asc->arrayOut($sort_asc->rotationArray('ASC'));
+    $sort_asc->arrayOut($sort_asc->rotationArray('DESC'));
+
+    $sort_asc->arrayOut($sort_asc->spiral('ASC'));
+    $sort_asc->arrayOut($sort_asc->spiral('DESC'));
+    $out=ob_get_contents();
+    $sort_asc->writeToFile($out."<br><a href='index.php'>back to index.php<a>");
+    ob_end_clean();           
           
-        ?>
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,6 +38,14 @@
           echo $out;  
        ?>
         <p>
+        Enter array size if you want to change the size of the array
+        <form action ='index.php' method='post'>
+            <input type='number' name='w1' value="" placeholder='width'> 
+            <input type='number' name='h1' value="" placeholder='height'> 
+            <input type='submit' value='reload'> 
+           
+            
+        </form>
         <a href='array.html'>Open the recorded file</a>
        
     </body>

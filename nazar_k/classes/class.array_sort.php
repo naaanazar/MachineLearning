@@ -1,79 +1,125 @@
 <?php
-    require_once 'array_conf.php';
+    
     class ArraySort{
 
         public $array;
         public $sort = 'ASC';
         public $file = 'array.html';
-        public $out=[];
         public $string;
         public $sort_type;
+        
 
-        function __construct($array)
+
+       function __construct($array)
         {
             $this->array = $array;                 
         }
 
-        public function sortArray()
-        {
-            $this->sort_type = 'Sort  ' . $this->sort;
+        public function sortArray($sort)
+        {            
+            global $ar;
+            global $n;
             $ar = [];
             $n = max( array_map( 'count',  $this->array ) );
+            $this->sort_type = 'Sort  ' . $sort;
             foreach ($this->array as $j => $value)
             {
                 $ar= array_merge($ar, $value);                
             }  
-            if ($this->sort == 'DESC')
+            if ($sort == 'DESC')
             {
                 rsort($ar);
             }
-            elseif($this->sort == 'ASC')
+            elseif($sort == 'ASC')
             {
                 sort($ar);
-            }
-            $this->array=array_chunk($ar, $n);                
-        }   
+            } 
+            $sort_array=array_chunk($ar, $n);
+            return $sort_array;
+            
+        }     
+      
 
-        public function zipper()
+        public function zipper($sort)
         {
-            $this->sortArray();
-            $this->sort_type = 'Zipper  ' . $this->sort;
-            if ($this->sort == 'ASC')
+            $array=$this->sortArray($sort);           
+            $this->sort_type = 'Zipper  ' . $sort;
+            if ($sort == 'ASC')
             {
                 $f=1; 
             }
-            if ($this->sort == 'DESC')
+            if ($sort == 'DESC')
             {
                 $f=2; 
             }
-            foreach ($this->array as $key => $value) {
+            foreach ($array as $key => $value) {
                 if (is_array($value))
                 {                    
-                    $tmp=$this->array[$key]; 
+                    $tmp=$array[$key]; 
                     if (($f % 2) == 0)
                     {
-                        $this->array[$key] = array_reverse($tmp);
+                        $array[$key] = array_reverse($tmp);
                     }
                     $f++;
                 }
             }
+            return  $array;
         } 
-        public function rotationArray()
+        
+        public function rotationArray($sort)
         {
-            $this->sortArray();
-            $this->sort_type = 'Rotate array  ' . $this->sort;
-            array_unshift($this->array, null);
-            $this->array = call_user_func_array('array_map', $this->array);
+            $array=$this->sortArray($sort);   
+            $this->sort_type = 'Rotate array  ' . $sort;
+            array_unshift($array, null);
+            $array = call_user_func_array('array_map', $array);
+            return $array;
         }
-
-        public function arrayOut()
+        
+        public function spiral($sort)
         {
-            ob_start();
+            global $ar;
+            global $n;
+           
+            $array=$this->sortArray($sort);   
+            $this->sort_type = 'spiral  ' . $sort;           
+            $i = $j = 0;            
+            $w = count($array);
+            $right = $w - 1;
+            $left = 0;
+            $s = 0;            
+            for ($k = 0; $k < $n * $w; ++$k) {
+                $array[$i][$j] = $ar[$s++];
+                if (($i == ($left + 1)) and ($j == $left)) { 
+                    $right--;
+                    $left++;
+                } if (($j == $right) and ($i < $right)) { 
+                    $i++;
+                    continue;
+                } 
+                if (($j < $right) and ($i == $left)) {
+                    $j++; 
+                    continue;
+                } 
+                if (($i == $right) and ($j > $left)) { 
+                    $j--;
+                    continue;
+                } 
+                if (($j == $left) and ($i > $left)) {
+                    $i--; 
+                    continue;} 
+            };
+            return $array;
+           
+        }
+        
+
+        public function arrayOut($array)
+        {            
             echo 
                 "<div style='display: inline-block; margin:10px;'>
                     <table>
                         <caption>".$this->sort_type ."</caption>";
-            foreach ($this->array as $j => $value)
+            foreach ($array as $j => $value)
             {
                 echo '<tr>';
                 if (is_array($value))
@@ -87,19 +133,11 @@
             }  
             echo 
                     '</table>
-                </div>';
-            $this->string=ob_get_contents();
-            $this->out[]=$this->string;
-            ob_get_clean();
+                </div>';               
         }  
 
-        public function writeToFile()
-        {    
-            global $string ;
-            foreach ($this->out as $key => $value)
-            {
-                $string .= $value;
-            }
-            file_put_contents($this->file, $string, LOCK_EX);
+        public function writeToFile($str)
+        {  
+            file_put_contents($this->file, $str, LOCK_EX);
         }
     }
