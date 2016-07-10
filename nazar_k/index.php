@@ -1,11 +1,12 @@
  <?php
      require_once 'classes/class.create_array.php';  
-     require_once 'classes/class.array_sort.php';  
+     require_once 'classes/class.array_sort.php'; 
+     require_once 'array_conf.php';
     if (isset($_POST['w1']) && isset($_POST['h1']) ){
         $cr_ar = new CreateArray;
-        $array = $cr_ar->crArray($_POST['h1'], $_POST['w1']);   
+        $array = $cr_ar->crArray($_POST['h1'], $_POST['w1'], $_POST['type']);   
     } else {
-        require_once 'array_conf.php';
+        $array = $default_array;
     }
     
     $sort_asc= new ArraySort($array);
@@ -41,7 +42,9 @@
         Enter array size if you want to change the size of the array
         <form action ='index.php' method='post'>
             <input type='number' name='w1' value="" placeholder='width'> 
-            <input type='number' name='h1' value="" placeholder='height'> 
+            <input type='number' name='h1' value="" placeholder='height'><br>            
+            <input type='radio' name='type' value='successively' checked>successively<br>
+            <input type='radio' name='type' value='random'>random<br>
             <input type='submit' value='reload'> 
            
             
