@@ -1,53 +1,48 @@
+ <?php
+    require_once 'classes/class.array_sort.php';        
+        ob_start();           
+        $sort_asc= new array_sort($array);
+        $sort_asc->array_out($sort_asc->sort_array());
+        echo $sort_asc->string;
+        
+        $sort_asc->array_out($sort_asc->sort_array($sort_asc->sort = 'DESC'));
+        echo $sort_asc->string;         
+       
+        $ar_zip = new array_sort($array);      
+        $ar_zip->array_out($ar_zip->zipper());        
+        echo $ar_zip->string;
+        
+        $ar_zip->array_out($ar_zip->zipper($ar_zip->sort = 'DESC'));
+        echo $ar_zip->string;
+        
+        $rotate_array = new array_sort($array);      
+        $rotate_array->array_out($rotate_array->rotation_matrix());        
+        echo $rotate_array->string;
+        
+        $rotate_array->array_out($rotate_array->rotation_matrix($rotate_array->sort = 'DESC'));
+        echo $rotate_array->string;
+        
+        
+        $sort_asc->write_to_file(); 
+        $ar_zip->write_to_file();
+        $rotate_array->write_to_file();
+        
+        $out=ob_get_contents();
+        ob_end_clean();           
+          
+        ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Array sort</title>
     </head>
     <body>
-        hgjkg
-        <?php
-$mx = [
-   [1, 2, 3, 4, 5],
-   [6, 7, 8, 9, 10],
-   [11, 12, 45, 14, 15],
-   [16, 17, 18, 19, 20],
-   [21, 22, 33, 24, 25]
-];
-
-ob_start();
-foreach ($mx as $j => $value) {
-
-    echo '|'.$j.'|';
-    foreach ($value as $i => $value) {
-        echo '|'.$i.'--' . $value.'|';  
-        
-      //  if (mx[j][i]<$mx)
-        
-    }
-    echo '<br>';
-    
-}
-array_unshift($mx, null);
-$mx = call_user_func_array('array_map', $mx);
-foreach ($mx as $j => $value) {
-
-    echo '|'.$j.'|';
-    foreach ($value as $i => $value) {
-        echo '|'.$i.'--' . $value.'|';         
-    }
-    echo '<br>';
-    
-}
-$out2 = ob_get_contents();
-
-ob_end_clean();
-echo $out2;
-           ?>
+       <?php
+          echo $out;  
+       ?>
+        <p>
+        <a href='array.html'>Open the recorded file</a>
+       
     </body>
 </html>
