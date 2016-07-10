@@ -8,27 +8,33 @@
             <input type="number" min="2" max="10" name="number" required>
             <input type="submit" name="submit" required>
             <?php
+                $handle = fopen("/array.txt", "a");
                 function Vidstup(){
                     echo '<br>';
+                    fwrite($handle, '<br>');
                     echo '<br>';
+                    fwrite($handle, '<br>');
                 };
+                function OutPut($value)
+                {   
+                    if($value < 10) {
+                        echo $value.str_repeat('&nbsp;', 3);
+                        fwrite($handle, "$value.str_repeat('&nbsp;', 3);");
+                    } else {
+                        echo $value.str_repeat('&nbsp;', 1);
+                        fwrite($handle, "$value.str_repeat('&nbsp;', 3);");
+                    };
+                };                
                 function OutPutArray($array, $number)
                 {
                     for ($i = 0; $i < $number; $i++) { 
                         echo '<br>';
+                        fwrite($handle, '<br>');
                         for ($j = 0; $j < $number; $j++) { 
                             OutPut($array[$i][$j]);
                         };
                     };
                 };
-                function OutPut($value)
-                {   
-                    if($value < 10)
-                        echo $value.str_repeat('&nbsp;', 3);
-                    else
-                        echo $value.str_repeat('&nbsp;', 1);
-                };
-
                 function ArrayInit($number)
                 {
                     $array = array();
@@ -52,6 +58,7 @@
                     Vidstup();
                     for ($j = 0; $j < $number; $j++) { 
                         echo '<br>';
+                        fwrite($handle, '<br>');
                         for ($i = 0; $i < $number; $i++) { 
                             OutPut($arrayFinal[$i][$j]);
                         };
@@ -59,6 +66,7 @@
                     Vidstup();
                     for ($j = $number - 1; $j >= 0; $j--) { 
                         echo '<br>';
+                        fwrite($handle, '<br>');
                         for ($i = $number - 1; $i >= 0; $i--) { 
                             OutPut($arrayFinal[$i][$j]);
                         };
@@ -66,6 +74,7 @@
                     Vidstup();
                     for ($i = 0; $i < $number; $i++) { 
                         echo '<br>';
+                        fwrite($handle, '<br>');
                         if ($i % 2 == 0){
                             for ($j = 0; $j < $number; $j++) { 
                                 OutPut($arrayFinal[$i][$j]);
@@ -134,8 +143,34 @@
                             continue;} 
                     };
                     OutPutArray($antiSpiral, $number);
+                    $arrDiag = ArrayInit($number);
+                    $x = 0; 
+                    $y = 0; 
+                    $count3 = 1;
+                    for ($i = 0; $i < $number; $i++) { 
+                        $x = 0;
+                        $y = $i;
+                        while ($y >= 0) {
+                                $arrDiag[$x][$y] = $count3++;
+                                $x++;
+                                $y--;
+                        };
+
+                    };
+                    for ($i = 1; $i < $number; $i++) { 
+                        $x = $i;
+                        $y = $number - 1;
+                        while ($x <= $number - 1) {
+                                $arrDiag[$x][$y] = $count3++;
+                                $x++;
+                                $y--;
+                        };
+
+                    };
+                    Vidstup();
+                    OutPutArray($arrDiag, $number);  
                 };
-                
+                fclose($handle);                
             ?>
         </form>
     </body>
