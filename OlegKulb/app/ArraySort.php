@@ -1,25 +1,10 @@
 <?php
+namespace ex\app;
 
-class ArraySort {
-    
-    public function __toString() {
-        return "String by ArraySort";
-    }
-//foreach+
-    public function viewSortArray($viewArrays, $arraySize) {
-        echo "<table>";
-        for($i = 0; $i <= $arraySize; $i++) {
-            echo "<tr>";
-            for($i2 = 0; $i2 <= $arraySize; $i2++) {
-                echo "<td>". $viewArrays[$i][$i2] . "</td>";
-            }
-            echo "</tr>"; 
-        } 
-        echo "</table>";
-    }
-
-    public function first($arrayOriginal, $arraySize) {
-        
+class ArraySort
+{
+    public function first($arrayOriginal, $arraySize)
+    {        
         for($i = 0; $i <= $arraySize; $i++) {
             for($i2 = 0; $i2 <= $arraySize; $i2++) {
                 $sortFirst[$i2][$i] = $arrayOriginal[$i][$i2];
@@ -28,7 +13,8 @@ class ArraySort {
         return $sortFirst;  
     }
     
-    public function second($arrayOriginal, $arraySize) {
+    public function second($arrayOriginal, $arraySize)
+    {
         $counter = 1;
         foreach($arrayOriginal as $key1 => $arr1) {
             $coup = $arraySize;
@@ -45,7 +31,8 @@ class ArraySort {
         return $sortSecond;
     }
     
-    public function therd($arrayOriginal, $arraySize) {
+    public function therd($arrayOriginal, $arraySize)
+    {
             $size = $arraySize;
             $sizeReverse = 0;
             $side = 1;
@@ -88,7 +75,8 @@ class ArraySort {
              return $sortTherd;
     }
     
-    public function fourth($arrayOriginal, $arraySize) {
+    public function fourth($arrayOriginal, $arraySize)
+    {
         $k1 = 0;
         $k2 = 0;
         $line = 0;
@@ -154,13 +142,7 @@ class ArraySort {
                 }
                 
             }
-        }
-                 
+        }    
         return $sortFourth ;
     }
 }
-
-
-
-
-

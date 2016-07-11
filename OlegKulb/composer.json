@@ -1,0 +1,19 @@
+{
+    "name": "exbers/framework.loc",
+    "description": "framework",
+    "type": "proj",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "exbers",
+            "email": "exberser@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ex\\": ""             
+        }
+    }
+}
