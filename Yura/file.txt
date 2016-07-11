@@ -1,2 +1,2 @@
 text+
-
+New text.
