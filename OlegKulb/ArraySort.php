@@ -51,7 +51,7 @@ class ArraySort {
             
              foreach($arrayOriginal as $key1 => $arr1) {
                  foreach ($arr1 as $key2 => $arr2) {
-                     $sortTherd[$k1][$k2]=$arrayOriginal[$key1][$key2];
+                     $sortTherd[$k1][$k2] = $arrayOriginal[$key1][$key2];
                      switch($side) {
                         case 1:
                             $k2++;
@@ -83,4 +83,44 @@ class ArraySort {
              }
              return $sortTherd;
     }
+    
+    public function fourth($arrayOriginal, $arraySize) {
+        $k1 = 0;
+        $k2 = 0;
+        $line = 0;
+        $lengLine = 0;
+        foreach($arrayOriginal as $key1 => $arr1) {
+            foreach ($arr1 as $key2 => $arr2) {
+                if($line < $arraySize+1) {
+                    if($k1 == 0 && $k2 == 0) {
+                        $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
+                        $line++;
+                        $k2 = 1;
+                    } else {
+                        if($line == $lengLine) {
+                            $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
+                            $k1 = 0;
+                            $line++;
+                            $k2 = $line;
+                            $lengLine = 0;
+                        }  else {
+                            $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
+                            $k1++;
+                            $k2--;
+                            $lengLine++;
+                        }
+                    }
+                } 
+                
+                
+            }
+        }
+                 
+        return $sortFourth ;
+    }
 }
+
+
+
+
+
