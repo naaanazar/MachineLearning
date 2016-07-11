@@ -1,15 +1,19 @@
  <?php
-     require_once '../app/classes/class.create_array.php';  
-     require_once '../app/classes/class.array_sort.php'; 
-     require_once '../array_conf.php';
+    
+    require_once '../array_conf.php';
+    require __DIR__ . '/../vendor/autoload.php';
+    
+    use sa\app\ArraySort;
+    use sa\app\CreateArray;    
+ 
     if (isset($_POST['w1']) && isset($_POST['h1']) ){
-        $cr_ar = new app\classes\CreateArray;
+        $cr_ar = new CreateArray;
         $array = $cr_ar->crArray($_POST['h1'], $_POST['w1'], $_POST['type']);   
     } else {
         $array = $default_array;
     }
     
-    $sort_asc= new app\classes\ArraySort($array);
+    $sort_asc= new ArraySort($array);
     ob_start();           
 
     $sort_asc->arrayOut($sort_asc->sortArray('ASC'));
@@ -23,8 +27,9 @@
 
     $sort_asc->arrayOut($sort_asc->spiral('ASC'));
     $sort_asc->arrayOut($sort_asc->spiral('DESC'));
+    
     $out=ob_get_contents();
-    $sort_asc->writeToFile($out."<br><a href='index.php'>back to index.php<a>");
+    $sort_asc->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");
     ob_end_clean();           
           
 ?>
@@ -49,7 +54,7 @@
            
             
         </form>
-        <a href='array.html'>Open the recorded file</a>
+        <a href='tmp/array.html'>Open the recorded file</a>
        
     </body>
 </html>

@@ -1,16 +1,18 @@
-<?php
+<?php    
+
+    namespace sa\app;
     
-    namespace app\classes;
+    use sa\traits\ArrayOut;
 
     class ArraySort{
+        
+        use ArrayOut;
 
         public $array;
-        public $sort = 'ASC';
-        public $file = 'array.html';       
-        private $sort_type; 
+        public $sort = SORT_DEFAULT;
+        protected $sort_type; 
 
-
-       function __construct($array)
+        function __construct($array)
         {
             $this->array = $array;                 
         }
@@ -19,6 +21,7 @@
         {            
             global $ar;
             global $n;
+            
             $ar = [];
             $n = max( array_map( 'count',  $this->array ) );
             $this->sort_type = 'Sort  ' . $sort;
@@ -35,8 +38,7 @@
                 sort($ar);
             } 
             $sort_array=array_chunk($ar, $n);
-            return $sort_array;
-            
+            return $sort_array;            
         }     
       
 
@@ -108,36 +110,6 @@
                     $i--; 
                     continue;} 
             };
-            return $array;
-           
-        }
-        
-
-        public function arrayOut($array)
-        {            
-            echo 
-                "<div style='display: inline-block; margin:10px;'>
-                    <table>
-                        <caption>".$this->sort_type ."</caption>";
-            foreach ($array as $j => $value)
-            {
-                echo '<tr>';
-                if (is_array($value))
-                {
-                    foreach ($value as $i => $value)
-                    {
-                        echo '<td>'. $value;
-                    }
-                    echo '</td></tr>';
-                }                  
-            }  
-            echo 
-                    '</table>
-                </div>';               
-        }  
-
-        public function writeToFile($str)
-        {  
-            file_put_contents($this->file, $str, LOCK_EX);
+            return $array;           
         }
     }
