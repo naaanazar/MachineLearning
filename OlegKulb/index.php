@@ -5,7 +5,7 @@ include_once 'GenerationArray.php';
 $sort = new ArraySort;
 $GenerationArray = new GenerationArray();
 
-$arraySize = 3  ;
+$arraySize = 6;
 
 $arrList = $GenerationArray->makeArray($arraySize);
 
@@ -32,7 +32,7 @@ $sort->viewSortArray( $sort->fourth($arrList, $arraySize), $arraySize );
 
 
 
-echo "<hr />";
+echo "<hr />фіва";
 $fp = fopen("file.txt", "a"); 
 $arrs = array('one' => 'Раз', 'two' => 'Два');
 foreach($arrList as $key1 => $arr1){
@@ -44,3 +44,6 @@ foreach($arrList as $key1 => $arr1){
 if ($test) echo 'YES';
 else echo 'ERROR';
 fclose($fp); 
+echo "<hr />";
+
+echo $sort;

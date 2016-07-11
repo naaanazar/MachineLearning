@@ -1,7 +1,11 @@
 <?php
 
 class ArraySort {
-
+    
+    public function __toString() {
+        return "String by ArraySort";
+    }
+//foreach+
     public function viewSortArray($viewArrays, $arraySize) {
         echo "<table>";
         for($i = 0; $i <= $arraySize; $i++) {
@@ -91,7 +95,7 @@ class ArraySort {
         $lengLine = 0;
         foreach($arrayOriginal as $key1 => $arr1) {
             foreach ($arr1 as $key2 => $arr2) {
-                if($line < $arraySize+1) {
+                if($line < $arraySize + 1) {
                     if($k1 == 0 && $k2 == 0) {
                         $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
                         $line++;
@@ -99,7 +103,7 @@ class ArraySort {
                     } else {
                         if($line == $lengLine) {
                             $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
-                            $k1 = 0;
+                            $k1 = 0;//
                             $line++;
                             $k2 = $line;
                             $lengLine = 0;
@@ -110,8 +114,44 @@ class ArraySort {
                             $lengLine++;
                         }
                     }
-                } 
-                
+                } else {
+                    if( isset($arrRev) ) {
+                        if($arrRev == 1) {
+                            $k1 = $k1Rev;
+                            $k1Rev++;
+                            $k2 = $arraySize;
+                            $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
+                            $k1++;
+                            $k2--;
+                            $arrRev2--;
+                            $arrRev = $arrRev2;
+                           
+                        } else {
+                            $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
+                            $k1++;
+                            $k2--;
+                            $arrRev--;
+                            
+//                             if ($k1 == 8 && $k2 == 1){
+//                                $sortFourth[0][0] = 111111;
+//                            }
+                        }
+                        
+                    }else {
+                        $arrRev = $line - 1;//=> 4
+                        $arrRev2 = $arrRev;
+                        $k1Rev = 1;
+                        $k1 = $k1Rev;
+                        $k2 = $arraySize;
+                        $k1Rev++;
+                        $sortFourth[$k1][$k2] = $arrayOriginal[$key1][$key2];
+                        $lengLine++;
+                        $k1++;
+                        $k2--;
+                        
+                    }
+
+                }
                 
             }
         }
