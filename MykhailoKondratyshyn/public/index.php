@@ -1,12 +1,27 @@
 <?php
 
 
+require "../classes/NewArray.php";
+
+ $horisontalArrayObject = new NewArray();
+
+var_dump($horisontalArrayObject->generateArray(5));
 
 
-//$horisontalArrayObject = new CreateArray();
+//$firstArray = range(0, 25);
+//
+//foreach ($firstArray as $number) {
+//    echo $number;
+//}
 
-$firstArray = range(0, 25);
+//print_r($horisontalArrayObject);
 
-foreach ($firstArray as $number) {
-    echo $number;
-}
+//$a = array(
+//    range(1, 5),
+//    range(6, 10),
+//
+//);
+//
+//
+//print_r($a);
+//

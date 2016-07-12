@@ -1,18 +1,22 @@
  <?php
 
  
-require "../app/Matrix.php";
+require __DIR__."/../vendor/autoload.php";
 
-use Figure\Matrix as Matrix;
+use app\Figure\Matrix;
 
 
 $matrix = new Matrix();
 $matrix->outHTML();
 
+/*
 $matrix->reverse();
 $matrix->outHTML();
 
 $matrix->clear();
 $matrix->secondReverse();
-$matrix->outHTML();/*
-$matrix->spiralSort();
+$matrix->outHTML();
+*/
+$matrix->clear();
+$matrix->zetSort() ;
+$matrix->outHTML();

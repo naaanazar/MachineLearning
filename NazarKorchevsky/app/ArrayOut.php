@@ -1,19 +1,20 @@
 <?php
-    namespace sa\traits;
+    namespace sa\app;    
     
-    trait ArrayOut
+    class ArrayOut 
     {        
-        public $file = OUT_FILE; 
+        public $file = 'tmp/array.html';      
         
         public function arrayOut($array)
         {            
             echo 
                 "<div style='display: inline-block; margin:10px;'>
                     <table>
-                        <caption>" . $this->sort_type . "</caption>";
-            foreach ($array as $j => $value)
-            {
+                        <caption>" . ArraySort::$sort_type1 . "</caption>";
+            foreach ($array as $j => $value) {
+                
                 echo '<tr>';
+                
                 if (is_array($value))
                 {
                     foreach ($value as $i => $value)
@@ -28,8 +29,10 @@
                 </div>';               
         }  
 
-        static function writeToFile($str)
+        public function writeToFile($str)
         {  
-            file_put_contents($file, $str, LOCK_EX);
+            $s=file_put_contents($this->file, $str, LOCK_EX);
+            echo $s;
+            
         }
     }

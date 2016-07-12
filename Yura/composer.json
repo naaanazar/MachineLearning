@@ -1,0 +1,17 @@
+{
+    "name": "yurii/yura",
+    "description": "arraySort for CrowdinSpace",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yurii",
+            "email": "fidelite62@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+	"autoload": {
+        "psr-4": {"Acme\\": "src/"}
+    }
+}
