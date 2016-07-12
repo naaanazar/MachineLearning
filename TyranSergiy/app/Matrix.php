@@ -1,6 +1,6 @@
 <?php
 
-namespace Figure;
+namespace app\Figure;
 class Matrix{
     
     private $size;
@@ -56,9 +56,9 @@ class Matrix{
         $firstValue = 1;
         
         for( $i = 0; $i < $this->size; $i++ ){
-        for( $j = 0; $j < $this->size; $j++ ){
-        $this->array[$i][$j]= $firstValue++;
-        }
+         for( $j = 0; $j < $this->size; $j++ ){
+          $this->array[$i][$j]= $firstValue++;
+            }
         }
         
     }
@@ -80,8 +80,65 @@ class Matrix{
     
  
         
+    public function spiralSort(){
         
+        $i = 0;
+        $j = 0;
+        $w = $this->size-1;
+        $l = 0;
+         $sortedArray = array();     
+        
+            
+            for($p = 0; $p < $this->size; $p++) {
+              for($k = 0; $k < $this->size; $k++) {
+                   
+                $sortedArray[$i][$j] = $this->array[$p][$k];
+                  
+                   
+    if (($i==($l+1))&&($j==$l))
+        {$w--;$l++;} 
+        
+	if (($j==$w)&&($i<$w)) 
+        {$i++;continue;} 
+    
+	if (($j<$w)&&($i==$l))
+        {$j++;continue;} 
+        
+	if (($i==$w)&&($j>$l))
+        {$j--;continue;} 
+        
+	if (($j==$l)&&($i>$l))
+        {$i--;continue;}
+     
+                }
+            }
+            $this->array = $sortedArray;
+    
+            
     }
+    
+    
+    
+    public function zetSort(){
+        
+        $sortedArray = array();
+        $row = array();
+        
+        for($i = 0; $i<$this->size; $i++){
+            if( $i % 2 != 0 ){
+                $row = array_reverse($this->array[$i]);
+            }  else {
+            $row = $this->array[$i];   
+            }
+            
+            $sortedArray[$i] = $row;
+           
+        }
+        
+        $this->array = $sortedArray;
+    }
+    
+}
         
     
     
