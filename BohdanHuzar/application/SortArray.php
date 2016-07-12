@@ -1,6 +1,6 @@
 <?php
 
-namespace liw\app
+namespace liw\application
 
 class SortArray
 {	
