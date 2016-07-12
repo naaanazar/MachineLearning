@@ -1,9 +1,10 @@
 <?php
-    namespace sa\traits;
+    namespace sa\app;
+    use sa\app\ArraySort;
     
-    trait ArrayOut
+    class ArrayOut extends ArraySort
     {        
-        public $file = OUT_FILE; 
+        public $file = 'tmp/array.html'; 
         
         public function arrayOut($array)
         {            
