@@ -149,14 +149,10 @@ class ArraySort extends GenerationArray
                             $k1++;
                             $k2--;
                             $arrRev--;
-                            
-//                             if ($k1 == 8 && $k2 == 1){
-//                                $sortFourth[0][0] = 111111;
-//                            }
                         }
                         
                     }else {
-                        $arrRev = $line - 1;//=> 4
+                        $arrRev = $line - 1;
                         $arrRev2 = $arrRev;
                         $k1Rev = 1;
                         $k1 = $k1Rev;
@@ -166,11 +162,8 @@ class ArraySort extends GenerationArray
                         $lengLine++;
                         $k1++;
                         $k2--;
-                        
                     }
-
                 }
-                
             }
         }    
         $this->arraySort = $arraySort;

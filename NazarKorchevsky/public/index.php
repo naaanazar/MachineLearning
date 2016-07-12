@@ -1,31 +1,46 @@
  <?php
-     require_once '../app/classes/class.create_array.php';  
-     require_once '../app/classes/class.array_sort.php'; 
-     require_once '../array_conf.php';
+ 
+    ini_set('error_reporting', E_ALL);
+	ini_set('display_errors',1);
+	ini_set('display_startup_errors', 1);
+  
+    require_once '../app/array_conf.php';
+    require __DIR__ . '/../vendor/autoload.php';
+    
+    use sa\app\ArraySort;
+    use sa\app\CreateArray; 
+    use sa\app\ArrayOut; 
+ 
     if (isset($_POST['w1']) && isset($_POST['h1']) ){
-        $cr_ar = new app\classes\CreateArray;
+        $cr_ar = new CreateArray;
         $array = $cr_ar->crArray($_POST['h1'], $_POST['w1'], $_POST['type']);   
     } else {
         $array = $default_array;
     }
     
-    $sort_asc= new app\classes\ArraySort($array);
+    $sort_asc= new ArraySort($array);
+    $arrayOut = new ArrayOut($array);
     ob_start();           
 
-    $sort_asc->arrayOut($sort_asc->sortArray('ASC'));
-    $sort_asc->arrayOut($sort_asc->sortArray('DESC'));
+    $arrayOut->arrayOut($arrayOut->sortArray('ASC'));
+    $arrayOut->arrayOut($arrayOut->sortArray('DESC'));
 
-    $sort_asc->arrayOut($sort_asc->zipper('ASC'));
-    $sort_asc->arrayOut($sort_asc->zipper('DESC'));
+    $arrayOut->arrayOut($arrayOut->zipper('ASC'));
+    $arrayOut->arrayOut($arrayOut->zipper('DESC'));
 
-    $sort_asc->arrayOut($sort_asc->rotationArray('ASC'));
-    $sort_asc->arrayOut($sort_asc->rotationArray('DESC'));
+    $arrayOut->arrayOut($arrayOut->rotationArray('ASC'));
+    $arrayOut->arrayOut($arrayOut->rotationArray('DESC'));
 
-    $sort_asc->arrayOut($sort_asc->spiral('ASC'));
-    $sort_asc->arrayOut($sort_asc->spiral('DESC'));
+    $arrayOut->arrayOut($arrayOut->spiral('ASC'));
+    $arrayOut->arrayOut($arrayOut->spiral('DESC'));
+    
+     
     $out=ob_get_contents();
-    $sort_asc->writeToFile($out."<br><a href='index.php'>back to index.php<a>");
-    ob_end_clean();           
+    ob_end_clean(); 
+    
+    $arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");
+    
+              
           
 ?>
 <!DOCTYPE html>
@@ -49,7 +64,7 @@
            
             
         </form>
-        <a href='array.html'>Open the recorded file</a>
+        <a href='tmp/array.html'>Open the recorded file</a>
        
     </body>
 </html>
