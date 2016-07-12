@@ -23,19 +23,22 @@
     ob_start();           
 
     $arrayOut->arrayOut($arrayOut->sortArray('ASC'));
-     $arrayOut->arrayOut($arrayOut->sortArray('DESC'));
+    $arrayOut->arrayOut($arrayOut->sortArray('DESC'));
 
-     $arrayOut->arrayOut($arrayOut->zipper('ASC'));
-     $arrayOut->arrayOut($arrayOut->zipper('DESC'));
+    $arrayOut->arrayOut($arrayOut->zipper('ASC'));
+    $arrayOut->arrayOut($arrayOut->zipper('DESC'));
 
-     $arrayOut->arrayOut($arrayOut->rotationArray('ASC'));
-     $arrayOut->arrayOut($arrayOut->rotationArray('DESC'));
+    $arrayOut->arrayOut($arrayOut->rotationArray('ASC'));
+    $arrayOut->arrayOut($arrayOut->rotationArray('DESC'));
 
     $arrayOut->arrayOut($arrayOut->spiral('ASC'));
-     $arrayOut->arrayOut($arrayOut->spiral('DESC'));
+    $arrayOut->arrayOut($arrayOut->spiral('DESC'));
+    
+    $out = 'sdsfdgsdfgsdfgdfgfdgfdgdfgdfgdfgdfgdfg';
+    
+    $arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");
     
     $out=ob_get_contents();
-    $arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");
     ob_end_clean();           
           
 ?>

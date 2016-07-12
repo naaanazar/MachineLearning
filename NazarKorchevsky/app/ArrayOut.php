@@ -29,8 +29,10 @@
                 </div>';               
         }  
 
-        static function writeToFile($str)
+        public function writeToFile($str)
         {  
-            file_put_contents($file, $str, LOCK_EX);
+            $s=file_put_contents($this->file, $str, LOCK_EX);
+            echo $s;
+            
         }
     }

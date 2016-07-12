@@ -6,7 +6,7 @@
     {              
 
         public $array;
-        public $sort = SORT_DEFAULT;
+        public $sort = 'ASC';
         protected $sort_type; 
 
         function __construct($array)
