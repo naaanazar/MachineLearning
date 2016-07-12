@@ -84,7 +84,7 @@ class Matrix{
         
         $i = 0;
         $j = 0;
-        $w = 4;
+        $w = $this->size-1;
         $l = 0;
          $sortedArray = array();     
         
@@ -96,18 +96,18 @@ class Matrix{
                   
                    
     if (($i==($l+1))&&($j==$l))
-       	 {$w--;$l++;} 
-
-    if (($j==$w)&&($i<$w)) 
-         {$i++;continue;} 
-
-    if (($j<$w)&&($i==$l))
+        {$w--;$l++;} 
+        
+	if (($j==$w)&&($i<$w)) 
+        {$i++;continue;} 
+    
+	if (($j<$w)&&($i==$l))
         {$j++;continue;} 
-
-    if (($i==$w)&&($j>$l))
+        
+	if (($i==$w)&&($j>$l))
         {$j--;continue;} 
-
-    if (($j==$l)&&($i>$l))
+        
+	if (($j==$l)&&($i>$l))
         {$i--;continue;}
      
                 }
@@ -115,6 +115,27 @@ class Matrix{
             $this->array = $sortedArray;
     
             
+    }
+    
+    
+    
+    public function zetSort(){
+        
+        $sortedArray = array();
+        $row = array();
+        
+        for($i = 0; $i<$this->size; $i++){
+            if( $i % 2 != 0 ){
+                $row = array_reverse($this->array[$i]);
+            }  else {
+            $row = $this->array[$i];   
+            }
+            
+            $sortedArray[$i] = $row;
+           
+        }
+        
+        $this->array = $sortedArray;
     }
     
 }
