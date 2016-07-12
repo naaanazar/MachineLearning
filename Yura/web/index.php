@@ -1,11 +1,9 @@
- <?php
- 
-require "../app/Matrix.php";
-use Figure\Matrix as Matrix;
-$matrix = new Matrix();
-$matrix->outHTML();
-$matrix->reverse();
-$matrix->outHTML();
-$matrix->clear();
-$matrix->secondReverse();
-$matrix->outHTML();/*
+<?php
+require '../app/arrayClass.php'; 
+$a = new arrayClass();
+$a->printArrayStraight();
+echo "<hr>";
+$a->transposeArray();
+echo "<hr>";
+$a->transposeArrayInversion();
+echo "<hr>";
