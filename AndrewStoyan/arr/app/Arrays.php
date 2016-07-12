@@ -1,10 +1,10 @@
 <?php
-
+namespace app;
 /**
 * Initialize arrays and etc.
 *
 */
-class Array 
+class Arrays 
 {
 	public $array;
 	public $counter = 1;
@@ -24,8 +24,9 @@ class Array
 
 		for ($i = 0; $i < $number; $i++) { 
             for ($j = 0; $j < $number; $j++) { 
-                $this->$array[$i][$j] = $this->count;
+                $this->array[$i][$j] = $this->count;
                 $this->count++;
+            }
         }
 
         return $this->array;
@@ -38,7 +39,7 @@ class Array
 		if ($method == 1) {
 			$count1 = 1;
 		} else {
-			$count2 = $number * $number;
+			$count1 = $number * $number;
 		}
 
         $i = $j = 0;
@@ -81,25 +82,22 @@ class Array
 		return $this->array;
 	}
 
-	public function ArrayFeel($number)
+	public function DiagFeel($number)
 	{	
 		$this->ArrayInit($number);
-
 		$x = 0; 
         $y = 0; 
         $count2 = 1;
-                    
+        
         for ($i = 0; $i < $number; $i++) { 
             $x = 0;
-            $y = $i;
-            
+            $y = $i;         
             while ($y >= 0) {
                	$this->$array[$x][$y] = $count2++;
                 $x++;
                 $y--;
             }
-        }
-                    
+        }       
         for ($i = 1; $i < $number; $i++) { 
             $x = $i;
             $y = $number - 1;
@@ -110,7 +108,6 @@ class Array
                 $y--;
             }
         }
-
         return $this->array;
     }
 }

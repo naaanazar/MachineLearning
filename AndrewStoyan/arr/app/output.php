@@ -1,5 +1,5 @@
 <?php
-	
+	namespace app;
 	/**
 	* Take care about outputing things 
 	*
@@ -14,18 +14,20 @@
 
 		public static function OutPuts($value)
 		{
-			if($value < 10) 
+			if($value < 10) {
                 echo $value.str_repeat('&nbsp;', 3);
-            else 
+            } else {
                 echo $value.str_repeat('&nbsp;', 1);
+            }
   		}
 
 		public static function OutPutArray($array, $number)
 		{
 			for ($i = 0; $i < $number; $i++) { 
                 $this->Vidstup(1);
-                for ($j = 0; $j < $number; $j++) 
+                for ($j = 0; $j < $number; $j++) { 
                     $this->OutPuts($array[$i][$j]);
+                }
             }
 		}
 
@@ -33,8 +35,9 @@
 		{
 			for ($j = 0; $j < $number; $j++) { 
                 $this->Vidstup(1);
-                for ($i = 0; $i < $number; $i++)  
+                for ($i = 0; $i < $number; $i++) {  
                     $this->OutPuts($array[$i][$j]);
+                }
             }
 		}
 
@@ -42,8 +45,9 @@
 		{
 			for ($j = $number - 1; $j >= 0; $j--) { 
                 $this->Vidstup(1);
-                for ($i = $number - 1; $i >= 0; $i--)  
+                for ($i = $number - 1; $i >= 0; $i--) { 
                     $this->OutPuts($array[$i][$j]);   
+                }
             }
 		}
 
@@ -52,14 +56,14 @@
 			for ($i = 0; $i < $number; $i++) { 
                 $this->Vidstup(1);
                 if ($i % 2 == 0){
-                    for ($j = 0; $j < $number; $j++) 
-                        $this->OutPuts($arrayFinal[$i][$j]);
+                    for ($j = 0; $j < $number; $j++) {
+                        $this->OutPuts($array[$i][$j]);
+                    }
                 } else { 
-                    for ($j = $number - 1; $j >= 0; $j--)  
-                        $this->OutPuts($arrayFinal[$i][$j]);
-                           
+                    for ($j = $number - 1; $j >= 0; $j--) {  
+                        $this->OutPuts($array[$i][$j]);
+                    }                           
                 }
             }
 		}
-
 	}
