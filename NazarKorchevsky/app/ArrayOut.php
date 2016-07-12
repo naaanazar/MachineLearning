@@ -1,9 +1,10 @@
 <?php
-    namespace sa\traits;
+    namespace sa\app;
+    use sa\app\ArraySort;
     
-    trait ArrayOut
+    class ArrayOut extends ArraySort
     {        
-        public $file = OUT_FILE; 
+        public $file = 'tmp/array.html'; 
         
         public function arrayOut($array)
         {            
@@ -28,8 +29,10 @@
                 </div>';               
         }  
 
-        static function writeToFile($str)
+        public function writeToFile($str)
         {  
-            file_put_contents($file, $str, LOCK_EX);
+            $s=file_put_contents($this->file, $str, LOCK_EX);
+            echo $s;
+            
         }
     }

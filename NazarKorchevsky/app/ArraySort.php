@@ -1,15 +1,12 @@
 <?php    
 
-    namespace sa\app;
-    
-    use sa\traits\ArrayOut;
+    namespace sa\app;    
 
-    class ArraySort{
-        
-        use ArrayOut;
+    class ArraySort 
+    {              
 
         public $array;
-        public $sort = SORT_DEFAULT;
+        public $sort = 'ASC';
         protected $sort_type; 
 
         function __construct($array)
@@ -25,18 +22,15 @@
             $ar = [];
             $n = max( array_map( 'count',  $this->array ) );
             $this->sort_type = 'Sort  ' . $sort;
-            foreach ($this->array as $j => $value)
-            {
+            
+            foreach ($this->array as $j => $value) {
                 $ar= array_merge($ar, $value);                
-            }  
-            if ($sort == 'DESC')
-            {
+            } if ($sort == 'DESC') {
                 rsort($ar);
-            }
-            elseif($sort == 'ASC')
-            {
+            } elseif($sort == 'ASC') {
                 sort($ar);
-            } 
+            }
+            
             $sort_array=array_chunk($ar, $n);
             return $sort_array;            
         }     
@@ -46,17 +40,15 @@
         {
             $array=$this->sortArray($sort);           
             $this->sort_type = 'Zipper  ' . $sort;
-            if ($sort == 'ASC')
-            {
+            if ($sort == 'ASC') {
                 $f=1; 
             }
-            if ($sort == 'DESC')
-            {
+            if ($sort == 'DESC') {
                 $f=2; 
             }
+            
             foreach ($array as $key => $value) {
-                if (is_array($value))
-                {                    
+                if (is_array($value)) {                    
                     $tmp=$array[$key]; 
                     if (($f % 2) == 0)
                     {
