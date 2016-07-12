@@ -6,9 +6,30 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit519df50e3ecaadad6ec7996c4dd1f07b
 {
+    public static $prefixLengthsPsr4 = array (
+        'a' => 
+        array (
+            'app\\' => 4,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'app\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
+        ),
+    );
+
+    public static $classMap = array (
+        'app\\Figure\\Matrix' => __DIR__ . '/../..' . '/app/Matrix.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit519df50e3ecaadad6ec7996c4dd1f07b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit519df50e3ecaadad6ec7996c4dd1f07b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit519df50e3ecaadad6ec7996c4dd1f07b::$classMap;
 
         }, null, ClassLoader::class);
     }

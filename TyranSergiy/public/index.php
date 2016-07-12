@@ -1,10 +1,8 @@
  <?php
 
- 
-require "../app/Matrix.php";
+require __DIR__."/../vendor/autoload.php";
 
-use Figure\Matrix as Matrix;
-
+use app\Figure\Matrix;
 
 $matrix = new Matrix();
 $matrix->outHTML();
