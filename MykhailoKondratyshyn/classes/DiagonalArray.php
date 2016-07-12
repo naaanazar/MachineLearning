@@ -6,7 +6,7 @@
  * Date: 11.07.16
  * Time: 23:45
  */
-class DiagonalArray extends CreateArray
+class DiagonalArray extends NewArray
 {
     public function diagonalArray()
     {
