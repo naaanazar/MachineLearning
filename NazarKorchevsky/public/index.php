@@ -34,12 +34,13 @@
     $arrayOut->arrayOut($arrayOut->spiral('ASC'));
     $arrayOut->arrayOut($arrayOut->spiral('DESC'));
     
-    $out = 'sdsfdgsdfgsdfgdfgfdgfdgdfgdfgdfgdfgdfg';
+     
+    $out=ob_get_contents();
+    ob_end_clean(); 
     
     $arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");
     
-    $out=ob_get_contents();
-    ob_end_clean();           
+              
           
 ?>
 <!DOCTYPE html>
