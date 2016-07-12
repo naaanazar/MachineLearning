@@ -1,4 +1,5 @@
 <?php
+echo"I`m working.GO AWAY";
 require '../app/arrayClass.php'; 
 $a = new arrayClass();
 $a->printArrayStraight();
