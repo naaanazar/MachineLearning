@@ -10,7 +10,7 @@
     if (isset($_POST['number']) && isset($_POST['submit'])) {
         $number = $_POST['number'];
 
-        $array = new Array();
+        $array = new Arrays();
         $arrayFinal = $array->ArrayFeel($number);
 
         OutPut::OutPutArray($arrayFinal, $number);
