@@ -15,12 +15,12 @@
                 
                 echo '<tr>';
                 
-                if (is_array($value))
-                {
-                    foreach ($value as $i => $value)
-                    {
+                if (is_array($value)) {
+                    
+                    foreach ($value as $i => $value) {
                         echo '<td>'. $value;
                     }
+                    
                     echo '</td></tr>';
                 }                  
             }  
