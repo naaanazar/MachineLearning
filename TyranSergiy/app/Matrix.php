@@ -96,15 +96,18 @@ class Matrix{
                   
                    
     if (($i==($l+1))&&($j==$l))
-        {$w--;$l++;} 
-	if (($j==$w)&&($i<$w)) 
-        {$i++;continue;} 
-    
-	if (($j<$w)&&($i==$l))
+       	 {$w--;$l++;} 
+
+    if (($j==$w)&&($i<$w)) 
+         {$i++;continue;} 
+
+    if (($j<$w)&&($i==$l))
         {$j++;continue;} 
-	if (($i==$w)&&($j>$l))
+
+    if (($i==$w)&&($j>$l))
         {$j--;continue;} 
-	if (($j==$l)&&($i>$l))
+
+    if (($j==$l)&&($i>$l))
         {$i--;continue;}
      
                 }
