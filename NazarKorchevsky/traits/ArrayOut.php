@@ -1,13 +1,16 @@
 <?php
-    namespace app\classes;
+    namespace sa\traits;
     
-    class class {
+    trait ArrayOut
+    {        
+        public $file = OUT_FILE; 
+        
         public function arrayOut($array)
         {            
             echo 
                 "<div style='display: inline-block; margin:10px;'>
                     <table>
-                        <caption>".$this->sort_type ."</caption>";
+                        <caption>" . $this->sort_type . "</caption>";
             foreach ($array as $j => $value)
             {
                 echo '<tr>';
@@ -27,6 +30,6 @@
 
         static function writeToFile($str)
         {  
-            file_put_contents($this->file, $str, LOCK_EX);
+            file_put_contents($file, $str, LOCK_EX);
         }
     }

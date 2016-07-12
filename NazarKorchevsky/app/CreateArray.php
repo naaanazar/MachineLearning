@@ -1,6 +1,6 @@
 <?php
 
-    namespace app\classes;
+    namespace sa\app;
 
     class CreateArray 
     {      
