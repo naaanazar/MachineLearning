@@ -1,8 +1,6 @@
 <?php
    define('RAND_MIN', '1');
-   define('RAND_MAX', '100');
-   define('OUT_FILE', 'tmp/array.html');
-   define('SORT_DEFAULT', 'ASC');
+   define('RAND_MAX', '100');     
    
    $default_array = array(
       array (1, 2, 3, 4, 5),

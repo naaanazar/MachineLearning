@@ -29,7 +29,7 @@ class arrayClass
         }        
     }
     
-    public function printArray()
+    public function printArrayStraight()
     {
         $array_to_print = "";
         foreach ($this->array as $row) {
@@ -47,7 +47,7 @@ class arrayClass
     public function transposeArray()
     {
         $array_to_print = "";
-        for($i = 0; $i < $this->elementsQuantity; $i++)
+        for ($i = 0; $i < $this->elementsQuantity; $i++)
         {    
             for ($j = 0; $j < $this->elementsQuantity; $j++)
             {
@@ -59,12 +59,13 @@ class arrayClass
             }
             $array_to_print .= "</br>";
         }
+        echo $array_to_print;
     }
     
     public function transposeArrayInversion()
     {
         $array_to_print = "";
-        for($i = $this->elementsQuantity-1; $i>=0; $i--)
+        for ($i = $this->elementsQuantity-1; $i >= 0; $i--)
         {    
             for ($j = $this->elementsQuantity-1; $j >= 0; $j--)
             {
@@ -76,5 +77,6 @@ class arrayClass
             }
             $array_to_print .= "</br>";
         }
+        echo $array_to_print;
     }
 }
