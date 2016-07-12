@@ -1,0 +1,14 @@
+{
+    "name": "fidelite/mm",
+    "description": "composer",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yurii",
+            "email": "fidelite62@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
