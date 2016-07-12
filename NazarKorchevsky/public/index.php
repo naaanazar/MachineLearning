@@ -1,38 +1,47 @@
  <?php
  
     ini_set('error_reporting', E_ALL);
-	ini_set('display_errors',1);
-	ini_set('display_startup_errors', 1);
+    ini_set('display_errors',1);
+    ini_set('display_startup_errors', 1);
   
-    require_once '../app/array_conf.php';
+    //require_once '../app/array_conf.php';
     require __DIR__ . '/../vendor/autoload.php';
     
-    use sa\app\ArraySort;
-    use sa\app\CreateArray; 
-    use sa\app\ArrayOut; 
- 
-    if (isset($_POST['w1']) && isset($_POST['h1']) ){
-        $cr_ar = new CreateArray;
-        $array = $cr_ar->crArray($_POST['h1'], $_POST['w1'], $_POST['type']);   
-    } else {
-        $array = $default_array;
-    }
+    use sa\app\SortZipper;
+    use sa\app\SortSpiral;
+    use sa\app\SortVertical;
+    use sa\app\SortHorizontal;
     
-    $sort_asc= new ArraySort($array);
+    use sa\app\ArraySort;
+    use sa\app\NewArray; 
+    use sa\app\ArrayOut;
+    
+    $newArray = new NewArray;
+    
+    if (isset($_POST['w1']) && isset($_POST['h1']) ){        
+        $array = $newArray->crArray($_POST['h1'], $_POST['w1'], $_POST['type']);   
+    } else {
+        $array = $newArray->array;
+    }
+    ob_start();  
+    
     $arrayOut = new ArrayOut($array);
-    ob_start();           
+    $sortHorizontal = new SortHorizontal($array);
+    $arrayOut->arrayOut($sortHorizontal->sortArrayType('ASC'));
+    $arrayOut->arrayOut($sortHorizontal->sortArrayType('DESC'));
 
-    $arrayOut->arrayOut($arrayOut->sortArray('ASC'));
-    $arrayOut->arrayOut($arrayOut->sortArray('DESC'));
+    $sortZipper = new SortZipper($array);
+    $arrayOut->arrayOut($sortZipper->sortArrayType('ASC'));
+    $arrayOut->arrayOut($sortZipper->sortArrayType('DESC'));
+    
+    $sortSpiral = new SortSpiral($array);
+    $arrayOut->arrayOut($sortSpiral->sortArrayType('ASC'));
+    $arrayOut->arrayOut($sortSpiral->sortArrayType('DESC'));
 
-    $arrayOut->arrayOut($arrayOut->zipper('ASC'));
-    $arrayOut->arrayOut($arrayOut->zipper('DESC'));
-
-    $arrayOut->arrayOut($arrayOut->rotationArray('ASC'));
-    $arrayOut->arrayOut($arrayOut->rotationArray('DESC'));
-
-    $arrayOut->arrayOut($arrayOut->spiral('ASC'));
-    $arrayOut->arrayOut($arrayOut->spiral('DESC'));
+    $sortVertical = new SortVertical($array);
+    $arrayOut->arrayOut($sortVertical->sortArrayType('ASC'));
+    $arrayOut->arrayOut($sortVertical->sortArrayType('DESC'));
+  
     
      
     $out=ob_get_contents();
