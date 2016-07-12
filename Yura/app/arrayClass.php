@@ -64,5 +64,20 @@ class arrayClass
         }
         echo $array_to_print;
     }
+    public function ArraySnake()
+    {
+      $array_to_print = "";
+        foreach ($this->array as $row) {
+            foreach ($row as $item) {
+                $array_to_print .=  $item. "&nbsp;";
+                if ($item < 10) {
+                    $array_to_print .= "&nbsp;&nbsp;";
+                }
+            }
+            $array_to_print .= "</br>";
+        }
+        echo $array_to_print;
+        echo "<br>this is not a SnakeArray, but thats OK!";
+    }
 }
 
