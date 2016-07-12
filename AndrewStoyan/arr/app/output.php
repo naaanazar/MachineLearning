@@ -7,7 +7,7 @@
 class OutPut 
 {
 		
-    public static function Vidstup($value)
+    public static function Offset($value)
     {
         echo str_repeat('<br>', $value);
     }
@@ -24,7 +24,7 @@ class OutPut
     public static function OutPutArray($array, $number)
     {
         for ($i = 0; $i < $number; $i++) { 
-            self::Vidstup(1);
+            self::Offset(1);
             for ($j = 0; $j < $number; $j++) { 
                 self::OutPuts($array[$i][$j]);
             }
