@@ -1,8 +1,5 @@
 <?php
-/**
- * 
- * ss
- */
+class arrayClass
 {
     public $elementsQuantity = 5;
     public $array = array();
@@ -68,3 +65,4 @@
         echo $array_to_print;
     }
 }
+
