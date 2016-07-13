@@ -1,19 +1,13 @@
 <?php
-class arrayClass
+
+namespace yu\app;
+
+use yu\app\generationArray;
+
+
+class arrayClass extends generationArray
 {
-    public $elementsQuantity = 5;
-    public $array = array();
-    public function __construct()
-    {
-        $cnt = 0;
-        for ($i = 0; $i < $this->elementsQuantity; $i++) {
-            for ($j = 0; $j < $this->elementsQuantity; $j++) {
-                $cnt++;
-                $this->array[$i][$j] = $cnt;   
-            }            
-        }        
-    }
-    
+
     public function printArrayStraight()
     {
         $array_to_print = "";
