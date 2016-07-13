@@ -17,4 +17,3 @@ $a->transposeArrayInversion();
 echo "<hr>";
 $a->testArray();
 echo "<hr>";
-echo "<hr>";
