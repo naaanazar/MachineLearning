@@ -2,8 +2,6 @@
 
 namespace CSR\App;
 
-use CSR\App\Sorters;
-
 class ArraySorterFactory
 {
 	const TYPE_STANDART = 'standart';
@@ -22,6 +20,7 @@ class ArraySorterFactory
 		self::TYPE_SPIRAL,
 		self::TYPE_REV_SPIRAL,
 		self::TYPE_DIAGONAL,
+		self::TYPE_REV_DIAGONAL,
 		self::TYPE_SNAKE,
 	);
 
