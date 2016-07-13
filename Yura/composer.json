@@ -1,6 +1,6 @@
 {
-    "name": "fidelite/mm",
-    "description": "composer",
+    "name": "yurii/yura",
+    "description": "arraySort for CrowdinSpace",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -10,5 +10,8 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+	"autoload": {
+        "psr-4": {"Acme\\": "src/"}
+    }
 }
