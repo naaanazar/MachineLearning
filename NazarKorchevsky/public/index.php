@@ -2,11 +2,13 @@
  
     ini_set('error_reporting', E_ALL);
     ini_set('display_errors',1);
-    ini_set('display_startup_errors', 1);
+    ini_set('display_startup_errors', 1);    
   
     require __DIR__ . '/../vendor/autoload.php';
     
-    use sa\app\SortZipper;
+    use sa\app\FactoryArray;
+    
+   use sa\app\SortZipper;
     use sa\app\SortSpiral;
     use sa\app\SortVertical;
     use sa\app\SortHorizontal;
@@ -25,9 +27,22 @@
     
     ob_start();  
     
-    $arrayOut = new ArrayOut($array);
+    $arrayOut = new ArrayOut($array);    
     
-    $sortHorizontal = new SortHorizontal($array);
+    $horizontal = FactoryArray::sort('Horizontal', $array);
+    $arrayOut->arrayOut($horizontal->sortArrayType('ASC'));
+    $arrayOut->arrayOut($horizontal->sortArrayType('DESC'));    
+    
+    $zipper = FactoryArray::sort('Zipper', $array);
+    $arrayOut->arrayOut($zipper->sortArrayType('ASC'));
+    $arrayOut->arrayOut($zipper->sortArrayType('DESC'));
+  
+    //$sortSpiral = new  call_user_func('SortSpiral' ,$array);
+   // $sortSpiral = new SortSpiral($array);
+    //$arrayOut->arrayOut($sortSpiral->sortArrayType('ASC'));
+   // $arrayOut->arrayOut($sortSpiral->sortArrayType('DESC'));
+    
+    /*$sortHorizontal = new SortHorizontal($array);
     $arrayOut->arrayOut($sortHorizontal->sortArrayType('ASC'));
     $arrayOut->arrayOut($sortHorizontal->sortArrayType('DESC'));
 
@@ -41,12 +56,12 @@
 
     $sortVertical = new SortVertical($array);
     $arrayOut->arrayOut($sortVertical->sortArrayType('ASC'));
-    $arrayOut->arrayOut($sortVertical->sortArrayType('DESC'));    
+    $arrayOut->arrayOut($sortVertical->sortArrayType('DESC'));    */
      
     $out=ob_get_contents();
     ob_end_clean(); 
     
-    $arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");                
+   // $arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");                
           
 ?>
 <!DOCTYPE html>
