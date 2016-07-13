@@ -4,7 +4,7 @@
     * Take care about outputing things 
     *
     */
-class OutPut 
+class ArrayOutput 
 {
 		
     public static function Offset($value)
