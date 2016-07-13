@@ -10,26 +10,43 @@ class SpiralArray extends NewArray
 {
     public function spiralArray($k)
     {
-        // $z = 0;
-        $array = array();
+        $z = 0;
+        $x = 1;
 
-        $i = 0;
-        for ($j = 0; $j < $k; $j++) {
+//        for ($i = 0; $i < $k; $i++) {
+//            for ($j = 0; $j < $k; $j++) {
+//
+//                $array[$i][$j] = $j + $z;
+//
+//                echo $array[$i][$j] . " ";
+//            }
+//            echo "<br>";
+//            $z = $z + $k;
+//        }
 
-            $array[$i][$j] = $j;
 
-            echo $array[$i][$j] . " ";
+        for ($i = 0; $i < $k; $i++) {
+            for ($j = 0; $j < $k; $j++) {
 
+
+                    if ($j = $k) {
+                        for ($q = 1; $q < $k; $q++) {
+                            $array[$q][$j] = $j + $x;
+
+                            echo $array[$q][$j] . " ";
+                            $x++;
+                        }
+                    }else {
+                        //$array[$i][$j] = $j + $z;
+
+                        echo "hh ";
+                    }
+            }
+            echo "<br>";
+            $z = $z + $k;
         }
 
 
-        for ($d = 0; $d < $k; $d++) {
-
-            $array[$d][$j] = $d + $k;
-
-            echo $array[$i][$j] . " ";
-
-        }
 
 
 
@@ -37,6 +54,6 @@ class SpiralArray extends NewArray
 
 
         echo "<pre>";
-        return $array;
+        var_dump($array);
     }
 }
