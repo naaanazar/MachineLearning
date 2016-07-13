@@ -1,31 +1,15 @@
-<?php
+<?php 
 
- 
+    namespace sa\app;
 
-namespace sa\app;
+    class FactoryArray 
+    {    
+        public static function sort($type)
 
-
-
-class FactoryArray 
-{    
-    public static function sort($type1, $array)
-            
-    {        
-       switch ($type1) {
-            case 'Horizontal':
-                return new SortHorizontal($array);
-                break;
-            
-            case 'Zipper':
-                return new SortZipper($array);
-                break;
-
-            default:
-                break;
+        {         
+           $className = 'sa\app\sorters\\'.$type;
+          //  $className = 'sa\app\sorters\HorizontalSort';
+            return new $className;    
         }
-       // $type = '\\app\\'."Sort".ucfirst($type);
-        
-        return new SortHorizontal($array);    
+
     }
-   
-}

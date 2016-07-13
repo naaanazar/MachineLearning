@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace yu\app;
+namespace yu\app\generators;
 /**
  * Description of generationArray
  *
