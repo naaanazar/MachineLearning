@@ -1,11 +1,23 @@
 <?php
 
 
-require "../classes/NewArray.php";
+//require "../classes/NewArray.php";
+require "../classes/HorisontalArray.php";
+require "../classes/VerticalArray.php";
+require "../classes/UnVerticalArray.php";
+require "../classes/SpiralArray.php";
 
- $horisontalArrayObject = new NewArray();
+ $horisontalArrayObject = new HorisontalArray();
+echo "<hr>";
+ $varticalArrayObject = new VerticalArray();
+echo "<hr>";
+ $unVerticalArrayObject = new UnVerticalArray();
+echo "<hr>";
+$spiralArrayObject = new SpiralArray(5);
+echo "<hr>";
 
-var_dump($horisontalArrayObject->generateArray(5));
+
+//var_dump($horisontalArrayObject->horisontalArray());
 
 
 //$firstArray = range(0, 25);
