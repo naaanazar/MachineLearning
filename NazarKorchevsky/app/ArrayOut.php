@@ -31,8 +31,8 @@
 
         public function writeToFile($str)
         {  
-            $s=file_put_contents($this->file, $str, LOCK_EX);
-            echo $s;
+            file_put_contents($this->file, $str, LOCK_EX);
+            
             
         }
     }
