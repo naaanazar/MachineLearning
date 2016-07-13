@@ -8,51 +8,46 @@
  */
 class NewArray
 {
-    public function generateArray($k)
+    public function generateArray()
     {
-        $z = 0;
-        $array = array();
-
-        for ($i = 0; $i < $k; $i++) {
-            for ($j = 0; $j < $k; $j++) {
-
-                $array[$i][$j] = $j+$z;
-
-                echo $array[$i][$j] . " ";
-
-            }
-            $z = $z + 1;
-            echo "<br>";
-
-//            if ($j+1 % $k = 0) {
-//
-//                for ($q = 1; $q < $k; $q++) {
-//
-//                    echo $array[$q][$j] = ;
-//                }
-//
-//                }else {
-//
-//
-//                    echo "eeeee";
-//                }
-
-            $array[$i][$j] = $j+$z;
-
-            echo $array[$i][$j] . " ";
-        }
-
-
-//        for ($i = 0; $i < $k; $i++) {
+//       // $z = 0;
+//        $array = array();
+//$k = 5;
+//        $i = 0;
 //            for ($j = 0; $j < $k; $j++) {
+//
+//                $array[$i][$j] = $j;
+//
 //                echo $array[$i][$j] . " ";
 //
+//            }
+//
+//
+//        for ($d = 0; $d < $k; $d++) {
+//
+//                $array[$d][$j] = $d + $k;
+//
+//                echo $array[$i][$j] . " ";
 //
 //            }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //            echo "<br>";
-//        }
-
-echo "<pre>";
-        return $array;
+//
+//
+//echo "<pre>";
+//        return $array;
+//    }
     }
 }

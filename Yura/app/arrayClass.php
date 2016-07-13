@@ -1,19 +1,13 @@
 <?php
-class arrayClass
+
+namespace yu\app;
+
+use yu\app\generationArray;
+
+
+class arrayClass extends generationArray
 {
-    public $elementsQuantity = 5;
-    public $array = array();
-    public function __construct()
-    {
-        $cnt = 0;
-        for ($i = 0; $i < $this->elementsQuantity; $i++) {
-            for ($j = 0; $j < $this->elementsQuantity; $j++) {
-                $cnt++;
-                $this->array[$i][$j] = $cnt;   
-            }            
-        }        
-    }
-    
+
     public function printArrayStraight()
     {
         $array_to_print = "";
@@ -63,21 +57,19 @@ class arrayClass
             $array_to_print .= "</br>";
         }
         echo $array_to_print;
-    }
-    public function ArraySnake()
-    {
-      $array_to_print = "";
-        foreach ($this->array as $row) {
-            foreach ($row as $item) {
-                $array_to_print .=  $item. "&nbsp;";
-                if ($item < 10) {
-                    $array_to_print .= "&nbsp;&nbsp;";
-                }
+    }   
+    
+   public function testArray()
+   {
+      $nerarray = array();
+      
+        for ($i=0; $i<1; $i++) 
+        {
+            for($j=0; $j<1; $j++)
+            {
+              echo "Here will be snake sort<br>";
             }
-            $array_to_print .= "</br>";
         }
-        echo $array_to_print;
-        echo "<br>this is not a SnakeArray, but thats OK!";
-    }
+   }  
 }
 

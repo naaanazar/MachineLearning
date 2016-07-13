@@ -1,6 +1,7 @@
 <?php    
 
-    namespace sa\app;
+    namespace sa\app;   
+    
 
     abstract class ArraySort 
     {              
