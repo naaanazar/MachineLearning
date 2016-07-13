@@ -138,12 +138,57 @@ class Matrix{
         $this->array = $sortedArray;
     }
     
+    
+   
+     public function diagonalSort(){
+        
+        $i = 0;
+        $j = 0;
+        $mainDiagonal = false;
+         $sortedArray = array();  
+            
+            for($p = 0; $p < 5; $p++) {
+              for($k = 0; $k < 5; $k++) {
+            
+               $sortedArray[$i][$j] = $this->array[$p][$k];
+             
+               
+               if($mainDiagonal == false){
+                   
+                if(($i==0) && ($j!=0) ){$i = ++$j; $j = 0;
+                 if($i==5){$mainDiagonal= true; $i=4; $j=1; continue;}
+              
+                continue;}
+                
+                if(($i == 0) && ($j == 0)){$i++;continue;}
+                
+                if($i!=0){$i--;$j++;continue;} 
+                
+               }
+               
+               if($mainDiagonal== true){
+                 
+                   if($j!=4){$i--;$j++; continue;}
+                   if($j==4){$j = ++$i; $i = $this->size-1;  continue;}
+                   
+               }
+                
+                 
+               
+             
+               
+              }
+            }
+           
+            $this->array = $sortedArray;
+            
+              
+            
+            
+            
 }
         
     
     
-    
-    
-    
-    
+}
     

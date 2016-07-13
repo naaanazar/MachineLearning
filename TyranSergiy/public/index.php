@@ -18,5 +18,5 @@ $matrix->secondReverse();
 $matrix->outHTML();
 */
 $matrix->clear();
-$matrix->zetSort() ;
+$matrix->diagonalSort() ;
 $matrix->outHTML();

@@ -63,21 +63,19 @@ class arrayClass
             $array_to_print .= "</br>";
         }
         echo $array_to_print;
-    }
-    public function ArraySnake()
-    {
-      $array_to_print = "";
-        foreach ($this->array as $row) {
-            foreach ($row as $item) {
-                $array_to_print .=  $item. "&nbsp;";
-                if ($item < 10) {
-                    $array_to_print .= "&nbsp;&nbsp;";
-                }
+    }   
+    
+   public function testArray()
+   {
+      $nerarray = array();
+      
+        for ($i=0; $i<1; $i++) 
+        {
+            for($j=0; $j<1; $j++)
+            {
+              echo "Here will be snake sort<br>";
             }
-            $array_to_print .= "</br>";
         }
-        echo $array_to_print;
-        echo "<br>this is not a SnakeArray, but thats OK!";
-    }
+   }  
 }
 
