@@ -1,10 +1,10 @@
 <?php
 
-    namespace sa\app;
+    namespace sa\app\sorters;
     
-    use sa\app\ArraySort;
+    use sa\app\sorters\BaseSort;
 
-    class SortSpiral extends ArraySort
+    class SpiralSort extends BaseSort
     {        
         public function sortArrayType($sort)
         {
@@ -47,5 +47,10 @@
                     continue;} 
             };
             return $array;  
+        }
+        
+           static public function addToFactoryArray()
+        {            
+            return 'true';
         }
     }

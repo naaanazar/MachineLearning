@@ -1,21 +1,23 @@
 <?php    
 
-    namespace sa\app;   
+    namespace sa\app\sorters;   
     
-
-    abstract class ArraySort 
+    use sa\app\NewArray;
+    
+    abstract class BaseSort 
     {              
         public $array;
         public $sort = 'ASC';
         public $sort_type; 
         static public $sort_type1; 
 
-        function __construct($array)
+       function __construct()
         {
-            $this->array = $array;                 
+            $this->array = NewArray::$array;                 
         }
 
         abstract public function sortArrayType($sort);
+        abstract static public function addToFactoryArray();
         
         public function sortArray($sort)
         {            

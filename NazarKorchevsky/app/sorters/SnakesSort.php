@@ -1,14 +1,14 @@
 <?php
 
-    namespace sa\app;
+    namespace sa\app\sorters;
     
-    use sa\app\ArraySort;
+    use sa\app\sorters\BaseSort;
 
-    class SortZipper extends ArraySort
+    class SnakesSort extends BaseSort
     {        
         public function sortArrayType($sort)
         {
-            $array=$this->sortArray($sort);           
+            $array=$this->sortArray($sort, $this->array);          
             self::$sort_type1 = 'Zipper  ' . $sort;
             
             if ($sort == 'ASC') {
@@ -28,5 +28,10 @@
                 }
             }
             return  $array;
+        }
+        
+        static public function addToFactoryArray()
+        {
+            return 'true';
         }
     }

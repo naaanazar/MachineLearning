@@ -1,6 +1,8 @@
 <?php
     namespace sa\app;    
     
+    use sa\app\sorters\BaseSort;
+    
     class ArrayOut 
     {        
         public $file = 'tmp/array.html';      
@@ -10,7 +12,7 @@
             echo 
                 "<div style='display: inline-block; margin:10px;'>
                     <table>
-                        <caption>" . ArraySort::$sort_type1 . "</caption>";
+                        <caption>" . BaseSort::$sort_type1 . "</caption>";
             foreach ($array as $j => $value) {
                 
                 echo '<tr>';

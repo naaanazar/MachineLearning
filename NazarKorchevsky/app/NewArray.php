@@ -4,7 +4,7 @@
 
     class NewArray 
     {  
-        public $array=array(
+        static public $array=array(
             array (1, 2, 3, 4, 5),
             array (6, 7, 8, 9, 10),
             array (11, 12, 13, 14, 151),
@@ -14,9 +14,11 @@
         public $randMin = 1;
         public $randMax = 100;
         
+        
+        
         public function  crArray($height1, $width, $type){
             $k=1;       
-            $this->array = []; 
+            $array = []; 
             
             for ($i = 1; $i <= $height1; $i++){
                 
@@ -28,7 +30,9 @@
                         $array[$i][$j] = rand($this->randMin, $this->randMax);
                     }                    
                 }                
-            }            
+            }     
+            self::$array = $array;   
+            
         return $array;
         }
     }
