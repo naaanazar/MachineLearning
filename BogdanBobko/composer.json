@@ -1,0 +1,11 @@
+{
+    "name": "bogdanb/cs-arr-sort",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bogdan Bobko",
+            "email": "bogdan@crowdin.com"
+        }
+    ],
+    "require": {}
+}

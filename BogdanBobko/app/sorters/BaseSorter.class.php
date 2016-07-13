@@ -5,6 +5,7 @@ namespace App\Sorters;
 abstract class BaseSorter {
 	protected $array = array();
 	protected $arrayLength = 0;
+	protected $rowLength = 10;
 	protected $sortedArray = array();
 
 	protected $title = "Base sorting.";
@@ -23,7 +24,7 @@ abstract class BaseSorter {
 
 	public function display() {
 		foreach ($this->sortedArray as $index => $arrayItem) {
-			if ($index > 0 && is_int($index / 10)) {
+			if ($index > 0 && is_int($index / $this->rowLength)) {
 				echo PHP_EOL;
 			}
 

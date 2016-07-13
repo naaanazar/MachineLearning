@@ -9,7 +9,7 @@ $sorterFactory = new App\ArraySorterFactory();
 $generatedArray = \App\Generators\StandartArrayGenerator::generate();
 
 //foreach($sorterFactory::getAllTypes() as $type) {
-foreach(array(\App\ArraySorterFactory::TYPE_VERTICAL) as $type) {
+foreach(array(\App\ArraySorterFactory::TYPE_STANDART, \App\ArraySorterFactory::TYPE_VERTICAL) as $type) {
 	$sorter = $sorterFactory->getSorter($type);
 
 	$sorter->displayTitle();
