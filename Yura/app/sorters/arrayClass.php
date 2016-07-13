@@ -1,8 +1,8 @@
 <?php
 
-namespace yu\app;
+namespace yu\app\sorters;
 
-use yu\app\generationArray;
+use yu\app\generators\generationArray;
 
 
 class arrayClass extends generationArray
