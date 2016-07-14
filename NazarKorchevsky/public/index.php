@@ -2,16 +2,13 @@
  
     ini_set('error_reporting', E_ALL);
     ini_set('display_errors',1);
-    ini_set('display_startup_errors', 1);
+    ini_set('display_startup_errors', 1);    
   
     require __DIR__ . '/../vendor/autoload.php';
     
-    use sa\app\SortZipper;
-    use sa\app\SortSpiral;
-    use sa\app\SortVertical;
-    use sa\app\SortHorizontal;
+    use sa\app\FactoryArray;
     
-    use sa\app\ArraySort;
+    use sa\app\sorters\BaseSort;
     use sa\app\NewArray; 
     use sa\app\ArrayOut;
     
@@ -20,28 +17,32 @@
     if (isset($_POST['w1']) && isset($_POST['h1']) ){        
         $array = $newArray->crArray($_POST['h1'], $_POST['w1'], $_POST['type']);   
     } else {
-        $array = $newArray->array;
+        $array = $newArray::$array;
     }
     
-    ob_start();  
+    ob_start(); 
     
-    $arrayOut = new ArrayOut($array);
+    $arrayOut = new ArrayOut; 
+    $sorterFactory = new FactoryArray;    
     
-    $sortHorizontal = new SortHorizontal($array);
-    $arrayOut->arrayOut($sortHorizontal->sortArrayType('ASC'));
-    $arrayOut->arrayOut($sortHorizontal->sortArrayType('DESC'));
-
-    $sortZipper = new SortZipper($array);
-    $arrayOut->arrayOut($sortZipper->sortArrayType('ASC'));
-    $arrayOut->arrayOut($sortZipper->sortArrayType('DESC'));
+    // autoload classes to factory
+    $SortClasses = scandir('../app/sorters');      
     
-    $sortSpiral = new SortSpiral($array);
-    $arrayOut->arrayOut($sortSpiral->sortArrayType('ASC'));
-    $arrayOut->arrayOut($sortSpiral->sortArrayType('DESC'));
-
-    $sortVertical = new SortVertical($array);
-    $arrayOut->arrayOut($sortVertical->sortArrayType('ASC'));
-    $arrayOut->arrayOut($sortVertical->sortArrayType('DESC'));    
+    if (!$SortClasses == false){
+        $i=1;
+        
+        foreach ($SortClasses as $key => $value) {          
+            $class = substr($value, 0, -4);
+            
+            if  (method_exists('sa\app\sorters\\'.$class, 'addToFactoryArray') and $class != 'BaseSort'){                         
+                $sorter = $sorterFactory::sort($class);
+                $arrayOut->arrayOut($sorter->sortArrayType('ASC'));
+                $arrayOut->arrayOut($sorter->sortArrayType('DESC')); 
+                
+//How todo:  sa\app\sorters\HorizontalSort::addToFactoryArray();                
+            }    
+        }        
+    }    
      
     $out=ob_get_contents();
     ob_end_clean(); 
