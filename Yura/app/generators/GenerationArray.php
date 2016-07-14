@@ -12,19 +12,30 @@ namespace yu\app\generators;
  *
  * @author yurii
  */
-class generationArray 
+class GenerationArray
 {
     protected $elementsQuantity = 5;
     protected $array = array();
-    
+
     public function __construct()
     {
         $cnt = 0;
+
         for ($i = 0; $i < $this->elementsQuantity; $i++) {
             for ($j = 0; $j < $this->elementsQuantity; $j++) {
                 $cnt++;
-                $this->array[$i][$j] = $cnt;   
-            }            
+                $this->array[$i][$j] = $cnt;
+            }
         }        
+    }
+
+    public function getArray()
+    {
+        return $this->array;
+    }
+
+    public function getQuantity()
+    {
+        return $this->elementsQuantity;
     }
 }

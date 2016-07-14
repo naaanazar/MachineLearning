@@ -4,24 +4,20 @@ ini_set('display_errors', E_ALL);
 
 require_once '../vendor/autoload.php';
 
-use yu\app\sorters\SortingArray;
+//use yu\app\sorters\SortingArray;
 use yu\app\ArraySorterFactory;
-use yu\app\generators\StandartArrayGenerator;
+use yu\app\generators\GenerationArray;
 
 echo"I`m working.GO AWAY!!".'<br>';
 
-$SorterFactory = new ArraySorterFactory();
-$generatedArray = StandartArrayGenerator::generate();
+$generator = new GenerationArray();
+$types = ArraySorterFactory::getAllTypes();
 
-$a = new SortingArray();
-echo"<hr>";
+foreach($types as $type) {
+    $sorter = ArraySorterFactory::getSorter($type);
+    $sorter->setArray($generator->getArray());
+    $sorter->setQuantity($generator->getQuantity());
+    $sorter->sort();
 
-$a->printArrayStraight();
-echo"<hr>";
-$a->transposeArray();
-echo"<hr>";
-
-$a->transposeArrayInversion();
-echo "<hr>";
-$a->testArray();
-echo "<hr>";
+    echo "<br>";
+}
