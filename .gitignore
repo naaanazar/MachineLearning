@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 nbproject/*
 nbproject/private/
+/NazarShershen/nbproject/
 /OlegKulb/nbproject/private/
 /OlegKulb/vendor/
-=======
 /VitaliyOlikh/ArrayFactory/nbproject/private/
 /VitaliyOlikh/ArraySort/nbproject/private/
->>>>>>> 9f777f4296cfdff19c4b0538961efd6a79211fff
+/VitaliyOlikh/ArraySort2/nbproject/private/
+/VitaliyOlikh/ArraySort2/vendor/
+/VitaliyOlikh/OOPLessons/nbproject/private/
