@@ -10,6 +10,7 @@ class Diagonal extends GeneralAbstractSort
         $k2 = 0;
         $line = 0;
         $lengLine = 0;
+        
         foreach($this->arrayForSorting as $key1 => $arr1) {
             foreach ($arr1 as $key2 => $arr2) {
                 if($line < $this->arraySize + 1) {
@@ -42,14 +43,12 @@ class Diagonal extends GeneralAbstractSort
                             $k2--;
                             $arrRev2--;
                             $arrRev = $arrRev2;
-
                         } else {
                             $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                             $k1++;
                             $k2--;
                             $arrRev--;
                         }
-
                     } else {
                         $arrRev = $line - 1;
                         $arrRev2 = $arrRev;
@@ -61,14 +60,11 @@ class Diagonal extends GeneralAbstractSort
                         $lengLine++;
                         $k1++;
                         $k2--;
-
                     }
-
                 }
-
             }
         }
-        $this->arraySort = $arraySort;
+        
         return $arraySort;
     }
 

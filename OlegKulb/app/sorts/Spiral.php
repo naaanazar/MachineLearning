@@ -20,21 +20,17 @@ class Spiral extends GeneralAbstractSort
                      switch($side) {
                         case 1:
                             $k2++;
-
                             $side = ($k2 == $size) ? 2 : 1;
-
                             $circleCounter = ($side == 2) ? $circleCounter++ : $circleCounter;
 
                             break;
                         case 2:
                             $k1++;
-
                             $side = ($k1 == $size) ? 3 : 2;
 
                             break;
                         case 3:
                             $k2--;
-
                             $side = ($k2 == $sizeReverse) ? 4 : 3;
 
                             break;
@@ -56,9 +52,7 @@ class Spiral extends GeneralAbstractSort
                      }
                  }
              }
-             
-             $this->arraySort = $arraySort;
+
              return $arraySort;
     }
-
 }
