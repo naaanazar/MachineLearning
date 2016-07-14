@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+<<<<<<< HEAD
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Crowdin/Service/MarynaPotapovych/index.php</file>
             <file>file:/E:/Crowdin/Service/MarynaPotapovych/ClassArr.php</file>
         </group>
     </open-files>
+=======
+>>>>>>> a7b6b37705fbf4e4ee4d8ab04deaea44b20c08af
 </project-private>

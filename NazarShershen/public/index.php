@@ -1,11 +1,28 @@
 <?php
 
-require '../app/arrayClass.php'; 
+error_reporting(E_ALL & ~E_NOTICE);
+ini_set("display_errors", 1);
 
-$a = new arrayClass();
-$a->printArrayStraight();
+require __DIR__ . '/../vendor/autoload.php';
+
+use arr\app\ArraysFactory;
+
+$factory = new ArraysFactory();
+
+$obj;
+
+$obj = $factory->getSorter("snakeSort");
+$obj->sortArray();
 echo "<hr>";
-$a->transposeArray();
+
+$obj = $factory->getSorter("straightSort");
+$obj->sortArray();
 echo "<hr>";
-$a->transposeArrayInversion();
+
+$obj = $factory->getSorter("verticalSort");
+$obj->sortArray();
 echo "<hr>";
+$obj->flag = true;
+$obj->sortArray();
+echo "<hr>";
+
