@@ -1,37 +1,37 @@
 <?php
 
-    namespace sa\app\sorters;
-    
-    use sa\app\sorters\BaseSort;
+namespace sa\app\sorters;
 
-    class SnakesSort extends BaseSort
-    {        
-        public function sortArrayType($sort)
-        {
-            $array=$this->sortArray($sort, $this->array);          
-            self::$sort_type1 = 'Zipper  ' . $sort;
-            
-            if ($sort == 'ASC') {
-                $f=1; 
-            } elseif ($sort == 'DESC') {
-                $f=2; 
-            }
-            
-            foreach ($array as $key => $value) {
-                if (is_array($value)) {                    
-                    $tmp=$array[$key]; 
-                    if (($f % 2) == 0)
-                    {
-                        $array[$key] = array_reverse($tmp);
-                    }
-                    $f++;
+use \sa\app\sorters\BaseSort\BaseSort;
+
+class SnakesSort extends BaseSort
+{
+
+    public function sort()
+    {
+        $array = $this->sortArray($this->order, $this->array);
+        self::$title = 'Zipper  ' . $this->order;
+
+        if ($this->order == 'ASC') {
+            $f = 1;
+        } elseif ($this->order == 'DESC') {
+            $f = 2;
+        }
+
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $tmp = $array[$key];
+                if (($f % 2) == 0) {
+                    $array[$key] = array_reverse($tmp);
                 }
+                $f++;
             }
-            return  $array;
         }
-        
-        static public function addToFactoryArray()
-        {
-            return 'true';
-        }
+        return $array;
     }
+
+    public function addToFactoryArray()
+    {
+        return 'true';
+    }
+}
