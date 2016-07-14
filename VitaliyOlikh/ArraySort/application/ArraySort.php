@@ -11,7 +11,7 @@
  *
  * @author dron
  */
-class Arrays 
+class ArraySort 
 {
     public $array;
     
