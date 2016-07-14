@@ -9,14 +9,14 @@
 namespace yu\app\generators;
 
 /**
- * Description of StandartArrayGenerator
+ * Description of StandatrArrayGenerator
  *
  * @author yurii
  */
-class StandartArrayGenerator implements BaseArrayGenerator
-{
-    public static function generate()
-    {
-        return range(1, 100);
-    }
+class StandartArrayGenerator implements BaseArrayGenerator {
+	public static function generate()
+	{
+        
+		return range(1, 100);
+	}
 }

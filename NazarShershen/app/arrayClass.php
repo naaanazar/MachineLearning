@@ -12,6 +12,7 @@
  * @author Nazar
  */
 
+namespace arr\app;
 
 class arrayClass
 {
