@@ -1,14 +1,18 @@
 {
-    "name": "space/array",
-    "description": "arrays",
-    "type": "project",
+    "name": "array/sort",
+    "description": "sort array",
     "license": "MIT",
     "authors": [
         {
-            "name": "Andrew Stoyan",
-            "email": "stoyan.andrew@gmail.com"
+            "name": "vitaliy-olikh",
+            "email": "vitaliy.olikh@gmail.com"
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "project\\": ""
+        }
+    }
 }
