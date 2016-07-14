@@ -1,19 +1,22 @@
 <?php
 
-    namespace sa\app\sorters;
-    
-    use sa\app\sorters\BaseSort;
+namespace sa\app\sorters;
 
-    class HorizontalSort extends BaseSort
-    {        
-        public function sortArrayType($sort)
-        {
-            $array=$this->sortArray($sort, $this->array);   
-            self::$sort_type1 = 'Horizontal  ' . $sort;
-            return $array;
-        }
-       static public function addToFactoryArray()
-        {
-            return 'true';
-        }
+use \sa\app\sorters\BaseSort\BaseSort;
+
+class HorizontalSort extends BaseSort
+{
+
+    public function sort()
+    {
+        self::$title = 'Horizontal  ' . $this->order;
+
+        $array = $this->sortArray($this->order, $this->array);
+        return $array;
     }
+
+    public function addToFactoryArray()
+    {
+        return true;
+    }
+}

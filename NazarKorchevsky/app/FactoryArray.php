@@ -1,15 +1,14 @@
-<?php 
+<?php
 
-    namespace sa\app;
+namespace sa\app;
 
-    class FactoryArray 
-    {    
-        public static function sort($type)
+class FactoryArray
+{
 
-        {         
-           $className = 'sa\app\sorters\\'.$type;
-          //  $className = 'sa\app\sorters\HorizontalSort';
-            return new $className;    
-        }
+    public static function getClass($class)
+    {
+        $className = 'sa\app\sorters\\' . $class;
 
+        return new $className;
     }
+}
