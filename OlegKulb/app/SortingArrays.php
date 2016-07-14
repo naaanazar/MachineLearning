@@ -2,7 +2,8 @@
 
 namespace ex\app;
 
-class SortingArrays{
+class SortingArrays
+{
     private $arraySize;
     private $arrayForSorting;
 
@@ -18,7 +19,7 @@ class SortingArrays{
             for($i2 = 0; $i2 <= $this->arraySize; $i2++) {
                 $arraySort[$i2][$i] = $this->arrayForSorting[$i][$i2];
             }
-        } 
+        }
         return $arraySort; 
     }
     
@@ -43,7 +44,7 @@ class SortingArrays{
         
         $this->arraySort = $arraySort;
         
-        return $arraySort;  
+        return $arraySort;
     }
     
     public function spiral()
@@ -135,14 +136,10 @@ class SortingArrays{
                             $k1++;
                             $k2--;
                             $arrRev--;
-                            
-//                             if ($k1 == 8 && $k2 == 1){
-//                                $sortFourth[0][0] = 111111;
-//                            }
                         }
                         
-                    }else {
-                        $arrRev = $line - 1;//=> 4
+                    } else {
+                        $arrRev = $line - 1;
                         $arrRev2 = $arrRev;
                         $k1Rev = 1;
                         $k1 = $k1Rev;

@@ -2,28 +2,28 @@
 
 namespace ex\app;
 
-use ex\app\SortCreator;
+use ex\app\ArrayGeneration;
 
 class FactorySort
 {
-    public static function factorySort($method, $size)
+    public static function factorySort($method, $size, $file = NULL)
     {
-        $sortCreator = new SortCreator($size);
-        $arrayOriginal = $sortCreator->getOriginalArray();
-        $SortableArray = $sortCreator->getSort($method, $arrayOriginal);    
+        $arrayGeneration = new ArrayGeneration($size);
+        $arrayOriginal = $arrayGeneration->generation();
+
+        $class = '\\ex\\app\\sorts\\' . ucfirst($method);
         
-        echo "<table border='1'>";
+        $sort = new $class();
+        $sortableArray = $sort->process($size, $arrayOriginal);
         
-        for($i = 0; $i <= $size; $i++) {
-            echo "<tr>";
-            
-            for($i2 = 0; $i2 <= $size; $i2++) {
-                echo "<td>". $SortableArray[$i][$i2] . "</td>";
-            }
-            
-            echo "</tr>"; 
-        } 
+        $output = new Output($size, $sortableArray);
+        $output->arrayView();
+
+        if( !$file == NULL) {
+            $output->printArrayInfile($file);
+        }
         
-        echo "</table><hr /><br />";
+
+        
     }
 }
