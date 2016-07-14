@@ -1,0 +1,16 @@
+{
+    "name": "root/maryna-potapovych",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maryna Potapovych",
+            "email": "maryna.potapovych@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4":{
+            "liw\\": ""}
+                 }
+             }
+
