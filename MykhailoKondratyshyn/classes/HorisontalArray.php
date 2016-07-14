@@ -1,15 +1,26 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: dregan
- * Date: 11.07.16
- * Time: 23:43
- */
-class HorisontalArray extends CreateArray
+require "../classes/NewArray.php";
+
+
+class HorisontalArray extends NewArray
 {
     public function horisontalArray()
     {
+        $z = 0;
+        $k = 6;
         
+
+        for ($i = 0; $i < $k; $i++) {
+            for ($j = 0; $j < $k; $j++) {
+                $array[$i][$j] = $j + $z;
+
+
+                echo $array[$i][$j] . " ";
+
+            }
+            $z = $z + $k;
+            echo "<br>";
+        }
     }
 }

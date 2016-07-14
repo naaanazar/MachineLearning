@@ -1,26 +1,28 @@
 <?php
-    namespace sa\app;
-    use sa\app\ArraySort;
+    namespace sa\app;    
     
-    class ArrayOut extends ArraySort
+    use sa\app\sorters\BaseSort;
+    
+    class ArrayOut 
     {        
-        public $file = 'tmp/array.html'; 
+        public $file = 'tmp/array.html';      
         
         public function arrayOut($array)
         {            
             echo 
                 "<div style='display: inline-block; margin:10px;'>
                     <table>
-                        <caption>" . $this->sort_type . "</caption>";
-            foreach ($array as $j => $value)
-            {
+                        <caption>" . BaseSort::$sort_type1 . "</caption>";
+            foreach ($array as $j => $value) {
+                
                 echo '<tr>';
-                if (is_array($value))
-                {
-                    foreach ($value as $i => $value)
-                    {
+                
+                if (is_array($value)) {
+                    
+                    foreach ($value as $i => $value) {
                         echo '<td>'. $value;
                     }
+                    
                     echo '</td></tr>';
                 }                  
             }  
@@ -31,8 +33,8 @@
 
         public function writeToFile($str)
         {  
-            $s=file_put_contents($this->file, $str, LOCK_EX);
-            echo $s;
+            file_put_contents($this->file, $str, LOCK_EX);
+            
             
         }
     }

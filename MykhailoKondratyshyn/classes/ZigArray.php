@@ -6,7 +6,7 @@
  * Date: 11.07.16
  * Time: 23:45
  */
-class ZigArray extends CreateArray
+class ZigArray extends NewArray
 {
     public function zigArray()
     {
