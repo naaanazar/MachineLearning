@@ -8,3 +8,7 @@ and open the template in the editor.
     Author     : Vitaliy
 */
 
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
