@@ -1,3 +1,8 @@
+nbproject/*
+nbproject/private/
+/NazarShershen/nbproject/
+/OlegKulb/nbproject/private/
+/OlegKulb/vendor/
 /VitaliyOlikh/ArrayFactory/nbproject/private/
 /VitaliyOlikh/ArraySort/nbproject/private/
 /VitaliyOlikh/ArraySort2/nbproject/private/

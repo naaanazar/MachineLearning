@@ -13,5 +13,5 @@ namespace yu\app\generators;
  * @author yurii
  */
 interface BaseArrayGenerator {
-    //put your code here
+          public static function generate();
 }

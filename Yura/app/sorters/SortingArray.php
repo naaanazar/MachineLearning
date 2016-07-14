@@ -5,10 +5,10 @@ namespace yu\app\sorters;
 use yu\app\generators\generationArray;
 
 
-class arrayClass extends generationArray
+class SortingArray extends generationArray
 {
-
-    public function printArrayStraight()
+    
+       public function printArrayStraight()
     {
         $array_to_print = "";
         foreach ($this->array as $row) {
@@ -72,4 +72,4 @@ class arrayClass extends generationArray
         }
    }  
 }
-
+?>

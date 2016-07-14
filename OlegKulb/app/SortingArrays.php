@@ -1,53 +1,39 @@
 <?php
+
 namespace ex\app;
 
+class SortingArrays{
+    private $arraySize;
+    private $arrayForSorting;
 
-use ex\app\GenerationArray;
-use ex\app\ArrayView;
-
-class ArraySort extends GenerationArray
-{
-    private $arraySort;
-
-    public function __construct($arraySize)
+    public function __construct($arraySize, $arrayForSorting)
     {
-        parent::__construct($arraySize);
+        $this->arraySize = $arraySize;
+        $this->arrayForSorting = $arrayForSorting;
     }
     
-    public function __destruct()
-    {
-        $arrayView = new ArrayView();
-        $arrayView->viewSortArray($this->arraySort, $this->arraySize);
-    }
-
-    public function first()
+    public function vertically()
     {        
-        
         for($i = 0; $i <= $this->arraySize; $i++) {
             for($i2 = 0; $i2 <= $this->arraySize; $i2++) {
-                $arraySort[$i2][$i] = $this->arrayOriginal[$i][$i2];
+                $arraySort[$i2][$i] = $this->arrayForSorting[$i][$i2];
             }
-        }
-        
-        $this->arraySort = $arraySort;
-        
+        } 
         return $arraySort; 
-        
-        
     }
     
-    public function second()
+    public function snake()
     {
         $counter = 1;
         
-        foreach($this->arrayOriginal as $key1 => $arr1) {
+        foreach($this->arrayForSorting as $key1 => $arr1) {
             $coup = $this->arraySize;
             
             foreach($arr1 as $key2 => $arr2) {
                 if($counter % 2) {
-                    $arraySort[$key1][$key2] = $this->arrayOriginal[$key1][$key2];
+                    $arraySort[$key1][$key2] = $this->arrayForSorting[$key1][$key2];
                 } else {
-                    $arraySort[$key1][$coup] = $this->arrayOriginal[$key1][$key2];
+                    $arraySort[$key1][$coup] = $this->arrayForSorting[$key1][$key2];
                     $coup--;
                 }
             }
@@ -60,7 +46,7 @@ class ArraySort extends GenerationArray
         return $arraySort;  
     }
     
-    public function therd()
+    public function spiral()
     {
             $size = $this->arraySize;
             $sizeReverse = 0;
@@ -69,9 +55,9 @@ class ArraySort extends GenerationArray
             $k2 = 0;
             $circleCounter = 0;
             
-             foreach($this->arrayOriginal as $key1 => $arr1) {
+             foreach($this->arrayForSorting as $key1 => $arr1) {
                  foreach ($arr1 as $key2 => $arr2) {
-                     $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                     $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                      switch($side) {
                         case 1:
                             $k2++;
@@ -105,28 +91,28 @@ class ArraySort extends GenerationArray
              return $arraySort;
     }
     
-    public function fourth()
+    public function diagonal()
     {
         $k1 = 0;
         $k2 = 0;
         $line = 0;
         $lengLine = 0;
-        foreach($this->arrayOriginal as $key1 => $arr1) {
+        foreach($this->arrayForSorting as $key1 => $arr1) {
             foreach ($arr1 as $key2 => $arr2) {
                 if($line < $this->arraySize + 1) {
                     if($k1 == 0 && $k2 == 0) {
-                        $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                        $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                         $line++;
                         $k2 = 1;
                     } else {
                         if($line == $lengLine) {
-                            $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                            $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                             $k1 = 0;//
                             $line++;
                             $k2 = $line;
                             $lengLine = 0;
                         }  else {
-                            $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                            $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                             $k1++;
                             $k2--;
                             $lengLine++;
@@ -138,32 +124,39 @@ class ArraySort extends GenerationArray
                             $k1 = $k1Rev;
                             $k1Rev++;
                             $k2 = $this->arraySize;
-                            $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                            $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                             $k1++;
                             $k2--;
                             $arrRev2--;
                             $arrRev = $arrRev2;
                            
                         } else {
-                            $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                            $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                             $k1++;
                             $k2--;
                             $arrRev--;
+                            
+//                             if ($k1 == 8 && $k2 == 1){
+//                                $sortFourth[0][0] = 111111;
+//                            }
                         }
                         
                     }else {
-                        $arrRev = $line - 1;
+                        $arrRev = $line - 1;//=> 4
                         $arrRev2 = $arrRev;
                         $k1Rev = 1;
                         $k1 = $k1Rev;
                         $k2 = $this->arraySize;
                         $k1Rev++;
-                        $arraySort[$k1][$k2] = $this->arrayOriginal[$key1][$key2];
+                        $arraySort[$k1][$k2] = $this->arrayForSorting[$key1][$key2];
                         $lengLine++;
                         $k1++;
                         $k2--;
+                        
                     }
+
                 }
+                
             }
         }    
         $this->arraySort = $arraySort;
