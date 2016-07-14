@@ -4,20 +4,23 @@ namespace sa\app\sorters;
 
 use \sa\app\sorters\BaseSort\BaseSort;
 
-class SpiralSort extends BaseSort {
+class SpiralSort extends BaseSort
+{
 
-    public function sort() {
+    public function sort()
+    {
 
         global $ar;
         global $n;
 
-        $array = $this->sortArray($this->order, $this->array);
         self::$title = 'Spiral  ' . $this->order;
+
+        $array = $this->sortArray($this->order, $this->array);
         $i = $j = 0;
         $w = count($array);
         $right = $w - 1;
         $left = 0;
-        $s = 0;
+        $s = 0;        
 
         for ($k = 0; $k < $n * $w; ++$k) {
             $array[$i][$j] = $ar[$s++];
@@ -46,12 +49,12 @@ class SpiralSort extends BaseSort {
                 $i--;
                 continue;
             }
-        };
+        }
         return $array;
     }
 
     public function addToFactoryArray() {
-        return 'true';
-    }
 
+        return true;
+    }
 }

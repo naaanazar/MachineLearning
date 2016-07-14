@@ -9,14 +9,14 @@ class HorizontalSort extends BaseSort
 
     public function sort()
     {
-        $array = $this->sortArray($this->order, $this->array);
         self::$title = 'Horizontal  ' . $this->order;
 
+        $array = $this->sortArray($this->order, $this->array);
         return $array;
     }
 
     public function addToFactoryArray()
     {
-        return 'true';
+        return true;
     }
 }

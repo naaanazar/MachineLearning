@@ -13,10 +13,10 @@ class ArrayOut
     {
         $out = '';
 
-        foreach ($array as $j => $value) {
+        foreach ($array as $value) {
             $tds = '';
             
-                foreach ($value as $i => $value) {
+                foreach ($value as $value) {
                     $tds .= sprintf('<td>%s</td>', $value);
                 }
             
@@ -39,8 +39,6 @@ class ArrayOut
         
     public function writeToFile($str)
     {
-    file_put_contents($this->file, $str, LOCK_EX);
-    }
-    
-
+        file_put_contents($this->file, $str, LOCK_EX);
+    }    
 }

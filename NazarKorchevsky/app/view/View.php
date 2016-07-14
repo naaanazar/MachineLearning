@@ -6,6 +6,7 @@ use \sa\app\sorters\BaseSort\BaseSort;
 
 class View
 {
+
    public static $out;
    
    public static function getHtml()
@@ -34,6 +35,5 @@ class View
         );
        
         return self::$out;
-   }
-    
+   }    
 }

@@ -9,8 +9,9 @@ class VerticalSort extends BaseSort
 
     public function sort()
     {
-        $array = $this->sortArray($this->order, $this->array);
         self::$title = 'Vertical  ' . $this->order;
+
+        $array = $this->sortArray($this->order, $this->array);
         array_unshift($array, null);
         $array = call_user_func_array('array_map', $array);
 
@@ -19,6 +20,6 @@ class VerticalSort extends BaseSort
 
     public function addToFactoryArray()
     {
-        return 'true';
+        return true;
     }
 }

@@ -27,7 +27,7 @@ abstract class BaseSort
         }
     }
 
-    public function sortArray($sort)
+    public function sortArray()
     {
         global $ar;
         global $n;
@@ -46,6 +46,7 @@ abstract class BaseSort
         }
 
         $sort_array = array_chunk($ar, $n);
+
         return $sort_array;
     }
 }
