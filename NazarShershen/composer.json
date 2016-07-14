@@ -1,0 +1,16 @@
+{
+    "name": "bogdan/nazar-shershen",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nazar Shershen",
+            "email": "nazar.shershen@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "arr\\": ""
+        }
+    }
+}
