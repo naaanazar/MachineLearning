@@ -11,4 +11,10 @@ abstract class ArrayBase
     private $counter;
     public abstract function Feel();
     public abstract function Display();
+    public function File() {
+        $handle = fopen("../../var/arr.txt", "a");
+        $value = serialize($this->array) . "\n";
+        fwrite($handle, $value);
+        fclose($handle);
+    }
 }

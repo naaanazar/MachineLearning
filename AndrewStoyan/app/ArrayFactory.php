@@ -19,13 +19,20 @@ class ArrayFactory
         "Diagonal"
     );
     public $class;
+    public $number;
     
-    public function SetFactory()
+    public function GetTypes($number)
     {
+        $this->number = $number;
         for ($i = 0, $n = count($this->types); $i < $n; $i++) {
             $this->types[$i] = "arrays\app\arr\\" . $this->types[$i];
         }
 
         return $this->types;
+    }
+
+    public function GetArray($type)
+    {
+        return new $type($this->number);
     }
 }
