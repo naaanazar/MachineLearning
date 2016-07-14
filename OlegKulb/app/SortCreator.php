@@ -2,10 +2,9 @@
 
 namespace ex\app;
 
-use ex\app\api\SortCreator_IP;
 use ex\app\ArrayGeneration;
 
-class SortCreator implements SortCreator_IP
+class SortCreator 
 {
     private $size;
 
