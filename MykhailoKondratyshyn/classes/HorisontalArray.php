@@ -1,8 +1,5 @@
 <?php
 
-require "../classes/NewArray.php";
-
-
 class HorisontalArray extends NewArray
 {
     public function horisontalArray()
