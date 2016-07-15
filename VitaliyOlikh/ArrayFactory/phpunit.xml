@@ -3,8 +3,7 @@
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="myTest">
-          <file>test/application/ArrayFactoryTest.php</file>
-          <file>test/application/ArraySorts/SnakeSorterTest.php</file>
+            <directory>test</directory>
         </testsuite>
       </testsuites>
 </phpunit>

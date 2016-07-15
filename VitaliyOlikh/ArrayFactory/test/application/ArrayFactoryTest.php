@@ -41,4 +41,11 @@ class ArrayFactoryTest extends PHPUnit_Framework_TestCase
             array(new VerticalRevSorter(), "vertical reverse"),
         );
     }
+
+    public function testException()
+    {
+        $this->setExpectedException('Exception');
+        $sorterFactory = new ArrayFactory();
+        $sorterFactory->getSorter('fail');
+    }
 }
