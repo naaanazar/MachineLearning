@@ -1,39 +1,24 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
 
-//require "../classes/NewArray.php";
-require "../classes/HorisontalArray.php";
-require "../classes/VerticalArray.php";
-require "../classes/UnVerticalArray.php";
-require "../classes/SpiralArray.php";
+use dregan\application\NewArray;
+use dregan\application\VerticalArray;
+use dregan\application\UnVerticalArray;
+use dregan\application\MyClass;
 
- $horisontalArrayObject = new HorisontalArray();
+$newArrayObject = new NewArray();
+
 echo "<hr>";
- $varticalArrayObject = new VerticalArray();
+$verticalArrayObject = new VerticalArray();
+$verticalArrayObject->generateArray(5);
+
+$verticalArrayObject->sortVerticalArray();
+
 echo "<hr>";
- $unVerticalArrayObject = new UnVerticalArray();
+$unVerticalArrayObject = new UnVerticalArray();
+$unVerticalArrayObject->generateArray(5);
+$unVerticalArrayObject->sortUnVerticalArray();
 echo "<hr>";
-$spiralArrayObject = new SpiralArray(5);
-echo "<hr>";
-
-
-//var_dump($horisontalArrayObject->horisontalArray());
-
-
-//$firstArray = range(0, 25);
-//
-//foreach ($firstArray as $number) {
-//    echo $number;
-//}
-
-//print_r($horisontalArrayObject);
-
-//$a = array(
-//    range(1, 5),
-//    range(6, 10),
-//
-//);
-//
-//
-//print_r($a);
-//
+$myClass = new MyClass();
+//$factory = new dregan\application\ArrayFactory();

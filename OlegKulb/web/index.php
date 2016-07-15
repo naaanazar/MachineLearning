@@ -1,16 +1,17 @@
 <?php
+
 require '__DIR___' . '/../../vendor/autoload.php';
 
-use ex\app\ArraySort;
-use ex\app\WriteFile;
+use ex\app\FactorySort;
 
-$arraySize = 5;
-$arraySort = new ArraySort($arraySize);
-//$writeFile = new WriteFile();
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-$Array1 = $arraySort->first();
-$Array2 = $arraySort->second();
-$Array3 = $arraySort->therd();
-$Array4 = $arraySort->fourth();
+/**
+ * @param string $method Names sort of array(snake, spiral, diagonal, vertically)
+ * @param int $size Array size
+ * @param string $file File name ('file.txt')
+ */
 
-//$writeFile->writeArrayInFile('file.txt', $Array1);
+FactorySort::factorySort('vertically', 6, 'file.txt');

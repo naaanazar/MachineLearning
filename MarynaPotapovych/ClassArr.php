@@ -1,6 +1,6 @@
 <?php
 
-
+namespace liw;
 /**
  * Description of ClassArr
  *
@@ -52,6 +52,7 @@ class ClassArr
     
     public function BackSort()
     {
+        
         for ($i = 4; $i >= 0; $i--) 
         { 
             for ($j = 4; $j >= 0; $j--) 
@@ -67,10 +68,8 @@ class ClassArr
     echo '<br />';
     }
 
-    public function Spiral ()
-    {
-    }
-     
+
+
     }
 
  
