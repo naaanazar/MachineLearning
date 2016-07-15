@@ -31,4 +31,15 @@ class OutPut
         }
         self::Offset(2);
     }
+
+    public static function FromFile($number)
+    {
+        echo '<br>' . 'From file : ' . '<br>';
+        $handle = fopen("../../var/arr.txt", "r");
+        while (($buffer = fgets($handle)) !== false) {
+            $arr_from_file = unserialize($buffer);
+            OutPut::OutPutArray($arr_from_file, $number);
+        }
+        fclose($handle);
+    }
 }
