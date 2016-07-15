@@ -1,15 +1,13 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
 
-require "../classes/NewArray.php";
-//require "../classes/HorisontalArray.php";
-require "../classes/VerticalArray.php";
-require "../classes/UnVerticalArray.php";
-//require "../classes/SpiralArray.php";
-require "../classes/Factory.php";
+use dregan\application\NewArray;
+use dregan\application\VerticalArray;
+use dregan\application\UnVerticalArray;
+use dregan\application\MyClass;
 
-
-//$newArrayObject = new NewArray();
+$newArrayObject = new NewArray();
 
 echo "<hr>";
 $verticalArrayObject = new VerticalArray();
@@ -22,7 +20,5 @@ $unVerticalArrayObject = new UnVerticalArray();
 $unVerticalArrayObject->generateArray(5);
 $unVerticalArrayObject->sortUnVerticalArray();
 echo "<hr>";
-
-
-
-
+$myClass = new MyClass();
+//$factory = new dregan\application\ArrayFactory();

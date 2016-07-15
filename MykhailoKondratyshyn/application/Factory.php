@@ -1,4 +1,7 @@
 <?php
+
+namespace dregan\application;
+
 class MyArray
 {
     private $arrayNew;
@@ -20,7 +23,6 @@ class MyArray
 
             }
         }
-
 
         for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
             for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {

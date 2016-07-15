@@ -1,5 +1,6 @@
 <?php
 
+namespace dregan\application;
 /**
  * Created by PhpStorm.
  * User: dregan
