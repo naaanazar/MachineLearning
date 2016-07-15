@@ -14,6 +14,7 @@ class VerticalTest extends \PHPUnit_Framework_TestCase
     {
         $test = new Vertical($number);
         $test->Feel();
+        $this->expectOutputString("Vertical method");
         $this->assertEquals($array, $test->array);
     }
 

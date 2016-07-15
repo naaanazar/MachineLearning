@@ -14,6 +14,7 @@ class RevSpiralTest extends \PHPUnit_Framework_TestCase
     {
         $test = new RevSpiral($number);
         $test->Feel();
+        $this->expectOutputString("Reverse Spiral method");
         $this->assertEquals($array, $test->array);
     }
 

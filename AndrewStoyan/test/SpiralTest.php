@@ -14,6 +14,7 @@ class SpiralTest extends \PHPUnit_Framework_TestCase
     {
         $test = new Spiral($number);
         $test->Feel();
+        $this->expectOutputString("Spiral method");
         $this->assertEquals($array, $test->array);
     }
 

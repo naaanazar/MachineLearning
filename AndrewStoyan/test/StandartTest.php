@@ -14,6 +14,7 @@ class StandartTest extends \PHPUnit_Framework_TestCase
     {
         $test = new Standart($number);
         $test->Feel();
+        $this->expectOutputString("Standart method");
         $this->assertEquals($array, $test->array);
     }
 

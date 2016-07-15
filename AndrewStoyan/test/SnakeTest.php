@@ -14,6 +14,7 @@ class SnakeTest extends \PHPUnit_Framework_TestCase
     {
         $test = new Snake($number);
         $test->Feel();
+        $this->expectOutputString("Snake method");
         $this->assertEquals($array, $test->array);
     }
 
