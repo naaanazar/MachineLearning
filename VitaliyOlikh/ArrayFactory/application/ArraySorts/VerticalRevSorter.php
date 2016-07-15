@@ -1,10 +1,10 @@
 <?php
 
-namespace project\application\ArraySorts;
+namespace Project\Application\ArraySorts;
 
 class VerticalRevSorter extends BaseArray
 {
-    protected $title = "Vertical Reverse Sorter";
+    protected $title = "Vertical Reverse Sort";
 
     public function sort()
     {

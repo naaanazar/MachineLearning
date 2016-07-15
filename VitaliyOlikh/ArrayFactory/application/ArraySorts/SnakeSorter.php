@@ -1,11 +1,10 @@
 <?php
 
-namespace project\application\ArraySorts;
-
+namespace Project\Application\ArraySorts;
 
 class SnakeSorter extends BaseArray
 {
-    protected $title = "SnakeSorter";
+    protected $title = "Snake Sort";
 
     public function sort()
     {

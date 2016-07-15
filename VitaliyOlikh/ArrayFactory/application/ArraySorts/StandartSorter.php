@@ -4,7 +4,7 @@ namespace project\application\ArraySorts;
 
 class StandartSorter extends BaseArray
 {
-    protected $title = 'Standart Array';
+    protected $title = 'Standart Sort';
 
     public function sort()
     {

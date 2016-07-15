@@ -1,10 +1,10 @@
 <?php
 
-namespace project\application\ArraySorts;
+namespace Project\Application\ArraySorts;
 
 class SpiralRevSorter extends BaseArray
 {
-    protected $title = "Spiral Reverse Sorter";
+    protected $title = "Spiral Reverse Sort";
 
     public function sort()
     {
@@ -39,6 +39,7 @@ class SpiralRevSorter extends BaseArray
                 continue;
             }
         }
+
         return $this->array;
     }
 

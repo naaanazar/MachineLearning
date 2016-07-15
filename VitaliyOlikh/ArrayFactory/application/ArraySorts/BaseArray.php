@@ -26,6 +26,7 @@ abstract class BaseArray
     {
         echo "<table border='1'>";
         echo "<caption>" . $this->title . "</caption>";
+
         foreach ($this->array as $value) {
             echo "<tr>";
             foreach($value as $var) {
@@ -33,8 +34,10 @@ abstract class BaseArray
                 echo "$var" . PHP_EOL;
                 echo "</td>";
             }
+            
             echo "</tr>";
         }
+
         echo "</table>";
     }    
 }

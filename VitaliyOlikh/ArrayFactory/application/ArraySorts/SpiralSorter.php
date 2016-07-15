@@ -1,16 +1,17 @@
 <?php
 
-namespace project\application\ArraySorts;
+namespace Project\Application\ArraySorts;
 
 class SpiralSorter extends BaseArray
 {
-    protected $title = "Spiral Array";
+    protected $title = "Spiral Sort";
 
     public function sort()
     {
         $n = count($this->array);
         $i = 1;
         $p = $n / 2;
+
         for ($k = 1; $k <= $p; $k++) {
             for ($j = $k - 1; $j < $n - $k + 1; $j++) {
                 $this->array[$k - 1][$j] = $i++;

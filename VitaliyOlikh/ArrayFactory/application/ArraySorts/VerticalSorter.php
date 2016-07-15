@@ -1,10 +1,10 @@
 <?php
 
-namespace project\application\ArraySorts;
+namespace Project\Application\ArraySorts;
 
 class VerticalSorter extends BaseArray
 {
-    protected $title = "Vertical Sorter";
+    protected $title = "Vertical Sort";
 
     public function sort()
     {
@@ -16,6 +16,7 @@ class VerticalSorter extends BaseArray
                 $this->array[$i][$j] = $counter++;
             }
         }
+
         return $this->array;
     }
 
