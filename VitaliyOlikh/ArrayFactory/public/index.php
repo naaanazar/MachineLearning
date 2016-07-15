@@ -20,7 +20,7 @@
         foreach ($sorterFactory::getAllType() as $type) {
             $sorter = $sorterFactory->getSorter($type);
 
-            $sorter->ArrayFeel(5);
+            $sorter->arrayFeel(5);
             $sorter->sort();
             $sorter->display();
         }

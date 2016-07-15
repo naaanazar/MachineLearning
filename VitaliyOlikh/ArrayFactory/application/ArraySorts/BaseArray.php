@@ -10,7 +10,7 @@ abstract class BaseArray
 
     abstract public function sort();
 
-    public function ArrayFeel($number)
+    public function arrayFeel($number)
     {
         $counter = 1;
         for ($i = 0; $i < $number; $i++) {

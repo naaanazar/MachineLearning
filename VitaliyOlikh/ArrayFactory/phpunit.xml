@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="vendor/autoload.php"></phpunit>
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="myTest">
+          <file>test/application/ArrayFactoryTest.php</file>
+          <file>test/application/ArraySorts/SnakeSorterTest.php</file>
+        </testsuite>
+      </testsuites>
+</phpunit>

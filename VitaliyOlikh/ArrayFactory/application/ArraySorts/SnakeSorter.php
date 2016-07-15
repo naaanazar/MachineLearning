@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Application\ArraySorts;
+namespace project\application\ArraySorts;
 
 class SnakeSorter extends BaseArray
 {
