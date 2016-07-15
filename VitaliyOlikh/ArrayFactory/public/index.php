@@ -14,7 +14,6 @@
         require __DIR__ . '/../vendor/autoload.php';
 
         use project\application\ArrayFactory;
-        use project\application\ArrayGenerate\ArrayGenerator;
 
         $sorterFactory = new ArrayFactory();
 
