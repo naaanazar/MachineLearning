@@ -2,6 +2,6 @@
 
 namespace CSR\App\Generators;
 
-interface BaseArrayGenerator {
+interface ArrayGeneratorInterface {
 	public static function generate();
 }

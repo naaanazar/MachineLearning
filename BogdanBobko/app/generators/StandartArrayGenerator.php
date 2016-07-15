@@ -2,12 +2,25 @@
 
 namespace CSR\App\Generators;
 
-use CSR\App\Generators\BaseArrayGenerator;
+use CSR\App\Generators\ArrayGeneratorInterface;
 
-// Generates standart single-dimension array
-class StandartArrayGenerator implements BaseArrayGenerator {
+class StandartArrayGenerator implements ArrayGeneratorInterface {
+	private static $dimensions = array(
+		'columns' => 10,
+		'rows' => 10
+	);
+
 	public static function generate()
 	{
-		return range(1, 100);
+		$array = array();
+		$counter = 0;
+
+		for ($rowIndex = 0; $rowIndex < self::$dimensions['rows']; $rowIndex++) {
+			for ($itemIndex = 0; $itemIndex < self::$dimensions['columns']; $itemIndex++) {
+				$array[$rowIndex][$itemIndex] = ++$counter;
+			}
+		}
+
+		return $array;
 	}
 }
