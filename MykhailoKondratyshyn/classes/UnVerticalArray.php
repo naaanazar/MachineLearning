@@ -6,31 +6,34 @@
  * Date: 11.07.16
  * Time: 23:44
  */
-class UnVerticalArray extends  NewArray
+class UnVerticalArray extends NewArray
 {
-    public function unVerticalArray()
+    public function sortUnVerticalArray()
     {
-        $k = 5;
-        $p = 5;
+        $q = count($this->arrayNew) - 1;
 
+        $arraySorted = array();
 
-        $j = $p * $k;
+        for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
+            for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {
+                $arraySorted[$j][$q] = $this->arrayNew[$i][$j];
 
+            }
+            $q--;
+        }
+        $array = array_reverse($arraySorted);
 
+        for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
+            for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {
 
-
-
-        for ($i = $p; $i>=1; $i--) {
-
-            foreach (array_reverse(range($i, $j, $k)) as $number) {
-                echo "$number ";
+                echo $array[$i][$j] . " ";
 
             }
             echo "<br>";
 
-            $j = $j - 1;
+        }
 
 
-        }
-        }
+        echo "<pre>";
+    }
 }

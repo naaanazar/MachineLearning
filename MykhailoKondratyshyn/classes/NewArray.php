@@ -8,46 +8,17 @@
  */
 class NewArray
 {
-    public function generateArray()
+    protected $arrayNew;
+
+    public function generateArray($size)
     {
-//       // $z = 0;
-//        $array = array();
-//$k = 5;
-//        $i = 0;
-//            for ($j = 0; $j < $k; $j++) {
-//
-//                $array[$i][$j] = $j;
-//
-//                echo $array[$i][$j] . " ";
-//
-//            }
-//
-//
-//        for ($d = 0; $d < $k; $d++) {
-//
-//                $array[$d][$j] = $d + $k;
-//
-//                echo $array[$i][$j] . " ";
-//
-//            }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//            echo "<br>";
-//
-//
-//echo "<pre>";
-//        return $array;
-//    }
+        $z = 1;
+        for ($i = 0; $i <= $size - 1; $i++) {
+            for ($j = 0; $j <= $size - 1; $j++) {
+                $this->arrayNew[$i][$j] = $z++;
+            }
+        }
+        return $size;
+
     }
 }
