@@ -35,5 +35,4 @@ class NewArray
 
         return $array;
     }
-
 }

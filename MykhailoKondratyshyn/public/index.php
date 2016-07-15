@@ -1,39 +1,28 @@
 <?php
 
 
-//require "../classes/NewArray.php";
-require "../classes/HorisontalArray.php";
+require "../classes/NewArray.php";
+//require "../classes/HorisontalArray.php";
 require "../classes/VerticalArray.php";
 require "../classes/UnVerticalArray.php";
-require "../classes/SpiralArray.php";
+//require "../classes/SpiralArray.php";
+require "../classes/Factory.php";
 
- $horisontalArrayObject = new HorisontalArray();
+
+//$newArrayObject = new NewArray();
+
 echo "<hr>";
- $varticalArrayObject = new VerticalArray();
+$verticalArrayObject = new VerticalArray();
+$verticalArrayObject->generateArray(5);
+
+$verticalArrayObject->sortVerticalArray();
+
 echo "<hr>";
- $unVerticalArrayObject = new UnVerticalArray();
+$unVerticalArrayObject = new UnVerticalArray();
+$unVerticalArrayObject->generateArray(5);
+$unVerticalArrayObject->sortUnVerticalArray();
 echo "<hr>";
-$spiralArrayObject = new SpiralArray(5);
-echo "<hr>";
 
 
-//var_dump($horisontalArrayObject->horisontalArray());
 
 
-//$firstArray = range(0, 25);
-//
-//foreach ($firstArray as $number) {
-//    echo $number;
-//}
-
-//print_r($horisontalArrayObject);
-
-//$a = array(
-//    range(1, 5),
-//    range(6, 10),
-//
-//);
-//
-//
-//print_r($a);
-//

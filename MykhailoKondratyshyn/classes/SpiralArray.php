@@ -10,33 +10,79 @@ class SpiralArray extends NewArray
 {
     public function spiralArray($k)
     {
-        // $z = 0;
+        $z = 0;
+
+
         $array = array();
+        for ($i = 0; $i < $k; $i++) {
+            for ($j = 0; $j < $k; $j++) {
+                $array[$i][$j] = $j + $z;
 
-        $i = 0;
-        for ($j = 0; $j < $k; $j++) {
 
-            $array[$i][$j] = $j;
+                echo $array[$i][$j] . " ";
 
-            echo $array[$i][$j] . " ";
-
+            }
+            $z = $z + $k;
+            echo "<br>";
         }
 
 
-        for ($d = 0; $d < $k; $d++) {
+        $size = 5;
+        $sizeReverse = 0;
+        $side = 1;
+        $k1 = 0;
+        $k2 = 0;
+        $circleCounter = 0;
 
-            $array[$d][$j] = $d + $k;
+        foreach ($array as $key1 => $arr1) {
+            foreach ($arr1 as $key2 => $arr2) {
+                $arraySort[$k1][$k2] = $array[$key1][$key2];
+                switch ($side) {
+                    case 1:
+                        $k2++;
+                        $side = ($k2 == $size) ? 2 : 1;
+                        $circleCounter = ($side == 2) ? $circleCounter++ : $circleCounter;
+                        break;
+                    case 2:
+                        $k1++;
+                        $side = ($k1 == $size) ? 3 : 2;
+                        break;
+                    case 3:
+                        $k2--;
+                        $side = ($k2 == $sizeReverse) ? 4 : 3;
+                        break;
+                    case 4:
+                        if (!isset($onece)) {
+                            $sizeReverse++;
+                            $size--;
+                            $onece = 1;
+                        }
+                        $k1--;
+                        $side = ($k1 == $sizeReverse) ? 1 : 4;
+                        if ($side == 1) {
+                            unset($onece);
+                        }
+                        break;
+                }
+            }
+        }
+        // $this->arraySort = $array;
 
-            echo $array[$i][$j] . " ";
 
+
+        echo "<table border='1'>";
+
+        for ($i = 0; $i <= 4; $i++) {
+            echo "<tr>";
+
+            for ($i2 = 0; $i2 <= 4; $i2++) {
+                echo "<td>" . $array[$i][$i2] . "</td>";
+            }
+
+            echo "</tr>";
         }
 
-
-
-        echo "<br>";
-
-
-        echo "<pre>";
+        echo "</table><hr /><br />";
         return $array;
     }
 }

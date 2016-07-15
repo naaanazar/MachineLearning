@@ -6,27 +6,34 @@
  * Date: 11.07.16
  * Time: 23:43
  */
-class VerticalArray extends  NewArray
+class VerticalArray extends NewArray
 {
-   public function verticalArray()
-   {
-      $k = 6;
-      $p = 7;
+    public function sortVerticalArray()
+    {
+        $arraySorted = array();
+
+        for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
+            for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {
+                $arraySorted[$j][$i] = $this->arrayNew[$i][$j];
+
+            }
+        }
 
 
-      $j = $p * $k;
+        for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
+            for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {
+
+                echo $arraySorted[$i][$j] . " ";
+
+            }
+            echo "<br>";
+
+        }
 
 
-      for ($i = 1; $i <= $k; $i++) {
+        echo "<pre>";
 
-         foreach (range($i, $j, $k) as $number) {
-            echo "$number ";
 
-         }
-         echo "<br>";
+    }
 
-         $j = $j + 1;
-
-      }
-   }
 }

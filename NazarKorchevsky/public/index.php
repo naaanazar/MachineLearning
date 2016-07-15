@@ -24,11 +24,14 @@ $arrayOut = new ArrayOut;
 
 // autoload classes to factory
 
-foreach (glob("../app/sorters/*Sort.php") as $filename) {   
+foreach (glob("../app/sorters/*Sort.php") as $filename) {
+    $className = substr(strrchr($filename, '/'), 1, -4);
 
-    $className = substr(strrchr($filename, '/'), 1,  -4);            
+    if (method_exists('sa\app\sorters\\' . $className, 'addToFactoryArray')) {
+        $fullClassName = 'sa\app\sorters\\' . $className;
+        $obj = new $fullClassName;
 
-        if (method_exists('sa\app\sorters\\' . $className, 'addToFactoryArray')) {
+        if ($obj->addToFactoryArray() === true) {
             $sorter = FactoryArray::getClass($className);
 
             $sorter->setOrder('ASC');
@@ -36,9 +39,10 @@ foreach (glob("../app/sorters/*Sort.php") as $filename) {
 
             $sorter->setOrder('DESC');
             $arrayOut->arrayOut($sorter->sort());
+        }
 
-            //How todo:  sa\app\sorters\HorizontalSort::addToFactoryArray();
-        }         
+        unset($obj);
+    }         
 }
 
 $out = ob_get_contents();
@@ -47,5 +51,5 @@ ob_end_clean();
 View::$out = $out;
 echo View::getHtml();
 
-//$arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php<a>");
-?>
+//$arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php</a>");
+

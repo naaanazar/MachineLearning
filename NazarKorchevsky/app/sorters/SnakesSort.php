@@ -9,8 +9,9 @@ class SnakesSort extends BaseSort
 
     public function sort()
     {
-        $array = $this->sortArray($this->order, $this->array);
         self::$title = 'Zipper  ' . $this->order;
+
+        $array = $this->sortArray($this->order, $this->array);        
 
         if ($this->order == 'ASC') {
             $f = 1;
@@ -32,6 +33,6 @@ class SnakesSort extends BaseSort
 
     public function addToFactoryArray()
     {
-        return 'true';
+        return true;
     }
 }
