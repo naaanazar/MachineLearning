@@ -4,7 +4,8 @@ namespace liw\app;
 
 abstract class BaseSort
 {
-
+    protected $sortedArr = array();
+    
     protected $arr = array( 
         array(1, 2, 3, 4, 5 ), 
         array(6, 7, 8, 9, 10), 
@@ -15,4 +16,17 @@ abstract class BaseSort
     
     public abstract function sortArr();
     
+    public function displayArray()
+    {
+        foreach ($this->sortedArr as $row) {
+            foreach ($row as $item) {
+                echo $item . "&nbsp;&nbsp;";
+                if($item < 10) {
+                    echo "&nbsp;&nbsp;";
+                }
+            }
+            echo "</br>";
+        }
+        echo "<hr>";
+    }
 }

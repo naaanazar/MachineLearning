@@ -30,9 +30,5 @@ class HorisontalTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedArray, $this->fixture->sortArr());
     }
     
-    public function testEmpty()
-    {
-        $this->assertEmpty( ['1, 2']);
-    }
-
+   
 }

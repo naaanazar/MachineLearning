@@ -29,8 +29,12 @@ foreach ($aaa as $row) {
 echo '------------------------------------------------';
 echo '<br />';
 
+
 $sortObj = $factory->getSort("VerticalSortClass");
-$sortObj->sortArr();
+$a = $sortObj->sortArr();
+$sortObj->displayArray($a);
 
 $sortObj->flag = true;
-$sortObj->sortArr();
+$a = $sortObj->sortArr();
+$sortObj->displayArray($a);
+
