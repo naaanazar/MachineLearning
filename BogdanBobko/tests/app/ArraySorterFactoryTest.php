@@ -11,7 +11,7 @@ class ArraySorterFactoryTest extends PHPUnit_Framework_TestCase {
 		return '\CSR\App\Sorters\\' . $className;
 	}
 
-	public function addDataProvider()
+	public function sortersDataProvider()
 	{
 		return array(
             ArraySorterFactory::TYPE_DIAGONAL => array(
@@ -42,7 +42,7 @@ class ArraySorterFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
     /**
-     * @dataProvider addDataProvider
+     * @dataProvider sortersDataProvider
      */
     public function testGetSorter($type, $expected)
     {
