@@ -8,11 +8,16 @@ namespace dregan\application;
  * Date: 11.07.16
  * Time: 23:14
  */
-class NewArray
+
+
+
+abstract class NewArray
 {
     protected $arrayNew;
 
-    public function generateArray($size)
+    abstract function sortArray();
+
+    public function __construct($size)
     {
         $z = 1;
         for ($i = 0; $i <= $size - 1; $i++) {
@@ -20,7 +25,23 @@ class NewArray
                 $this->arrayNew[$i][$j] = $z++;
             }
         }
-        return $size;
+    }
 
+
+    public function echoArray()
+    {
+        $arraySorted = $this->sortArray();
+        for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
+            for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {
+
+                echo $arraySorted[$i][$j] . " ";
+
+            }
+            echo "<br>";
+
+        }
+
+
+        echo "<pre>";
     }
 }
