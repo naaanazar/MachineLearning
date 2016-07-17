@@ -7,10 +7,11 @@
             "email": "maryna.potapovych@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "phpunit/phpunit": "4.8.*"
+    },
     "autoload": {
         "psr-4":{
             "liw\\": ""}
                  }
              }
-

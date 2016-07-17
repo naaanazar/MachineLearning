@@ -9,8 +9,25 @@ use liw\app\ArraySorterFactory;
 
 $factory = new ArraySorterFactory();
 
+
 $sortObj = $factory->getSort("HorisontalSortClass");
-$sortObj->sortArr();
+$aaa = $sortObj->sortArr();
+
+foreach ($aaa as $row) {
+    foreach ($row as $item) {
+        echo $item . "&nbsp";
+        
+        if ($item < 10) {
+            echo "&nbsp;&nbsp;";
+        }
+    }
+    
+    echo "</br>";
+    
+}
+
+echo '------------------------------------------------';
+echo '<br />';
 
 $sortObj = $factory->getSort("VerticalSortClass");
 $sortObj->sortArr();
