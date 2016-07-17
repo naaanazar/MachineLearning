@@ -17,7 +17,7 @@ class ArrayGeneration
             for($i2 = 0; $i2 <= $this->arraySize; $i2++) {
                 $arrayOriginal[$i][$i2] = $value++;
             }
-        } 
+        }
         return $arrayOriginal;
     }
 }
