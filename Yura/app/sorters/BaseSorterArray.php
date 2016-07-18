@@ -28,4 +28,5 @@ abstract class BaseSorterArray {
     {
         $this->elementsQuantity = $quantity;
     }
+    
 }

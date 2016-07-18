@@ -10,7 +10,7 @@ namespace dregan\application;
  */
 class UnVerticalArray extends NewArray
 {
-    public function sortUnVerticalArray()
+    public function sortArray()
     {
         $q = count($this->arrayNew) - 1;
 
@@ -23,19 +23,7 @@ class UnVerticalArray extends NewArray
             }
             $q--;
         }
-        $array = array_reverse($arraySorted);
+        return array_reverse($arraySorted);
 
-        for ($i = 0; $i <= count($this->arrayNew) - 1; $i++) {
-            for ($j = 0; $j <= count($this->arrayNew) - 1; $j++) {
-
-                echo $array[$i][$j] . " ";
-
-            }
-            echo "<br>";
-
-        }
-
-
-        echo "<pre>";
     }
 }
