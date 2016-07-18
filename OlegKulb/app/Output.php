@@ -17,10 +17,10 @@ class Output
     {
         echo "<table border='1'>";
 
-        for($i = 0; $i <= $this->size; $i++) {
+        for ($i = 0; $i <= $this->size; $i++) {
             echo "<tr>";
 
-            for($i2 = 0; $i2 <= $this->size; $i2++) {
+            for ($i2 = 0; $i2 <= $this->size; $i2++) {
                 echo "<td>". $this->sortableArray[$i][$i2] . "</td>";
             }
 
@@ -35,8 +35,8 @@ class Output
         $file = '../web/file/' . $file;
         $fp = fopen($file, "a");
 
-        foreach($this->sortableArray as $key1 => $arr1) {
-            foreach($arr1 as $key2 => $arr2) {
+        foreach ($this->sortableArray as $key1 => $arr1) {
+            foreach ($arr1 as $key2 => $arr2) {
                 $test = fwrite($fp, $arr2."\t");
             }
 
@@ -46,7 +46,7 @@ class Output
         if ($test) {
             echo 'YES';
             
-        }else {
+        } else {
             echo 'ERROR. Pliz create file or get permission';
         }
 

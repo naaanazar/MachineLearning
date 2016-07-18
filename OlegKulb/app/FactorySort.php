@@ -14,19 +14,18 @@ class FactorySort
 
         $class = '\\ex\\app\\sorts\\' . ucfirst($method);
 
-        if( !class_exists($class) ) {
+        if ( !class_exists($class) ) {
             throw new Exception("Type does not exist");
+        } else {
+            $sort = new $class();
         }
-
-        $sort = new $class();
-
 
         $sortableArray = $sort->process($size, $arrayOriginal);
         
         $output = new Output($size, $sortableArray);
         $output->arrayView();
 
-        if( !$file == NULL) {
+        if ( !$file == NULL) {
             $output->printArrayInfile($file);
         }
     }
