@@ -27,6 +27,7 @@ class SpiralTest extends PHPUnit_Framework_TestCase
             array(10, 9, 8, 7)
         );
 
+        sleep(5);
         $this->assertEquals($expected, $sortableArray);
     }
 
