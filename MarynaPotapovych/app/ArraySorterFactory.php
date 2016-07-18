@@ -5,8 +5,8 @@ namespace liw\app;
 class ArraySorterFactory
 {
     private static $SortTypes = array(
-        "ForwardSort",
-	    "BackSort"  
+        "HorisontalSort",
+	    "VerticalSort"  
     );
     
     public function getSort($SortType)

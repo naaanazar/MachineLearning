@@ -5,39 +5,28 @@ namespace liw\app;
 class VerticalSortClass extends BaseSort
 {
     public $flag = false;
-    
+    private $elementsQuantity;
+
     public function sortArr()
     {
         if (!$this->flag) {
             for ($i = 0; $i < 5; $i++) {
                 for ($j = 0; $j < 5; $j++) {
-                    echo $this->arr[$j][$i] . "&nbsp";
-                    
-                    if ($this->arr[$j][$i] < 10) {
-                        echo "&nbsp;&nbsp;";
-                    }
+                    $this->sortedArr[$i][$j] = $this->arr[$j][$i];
                 }
-                
-                echo '<br />';
             }
-            
-            echo '------------------------------------------------';
-            echo '<br />';
         } else {
-            for ($i = 4; $i >= 0; $i--) {
-                for ($j = 4; $j >= 0; $j--) {
-                    echo $this->arr[$j][$i] . "&nbsp";
-                    
-                    if ($this->arr[$j][$i] < 10) {
-                        echo "&nbsp;&nbsp;";
-                    }
-                }
-                
-                echo '<br />';
-            }
+            $this->sortedArr = array();
+            $row = 0;
             
-            echo '------------------------------------------------';
-            echo '<br />';
+            for ($i = 4; $i >= 0; $i--) {                
+                for ($j = 4; $j >= 0; $j--) {                    
+                    $this->sortedArr[$row][] = $this->arr[$j][$i];
+                }
+                $row++;
+            }
         }
+        
+        return $this->sortedArr;
     }
 }

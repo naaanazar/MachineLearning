@@ -1,39 +1,30 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
 
-//require "../classes/NewArray.php";
-require "../classes/HorisontalArray.php";
-require "../classes/VerticalArray.php";
-require "../classes/UnVerticalArray.php";
-require "../classes/SpiralArray.php";
+use dregan\application\NewArray;
+use dregan\application\VerticalArray;
+use dregan\application\UnVerticalArray;
+use dregan\application\MyClass;
+use dregan\application\ArrayFactory;
+use \dregan\application\HorisontalArray;
 
- $horisontalArrayObject = new HorisontalArray();
-echo "<hr>";
- $varticalArrayObject = new VerticalArray();
-echo "<hr>";
- $unVerticalArrayObject = new UnVerticalArray();
-echo "<hr>";
-$spiralArrayObject = new SpiralArray(5);
-echo "<hr>";
-
-
-//var_dump($horisontalArrayObject->horisontalArray());
-
-
-//$firstArray = range(0, 25);
+//echo "<hr>";
+//$verticalArrayObject = new VerticalArray(5);
 //
-//foreach ($firstArray as $number) {
-//    echo $number;
-//}
+//$verticalArrayObject->echoArray();
+//
+//echo "<hr>";
+//$unVerticalArrayObject = new UnVerticalArray(5);
+//$unVerticalArrayObject->echoArray();
+//echo "<hr>";
+////$myClass = new MyClass();
+////$factory = new dregan\application\ArrayFactory();
+//
+//$horisontalArray = new HorisontalArray(5);
+//$horisontalArray->echoArray();
 
-//print_r($horisontalArrayObject);
-
-//$a = array(
-//    range(1, 5),
-//    range(6, 10),
-//
-//);
-//
-//
-//print_r($a);
-//
+$factory = new ArrayFactory();
+foreach ($factory->getTypes() as $type) {
+    $factory->getArray($type, 5)->echoArray();
+}

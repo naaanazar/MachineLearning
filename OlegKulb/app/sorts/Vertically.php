@@ -11,6 +11,7 @@ class Vertically extends GeneralAbstractSort
                 $arraySort[$i2][$i] = $this->arrayForSorting[$i][$i2];
             }
         }
+        
         return $arraySort;
     }
 }

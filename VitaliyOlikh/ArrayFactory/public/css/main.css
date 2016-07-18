@@ -8,3 +8,26 @@ and open the template in the editor.
     Author     : Vitaliy
 */
 
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h2 {
+    padding-bottom: 15px;
+    font: 32px Tahoma;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+table {
+    display: inline-table;
+    float: left;
+    width: 48%;
+    margin: 20px 5px;
+}
+
+caption {
+    font: 20px Tahoma;
+    margin-bottom: 10px;
+}

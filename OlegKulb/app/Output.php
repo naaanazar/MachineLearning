@@ -32,25 +32,22 @@ class Output
 
     public function printArrayInfile($file)
     {
-        echo "<hr />";
-
+        $file = '../web/file/' . $file;
         $fp = fopen($file, "a");
 
-
-        foreach($this->sortableArray as $key1 => $arr1){
-            foreach($arr1 as $key2 => $arr2){
+        foreach($this->sortableArray as $key1 => $arr1) {
+            foreach($arr1 as $key2 => $arr2) {
                 $test = fwrite($fp, $arr2."\t");
             }
 
             $test = fwrite($fp, "\r\n");
         }
-
+        $test = fwrite($fp, "\r\n");
         if ($test) {
             echo 'YES';
             
         }else {
-            echo 'ERROR';
-            
+            echo 'ERROR. Pliz create file or get permission';
         }
 
         fclose($fp);

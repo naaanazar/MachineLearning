@@ -19,10 +19,9 @@ class Snake extends GeneralAbstractSort
                     $coup--;
                 }
             }
+
             $counter++;
         }
-
-        $this->arraySort = $arraySort;
 
         return $arraySort;
     }

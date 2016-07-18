@@ -5,6 +5,7 @@ namespace CSR\App;
 class ArraySorterFactory
 {
 	const TYPE_STANDART = 'standart';
+	const TYPE_REV_STANDART = 'reversed_standart';
 	const TYPE_VERTICAL = 'vertical';
 	const TYPE_REV_VERTICAL = 'reversed_vertical';
 	const TYPE_SPIRAL = 'spiral';
@@ -15,6 +16,7 @@ class ArraySorterFactory
 
 	private static $types = array(
 		self::TYPE_STANDART,
+		self::TYPE_REV_STANDART,
 		self::TYPE_VERTICAL,
 		self::TYPE_REV_VERTICAL,
 		self::TYPE_SPIRAL,
@@ -32,19 +34,17 @@ class ArraySorterFactory
 
 		switch ($type) {
 			case self::TYPE_STANDART:
-				return new Sorters\StandartSorter();
+			case self::TYPE_REV_STANDART:
+				return new Sorters\StandartSorter($type === self::TYPE_REV_STANDART);
 			case self::TYPE_VERTICAL:
-				return new Sorters\VerticalSorter();
 			case self::TYPE_REV_VERTICAL:
-				return new Sorters\VerticalSorter(true);
+				return new Sorters\VerticalSorter($type === self::TYPE_REV_VERTICAL);
 			case self::TYPE_SPIRAL:
-				return new Sorters\SpiralSorter();
 			case self::TYPE_REV_SPIRAL:
-				return new Sorters\SpiralSorter(true);
+				return new Sorters\SpiralSorter($type === self::TYPE_REV_SPIRAL);
 			case self::TYPE_DIAGONAL:
-				return new Sorters\DiagonalSorter();
 			case self::TYPE_REV_DIAGONAL:
-				return new Sorters\DiagonalSorter(true);
+				return new Sorters\DiagonalSorter($type === self::TYPE_REV_DIAGONAL);
 			case self::TYPE_SNAKE:
 				return new Sorters\SnakeSorter();
 		}

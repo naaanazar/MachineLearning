@@ -10,7 +10,10 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "phpunit/phpunit": "4.8.*",
+	"brianium/paratest": "0.4.4"
+    },
     "autoload": {
         "psr-4": {
             "arrays\\": ""
