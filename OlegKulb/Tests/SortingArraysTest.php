@@ -20,6 +20,7 @@ class SortingArraysTest extends PHPUnit_Framework_TestCase
             array(13, 14, 15, 16)
         );
 
+        sleep(5);
         $this->assertEquals($expected, $testArray);
     }
 

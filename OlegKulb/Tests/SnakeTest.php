@@ -27,6 +27,7 @@ class SnakeTest extends PHPUnit_Framework_TestCase
             array(16, 15, 14, 13)
         );
 
+        sleep(5);
         $this->assertEquals($expected, $sortableArray);
     }
 
