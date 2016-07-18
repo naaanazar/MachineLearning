@@ -7,10 +7,10 @@
  */
 
 /**
- * Description of GenerationArrayTest
+ * Description of BaseSorterArrayTest
  *
  * @author yurii
  */
-class GenerationArrayTest extends PHPUnit_Framework_TestCase{
+class BaseSorterArrayTest extends PHPUnit_Framework_TestCase{
     //put your code here
 }
