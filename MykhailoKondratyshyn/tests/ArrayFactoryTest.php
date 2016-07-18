@@ -40,7 +40,7 @@ class ArrayFactoryTest extends PHPUnit_Framework_TestCase
         $factory = new ArrayFactory();
         $this->assertInstanceOf('\dregan\application\UnVerticalArray', $factory->getArray('UnVerticalArray', 5));
         $this->assertInstanceOf('\dregan\application\VerticalArray', $factory->getArray('VerticalArray', 5));
-        $this->assertInstanceOf('\dregan\application\HorisontalArray', $factory->getArray('HorisontalArray', 5));
+        $this->assertInstanceOf('\dregan\application\HorizontalArray', $factory->getArray('HorizontalArray', 5));
 
 
 

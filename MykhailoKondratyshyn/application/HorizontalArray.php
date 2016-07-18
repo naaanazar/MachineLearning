@@ -2,7 +2,7 @@
 
 namespace dregan\application;
 
-class HorisontalArray extends NewArray
+class HorizontalArray extends NewArray
 {
     public function sortArray()
     {

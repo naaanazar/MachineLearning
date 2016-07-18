@@ -9,7 +9,7 @@ class ArrayFactory
     public $types = array(
         "VerticalArray",
         "UnVerticalArray",
-        "HorisontalArray",
+        "HorizontalArray",
     );
 
     public function getTypes()
