@@ -14,6 +14,7 @@ class RevVerticalTest extends \PHPUnit_Framework_TestCase
     {
         $test = new RevVertical($number);
         $test->Feel();
+        $this->expectOutputString("Reverse Vertical method");
         $this->assertEquals($array, $test->array);
     }
 

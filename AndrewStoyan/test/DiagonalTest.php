@@ -14,6 +14,7 @@ class DiagonalTest extends \PHPUnit_Framework_TestCase
     {
         $test = new Diagonal($number);
         $test->Feel();
+        $this->expectOutputString("Diagonal method");
         $this->assertEquals($array, $test->array);
     }
 
