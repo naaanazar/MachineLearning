@@ -42,7 +42,9 @@ class ArrayFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\dregan\application\VerticalArray', $factory->getArray('VerticalArray', 5));
         $this->assertInstanceOf('\dregan\application\HorizontalArray', $factory->getArray('HorizontalArray', 5));
 
-
+        $this->assertInternalType('array', $factory->getArray('HorizontalArray', 5)->echoArray());
+        $this->assertInternalType('array', $factory->getArray('VerticalArray', 5)->echoArray());
+        $this->assertInternalType('array', $factory->getArray('UnVerticalArray', 5)->echoArray());
 
 
 

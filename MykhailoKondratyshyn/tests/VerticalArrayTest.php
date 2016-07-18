@@ -31,6 +31,6 @@ class VerticalArrayTest extends PHPUnit_Framework_TestCase
             array(5, 10, 15, 20, 25)
         );
         $this->assertEquals($expected, $arraySort);
-        
+
     }
 }
