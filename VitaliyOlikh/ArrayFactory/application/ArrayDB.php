@@ -4,11 +4,6 @@ namespace project\application;
 
 class ArrayDB
 {
-//     public $servername = "localhost";
-//     public $username = "root";
-//     public $password = "";
-//     private $dbname = "myDB";
-
     public static function connectDB()
     {     
         $conn = mysqli_connect("localhost", "root", "", "ArrDB");
