@@ -17,16 +17,7 @@ class StraightSort extends BaseSort
 {
     public function sortArray()
     {
-        $array_to_print = "";
-        foreach ($this->array as $row) {
-            foreach ($row as $item) {
-                $array_to_print .=  $item. "&nbsp;";
-                if ($item < 10) {
-                    $array_to_print .= "&nbsp;&nbsp;";
-                }
-            }
-            $array_to_print .= "</br>";
-        }
-        echo $array_to_print;
+        $this->sortedArray = $this->array;
+        return $this->sortedArray;
     }
 }

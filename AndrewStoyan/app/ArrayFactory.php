@@ -1,5 +1,9 @@
 <?php
 namespace arrays\app;
+
+
+use Exception;
+
 /**
  * Description of ArrayFactory
  * 
@@ -7,6 +11,7 @@ namespace arrays\app;
  * @var $type list of sort methods
  * @author dron
  */
+
 class ArrayFactory 
 {
     public $types = array(
@@ -33,6 +38,10 @@ class ArrayFactory
 
     public function GetArray($type)
     {
-        return new $type($this->number);
+        if(in_array($type, $this->types)) {
+            return new $type($this->number);
+        } else {
+            throw new Exception("Type does not exist");
+        }
     }
 }

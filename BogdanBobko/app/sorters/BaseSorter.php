@@ -3,44 +3,72 @@
 namespace CSR\App\Sorters;
 
 abstract class BaseSorter {
+	protected $reversed = false;
+
+	protected $rowsCount = 0; // number of rows
+	protected $itemsCount = 0; // number of items in a row
+
 	protected $array = array();
-	protected $arrayLength = 0;
-	protected $rowLength = 10;
 	protected $sortedArray = array();
 
+	private $maxItemOffset = 1;
+
 	protected $title = "Base sorting.";
+
+	public function __construct($reversed = false)
+	{
+		$this->reversed = $reversed;
+	}
 
 	abstract public function sort();
 
 	public function setArray($array)
 	{
 		$this->array = $array;
-		$this->arrayLength = count($array);
+		$this->rowsCount = count($array);
+		$this->itemsCount = count($array[0]);
 	}
 
 	public function displayTitle()
 	{
-		echo PHP_EOL . $this->title . PHP_EOL;
+		$title = $this->reversed ? "Revesed " . strtolower($this->title) : $this->title;
+		echo PHP_EOL . $title . PHP_EOL;
 	}
 
 	public function display()
 	{
-		foreach ($this->sortedArray as $index => $arrayItem) {
-			if ($index > 0 && is_int($index / $this->rowLength)) {
-				echo PHP_EOL;
+		$this->getMaxItemOffset();
+
+		foreach ($this->sortedArray as $row) {
+			foreach ($row as $rowItem) {
+				$this->displayArrayItem($rowItem);
 			}
 
-			echo ' ';
+			echo PHP_EOL;
+		}
+	}
 
-			if (strlen($arrayItem) < strlen($this->arrayLength)) {
-				for ($i = 0; $i < (strlen($this->arrayLength) - strlen($arrayItem)); $i++) {
-					echo ' ';
+	private function displayArrayItem($item)
+	{
+		echo ' ';
+
+		if (strlen($item) <= $this->maxItemOffset) {
+			for ($i = 0; $i < ($this->maxItemOffset - strlen($item)); $i++) {
+				echo ' ';
+			}
+
+			echo $item;
+		}
+	}
+
+	private function getMaxItemOffset()
+	{
+		foreach ($this->sortedArray as $row) {
+			foreach ($row as $rowItem) {
+				if (strlen($rowItem) > $this->maxItemOffset) {
+					$this->maxItemOffset = strlen($rowItem);
 				}
 			}
-
-			echo $arrayItem;
 		}
-
-		echo PHP_EOL;
 	}
 }

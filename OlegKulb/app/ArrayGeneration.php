@@ -13,11 +13,11 @@ class ArrayGeneration
 
     public function generation()
     {
-        for($i = 0, $value = 1; $i <= $this->arraySize; $i++) {
+        for ($i = 0, $value = 1; $i <= $this->arraySize; $i++) {
             for($i2 = 0; $i2 <= $this->arraySize; $i2++) {
                 $arrayOriginal[$i][$i2] = $value++;
             }
-        } 
+        }
         return $arrayOriginal;
     }
 }

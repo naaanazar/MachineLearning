@@ -1,12 +1,14 @@
 {
     "require": {
-      
+        "phpunit/phpunit": "4.8.*"
     },
     "minimum-stability": "dev",
 "autoload": {
     "psr-4": {
-        "app\\": "app/"
+        "app\\Sorter\\":"app/Sorters",
+        "app\\Factory\\":"app/Factories",
+	"app\\Figure\\":"app/Figure",
+        "app\\tests\\Figure\\":"app/tests/Figure"
     }
 }
 }
-  

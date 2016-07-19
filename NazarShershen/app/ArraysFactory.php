@@ -19,8 +19,7 @@ class ArraysFactory
     {
         $className = ucfirst($sortType);
         if (!in_array($className, self::$sortTypes)) {
-            echo "Type doesn't exist!";
-            return;
+            throw new \Exception('Type doesn\'t exists!');
         }        
         $objectName = "arr\app\sorters\\" . $className;
         return new $objectName();

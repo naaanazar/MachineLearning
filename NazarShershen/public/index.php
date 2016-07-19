@@ -9,20 +9,18 @@ use arr\app\ArraysFactory;
 
 $factory = new ArraysFactory();
 
-$obj;
-
-$obj = $factory->getSorter("snakeSort");
-$obj->sortArray();
+$snake = $factory->getSorter("snakeSort");
+$snake->sortArray();
 echo "<hr>";
 
-$obj = $factory->getSorter("straightSort");
-$obj->sortArray();
-echo "<hr>";
+$straight = $factory->getSorter("straightSort");
+$straight->sortArray();
+$straight->displayArray();
 
-$obj = $factory->getSorter("verticalSort");
-$obj->sortArray();
-echo "<hr>";
-$obj->flag = true;
-$obj->sortArray();
-echo "<hr>";
+$vertical = $factory->getSorter("verticalSort");
+$vertical->sortArray();
+$vertical->displayArray();
+$vertical->flag = true;
+$vertical->sortArray();
+$vertical->displayArray();
 

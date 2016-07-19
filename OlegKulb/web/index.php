@@ -9,9 +9,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 /**
- * @param string $method Names sort of array(snake, spiral, diagonal, vertically)
+ * @param string $method Names sort of  array(snake, spiral, diagonal, vertically)
  * @param int $size Array size
  * @param string $file File name ('file.txt')
  */
-
-FactorySort::factorySort('vertically', 6, 'file.txt');
+FactorySort::factorySort('diagonal', 4);

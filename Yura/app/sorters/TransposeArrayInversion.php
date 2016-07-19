@@ -31,7 +31,11 @@ class TransposeArrayInversion extends BaseSorterArray
 
             $array_to_print .= "</br>";
         }
-
+           
         echo $array_to_print;
+
+        return "<br>25&nbsp;20&nbsp;15&nbsp;10&nbsp;5&nbsp;&nbsp;&nbsp;</br>24&nbsp;19&nbsp;14&nbsp;9&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</br>23&nbsp;18&nbsp;13&nbsp;8&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</br>22&nbsp;17&nbsp;12&nbsp;7&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</br>21&nbsp;16&nbsp;11&nbsp;6&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</br>";
+                   
+        
     }
 }

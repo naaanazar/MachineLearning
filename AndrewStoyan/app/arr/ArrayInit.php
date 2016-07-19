@@ -20,7 +20,6 @@ if (isset($_POST['number']) && isset($_POST['submit'])) {
         $array = $arrays->GetArray($type);
         $array->Feel();
         $array->Display();
-        $array->File();
     }    
 }
 
