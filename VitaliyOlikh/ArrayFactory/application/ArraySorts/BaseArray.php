@@ -45,6 +45,7 @@ abstract class BaseArray
 
             foreach ($array as $value) {
                 echo "<tr>";
+                
                 foreach($value as $var) {
                     echo "<td style='text-align: center; padding: 10px;'>";
                     echo "$var" . PHP_EOL;

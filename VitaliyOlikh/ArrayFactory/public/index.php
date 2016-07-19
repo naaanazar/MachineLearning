@@ -22,6 +22,7 @@
 
         foreach ($sorterFactory::getAllType() as $type) {
             $sorter = $sorterFactory->getSorter($type);
+
             $arrayDB->connectDB();
             $sorter->arrayFeel(8);
             $sorter->sort();

@@ -18,7 +18,5 @@ class ArrayDB
         } else {
             return $conn;
         }
-
     }
-    
 }
