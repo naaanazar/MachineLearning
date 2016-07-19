@@ -4,11 +4,16 @@ namespace ex\app;
 
 use Exception;
 use ex\app\ArrayGeneration;
+use ex\app\Database\DBGW;
+use PDO;
 
 class FactorySort
 {
     public static function factorySort($method, $size, $file = NULL)
     {
+
+        $DBGW = DBGW::getInstance()->query('w');
+        
         $arrayGeneration = new ArrayGeneration($size);
         $arrayOriginal = $arrayGeneration->generation();
 
