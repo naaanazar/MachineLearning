@@ -2,6 +2,8 @@
 
 namespace project\application\ArraySorts;
 
+use project\application\ArrayDB;
+
 abstract class BaseArray
 {
     protected $array;
@@ -24,20 +26,45 @@ abstract class BaseArray
 
     public function display()
     {
-        echo "<table border='1'>";
-        echo "<caption>" . $this->title . "</caption>";
+        $serArray = serialize($this->array);
 
-        foreach ($this->array as $value) {
-            echo "<tr>";
-            foreach($value as $var) {
-                echo "<td style='text-align: center; padding: 10px;'>";
-                echo "$var" . PHP_EOL;
-                echo "</td>";
+        $connDB = new ArrayDB();
+        $conn = $connDB->connectDB();
+
+        $sql = "SELECT type_array, data_array FROM Array "
+                . "WHERE type_array = '$this->title'";
+
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        if ($row['type_array'] == $this->title) {
+            $array = unserialize($row['data_array']);
+
+            echo "<table border='1'>";
+            echo "<caption>" . $row[type_array] . "</caption>";
+
+            foreach ($array as $value) {
+                echo "<tr>";
+                foreach($value as $var) {
+                    echo "<td style='text-align: center; padding: 10px;'>";
+                    echo "$var" . PHP_EOL;
+                    echo "</td>";
+                }
+
+                echo "</tr>";
             }
-            
-            echo "</tr>";
-        }
 
-        echo "</table>";
+            echo "</table>";
+            
+        } else {
+            $sql2 = "INSERT INTO Array (type_array, data_array) "
+                    . "VALUES ('$this->title', '$serArray')";
+            
+            if ($conn->query($sql2) === TRUE) {
+                echo "New record created successfully" . "<br>";
+            } else {
+                echo "Error: " . $sql2 . "<br>" . $conn->error;
+            }
+        }
     }    
 }

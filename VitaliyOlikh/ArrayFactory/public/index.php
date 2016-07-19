@@ -13,14 +13,17 @@
 
         require __DIR__ . '/../vendor/autoload.php';
 
+
+        use project\application\ArrayDB;
         use project\application\ArrayFactory;
 
+        $arrayDB = new ArrayDB();
         $sorterFactory = new ArrayFactory();
 
         foreach ($sorterFactory::getAllType() as $type) {
             $sorter = $sorterFactory->getSorter($type);
-
-            $sorter->arrayFeel(5);
+            $arrayDB->connectDB();
+            $sorter->arrayFeel(8);
             $sorter->sort();
             $sorter->display();
         }
