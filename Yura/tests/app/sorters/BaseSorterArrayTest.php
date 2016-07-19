@@ -15,10 +15,10 @@ use yu\app\sorters\BaseSorterArray;
  */
 class BaseSorterArrayTest extends PHPUnit_Framework_TestCase{
 
-    public function testBaseSorterArray() {
-
-        $expected = "111";
-        $this->assertEquals($expected, BaseSorterArray::class );
+//    public function testBaseSorterArray() {
+//        $BaseArray = new base ;
+//        $expected = "111";
+//        $this->assertEquals($expected, );
 
     }
-}
+
