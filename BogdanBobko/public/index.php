@@ -2,9 +2,10 @@
 
 ini_set('display_errors', 1);
 
+require_once __DIR__ . '/../init.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use CSR\App\ArraySorterFactory;
+use CSR\App\Sorters\ArraySorterFactory;
 use CSR\App\Generators\StandartArrayGenerator;
 
 $sorterFactory = new ArraySorterFactory();

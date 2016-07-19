@@ -15,7 +15,7 @@ class StandartSorter extends BaseSorter
 		}
 	}
 
-	private function reverseSort()
+	protected function reverseSort()
 	{
 		$_rowIndex = 0;
 
