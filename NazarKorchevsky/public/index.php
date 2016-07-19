@@ -10,6 +10,8 @@ use sa\app\NewArray;
 use sa\app\ArrayOut;
 use sa\app\view\View;
 
+use sa\app\DB\DBArray;
+
 $newArray = new NewArray;
 
 if (isset($_POST['w1']) && isset($_POST['h1'])) {
@@ -48,8 +50,15 @@ foreach (glob("../app/sorters/*Sort.php") as $filename) {
 $out = ob_get_contents();
 ob_end_clean();
 
+//View::$out = $out;
+//echo View::getHtml();
+
+$DB = new DBArray;
+$DB->insertArray($out);
+$out = $DB->selectArray();
+
 View::$out = $out;
 echo View::getHtml();
 
-//$arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php</a>");
+$arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php</a>");
 
