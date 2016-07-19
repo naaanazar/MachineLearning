@@ -27,6 +27,7 @@ class VerticallyTest extends PHPUnit_Framework_TestCase
             array(4, 8, 12, 16)
         );
 
+        sleep(5);
         $this->assertEquals($expected, $sortableArray);
     }
 

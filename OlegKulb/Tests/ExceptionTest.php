@@ -16,6 +16,7 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
      */
     public function testException($type)
     {
+        sleep(5);
         FactorySort::factorySort($type, 4);
     }
 

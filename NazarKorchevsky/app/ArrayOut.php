@@ -33,8 +33,9 @@ class ArrayOut
             </div>",
             BaseSort::$title, $out
         );
-
+        
         echo $out;
+        return $out;
     }
         
     public function writeToFile($str)

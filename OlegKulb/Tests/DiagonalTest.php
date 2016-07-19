@@ -26,7 +26,7 @@ class DiagonalTest extends PHPUnit_Framework_TestCase
             array(6, 9, 12, 14),
             array(10, 13, 15, 16)
         );
-
+        sleep(5);
         $this->assertEquals($expected, $sortableArray);
     }
 

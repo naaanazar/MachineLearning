@@ -14,5 +14,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
         $test = new View;
         $this->assertNotEmpty($test->getHtml());
     }
+
+   
 }
 
