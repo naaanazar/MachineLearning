@@ -15,6 +15,8 @@ class Test1 extends PHPUnit_Framework_TestCase
     public function test2()
     {
         $stack = 12;
+
+        sleep(5);
         $this->assertEquals(0, $stack); //expected 0 -false
     }
 

@@ -44,7 +44,7 @@ class StandartSorterTest extends PHPUnit_Framework_TestCase {
 
 		$reverseSortMethod = new ReflectionMethod(
 			$sorter, 'reverseSort'
-        );
+		);
 
 		$reverseSortMethod->setAccessible(true);
 		$reverseSortMethod->invoke($sorter);

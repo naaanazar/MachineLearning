@@ -37,6 +37,8 @@ class SnakesSortTest extends PHPUnit_Framework_TestCase
         $test->setOrder('ASC');
         $this->assertEquals($this->arrayTestASC, $test->sort());
 
+        $this->assertInternalType('array', NewArray::$array);
+
 
     }
 
@@ -54,6 +56,8 @@ class SnakesSortTest extends PHPUnit_Framework_TestCase
 
         $test->setOrder('DESC');
         $this->assertEquals($this->arrayTestDESC, $test->sort());
+
+        $this->assertInternalType('array', NewArray::$array);
 
 
     }

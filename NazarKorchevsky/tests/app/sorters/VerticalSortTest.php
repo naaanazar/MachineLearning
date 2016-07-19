@@ -52,6 +52,8 @@ class VerticalSortTest extends PHPUnit_Framework_TestCase
         $test->setOrder('DESC');
         $this->assertEquals($this->arrayTestDESC, $test->sort());
 
+        $this->assertInternalType('array', NewArray::$array);
+
     }
 
     public function testAddToFactory()
