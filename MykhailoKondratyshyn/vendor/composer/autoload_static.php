@@ -55,11 +55,24 @@ class ComposerStaticInit685d8cbdf902b5585b101d997b793bc0
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Symfony\\Component\\Console\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/symfony/console',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
+            ),
+            'ParaTest' => 
+            array (
+                0 => __DIR__ . '/..' . '/brianium/paratest/src',
+                1 => __DIR__ . '/..' . '/brianium/paratest/test',
+                2 => __DIR__ . '/..' . '/brianium/paratest/it',
             ),
         ),
     );
