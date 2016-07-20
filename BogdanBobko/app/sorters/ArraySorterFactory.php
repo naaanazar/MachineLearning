@@ -1,6 +1,8 @@
 <?php
 
-namespace CSR\App;
+namespace CSR\App\Sorters;
+
+use Exception;
 
 class ArraySorterFactory
 {
@@ -29,24 +31,24 @@ class ArraySorterFactory
 	public static function getSorter($type)
 	{
 		if (!in_array($type, self::getAllTypes())) {
-			throw new \Exception('Unsupported type');
+			throw new Exception('Unsupported type');
 		}
 
 		switch ($type) {
 			case self::TYPE_STANDART:
 			case self::TYPE_REV_STANDART:
-				return new Sorters\StandartSorter($type === self::TYPE_REV_STANDART);
+				return new StandartSorter($type === self::TYPE_REV_STANDART);
 			case self::TYPE_VERTICAL:
 			case self::TYPE_REV_VERTICAL:
-				return new Sorters\VerticalSorter($type === self::TYPE_REV_VERTICAL);
+				return new VerticalSorter($type === self::TYPE_REV_VERTICAL);
 			case self::TYPE_SPIRAL:
 			case self::TYPE_REV_SPIRAL:
-				return new Sorters\SpiralSorter($type === self::TYPE_REV_SPIRAL);
+				return new SpiralSorter($type === self::TYPE_REV_SPIRAL);
 			case self::TYPE_DIAGONAL:
 			case self::TYPE_REV_DIAGONAL:
-				return new Sorters\DiagonalSorter($type === self::TYPE_REV_DIAGONAL);
+				return new DiagonalSorter($type === self::TYPE_REV_DIAGONAL);
 			case self::TYPE_SNAKE:
-				return new Sorters\SnakeSorter();
+				return new SnakeSorter();
 		}
 	}
 

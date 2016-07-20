@@ -41,5 +41,14 @@ class ArraysFactoryTest extends PHPUnit_Framework_TestCase
             array("VerticalSort")
         );
     }
+
+    /**
+    * @expectedException Exception
+    * @expectedExceptionMessage Type doesn't exists!
+    */
+    public function testGetSorterException()
+    {
+        $this->factory->getSorter("aaaa");
+    }
     
 }
