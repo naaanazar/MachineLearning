@@ -11,11 +11,16 @@ class StandartSorter extends BaseSorter
 		if ($this->reversed) {
 			$this->reverseSort();
 		} else {
-			$this->sortedArray = $this->array;
+			$this->straightSort();
 		}
 	}
 
-	protected function reverseSort()
+	public function straightSort()
+	{
+		$this->sortedArray = $this->array;
+	}
+
+	public function reverseSort()
 	{
 		$_rowIndex = 0;
 
