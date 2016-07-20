@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "stable",
     "require-dev": {
-        "phpunit/phpunit" : "4.8.x"
+        "phpunit/phpunit": "4.8.x",
+        "brianium/paratest": "0.4.4"
     },
     "autoload": {
         "psr-4": {

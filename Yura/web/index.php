@@ -1,37 +1,19 @@
-<html>
-  <p>
-    <?php
-    // Get a partial string from within your own name
-    // and print it to the screen!
-    echo"1";
-
-    ?>
-  </p>
-  <p>
-    <?php
-    // Make your name upper case and print it to the screen:
-    echo"1";
-    ?>
-  </p>
-  <p>
-    <?php
-    // Make your name lower case and print it to the screen:
-    echo"1";
-    ?>
-  </p>
-  <br><br><br><br><hr><br><br><br><br>
-</html>
-
     <?php
 ini_set('display_errors', E_ALL);
 
 require_once '../vendor/autoload.php';
+require_once '../app/DataBase/DBGW.php';
 
-//use yu\app\sorters\SortingArray;
 use yu\app\ArraySorterFactory;
 use yu\app\generators\GenerationArray;
+use yu\app\DataBase\DBGW;
 
-echo"I`m working.GO AWAY!!".'<br>';
+$users = DBGW::getInstance()->query('SELECT * FROM users');
+if($users->count()){
+    foreach ($users->results() as $user){
+        echo $user->name, '<br>';
+    }
+}
 
 $generator = new GenerationArray();
 $types = ArraySorterFactory::getAllTypes();

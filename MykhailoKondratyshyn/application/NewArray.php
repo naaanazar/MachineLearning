@@ -40,8 +40,7 @@ abstract class NewArray
             echo "<br>";
 
         }
-
-
         echo "<pre>";
+        return $arraySorted;
     }
 }

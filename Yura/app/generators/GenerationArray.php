@@ -14,7 +14,7 @@ namespace yu\app\generators;
  */
 class GenerationArray
 {
-    protected $elementsQuantity = 5;
+    protected $elementsQuantity = 3;
     protected $array = array();
 
     public function __construct()

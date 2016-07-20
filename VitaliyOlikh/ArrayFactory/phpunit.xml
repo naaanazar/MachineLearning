@@ -5,5 +5,12 @@
         <testsuite name="myTest">
             <directory>test</directory>
         </testsuite>
-      </testsuites>
+    </testsuites>
+    <logging>
+        <log type="coverage-html" target="./log/report" charset="UTF-8"
+            yui="true" highlight="true"
+            lowUpperBound="50" highLowerBound="80"/>
+    </logging>
+    <filter>
+</filter>
 </phpunit>
