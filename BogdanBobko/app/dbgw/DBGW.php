@@ -33,7 +33,7 @@ class DBGW {
 
 		if ($this->connection->connect_errno) {
 			throw new MySQLConnectException(
-				sprintf('Connect failed: %s\n', $this->connection->connect_error)
+				sprintf('Connection failed: %s\n', $this->connection->connect_error)
 			);
 		}
 	}
