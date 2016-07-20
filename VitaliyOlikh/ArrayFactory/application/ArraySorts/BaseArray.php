@@ -24,7 +24,7 @@ abstract class BaseArray
         return $this->array;
     }
 
-    public function display()
+    public function displayDB()
     {
         $serArray = serialize($this->array);
 
@@ -37,7 +37,7 @@ abstract class BaseArray
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 
-        if ($row['type_array'] == $this->title) {
+        if ($row['type_array'] == $this->title && $row['data_array'] == $serArray) {
             $array = unserialize($row['data_array']);
 
             echo "<table border='1'>";
@@ -57,14 +57,23 @@ abstract class BaseArray
 
             echo "</table>";
             
-        } else {
-            $sql2 = "INSERT INTO Array (type_array, data_array) "
-                    . "VALUES ('$this->title', '$serArray')";
-            
+        } elseif($row['type_array'] == $this->title && $row['data_array'] !== $serArray) {
+            $sql2 = "UPDATE Array SET data_array='$serArray' WHERE type_array='$this->title'";
+
             if ($conn->query($sql2) === TRUE) {
                 echo "New record created successfully" . "<br>";
             } else {
                 echo "Error: " . $sql2 . "<br>" . $conn->error;
+            }
+
+        } else {
+            $sql3 = "INSERT INTO Array (type_array, data_array) "
+                    . "VALUES ('$this->title', '$serArray')";
+            
+            if ($conn->query($sql3) === TRUE) {
+                echo "New record created successfully" . "<br>";
+            } else {
+                echo "Error: " . $sql3 . "<br>" . $conn->error;
             }
         }
     }    

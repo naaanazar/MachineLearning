@@ -13,7 +13,6 @@
 
         require __DIR__ . '/../vendor/autoload.php';
 
-
         use project\application\ArrayDB;
         use project\application\ArrayFactory;
 
@@ -24,9 +23,9 @@
             $sorter = $sorterFactory->getSorter($type);
 
             $arrayDB->connectDB();
-            $sorter->arrayFeel(8);
+            $sorter->arrayFeel(5);
             $sorter->sort();
-            $sorter->display();
+            $sorter->displayDB();
         }
         ?>
     </div>
