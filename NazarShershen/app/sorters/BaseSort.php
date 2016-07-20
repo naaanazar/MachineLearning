@@ -8,6 +8,8 @@
 
 namespace arr\app\sorters;
 
+use arr\app\db\DBGW;
+
 /**
  *
  * @author Nazar
@@ -65,4 +67,27 @@ abstract class BaseSort
         }
         echo "<hr>";
     }
+
+    public function saveArrayToDB($sortType)
+    {
+        $serializedArray = serialize($this->sortedArray);
+        
+        try {
+
+            $conn = DBGW::getConnection();
+
+            $stmt = $conn->prepare("INSERT INTO `sorted_arrays` (`key`, `value`) VALUES (:type, :array)");
+            $stmt->bindParam(':type', $sortType);
+            $stmt->bindParam(':array', $serializedArray);
+            $stmt->execute();
+            echo "Array is stored!";
+
+        } catch (\PDOException $e) {
+
+            echo $e->getMessage();
+        }
+
+        $conn = NULL;
+    }
+
 }
