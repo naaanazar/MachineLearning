@@ -27,4 +27,5 @@ use \dregan\application\HorisontalArray;
 $factory = new ArrayFactory();
 foreach ($factory->getTypes() as $type) {
     $factory->getArray($type, 5)->echoArray();
+    $factory->getArray($type, 5)->goMysql($type);
 }
