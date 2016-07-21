@@ -68,9 +68,10 @@ abstract class BaseSort
         echo "<hr>";
     }
 
-    public function saveArrayToDB($sortType)
+    public function saveArrayToDB($sortType, $array)
     {
-        $serializedArray = serialize($this->sortedArray);
+//        $serializedArray = serialize($this->sortedArray);
+        $serializedArray = serialize($array);
         
         try {
 
@@ -80,7 +81,7 @@ abstract class BaseSort
             $stmt->bindParam(':type', $sortType);
             $stmt->bindParam(':array', $serializedArray);
             $stmt->execute();
-            echo "Array is stored!";
+            echo "Array is stored!</br>";
 
         } catch (\PDOException $e) {
 
