@@ -1,6 +1,7 @@
 <?php
 
 namespace arrays\app;
+use arrays\app\DBFeeler;
 
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
@@ -19,7 +20,11 @@ if (isset($_POST['number']) && isset($_POST['submit'])) {
     foreach ($types as $type) {
         $array = $arrays->GetArray($type);
         $array->Feel();
-        $array->Display();
+        //$array->Display();
+        $array->ToDB();
+        $array->FromDB();
     }    
+
+    //$feeler = new DBFeeler(1000);
 }
 
