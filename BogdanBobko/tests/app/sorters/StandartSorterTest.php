@@ -4,7 +4,6 @@ namespace CSR\Tests\App\Sorters;
 
 use CSR\App\Sorters\StandartSorter;
 use PHPUnit_Framework_TestCase;
-use ReflectionProperty;
 use ReflectionMethod;
 
 class StandartSorterTest extends PHPUnit_Framework_TestCase {
@@ -21,24 +20,48 @@ class StandartSorterTest extends PHPUnit_Framework_TestCase {
 		array(91, 92, 93, 94, 95, 96, 97, 98, 99, 100),
 	);
 
+	private $outputArray = array(
+		array(100, 99, 98, 97, 96, 95, 94, 93, 92, 91),
+		array(90, 89, 88, 87, 86, 85, 84, 83, 82, 81),
+		array(80, 79, 78, 77, 76, 75, 74, 73, 72, 71),
+		array(70, 69, 68, 67, 66, 65, 64, 63, 62, 61),
+		array(60, 59, 58, 57, 56, 55, 54, 53, 52, 51),
+		array(50, 49, 48, 47, 46, 45, 44, 43, 42, 41),
+		array(40, 39, 38, 37, 36, 35, 34, 33, 32, 31),
+		array(30, 29, 28, 27, 26, 25, 24, 23, 22, 21),
+		array(20, 19, 18, 17, 16, 15, 14, 13, 12, 11),
+		array(10, 9, 8, 7, 6, 5, 4, 3, 2, 1),
+	);
+
+	public function testStraightSortLogic() {
+		$sorter = new StandartSorter(true);
+		$sorter->setArray($this->inputArray);
+		$sorter->sort();
+
+		$this->assertAttributeEquals($this->outputArray, 'sortedArray', $sorter);
+	}
+
+	public function testReverseSortLogic() {
+		$sorter = new StandartSorter();
+		$sorter->setArray($this->inputArray);
+		$sorter->sort();
+
+		$this->assertAttributeEquals($this->inputArray, 'sortedArray', $sorter);
+	}
+
 	// testing protected attribute
-	public function testSort()
-	{
+	public function testSort() {
 		$outputArray = $this->inputArray;
 
 		$sorter = new StandartSorter();
 		$sorter->setArray($this->inputArray);
 		$sorter->sort();
 
-		$sortedArrayProperty = new ReflectionProperty($sorter, 'sortedArray');
-		$sortedArrayProperty->setAccessible(true);
-
-		$this->assertEquals($outputArray, $sortedArrayProperty->getValue($sorter));
+		$this->assertAttributeEquals($outputArray, 'sortedArray', $sorter);
 	}
 
 	// testing private method and private attribute
-	public function testReverseSort()
-	{
+	public function testReverseSort() {
 		$sorter = new StandartSorter(true);
 		$sorter->setArray($this->inputArray);
 
@@ -49,17 +72,6 @@ class StandartSorterTest extends PHPUnit_Framework_TestCase {
 		$reverseSortMethod->setAccessible(true);
 		$reverseSortMethod->invoke($sorter);
 
-		$this->assertAttributeEquals(array(
-			array(100, 99, 98, 97, 96, 95, 94, 93, 92, 91),
-			array(90, 89, 88, 87, 86, 85, 84, 83, 82, 81),
-			array(80, 79, 78, 77, 76, 75, 74, 73, 72, 71),
-			array(70, 69, 68, 67, 66, 65, 64, 63, 62, 61),
-			array(60, 59, 58, 57, 56, 55, 54, 53, 52, 51),
-			array(50, 49, 48, 47, 46, 45, 44, 43, 42, 41),
-			array(40, 39, 38, 37, 36, 35, 34, 33, 32, 31),
-			array(30, 29, 28, 27, 26, 25, 24, 23, 22, 21),
-			array(20, 19, 18, 17, 16, 15, 14, 13, 12, 11),
-			array(10, 9, 8, 7, 6, 5, 4, 3, 2, 1),
-		), 'sortedArray', $sorter);
+		$this->assertAttributeEquals($this->outputArray, 'sortedArray', $sorter);
 	}
 }

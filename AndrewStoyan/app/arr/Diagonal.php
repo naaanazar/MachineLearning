@@ -14,8 +14,9 @@ class Diagonal extends ArrayBase
     public $array;
     public $number;
 
-    public function __construct($number) {
+    public function __construct($number, $type) {
         $this->number = $number;
+        $this->type = $type;
     }
 
     public function Feel()
