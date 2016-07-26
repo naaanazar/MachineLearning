@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/yurii/Crowdin/Service/Yura/app/DataBase/DBGW.php</file>
+            <file>file:/home/yurii/Crowdin/Service/Yura/app/sorters/ArrayHorizontal.php</file>
             <file>file:/home/yurii/Crowdin/Service/Yura/web/index.php</file>
+            <file>file:/home/yurii/Crowdin/Service/Yura/app/DataBase/DBArray.php</file>
         </group>
     </open-files>
 </project-private>
