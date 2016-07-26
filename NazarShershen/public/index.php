@@ -14,8 +14,26 @@ $factory = new ArraysFactory();
 //echo "<hr>";
 
 $straight = $factory->getSorter("straightSort");
-$straight->sortArray();
-$straight->saveArrayToDB("straightSort");
+
+for($z = 0; $z < 10000; $z++) {
+
+    $straight->sortArray();
+    $array = array();
+    $str = "";
+    for($i = 0; $i < 5; $i++) {
+
+        $str .= chr(rand(97, 122));
+
+        for($j = 0; $j < 5; $j++) {
+            $array[$i][$j] = rand(0, 100);
+        }
+
+    }
+
+    $key = $str;
+
+    $straight->saveArrayToDB($key, $array);
+}
 //$straight->displayArray();
 //
 //$vertical = $factory->getSorter("verticalSort");
