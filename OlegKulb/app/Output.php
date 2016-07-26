@@ -42,7 +42,9 @@ class Output
 
             $test = fwrite($fp, "\r\n");
         }
+
         $test = fwrite($fp, "\r\n");
+        
         if ($test) {
             echo 'YES';
             

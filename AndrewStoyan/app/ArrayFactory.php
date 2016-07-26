@@ -39,7 +39,7 @@ class ArrayFactory
     public function GetArray($type)
     {
         if(in_array($type, $this->types)) {
-            return new $type($this->number);
+            return new $type($this->number, $type);
         } else {
             throw new Exception("Type does not exist");
         }

@@ -16,9 +16,9 @@ use arr\tests\app\sortersTest\StraightSortTest;
 class SortersTestSuite
 {
     public static function suite()
-    {       
+    {
         $suite = new PHPUnit_Framework_TestSuite('SortersSuite');
-        $suite->addTestSuite('\arr\tests\app\sortersTests\StraightSortTest');
+        $suite->addTestSuite(new StraightSortTest());
 //        $suite->addTestSuite('VerticalSortTest');
 //        $suite->addTestSuite('SnakeSortTest');
         return $suite;
