@@ -60,5 +60,5 @@ $out = $DB->selectArray();
 View::$out = $out;
 echo View::getHtml();
 
-$arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php</a>");
+//$arrayOut->writeToFile($out."<br><a href='../index.php'>back to index.php</a>");
 
