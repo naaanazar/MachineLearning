@@ -55,35 +55,37 @@ abstract class NewArray
 
 
 
-        public function goMysql($type)
-    {
-        $arraySorted = $this->sortArray();
-        $deviceIds = array();
-        for ($m = 0; $m <= count($this->arrayNew) - 1; $m++) {
-            for ($h = 0; $h <= count($this->arrayNew) - 1; $h++) {
+//        public function goMysql($type)
+//    {
+//        $arraySorted = $this->sortArray();
+//        $deviceIds = array();
+//        for ($m = 0; $m <= count($this->arrayNew) - 1; $m++) {
+//            for ($h = 0; $h <= count($this->arrayNew) - 1; $h++) {
+//
+//                $deviceIds[] = $arraySorted[$m][$h];
+//
+//            }
+//        }
+//        $str = implode(',', $deviceIds);
+//
+//        $strr = json_encode($arraySorted);
+//        $sttrr = json_decode($strr);
+//
+//        echo '<br>';
+//        echo $sttrr;
+//        echo '<br>';
 
-                $deviceIds[] = $arraySorted[$m][$h];
 
-            }
-        }
-        $str = implode(',', $deviceIds);
-
-        $strr = json_encode($arraySorted);
-
-        echo '<br>';
-        echo json_encode($arraySorted);
-        echo '<br>';
-
-
-        $result = $this->db->query("INSERT INTO `arraysort`(`type`, `result`) VALUES ('$type', '$strr')");
+        //$result = $this->db->query("INSERT INTO `arraysort`(`type`, `result`) VALUES ('$type', '$strr')");
 
         //return $result->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $downloadresult = $this->db->query("SELECT result FROM `arraysort` WHERE type = '$type';");
+        //$downloadresult = $this->db->query("SELECT result FROM `arraysort` WHERE type = '$type';");
 
-
-    }
+//        echo '<br>';
+//        echo json_decode($downloadresult);
+   // }
 
 
 
@@ -93,3 +95,5 @@ abstract class NewArray
 
 
 }
+
+
