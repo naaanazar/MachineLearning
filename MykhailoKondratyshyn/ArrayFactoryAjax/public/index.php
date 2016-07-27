@@ -29,5 +29,9 @@ $factory = new ArrayFactory();
 //    $factory->getArray($type, 5)->echoArray();
 // //   $factory->getArray($type, 5)->goMysql($type);
 //}
-
-$factory->getArray($_POST['name'], 5)->echoArray();
+if (!empty($_POST)) {
+    $factory->getArray($_POST['name'], 5)->jsonArray();
+}else {
+    $factory->getArray($_GET['name'], 5)->jsonArray();
+}
+//echo json_decode($_POST['name']);

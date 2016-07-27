@@ -49,8 +49,30 @@ abstract class NewArray
         }
 
         echo "<pre>";
+
         return $arraySorted;
+
     }
+
+
+    public function jsonArray(){
+        $arraySorted = $this->sortArray();
+        $deviceIds = array();
+        for ($m = 0; $m <= count($this->arrayNew) - 1; $m++) {
+            for ($h = 0; $h <= count($this->arrayNew) - 1; $h++) {
+
+                $deviceIds[] = $arraySorted[$m][$h];
+
+            }
+        }
+        $json = json_encode($arraySorted);
+        echo $json;
+    }
+
+
+
+
+
 
 
 
