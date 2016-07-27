@@ -25,8 +25,9 @@ use \dregan\application\HorisontalArray;
 //$horisontalArray->echoArray();
 
 $factory = new ArrayFactory();
-foreach ($factory->getTypes() as $type) {
-    $factory->getArray($type, 5)->echoArray();
- //   $factory->getArray($type, 5)->goMysql($type);
-}
+//foreach ($factory->getTypes() as $type) {
+//    $factory->getArray($type, 5)->echoArray();
+// //   $factory->getArray($type, 5)->goMysql($type);
+//}
 
+$factory->getArray($_POST['name'], 5)->echoArray();
