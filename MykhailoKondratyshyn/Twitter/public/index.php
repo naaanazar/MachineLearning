@@ -36,7 +36,7 @@ $echo->singUp();
 
 
 $echho = new Methods();
-//$echho->tweet();
-//$echho->getPosts();
-//$echho->follow();
+$echho->tweet();
+$echho->getPosts();
+$echho->follow();
 $echho->getFollowers();
