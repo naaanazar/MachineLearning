@@ -33,5 +33,10 @@ use \dregan\application\HorisontalArray;
 $echo = new SignUp();
 $echo->singUp();
 
+
+
 $echho = new Methods();
-$echho->tweet();
+//$echho->tweet();
+//$echho->getPosts();
+//$echho->follow();
+$echho->getFollowers();

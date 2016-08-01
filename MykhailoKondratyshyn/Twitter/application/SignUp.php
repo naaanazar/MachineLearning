@@ -4,6 +4,7 @@ namespace dregan\application;
 
 use dregan\database\Db;
 use PDO;
+
 /**
  * Created by PhpStorm.
  * User: dregan
@@ -14,7 +15,8 @@ class SignUp
 {
 
     protected $user_id;
-
+    protected $login = "Dreggan";
+    protected $email = "example@gmail.com";
 
     public function __construct()
     {
@@ -24,15 +26,25 @@ class SignUp
 
     public function singUp()
     {
+        $login = $this->login;
+        $email = $this->email;
+        $this->db->query("INSERT INTO `twitter`(`Login`, `Email`, `Pass`) VALUES ('$login', '$email', 'password')");
 
-        $result = $this->db->query("INSERT INTO `twitter`(`Login`, `Email`, `Pass`) VALUES ('Dregan', 'example@gmail.com', 'password')");
-
-        $this->user_id = $this->db->query("SELECT `Id` From `twitter` WHERE Login = 'Dregan'");
-
-
-
-        return $this->user_id;
-        //return $this->user_id->fetchAll(PDO::FETCH_ASSOC);
-        //$downloadresult = $this->db->query("SELECT result FROM `arraysort` WHERE type = '$type';");
     }
+
+
+    public function userId()
+    {
+        $login = $this->login;
+        $result = $this->db->query("SELECT `Id` From `twitter` WHERE Login = '$login'");
+
+        $user_id = $result->fetch(PDO::FETCH_ASSOC);
+        return implode($user_id);
+    }
+
+
 }
+
+
+
+
