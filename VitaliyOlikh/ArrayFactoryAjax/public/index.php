@@ -23,7 +23,7 @@
             $sorter = $sorterFactory->getSorter($type);
 
             $arrayDB->connectDB();
-            $sorter->arrayFeel(6);
+            $sorter->arrayFeel(5);
             $sorter->sort();
             $sorter->displayDB();
         }
