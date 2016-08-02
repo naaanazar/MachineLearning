@@ -14,9 +14,7 @@ use PDO;
 class SignUp
 {
 
-    protected $user_id;
-    protected $login = "Dreggan";
-    protected $email = "example@gmail.com";
+
 
     public function __construct()
     {
@@ -24,18 +22,17 @@ class SignUp
     }
 
 
-    public function singUp()
+    public function singUp($login, $email, $pass)
     {
-        $login = $this->login;
-        $email = $this->email;
-        $this->db->query("INSERT INTO `twitter`(`Login`, `Email`, `Pass`) VALUES ('$login', '$email', 'password')");
+
+        $this->db->query("INSERT INTO `twitter`(`Login`, `Email`, `Pass`) VALUES ('$login', '$email', '$pass')");
 
     }
 
 
-    public function userId()
+    public function userId($login)
     {
-        $login = $this->login;
+
         $result = $this->db->query("SELECT `Id` From `twitter` WHERE Login = '$login'");
 
         $user_id = $result->fetch(PDO::FETCH_ASSOC);
