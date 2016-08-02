@@ -12,9 +12,10 @@ class Standart extends ArrayBase
     public $array;
     protected $counter;
     public $number;
-
-    public function __construct($number) {
+    
+    public function __construct($number, $type) {
         $this->number = $number;
+        $this->type = $type;
     }
 
     public function Display()

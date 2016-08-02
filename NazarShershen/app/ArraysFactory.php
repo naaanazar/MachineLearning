@@ -2,6 +2,8 @@
 
 namespace arr\app;
 
+use Exception;
+
 /**
  * Description of ArraysFactory
  *
@@ -19,7 +21,7 @@ class ArraysFactory
     {
         $className = ucfirst($sortType);
         if (!in_array($className, self::$sortTypes)) {
-            throw new \Exception('Type doesn\'t exists!');
+            throw new Exception('Type doesn\'t exists!');
         }        
         $objectName = "arr\app\sorters\\" . $className;
         return new $objectName();

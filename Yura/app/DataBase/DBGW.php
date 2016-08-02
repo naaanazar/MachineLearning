@@ -16,8 +16,9 @@ use mysqli;
 class DBGW {
     private $_mysqli,
             $_query,
-            $_result = array(),
+            $_result = [],
             $_count = 0;
+            
 
     public static $instance;
 
@@ -32,24 +33,30 @@ class DBGW {
         $this->_mysqli = new mysqli('localhost', 'Fidelite', 'yurayura123', 'singleton');
         if ($this->_mysqli->connect_error) {
             die($this->_mysqli->connect_error);
-        }
-
+          }
+          
     }
 
-        public function query($sql){
-                if($this->_query == $this->_mysqli->query($sql))  {
-            /* @var $row type */
-            while ($row = $this->_query->fetch_object()){
-                        $this->_result[] = $row;
-                    }
-                    $this->_count = $this->query->num_rows;
+    public function query($sql)
+        {
+            if($this->_query = $this->_mysqli->query($sql))  {
+                while ($row = $this->_query->fetch_object()){
+                    $this->_result[] = $row;
+                    var_dump($row);
+                   
                 }
-                return $this;
+                $this->_count = $this->_query->num_rows;
+            }
+
+            return ($this);
         }
+
+        
         public function results() {
             return $this->_result;
         }
+
         public function count(){
             return $this->_count;
         }
-}
+       }
