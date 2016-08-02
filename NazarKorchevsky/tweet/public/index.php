@@ -9,7 +9,7 @@ $auth->session_security();
 
 require_once '../app/tweet.php';
 $tweet = new Tweet;
-$userList = $tweet->userList();
+$userList = $tweet->userListView();
 
 if (isset($_POST['msg']) && isset($_POST['tweet'])) {
     require_once '../app/tweet.php';    
@@ -24,7 +24,7 @@ if (isset($_POST['get_post'])) {
 }
 
 if (isset($_POST['Follow'])) {
-    $tweet->follow();
+    $tweet->setFollow();
    
 }
 
@@ -34,7 +34,7 @@ if (isset($_POST['Follow'])) {
 ?>
 
 <form class='login' action='login.php' method='post'>
-	<span><?php echo $_SESSION['user'] . $_SESSION['users_id'] . $_SESSION['auth'] ?></span>
+	<span><?php echo $_SESSION['user'] . $_SESSION['users_id']?></span>
 	<input type='submit' name='logout' value='Logout'>
 </form>
 <br><br>
@@ -48,14 +48,16 @@ if (isset($_POST['Follow'])) {
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <input type="number" placeholder="id" name="get_post_id">
     <input type="submit" name="get_post" value="get post">
-</form>ost
+</form>
 <?= isset($get_post) ? $get_post : ''  ?>
+<hr>
+<?= $userList ?>
 <hr>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <?= $userList ?>
-    <input type="submit" name="Follow" value="follow">
+     <input type="number" placeholder="Follow user id" name="follow_user_id">    
+     <input type="submit" name="Follow" value="follow">
 </form>
-
 
 
 

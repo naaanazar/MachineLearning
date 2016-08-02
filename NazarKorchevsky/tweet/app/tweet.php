@@ -4,6 +4,7 @@ require_once 'DB/QueriesToDB.php';
 
 class Tweet
 {
+    
 
     public function createTweet($user_id, $msg)
     {
@@ -34,20 +35,25 @@ class Tweet
         return $res;
 
     }
-
+    
     public function userList()
     {
+        
         $DB = new QueriesToDB;
         $sql = "SELECT id, user FROM users";
         $result = $DB->selectDB($sql);
+        if (mysqli_num_rows($result) >  0) {          
+           return $result;
+        }
+    }
+
+    public function userListView()
+    {
         ob_start();
-
-        if (mysqli_num_rows($result) >  0) {
-            $i = 1;
-
+        $result = $this->userList();
+        if ($result) {              
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<input type='checkbox' name='userList". $i . "' value='".  $row['id']. "'>" .  $row['id'] . "<br>";
-                $i++;
+                echo $row['user']. "_ _ id _ _ ".  $row['id'] . "<br>";                
             }
         }
         $res = ob_get_contents();
@@ -56,19 +62,27 @@ class Tweet
         return $res;
 
     }
+    
+    
 
-    public function follow()
-    {
-        
+    public function setFollow()
+    {        
         $DB = new QueriesToDB;
-        foreach ($_POST as $key => $value) {
-            if ($value !== "follow") {                
-               $sql="INSERT INTO follow (user_id, follow_user_id)
-			   VALUES (" . $_SESSION['users_id'] . "','$value') WHERE user_id = '".$_SESSION['users_id']."' AND follow_user_id <>'". $value ."' ";
-               $DB->insertOrUpdateDB($sql);
-            }
-        }
- 
+       follow_user_id
+                $sql = "SELECT * FROM follow WHERE user_id = " . $_SESSION['users_id'] ." AND follow_user_id=". $_POST['follow_user_id']";  
+                $result = $DB->selectDB($sql);
+               
+                if (mysqli_num_rows($result) < 1) {            
+                    $sql = "INSERT INTO follow (user_id, follow_user_id)
+                         VALUES ('" . $_SESSION['users_id'] . "','" . $value . "')";
+                    $DB->insertOrUpdateDB($sql);
+               }
+         
+ //SELECT NOT EXISTS (SELECT * FROM `follow` WHERE user_id = 1 AND follow_user_id=4)
+        
+   //      INSERT INTO follow (user_id, follow_user_id)
+  // VALUES (1, 2)
+  // WHERE NOT EXISTS (SELECT * FROM follow WHERE user_id = 1 AND follow_user_id=5);
     }
 
     public function follows()
