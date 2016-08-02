@@ -5,7 +5,7 @@ namespace liw\app;
 class VerticalSortClass extends BaseSort
 {
     public $flag = false;
-    private $elementsQuantity;
+   
 
     public function sortArr()
     {
