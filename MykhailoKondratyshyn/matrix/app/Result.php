@@ -24,9 +24,12 @@ class Result
 
                 if ($array[$i][$j] == 1) {
                     $arrayOur[0][0] = $array[$i][$j];
-                    for ($m = 1; $m <= count($array); $m++) {
-                        if ($array[$i][$j + $m] == 1)
+                    for ($m = 1; $m <= count($array)-1; $m++) {
+                        if ($array[$i][$j + $m] == 1) {
                             $arrayOur[0][$m] = $array[$i][$j + $m];
+                        }elseif ($array[$i + $m][$j] == 1){
+                            $arrayOur[$m][0] = $array[$i][$j + $m];
+                        }
                         echo "<pre>";
 
                     }
