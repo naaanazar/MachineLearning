@@ -6,35 +6,42 @@ class Result
 
     public function matrix()
     {
+        $width = 5;
+        $hight = 4;
+        $sum = 1;
+        $k = 0;
 
-        $sum = 0;
-        $a = 0;
-        $m = 2;
         $array = array(
-            [1, 1, 1, 0, 0],
-            [1, 1, 1, 1, 1],
+            [1, 1, 1, 0, 1],
+            [1, 1, 0, 1, 1],
             [1, 1, 1, 1, 1],
             [1, 0, 0, 1, 1]
         );
 
-        for ($i = 0; $i <= count($array) - 1; $i++) {
-            for ($j = 0; $j <= count($array) - 1; $j++) {
+        for ($i = 0; $i <= $hight - 1; $i++) {
+            for ($j = 0; $j <= $width - 1; $j++) {
 
                 $rectangle = $array[$i][$j];
 
                 if ($array[$i][$j] == 1) {
-                    $arrayOur[0][0] = $array[$i][$j];
-                    for ($m = 1; $m <= count($array)-1; $m++) {
-                        if ($array[$i][$j + $m] == 1) {
-                            $arrayOur[0][$m] = $array[$i][$j + $m];
-                        }elseif ($array[$i + $m][$j] == 1){
-                            $arrayOur[$m][0] = $array[$i][$j + $m];
+                    //$arrayOur[$i][$n] = $array[$i][$j];
+                    for ($m = 1; $m <= $hight-$i-1; $m++) {
+                        for ($n = 1; $n <= $width-$j-1; $n++) {
+                            if ($array[$i][$j+$n] == 1) {
+                               $arrayOur[$i][$n-1] = $array[$i][$j];
+                                $arrayOur[$i][$n] = $array[$i][$j+$n-1];
+
+                            }elseif ($array[$i+$m][$n] == 1) {
+
+                                $arrayOur[$i+$m][$n] = $array[$i][$j];
+                                $arrayOur[$i+$m][$n] = $array[$i][$j+$n-1];
+                            }
+
+                            echo "<pre>";
+
                         }
-                        echo "<pre>";
 
                     }
-
-
                 }
 
             }
