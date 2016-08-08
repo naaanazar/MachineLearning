@@ -30,5 +30,21 @@ class VerticalTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals($expectedArray1, $this->fixture->sortArr());
     }
+    
+     public function testEqual1()
+    {
+        $expectedArray2 = array(
+            array(25, 20, 15, 10, 5),
+            array(24, 19, 14, 9, 4),
+            array(23, 18, 13, 8, 3),
+            array(22, 17, 12, 7, 2),
+            array(21, 16, 11, 6, 1),
+        );
+        
+        $this->fixture->flag = TRUE;
+        $this->assertEquals($expectedArray2, $this->fixture->sortArr());
+    }
+    
+    
 
 }
