@@ -1,45 +1,30 @@
 <?php
 
-$i = 0;
+
 $dir = '/home/crowdin_share';
 
-if ($handle = opendir($dir)) {
-    echo "Дескриптор каталога: $handle<br>";
-    echo "Записи:<br>";
 
-    $element = readdir($handle);
-
-
-
-
-
-    while (($file = readdir($handle)) !== false) {
-
-
-        echo "$file<br>";
-        $arr[$i] = $file;
-        $i++;
+function display($dir = ".")
+{
+    if (is_dir($dir)) {
+        echo $dir, ":<br><ul>";
+        if ($dh = opendir($dir)) {
+            while (($file = readdir($dh)) !== false) {
+                if ($file == '..' || $file == '.') {
+                    continue;
+                }
+                echo "<li>";
+                if (is_dir($dir . "/" . $file)) {
+                    display($dir . "/" . $file);
+                } else {
+                    echo $file;
+                }
+                echo "</li>";
+            }
+            closedir($dh);
+        }
+        echo "</ul>";
     }
-
-    for ($j = 0; $j<=$i; $j++) {
-
-        echo filetype($dir . $arr[$i]);
-
-    }
-
-
-
-
-
-
-
-
-
-
-    echo "<pre>";
-
-var_dump($arr);
-
-
-    closedir($handle);
 }
+
+display();

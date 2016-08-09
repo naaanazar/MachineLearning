@@ -2,9 +2,9 @@
 
 
 
-$login = 'text';
+$login = 'Mykhailo Kondratyshyn';
 
-$login_shablon = "/^[a-zA-Z][_.a-zA-Z0-9]{2,}$/";
+$login_shablon = "/^[А-Я]|[A-Z][a-zA-Z]$/u";
 
 
 if (preg_match($login_shablon, $login)){
