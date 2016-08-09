@@ -12,7 +12,8 @@
     "minimum-stability": "stable",
     "require": {
         "phpunit/phpunit": "4.8.*",
-        "brianium/paratest": "0.4.4"
+        "brianium/paratest": "0.4.4",
+        "twbs/bootstrap": "^3.3"
 
     },
 	"autoload": {
