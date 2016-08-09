@@ -9,13 +9,14 @@ $(document).ready(function() {
                var output = '<table border="1">';
 
                for (var i = 0; i < data.length; i++) {
-               output += '</tr>';
                
+                output += '</tr>';
+
                     $.each(data[i], function(key, val) {
                         output += '<td>' + val + '</td>';
                     });
-                    
-               output += '</tr>';
+
+                output += '</tr>';
                }
                
                output += '</table>';

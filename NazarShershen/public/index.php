@@ -4,42 +4,36 @@ error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", 1);
 
 require __DIR__ . '/../vendor/autoload.php';
-
 use arr\app\ArraysFactory;
+use arr\app\twitter\User;
 
-$factory = new ArraysFactory();
 
-//$snake = $factory->getSorter("snakeSort");
-//$snake->sortArray();
-//echo "<hr>";
+//include_once './htmlForAjax.html';
 
-$straight = $factory->getSorter("straightSort");
+$a = new User();
+//$id = $a->signUp("Nazar4", "example@gmail.com", "123");
 
-for($z = 0; $z < 10000; $z++) {
 
-    $straight->sortArray();
-    $array = array();
-    $str = "";
-    for($i = 0; $i < 5; $i++) {
 
-        $str .= chr(rand(97, 122));
 
-        for($j = 0; $j < 5; $j++) {
-            $array[$i][$j] = rand(0, 100);
-        }
+//$message = "fsagfasiugf;agsfsagfasu;gf";
+//$a->tweet(3, $message);
 
-    }
-
-    $key = $str;
-
-    $straight->saveArrayToDB($key, $array);
-}
-//$straight->displayArray();
+//$p = $a->getPosts(3);
 //
-//$vertical = $factory->getSorter("verticalSort");
-//$vertical->sortArray();
-//$vertical->displayArray();
-//$vertical->flag = true;
-//$vertical->sortArray();
-//$vertical->displayArray();
+//echo "<pre>";
+//print_r($p);
+//echo "</pre>";
+
+//$a->follow(1, 3);
+//$a->follow(1, 10);
+//$a->follow(1, 2);
+
+//$a->unFollow(1, 3);
+
+$z = $a->getFollowers(1);
+
+echo "<pre>";
+var_dump($z);
+echo "</pre>";
 
