@@ -1,13 +1,27 @@
 <?php
+$x = 1;
+var_dump($x);
+
+$exp = /^([\w\.\_]+)@([\w\.\_]+)\.([\w]{2,6})$/;
+$get = "fidelite62@gmail.com";
+	if(preg_match($exp, $get)) {
+		echo "1";
+	}
+	else{
+		echo "0";
+			}	
+
+
+/*
     $path = '../';
-        $queue = '';
+    $queue = '';
  
     function createDir($path = '.')
     {    
         if ($handle = opendir($path)) 
         {
-            echo '<ol class="tree">';
-         
+            echo '<center><ol class="tree"></center>';
+
             while (false !== ($file = readdir($handle))) 
             { 
                 if (is_dir($path.$file) && $file != '.' && $file !='..')
@@ -15,9 +29,8 @@
                 else if ($file != '.' && $file !='..')
                     $queue[] = $file;
             }
-             
+
             printQueue($queue, $path);
- 
             echo '</ol>';
         }
     }
@@ -41,12 +54,12 @@
         createDir($path.$dir.'/');
         echo '</li>';
     }
-  
+
     createDir($path);
 
 
 
-/*//////////////////////////////////////////////////////////////////////////////////////////////
+/* /////////////////////////////////////////////////////////////////////////////////////////////
 $array = array(2,1,3,6,5,8,7);
 var_dump($array);
 echo "sorting";
