@@ -1,18 +1,4 @@
 <?php
-$x = 1;
-var_dump($x);
-
-$exp = /^([\w\.\_]+)@([\w\.\_]+)\.([\w]{2,6})$/;
-$get = "fidelite62@gmail.com";
-	if(preg_match($exp, $get)) {
-		echo "1";
-	}
-	else{
-		echo "0";
-			}	
-
-
-/*
     $path = '../';
     $queue = '';
  
