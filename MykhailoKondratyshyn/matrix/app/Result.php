@@ -8,49 +8,46 @@ class Result
     {
         $width = 5;
         $hight = 4;
-        $sum = 1;
-        $k = 0;
+
 
         $array = array(
-            [1, 1, 1, 0, 1],
-            [1, 1, 0, 1, 1],
+            [1, 0, 1, 0, 0],
+            [1, 0, 1, 1, 1],
             [1, 1, 1, 1, 1],
-            [1, 0, 0, 1, 1]
+            [1, 0, 0, 1, 0]
         );
 
+
+//        for ($i = 0; $i <= $hight - 1; $i++) {
+//            for ($j = 0; $j <= $width - 1; $j++) {
+//                $array[$i][$j];
+//            }
+//
+//        }
         for ($i = 0; $i <= $hight - 1; $i++) {
             for ($j = 0; $j <= $width - 1; $j++) {
 
-                $rectangle = $array[$i][$j];
-
                 if ($array[$i][$j] == 1) {
-                    //$arrayOur[$i][$n] = $array[$i][$j];
-                    for ($m = 1; $m <= $hight-$i-1; $m++) {
-                        for ($n = 1; $n <= $width-$j-1; $n++) {
-                            if ($array[$i][$j+$n] == 1) {
-                               $arrayOur[$i][$n-1] = $array[$i][$j];
-                                $arrayOur[$i][$n] = $array[$i][$j+$n-1];
+                    $arrayOur[0][0] = $array[$i][$j];
 
-                            }elseif ($array[$i+$m][$n] == 1) {
 
-                                $arrayOur[$i+$m][$n] = $array[$i][$j];
-                                $arrayOur[$i+$m][$n] = $array[$i][$j+$n-1];
-                            }
 
-                            echo "<pre>";
+
+                    if (isset($array[$i + 1][$j]) && isset($array[$i][$j + 1]) && isset($array[$i + 1][$j + 1]))
+                        if ($array[$i + 1][$j] == 1 && $array[$i][$j + 1] == 1 && $array[$i + 1][$j + 1] == 1) {
+                            $arrayOur[0 + 1][0] = 1 && $arrayOur[0][0 + 1] = 1 && $arrayOur[0 + 1][0 + 1] = 1;
+                            echo $arrayOur[0][0];
 
                         }
-
-                    }
+                    //var_dump($arrayOur);
                 }
-
             }
         }
+        echo "<pre>";
         var_dump($arrayOur);
     }
 
-    public
-    function rectangle()
+    public function rectangle()
     {
         $array = array(
             [1, 0, 1, 0, 0],
