@@ -4,71 +4,88 @@
 class Result
 {
 
+    protected $sum = 0;
+
     public function matrix()
     {
         $width = 5;
         $hight = 4;
-        $sum = 1;
-        $k = 0;
+        $m = 2;
+        $sum = 0;
 
         $array = array(
+            [1, 1, 1, 0, 0],
+            [1, 1, 1, 0, 0],
             [1, 1, 1, 0, 1],
-            [1, 1, 0, 1, 1],
-            [1, 1, 1, 1, 1],
-            [1, 0, 0, 1, 1]
+            [1, 1, 1, 0, 1]
         );
 
+
+//        for ($i = 0; $i <= $hight - 1; $i++) {
+//            for ($j = 0; $j <= $width - 1; $j++) {
+//                $array[$i][$j];
+//            }
+//
+//        }
+        $res = [];
         for ($i = 0; $i <= $hight - 1; $i++) {
             for ($j = 0; $j <= $width - 1; $j++) {
 
-                $rectangle = $array[$i][$j];
-
                 if ($array[$i][$j] == 1) {
-                    //$arrayOur[$i][$n] = $array[$i][$j];
-                    for ($m = 1; $m <= $hight-$i-1; $m++) {
-                        for ($n = 1; $n <= $width-$j-1; $n++) {
-                            if ($array[$i][$j+$n] == 1) {
-                               $arrayOur[$i][$n-1] = $array[$i][$j];
-                                $arrayOur[$i][$n] = $array[$i][$j+$n-1];
+                    if (isset($array[$i + 1][$j]) && isset($array[$i][$j + 1]) && isset($array[$i + 1][$j + 1])
+                        && $array[$i + 1][$j] == 1 && $array[$i][$j + 1] == 1 && $array[$i + 1][$j + 1] == 1
+                    ) {
+                        $res[$i . $j][$i][$j] = 1;
+                        $res[$i . $j][$i + 1][$j] = 1;
+                        $res[$i . $j][$i][$j + 1] = 1;
+                        $res[$i . $j][$i + 1][$j + 1] = 1;
 
-                            }elseif ($array[$i+$m][$n] == 1) {
-
-                                $arrayOur[$i+$m][$n] = $array[$i][$j];
-                                $arrayOur[$i+$m][$n] = $array[$i][$j+$n-1];
-                            }
-
-                            echo "<pre>";
-
+                        $n = 2;
+                        while (isset($array[$i][$j + $n]) && isset($array[$i + 1][$j + $n])
+                            && $array[$i][$j + $n] == 1 && $array[$i + 1][$j + $n] == 1) {
+                            $res[$i . $j][$i][$j + $n] = 1;
+                            $res[$i . $j][$i + 1][$j + $n] = 1;
+                            $n++;
                         }
 
+                        $number = count(reset($res[$i . $j]));
+                        for ($k = $i + 1; $k < $hight; $k++) {
+                            $arrayToCkeck = array_slice($array[$k], $j, $number);
+                            if (!in_array(0, $arrayToCkeck)) {
+                                $res[$i . $j][$k] = $arrayToCkeck;
+                            }
+                        }
                     }
                 }
-
             }
         }
-        var_dump($arrayOur);
-    }
 
-    public
-    function rectangle()
-    {
-        $array = array(
-            [1, 0, 1, 0, 0],
-            [1, 0, 1, 1, 1],
-            [1, 1, 1, 1, 1],
-            [1, 0, 0, 1, 0]
-        );
+var_dump($res);
+
+
+}
+
+
+public
+function rectangle()
+{
+    $array = array(
+        [1, 0, 1, 0, 0],
+        [1, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1],
+        [1, 0, 0, 1, 0]
+    );
 //        echo "<pre>";
 //        var_dump($array);
 
 
-    }
+}
 
-    public
-    function area()
-    {
-
-    }
+public
+function area()
+{
+//echo $this->sum;
+}
 
 
 }

@@ -3,10 +3,8 @@ function longestConsecutive(num) {
 		return false;
 	}
 
-	var set = [];
+	var set = num.slice();
 	var max = 1;
-
-	for (var i=0; i < num.length; i++) set.push(num[i]);
 
 	for (var i = 0; i < num.length; i++) {
 		var left = num[i] - 1;
@@ -30,4 +28,4 @@ function longestConsecutive(num) {
 	return max;
 }
 
-console.log(longestConsecutive([4,3,2,0,8]));
+console.log(longestConsecutive([4,3,2,1,0,8]));

@@ -1,9 +1,5 @@
 <?php
-
-
-$dir = '/home/crowdin_share';
-
-
+$dir = '/home/';
 function display($dir = ".")
 {
     if (is_dir($dir)) {
@@ -26,5 +22,4 @@ function display($dir = ".")
         echo "</ul>";
     }
 }
-
 display();
