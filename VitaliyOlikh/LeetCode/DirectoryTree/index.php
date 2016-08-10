@@ -1,48 +1,17 @@
 <?php
-
-$path = '../';
-$queue = '';
-
-function createDir($path = '.')
-{
-  if ($handle = opendir($path)) {
-    echo '<ol class="tree">';
-
-    while (false !== ($file = readdir($handle)))
-    {
-      if (is_dir($path.$file) && $file != '.' && $file != '..') {
-        printSubDir($file, $path, $queue);
-      } elseif ($file != '.' && $file != '..') {
-        $queue[] = $file;
-      }
+function dirToArray($dir) {
+    $contents = array();
+    foreach (scandir($dir) as $node) {
+        if ($node == '.' || $node == '..') continue;
+        if (is_dir($dir . '/' . $node)) {
+            $contents[$node] = dirToArray($dir . '/' . $node);
+        } else {
+            $contents[] = $node;
+        }
     }
-
-    printQueue($queue, $path);
-
-    echo "</ol>";
-  }
+    return $contents;
 }
 
-function printQueue($queue, $path)
-{
-  foreach ($queue as $file) {
-    printFile($file, $path);
-  }
-}
-
-function printFile($file, $path)
-{
-  echo '<li class="file"><a href="' . $path . $file . '">' . $file . '</a></li>';
-}
-
-function printSubDir($dir, $path)
-{
-  echo '<li class="toggle"' . $dir . '<input type="checkbox">';
-  createDir($path . $dir . '/');
-  echo '</li>';
-}
-
-createDir($path);
-
-
-?>
+$r = dirToArray('E:/Programing/test');
+echo '<pre>';
+var_dump($r);
