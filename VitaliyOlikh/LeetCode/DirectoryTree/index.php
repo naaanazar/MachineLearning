@@ -1,17 +1,38 @@
 <?php
-function dirToArray($dir) {
-    $contents = array();
-    foreach (scandir($dir) as $node) {
-        if ($node == '.' || $node == '..') continue;
-        if (is_dir($dir . '/' . $node)) {
-            $contents[$node] = dirToArray($dir . '/' . $node);
-        } else {
-            $contents[] = $node;
-        }
+
+class PathDirectory
+{
+  public function createDirectory($path)
+  {
+    $pathArray = [];
+
+    foreach (scandir($path) as $node) {
+      if ($node == '.' || $node == '..') continue;
+
+      if (is_dir($path . '/' . $node)) {
+        $pathArray[$node] = $this->createDirectory($path . '/' . $node);
+      } else {
+        $pathArray[] = $node;
+      }
     }
-    return $contents;
+    return $pathArray;
+  }
+
+  public function outputDirectory($pathArray)
+  {
+
+    for ($i = 1; $i < count($pathArray); $i++) {
+      
+    }
+
+    return $output;
+  }
 }
 
-$r = dirToArray('E:/Programing/test');
+$obj = new PathDirectory();
+
 echo '<pre>';
-var_dump($r);
+$pathArray = $obj->createDirectory('E:/Programing/test');
+echo $obj->outputDirectory($pathArray);
+
+
