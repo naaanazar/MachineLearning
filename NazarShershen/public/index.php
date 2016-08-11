@@ -1,39 +1,50 @@
 <?php
 
-error_reporting(E_ALL & ~E_NOTICE);
+
+
+//error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", 1);
 
+error_reporting(E_ALL);
+
 require __DIR__ . '/../vendor/autoload.php';
+
 use arr\app\ArraysFactory;
 use arr\app\twitter\User;
-
+use arr\app\triada\Triada;
+use arr\app\Sequence;
+use arr\app\tree\Tree;
+use arr\app\tree\Tree2;
 
 //include_once './htmlForAjax.html';
 
-$a = new User();
-//$id = $a->signUp("Nazar4", "example@gmail.com", "123");
 
-
-
-
-//$message = "fsagfasiugf;agsfsagfasu;gf";
-//$a->tweet(3, $message);
-
-//$p = $a->getPosts(3);
+$path = '/home/nazar/shared';
+//$a = new Tree('/home/nazar/shared/');
+//$tree = $a->buidTree();
 //
-//echo "<pre>";
-//print_r($p);
-//echo "</pre>";
+//echo "<ul>$tree</ul>";
 
-//$a->follow(1, 3);
-//$a->follow(1, 10);
-//$a->follow(1, 2);
+$a = new Tree2('/home/nazar/shared/');
+$it = $a->createIterator();
+$a->iterateDirectory($it);
 
-//$a->unFollow(1, 3);
 
-$z = $a->getFollowers(1);
 
-echo "<pre>";
-var_dump($z);
-echo "</pre>";
+$factorial = function($number) use(&$factorial) {
 
+    $fact = 1;  
+
+    if($number == 0) {
+        return 1;
+    }
+
+    while($number > 1) {
+        $fact *= $number--;
+        $factorial($number);
+    }
+
+    return $fact;
+};
+
+//echo $factorial(5);
