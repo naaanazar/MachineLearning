@@ -1,5 +1,5 @@
-<form method="post" action="#" onSubmit="return validate(this);" name="form">
-<input type='text' name='name'/>
+<form method="post" action="#" onsubmit="return validate(this);" name="form">
+<input type="text" name="name"/>
 </form>
 
 <script>
@@ -8,7 +8,7 @@
 function validate(form){
 
 var name = form.name.value;
-var regexName = new RegExp("^[A-Z][a-z]+ [A-Z][a-z]+$");
+var regexName = new RegExp("^([A-Z][a-z`]+\s+){2}$");
 var errors = [];
 
 if(!regexName.test(name)){
