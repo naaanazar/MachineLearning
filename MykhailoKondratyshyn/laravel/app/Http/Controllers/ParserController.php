@@ -12,8 +12,8 @@ class ParserController extends Controller
     public function index()
     {
         $parser = new Parser();
-        $html = $parser->fetchPage('google.com');
+        $html = $parser->fetchPage('http://rozetka.com.ua/krepkie-napitki/c4594292/filter/vid-napitka-69821=konyak/');
         print_r($html);
-        die();
+        //die();
     }
 }
