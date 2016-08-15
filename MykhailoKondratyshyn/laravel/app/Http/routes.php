@@ -12,6 +12,10 @@
 */
 Route::get('/parse', 'ParserController@index');
 
+Route::get('/parser', 'ParserDomCrawler@index');
+
+Route::get('/parserdisplay', 'HomeController@display');
+
 Route::get('/', function () {
     return view('welcome');
 });
