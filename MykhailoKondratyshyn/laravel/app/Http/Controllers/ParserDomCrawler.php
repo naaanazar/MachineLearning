@@ -11,7 +11,7 @@ class ParserDomCrawler extends Controller
 {
     public function index()
     {
-        $i=0;
+
         $ch = curl_init('http://comfy.ua/brush-cutters/');
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -22,14 +22,14 @@ class ParserDomCrawler extends Controller
         $html = curl_exec($ch);
 
         $dom = new Crawler($html);
-        $crawler = $dom->filter('.products-tiles')->filter('.products-tiles__cell__name')->filter('a')->html();
+        $crawler = $dom->filter('.products-tiles__cell');
 
 
         //$crawler = $crawler->filter('.products-tiles__cell__name');
 //        for ($i = 0; $i<=$crawler; $i++){
 //
 //            $crawler = $crawler->filter('.products-tiles__cell__name')->eq($i)->html();
-            print_r($crawler);
+            //print_r($crawler);
 //
 //
 //        }
@@ -37,8 +37,11 @@ class ParserDomCrawler extends Controller
 
         foreach ($crawler as $domElement) {
        // $domElement = $domElement;
-            echo "<pre>";
-        var_dump($domElement);
+            $rowCrawler = new Crawler($domElement);
+            //echo "<pre>";
+        print_r(trim($rowCrawler->filter('.products-tiles__cell__name')->text()));
+        //print_r(trim($rowCrawler->filter('a')->text()));
+            echo "<br>";
         }
 
         curl_close($ch);
