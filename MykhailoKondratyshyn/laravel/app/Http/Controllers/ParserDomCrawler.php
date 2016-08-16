@@ -25,20 +25,20 @@ class ParserDomCrawler extends Controller
         $dom = new Crawler($html);
         $crawler = $dom->filter('.products-tiles__cell');
 
-
+$fp = fopen('file.csv', 'w');
         foreach ($crawler as $domElement) {
             $rowCrawler = new Crawler($domElement);
             $productImgUrl = $rowCrawler->filter('img.js-product-main-img')->attr('src');
             echo "<img src='$productImgUrl'>";
             echo "<br>";
             echo "<br>";
-            echo(trim($rowCrawler->filter('.products-tiles__cell__name')->text()));
+            fputcsv($fp, trim($rowCrawler->filter('.products-tiles__cell__name')->text()));
             echo "<br>";
-            echo(trim($rowCrawler->filter('.price-box__content')->text()));
+            fputcsv($fp, trim($rowCrawler->filter('.price-box__content')->text()));
             echo "<br>";
             echo "<br>";
         }
-
+        fclose($fp);
         curl_close($ch);
     }
 }

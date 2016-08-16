@@ -1,3 +1,5 @@
+<div class="h1">All Products</div>
 @foreach($products as $product)
-   <p><img src="{{$product->img_url}}"> </p>
+
+    <p>{{$product->title}}</p>
 @endforeach

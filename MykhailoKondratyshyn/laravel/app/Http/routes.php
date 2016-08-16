@@ -14,23 +14,31 @@ Route::get('/parse', 'ParserController@index');
 
 Route::get('/parser', 'ParserDomCrawler@index');
 
-Route::get('/parserdisplay', 'HomeController@display');
-
-Route::get('/products/add', 'ProductController@addProduct');
-Route::post('/products/save', 'ProductController@saveProduct');
+Route::get('/products', 'ProductController@index');
+Route::get('/products/{products}', 'ProductController@show');
 
 
 
 
 
-Route::get('/products/{product}', function($product) {
-    return Controller::call('ProductController@product');
-})->where('product', '[0-9]+');
 
 
-Route::group(['middleware' => 'web'], function () {
-    Route::post('/products/save', 'ProductController@saveProduct');
-});
+
+//Route::get('/products/add', 'ProductController@addProduct');
+//Route::post('/products/save', 'ProductController@saveProduct');
+//
+//
+//
+//
+//
+//Route::get('/products/{product}', function($product) {
+//    return Controller::call('ProductController@product');
+//})->where('product', '[0-9]+');
+//
+//
+//Route::group(['middleware' => 'web'], function () {
+//    Route::post('/products/save', 'ProductController@saveProduct');
+//});
 
 
 
