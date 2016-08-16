@@ -16,6 +16,34 @@ Route::get('/parser', 'ParserDomCrawler@index');
 
 Route::get('/parserdisplay', 'HomeController@display');
 
+Route::get('/products/add', 'ProductController@addProduct');
+Route::post('/products/save', 'ProductController@saveProduct');
+
+
+
+
+
+Route::get('/products/{product}', function($product) {
+    return Controller::call('ProductController@product');
+})->where('product', '[0-9]+');
+
+
+Route::group(['middleware' => 'web'], function () {
+    Route::post('/products/save', 'ProductController@saveProduct');
+});
+
+
+
+
+
+
+
+
+
+
+
+//Route::get('/parserdisplay/{product_id}', 'HomeController@display');
+
 Route::get('/', function () {
     return view('welcome');
 });

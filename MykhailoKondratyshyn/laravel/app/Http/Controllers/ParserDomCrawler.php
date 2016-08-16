@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Finder\Finder;
 
 class ParserDomCrawler extends Controller
 {
@@ -25,25 +26,21 @@ class ParserDomCrawler extends Controller
         $crawler = $dom->filter('.products-tiles__cell');
 
 
-        //$crawler = $crawler->filter('.products-tiles__cell__name');
-//        for ($i = 0; $i<=$crawler; $i++){
-//
-//            $crawler = $crawler->filter('.products-tiles__cell__name')->eq($i)->html();
-            //print_r($crawler);
-//
-//
-//        }
-
-
         foreach ($crawler as $domElement) {
-       // $domElement = $domElement;
             $rowCrawler = new Crawler($domElement);
-            //echo "<pre>";
-        print_r(trim($rowCrawler->filter('.products-tiles__cell__name')->text()));
-        //print_r(trim($rowCrawler->filter('a')->text()));
+            $productImgUrl = $rowCrawler->filter('img.js-product-main-img')->attr('src');
+            echo "<img src='$productImgUrl'>";
+            echo "<br>";
+            echo "<br>";
+            echo(trim($rowCrawler->filter('.products-tiles__cell__name')->text()));
+            echo "<br>";
+            echo(trim($rowCrawler->filter('.price-box__content')->text()));
+            echo "<br>";
             echo "<br>";
         }
 
         curl_close($ch);
     }
 }
+
+

@@ -24,6 +24,6 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->text,
         'description' => $faker->paragraph,
-        'img_url' => Faker\Provider\Image::imageUrl(32, 32),
+        'img_url' => Faker\Provider\Image::imageUrl(320, 240),
     ];
 });
