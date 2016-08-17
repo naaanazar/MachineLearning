@@ -18,6 +18,12 @@ Route::get('/products', 'ProductController@index');
 Route::get('/products/{product}', 'ProductController@show');
 
 
+Route::get('/add_new', 'ProductController@addNew');
+
+
+
+Route::post('/products/{product}/notes', 'NotesController@store');
+
 
 
 
