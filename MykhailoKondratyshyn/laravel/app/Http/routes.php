@@ -15,7 +15,7 @@ Route::get('/parse', 'ParserController@index');
 Route::get('/parser', 'ParserDomCrawler@index');
 
 Route::get('/products', 'ProductController@index');
-Route::get('/products/{products}', 'ProductController@show');
+Route::get('/products/{product}', 'ProductController@show');
 
 
 
