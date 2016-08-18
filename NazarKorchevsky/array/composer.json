@@ -1,0 +1,23 @@
+{
+    "name": "proj/sort",
+    "description": "123",
+    "type": "MIT",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nazar",
+            "email": "nazar.korchevsky@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "brianium/paratest": "0.4.4",
+        "phpunit/phpunit": "4.8.*"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "sa\\": ""             
+        }
+    }
+}

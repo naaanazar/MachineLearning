@@ -1,0 +1,14 @@
+{
+    "name": "space/array",
+    "description": "arrays",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Stoyan",
+            "email": "stoyan.andrew@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

@@ -21,8 +21,7 @@ class Auth
                     $_SESSION['auth'] = 'true';
                     $_SESSION['user'] = $row['user'];
                     $_SESSION['users_id'] = $row['id'];
-
-                    ini_set('session.gc_maxlifetime', 60 * 60 * 24);			 		
+                    	 		
                     $_SESSION['check'] = hash('ripemd128',$_SERVER['REMOTE_ADDR'] .  $_SERVER['HTTP_USER_AGENT']);			 		
                     header("location: index.php");
                     exit;
