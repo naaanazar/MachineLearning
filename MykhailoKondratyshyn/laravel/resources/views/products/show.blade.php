@@ -1,14 +1,30 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport">
+
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Document</title>
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+
 </head>
+
 <body>
+<script>
+
+    $(document).ready(function () {
+        $('.delete'.on('click', function (e) {
+
+        }));
+    });
+
+
+</script>
+
 <div class="row">
-    <div class="col-md-6 col-md-offset-3"
+    <div class="col-md-6 col-md-offset-3">
     <h1>{{$product->title}}</h1>
 
 

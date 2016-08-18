@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
 
-    protected $fillable = ['body'];
+    protected $fillable = ['title', 'body'];
 
     public function product()
     {

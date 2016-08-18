@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -27,16 +28,25 @@ class ParserDomCrawler extends Controller
 
 
         foreach ($crawler as $domElement) {
+
+            $product = new Product;
             $rowCrawler = new Crawler($domElement);
+
             $productImgUrl = $rowCrawler->filter('img.js-product-main-img')->attr('src');
             echo "<img src='$productImgUrl'>";
             echo "<br>";
             echo "<br>";
-            echo(trim($rowCrawler->filter('.products-tiles__cell__name')->text()));
+            $productTitle = trim($rowCrawler->filter('.products-tiles__cell__name')->text());
+            echo $productTitle;
             echo "<br>";
-            echo(trim($rowCrawler->filter('.price-box__content')->text()));
+            $productDiscription = trim($rowCrawler->filter('.price-box__content')->text());
+            echo $productDiscription;
             echo "<br>";
-            echo "<br>";
+
+            $product->title = $productTitle;
+            $product->description = $productDiscription;
+            $product->img_url = $productImgUrl;
+            $product->save();
         }
 
         curl_close($ch);

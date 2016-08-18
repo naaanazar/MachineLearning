@@ -15,14 +15,18 @@ Route::get('/parse', 'ParserController@index');
 Route::get('/parser', 'ParserDomCrawler@index');
 
 Route::get('/products', 'ProductController@index');
-Route::get('/products/{product}', 'ProductController@show');
-
+Route::get('/products/{product}', 'ProductController@show')->where('product', '[0-9]+');
+Route::post('/products/save', 'ProductController@save');
 
 Route::get('/add_new', 'ProductController@addNew');
 
 
 
 Route::post('/products/{product}/notes', 'NotesController@store');
+
+
+
+Route::post('/products/delete/{id}', 'ProductController@deleteProduct');
 
 
 
