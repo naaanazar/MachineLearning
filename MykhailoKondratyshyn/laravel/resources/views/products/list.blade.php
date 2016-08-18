@@ -1,38 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Document</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+@extends('layout')
 
 
-    </script>
-
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-
-
-</head>
-<body>
-
-<div class="h1">All Products</div>
-
+@section('content')
 @foreach($products as $product)
 
-    <p><a href="/products/{{$product->id}}">{{$product->title}}</a>
+    <p><img src="{{$product->img_url}}"></p>
 
-    <a href="/products/delete/{{$product->id}}">Delete</a></p>
+    <p><a href="/products/{{$product->id}}">{{$product->title}}</a>
+    <div class="col-md-2">
+        <p align="center"><a class="btn btn-danger" href="/products/{{$product->id}}/delete">Delete</a></p>
+    </div>
+    <br>
+    <br>
+    <br>
+    </p>
 @endforeach
 
-</body>
-</html>
-
-
-
+@endsection
