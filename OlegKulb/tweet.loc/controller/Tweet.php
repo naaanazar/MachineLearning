@@ -5,6 +5,7 @@ namespace ex\controller;
 use \ex\app\Controller;
 use \ex\model\Login;
 use \ex\model\HomeTweet;
+use \ex\app\Helper;
 
 class Tweet extends Controller
 {
@@ -26,12 +27,15 @@ class Tweet extends Controller
 
     public function login()
     {
+        $valid = new Helper();
+
+
         if ( isset($_COOKIE["name"]) ) {
             header("Location: http://framework.loc/tweet/hometweet");
         }
         
         if ( isset($_POST['enter']) ) {
-            $name = $_POST['name'];
+            $name = $valid->clean($_POST['name']);
             $email = $_POST['email'];
             $password = $_POST['password'];
 
