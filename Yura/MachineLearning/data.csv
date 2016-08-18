@@ -896,6 +896,7 @@ of,technological,endeavor
 ,,Science
 ,Science,engineering
 Science,engineering,and
+<<<<<<< HEAD
 engineering,and,"technology
 
 Antoine"
@@ -904,6 +905,16 @@ and,"technology
 Antoine",Lavoisier
 "technology
 
+=======
+engineering,and,"technology
+
+Antoine"
+and,"technology
+
+Antoine",Lavoisier
+"technology
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Antoine",Lavoisier,conducting
 Lavoisier,conducting,an
 conducting,an,experiment
@@ -913,11 +924,19 @@ with,combustion,generated
 combustion,generated,by
 generated,by,amplified
 by,amplified,sun
+<<<<<<< HEAD
 amplified,sun,"light
 The"
 sun,"light
 The",distinction
 "light
+=======
+amplified,sun,"light
+The"
+sun,"light
+The",distinction
+"light
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 The",distinction,between
 distinction,between,science
 between,science,engineering
@@ -1288,11 +1307,19 @@ is,a,result
 a,result,of
 result,of,scientific
 of,scientific,research
+<<<<<<< HEAD
 ,,"History
 Main"
 ,"History
 Main",articles
 "History
+=======
+,,"History
+Main"
+,"History
+Main",articles
+"History
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Main",articles,History
 articles,History,of
 History,of,technology
@@ -1306,15 +1333,22 @@ and,Timeline,of
 Timeline,of,electrical
 of,electrical,and
 electrical,and,electronic
+<<<<<<< HEAD
 and,electronic,"engineering
 Paleolithic"
 electronic,"engineering
+=======
+and,electronic,"engineering
+Paleolithic"
+electronic,"engineering
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Paleolithic",(2
 ,,5
 ,5,million
 5,million,YA
 million,YA,–
 YA,–,"10,000"
+<<<<<<< HEAD
 –,"10,000","BC)
 
 A"
@@ -1336,6 +1370,29 @@ The"
 prehistoric,"technology
 The",use
 "technology
+=======
+–,"10,000","BC)
+
+A"
+"10,000","BC)
+
+A",primitive
+"BC)
+
+A",primitive,"chopper
+Further"
+primitive,"chopper
+Further",information
+"chopper
+Further",information,Outline
+information,Outline,of
+Outline,of,prehistoric
+of,prehistoric,"technology
+The"
+prehistoric,"technology
+The",use
+"technology
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 The",use,of
 use,of,tools
 of,tools,by
@@ -1362,6 +1419,7 @@ of,foraging,hominids
 foraging,hominids,which
 hominids,which,were
 which,were,already
+<<<<<<< HEAD
 were,already,"bipedal,
 
 Stone"
@@ -1388,15 +1446,51 @@ Acheulian,"period
 A",Clovis
 "period
 
+=======
+were,already,"bipedal,
+
+Stone"
+already,"bipedal,
+
+Stone","tools
+
+Hand"
+"bipedal,
+
+Stone","tools
+
+Hand",axes
+"tools
+
+Hand",axes,from
+axes,from,the
+from,the,Acheulian
+the,Acheulian,"period
+
+A"
+Acheulian,"period
+
+A",Clovis
+"period
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 A",Clovis,point
 Clovis,point,made
 point,made,via
 made,via,pressure
+<<<<<<< HEAD
 via,pressure,"flaking
 Hominids"
 pressure,"flaking
 Hominids",started
 "flaking
+=======
+via,pressure,"flaking
+Hominids"
+pressure,"flaking
+Hominids",started
+"flaking
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Hominids",started,using
 started,using,primitive
 using,primitive,stone
@@ -1431,21 +1525,37 @@ way,to,make
 to,make,much
 make,much,finer
 much,finer,work
+<<<<<<< HEAD
 ,,"Fire
 Main"
 ,"Fire
 Main",article
 "Fire
+=======
+,,"Fire
+Main"
+,"Fire
+Main",article
+"Fire
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Main",article,Control
 article,Control,of
 Control,of,fire
 of,fire,by
 fire,by,early
+<<<<<<< HEAD
 by,early,"humans
 The"
 early,"humans
 The",discovery
 "humans
+=======
+by,early,"humans
+The"
+early,"humans
+The",discovery
+"humans
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 The",discovery,and
 discovery,and,utilization
 and,utilization,of
@@ -1470,11 +1580,19 @@ technological,evolution,of
 evolution,of,humankind
 ,,Clothing
 ,Clothing,and
+<<<<<<< HEAD
 Clothing,and,"shelter
 Other"
 and,"shelter
 Other",technological
 "shelter
+=======
+Clothing,and,"shelter
+Other"
+and,"shelter
+Other",technological
+"shelter
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Other",technological,advances
 technological,advances,made
 advances,made,during
@@ -1533,6 +1651,7 @@ classical,antiquity,"(10,000"
 antiquity,"(10,000",BC
 "(10,000",BC,–
 BC,–,300
+<<<<<<< HEAD
 –,300,"AD)
 
 An"
@@ -1541,6 +1660,16 @@ An"
 An",array
 "AD)
 
+=======
+–,300,"AD)
+
+An"
+300,"AD)
+
+An",array
+"AD)
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 An",array,of
 array,of,Neolithic
 of,Neolithic,artifacts
@@ -1551,11 +1680,19 @@ bracelets,axe,heads
 axe,heads,chisels
 heads,chisels,and
 chisels,and,polishing
+<<<<<<< HEAD
 and,polishing,"tools
 Man's"
 polishing,"tools
 Man's",technological
 "tools
+=======
+and,polishing,"tools
+Man's"
+polishing,"tools
+Man's",technological
+"tools
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Man's",technological,ascent
 technological,ascent,began
 ascent,began,in
@@ -1653,11 +1790,19 @@ an,increase,in
 increase,in,labor
 in,labor,specialization
 ,,Metal
+<<<<<<< HEAD
 ,Metal,"tools
 Continuing"
 Metal,"tools
 Continuing",improvements
 "tools
+=======
+,Metal,"tools
+Continuing"
+Metal,"tools
+Continuing",improvements
+"tools
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Continuing",improvements,led
 improvements,led,to
 led,to,the
@@ -1744,6 +1889,7 @@ to,around,1400
 around,1400,BC
 ,,Energy
 ,Energy,and
+<<<<<<< HEAD
 Energy,and,"transport
 
 The"
@@ -1752,6 +1898,16 @@ and,"transport
 The",wheel
 "transport
 
+=======
+Energy,and,"transport
+
+The"
+and,"transport
+
+The",wheel
+"transport
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 The",wheel,was
 wheel,was,invented
 was,invented,circa
@@ -1761,11 +1917,19 @@ circa,4000,BC
 ,Main,article
 Main,article,History
 article,History,of
+<<<<<<< HEAD
 History,of,"transport
 Meanwhile"
 of,"transport
 Meanwhile",humans
 "transport
+=======
+History,of,"transport
+Meanwhile"
+of,"transport
+Meanwhile",humans
+"transport
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Meanwhile",humans,were
 humans,were,learning
 were,learning,to
@@ -2042,11 +2206,19 @@ and,modern,history
 modern,history,(300
 history,(300,AD
 (300,AD,–
+<<<<<<< HEAD
 AD,–,"present)
 Main"
 –,"present)
 Main",articles
 "present)
+=======
+AD,–,"present)
+Main"
+–,"present)
+Main",articles
+"present)
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Main",articles,Medieval
 articles,Medieval,technology
 Medieval,technology,Renaissance
@@ -2063,11 +2235,19 @@ Technology,and,Productivity
 and,Productivity,improving
 Productivity,improving,technologies
 improving,technologies,(economic
+<<<<<<< HEAD
 technologies,(economic,"history)
 Innovations"
 (economic,"history)
 Innovations",continued
 "history)
+=======
+technologies,(economic,"history)
+Innovations"
+(economic,"history)
+Innovations",continued
+"history)
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Innovations",continued,through
 continued,through,the
 through,the,Middle
@@ -2530,6 +2710,7 @@ such,as,construction
 as,construction,transportation
 construction,transportation,and
 transportation,and,architecture
+<<<<<<< HEAD
 ,,"Philosophy
 Technicism
 Generally"
@@ -2538,6 +2719,16 @@ Technicism
 Generally",technicism
 "Philosophy
 Technicism
+=======
+,,"Philosophy
+Technicism
+Generally"
+,"Philosophy
+Technicism
+Generally",technicism
+"Philosophy
+Technicism
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Generally",technicism,is
 technicism,is,a
 is,a,reliance
@@ -2611,6 +2802,7 @@ religion,as,a
 as,a,higher
 a,higher,moral
 higher,moral,authority
+<<<<<<< HEAD
 ,,"Optimism
 See"
 ,"Optimism
@@ -2621,6 +2813,18 @@ Optimistic"
 also,"Extropianism
 Optimistic",assumptions
 "Extropianism
+=======
+,,"Optimism
+See"
+,"Optimism
+See",also
+"Optimism
+See",also,"Extropianism
+Optimistic"
+also,"Extropianism
+Optimistic",assumptions
+"Extropianism
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Optimistic",assumptions,are
 assumptions,are,made
 are,made,by
@@ -2690,15 +2894,24 @@ Marx,as,a
 as,a,techno-optimist
 ,,Skepticism
 ,Skepticism,and
+<<<<<<< HEAD
 Skepticism,and,"critics
 See"
 and,"critics
 See",also
 "critics
+=======
+Skepticism,and,"critics
+See"
+and,"critics
+See",also
+"critics
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 See",also,Luddite
 also,Luddite,Neo-luddism
 Luddite,Neo-luddism,Anarcho-primitivism
 Neo-luddism,Anarcho-primitivism,and
+<<<<<<< HEAD
 Anarcho-primitivism,and,"Bioconservatism
 Refer"
 and,"Bioconservatism
@@ -2709,15 +2922,35 @@ Luddites"
 to,"caption
 Luddites",smashing
 "caption
+=======
+Anarcho-primitivism,and,"Bioconservatism
+Refer"
+and,"Bioconservatism
+Refer",to
+"Bioconservatism
+Refer",to,"caption
+Luddites"
+to,"caption
+Luddites",smashing
+"caption
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Luddites",smashing,a
 smashing,a,power
 a,power,loom
 power,loom,in
+<<<<<<< HEAD
 loom,in,"1812
 On"
 in,"1812
 On",the
 "1812
+=======
+loom,in,"1812
+On"
+in,"1812
+On",the
+"1812
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 On",the,somewhat
 the,somewhat,skeptical
 somewhat,skeptical,side
@@ -2784,6 +3017,7 @@ about,technology,(see
 technology,(see,"""The"
 (see,"""The",Question
 """The",Question,Concerning
+<<<<<<< HEAD
 Question,Concerning,"Technology""
 
 Some"
@@ -2792,6 +3026,16 @@ Concerning,"Technology""
 Some",of
 "Technology""
 
+=======
+Question,Concerning,"Technology""
+
+Some"
+Concerning,"Technology""
+
+Some",of
+"Technology""
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Some",of,the
 of,the,most
 the,most,poignant
@@ -3175,6 +3419,7 @@ campaign,of,the
 of,the,techno-industrial
 the,techno-industrial,infrastructure
 ,,Appropriate
+<<<<<<< HEAD
 ,Appropriate,"technology
 See"
 Appropriate,"technology
@@ -3187,6 +3432,20 @@ The"
 and,"Technorealism
 The",notion
 "Technorealism
+=======
+,Appropriate,"technology
+See"
+Appropriate,"technology
+See",also
+"technology
+See",also,Technocriticism
+also,Technocriticism,and
+Technocriticism,and,"Technorealism
+The"
+and,"Technorealism
+The",notion
+"Technorealism
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 The",notion,of
 notion,of,appropriate
 of,appropriate,technology
@@ -3256,11 +3515,19 @@ Optimism,and,Skepticism
 and,Skepticism,in
 Skepticism,in,the
 in,the,21st
+<<<<<<< HEAD
 the,21st,"century
 This"
 21st,"century
 This",article
 "century
+=======
+the,21st,"century
+This"
+21st,"century
+This",article
+"century
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 This",article,mainly
 article,mainly,focusses
 mainly,focusses,on
@@ -3303,6 +3570,7 @@ linkage,between,technology
 between,technology,and
 technology,and,this
 and,this,fundamental
+<<<<<<< HEAD
 this,fundamental,"problem?
 
 — Bernstein"
@@ -3311,6 +3579,16 @@ fundamental,"problem?
 — Bernstein",Jared
 "problem?
 
+=======
+this,fundamental,"problem?
+
+— Bernstein"
+fundamental,"problem?
+
+— Bernstein",Jared
+"problem?
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 — Bernstein",Jared,“It’s
 Jared,“It’s,Not
 “It’s,Not,a
@@ -3332,11 +3610,19 @@ Other,"Things,”",in
 in,The,American
 The,American,Prospect
 American,Prospect,October
+<<<<<<< HEAD
 Prospect,October,"2014
 In"
 October,"2014
 In",his
 "2014
+=======
+Prospect,October,"2014
+In"
+October,"2014
+In",his
+"2014
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 In",his,article
 his,article,Jared
 article,Jared,Bernstein
@@ -3546,6 +3832,7 @@ in,demand,trade
 demand,trade,income
 trade,income,and
 income,and,opportunity
+<<<<<<< HEAD
 ,,"""
 
 Complex"
@@ -3557,6 +3844,19 @@ Complex",Technological
 Complex",Technological,"Systems
 Thomas"
 Technological,"Systems
+=======
+,,"""
+
+Complex"
+,"""
+
+Complex",Technological
+"""
+
+Complex",Technological,"Systems
+Thomas"
+Technological,"Systems
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Thomas",P
 ,,Hughes
 ,Hughes,pointed
@@ -3627,6 +3927,7 @@ them,or,none
 or,none,of
 none,of,them
 of,them,as
+<<<<<<< HEAD
 them,as,"technologies?
 
 Technology"
@@ -3635,6 +3936,16 @@ as,"technologies?
 Technology",is
 "technologies?
 
+=======
+them,as,"technologies?
+
+Technology"
+as,"technologies?
+
+Technology",is
+"technologies?
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Technology",is,often
 is,often,considered
 often,considered,too
@@ -3798,6 +4109,7 @@ an,approach,of
 approach,of,technology
 of,technology,and
 technology,and,science
+<<<<<<< HEAD
 and,science,"""
 
 Competitiveness
@@ -3809,6 +4121,19 @@ Technology",is
 """
 
 Competitiveness
+=======
+and,science,"""
+
+Competitiveness
+Technology"
+science,"""
+
+Competitiveness
+Technology",is
+"""
+
+Competitiveness
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 Technology",is,properly
 is,properly,defined
 properly,defined,as
@@ -3894,6 +4219,7 @@ It,was,not
 was,not,economic-based
 not,economic-based,planning
 ,,Project
+<<<<<<< HEAD
 ,Project,"Socrates
 
 This"
@@ -3902,6 +4228,16 @@ Project,"Socrates
 This",section
 "Socrates
 
+=======
+,Project,"Socrates
+
+This"
+Project,"Socrates
+
+This",section
+"Socrates
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 This",section,contains
 section,contains,information
 contains,information,of
@@ -3928,11 +4264,19 @@ clarifying,or,removing
 or,removing,superfluous
 removing,superfluous,information
 ,,(May
+<<<<<<< HEAD
 ,(May,"2015)
 In"
 (May,"2015)
 In",1983
 "2015)
+=======
+,(May,"2015)
+In"
+(May,"2015)
+In",1983
+"2015)
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 In",1983,Project
 1983,Project,Socrates
 Project,Socrates,was
@@ -4181,11 +4525,19 @@ competitiveness,for,many
 for,many,generations
 ,,Other
 ,Other,animal
+<<<<<<< HEAD
 Other,animal,"species
 See"
 animal,"species
 See",also
 "species
+=======
+Other,animal,"species
+See"
+animal,"species
+See",also
+"species
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 See",also,Tool
 also,Tool,use
 Tool,use,by
@@ -4196,6 +4548,7 @@ Structures,built,by
 built,by,animals
 by,animals,and
 animals,and,Ecosystem
+<<<<<<< HEAD
 and,Ecosystem,"engineer
 
 This"
@@ -4204,6 +4557,16 @@ Ecosystem,"engineer
 This",adult
 "engineer
 
+=======
+and,Ecosystem,"engineer
+
+This"
+Ecosystem,"engineer
+
+This",adult
+"engineer
+
+>>>>>>> e2c7402fbd787bc1e143cb301cae8a59b679546a
 This",adult,gorilla
 adult,gorilla,uses
 gorilla,uses,a
