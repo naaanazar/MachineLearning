@@ -1,38 +1,29 @@
 <?php
 
-class PathDirectory
+class DirectoryTree
 {
-  public function createDirectory($path)
-  {
-    $pathArray = [];
 
-    foreach (scandir($path) as $node) {
-      if ($node == '.' || $node == '..') continue;
+    public function createDirectory($dir)
+    {
+        $cleanPath = realpath($dir) . DIRECTORY_SEPARATOR;
+        $scanDir = scandir($cleanPath);
 
-      if (is_dir($path . '/' . $node)) {
-        $pathArray[$node] = $this->createDirectory($path . '/' . $node);
-      } else {
-        $pathArray[] = $node;
-      }
+        echo "<ul>";
+            foreach ($scanDir as $file) {
+                if ($file == "." || $file == "..") {
+                    continue;
+                }
+
+                echo "<li>";
+                    echo $file;
+                    if (is_dir($cleanPath . $file) && is_readable($cleanPath . $file)) {
+                        $this->createDirectory($cleanPath . $file);
+                    }
+                echo "</li>";
+            }
+        echo "</ul>";
+
     }
-    return $pathArray;
-  }
-
-  public function outputDirectory($pathArray)
-  {
-
-    for ($i = 1; $i < count($pathArray); $i++) {
-      
-    }
-
-    return $output;
-  }
 }
 
-$obj = new PathDirectory();
-
-echo '<pre>';
-$pathArray = $obj->createDirectory('E:/Programing/test');
-echo $obj->outputDirectory($pathArray);
-
-
+(new DirectoryTree())->createDirectory("E:/Programing/");
