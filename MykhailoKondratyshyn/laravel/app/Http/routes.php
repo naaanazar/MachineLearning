@@ -35,7 +35,7 @@ Route::post('/products/{product}/notes', 'NotesController@store');
 
 
 
-Route::delete('/products/{product}/delete', 'ProductController@deleteProduct');
+Route::delete('/products/{productId}/delete', 'ProductController@delete')->where('product', '[0-9]+');
 
 
 
@@ -69,9 +69,4 @@ Route::delete('/products/{product}/delete', 'ProductController@deleteProduct');
 
 
 
-//Route::get('/parserdisplay/{product_id}', 'HomeController@display');
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
