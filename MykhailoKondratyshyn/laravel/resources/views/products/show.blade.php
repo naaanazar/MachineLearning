@@ -1,68 +1,45 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport">
+@extends('layout')
+
+@section('content')
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>{{$product->title}}</h1>
+            <p align="center"><img src="{{$product->img_url}}"></p>
+            <p align="center">Price: {{$product->description}}</p>
 
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Document</title>
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+            <a class="btn btn-primary" href="/products/{{$product->id}}/edit">Edit</a>
 
-</head>
+            <ul class="list-group">
 
-<body>
-<script>
+                @foreach($product->notes as $note)
 
-    $(document).ready(function () {
-        $('.delete'.on('click', function (e) {
-
-        }));
-    });
+                    <li class="list-group-item">{{$note->body}}</li>
+                @endforeach
 
 
-</script>
-
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <h1>{{$product->title}}</h1>
+            </ul>
 
 
-    <ul class="list-group">
+            <h3>Add New </h3>
 
-        @foreach($product->notes as $note)
+            <form method="post" enctype="multipart/form-data" action="/products/{{$product->id}}/notes">
 
-            <li class="list-group-item">{{$note->body}}</li>
-        @endforeach
-
-
-    </ul>
+                <div class="form-group">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <textarea name="body" class="form-control"></textarea>
 
 
-    <h3>Add New </h3>
+                </div>
 
-    <form method="post" enctype="multipart/form-data" action="/products/{{$product->id}}/notes">
+                <div class="form-group">
 
-        <div class="form-group">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <textarea name="body" class="form-control"></textarea>
+                    <button type="submit" class="btn btn-primary">Add Note</button>
+
+                </div>
 
 
+            </form>
         </div>
-
-        <div class="form-group">
-
-            <button type="submit" class="btn btn-primary">Add Note</button>
-
-        </div>
-
-
-    </form>
-</div>
-</div>
-
-</body>
-</html>
-
-
-
+    </div>
+@endsection
