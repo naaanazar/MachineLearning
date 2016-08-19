@@ -1,8 +1,27 @@
-<?php
+    <?php
 
-$path = realpath('E:/');
+class DirectoryTree
+{
+    public function createDirectory($dir)
+    {
+        $iterator = new RecursiveIteratorIterator(
+                            new RecursiveDirectoryIterator($dir),
+                            RecursiveIteratorIterator::SELF_FIRST
+                        );
 
-$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::SELF_FIRST);
-foreach($objects as $name => $object){
-    echo "$name<br>";
+        $this->outputDirectory($iterator);
+    }
+
+    public function outputDirectory($iterator)
+    {
+        foreach ($iterator as $path) {
+            if ($path->isDir()) {
+                echo $path . "<br>";
+            } else {
+                echo $path->getFilename() . "<br>";
+            }
+        }
+    }
 }
+
+(new DirectoryTree())->createDirectory("E:/Programing/test1/");
