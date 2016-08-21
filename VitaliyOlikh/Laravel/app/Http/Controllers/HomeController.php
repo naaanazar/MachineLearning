@@ -32,21 +32,18 @@ class HomeController extends Controller
     public function display()
     {
         $products = DB::table('products')->orderBy('created_at', 'DESC')->paginate(4); //->get()
-
         return view('products.list', ['products' => $products]);
     }
 
     public function showOneProduct(Product $products)
     {
         $oneProduct = [$products->title, $products->description, $products->img_url];
-
         return view('products.product', ['oneProduct' => $oneProduct]);
     }
 
     public function delete($productId)
     {
         Product::destroy($productId);
-
         return Response()->json(['success' => true]);
     }
 
@@ -86,6 +83,50 @@ class HomeController extends Controller
             return redirect()->action('HomeController@add');
         }
     }
+
+    public function edit($productId)
+    {
+        $products = Product::find($productId);
+        // dd($products);
+        return view('products.edit', ['products' => $products]);
+    }
+
+    public function update(Request $request)
+    {
+
+        // $this->validate($request->all(), [
+        //     'title' => 'required|max:255',
+        //     'description' => 'required|max:1000',
+        // ]);
+
+        if(Input::hasFile('file')) {
+            $file = Input::file('file');
+            $file->move('uploads', $file->getClientOriginalName());
+            $file = "uploads/" . $file->getClientOriginalName();
+        }
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'description' => 'required|max:1000',
+        ]);
+
+        if ($validator->passes()){
+            $title = Input::get('title');
+            $description = $file;
+            $img_url = Input::get('description');
+            
+            Product::where('title', $title)->update(array(
+                'title' => $title,
+                'description' => $description,
+                'img_url' => $img_url
+            ));
+
+            return redirect()->action('HomeController@display'); // back();
+        } else {
+            return redirect()->action('HomeController@update');
+        }
+    }
+
 
     public function render($request, Exception $e)
     {

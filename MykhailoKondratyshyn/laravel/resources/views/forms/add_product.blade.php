@@ -1,6 +1,17 @@
 @extends('layout')
 
 @section('content')
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 <form method="post" enctype="multipart/form-data" action="/products/save">
 
     <div class="form-group">
@@ -19,7 +30,7 @@
 
     <div class="form-group">
 
-        <button type="submit" class="btn-primary">Add Note</button>
+        <button type="submit" class="btn btn-primary">Add Note</button>
 
     </div>
 

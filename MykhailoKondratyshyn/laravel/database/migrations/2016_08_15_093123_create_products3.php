@@ -17,6 +17,7 @@ class CreateProducts3 extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('img_url');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

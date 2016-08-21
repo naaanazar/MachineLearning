@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::All();
+        $products = Product::withTrashed()->paginate(5);
 
 
         return view('products.list',
@@ -31,77 +31,70 @@ class ProductController extends Controller
 
 
     }
+
     public function addNew()
     {
         return view('forms.add_product');
     }
 
 
-    public function save(Request $request, Product $product )
+    public function save(Request $request, Product $product)
     {
-//        echo '<pre>';
-//        print_r($request->all());
-//        echo '<pre>';
-//        print_r($request->has('title'));
-//        echo '<pre>';
-//        print_r($request->get('title'));
-//        die();
-
-       // $product = new Product;
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->img_url = $request->img_url;
-        $product->save();
-
-        return view('forms.add_product', compact('product'));
-    }
-
-
-    public function edit()
-    {
-        return view('forms.edit_product');
-    }
-
-    public function saveEdit(Request $request, Product $product)
-    {
-        $product = Product::find($product->id);
-
-       // $product = Product::where('title', '=', $product->title)->first();
-
+        $this->validate($request, [
+            'title' => 'required|unique:products',
+            'description' => 'required'
+        ]);
 
         $product->title = $request->title;
         $product->description = $request->description;
         $product->img_url = $request->img_url;
         $product->save();
 
-        return back();
-            //view('products.show', compact('product'));
+        return view('products.show', compact('product'));
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function deleteProduct($product)
+    public function edit(Product $product)
     {
-        Product::destroy(34);
-print_r("qwe" . $product);
-        return back();
-            //response()->json(['success' => true]);
+        return view('forms.edit_product', compact('product'));
+    }
 
-//        $product = Product::find();
-//
-//        $product->delete();
+    public function saveEdit(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|unique:products',
+            'description' => 'required'
+        ]);
+
+        $product = Product::find($request->get('product_id'));
+
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->img_url = $request->img_url;
+        $product->save();
+
+        return view('products.show', compact('product'));
+    }
+
+
+    public function delete(Request $request, $productId)
+    {
+        Product::destroy($productId);
+        return response()->json(['success' => true]);
+    }
+
+
+    public function restore(Request $request, $productId, Product $product)
+    {
+
+
+        //dd($product);
+        Product::withTrashed()->where('id', $productId)->restore();
+
+
+return view('forms.success');
+
+//        return view('products.show',
+//            ['product' => $product]);
     }
 }
