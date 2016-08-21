@@ -38,6 +38,10 @@ Route::post('/products/{product}/notes', 'NotesController@store');
 Route::delete('/products/{productId}/delete', 'ProductController@delete')->where('product', '[0-9]+');
 
 
+Route::get('/products/{productId}/restore', 'ProductController@restore')->where('product', '[0-9]+');
+
+
+
 
 
 

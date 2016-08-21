@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::paginate(5);
+        $products = Product::withTrashed()->paginate(5);
 
 
         return view('products.list',
@@ -81,5 +81,20 @@ class ProductController extends Controller
     {
         Product::destroy($productId);
         return response()->json(['success' => true]);
+    }
+
+
+    public function restore(Request $request, $productId, Product $product)
+    {
+
+
+        //dd($product);
+        Product::withTrashed()->where('id', $productId)->restore();
+
+
+return view('forms.success');
+
+//        return view('products.show',
+//            ['product' => $product]);
     }
 }

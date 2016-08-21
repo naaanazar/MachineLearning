@@ -33,6 +33,7 @@
                 success : function (response) {
                     if(response.success) {
                         $(e.target).closest('div.product').fadeOut();
+                        location.reload();
                     }
                 }
             });
