@@ -1,4 +1,0 @@
-<?php
-
-curl_init();
-
