@@ -23,11 +23,11 @@
     @foreach($products as $product)
         <li class="list-group-item">
             <h3 class="text-center"><a href="/products/{{$product->id}}">{{$product->title}}</a></h3>
-            <a class="delete" href="/products/delete/{{$product->id}}">{{ trans('main.delete') }}</a>
-            <br>
             <img class="img-rounded img-responsive center-block" src="{{$product->description}}">
             <hr>
             <p>{{$product->img_url}}</p>
+            <a class="update btn btn-info" href="/products/{{$product->id}}/edit">{{ trans('main.edit') }}</a>
+            <a class="delete btn btn-danger" href="/products/delete/{{$product->id}}">{{ trans('main.delete') }}</a>
         </li>
         <br>
     @endforeach
