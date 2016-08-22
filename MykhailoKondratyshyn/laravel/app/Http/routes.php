@@ -20,48 +20,21 @@ Route::get('/products/{product}', 'ProductController@show')->where('product', '[
 Route::post('/products/save', 'ProductController@save');
 
 
-
 Route::get('/products/{product}/edit', 'ProductController@edit');
 Route::patch('/products/save_edit', 'ProductController@saveEdit');
-
-
 
 
 Route::get('/products/add_new', 'ProductController@addNew');
 
 
-
 Route::post('/products/{product}/notes', 'NotesController@store');
-
 
 
 Route::delete('/products/{productId}/delete', 'ProductController@delete')->where('product', '[0-9]+');
 
-
 Route::get('/products/{productId}/restore', 'ProductController@restore')->where('product', '[0-9]+');
 
 
-
-
-
-
-
-
-//Route::get('/products/add', 'ProductController@addProduct');
-//Route::post('/products/save', 'ProductController@saveProduct');
-//
-//
-//
-//
-//
-//Route::get('/products/{product}', function($product) {
-//    return Controller::call('ProductController@product');
-//})->where('product', '[0-9]+');
-//
-//
-//Route::group(['middleware' => 'web'], function () {
-//    Route::post('/products/save', 'ProductController@saveProduct');
-//});
 
 
 

@@ -6,7 +6,6 @@ class Display
     public function tree($cwd = "/home/crowdin_share")
 
     {
-        //$root = '../';
 
         $dir = new RecursiveDirectoryIterator($cwd);
         $iter = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::SELF_FIRST);

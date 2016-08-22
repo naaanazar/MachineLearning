@@ -3,7 +3,6 @@
 
 class Tree
 {
-//$dir = '/home/crowdin_share';
     public $br = ":<br>";
     public $ul = "<ul>";
     public $li = "<li>";
@@ -34,9 +33,6 @@ class Tree
 
 
     }
-
-
-    
 
 
 }

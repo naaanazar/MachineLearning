@@ -6,5 +6,3 @@
 <a href="/products" class="btn btn-primary">Back to list</a>
 
 @endsection
-</body>
-</html>

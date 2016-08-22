@@ -44,20 +44,7 @@ class ParserController extends Controller
 
         \phpQuery::unloadDocuments($doc);
 
-
         curl_close($ch);
 
-
-//        $parser = new Parser();
-//        $html = $parser->fetchPage('http://rozetka.com.ua/');
-//
-////        foreach ($html as $image) {
-////
-////        }
-//
-//
-//        echo "<pre>";
-//        print_r($html);
-        //die();
     }
 }
