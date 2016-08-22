@@ -47,6 +47,34 @@ class HomeController extends Controller
         return back();        
     }
 
+    public function editProduct(Product $product)
+    {
+        return view('forms.editProduct', array('item' => $product));
+    }
+
+    public function updateProduct(Request $request, $product_id)
+    {
+        $product = Product::find($product_id);
+        
+        $this->validate($request, [
+            'title'       => 'min:5',
+            'description' => 'max: 500',
+            'img'         => 'mimes:jpeg,bmp,png,jpg',
+        ]);
+
+        $product->title = $request->title;
+        $product->description = $request->description;
+        
+        if($request->hasFile('img')) {
+            $request->file('img')->move('images', $request->img->getClientOriginalName());
+            $product->img = $request->img->getClientOriginalName();
+        }
+
+       $product->save();
+
+        return back();
+    }
+
     public function deleteProduct($productId)
     {
         Product::find($productId)->delete();
