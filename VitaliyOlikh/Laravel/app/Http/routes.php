@@ -15,7 +15,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('products', 'HomeController@display');
     Route::get('products/add', 'HomeController@add');
     Route::get('products/{productId}/edit', 'HomeController@edit');
-    Route::post('update', 'HomeController@update');
+    Route::post('update/{productId}', 'HomeController@update');
     Route::post('upload', 'HomeController@upload');
     Route::get('products/{products}', 'HomeController@showOneProduct');
     Route::post('products/delete/{productId}', 'HomeController@delete')->where(['productId' => '[0-9]+']);

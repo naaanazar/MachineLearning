@@ -26,8 +26,14 @@
             <img class="img-rounded img-responsive center-block" src="{{$product->description}}">
             <hr>
             <p>{{$product->img_url}}</p>
-            <a class="update btn btn-info" href="/products/{{$product->id}}/edit">{{ trans('main.edit') }}</a>
-            <a class="delete btn btn-danger" href="/products/delete/{{$product->id}}">{{ trans('main.delete') }}</a>
+            <div class="row">
+                <div class="col-md-2">
+                    <a class="update btn btn-info" href="/products/{{$product->id}}/edit">{{ trans('main.edit') }}</a>
+                </div>
+                <div class="col-md-2 col-md-offset-8">
+                    <a class="delete btn btn-danger" href="/products/delete/{{$product->id}}">{{ trans('main.delete') }}</a>
+                </div>
+            </div>
         </li>
         <br>
     @endforeach

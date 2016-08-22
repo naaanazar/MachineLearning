@@ -37,8 +37,7 @@ class HomeController extends Controller
 
     public function showOneProduct(Product $products)
     {
-        $oneProduct = [$products->title, $products->description, $products->img_url];
-        return view('products.product', ['oneProduct' => $oneProduct]);
+        return view('products.product', ['products' => $products]);
     }
 
     public function delete($productId)
@@ -87,18 +86,11 @@ class HomeController extends Controller
     public function edit($productId)
     {
         $products = Product::find($productId);
-        // dd($products);
         return view('products.edit', ['products' => $products]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $productId)
     {
-
-        // $this->validate($request->all(), [
-        //     'title' => 'required|max:255',
-        //     'description' => 'required|max:1000',
-        // ]);
-
         if(Input::hasFile('file')) {
             $file = Input::file('file');
             $file->move('uploads', $file->getClientOriginalName());
@@ -111,22 +103,17 @@ class HomeController extends Controller
         ]);
 
         if ($validator->passes()){
-            $title = Input::get('title');
-            $description = $file;
-            $img_url = Input::get('description');
-            
-            Product::where('title', $title)->update(array(
-                'title' => $title,
-                'description' => $description,
-                'img_url' => $img_url
-            ));
+            $product = Product::find($productId);
+            $product->title = Input::get('title');
+            $product->description = $file;
+            $product->img_url = Input::get('description');
+            $product->save();
 
             return redirect()->action('HomeController@display'); // back();
         } else {
             return redirect()->action('HomeController@update');
         }
     }
-
 
     public function render($request, Exception $e)
     {
