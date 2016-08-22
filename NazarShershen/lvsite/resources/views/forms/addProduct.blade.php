@@ -4,7 +4,7 @@
 
 <div class="col-md-6 col-md-offset-3">
     <form role="form" method="post" action="save" enctype="multipart/form-data">
-        {{ crsf_field() }}
+        {{ CSRF_field() }}
 
         <div class="form-group">
             @if ($errors->has('title'))

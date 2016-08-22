@@ -57,3 +57,6 @@ class matrixRectange
         }
     }
 }
+
+$a = new matrixRectangle();
+$a->makeRectangle($a->matrix);
