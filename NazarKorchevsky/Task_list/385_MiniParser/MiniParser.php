@@ -28,16 +28,10 @@ class MiniParser
 
                 if ($str[$this->i] == '[') {
                     $this->open++;
-                    $this->i++;
-                    $this->parse($str);
-                    break;
                 }
 
                 if ($str[$this->i] == ']') {
                     $this->open--;
-                    $this->i++;
-                    $this->parse($str);
-                    break;
                 }
             }
         $this->i++;
