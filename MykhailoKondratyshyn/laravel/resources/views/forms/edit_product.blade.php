@@ -13,7 +13,7 @@
     @endif
 
     <form method="post" enctype="multipart/form-data" action="/products/save_edit">
-{{ method_field('PATCH') }}
+        {{ method_field('PATCH') }}
         <div class="form-group">
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -22,10 +22,8 @@
             <p>Description</p>
             <textarea name="description" class="form-control"></textarea>
             <p class="help-block">Add img for product</p>
-            <input type="file" id="exampleInputFile" name="img_url" value="{{ old('img') }}">
-            {{--@foreach($product as $produc)--}}
-            {{--<p>{{$produc}}</p>--}}
-            {{--@endforeach--}}
+            <input type="file" id="exampleInputFile" name="img_url">
+
 
         </div>
 

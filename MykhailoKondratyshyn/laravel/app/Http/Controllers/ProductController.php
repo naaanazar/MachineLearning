@@ -14,22 +14,14 @@ class ProductController extends Controller
 
         $products = Product::withTrashed()->paginate(5);
 
-
         return view('products.list',
             ['products' => $products]);
-
-        // return view('forms.add_product');
-
     }
 
 
     public function show(Product $product)
     {
-
-        //$product = Product::find($id);
         return view('products.show', compact('product'));
-
-
     }
 
     public function addNew()
@@ -77,24 +69,21 @@ class ProductController extends Controller
     }
 
 
-    public function delete(Request $request, $productId)
+    public function delete($productId)
     {
         Product::destroy($productId);
         return response()->json(['success' => true]);
     }
 
 
-    public function restore(Request $request, $productId, Product $product)
+    public function restore($productId)
     {
 
 
-        //dd($product);
         Product::withTrashed()->where('id', $productId)->restore();
 
 
-return view('forms.success');
+        return view('forms.success');
 
-//        return view('products.show',
-//            ['product' => $product]);
     }
 }

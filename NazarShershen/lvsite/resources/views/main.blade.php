@@ -29,7 +29,7 @@
                   e.preventDefault();
                   $.post( $(e.target).attr('href'), function( data ) {
                        if(data.success) {
-                           $(e.target).closest('div').fadeOut();
+                            location.reload();
                        }
                  });
               });

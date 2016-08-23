@@ -21,7 +21,7 @@ class Product extends Model
         if($rozetka) {
             return $path;
         } else {
-            return 'images/'.$path;
+            return '/images/'.$path;
         }
     }
 }

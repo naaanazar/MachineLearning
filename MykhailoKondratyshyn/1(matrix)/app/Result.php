@@ -10,7 +10,7 @@ class Result
     {
         $width = 5;
         $hight = 4;
-        
+
 
         $array = array(
             [1, 1, 1, 0, 0],
@@ -53,7 +53,7 @@ class Result
             }
         }
         echo "<pre>";
-        var_dump($res);
+        var_dump(max($res));
 
 
     }
@@ -69,7 +69,7 @@ class Result
     public
     function area()
     {
-//echo $this->sum;
+
     }
 
 

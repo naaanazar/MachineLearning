@@ -14,10 +14,6 @@ class HomeController extends Controller
       $products = Product::All();
 
 
-//        foreach ($products as $product){
-//            echo $product->title;
-//        }
-
         return view('products.list',
             ['products' => $products]);
     }

@@ -1,4 +1,5 @@
 nbproject/*
+.idea
 nbproject/private/
 /OlegKulb/nbproject/private/
 /OlegKulb/vendor/
@@ -15,4 +16,5 @@ nbproject/private/
 /NazarKorchevsky/tweet/nbproject/private/
 /VitaliyOlikh/ArrayFactoryAjax/nbproject/private/
 /VitaliyOlikh/Twitter/vendor/
-/NazarShershen/vendor/
+/NazarShershen/lvsite/nbproject
+/MarynaPotapovych/laravel/nbproject

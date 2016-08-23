@@ -11,12 +11,12 @@
             <a class="btn btn-primary" href="/products/{{$product->id}}/edit">Edit</a>
 
             <ul class="list-group">
-<h1>Comments</h1>
+                <h1>Comments</h1>
+
                 @foreach($product->notes as $note)
 
                     <li class="list-group-item">{{$note->body}}</li>
                 @endforeach
-
 
             </ul>
 

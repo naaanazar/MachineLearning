@@ -22,7 +22,9 @@ Route::get('/products/{product}', 'HomeController@showProduct')->where('product'
 Route::get('/products/add', 'HomeController@addProduct');
 Route::get('/products', 'HomeController@display');
 Route::post('/products/save', 'HomeController@saveProduct');
-Route::delete('/products/delete/{product_id}', 'HomeController@deleteProduct')->where('product', '[0-9]+');
+Route::get('/products/{product}/edit', 'HomeController@editProduct')->where('product', '[0-9]+');
+Route::patch('/products/{product_id}', 'HomeController@updateProduct')->where('product', '[0-9]+');;
+Route::post('/products/delete/{product_id}', 'HomeController@deleteProduct')->where('product', '[0-9]+');
 Route::post('/products/forcedelete/{product_id}', 'HomeController@forceDeleteProduct')->where('product', '[0-9]+');
 Route::post('/products/restore/{product_id}', 'HomeController@restoreProduct')->where('product', '[0-9]+');
 

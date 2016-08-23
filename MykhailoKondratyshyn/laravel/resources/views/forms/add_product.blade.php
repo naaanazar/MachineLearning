@@ -12,29 +12,27 @@
         </div>
     @endif
 
-<form method="post" enctype="multipart/form-data" action="/products/save">
+    <form method="post" enctype="multipart/form-data" action="/products/save">
 
-    <div class="form-group">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <p>Title</p>
-        <textarea name="title" class="form-control">Title</textarea>
-        <p>Description</p>
-        <textarea name="description" class="form-control">Description</textarea>
-        <p class="help-block">Add img for product</p>
-        <input type="file" id="exampleInputFile" name="img_url" value="{{ old('img') }}">
-        {{--@foreach($product as $produc)--}}
-    {{--<p>{{$produc}}</p>--}}
-    {{--@endforeach--}}
-
-    </div>
-
-    <div class="form-group">
-
-        <button type="submit" class="btn btn-primary">Add Note</button>
-
-    </div>
+        <div class="form-group">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <p>Title</p>
+            <textarea name="title" class="form-control">Title</textarea>
+            <p>Description</p>
+            <textarea name="description" class="form-control">Description</textarea>
+            <p class="help-block">Add img for product</p>
+            <input class="form-control" type="file" id="img_url" name="img_url">
 
 
-</form>
+        </div>
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary">Add Note</button>
+
+        </div>
+
+
+    </form>
 
 @endsection
