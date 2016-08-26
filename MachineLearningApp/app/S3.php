@@ -67,3 +67,13 @@ class S3
 
 
 }
+
+
+$target_dir = "../public/uploads/";
+$target_file = $target_dir . basename($_FILES["file"]["name"]);
+move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+
+$s3 = new S3();
+$test = $s3->uploadFileToS3($target_file);
+echo $test;
