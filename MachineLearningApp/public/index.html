@@ -1,369 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- tde above 3 meta tags *must* come first in tde head; any otder head content must come *after* tdese tags -->
-    <title>Crowdin.Space</title>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view tde page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">
-                <img class="logo" alt="crowdin-space" src="images/crowdin-space.png">
-            </a>
-        </div>
-            <form class="navbar-form navbar-right">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- tde above 3 meta tags *must* come first in tde head; any otder head content must come *after* tdese tags -->
+        <title>Crowdin Space Machine Learning App</title>
+        <!-- Bootstrap -->
+        <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <script src="js/lib/jquery/jquery.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/lib/bootstrap/bootstrap.min.js"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view tde page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">
+                    <img class="logo" alt="crowdin-space" src="images/crowdin-space.png">
+                </a>
+            </div>
+            <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
+                <div class="form-group">
+                    <label class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv / redshift">
+                        Upload Dataset <input type="file" style="display: none;">
+                    </label>
+                </div>
+            </form>
+            <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Create Model</button>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Upload Dataset (csv/redshift)</button>
-                </div>
             </form>
+        </nav>
+        <div class="container">
+            <h3>Real time prediction</h3>
+            <br>
+            <div class="col-md-6 clearfix">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="email" class="control-label batch-label text-right">Email custom domain</label>
+                        <input id="email" type="text" class="form-control batch-input" placeholder="Email custom domain">
+                    </div>
+                    <div class="form-group">
+                        <label for="same-email" class="control-label batch-label text-right">Same email domain count</label>
+                        <input id="same-email" type="text" class="form-control batch-input" placeholder="Same email domain count">
+                    </div>
+                    <div class="form-group">
+                        <label for="projects-count" class="control-label batch-label text-right">Projects count</label>
+                        <input id="projects-count" type="text" class="form-control batch-input" placeholder="Projects count">
+                    </div>
+                    <div class="form-group">
+                        <label for="string-count" class="control-label batch-label text-right">Strings count</label>
+                        <input id="string-count" type="text" class="form-control batch-input" placeholder="Strings count">
+                    </div>
+                    <div class="form-group">
+                        <label for="members-count" class="control-label batch-label text-right">Members count</label>
+                        <input id="members-count" type="text" class="form-control batch-input" placeholder="Members count">
+                    </div>
+                    <div class="form-group">
+                        <label for="has-privat-project" class="control-label batch-label text-right">Has private project</label>
+                        <input id="has-privat-project" type="text" class="form-control batch-input" placeholder="Has private project">
+                    </div>
+                    <div class="form-group">
+                        <label for="same-log-project" class="control-label batch-label text-right">Same login and project name</label>
+                        <input id="same-log-project" type="text" class="form-control batch-input" placeholder="Same login and project name">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-login" class="control-label batch-label text-right">Days after last login</label>
+                        <input id="last-login" type="text" class="form-control batch-input" placeholder="Days after last login">
+                    </div>
+                    <div class="form-group">
+                        <label for="country" class="control-label batch-label text-right">Country</label>
+                        <input id="country" type="text" class="form-control batch-input" placeholder="Country">
+                    </div>
+                    <div class="form-group">
+                        <label for="purchase" class="control-label batch-label text-right">Purchase</label>
+                        <input id="purchase" type="text" class="form-control batch-input" placeholder="Purchase">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary pull-right" value="Send" type="submit">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="block-output"></div>
+            </div>
         </div>
-    </nav>
-    <div class="container">
-        <h3>Real time prediction</h3>
-        <br>
-        <div class="col-md-6 clearfix">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Email custom domain</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Email custom domain">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Same email domain count</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Same email domain count">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Projects count</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Projects count">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Strings count</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Strings count">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Members count</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Members count">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Has private project</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Has private project">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Same login and project name</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Same login and project name">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Days after last login</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Days after last login">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Country</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Country">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="control-label batch-label text-right">Purchase</label>
-                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Purchase">
-                </div>
-                <div class="form-group">
-                <input class="btn btn-primary btn-batch pull-right" type="submit">
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <div class="block-output"></div>
-        </div>
-    </div>
-    <hr>
-    <div class="container clearfix">
-        <h3>List Records</h3>
-        <div class="block-add">
-            <a type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" href="">Add&nbsp;<span class="glyphicon glyphicon-plus"></span></a>
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="gridSystemModalLabel">Add Record</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Email custom domain</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Email custom domain">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Same email domain count</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Same email domain count">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Projects count</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Projects count">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Strings count</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Strings count">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Members count</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Members count">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Has private project</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Has private project">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Same login and project name</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Same login and project name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Days after last login</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Days after last login">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Country</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Country">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="control-label batch-label text-right">Purchase</label>
-                                    <input type="email" class="form-control batch-input" id="inputEmail3" placeholder="Purchase">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <input class="btn btn-primary btn-batch pull-right" type="submit">
-                                </div>
-                            </form>
+        <hr>
+        <div class="container clearfix">
+            <h3>List Records</h3>
+            <div class="block-add">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add&nbsp;<span class="glyphicon glyphicon-plus"></span></button>
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">Add Record</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="email-2" class="control-label batch-label text-right">Email custom domain</label>
+                                        <input id="email-2" type="text" class="form-control batch-input" placeholder="Email custom domain">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="same-email-2" class="control-label batch-label text-right">Same email domain count</label>
+                                        <input id="same-email-2" type="text" class="form-control batch-input" placeholder="Same email domain count">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="projects-count-2" class="control-label batch-label text-right">Projects count</label>
+                                        <input id="projects-count-2" type="text" class="form-control batch-input" placeholder="Projects count">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="string-count-2" class="control-label batch-label text-right">Strings count</label>
+                                        <input id="string-count-2" type="text" class="form-control batch-input" placeholder="Strings count">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="members-count-2" class="control-label batch-label text-right">Members count</label>
+                                        <input id="members-count-2" type="text" class="form-control batch-input" placeholder="Members count">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="has-privat-project-2" class="control-label batch-label text-right">Has private project</label>
+                                        <input id="has-privat-project-2" type="text" class="form-control batch-input" placeholder="Has private project">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="same-log-project-2" class="control-label batch-label text-right">Same login and project name</label>
+                                        <input id="same-log-project-2" type="text" class="form-control batch-input" placeholder="Same login and project name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-login-2" class="control-label batch-label text-right">Days after last login</label>
+                                        <input id="last-login-2" type="text" class="form-control batch-input" placeholder="Days after last login">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country-2" class="control-label batch-label text-right">Country</label>
+                                        <input id="country-2" type="text" class="form-control batch-input" placeholder="Country">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="purchase-2" class="control-label batch-label text-right">Purchase</label>
+                                        <input id="purchase-2" type="text" class="form-control batch-input" placeholder="Purchase">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="btn btn-primary btn-batch pull-right" type="submit">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <ul class="pagination pagination-sm pagination-border pull-right">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="active active-radius"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+            <table class="table text-center table-font">
+                <tr class="active">
+                    <td>Target</td>
+                    <td>Email custom domain</td>
+                    <td>Same email domain count</td>
+                    <td>Projects count</td>
+                    <td>Strings count</td>
+                    <td>Members count</td>
+                    <td>Has private project</td>
+                    <td>Same login and project name</td>
+                    <td>Days after last login</td>
+                    <td>Country</td>
+                    <td>Purchase</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>989</td>
+                    <td>52</td>
+                    <td>15</td>
+                    <td>453</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>13</td>
+                    <td>Saudi Arabia</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>900</td>
+                    <td>52</td>
+                    <td>30</td>
+                    <td>463</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>18</td>
+                    <td>USA</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>344</td>
+                    <td>52</td>
+                    <td>3</td>
+                    <td>453</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>France</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>765</td>
+                    <td>52</td>
+                    <td>24</td>
+                    <td>453</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>USA</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>989</td>
+                    <td>52</td>
+                    <td>15</td>
+                    <td>699</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>13</td>
+                    <td>Saudi Arabia</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>900</td>
+                    <td>52</td>
+                    <td>30</td>
+                    <td>453</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>18</td>
+                    <td>USA</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>1</td>
+                    <td>344</td>
+                    <td>52</td>
+                    <td>3</td>
+                    <td>453</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>France</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>765</td>
+                    <td>52</td>
+                    <td>24</td>
+                    <td>233</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Peru</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>1</td>
+                    <td>344</td>
+                    <td>52</td>
+                    <td>3</td>
+                    <td>453</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>Ukraine</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>765</td>
+                    <td>52</td>
+                    <td>24</td>
+                    <td>890</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>China</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <ul class="pagination pagination-sm pagination-border pull-right">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="active active-radius"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-        <table class="table text-center table-font">
-            <tr class="active">
-                <td>Target</td>
-                <td>Email custom domain</td>
-                <td>Same email domain count</td>
-                <td>Projects count</td>
-                <td>Strings count</td>
-                <td>Members count</td>
-                <td>Has private project</td>
-                <td>Same login and project name</td>
-                <td>Days after last login</td>
-                <td>Country</td>
-                <td>Purchase</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>0</td>
-                <td>989</td>
-                <td>52</td>
-                <td>15</td>
-                <td>453</td>
-                <td>0</td>
-                <td>0</td>
-                <td>13</td>
-                <td>Saudi Arabia</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>0</td>
-                <td>900</td>
-                <td>52</td>
-                <td>30</td>
-                <td>463</td>
-                <td>1</td>
-                <td>0</td>
-                <td>18</td>
-                <td>USA</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>1</td>
-                <td>344</td>
-                <td>52</td>
-                <td>3</td>
-                <td>453</td>
-                <td>0</td>
-                <td>0</td>
-                <td>5</td>
-                <td>France</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>0</td>
-                <td>765</td>
-                <td>52</td>
-                <td>24</td>
-                <td>453</td>
-                <td>0</td>
-                <td>1</td>
-                <td>1</td>
-                <td>USA</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>0</td>
-                <td>989</td>
-                <td>52</td>
-                <td>15</td>
-                <td>699</td>
-                <td>0</td>
-                <td>0</td>
-                <td>13</td>
-                <td>Saudi Arabia</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>0</td>
-                <td>900</td>
-                <td>52</td>
-                <td>30</td>
-                <td>453</td>
-                <td>1</td>
-                <td>0</td>
-                <td>18</td>
-                <td>USA</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>1</td>
-                <td>344</td>
-                <td>52</td>
-                <td>3</td>
-                <td>453</td>
-                <td>0</td>
-                <td>0</td>
-                <td>5</td>
-                <td>France</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>1</td>
-                <td>765</td>
-                <td>52</td>
-                <td>24</td>
-                <td>233</td>
-                <td>0</td>
-                <td>1</td>
-                <td>1</td>
-                <td>Peru</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>1</td>
-                <td>344</td>
-                <td>52</td>
-                <td>3</td>
-                <td>453</td>
-                <td>0</td>
-                <td>0</td>
-                <td>5</td>
-                <td>Ukraine</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>0</td>
-                <td>765</td>
-                <td>52</td>
-                <td>24</td>
-                <td>890</td>
-                <td>1</td>
-                <td>0</td>
-                <td>1</td>
-                <td>China</td>
-                <td>0</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="panel panel-margin">
-        <div class="panel-footer text-center">
-            2016 &copy; Crowdin.Space
+        <div class="panel panel-margin">
+            <div class="panel-footer text-center">
+                2016 &copy; Crowdin.Space
+            </div>
         </div>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
+    </body>
 </html>
