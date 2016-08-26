@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('/parse', 'ParserController@index');
 Route::get('/crawler', 'DomCrawlerController@index');
+Route::get('/int', 'NestedIntegersController@index');
 
 Route::get('/products/{product}', 'HomeController@showProduct')->where('product', '[0-9]+');
 Route::get('/products/add', 'HomeController@addProduct');
