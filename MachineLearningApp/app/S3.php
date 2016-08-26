@@ -40,9 +40,8 @@ class S3
                 'Key'    => $keyname,
                 'SourceFile'   => $filepath,
                 'ACL'    => 'public-read'
-            ));
-           
-            //echo $result['ObjectURL'] . "\n";
+            ));           
+            
             return $result['ObjectURL'];
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
