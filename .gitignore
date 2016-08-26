@@ -1,4 +1,4 @@
-nbproject/*
+nbproject/
 .idea
 nbproject/private/
 /OlegKulb/nbproject/private/
@@ -18,3 +18,4 @@ nbproject/private/
 /VitaliyOlikh/Twitter/vendor/
 /NazarShershen/lvsite/nbproject
 /MarynaPotapovych/laravel/nbproject
+/MachineLearningApp/nbproject/private/
