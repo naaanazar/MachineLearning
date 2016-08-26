@@ -11,6 +11,8 @@
     font-weight: normal;
 }
 
+
+#input-file { display: none ; }
 .btn-batch { margin-right: 42px; }
 .panel-margin { margin-bottom: 0; }
 .batch-label { margin-right: 15px; }
