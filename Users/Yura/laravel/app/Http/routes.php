@@ -10,11 +10,13 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route:: get('/','PagesController@index');
+Route::get('learn','CardsController@learn');
+Route::get('cards/{card}','CardsController@show');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::auth();
 
-Route::get('/home', 'HomeController@index');
+
+//Route::get('parse', 'ParserController@index');
+
+//Route::get('products', 'HomeController@display');
