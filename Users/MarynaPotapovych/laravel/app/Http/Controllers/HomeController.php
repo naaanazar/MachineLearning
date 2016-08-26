@@ -88,5 +88,6 @@ class HomeController extends Controller
         $product->save();
         return back();
     }
+    
 
 }
