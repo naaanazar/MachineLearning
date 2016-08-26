@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require '../vendor/autoload.php';
 
 use Aws\S3\S3Client;
@@ -14,6 +10,7 @@ class S3
 
     public $bucket = 'ml-datasets-test';
     
+
     private function connectToS3()
     {
         $s3 = new Aws\S3\S3Client([
@@ -24,6 +21,7 @@ class S3
                 'secret' => 'fjLNfQRailTs60W959jF7OA9443sn+Zx9U2Dnek+'
         ]
         ]);
+
         return $s3;
     }
 
@@ -40,29 +38,58 @@ class S3
                 'Key'    => $keyname,
                 'SourceFile'   => $filepath,
                 'ACL'    => 'public-read'
-            ));           
+            ));            
             
-            return $result['ObjectURL'];
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
+
+        return $result['ObjectURL'];
     }
-    public function deleteFileFromoS3 ($filename)
+
+
+    public function deleteFileFromS3 ($filename)
     {
 
         $client = $this->connectToS3();
+
         try {
             $result = $client->deleteObject([
                 'Bucket' => $this->bucket,
                 'Key' => $filename,
                 'RequestPayer' => 'requester'
-            ]);                
+            ]);
             
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-
     }
 
+    public function listFileFromS3 ()
+    {
+
+        $client = $this->connectToS3();
+
+        try {
+            $result = $client->listObjects([
+                'Bucket' => $this->bucket, // REQUIRED
+                'Delimiter' => '|',
+                
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        
+        $count = 0;
+
+        foreach ($result['Contents'] as $key => $value) {
+            $fileList[$count]['name'] = $value['Key'];
+            $fileList[$count]['size'] = $value['Size'];
+            $fileList[$count]['lastModified'] = $value['LastModified'];
+            $count++;            
+        }
+        return $fileList;
+    }
 
 }
