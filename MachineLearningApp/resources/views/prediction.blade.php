@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container">
+
     <h3>Real time prediction</h3>
     <br>
     <div class="col-md-6 clearfix">
@@ -169,9 +170,9 @@
                 <a class="btn btn-danger btn-sm" href=""><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
+
         @endfor
     </table>
 </div>
-
 @endsection
 

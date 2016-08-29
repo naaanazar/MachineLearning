@@ -21,10 +21,10 @@
         <![endif]-->
     </head>
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="/">
                     <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
                 </a>
             </div>
