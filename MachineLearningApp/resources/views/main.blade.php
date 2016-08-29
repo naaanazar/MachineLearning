@@ -30,15 +30,8 @@
             </div>
             <ul class="nav navbar-nav">
                 <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Home</a></li>
-                <li {{ (Request::is('list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
+                <li {{ (Request::is('list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">S3</a></li>
             </ul>
-            <form class="navbar-form navbar-right form-upload" enctype="multipart/form-data" action="../app/S3.php" method="post">
-                <div class="form-group">
-                    <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
-                        Upload Dataset (csv) <input id="input-file" type="file" name="file">
-                    </label>
-                </div>
-            </form>
             <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Create Model</button>

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Aws\S3\S3Client;
@@ -17,11 +16,6 @@ class S3Controller extends Controller
     public function predictionForm()
     {
         return view('prediction');
-    }
-
-    public function displayList()
-    {
-        return view('list');
     }
 
     private function connectToS3()
@@ -39,8 +33,18 @@ class S3Controller extends Controller
     }
 
 
-    public function uploadFileToS3 ($filepath)
+    public function uploadFileToS3 (Request $request)
     {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,txt',
+        ]);
+
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $storagePath = storage_path('\app\uploads');
+        $file->move($storagePath, $fileName);
+
+        $filepath = $storagePath . '\\' . $fileName;
         $keyname = basename($filepath);
         $client = $this->connectToS3();
 
@@ -56,7 +60,7 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return $result['ObjectURL'];
+        return back();
     }
 
 
