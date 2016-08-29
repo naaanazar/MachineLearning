@@ -28,6 +28,10 @@
                     <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
                 </a>
             </div>
+                <ul class="nav navbar-nav">
+                <li><a href="{{ URL::to('/') }}">Home</a></li>
+                <li><a href="{{ URL::to('/list') }}">List</a></li>
+            </ul>
             <form class="navbar-form navbar-right form-upload" enctype="multipart/form-data" action="../app/S3.php" method="post">
                 <div class="form-group">
                     <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
