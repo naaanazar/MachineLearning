@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h3><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">List of files</h3>
+                <h3 class="s3-list"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">List of files</h3>
                 <table class="table table-bordered table-font text-center">
                     <tr class="active">
                         <td>Target</td>
