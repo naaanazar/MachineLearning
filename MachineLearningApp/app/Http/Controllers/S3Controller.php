@@ -73,6 +73,8 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
+
+        return back();
     }
 
 
@@ -87,18 +89,12 @@ class S3Controller extends Controller
                 'Delimiter' => '|'
             ]);
 
+            $results = $result['Contents'];
+
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
 
-        $count = 0;
-
-        foreach ($result['Contents'] as $key => $value) {
-            $fileList[$count]['name'] = $value['Key'];
-            $fileList[$count]['size'] = $value['Size'];
-            $fileList[$count]['lastModified'] = $value['LastModified'];
-            $count++;
-        }
-        return $fileList;
+        return view('s3.list', compact('results'));
     }
 }

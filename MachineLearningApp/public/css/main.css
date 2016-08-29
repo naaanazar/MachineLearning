@@ -1,6 +1,20 @@
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+}
+
 .logo {
     width: 150px;
     margin-top: -8px;
+}
+
+.logo-s3 {
+    width: 100px;
 }
 
 .batch-label,
@@ -31,3 +45,9 @@
 .table-font { font-size: 11px; }
 .table-font tr td:last-child { width: 110px; }
 
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
