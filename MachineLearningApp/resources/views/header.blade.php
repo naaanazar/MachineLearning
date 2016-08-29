@@ -25,7 +25,7 @@
             <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="">
-                    <img class="logo" alt="crowdin-space" src="images/crowdin-space.png">
+                    <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
                 </a>
             </div>
             <form class="navbar-form navbar-right form-upload" enctype="multipart/form-data" action="../app/S3.php" method="post">
