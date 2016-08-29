@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('prediction');
-});
+Route::get('/', 'S3Controller@predictionForm');
+Route::get('/list', 'S3Controller@displayList');
