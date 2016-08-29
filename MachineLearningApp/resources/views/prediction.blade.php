@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h3>Real time prediction</h3>
+    <h3 class="title">Real time prediction</h3>
     <br>
     <div class="col-md-6 clearfix">
         <form class="form-horizontal">
