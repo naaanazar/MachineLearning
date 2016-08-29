@@ -91,14 +91,14 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        $count = 0;
+        // $count = 0;
 
-        foreach ($result['Contents'] as $key => $value) {
-            $fileList[$count]['name'] = $value['Key'];
-            $fileList[$count]['size'] = $value['Size'];
-            $fileList[$count]['lastModified'] = $value['LastModified'];
-            $count++;
-        }
-        return $fileList;
+        // foreach ($result['Contents'] as $key => $value) {
+        //     $fileList[$count]['name'] = $value['Key'];
+        //     $fileList[$count]['size'] = $value['Size'];
+        //     $fileList[$count]['lastModified'] = $value['LastModified'];
+        //     $count++;
+        // }
+        return view('s3.list');
     }
 }

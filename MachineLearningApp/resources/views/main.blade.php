@@ -1,6 +1,6 @@
-@include('header')
+@extends('header')
 
 @yield('content')
 
-@include('footer')
+@extends('footer')
 

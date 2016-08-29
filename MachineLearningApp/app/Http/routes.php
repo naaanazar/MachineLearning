@@ -12,4 +12,4 @@
 */
 
 Route::get('/', 'S3Controller@predictionForm');
-Route::get('/list', 'S3Controller@displayList');
+Route::get('/list', 'S3Controller@listFileFromS3');
