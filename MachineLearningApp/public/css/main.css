@@ -27,7 +27,6 @@ body {
 }
 
 .error { color: red; }
-.title { margin-top: 80px; }
 #input-file { display: none ; }
 .btn-batch { margin-right: 42px; }
 .panel-margin { margin-bottom: 0; }
