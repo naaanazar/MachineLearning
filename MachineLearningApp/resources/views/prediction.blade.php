@@ -174,7 +174,6 @@
         @endfor
     </table>
 </div>
-       
 <br>
 @endsection
 
