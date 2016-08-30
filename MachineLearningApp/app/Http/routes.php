@@ -10,8 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-    Route::get('/', 'S3Controller@predictionForm');
-    Route::get('list', 'S3Controller@listFileFromS3');
-    Route::get('delete/{name}', 'S3Controller@deleteFileFromS3');
+Route::get('/', 'S3Controller@predictionForm');
+Route::get('list', 'S3Controller@listFileFromS3');
+Route::get('delete/{name}', 'S3Controller@deleteFileFromS3');
 
