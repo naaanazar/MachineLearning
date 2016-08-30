@@ -1,6 +1,8 @@
 @extends('main')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+ <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
     <script>
     //     $.ajaxSetup({
     //        headers: {
@@ -28,7 +30,7 @@
                     <div class="form-group">
                         <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
                             <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">
-                        </label>
+                                </label>
                         @if (count($errors) > 0)
                             <br>
                             <br>
@@ -36,6 +38,9 @@
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li><strong>Error!</strong> {{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}</li>
+                                                <div class="jGrowl">
+                                                    <script src="/js/pop-up-massage-error.js"></script>
+                                                </div>
                                     @endforeach
                                 </ul>
                             </div>
@@ -45,6 +50,9 @@
                             <div class="alert alert-success">
                                 <ul>
                                     <li>{!! session('status') !!}</li>
+                                        <div class="jGrowl">
+                                            <script src="/js/pop-up-massage-succes.js"></script>
+                                        </div>
                                 </ul>
                             </div>
                         @endif
