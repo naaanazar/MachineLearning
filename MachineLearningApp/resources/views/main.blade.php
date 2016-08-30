@@ -30,12 +30,8 @@
             </div>
             <ul class="nav navbar-nav">
                 <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Home</a></li>
-<<<<<<< HEAD
                 <li {{ (Request::is('list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
                 <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
-=======
-                <li {{ (Request::is('list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">S3</a></li>
->>>>>>> 22767b224c9503153a87af62eac8e6a108b53142
             </ul>
             <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
