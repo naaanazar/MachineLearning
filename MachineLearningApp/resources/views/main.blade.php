@@ -34,6 +34,7 @@
             </ul>
             <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
+
                     <button type="submit" class="btn btn-primary">Create Model</button>
                 </div>
             </form>
