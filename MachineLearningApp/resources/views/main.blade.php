@@ -35,6 +35,8 @@
                 <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
                 <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
             </ul>
+                
+            <!-- TODO: Move this button to ML tab -->
             <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Create Model</button>
