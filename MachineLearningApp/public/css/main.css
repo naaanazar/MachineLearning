@@ -26,12 +26,8 @@ body {
     font-weight: normal;
 }
 
-<<<<<<< HEAD
-/*.title { margin-top: 80px; }*/
-=======
 .error { color: red; }
 .title { margin-top: 80px; }
->>>>>>> 22767b224c9503153a87af62eac8e6a108b53142
 #input-file { display: none ; }
 .btn-batch { margin-right: 42px; }
 .panel-margin { margin-bottom: 0; }
