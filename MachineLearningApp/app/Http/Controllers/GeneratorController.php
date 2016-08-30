@@ -13,7 +13,7 @@ class GeneratorController extends Controller
 {
     public function index()
     {        
-        return view('generator');
+        return view('generator.generator');
     }
 
     public function updateDataset(Request $request)
@@ -33,7 +33,6 @@ class GeneratorController extends Controller
             'path' => $datasetFeeder->targetFile
         );
 
-        return view('generator', array('stats' => $stats));
-
+        return view('generator.generator', array('stats' => $stats));
     }
 }

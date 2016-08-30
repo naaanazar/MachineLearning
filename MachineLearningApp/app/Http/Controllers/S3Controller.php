@@ -12,10 +12,10 @@ use Aws\S3\Exception\S3Exception;
 class S3Controller extends Controller
 {
     public $bucket = 'ml-datasets-test';
-    
+
     public function predictionForm()
     {
-        return view('prediction');
+        return view('prediction.prediction');
     }
 
     private function connectToS3()
@@ -31,7 +31,6 @@ class S3Controller extends Controller
 
         return $s3;
     }
-
 
     public function uploadFileToS3 (Request $request)
     {
@@ -63,7 +62,6 @@ class S3Controller extends Controller
         return redirect('list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
-
     public function deleteFileFromS3 ($filename)
     {
         $client = $this->connectToS3();
@@ -81,10 +79,8 @@ class S3Controller extends Controller
         return back();
     }
 
-
     public function listFileFromS3 ()
     {
-
         $client = $this->connectToS3();
 
         try {

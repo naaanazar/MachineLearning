@@ -30,29 +30,27 @@
                 </a>
             </div>
             <ul class="nav navbar-nav">
-                <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Home</a></li>
-                <li {{ (Request::is('list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
+                <li {{ (Request::is('predictions') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Predictions</a></li>
+                <li {{ (Request::is('ml') ? 'class=active' : '') }}><a href="{{ action('MLController@index') }}">ML</a></li>
+                <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
                 <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
             </ul>
             <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
-
                     <button type="submit" class="btn btn-primary">Create Model</button>
                 </div>
             </form>
-
         </nav>
 
-     @yield('content')
+        @yield('content')
 
         <div class="footer panel panel-margin">
             <div class="panel-footer text-center">
-                2016 &copy; Crowdin.Space
+                <span class="copy">2016 &copy; Crowdin.Space</span>
             </div>
         </div>
-         <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" 
-          role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
-          <span class="glyphicon glyphicon-chevron-up"></span>
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
         </a>
     </body>
 </html>

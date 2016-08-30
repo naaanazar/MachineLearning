@@ -23,11 +23,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">List of files</h2>
-                <form class="form form-upload" enctype="multipart/form-data" action="/upload" method="post">
+                <form class="form form-upload" enctype="multipart/form-data" action="upload" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
-                            <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset (csv)<input id="input-file" type="file" name="file">
+                            <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">
                         </label>
                         @if (count($errors) > 0)
                             <br>
