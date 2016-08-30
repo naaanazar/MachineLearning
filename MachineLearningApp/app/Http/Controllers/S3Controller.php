@@ -36,7 +36,7 @@ class S3Controller extends Controller
     public function uploadFileToS3 (Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:csv,txt',
+            'file' => 'required|file|mimes:csv,txt',
         ]);
 
         $file = $request->file('file');

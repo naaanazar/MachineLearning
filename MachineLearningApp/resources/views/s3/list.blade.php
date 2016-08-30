@@ -15,7 +15,9 @@
                             <div class="error">
                                 <ul>
                                     @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                                        <br>
+                                        <span class="alert alert-danger">{{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}</span>
+                                        <br>
                                     @endforeach
                                 </ul>
                             </div>
