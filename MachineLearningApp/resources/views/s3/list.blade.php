@@ -12,13 +12,21 @@
                             <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset (csv)<input id="input-file" type="file" name="file">
                         </label>
                         @if (count($errors) > 0)
-                            <div class="error">
+                            <br>
+                            <br>
+                            <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
-                                        <br>
-                                        <span class="alert alert-danger">{{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}</span>
-                                        <br>
+                                        <li><strong>Error!</strong> {{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}</li>
                                     @endforeach
+                                </ul>
+                            </div>
+                        @elseif (session('status'))
+                            <br>
+                            <br>
+                            <div class="alert alert-success">
+                                <ul>
+                                    <li>{!! session('status') !!}</li>
                                 </ul>
                             </div>
                         @endif
