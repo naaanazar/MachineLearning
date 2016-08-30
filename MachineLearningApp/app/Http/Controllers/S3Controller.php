@@ -47,6 +47,7 @@ class S3Controller extends Controller
         $filepath = $storagePath . '/' . $fileName;
         $keyname = basename($filepath);
         $client = $this->connectToS3();
+
         try {
             $result = $client->putObject(array(
                 'Bucket' => $this->bucket,
@@ -58,7 +59,7 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-
+        dd($result['ObjectURL']);
         return redirect('list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 

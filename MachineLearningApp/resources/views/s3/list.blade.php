@@ -1,6 +1,24 @@
 @extends('main')
 
 @section('content')
+    <script>
+    //     $.ajaxSetup({
+    //        headers: {
+    //            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //        }
+    //     });
+
+    //     $(document).ready(function() {
+    //         $('.btn-list').on('click', function(e){
+    //             e.preventDefault();
+    //             $.post( $(e.target).attr('href'), function( data ) {
+    //                 if(data.success) {
+    //                     $(e.target).closest('tr').fadeOut();
+    //                 }
+    //             });
+    //         });
+    //     });
+    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -47,7 +65,8 @@
                             <td>{{ $value['Size'] }}</td>
                             <td>{{ $value['LastModified'] }}</td>
                             <td>
-                                <a class="btn btn-danger btn-sm" href="/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
+                                <a class="btn btn-danger btn-sm btn-list" href="/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     @endforeach
