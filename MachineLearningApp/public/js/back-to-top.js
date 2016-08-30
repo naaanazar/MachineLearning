@@ -11,7 +11,7 @@
             $('#back-to-top').tooltip('hide');
             $('body,html').animate({
                 scrollTop: 0
-            }, 100);
+            }, 500);
             return false;
         });
         
