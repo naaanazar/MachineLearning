@@ -13,6 +13,7 @@
         <script src="{{ URL::to('js/lib/jquery/jquery.min.js') }}"></script>
         <script src="{{ URL::to('js/common.js') }}"></script>
         <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::to('js/back-to-top.js') }}"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view tde page via file:// -->
         <!--[if lt IE 9]>
@@ -38,14 +39,19 @@
                     <button type="submit" class="btn btn-primary">Create Model</button>
                 </div>
             </form>
+
         </nav>
 
-        @yield('content')
+     @yield('content')
 
         <div class="footer panel panel-margin">
             <div class="panel-footer text-center">
                 2016 &copy; Crowdin.Space
             </div>
         </div>
+         <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" 
+          role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
+          <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
     </body>
 </html>
