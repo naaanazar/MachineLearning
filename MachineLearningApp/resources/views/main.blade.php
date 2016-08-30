@@ -39,15 +39,17 @@
 
                 <div class="form-group">
                     <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
-                        Upload Dataset (csv) <input id="input-file" type="file" name="file">
+                        <span class="glyphicon glyphicon-upload"> </span>
+                        Upload Dataset <input id="input-file" type="file" name="file">
                     </label>
                 </div>
             </form>
             <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
                 <div class="form-group">
+
                     <button type="submit" class="btn btn-primary">Create Model</button>
                 </div>
-            </form>
+            </form>                                                          
         </nav>
 
         @yield('content')
