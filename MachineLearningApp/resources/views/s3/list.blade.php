@@ -61,6 +61,9 @@
                             </td>
                         </tr>
                     @endforeach
+                    <div class="pagination-list">
+                        <?php echo $results->render(); ?>
+                    </div>
                 </table>
             </div>
         </div>
