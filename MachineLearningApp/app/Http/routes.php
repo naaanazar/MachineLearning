@@ -11,5 +11,25 @@
 |
 */
 
-Route::get('/', 'S3Controller@predictionForm');
-Route::get('/list', 'S3Controller@displayList');
+Route::get('/', function () {
+    return redirect('predictions');
+});
+
+Route::get('predictions', 'S3Controller@predictionForm');
+Route::get('s3/list', 'S3Controller@listFileFromS3');
+Route::post('s3/upload', 'S3Controller@uploadFileToS3');
+Route::get('s3/delete/{name}', 'S3Controller@deleteFileFromS3');
+Route::get('buckets/delete/{name_backet}', 'S3Controller@deleteBucket');
+
+
+Route::get('buckets/delete_all', 'S3Controller@deleteAllObjectsFromBucket');
+
+
+
+Route::get('s3/list_of_buckets', 'S3Controller@listOfBuckets');
+Route::get('s3/create_bucket', 'S3Controller@createBucket');
+
+Route::get('ml', 'MLController@index');
+
+Route::get('generator', 'GeneratorController@index');
+Route::post('generator', 'GeneratorController@updateDataset');
