@@ -58,7 +58,6 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        dd($result['ObjectURL']);
         return redirect('list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
