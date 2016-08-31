@@ -33,7 +33,7 @@
                             <div class="alert alert-success">
                                 <ul>
                                     <li>{!! session('status') !!}</li>
-                                        <div class="jGrowl.center">
+                                        <div class="jGrowl">
                                             <script src="/js/pop-up-message-succes.js"></script>
                                         </div>
                                 </ul>
