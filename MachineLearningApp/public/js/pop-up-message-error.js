@@ -1,7 +1,6 @@
-$.jGrowl("Try to upload .csv file", { header: 'ERROR!' });
+$.jGrowl("Try to upload .csv files", { header: 'ERROR!' });
 
-
-								/* Just for example 
+/* Just for example 
 
 $.jGrowl("Hello world!");
 

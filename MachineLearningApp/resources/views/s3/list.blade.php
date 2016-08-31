@@ -1,8 +1,9 @@
 @extends('main')
 
 @section('content')
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />  online library(default css)-->
+<link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl/jquery.jgrowl.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -21,7 +22,7 @@
                                     @foreach ($errors->all() as $error)
                                         <li><strong>Error!</strong> {{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}</li>
                                                 <div class="jGrowl">
-                                                    <script src="/js/pop-up-massage-error.js"></script>
+                                                    <script src="/js/pop-up-message-error.js"></script>
                                                 </div>
                                     @endforeach
                                 </ul>
@@ -32,8 +33,8 @@
                             <div class="alert alert-success">
                                 <ul>
                                     <li>{!! session('status') !!}</li>
-                                        <div class="jGrowl">
-                                            <script src="/js/pop-up-massage-succes.js"></script>
+                                        <div class="jGrowl.center">
+                                            <script src="/js/pop-up-message-succes.js"></script>
                                         </div>
                                 </ul>
                             </div>
