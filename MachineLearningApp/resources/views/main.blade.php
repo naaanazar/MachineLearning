@@ -24,24 +24,25 @@
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">
-                    <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
-                </a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li {{ (Request::is('predictions') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Predictions</a></li>
-                <li {{ (Request::is('ml') ? 'class=active' : '') }}><a href="{{ action('MLController@index') }}">ML</a></li>
-                <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
-                <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
-            </ul>
-                
-            <!-- TODO: Move this button to ML tab -->
-            <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Create Model</button>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
+                    </a>
                 </div>
-            </form>
+                <ul class="nav navbar-nav">
+                    <li {{ (Request::is('predictions') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Predictions</a></li>
+                    <li {{ (Request::is('ml') ? 'class=active' : '') }}><a href="{{ action('MLController@index') }}">ML</a></li>
+                    <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
+                    <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
+                </ul>
+
+                <!-- TODO: Move this button to ML tab -->
+                <form class="navbar-form navbar-right" enctype="multipart/form-data" action="#" method="post">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create Model</button>
+                    </div>
+                </form>
+            </div>
         </nav>
 
         @yield('content')
