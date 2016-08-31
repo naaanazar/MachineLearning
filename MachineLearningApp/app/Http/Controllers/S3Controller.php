@@ -18,7 +18,7 @@ class S3Controller extends Controller
         return view('prediction.prediction');
     }
 
-    private function connectToS3()
+    private function connect()
     {
         $s3 = new S3Client([
             'version'     => 'latest',
@@ -32,7 +32,7 @@ class S3Controller extends Controller
         return $s3;
     }
 
-    public function uploadFileToS3 (Request $request)
+    public function upload(Request $request)
     {
         $this->validate($request, [
             'file' => 'required|file|mimes:csv,txt',
@@ -45,7 +45,7 @@ class S3Controller extends Controller
 
         $filepath = $storagePath . '/' . $fileName;
         $keyname = basename($filepath);
-        $client = $this->connectToS3();
+        $client = $this->connect();
 
         try {
             $result = $client->putObject(array(
@@ -58,12 +58,12 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        return redirect('list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
+        return redirect('s3/list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
-    public function deleteFileFromS3 ($filename)
+    public function delete($filename)
     {
-        $client = $this->connectToS3();
+        $client = $this->connect();
 
         try {
             $client->deleteObject([
@@ -78,9 +78,9 @@ class S3Controller extends Controller
         return back();
     }
 
-    public function listFileFromS3 ()
+    public function listS3()
     {
-        $client = $this->connectToS3();
+        $client = $this->connect();
 
         try {
             $result = $client->listObjects([

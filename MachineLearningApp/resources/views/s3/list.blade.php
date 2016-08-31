@@ -3,24 +3,6 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
-    <script>
-    //     $.ajaxSetup({
-    //        headers: {
-    //            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //        }
-    //     });
-
-    //     $(document).ready(function() {
-    //         $('.btn-list').on('click', function(e){
-    //             e.preventDefault();
-    //             $.post( $(e.target).attr('href'), function( data ) {
-    //                 if(data.success) {
-    //                     $(e.target).closest('tr').fadeOut();
-    //                 }
-    //             });
-    //         });
-    //     });
-    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
