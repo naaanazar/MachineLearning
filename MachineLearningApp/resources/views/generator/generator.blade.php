@@ -9,8 +9,8 @@
             <form style="padding: 10px 0;" method="post" action="" class="form-inline">
                 {{ CSRF_field() }}
                 <input class="form-control" type="number" name="rows" placeholder="Records number">
-                <button class="btn btn-info">Generate</button>
-            </form>                       
+                <button id="generate" class="btn btn-info">Generate</button>
+            </form>
         </div>
         @if($errors)
             <div class="col-md-12">
