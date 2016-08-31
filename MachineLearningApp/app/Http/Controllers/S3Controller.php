@@ -40,7 +40,7 @@ class S3Controller extends Controller
 
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $storagePath = storage_path('/app/uploads');
+        $storagePath = storage_path('app/uploads');
         $file->move($storagePath, $fileName);
 
         $filepath = $storagePath . '/' . $fileName;
