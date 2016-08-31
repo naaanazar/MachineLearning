@@ -70,3 +70,25 @@ body {
 .jGrowl {
   margin-top: 50px;
 }
+
+.form-upload {
+    float: left;
+    margin-top: 20px;
+}
+
+
+.pagination .active span {
+    border-radius: 50%;
+}
+
+.pagination-list {
+    float: right;
+    padding-top: 10px;
+}
+
+.pagination-list .active span,
+.pagination-list .disabled span,
+.pagination-list .pagination > li > a
+ {
+    border: none;
+}
