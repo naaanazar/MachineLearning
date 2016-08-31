@@ -57,7 +57,7 @@
                             <td>{{ $value['LastModified'] }}</td>
                             <td>
                                 <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a class="btn btn-danger btn-sm btn-list" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     @endforeach
