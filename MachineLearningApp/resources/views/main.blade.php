@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="shortcut icon" href="images/favicon.ico">
+=======
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="{{ URL::to('images/favicon.ico') }}">
+>>>>>>> master
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- tde above 3 meta tags *must* come first in tde head; any otder head content must come *after* tdese tags -->
         <title>Crowdin Space Machine Learning App</title>
@@ -33,6 +40,7 @@
                 <ul class="nav navbar-nav">
                     <li {{ (Request::is('predictions') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Predictions</a></li>
                     <li {{ (Request::is('ml') ? 'class=active' : '') }}><a href="{{ action('MLController@index') }}">ML</a></li>
+<<<<<<< HEAD
                     <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listFileFromS3') }}">List S3</a></li>
                     <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
                 </ul>
@@ -45,13 +53,17 @@
                         <a href="s3/list_of_buckets" class="btn btn-primary">List of Buckets</a>
                     </div>
                 </form>
+=======
+                    <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listS3') }}">List S3</a></li>
+                    <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
+                </ul>
+>>>>>>> master
             </div>
         </nav>
 
-@yield('content')
+        @yield('content')
 
-@include('footer')
-
+<<<<<<< HEAD
 =======
 <head>
     <meta charset="utf-8">
@@ -114,3 +126,15 @@
 </body>
 </html>
 >>>>>>> Stashed changes
+=======
+        <div class="footer panel panel-margin">
+            <div class="panel-footer text-center">
+                <span class="copy">2016 &copy; Crowdin.Space</span>
+            </div>
+        </div>
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+    </body>
+</html>
+>>>>>>> master

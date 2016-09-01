@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('predictions', 'S3Controller@predictionForm');
+<<<<<<< HEAD
 Route::get('s3/list', 'S3Controller@listFileFromS3');
 Route::post('s3/upload', 'S3Controller@uploadFileToS3');
 Route::get('s3/delete/{name}', 'S3Controller@deleteFileFromS3');
@@ -28,11 +29,17 @@ Route::get('buckets/delete_all', 'S3Controller@deleteAllObjectsFromBucket');
 
 Route::get('s3/list_of_buckets', 'S3Controller@listOfBuckets');
 Route::get('s3/create_bucket', 'S3Controller@createBucket');
+=======
+Route::get('s3/list/', 'S3Controller@listS3');
+Route::post('s3/upload', 'S3Controller@upload');
+Route::get('s3/delete/{name}', 'S3Controller@delete');
+>>>>>>> master
 
 Route::get('ml', 'MLController@index');
 
 Route::get('generator', 'GeneratorController@index');
 Route::post('generator', 'GeneratorController@updateDataset');
+<<<<<<< HEAD
 
 
 //Buckets
@@ -41,3 +48,5 @@ Route::get('bucket/delete_all/{name_bucket}', 'BucketController@deleteAllObjects
 Route::get('bucket', 'BucketController@index');
 Route::get('bucket', 'BucketController@listOfBuckets');
 Route::post('bucket/create_bucket', 'BucketController@createBucket');
+=======
+>>>>>>> master
