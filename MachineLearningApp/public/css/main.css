@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    background-image: url(/images/bg.png);
     position: relative;
     margin: 0;
     min-height: 100%;
@@ -16,6 +17,10 @@ body {
 
 .logo-s3 {
     width: 100px;
+}
+
+.title-s3 {
+    margin-top: 40px;
 }
 
 .batch-label,
@@ -47,6 +52,7 @@ body {
 .table-font tr td:last-child { width: 110px; }
 
 .footer {
+    background-color: white;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -93,6 +99,15 @@ body {
     border: none;
 }
 
+
 .btn btn-default btn-create-datasource pull-right {
     left: 0; bottom: 0;
+}
+
+.upload-message {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    width: 100%;
+    margin-left: -390px;
 }
