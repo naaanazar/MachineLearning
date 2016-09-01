@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                 @endif
-                <h2 class="title-s3"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">List of files</h2>
+                <h2 class="title-s3"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> List of files</h2>
                 <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@upload') }}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">

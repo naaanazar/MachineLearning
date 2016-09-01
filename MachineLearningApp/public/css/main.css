@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    background-image: url(/images/bg.png);
     position: relative;
     margin: 0;
     min-height: 100%;
@@ -51,6 +52,7 @@ body {
 .table-font tr td:last-child { width: 110px; }
 
 .footer {
+    background-color: white;
     position: absolute;
     right: 0;
     bottom: 0;
