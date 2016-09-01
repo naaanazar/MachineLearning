@@ -18,6 +18,10 @@ body {
     width: 100px;
 }
 
+.title-s3 {
+    margin-top: 40px;
+}
+
 .batch-label,
 .batch-input {
     float: left;
@@ -91,4 +95,12 @@ body {
 .pagination-list .pagination > li > a
  {
     border: none;
+}
+
+.upload-message {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    width: 100%;
+    margin-left: -390px;
 }
