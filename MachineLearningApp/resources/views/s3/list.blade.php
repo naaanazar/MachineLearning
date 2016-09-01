@@ -25,9 +25,11 @@
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li><strong>Error!</strong> {{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}</li>
-                                                <div class="jGrowl">
-                                                    <script src="/js/pop-up-message-error.js"></script>
-                                                </div>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $.jGrowl("Error!", {sticky: true, theme: 'jGrowl-status-error'});
+                                                })
+                                            </script>
                                     @endforeach
                                 </ul>
                             </div>
@@ -37,9 +39,11 @@
                             <div class="alert alert-success">
                                 <ul>
                                     <li>{!! session('status') !!}</li>
-                                        <div class="jGrowl">
-                                            <script src="/js/pop-up-message-succes.js"></script>
-                                        </div>
+                                        <script type="text/javascript">
+                                            $(document).ready(function() {
+                                                $.jGrowl("Succes!", {sticky: true, theme: 'jGrowl-status-success'});
+                                            })
+                                        </script>
                                 </ul>
                             </div>
                         @endif
