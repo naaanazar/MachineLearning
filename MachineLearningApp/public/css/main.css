@@ -99,6 +99,11 @@ body {
     border: none;
 }
 
+
+.btn btn-default btn-create-datasource pull-right {
+    left: 0; bottom: 0;
+}
+
 .upload-message {
     position: absolute;
     top: -25px;
