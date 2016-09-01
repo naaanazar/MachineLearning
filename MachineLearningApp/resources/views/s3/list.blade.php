@@ -4,11 +4,15 @@
 <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />  online library(default css)-->
 <link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl/jquery.jgrowl.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+
+<script>
+
+</script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">List of files</h2>
-                <form class="form form-upload" enctype="multipart/form-data" action="upload" method="post">
+                <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@upload') }}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
@@ -57,7 +61,7 @@
                             <td>{{ $value['LastModified'] }}</td>
                             <td>
                                 <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a class="btn btn-danger btn-sm" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     @endforeach
