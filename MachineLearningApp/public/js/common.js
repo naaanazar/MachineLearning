@@ -3,4 +3,10 @@ $(document).ready(function () {
     $('#input-file').change(function(){
         $('.form-upload').submit();
     });
+
+    $(".create-datasource").hide();
+
+    $(".btn-create-datasource").click(function(){
+        $(".create-datasource").show();
+    });
 });

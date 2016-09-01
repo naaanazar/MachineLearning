@@ -89,7 +89,17 @@ class S3Controller extends Controller
                 'Delimiter' => '|'
             ]);
 
+<<<<<<< Updated upstream
             $results = $result['Contents'];
+=======
+            $searchResults = $result['Contents'];
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $collection = new Collection($searchResults);
+            $perPage = 5;
+            $currentPageSearchResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            $paginatedSearchResults = new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
+            $paginatedSearchResults->setPath('/s3/list/');
+>>>>>>> Stashed changes
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
@@ -99,6 +109,7 @@ class S3Controller extends Controller
 
     }
 
+<<<<<<< Updated upstream
     public function listOfBuckets()
     {
         $client = $this->connectToS3();
@@ -186,6 +197,8 @@ class S3Controller extends Controller
     }
 
 
+=======
+>>>>>>> Stashed changes
 
 
 }

@@ -33,3 +33,11 @@ Route::get('ml', 'MLController@index');
 
 Route::get('generator', 'GeneratorController@index');
 Route::post('generator', 'GeneratorController@updateDataset');
+
+
+//Buckets
+Route::get('bucket/delete/{name_bucket}', 'BucketController@deleteBucket');
+Route::get('bucket/delete_all/{name_bucket}', 'BucketController@deleteAllObjectsFromBucket');
+Route::get('bucket', 'BucketController@index');
+Route::get('bucket', 'BucketController@listOfBuckets');
+Route::post('bucket/create_bucket', 'BucketController@createBucket');
