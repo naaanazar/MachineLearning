@@ -14,6 +14,11 @@ class MLController extends Controller
 {
     
     public $bucket = 'ml-datasets-test';
+    private $client;
+
+    function __construct() {
+       $this->client = $this->connectToML();
+    }
 
     public function index()
     {
@@ -34,15 +39,15 @@ class MLController extends Controller
         return $ml;
     }
 
+    //public listMLData()
+
 
     public function describeDataSources ()
     {
 
-        $client = $this->connectToML();
-
         try {
 
-            $result = $client->describeDataSources([
+            $result = $this->client->describeDataSources([
                 'SortOrder' => 'asc'
             ]);
 
@@ -52,5 +57,33 @@ class MLController extends Controller
         //echo '<pre>';
         //print_r($result);
         return view('ml.index',['result' => $result]);
+    }
+
+
+     public function createDataSourceFromS3()
+    {
+//        $DataSourceId, $DataSourceName, $DataSchema
+//        $client = $this->connectToML();
+//
+//        try {
+//           $result = $client->createDataSourceFromS3([
+//                'ComputeStatistics' => true,
+//                'DataSourceId' => $DataSourceId, // REQUIRED
+//                'DataSourceName' => $DataSourceName,
+//                'DataSpec' => [ // REQUIRED
+//                    'DataLocationS3' => 's3://ml-datasets-test/123.csv', // REQUIRED
+//                    'DataRearrangement' => '{"splitting":{"percentBegin":0,"percentEnd":70}}',
+//                    'DataSchema' => $DataSchema
+//                ],
+//            ]);
+//
+//        } catch (S3Exception $e) {
+//            echo $e->getMessage() . "\n";
+//        }
+        //echo '<pre>';
+        //print_r($result);
+        //return $result['DataSourceId'];
+
+        return redirect('ml')->with('edit', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 }
