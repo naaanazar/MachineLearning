@@ -39,7 +39,15 @@ class MLController extends Controller
         return $ml;
     }
 
-    //public listMLData()
+    public function listMLData()
+    {
+        $result['describeDataSources'] = $this->describeDataSources();
+        $result['describeMLModels'] = $this->describeMLModels();
+        $result['describeEvaluations'] = $this->describeEvaluations();
+        $result['describeBatchPredictions'] = $this->describeBatchPredictions();
+        
+        return view('ml.index',['result' => $result]);
+    }
 
 
     public function describeDataSources ()
@@ -54,10 +62,66 @@ class MLController extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        //echo '<pre>';
-        //print_r($result);
-        return view('ml.index',['result' => $result]);
+
+        return $result['Results'];
     }
+
+
+    public function describeMLModels ()
+    {
+
+        $client = $this->connectToML();
+
+        try {
+            $result = $client->describeMLModels([
+                'SortOrder' => 'asc'
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return $result['Results'];
+    }
+
+
+    public function describeEvaluations()
+    {
+
+        $client = $this->connectToML();
+
+        try {
+           $result = $client->describeEvaluations([
+                'SortOrder' => 'asc'
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return $result['Results'];
+    }
+
+
+    public function describeBatchPredictions()
+    {
+
+        $client = $this->connectToML();
+
+        try {
+            $result = $client->describeBatchPredictions([
+                'SortOrder' => 'asc'
+            ]);
+
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return $result['Results'];
+    }
+
+
 
 
      public function createDataSourceFromS3()

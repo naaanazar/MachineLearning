@@ -92,3 +92,7 @@ body {
  {
     border: none;
 }
+
+.btn btn-default btn-create-datasource pull-right {
+    left: 0; bottom: 0;
+}

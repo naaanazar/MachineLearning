@@ -4,7 +4,7 @@ $(document).ready(function () {
         $('.form-upload').submit();
     });
 
-     $(".create-datasource").hide();
+    $(".create-datasource").hide();
 
     $(".btn-create-datasource").click(function(){
         $(".create-datasource").show();
