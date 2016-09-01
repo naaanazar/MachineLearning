@@ -7,9 +7,13 @@ $(document).ready(function () {
         $('.form-upload').submit();
     });
 
+<<<<<<< HEAD
 
     $(".create-datasource").hide();
 
+=======
+    $(".create-datasource").hide();
+>>>>>>> master
     $(".btn-create-datasource").click(function(){
         $(".create-datasource").show();
     });
