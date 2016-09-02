@@ -43,6 +43,9 @@
                     <li {{ (Request::is('generator') ? 'class=active' : '') }}>
                         <a href="{{ URL::to('generator') }}">Generator</a>
                     </li>
+                    <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
+                        <a href="{{ action('BucketController@index') }}">Buckets</a>
+                    </li>
                 </ul>
             </div>
         </nav>
