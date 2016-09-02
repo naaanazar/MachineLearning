@@ -21,7 +21,7 @@
             <div id="describeDataSources" class="tab-pane fade in active">
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
-                    <form class="create-datasource" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                    <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -62,7 +62,7 @@
             <div id="describeMLModels" class="tab-pane fade">
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>
-                    <form class="create-mlmodel" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                    <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -105,7 +105,7 @@
             <div id="describeEvaluations" class="tab-pane fade">
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>
-                    <form class="create-evaluations" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                    <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -150,7 +150,7 @@
             <div id="describeBatchPredictions" class="tab-pane fade">
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-create-bath-description pull-right">Create Bath Description</button>
-                    <form class="create-bath-description" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                    <form class="create-bath-description" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
