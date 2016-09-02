@@ -16,6 +16,14 @@ class GeneratorController extends Controller
         return view('generator.generator');
     }
 
+    public function messages()
+    {
+        return [
+            'rows.required' => 'Records number is required',
+            'rows.integer'  => 'Records number must be an integer',
+        ];
+    }
+
     public function generateDataset(Request $request)
     {
         $this->validate($request, [
@@ -35,4 +43,6 @@ class GeneratorController extends Controller
 
         return json_encode(array('stats' => $stats));
     }
+
+    
 }
