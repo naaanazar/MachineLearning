@@ -70,8 +70,6 @@ class MLController extends Controller
     public function describeMLModels ()
     {
 
-        $client = $this->connectToML();
-
         try {
             $result = $client->describeMLModels([
                 'SortOrder' => 'asc'
@@ -88,9 +86,7 @@ class MLController extends Controller
     public function describeEvaluations()
     {
 
-        $client = $this->connectToML();
-
-        try {
+       try {
            $result = $client->describeEvaluations([
                 'SortOrder' => 'asc'
             ]);
@@ -105,8 +101,6 @@ class MLController extends Controller
 
     public function describeBatchPredictions()
     {
-
-        $client = $this->connectToML();
 
         try {
             $result = $client->describeBatchPredictions([
@@ -203,8 +197,6 @@ class MLController extends Controller
     public function deleteDataSource($DataSourceId)
     {
 
-        $client = $this->connectToML();
-
         try {
             $result = $client->deleteDataSource([
                 'DataSourceId' => $DataSourceId, // REQUIRED
@@ -220,9 +212,7 @@ class MLController extends Controller
 
     public function deleteEvaluation($EvaluationId)
     {
-
-        $client = $this->connectToML();
-
+        
         try {
            $result = $client->deleteEvaluation([
                 'EvaluationId' => $EvaluationId, // REQUIRED
@@ -238,9 +228,7 @@ class MLController extends Controller
 
     public function deleteMLModel($MLModelId)
     {
-
-        $client = $this->connectToML();
-
+  
         try {
             $result = $client->deleteMLModel([
                 'MLModelId' => $MLModelId, // REQUIRED
@@ -254,10 +242,24 @@ class MLController extends Controller
     }
 
 
-    public function predict($MLModelId)
+    public function deleteBatchPredictionl($BatchPredictionId)
     {
 
-        $client = $this->connectToML();
+        try {
+            $result = $client->deleteBatchPrediction([
+                'BatchPredictionId' => '$BatchPredictionId', // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return back();
+
+    }
+
+
+    public function predict($MLModelId)
+    {
 
         try {
            $result = $client->predict([
