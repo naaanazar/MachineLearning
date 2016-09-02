@@ -29,7 +29,7 @@ Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
 Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteDataSource');
 
 Route::get('generator', 'GeneratorController@index');
-Route::post('generator', 'GeneratorController@updateDataset');
+Route::post('generate', 'GeneratorController@generateDataset');
 
 //Buckets
 Route::get('bucket/delete/{name_bucket}', 'BucketController@deleteBucket');

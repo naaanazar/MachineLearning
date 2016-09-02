@@ -10,6 +10,7 @@
         <title>Crowdin Space Machine Learning App</title>
         <!-- Bootstrap -->
         <link href="{{ URL::to('css/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ URL::to('css/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ URL::to('css/main.css') }}" rel="stylesheet">
         <script src="{{ URL::to('js/lib/jquery/jquery.min.js') }}"></script>
         <script src="{{ URL::to('js/common.js') }}"></script>
@@ -20,7 +21,7 @@
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <![endif]-->        
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
