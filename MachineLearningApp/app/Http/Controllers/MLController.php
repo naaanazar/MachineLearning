@@ -59,7 +59,7 @@ class MLController extends Controller
                 'SortOrder' => 'asc'
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -77,7 +77,7 @@ class MLController extends Controller
                 'SortOrder' => 'asc'
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -95,7 +95,7 @@ class MLController extends Controller
                 'SortOrder' => 'asc'
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -114,7 +114,7 @@ class MLController extends Controller
             ]);
 
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -192,6 +192,25 @@ class MLController extends Controller
             ]);
 
         } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+
+    }
+
+
+    public function deleteDataSource($DataSourceId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+            $result = $client->deleteDataSource([
+                'DataSourceId' => '<string>', // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
