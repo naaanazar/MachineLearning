@@ -15,6 +15,11 @@ class BucketController extends Controller
     public $bucket = 'ml-datasets-test';
     public $newBucketName = 'ml-datasets-testing';
 
+    public function index()
+    {
+        return view('bucket.listBucket');
+    }
+
     private function connect()
     {
         $s3 = new S3Client([
@@ -28,6 +33,7 @@ class BucketController extends Controller
 
         return $s3;
     }
+
 
     public function listOfBuckets()
     {
@@ -55,11 +61,6 @@ class BucketController extends Controller
                 'CreateBucketConfiguration' => [
                     'LocationConstraint' => 'us-east-1',
                 ],
-//                'GrantFullControl' => '1',
-//                'GrantRead' => 'Allow',
-//                'GrantReadACP' => 'Allow',
-//                'GrantWrite' => 'Allow',
-//                'GrantWriteACP' => 'Allow',
             ]);
 
         } catch (S3Exception $e) {
@@ -110,12 +111,6 @@ class BucketController extends Controller
         return back();
 
 
-    }
-
-
-    public function index()
-    {
-        return view('bucket.listBucket');
     }
 
 
