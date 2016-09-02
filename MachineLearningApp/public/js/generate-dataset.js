@@ -32,18 +32,19 @@ $(document).ready(function() {
                     content += '<li>Link to dataset: ' +link+ '</li>';
                     content += '</ul>';
                     $('.messages').html(content);
+                    $('.messages').show();
                 }
             },
             error: function (error) {
                 $('i.fa-spinner').hide();
                 console.log(error);
                 if(error.status === 500) {
-                    $('.messages').html("Token Mismatch!");
+                    $('.errors-alert').append("Token Mismatch!").show();
                     return;
                 }
                 var errorMessages = error.responseJSON.rows;
                 console.log(errorMessages);
-                $('.messages').html(errorMessages);
+                $('.errors-alert').append(errorMessages).show();
             }
         });
     });

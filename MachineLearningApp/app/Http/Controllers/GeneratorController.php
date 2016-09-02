@@ -34,6 +34,5 @@ class GeneratorController extends Controller
         );
 
         return json_encode(array('stats' => $stats));
-//        return view('generator.generator', array('stats' => $stats));
     }
 }
