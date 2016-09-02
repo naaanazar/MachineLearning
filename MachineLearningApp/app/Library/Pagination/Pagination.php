@@ -7,7 +7,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class Pagination
 {
-
     private $currentPage;
     private $collection;
     private $perPage;
@@ -17,7 +16,7 @@ class Pagination
     /**
      * $data (array) - data from pagination;
      * $countPage (int) - number of files in page;
-     * $path (string) - path current page;
+     * $path (string) - current page path;
      *
      * @return object
      */
@@ -25,9 +24,13 @@ class Pagination
     {
             $this->currentPage = LengthAwarePaginator::resolveCurrentPage();
             $this->collection = new Collection($data);
+
             $this->perPage = $countPage;
-            $this->currentPageSearchResults = $this->collection->slice(($this->currentPage - 1)  * $this->perPage, $this->perPage)->all();
-            $this->paginatedSearchResults = new LengthAwarePaginator($this->currentPageSearchResults, count($this->collection), $this->perPage);
+            $this->currentPageSearchResults = $this->collection->slice(($this->currentPage - 1)  * $this->perPage,
+                                                                        $this->perPage)->all();
+            $this->paginatedSearchResults = new LengthAwarePaginator($this->currentPageSearchResults,
+                                                                     count($this->collection),
+                                                                     $this->perPage);
             $this->paginatedSearchResults->setPath($path);
 
             return $this->paginatedSearchResults;
