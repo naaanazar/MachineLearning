@@ -6,8 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
+use App\Library\Pagination\Pagination as S3Pagination;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
@@ -91,13 +90,9 @@ class S3Controller extends Controller
                 'Delimiter' => '|'
             ]);
 
-            $searchResults = $result['Contents'];
-            $currentPage = LengthAwarePaginator::resolveCurrentPage();
-            $collection = new Collection($searchResults);
-            $perPage = 5;
-            $currentPageSearchResults = $collection->slice(($currentPage - 1)  * $perPage, $perPage)->all();
-            $paginatedSearchResults = new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
-            $paginatedSearchResults->setPath('/s3/list/');
+            $results = $result['Contents'];
+
+            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 5, 's3/list');
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
