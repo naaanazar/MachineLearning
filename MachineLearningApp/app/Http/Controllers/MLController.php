@@ -71,7 +71,7 @@ class MLController extends Controller
     {
 
         try {
-            $result = $client->describeMLModels([
+            $result = $this->client->describeMLModels([
                 'SortOrder' => 'asc'
             ]);
 
@@ -87,7 +87,7 @@ class MLController extends Controller
     {
 
        try {
-           $result = $client->describeEvaluations([
+           $result = $this->client->describeEvaluations([
                 'SortOrder' => 'asc'
             ]);
 
@@ -103,7 +103,7 @@ class MLController extends Controller
     {
 
         try {
-            $result = $client->describeBatchPredictions([
+            $result = $this->client->describeBatchPredictions([
                 'SortOrder' => 'asc'
             ]);
 
@@ -118,12 +118,10 @@ class MLController extends Controller
 
     public function getDataSource($DataSourceId)
     {
-
-        $client = $this->connectToML();
-
+        
         try {
 
-            $result = $client->getDataSource([
+            $result = $this->client->getDataSource([
                 'DataSourceId' => $DataSourceId, // REQUIRED
                 'Verbose' => true || false,
             ]);
@@ -139,11 +137,9 @@ class MLController extends Controller
     public function getMLModel($ModelId)
     {
 
-        $client = $this->connectToML();
-
         try {
 
-            $result = $client->getMLModel([
+            $result = $this->client->getMLModel([
             'MLModelId' => $ModelId, // REQUIRED
             'Verbose' => true,
         ]);
@@ -159,11 +155,9 @@ class MLController extends Controller
     public function getEvaluation($EvaluationId)
     {
 
-        $client = $this->connectToML();
-
         try {
 
-            $result = $client->getEvaluation([
+            $result = $this->client->getEvaluation([
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
@@ -178,10 +172,8 @@ class MLController extends Controller
     public function getBatchPrediction($getBatchPredictionId)
     {
 
-        $client = $this->connectToML();
-
         try {
-           $result = $client->getBatchPrediction([
+           $result = $this->client->getBatchPrediction([
                 'BatchPredictionId' => $getBatchPredictionId, // REQUIRED
             ]);
 
@@ -198,7 +190,7 @@ class MLController extends Controller
     {
 
         try {
-            $result = $client->deleteDataSource([
+            $result = $this->client->deleteDataSource([
                 'DataSourceId' => $DataSourceId, // REQUIRED
             ]);
 
@@ -214,7 +206,7 @@ class MLController extends Controller
     {
         
         try {
-           $result = $client->deleteEvaluation([
+           $result = $this->client->deleteEvaluation([
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
@@ -230,7 +222,7 @@ class MLController extends Controller
     {
   
         try {
-            $result = $client->deleteMLModel([
+            $result = $this->client->deleteMLModel([
                 'MLModelId' => $MLModelId, // REQUIRED
             ]);
 
@@ -242,12 +234,12 @@ class MLController extends Controller
     }
 
 
-    public function deleteBatchPredictionl($BatchPredictionId)
+    public function deleteBatchPrediction($BatchPredictionId)
     {
 
         try {
-            $result = $client->deleteBatchPrediction([
-                'BatchPredictionId' => '$BatchPredictionId', // REQUIRED
+            $result = $this->client->deleteBatchPrediction([
+                'BatchPredictionId' => $BatchPredictionId, // REQUIRED
             ]);
 
         } catch (MachineLearningException $e) {
@@ -262,7 +254,7 @@ class MLController extends Controller
     {
 
         try {
-           $result = $client->predict([
+           $result = $this->client->predict([
             'MLModelId' => $MLModelId, // REQUIRED
             'PredictEndpoint' => 'https://realtime.machinelearning.us-east-1.amazonaws.com', // REQUIRED
             'Record' => [
