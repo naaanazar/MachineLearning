@@ -31,10 +31,18 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li {{ (Request::is('predictions') ? 'class=active' : '') }}><a href="{{ action('S3Controller@predictionForm') }}">Predictions</a></li>
-                    <li {{ (Request::is('ml') ? 'class=active' : '') }}><a href="{{ action('MLController@index') }}">ML</a></li>
-                    <li {{ (Request::is('s3/list') ? 'class=active' : '') }}><a href="{{ action('S3Controller@listS3') }}">List S3</a></li>
-                    <li {{ (Request::is('generator') ? 'class=active' : '') }}><a href="{{ URL::to('generator') }}">Generator</a></li>
+                    <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
+                        <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
+                    </li>
+                    <li {{ (Request::is('ml') ? 'class=active' : '') }}>
+                        <a href="{{ action('MLController@index') }}">ML</a>
+                    </li>
+                    <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
+                        <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
+                    </li>
+                    <li {{ (Request::is('generator') ? 'class=active' : '') }}>
+                        <a href="{{ URL::to('generator') }}">Generator</a>
+                    </li>
                 </ul>
             </div>
         </nav>

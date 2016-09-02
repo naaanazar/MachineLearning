@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\Library\Pagination\Pagination as S3Pagination;
 
 use Aws\S3\S3Client;
@@ -92,7 +91,7 @@ class S3Controller extends Controller
 
             $results = $result['Contents'];
 
-            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 5, '/s3/list/');
+            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 2, '/s3/list/');
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
