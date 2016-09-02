@@ -218,6 +218,42 @@ class MLController extends Controller
     }
 
 
+    public function deleteEvaluation($EvaluationId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+           $result = $client->deleteEvaluation([
+                'EvaluationId' => $EvaluationId, // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return back();
+
+    }
+
+
+    public function deleteMLModel($MLModelId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+            $result = $client->deleteMLModel([
+                'MLModelId' => $MLModelId, // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return back();
+
+    }
+
+
     public function predict($MLModelId)
     {
 

@@ -96,7 +96,7 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach
@@ -141,7 +141,7 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach
@@ -192,7 +192,7 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach
