@@ -122,9 +122,85 @@ class MLController extends Controller
     }
 
 
+    public function getDataSource($DataSourceId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+
+            $result = $client->getDataSource([
+                'DataSourceId' => $DataSourceId, // REQUIRED
+                'Verbose' => true || false,
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+    }
 
 
-     public function createDataSourceFromS3()
+    public function getMLModel($ModelId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+
+            $result = $client->getMLModel([
+            'MLModelId' => $ModelId, // REQUIRED
+            'Verbose' => true,
+        ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+    }
+
+
+    public function getEvaluation($EvaluationId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+
+            $result = $client->getEvaluation([
+                'EvaluationId' => $EvaluationId, // REQUIRED
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+    }
+
+
+    public function getBatchPrediction($getBatchPredictionId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+           $result = $client->getBatchPrediction([
+                'BatchPredictionId' => $getBatchPredictionId, // REQUIRED
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+
+    }
+
+
+    public function createDataSourceFromS3()
     {
 //        $DataSourceId, $DataSourceName, $DataSchema
 //        $client = $this->connectToML();
