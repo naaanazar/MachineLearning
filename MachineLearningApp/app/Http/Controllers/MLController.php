@@ -207,15 +207,14 @@ class MLController extends Controller
 
         try {
             $result = $client->deleteDataSource([
-                'DataSourceId' => '<string>', // REQUIRED
+                'DataSourceId' => $DataSourceId, // REQUIRED
             ]);
 
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
-
+        return back();
+        
     }
 
 

@@ -23,6 +23,7 @@ Route::get('/s3/delete/{name}', 'S3Controller@delete');
 Route::get('ml', 'MLController@index');
 Route::get('ml', 'MLController@listMLData');
 Route::post('ml/datasource', 'MLController@createDataSourceFromS3');
+Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');
 
 Route::get('generator', 'GeneratorController@index');
 Route::post('generator', 'GeneratorController@updateDataset');

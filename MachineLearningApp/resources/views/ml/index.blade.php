@@ -53,7 +53,7 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                 @endforeach
