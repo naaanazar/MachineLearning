@@ -9,14 +9,13 @@
      
     <div class="col-md-12">
         <div class="col-md-8">
-            <ul class="nav nav nav-pills nav-justified">
+            <ul class="nav nav nav-tabs nav-justified">
               <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
               <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
               <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
               <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
             </ul>
         </div>
-
         <div class="tab-content">           
             <div id="describeDataSources" class="tab-pane fade in active">
                 <div class="col-md-4">
@@ -199,8 +198,8 @@
                 </table>
             </div>   
         </div>
-    </div>  
-</div>
+    </div>
+</div><br>
 
        
 
