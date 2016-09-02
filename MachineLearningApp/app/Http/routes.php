@@ -25,4 +25,4 @@ Route::get('ml', 'MLController@listMLData');
 Route::post('ml/datasource', 'MLController@createDataSourceFromS3');
 
 Route::get('generator', 'GeneratorController@index');
-Route::post('generator', 'GeneratorController@updateDataset');
+Route::post('generate', 'GeneratorController@generateDataset');
