@@ -12,27 +12,31 @@ class MenuTest extends TestCase
         $this->visit('/');
     }
 
-    public function testOpenPredictionsPage(){
+    public function testOpenPredictionsPage()
+    {
         $this->click('Predictions')
-             ->seePageIs('predictions')
-             ->see('Real time prediction');
+            ->seePageIs('predictions')
+            ->see('Real time prediction');
     }
 
-    public function testopenMLPage(){
+    public function testopenMLPage()
+    {
         $this->click('ML')
-             ->seePageIs('ml')
-             ->see('ML Models');
+            ->seePageIs('ml')
+            ->see('ML Models');
     }
 
-    public function testopenListS3Page(){
+    public function testopenListS3Page()
+    {
         $this->click('List S3')
-             ->seePageIs('s3/list')
-             ->see('List of files');
+            ->seePageIs('s3/list')
+            ->see('List of files');
     }
 
-    public function testopenCeneratorPage(){
+    public function testopenCeneratorPage()
+    {
         $this->click('Generator')
-             ->seePageIs('generator')
-             ->see('Generate dataset');
+            ->seePageIs('generator')
+            ->see('Generate dataset');
     }
 }
