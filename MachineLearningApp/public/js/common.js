@@ -24,4 +24,9 @@ $(document).ready(function () {
     });
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
+
+
+
+
 });
+

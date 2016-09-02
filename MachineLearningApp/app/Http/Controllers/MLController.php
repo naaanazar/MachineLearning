@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
+use Aws\S3\S3Client;
+
 
 class MLController extends Controller
 {
@@ -59,7 +61,7 @@ class MLController extends Controller
                 'SortOrder' => 'asc'
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -77,7 +79,7 @@ class MLController extends Controller
                 'SortOrder' => 'asc'
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -95,7 +97,7 @@ class MLController extends Controller
                 'SortOrder' => 'asc'
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -114,7 +116,7 @@ class MLController extends Controller
             ]);
 
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -149,5 +151,23 @@ class MLController extends Controller
         //return $result['DataSourceId'];
 
         return redirect('ml')->with('edit', '<strong>Success!</strong> File successfully uploaded to S3');
+    }
+
+
+
+
+    public function deleteDataSource($datasourseId)
+    {
+        $client = $this->connectToML();
+
+        try {
+
+            $client->deleteDataSource([
+                'DataSourceId' => $datasourseId,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
     }
 }
