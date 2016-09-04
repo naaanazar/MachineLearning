@@ -16,7 +16,15 @@ class GeneratorController extends Controller
         return view('generator.generator');
     }
 
-    public function updateDataset(Request $request)
+    public function messages()
+    {
+        return [
+            'rows.required' => 'Records number is required',
+            'rows.integer'  => 'Records number must be an integer',
+        ];
+    }
+
+    public function generateDataset(Request $request)
     {
         $this->validate($request, [
             'rows' => 'required|integer'
@@ -33,6 +41,8 @@ class GeneratorController extends Controller
             'path' => $datasetFeeder->targetFile
         );
 
-        return view('generator.generator', array('stats' => $stats));
+        return json_encode(array('stats' => $stats));
     }
+
+    
 }

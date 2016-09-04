@@ -3,7 +3,6 @@ html {
 }
 
 body {
-    background-image: url(/images/bg.png);
     position: relative;
     margin: 0;
     min-height: 100%;

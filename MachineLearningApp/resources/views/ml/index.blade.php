@@ -6,37 +6,34 @@
     <div class="col-md-6">
         <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
     </div>
-     <div class="col-md-6">
-        <div class="tab-content">
+     
+    <div class="col-md-12">
+        <div class="col-md-8" style="padding: 0">
+            <ul class="nav nav nav-tabs nav-justified">
+              <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
+              <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
+              <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
+              <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">           
             <div id="describeDataSources" class="tab-pane fade in active">
-                <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
-
-                <form class="create-datasource" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
-                    <br>
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                       <label for="exampleInputEmail1">Email address</label>
-                       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                       <label for="exampleInputPassword1">Password</label>
-                       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
+                    <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Email address</label>
+                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputPassword1">Password</label>
+                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-         </div>
-    </div>
-    <div class="col-md-12">       
-        <ul class="nav nav nav-pills nav-justified">
-          <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
-          <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
-          <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
-          <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="describeDataSources" class="tab-pane fade in active">
                 <table class="table table-bordered table-font text-center">
                     <tr class="active">
                         <td>DataSourceId</td>
@@ -55,13 +52,29 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                 @endforeach
                 </table>
             </div>
             <div id="describeMLModels" class="tab-pane fade">
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>
+                    <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Email address</label>
+                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputPassword1">Password</label>
+                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
                 <table class="table table-bordered table-font text-center">
                     <tr class="active">
                          <td>MLModelId</td>
@@ -82,13 +95,29 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach
                 </table>
             </div>
             <div id="describeEvaluations" class="tab-pane fade">
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>
+                    <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Email address</label>
+                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputPassword1">Password</label>
+                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
                 <table class="table table-bordered table-font text-center">               
                     <tr class="active">
                          <td>EvaluationId</td>
@@ -110,15 +139,31 @@
                         <td>{{ $value['EvaluationDataSourceId'] }}</td>
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
-                            <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}">1212<span class="glyphicon glyphicon-info-sign"></span></a>
+                            <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
 
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach
                 </table>
             </div>
             <div id="describeBatchPredictions" class="tab-pane fade">
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-create-bath-description pull-right">Create Bath Description</button>
+                    <form class="create-bath-description" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Email address</label>
+                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputPassword1">Password</label>
+                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
                 <table class="table table-bordered table-font text-center">
                     <tr class="active">
                          <td>BatchPredictionId</td>
@@ -147,7 +192,7 @@
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach
@@ -155,34 +200,10 @@
             </div>   
         </div>
     </div>
-
-    <div class="col-md-6">
-        <button class="btn btn-default btn-create-datasource">Create Datasource</button>
-
-        <form class="create-datasource" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
-            <br>
-            {{ csrf_field() }}
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-    </div>
-
-
- 
-
+</div><br>
 
        
 
-    </div>
-    
-</div>
+
 
 @stop
