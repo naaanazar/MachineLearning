@@ -110,7 +110,8 @@
                         <td>{{ $value['EvaluationDataSourceId'] }}</td>
                         <td>{{ $value['LastUpdatedAt'] }}</td>
                         <td>
-                            <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                            <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}">1212<span class="glyphicon glyphicon-info-sign"></span></a>
+
                             <a class="btn btn-danger btn-sm btn-list" href="/ml/delete/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
