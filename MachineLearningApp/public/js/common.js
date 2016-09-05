@@ -36,7 +36,7 @@ $(document).ready(function () {
         e.preventDefault();
         $.post(url, function( data ) {
             if(data.success) {
-                $(e.target).closest('tr').fadeOut();
+                $(e.target).closest('tr').hide("slow");
             }
         });
     });
