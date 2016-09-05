@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
@@ -24,28 +24,70 @@ $(document).ready(function () {
     });
 
     $(".btn-create-datasource").click(function() {
-        $(".create-datasource").toggle();       
-        $(".container-describeDataSources").toggle();      
+        $(".create-datasource").toggle();
+        $(".container-describeDataSources").toggle();
     });
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
-    // delete row from s3 table
+
+    // delete row from s3 table using ajax
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    $('.btn-delete').on('click', function(e) {
-        var url = $(this).attr('href');
-
+    $(document).on('click', '.btn-delete', function(e){
         e.preventDefault();
-
-        $.post(url, function(data) {
-            if(data.success) {
-                $(e.target).closest('tr').hide("slow");
-            }
+        var url = $(this).attr('href');
+        $.ajax({
+            url     : url,
+            method  : 'GET',
+            success : function(data) {
+                            if(data.success) {
+                                $(e.target).closest('tr').hide("fast");
+                            }
+                            $('.notification-s3').append('<div class="alert alert-success upload-message-s3">'
+                                                            + '<ul><li><strong>Success!</strong>'
+                                                            + '   File delete!</li></ul></div>').show('slow').hide(4000);
+                      }
         });
     });
+
+    //upload file to s3 bucket using ajax
+    $('.form-upload').on("submit", function(e){
+        e.preventDefault();
+        $('.preload-s3').show('fast').delay(4000).fadeOut(400);
+        $.ajax({
+            url         : '/s3/upload',
+            method      : 'POST',
+            data        : new FormData($(".form-upload")[0]),
+            contentType : false,
+            cache       : false,
+            processData : false,
+            success     : function (data) {
+                                getListS3();
+                                $('.notification-s3').append('<div class="alert alert-success upload-message-s3">'
+                                                            + '<ul><li><strong>Success!</strong>'
+                                                            + '   File successfully uploaded to S3!</li></ul></div>').show('slow').hide(4000);
+                          },
+            error       : function () {
+                                $('.notification-s3').append('<div class="alert alert-danger upload-message-s3">'
+                                                            + '<ul><li><strong>Error! File no upload to S3!</strong>'
+                                                            + '</li></ul></div>').show('slow').hide(4000);
+                          },
+        });
+    });
+
+    // update list s3
+    function getListS3() {
+        $.ajax({
+            url         : '/s3/list',
+            method      : 'GET',
+            success     : function (data) {
+                $('.s3-table').html($(data).find('table'));
+            }
+        });
+    }
 });
