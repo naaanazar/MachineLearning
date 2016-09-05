@@ -35,7 +35,7 @@ $(document).ready(function() {
         }
     });
 
-     // $('.btn-delete').on('click', function(e){
+    // $('.btn-delete').on('click', function(e){
     $(document).on('click', '.btn-delete', function(e){
         e.preventDefault();
         var url = $(this).attr('href');
@@ -56,6 +56,7 @@ $(document).ready(function() {
     //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function(e){
         e.preventDefault();
+        $('.preload-s3').show('fast').delay(4000).fadeOut(400);
         $.ajax({
             url         : '/s3/upload',
             method      : 'POST',
@@ -70,7 +71,7 @@ $(document).ready(function() {
                                                             + '   File successfully uploaded to S3!</li></ul></div>').show('slow').hide(4000);
                           },
             error       : function () {
-                                $('.notification-s3').append('<div class="alert alert-success upload-message">'
+                                $('.notification-s3').append('<div class="alert alert-danger upload-message">'
                                                             + '<ul><li><strong>Error! File no upload to S3!</strong>'
                                                             + '</li></ul></div>').show('slow').hide(4000);
                           },
@@ -79,7 +80,6 @@ $(document).ready(function() {
 
     // update list s3
     function getListS3() {
-        console.log('getListS3');
         $.ajax({
             url         : '/s3/list',
             method      : 'GET',

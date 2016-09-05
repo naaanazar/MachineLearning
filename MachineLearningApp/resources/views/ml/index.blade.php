@@ -16,10 +16,10 @@
               <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
             </ul>
         </div>
-        <div class="tab-content">           
+        <div class="tab-content">
             <div id="describeDataSources" class="tab-pane fade in active">
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
+                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
                 </div>
                 <div class="col-md-6 col-md-offset-1">
                     <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">

@@ -161,3 +161,9 @@ body {
 .jgrowl-success {
     background-color: green !important;
 }
+
+.preload-s3 {
+    display: none;
+    float: right;
+    margin: 3px 10px;
+}
