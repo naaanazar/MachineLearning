@@ -46,7 +46,7 @@ $(document).ready(function() {
                             if(data.success) {
                                 $(e.target).closest('tr').hide("fast");
                             }
-                            $('.notification-s3').append('<div class="alert alert-success upload-message">'
+                            $('.notification-s3').append('<div class="alert alert-success upload-message-s3">'
                                                             + '<ul><li><strong>Success!</strong>'
                                                             + '   File delete!</li></ul></div>').show('slow').hide(4000);
                       }
@@ -66,12 +66,12 @@ $(document).ready(function() {
             processData : false,
             success     : function (data) {
                                 getListS3();
-                                $('.notification-s3').append('<div class="alert alert-success upload-message">'
+                                $('.notification-s3').append('<div class="alert alert-success upload-message-s3">'
                                                             + '<ul><li><strong>Success!</strong>'
                                                             + '   File successfully uploaded to S3!</li></ul></div>').show('slow').hide(4000);
                           },
             error       : function () {
-                                $('.notification-s3').append('<div class="alert alert-danger upload-message">'
+                                $('.notification-s3').append('<div class="alert alert-danger upload-message-s3">'
                                                             + '<ul><li><strong>Error! File no upload to S3!</strong>'
                                                             + '</li></ul></div>').show('slow').hide(4000);
                           },
