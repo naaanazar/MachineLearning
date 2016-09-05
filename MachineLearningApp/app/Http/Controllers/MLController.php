@@ -156,18 +156,5 @@ class MLController extends Controller
 
 
 
-    public function deleteDataSource($datasourseId)
-    {
-        $client = $this->connectToML();
 
-        try {
-
-            $client->deleteDataSource([
-                'DataSourceId' => $datasourseId,
-            ]);
-
-        } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
-        }
-    }
 }

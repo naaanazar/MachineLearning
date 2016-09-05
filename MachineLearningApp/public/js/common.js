@@ -17,7 +17,7 @@ $(document).ready(function () {
     $(".create-bath-description").hide();
     $(".btn-create-bath-description").click(function(){
         $(".create-bath-description").show();
-    });    
+    });
     $(".create-evaluations").hide();
     $(".btn-create-evaluations").click(function(){
         $(".create-evaluations").show();
@@ -26,7 +26,10 @@ $(document).ready(function () {
     $(".upload-message").show().delay(1500).fadeOut(1000);
 
 
+    // data = '12';
+    // $('#result_info').text(data);
 
 
 });
+
 
