@@ -76,7 +76,7 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+       return Response()->json(['success' => true]);
     }
 
     public function listS3()
@@ -91,7 +91,7 @@ class S3Controller extends Controller
 
             $results = $result['Contents'];
 
-            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 2, '/s3/list/');
+            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 6, '/s3/list/');
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";

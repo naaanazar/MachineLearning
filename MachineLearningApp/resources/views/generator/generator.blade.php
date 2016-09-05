@@ -2,37 +2,22 @@
 
 @section('content')
 
+<script type="text/javascript" src="{{ URL::to('js/generate-dataset.js') }}"></script>
+
 <div class="container">    
-    <div class="row">
+    <div class="row generator-form">
         <div class="col-md-12">
             <h3 align='center'>Generate dataset</h3>
-            <form style="padding: 10px 0;" method="post" action="" class="form-inline">
-                {{ CSRF_field() }}
-                <input class="form-control" type="number" name="rows" placeholder="Records number">
-                <button id="generate" class="btn btn-info">Generate</button>
-            </form>
-        </div>
-        @if($errors)
-            <div class="col-md-12">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
+            <div class="col-md-6 col-md-offset-3">                
+                <input style="display: inline-block; width: 80%; margin-top: 20px;" class="form-control" id="rows-number" type="number" name="rows" placeholder="Records number">
+                <a id="generate-btn" class="btn btn-info" href="{{ URL::to('generate') }}">Generate</a>
             </div>
-        @endif
+        </div>
+        <div class="col-md-12" style="text-align: center; padding-top: 50px;">
+            <i class="fa fa-spinner fa-4x fa-spin" style="display: none;"></i>
+        </div>
+        <div class="col-md-8 col-md-offset-2 messages"></div>
     </div>    
-    @unless(empty($stats))
-        <hr>
-        <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li>Records number: {{ $stats['recordsNumber'] }}</li>
-                    <li>Purchase number: {{ $stats['purchaseNumber'] }}</li>
-                    <li>Purchase percentage: {{ $stats['purchasePercentage'] }}%</li>
-                    <li>Dataset: <a href="{{ URL::to($stats['path']) }}">{{ basename($stats['path']) }}</a></li>
-                </ul>
-            </div>
-        </div>
-    @endunless
 </div>
     
 @endsection

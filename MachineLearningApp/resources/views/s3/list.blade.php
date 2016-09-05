@@ -18,6 +18,12 @@
                             <li>{!! session('status') !!}</li>
                         </ul>
                     </div>
+                @elseif (session('delete'))
+                    <div class="alert alert-success upload-message">
+                        <ul>
+                            <li>{!! session('delete') !!}</li>
+                        </ul>
+                    </div>
                 @endif
                 <h2 class="title-s3"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> List of files</h2>
                 <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@upload') }}" method="post">
@@ -44,7 +50,7 @@
                             <td>{{ $value['LastModified'] }}</td>
                             <td>
                                 <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
-                                <a class="btn btn-danger btn-sm" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a class="btn btn-danger btn-sm btn-delete" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     @endforeach
