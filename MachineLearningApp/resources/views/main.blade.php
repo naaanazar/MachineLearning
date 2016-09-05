@@ -31,29 +31,56 @@
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">
-                        <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
-                    </a>
+                <div class ="col-md-4 col-lg-4 col-sm-4 col-xs-5">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">
+                            <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
+                        </a>
+                    </div>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
-                        <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
-                    </li>
-                    <li {{ (Request::is('ml') ? 'class=active' : '') }}>
-                        <a href="{{ action('MLController@index') }}">ML</a>
-                    </li>
-                    <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
-                        <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
-                    </li>
-                    <li {{ (Request::is('generator') ? 'class=active' : '') }}>
-                        <a href="{{ URL::to('generator') }}">Generator</a>
-                    </li>
-                    <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
-                        <a href="{{ action('BucketController@index') }}">Buckets</a>
-                    </li>
-                </ul>
+                <div class="main-menu col-md-8 col-lg-8 col-sm-8 col-xs-7">
+                    <ul class="nav navbar-nav"> 
+                        <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
+                            <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
+                        </li>
+                        <li {{ (Request::is('ml') ? 'class=active' : '') }}>
+                            <a href="{{ action('MLController@index') }}">ML</a>
+                        </li>
+                        <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
+                            <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
+                        </li>
+                        <li {{ (Request::is('generator') ? 'class=active' : '') }}>
+                            <a href="{{ URL::to('generator') }}">Generator</a>
+                        </li>
+                        <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
+                            <a href="{{ action('BucketController@index') }}">Buckets</a>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="dropdown-main-menu col-md-8 col-lg-8 col-sm-8 col-xs-7">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"              aria-haspopup="true" aria-expanded="true">Menu<span class="caret"></span>
+                        </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
+                                    <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
+                                </li>
+                                <li {{ (Request::is('ml') ? 'class=active' : '') }}>
+                                    <a href="{{ action('MLController@index') }}">ML</a>
+                                </li>
+                                <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
+                                    <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
+                                </li>
+                                <li {{ (Request::is('generator') ? 'class=active' : '') }}>
+                                    <a href="{{ URL::to('generator') }}">Generator</a>
+                                </li>
+                                <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
+                                    <a href="{{ action('BucketController@index') }}">Buckets</a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
             </div>
+            
         </nav>
 
         @yield('content')

@@ -2,14 +2,15 @@
 
 @section('content')
 
-
 <div class="container">
-    <div class="col-md-6">
+<div class = "row" >
+    <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
         <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
     </div>     
-    <div class="col-md-12">
-        <div class="col-md-8" style="padding: 0">
+    <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding: 0">
             <ul class="nav nav nav-tabs nav-justified">
+
               <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
               <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
               <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
@@ -18,10 +19,10 @@
         </div>
         <div class="tab-content">           
             <div id="describeDataSources" class="tab-pane fade in active">
-                <div class="col-md-4">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
                 </div>
-                <div class="col-md-6 col-md-offset-1">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
@@ -65,10 +66,10 @@
                 </div>
             </div>  
             <div id="describeMLModels" class="tab-pane fade">
-                <div class="col-md-4">
+                <div class="create-ml-mode">
                     <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>                   
                 </div>
-                <div class="col-md-6 col-md-offset-1">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
@@ -112,13 +113,14 @@
                 </div>
             </div>            
             <div id="describeEvaluations" class="tab-pane fade">
-                <div class="col-md-4">
+                <div class="">
+                 <div class="create-evaluation">
                     <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>                    
                 </div>
-                <div class="col-md-6 col-md-offset-1">
                     <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
+                        <br><br>
                         <div class="form-group">
                            <label for="exampleInputEmail1">Email address</label>
                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
@@ -160,11 +162,10 @@
                 </table>
             </div>
             <div id="describeBatchPredictions" class="tab-pane fade">
-                <div class="col-md-4">
+                <div class="create-bath-description">
                     <button class="btn btn-primary btn-create-bath-description pull-right">Create Bath Description</button>
-                    
                 </div>
-                <div class="col-md-6 col-md-offset-1">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-bath-description" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
@@ -217,6 +218,8 @@
             </div>   
         </div>
     </div>
-</div><br>     
+</div>
+</div>
+<br>     
 
 @stop

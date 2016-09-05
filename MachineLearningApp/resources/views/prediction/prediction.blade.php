@@ -6,7 +6,7 @@
 
     <h3 class="title">Real time prediction</h3>
     <br>
-    <div class="col-md-6 clearfix">
+    <div class="col-lg-8 col-md-8 col-ms-8 col-xs-8">
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="email" class="control-label batch-label text-right">Email custom domain</label>
@@ -53,7 +53,7 @@
             </div>
         </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
         <div class="block-output"></div>
     </div>
 </div>
