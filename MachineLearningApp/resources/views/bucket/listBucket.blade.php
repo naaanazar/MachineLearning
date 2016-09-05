@@ -1,9 +1,6 @@
 @extends('main')
 
 @section('content')
-    <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />  online library(default css)-->
-    <link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl/jquery.jgrowl.min.css"/>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -101,7 +98,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <br>
     <br>
