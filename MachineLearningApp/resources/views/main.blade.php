@@ -57,14 +57,14 @@
         </nav>
 
         @yield('content')
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"  data-placement="top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
 
         <div class="footer panel panel-margin">
             <div class="panel-footer text-center">
                 <span class="copy">2016 &copy; Crowdin.Space</span>
             </div>
         </div>
-        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
-            <span class="glyphicon glyphicon-chevron-up"></span>
-        </a>
     </body>
 </html>
