@@ -29,7 +29,11 @@ Route::get('/ml/delete-ml-model/{id}', 'MLController@deleteMLModel');
 Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
 Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPrediction');
 
-
+//ML info
+Route::get('/ml/getdatasource/{DataSourceId}', 'MLController@getDataSource');
+Route::get('/ml/getmlmodel/{ModelId}', 'MLController@getMLModel');
+Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@getEvaluation');
+Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@getBatchPrediction');
 
 //Generator
 Route::get('generator', 'GeneratorController@index');

@@ -82,25 +82,26 @@ class MLController extends Controller
         }
         return $result['Results'];
     }
+
     public function getDataSource($DataSourceId)
     {
-
         try {
             $result = $this->client->getDataSource([
-                'DataSourceId' => $DataSourceId, // REQUIRED
+                'DataSourceId' => $DataSourceId,
                 'Verbose' => true || false,
             ]);
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
+
+        return response()->json(['data' => (array)$result]);
     }
+
     public function getMLModel($ModelId)
     {
         try {
             $result = $this->client->getMLModel([
-                'MLModelId' => $ModelId, // REQUIRED
+                'MLModelId' => $ModelId,
                 'Verbose' => true,
             ]);
         } catch (S3Exception $e) {
@@ -115,6 +116,7 @@ class MLController extends Controller
             $result = $this->client->getEvaluation([
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
+
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
@@ -313,4 +315,9 @@ class MLController extends Controller
         echo '<pre>';
         print_r($result);
     }
+
+
+
+
+
 }

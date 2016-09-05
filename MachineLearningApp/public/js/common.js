@@ -41,4 +41,22 @@ $(document).ready(function () {
             }
         });
     });
+
+
+
+    $('#info_click').on("click", function(event) {
+        $.get('/ml/getdatasource/123456789', function (response) {
+            var result = '' +
+                '<table>' +
+                    '<tr>' +
+                        '<td>' + response.data[Object.keys(response.data)[0]].Name + '</td>' +
+                    '</tr>' +
+                '</table>';
+
+            $('#result_info').html(result);
+        });
+
+        event.preventDefault();
+    });
+
 });

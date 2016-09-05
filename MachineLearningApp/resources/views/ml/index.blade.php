@@ -14,6 +14,7 @@
                     <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
                     <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
                     <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
+                    <li><a href="#modal" role="button" class="btn" data-toggle="modal" id="info_click">Click Me</a></li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -54,7 +55,7 @@
                                     <td>{{ $value['DataLocationS3'] }}</td>
                                     <td>{{ $value['LastUpdatedAt'] }}</td>
                                     <td>
-                                        <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                        <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}" data-toggle="modal" id="info"><span class="glyphicon glyphicon-info-sign"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                 </tr>
@@ -101,7 +102,7 @@
                                     <td>{{ $value['MLModelType'] }}</td>
                                     <td>{{ $value['LastUpdatedAt'] }}</td>
                                     <td>
-                                        <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                        <a class="btn btn-info btn-sm btn-list" href="/ml/getmlmodel/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                 </tr>
@@ -149,7 +150,7 @@
                                 <td>{{ $value['EvaluationDataSourceId'] }}</td>
                                 <td>{{ $value['LastUpdatedAt'] }}</td>
                                 <td>
-                                    <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                    <a class="btn btn-info btn-sm btn-list" href="/ml/getevaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                                     <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
 
                                 </td>
@@ -205,7 +206,7 @@
                                     </td>
                                     <td>{{ $value['LastUpdatedAt'] }}</td>
                                     <td>
-                                        <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                        <a class="btn btn-info btn-sm btn-list" href="/ml/getbatchprediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                 </tr>
@@ -217,20 +218,17 @@
         </div>
     </div><br>
 
-<div id="modal" class="modal">
+    <div id="modal" class="modal">
         <div class="modal-dialog">
             <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h2>Lorem Ipsum</h2>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2>Lorem Ipsum</h2>
+                </div>
+                <div class="modal-body" id="result_info">
+
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Donec placerat sem ipsum, ut faucibus nulla. Nullam mattis volutpat
-                dolor, eu porta magna facilisis ut. In ultricies, purus sed pellentesque
-                mollis, nibh tortor semper elit, eget rutrum purus nulla id quam.</p>
-        </div>
-        </div>
-        </div>
-        </div>
+    </div>
 @stop
