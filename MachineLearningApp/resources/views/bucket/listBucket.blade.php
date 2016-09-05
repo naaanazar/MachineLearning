@@ -42,7 +42,7 @@
                                 <script type="text/javascript">
                                     $(document).ready(function () {
                                         $.jGrowl("Error!", {sticky: true, theme: 'jGrowl-status-error'});
-                                    })
+                                    });
                                 </script>
                             @endforeach
                         </ul>
@@ -55,8 +55,8 @@
                             <li>{!! session('status') !!}</li>
                             <script type="text/javascript">
                                 $(document).ready(function () {
-                                    $.jGrowl("Succes!", {sticky: true, theme: 'jGrowl-status-success'});
-                                })
+                                    $.jGrowl("Success!", {sticky: true, theme: 'jGrowl-status-success'});
+                                });
                             </script>
                         </ul>
                     </div>
@@ -74,13 +74,13 @@
 
                         </tr>
 
-
                         @foreach($results as $key => $value)
                             <tr>
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $value['Name'] }}</td>
                                 <td><a class="btn btn-danger btn-sm btn-list"
-                                       href="/bucket/delete/{{ $value['Name'] }}"><span
+                                       href="/bucket/delete/{{ $value['Name'] }}"
+                                       id="delete-{{ $key }}"><span
                                                 class="glyphicon glyphicon-trash"></span></a></td>
                                 <td><a class="btn btn-danger btn-sm btn-list"
                                        href="bucket/delete_all/{{ $value['Name'] }}"><span class="glyphicon"></span>Delete

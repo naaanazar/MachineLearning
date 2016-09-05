@@ -2,7 +2,8 @@
 
 use Laracasts\Integrated\Extensions\Selenium as BucketTest;
 
-abstract class AbstractSeleniumTest extends BucketTest {
+abstract class AbstractSeleniumTest extends BucketTest
+{
 
   protected function findByCssSelector($selector)
   {
@@ -23,4 +24,3 @@ abstract class AbstractSeleniumTest extends BucketTest {
   }
 
 }
-
