@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\GeneratorRequest;
 use App\Http\Controllers\Controller;
-
 use App\Library\Generators\DatasetGenerator;
 
 class GeneratorController extends Controller
@@ -14,21 +14,10 @@ class GeneratorController extends Controller
     public function index()
     {        
         return view('generator.generator');
-    }
+    }    
 
-    public function messages()
+    public function generateDataset(GeneratorRequest $request)
     {
-        return [
-            'rows.required' => 'Records number is required',
-            'rows.integer'  => 'Records number must be an integer',
-        ];
-    }
-
-    public function generateDataset(Request $request)
-    {
-        $this->validate($request, [
-            'rows' => 'required|integer'
-        ]);
 
         $datasetFeeder = new DatasetGenerator();
         $datasetFeeder->rowsCount = $request->rows;

@@ -21,8 +21,8 @@ $(document).ready(function() {
         $(".container-describeEvaluations").toggle();
     }); 
     $(".btn-create-datasource").click(function() {
-        $(".create-datasource").toggle();
-        $(".container-describeDataSources").toggle();
+        $(".create-datasource").toggle();       
+        $(".container-describeDataSources").toggle();      
     });
 
     // upload show/hide message
@@ -47,7 +47,6 @@ $(document).ready(function() {
                                 $(e.target).closest('tr').hide("fast");
                             }
                       }
-
         });
     });
 

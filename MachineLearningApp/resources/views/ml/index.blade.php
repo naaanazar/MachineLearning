@@ -46,6 +46,7 @@
                             <td>Last Updated</td>
                             <td>&nbsp;</td>
                         </tr>
+
                     @foreach($result['describeDataSources'] as $key => $value)
                         <tr>
                             <td>{{ $value['DataSourceId'] }}</td>
@@ -54,6 +55,7 @@
                             <td>{{ $value['DataLocationS3'] }}</td>
                             <td>{{ $value['LastUpdatedAt'] }}</td>
                             <td>
+
                                 <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                                 <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>

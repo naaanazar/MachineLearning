@@ -34,15 +34,18 @@ $(document).ready(function() {
                     $('.messages').html(content);
                 }
             },
-            error: function (error) {
+            error: function (xhr, status, error) {
                 $('i.fa-spinner').hide();
-                if(error.status === 500) {
-                    $.jGrowl("Token Mismatch!", { sticky: true });
+//                $('body').prepend(xhr.responseText);
+                console.log(status);
+                console.log(error);
+                if(xhr.status === 500) {
+                    $.jGrowl("Token Mismatch!", { sticky: true, theme: 'jgrowl-danger' });
                     return;
                 }
-                var errorMessages = error.responseJSON.rows;
+                var errorMessages = xhr.responseJSON.rows;
                 console.log(errorMessages);
-                $.jGrowl(errorMessages, { sticky: true });
+                $.jGrowl(errorMessages, { sticky: true, theme: 'jgrowl-danger' });
             }
         });
     });
