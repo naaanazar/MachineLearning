@@ -246,15 +246,158 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
         return back();
+    }
 
+
+    public function createDataSourceFromS3($DataSourceId, $DataSourceName, $DataSchema)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+           $result = $client->createDataSourceFromS3([
+                'ComputeStatistics' => true,
+                'DataSourceId' => $DataSourceId, // REQUIRED
+                'DataSourceName' => $DataSourceName,
+                'DataSpec' => [ // REQUIRED
+                    'DataLocationS3' => 's3://ml-datasets-test/123.csv', // REQUIRED
+                    'DataRearrangement' => '{"splitting":{"percentBegin":0,"percentEnd":70}}',
+                    'DataSchema' => $DataSchema
+                ],
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+        return $result['DataSourceId'];
+    }
+
+
+    public function createMLModel($ModelId, $ModelName, $ModelType, $DataSourceId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+
+            $result = $client->createMLModel([
+                'MLModelId' => $ModelId, // REQUIRED
+                'MLModelName' => $ModelName,
+                'MLModelType' => $ModelType, // REQUIRED
+                //'Parameters' => ['<string>', ...],
+                //'Recipe' => '<string>',
+                //'RecipeUri' => '<string>',
+                'TrainingDataSourceId' => $DataSourceId, // REQUIRED
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+        return $result['MLModelId'];
+    }
+
+
+    public function createEvaluation($EvaluationName, $EvaluationId, $ModelId, $EvaluationDataSourceId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+
+            $result = $client->createEvaluation([
+                'EvaluationDataSourceId' => $EvaluationDataSourceId, // REQUIRED
+                'EvaluationId' => $EvaluationId, // REQUIRED
+                'EvaluationName' => $EvaluationName,
+                'MLModelId' => $ModelId, // REQUIRED
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+
+        return $result['EvaluationId'];
+    }
+
+
+    public function createDataSourceBathFromS3($DataSourceId, $DataSourceName, $DataSchema)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+           $result = $client->createDataSourceFromS3([
+                'ComputeStatistics' => true,
+                'DataSourceId' => $DataSourceId, // REQUIRED
+                'DataSourceName' => $DataSourceName,
+                'DataSpec' => [ // REQUIRED
+                    'DataLocationS3' => 's3://ml-datasets-test/123_b.csv', // REQUIRED
+                    'DataSchema' => $DataSchema
+                ],
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+        return $result['DataSourceId'];
+    }
+
+
+    public function createBatchPrediction($BatchPredictionDataSourceId, $BatchPredictionId, $BatchPredictionName, $ModelId, $OutputUri)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+           $result = $client->createBatchPrediction([
+                'BatchPredictionDataSourceId' => $BatchPredictionDataSourceId, // REQUIRED
+                'BatchPredictionId' => $BatchPredictionId, // REQUIRED
+                'BatchPredictionName' => $BatchPredictionName,
+                'MLModelId' => $ModelId, // REQUIRED
+                'OutputUri' => $OutputUri, // REQUIRED
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
+        return $result['BatchPredictionId'];
+    }
+
+
+    public function createRealtimeEndpoint($MLModelId)
+    {
+
+        $client = $this->connectToML();
+
+        try {
+            $result = $client->createRealtimeEndpoint([
+                'MLModelId' => $MLModelId, // REQUIRED
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        echo '<pre>';
+        print_r($result);
     }
 
 
     public function predict($MLModelId)
     {
 
+        $client = $this->connectToML();
+
         try {
-           $result = $this->client->predict([
+           $result = $client->predict([
             'MLModelId' => $MLModelId, // REQUIRED
             'PredictEndpoint' => 'https://realtime.machinelearning.us-east-1.amazonaws.com', // REQUIRED
             'Record' => [
@@ -269,40 +412,10 @@ class MLController extends Controller
                 "country"=>"China"]
             ]);
 
-
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
         print_r($result);
-
-    }
-
-
-    public function createDataSourceFromS3()
-    {
-//        $DataSourceId, $DataSourceName, $DataSchema
-//        $client = $this->connectToML();
-//
-//        try {
-//           $result = $client->createDataSourceFromS3([
-//                'ComputeStatistics' => true,
-//                'DataSourceId' => $DataSourceId, // REQUIRED
-//                'DataSourceName' => $DataSourceName,
-//                'DataSpec' => [ // REQUIRED
-//                    'DataLocationS3' => 's3://ml-datasets-test/123.csv', // REQUIRED
-//                    'DataRearrangement' => '{"splitting":{"percentBegin":0,"percentEnd":70}}',
-//                    'DataSchema' => $DataSchema
-//                ],
-//            ]);
-//
-//        } catch (S3Exception $e) {
-//            echo $e->getMessage() . "\n";
-//        }
-        //echo '<pre>';
-        //print_r($result);
-        //return $result['DataSourceId'];
-
-        return redirect('ml')->with('edit', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 }
