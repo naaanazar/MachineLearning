@@ -146,3 +146,20 @@ body {
     cursor: pointer;
 }
 
+.jGrowl-notification {
+    font-size: 18px;
+    width: 300px !important;
+}
+.jgrowl-danger {
+    background-color: red !important;
+}
+
+.jgrowl-warning {
+    background-color: yellow !important;
+    color: #000000 !important;
+}
+
+.jgrowl-success {
+    background-color: green !important;
+}
+
