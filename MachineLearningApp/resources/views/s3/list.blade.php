@@ -34,30 +34,33 @@
                         </label>
                     </div>
                 </form>
-                <table class="table table-bordered table-font text-center">
-                    <tr class="active">
-                        <td>Target</td>
-                        <td>Name</td>
-                        <td>Size</td>
-                        <td>Last modified</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    @foreach($results as $key => $value)
-                        <tr>
-                            <td>{{ ++$key }}</td>
-                            <td>{{ $value['Key'] }}</td>
-                            <td>{{ $value['Size'] }}</td>
-                            <td>{{ $value['LastModified'] }}</td>
-                            <td>
-                                <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
-                                <a class="btn btn-danger btn-sm btn-delete" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
+                <!--<div class="pagination-list">
+                    <?php echo $results->render(); ?>
+                </div>-->
+                <div class="s3-table">
+                    <table class="table table-bordered table-font text-center">
+                        <tr class="active">
+                            <td>Target</td>
+                            <td>Name</td>
+                            <td>Size</td>
+                            <td>Last modified</td>
+                            <td>&nbsp;</td>
                         </tr>
-                    @endforeach
-                    <div class="pagination-list">
-                        <?php echo $results->render(); ?>
-                    </div>
-                </table>
+                        @foreach($results as $key => $value)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td>{{ $value['Key'] }}</td>
+                                <td>{{ $value['Size'] }}</td>
+                                <td>{{ $value['LastModified'] }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
+                                    <a class="btn btn-danger btn-sm btn-delete" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
+                    </table>
+                </div>
             </div>
         </div>
     </div>
