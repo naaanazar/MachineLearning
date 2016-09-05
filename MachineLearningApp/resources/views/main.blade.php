@@ -20,7 +20,7 @@
         <script src="{{ URL::to('js/common.js') }}"></script>
         <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
         <script src="{{ URL::to('js/back-to-top.js') }}"></script>
-        
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view tde page via file:// -->
         <!--[if lt IE 9]>
@@ -56,38 +56,35 @@
                             <a href="{{ action('BucketController@index') }}">Buckets</a>
                         </li>
                     </ul>
-                    </div>
-                    <div class="dropdown-main-menu col-md-8 col-lg-8 col-sm-8 col-xs-7">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"              aria-haspopup="true" aria-expanded="true">Menu<span class="caret"></span>
-                        </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
-                                    <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
-                                </li>
-                                <li {{ (Request::is('ml') ? 'class=active' : '') }}>
-                                    <a href="{{ action('MLController@index') }}">ML</a>
-                                </li>
-                                <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
-                                    <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
-                                </li>
-                                <li {{ (Request::is('generator') ? 'class=active' : '') }}>
-                                    <a href="{{ URL::to('generator') }}">Generator</a>
-                                </li>
-                                <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
-                                    <a href="{{ action('BucketController@index') }}">Buckets</a>
-                                </li>
-                            </ul>
-                    </div>
                 </div>
-            </div>
-            
+                <div class="dropdown-main-menu col-md-8 col-lg-8 col-sm-8 col-xs-7">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"              aria-haspopup="true" aria-expanded="true">Menu<span class="caret"></span>
+                    </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
+                                <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
+                            </li>
+                            <li {{ (Request::is('ml') ? 'class=active' : '') }}>
+                                <a href="{{ action('MLController@index') }}">ML</a>
+                            </li>
+                            <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
+                                <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
+                            </li>
+                            <li {{ (Request::is('generator') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('generator') }}">Generator</a>
+                            </li>
+                            <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
+                                <a href="{{ action('BucketController@index') }}">Buckets</a>
+                            </li>
+                        </ul>
+                </div>
+            </div>     
         </nav>
 
         @yield('content')
-        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
-            <span class="glyphicon glyphicon-chevron-up"></span>
-        </a>
 
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+        
         <div class="footer panel panel-margin">
             <div class="panel-footer text-center">
                 <span class="copy">2016 &copy; Crowdin.Space</span>

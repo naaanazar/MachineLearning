@@ -10,14 +10,13 @@
     <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding: 0">
             <ul class="nav nav nav-tabs nav-justified">
-
               <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
               <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
               <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
               <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
             </ul>
         </div>
-        <div class="tab-content">           
+        <div class="tab-content">
             <div id="describeDataSources" class="tab-pane fade in active">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
