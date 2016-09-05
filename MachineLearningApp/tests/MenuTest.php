@@ -3,9 +3,11 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Laracasts\Integrated\Extensions\Selenium;
 
-class MenuTest extends TestCase
+class MenuTest extends Selenium
 {
+
     public function setUp()
     {
         parent::setUp();
@@ -19,24 +21,29 @@ class MenuTest extends TestCase
             ->see('Real time prediction');
     }
 
-    public function testopenMLPage()
+    public function testOpenMLPage()
     {
         $this->click('ML')
             ->seePageIs('ml')
             ->see('ML Models');
     }
 
-    public function testopenListS3Page()
+    public function testOpenListS3Page()
     {
         $this->click('List S3')
             ->seePageIs('s3/list')
             ->see('List of files');
     }
 
-    public function testopenCeneratorPage()
+    public function testOpenCeneratorPage()
     {
         $this->click('Generator')
             ->seePageIs('generator')
             ->see('Generate dataset');
+    }
+
+    public function testopenBucketPage()
+    {
+        $this->click('Buckets');
     }
 }
