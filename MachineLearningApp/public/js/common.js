@@ -22,10 +22,8 @@ $(document).ready(function () {
         $(".create-datasource").toggle();       
         $(".container-describeDataSources").toggle();      
     });
-     
-  
-
-    // upload show/hide message
+    
+        // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
     // delete row from s3 table
     $.ajaxSetup({

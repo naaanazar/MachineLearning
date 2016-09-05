@@ -57,8 +57,7 @@
         </nav>
 
         @yield('content')
-
-        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top">
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"  data-placement="top">
             <span class="glyphicon glyphicon-chevron-up"></span>
         </a>
 
