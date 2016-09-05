@@ -21,8 +21,8 @@ $(document).ready(function() {
         $(".container-describeEvaluations").toggle();
     }); 
     $(".btn-create-datasource").click(function() {
-        $(".create-datasource").toggle();       
-        $(".container-describeDataSources").toggle();      
+        $(".create-datasource").toggle();
+        $(".container-describeDataSources").toggle();
     });
 
     // upload show/hide message
@@ -36,7 +36,7 @@ $(document).ready(function() {
     });
 
      // $('.btn-delete').on('click', function(e){
-    $(document).on('click','.btn-delete',function(e){
+    $(document).on('click', '.btn-delete', function(e){
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
@@ -46,13 +46,16 @@ $(document).ready(function() {
                             if(data.success) {
                                 $(e.target).closest('tr').hide("fast");
                             }
+                            $('.notification-s3').append('<div class="alert alert-success upload-message">'
+                                                            + '<ul><li><strong>Success!</strong>'
+                                                            + '   File delete!</li></ul></div>').show('slow').hide(4000);
                       }
         });
     });
 
     //upload file to s3 bucket using ajax
-    $('.form-upload').on("submit", function(event2){
-        event2.preventDefault();
+    $('.form-upload').on("submit", function(e){
+        e.preventDefault();
         $.ajax({
             url         : '/s3/upload',
             method      : 'POST',
@@ -60,9 +63,17 @@ $(document).ready(function() {
             contentType : false,
             cache       : false,
             processData : false,
-            success: function (data) {
-                getListS3();
-            }
+            success     : function (data) {
+                                getListS3();
+                                $('.notification-s3').append('<div class="alert alert-success upload-message">'
+                                                            + '<ul><li><strong>Success!</strong>'
+                                                            + '   File successfully uploaded to S3!</li></ul></div>').show('slow').hide(4000);
+                          },
+            error       : function () {
+                                $('.notification-s3').append('<div class="alert alert-success upload-message">'
+                                                            + '<ul><li><strong>Error! File no upload to S3!</strong>'
+                                                            + '</li></ul></div>').show('slow').hide(4000);
+                          },
         });
     });
 
