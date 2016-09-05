@@ -8,7 +8,7 @@
     </div>
      
     <div class="col-md-12">
-        <div class="col-md-8">
+        <div class="col-md-8" style="padding: 0">
             <ul class="nav nav nav-tabs nav-justified">
               <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
               <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
@@ -20,7 +20,7 @@
             <div id="describeDataSources" class="tab-pane fade in active">
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
-                    <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                    <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -141,6 +141,7 @@
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                             <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+
                         </td>
                     </tr>
                     @endforeach
