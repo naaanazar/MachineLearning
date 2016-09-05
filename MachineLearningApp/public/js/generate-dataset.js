@@ -36,14 +36,13 @@ $(document).ready(function() {
             },
             error: function (error) {
                 $('i.fa-spinner').hide();
-                console.log(error);
                 if(error.status === 500) {
-                    $('.messages').html("Token Mismatch!");
+                    $.jGrowl("Token Mismatch!", { sticky: true });
                     return;
                 }
                 var errorMessages = error.responseJSON.rows;
                 console.log(errorMessages);
-                $('.messages').html(errorMessages);
+                $.jGrowl(errorMessages, { sticky: true });
             }
         });
     });

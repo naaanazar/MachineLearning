@@ -128,35 +128,34 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
-                <div class="container-describeEvaluations">
-                    <table class="table table-bordered table-font text-center">
-                        <tr class="active">
-                             <td>EvaluationId</td>
-                            <td>Name</td>
-                            <td>Status</td>
-                            <td>BinaryAUC</td>
-                            <td>MLModelId</td>
-                            <td>EvaluationDataSourceId</td>
-                            <td>Last Updated</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        @foreach($result['describeEvaluations'] as $key => $value)
-                        <tr>
-                            <td>{{ $value['EvaluationId'] }}</td>
-                            <td>{{ $value['Name'] }}</td>
-                            <td>{{ $value['Status'] }}</td>
-                            <td>{{ $value['PerformanceMetrics']['Properties']['BinaryAUC'] }}</td>
-                            <td>{{ $value['MLModelId'] }}</td>
-                            <td>{{ $value['EvaluationDataSourceId'] }}</td>
-                            <td>{{ $value['LastUpdatedAt'] }}</td>
-                            <td>
-                                <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                 </div>
+                <table class="table table-bordered table-font text-center">               
+                    <tr class="active">
+                         <td>EvaluationId</td>
+                        <td>Name</td>
+                        <td>Status</td>
+                        <td>BinaryAUC</td>               
+                        <td>MLModelId</td>
+                        <td>EvaluationDataSourceId</td>
+                        <td>Last Updated</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    @foreach($result['describeEvaluations'] as $key => $value)
+                    <tr>
+                        <td>{{ $value['EvaluationId'] }}</td>
+                        <td>{{ $value['Name'] }}</td>
+                        <td>{{ $value['Status'] }}</td>
+                        <td>{{ $value['PerformanceMetrics']['Properties']['BinaryAUC'] }}</td>                   
+                        <td>{{ $value['MLModelId'] }}</td>
+                        <td>{{ $value['EvaluationDataSourceId'] }}</td>
+                        <td>{{ $value['LastUpdatedAt'] }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
+                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
             </div>
             <div id="describeBatchPredictions" class="tab-pane fade">
                 <div class="col-md-4">
