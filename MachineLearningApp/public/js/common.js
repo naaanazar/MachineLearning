@@ -92,13 +92,14 @@ $(document).ready(function () {
     }
 
 
-    $('#info_click').on("click", function(event) {
+    $('#info_click').on("click", function (event) {
         $.get('/ml/getdatasource/123456789', function (response) {
             console.log(response.data);
             var result = '' +
                 '<table>' +
                 '<tr>' +
-                '<td>' + response.data[Object.keys(response.data)[0]] + '</td>' +
+                '<td>' + '<p>' + '<h5>' + 'Name:' + '</h5>' + '<h5>' + 'DataLocationS3:' + '</h5>' + '</p>' + '</td>' +
+                '<td>' + '<p>' + response.data[Object.keys(response.data)[0]] + '</p>' + '<p>' + response.data[Object.keys(response.data)[1]] + '</p>' + '</td>' +
                 '</tr>' +
                 '</table>';
 
