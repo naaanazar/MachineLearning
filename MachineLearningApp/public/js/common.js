@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     $(".btn-create-bath-description").click(function() {
-        $(".create-bath-description").toggle();
+        $(".create-bath-descriptions").toggle();
         $(".container-describeBatchPredictions").toggle();
     });
 
