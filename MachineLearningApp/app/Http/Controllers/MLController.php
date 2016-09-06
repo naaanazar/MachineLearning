@@ -93,8 +93,10 @@ class MLController extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
+        $arr = [$result['Name'], $result['DataLocationS3']];
+        //dd($arr);
 
-        return response()->json(['data' => (array)$result]);
+        return response()->json(['data' => (array)$arr]);
     }
 
     public function getMLModel($ModelId)
