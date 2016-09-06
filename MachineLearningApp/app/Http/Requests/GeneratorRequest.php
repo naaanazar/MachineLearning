@@ -24,7 +24,7 @@ class GeneratorRequest extends Request
     public function rules()
     {
         return [
-            'rows' => 'required|integer',
+            'rows' => 'required|integer|min:0',
         ];
     }
 
