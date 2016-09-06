@@ -86,8 +86,10 @@ $(document).ready(function() {
             url         : '/s3/list',
             method      : 'GET',
             success     : function (data) {
-                $('.s3-table').html($(data).find('table'));
-            }
+                              console.log($(data).find('div.pagination-list'));
+                              $('.s3-pagination').html($(data).find('div.pagination-list'));
+                              $('.s3-table').html($(data).find('table'));
+                          }
         });
     }
 });
