@@ -1,3 +1,7 @@
+/***************************************
+    Main Style
+***************************************/
+
 html {
     height: 100%;
 }
@@ -9,17 +13,77 @@ body {
     padding-top: 80px;
 }
 
-.logo {
-    width: 200px;
-    margin-top: -13px ;
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
 }
 
+.copy {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/***************************************
+    S3 Style
+***************************************/
 .logo-s3 {
     width: 100px;
 }
 
 .title-s3 {
     margin-top: 40px;
+}
+
+.dropdown-main-menu{
+    width: 100px;
+    padding-top: 10px;
+    float: right;
+}
+
+@media screen and (min-width: 768px){
+.dropdown-main-menu{
+    display: none;
+    
+}}
+
+@media screen and (max-width: 768px){
+.main-menu{
+    display: none;
+}}
+
+.form-upload {
+    float: left;
+    margin-top: 20px;
+}
+
+.upload-message-s3 {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+}
+
+.preload-s3 {
+    display: none;
+    float: right;
+    margin: 3px 10px;
+}
+
+
+/***************************************
+    Other
+***************************************/
+
+.logo {
+    width: 200px;
+    margin-top: -13px ;
 }
 
 .batch-label,
@@ -40,8 +104,8 @@ body {
 .pagination-border li > a { border: none; }
 
 .block-output {
-    width: 70%;
-    height: 430px;
+    width: 100%;
+    height: 450px;
     margin: 0 auto;
     background: #eee;
     border-radius: 15px;
@@ -50,37 +114,17 @@ body {
 .table-font { font-size: 11px; }
 .table-font tr td:last-child { width: 110px; }
 
-.footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 45px;
-}
-
-.copy {
-    font-weight: bold;
-    font-size: 13px;
-}
-
 .back-to-top {
     cursor: pointer;
     position: fixed;
-    bottom: 10px;
+    bottom: 55px;
     left: 15px;
-    margin-bottom: 70px;
     display: none;
 }
 
 .jGrowl {
   margin-top: 50px;
 }
-
-.form-upload {
-    float: left;
-    margin-top: 20px;
-}
-
 
 .pagination .active span {
     border-radius: 50%;
@@ -93,14 +137,15 @@ body {
 
 .pagination-list .active span,
 .pagination-list .disabled span,
-.pagination-list .pagination > li > a
- {
+.pagination-list .pagination > li > a {
     border: none;
 }
 
-
 .btn btn-default btn-create-datasource pull-right {
-    left: 0; bottom: 0;
+    position: absolute;
+    left: 0; 
+    bottom: 0;
+    background-color: red;
 }
 
 .upload-message {
@@ -124,8 +169,8 @@ body {
     z-index: 100;
     overflow: auto;
 }
-    
-#window{
+
+#window {
     width: 400px;
     height: 400px;
     margin: 50px auto;
@@ -139,10 +184,26 @@ body {
     bottom: 0;
     padding: 16px;
 }
-    
-.close{
+
+.close {
     margin-left: 364px;
     margin-top: 4px;
     cursor: pointer;
 }
 
+.jGrowl-notification {
+    font-size: 18px;
+    width: 300px !important;
+}
+.jgrowl-danger {
+    background-color: red !important;
+}
+
+.jgrowl-warning {
+    background-color: yellow !important;
+    color: #000000 !important;
+}
+
+.jgrowl-success {
+    background-color: green !important;
+}
