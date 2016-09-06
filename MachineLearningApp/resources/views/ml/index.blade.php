@@ -55,7 +55,6 @@
                             <td>{{ $value['DataLocationS3'] }}</td>
                             <td>{{ $value['LastUpdatedAt'] }}</td>
                             <td>
-
                                 <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                                 <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
@@ -68,7 +67,7 @@
                 <div class="create-ml-mode">
                     <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>                   
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
@@ -111,11 +110,11 @@
                     </table>
                 </div>
             </div>            
-            <div id="describeEvaluations" class="tab-pane fade">
-                <div class="">
-                 <div class="create-evaluation">
+            <div id="describeEvaluations" class="tab-pane fade">               
+                <div class="create-evaluation">
                     <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>                    
                 </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
@@ -154,7 +153,6 @@
                         <td>
                             <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                             <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-
                         </td>
                     </tr>
                     @endforeach
