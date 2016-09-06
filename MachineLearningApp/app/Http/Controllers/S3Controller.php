@@ -91,7 +91,7 @@ class S3Controller extends Controller
 
             $results = $result['Contents'];
 
-            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 100, '/s3/list/');
+            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 2, '/s3/list/');
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
