@@ -249,18 +249,20 @@ class MLController extends Controller
     }
 
 
-    public function createDataSourceFromS3($DataSourceId, $DataSourceName, $DataSchema)
+    public function createDataSourceFromS3(Request $request)
     {
-
-        $client = $this->connectToML();
+        $DataSourceId = $request->input('DataSourceId');
+        $DataSourceName = $request->input('DataSourceName');
+        $DataLocationS3 = $request->input('DataLocationS3');
+        $DataSchema = $request->input('DataSchema');
 
         try {
-           $result = $client->createDataSourceFromS3([
+           $result = $this->client->createDataSourceFromS3([
                 'ComputeStatistics' => true,
                 'DataSourceId' => $DataSourceId, // REQUIRED
                 'DataSourceName' => $DataSourceName,
                 'DataSpec' => [ // REQUIRED
-                    'DataLocationS3' => 's3://ml-datasets-test/123.csv', // REQUIRED
+                    'DataLocationS3' => $DataLocationS3, // REQUIRED
                     'DataRearrangement' => '{"splitting":{"percentBegin":0,"percentEnd":70}}',
                     'DataSchema' => $DataSchema
                 ],
@@ -271,13 +273,13 @@ class MLController extends Controller
         }
         echo '<pre>';
         print_r($result);
-        return $result['DataSourceId'];
+        echo $result['DataSourceId'];
     }
 
 
-    public function createMLModel($ModelId, $ModelName, $ModelType, $DataSourceId)
+    public function createMLModel()
     {
-
+        
         $client = $this->connectToML();
 
         try {

@@ -22,16 +22,25 @@
                     <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                    <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
                         {{ csrf_field() }}
+                        <br><br>
                         <div class="form-group">
-                           <label for="exampleInputEmail1">Email address</label>
-                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                           <label for="DataSourceId">Data source id</label>
+                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
                         </div>
                         <div class="form-group">
-                           <label for="exampleInputPassword1">Password</label>
-                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                           <label for="DataSourceName">Data source name</label>
+                           <input type="text" class="form-control" id="DataSourceName" placeholder="Data source name" name="DataSourceName>
+                        </div>
+                        <div class="form-group">
+                           <label for="DataLocationS3">Data location S3</label>
+                           <input type="text" class="form-control" id="DataLocationS3" placeholder="Data location S3" name="DataLocationS3>
+                        </div>
+                        <div class="form-group">
+                           <label for="DataSchema">Data schema</label>
+                           <textarea class="form-control" id="DataSchema" placeholder="Data schema"  rows="10" name="DataSchema></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -120,12 +129,12 @@
                         {{ csrf_field() }}
                         <br><br>
                         <div class="form-group">
-                           <label for="exampleInputEmail1">Email address</label>
-                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                           <label for="DataSourceId">Email address</label>
+                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id">
                         </div>
                         <div class="form-group">
-                           <label for="exampleInputPassword1">Password</label>
-                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                           <label for="DataSourceName">Data source name</label>
+                           <input type="text" class="form-control" id="DataSourceName" placeholder="Data source name">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
