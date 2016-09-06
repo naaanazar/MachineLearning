@@ -15,9 +15,11 @@
                         <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                     </div>
                 </form>
-                <!--<div class="pagination-list">
-                    <?php echo $results->render(); ?>
-                </div>-->
+                <div class="s3-pagination">
+                    <div class="pagination-list pagination-ajas-s3">
+                        <?= $results->render(); ?>
+                    </div>
+                </div>
                 <div class="s3-table">
                     <table class="table table-bordered table-font text-center">
                         <tr class="active">
