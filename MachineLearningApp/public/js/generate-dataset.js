@@ -24,12 +24,11 @@ $(document).ready(function() {
                 $('i.fa-spinner').hide();
                 if(!$.isEmptyObject(data)) {
                     var stats = data.stats;                    
-                    var filePath = stats.path.split('/').pop();
                     var content = '<ul>';
                     content += '<li>Records number: ' +stats.recordsNumber+ '</li>';
                     content += '<li>Purchase number: ' +stats.purchaseNumber+ '</li>';
                     content += '<li>Purchase percentage: ' +stats.purchasePercentage+ '</li>';
-                    var link = "<a href='datasets/" +filePath+ "'>dataset</a>";
+                    var link = "<a href='datasets/" +stats.path+ "'>dataset</a>";
                     content += '<li>Link to dataset: ' +link+ '</li>';
                     content += '</ul>';
                     $('.messages').html(content);
