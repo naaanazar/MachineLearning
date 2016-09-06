@@ -92,21 +92,52 @@ $(document).ready(function () {
     }
 
 
-    $('#info_click').on("click", function (event) {
+
+    // $('#info').click(function(){
+    //     $.post(
+    //         "/скрипт/который/будет/обрабатывать/эту_форму.php",
+    //         { myActionName: "Выполнить" }
+    //     );
+    // });
+
+
+
+
+    $(document).on("click", function (event) {
         $.get('/ml/getdatasource/123456789', function (response) {
-            console.log(response.data);
-            var result = '' +
-                '<table>' +
-                '<tr>' +
-                '<td>' + '<p>' + '<h5>' + 'Name:' + '</h5>' + '<h5>' + 'DataLocationS3:' + '</h5>' + '</p>' + '</td>' +
-                '<td>' + '<p>' + response.data[Object.keys(response.data)[0]] + '</p>' + '<p>' + response.data[Object.keys(response.data)[1]] + '</p>' + '</td>' +
-                '</tr>' +
-                '</table>';
+
+            var result = event.target.nodeName;
 
             $('#result_info').html(result);
         });
 
         event.preventDefault();
+        //event.stopPropagation();
     });
+
+
+
+
+
+
+
+
+//data to modal windows
+//     $('#info').on("click", function (event) {
+//         $.get('/ml/getdatasource/123456789', function (response) {
+//
+//             var result = '' +
+//                 '<table>' +
+//                 '<tr>' +
+//                 '<td>' + '<p>' + '<h5>' + 'Name:' + '</h5>' + '<h5>' + 'DataLocationS3:' + '</h5>' + '</p>' + '</td>' +
+//                 '<td>' + '<p>' + response.data[Object.keys(response.data)[0]] + '</p>' + '<p>' + response.data[Object.keys(response.data)[1]] + '</p>' + '</td>' +
+//                 '</tr>' +
+//                 '</table>';
+//
+//             $('#result_info').html(result);
+//         });
+//
+//         event.preventDefault();
+//     });
 
 });
