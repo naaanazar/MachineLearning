@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <h3 align='center'>Generate dataset</h3>
             <div class="col-md-6 col-md-offset-3">                
-                <input style="display: inline-block; width: 80%; margin-top: 20px;" class="form-control" id="rows-number" type="number" name="rows" placeholder="Records quantity">
+                <input style="display: inline-block; width: 80%; margin-top: 20px;" class="form-control" id="rows-number" type="number" name="rows" placeholder="Records quantity" min="1">
                 <a id="generate-btn" class="btn btn-info" href="{{ URL::to('generate') }}">Generate</a>
             </div>
         </div>
