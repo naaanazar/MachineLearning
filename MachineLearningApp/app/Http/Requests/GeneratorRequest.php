@@ -33,6 +33,7 @@ class GeneratorRequest extends Request
         return [
             'rows.required' => 'Records quantity is required',
             'rows.integer'  => 'Records quantity must be an integer',
+            'rows.min'  => 'Records quantity must be positive number',
         ];
     }
 }
