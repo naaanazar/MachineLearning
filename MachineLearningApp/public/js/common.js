@@ -1,9 +1,9 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
     // upload button without submit
-    $('#input-file').change(function() {
+    $('#input-file').change(function () {
         $('.form-upload').submit();
     });
 
@@ -17,20 +17,39 @@ $(document).ready(function() {
             
             for (var key in response.data) {
 
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectDataSource').html(result);
         });       
     });
 
 
-    $(".btn-create-bath-description").click(function() {
+    $(".btn-create-bath-description").click(function () {
         $(".create-bath-description").toggle();
         $(".container-describeBatchPredictions").toggle();
+
+        $.get("/ml/select-ml-model", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectBathMLModel').html(result);
+        });
+
+        $.get("/ml/select-data-source", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectBathDataSource').html(result);
+        });
     });
 
-
-    $(".btn-create-evaluations").click(function() {
+    $(".btn-create-evaluations").click(function () {
         $(".create-evaluations").toggle();
         $(".container-describeEvaluations").toggle();
 
@@ -39,7 +58,7 @@ $(document).ready(function() {
 
             for (var key in response.data) {
 
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+                result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectMLModelId').html(result);
         });
@@ -49,28 +68,16 @@ $(document).ready(function() {
 
             for (var key in response.data) {
 
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectEvDataSource').html(result);
         });      
     });
 
-    $(".btn-create-datasource").click(function() {
+    $(".btn-create-datasource").click(function () {
         $(".create-datasource").toggle();
         $(".container-describeDataSources").toggle();
-
-        $.get("/ml/select-S3objects", function(response){
-            var  result;
-            for (var key in response.data) {
-                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
-            }
-            $('#SelectDataLocationS3').html(result);
-        });
     });
-
-    
-        
-   
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
@@ -143,4 +150,141 @@ $(document).ready(function() {
                           }
         });
     }
+
+    //modal window ML
+    $(document).on("click", '.datasource-info', function (event) {
+        var datasourceId = $(event.target).closest('tr').find('td:first').text();
+
+        if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'DataSourceId') {
+
+
+            $.get('/ml/getdatasource/' + datasourceId, function (response) {
+                var result = '<table class="table table-condensed">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>' + 'NameData' + '</th>' +
+                    '<th>' + 'InfoData' + '</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + 'Name' + '</td>' +
+                    '<td>' + response.data[0] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'DataSizeInBytes' + '</td>' +
+                    '<td>' + response.data[1] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'NumberOfFiles' + '</td>' +
+                    '<td>' + response.data[2] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'Message' + '</td>' +
+                    '<td>' + response.data[3] + '</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>';
+
+                $('#result_info').html(result);
+                event.preventDefault();
+            });
+
+        } else if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'MLModelId') {
+
+            $.get('/ml/getmlmodel/' + datasourceId, function (response) {
+                var result = '<table class="table table-condensed">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>' + 'NameData' + '</th>' +
+                    '<th>' + 'InfoData' + '</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + 'Name' + '</td>' +
+                    '<td>' + response.data[0] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'SizeInBytes' + '</td>' +
+                    '<td>' + response.data[1] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'InputDataLocationS3' + '</td>' +
+                    '<td>' + response.data[2] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'Message' + '</td>' +
+                    '<td>' + response.data[3] + '</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>';
+
+                $('#result_info').html(result);
+                event.preventDefault();
+            });
+        } else if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'EvaluationId') {
+
+            $.get('/ml/getevaluation/' + datasourceId, function (response) {
+                var result = '<table class="table table-condensed">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>' + 'NameData' + '</th>' +
+                    '<th>' + 'InfoData' + '</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + 'ComputeTime' + '</td>' +
+                    '<td>' + response.data[0] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'InputDataLocationS3' + '</td>' +
+                    '<td>' + response.data[2] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'Message' + '</td>' +
+                    '<td>' + response.data[3] + '</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>';
+
+                $('#result_info').html(result);
+                event.preventDefault();
+            });
+
+        } else if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'BatchPredictionId') {
+
+            $.get('/ml/getbatchprediction/' + datasourceId, function (response) {
+                var result = '<table class="table table-condensed">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>' + 'NameData' + '</th>' +
+                    '<th>' + 'InfoData' + '</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + 'ComputeTime' + '</td>' +
+                    '<td>' + response.data[0] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'InputDataLocationS3' + '</td>' +
+                    '<td>' + response.data[2] + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>' + 'Message' + '</td>' +
+                    '<td>' + response.data[3] + '</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>';
+
+                $('#result_info').html(result);
+                event.preventDefault();
+            });
+
+        }
+
+    });
+
 });
