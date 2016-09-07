@@ -6,7 +6,7 @@
 <div class = "row" >
     <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
         <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
-    </div>     
+    </div>
     <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding: 0">
             <ul class="nav nav nav-tabs nav-justified">
@@ -19,16 +19,16 @@
         <div class="tab-content">
             <div id="describeDataSources" class="tab-pane fade in active">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
+                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
-                        {{ csrf_field() }}                        
+                        {{ csrf_field() }}
                         <div class="form-group">
                            <label for="DataSourceName">Data source name</label>
                            <input type="text" class="form-control" id="DataSourceName" placeholder="Data source name" name="DataSourceName">
-                        </div>                        
+                        </div>
                         <div class="form-group">
                              <label for="SelectDataLocationS3">Data location S3</label>
                              <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
@@ -83,10 +83,10 @@
                     @endforeach
                     </table>
                 </div>
-            </div>  
+            </div>
             <div id="describeMLModels" class="tab-pane fade">
                 <div class="create-ml-mode">
-                    <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>                   
+                    <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createMLModel') }}">
@@ -143,10 +143,10 @@
                         @endforeach
                     </table>
                 </div>
-            </div>            
-            <div id="describeEvaluations" class="tab-pane fade">               
+            </div>
+            <div id="describeEvaluations" class="tab-pane fade">
                 <div class="create-evaluation">
-                    <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>                    
+                    <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createEvaluation') }}">
@@ -220,8 +220,8 @@
                            <input type="text" class="form-control" id="BatchPredictionName" placeholder="Batch prediction name" name="BatchPredictionName">
                         </div>
                         <div class="form-group">
-                           <label for="SelectBathMLModel">ML model id</label>                           
-                           <select class="form-control" id="SelectBathMLModel" name="MLModelId">
+                           <label for="SelectBathMLModelId">ML model id</label>
+                           <select class="form-control" id="SelectBathMLModelId" name="MLModelId">
                            </select>
                         </div>
                         <div class="form-group">
@@ -267,11 +267,12 @@
                         @endforeach
                     </table>
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
 </div>
 </div>
-<br>     
+<br>
 
 @stop
+

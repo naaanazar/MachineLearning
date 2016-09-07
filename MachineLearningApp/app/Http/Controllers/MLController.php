@@ -309,7 +309,7 @@ class MLController extends Controller
 
         $ModelId = 'ml-' . uniqid();
         $ModelName = $request->input('MLModelName');
-        $ModelType = $request->input('MLSModelType');
+        $ModelType = $request->input('MLModelType');
         $DataSourceId = $request->input('DataSourceId');
 
         try {
@@ -323,8 +323,7 @@ class MLController extends Controller
 
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
-        }
-        
+        }      
         return back();
     }
 
@@ -365,7 +364,7 @@ class MLController extends Controller
         try {
            $result = $this->client->createBatchPrediction([
                 'BatchPredictionDataSourceId' => $DataSourceId, // REQUIRED
-                'BatchPredictionId' => $SBatchPredictionId, // REQUIRED
+                'BatchPredictionId' => $BatchPredictionId, // REQUIRED
                 'BatchPredictionName' => $BatchPredictionName,
                 'MLModelId' => $MLModelId, // REQUIRED
                 'OutputUri' => $OutputUri, // REQUIRED
