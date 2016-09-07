@@ -11,6 +11,10 @@ $(document).ready(function() {
     $('.btn-create-mlmodel').click(function(){
         $('.create-mlmodel').toggle();
         $(".container-describeMLModels").toggle();
+
+        $.get("/s3/select-mlmodel", function(response){
+            selectAjax(response, '#SelectMLModel');
+        });
     });
 
     $(".btn-create-bath-description").click(function() {
@@ -21,6 +25,7 @@ $(document).ready(function() {
     $(".btn-create-evaluations").click(function() {
         $(".create-evaluations").toggle();
         $(".container-describeEvaluations").toggle();
+
     });
 
     $(".btn-create-datasource").click(function() {
@@ -28,15 +33,17 @@ $(document).ready(function() {
         $(".container-describeDataSources").toggle();
 
         $.get("/s3/select-data-source", function(response){
-          for (var key in response.data) {
-              console.log(response.data[key].Key);
-          }
-          alert(response.data[0][Key]);
-          
+            selectAjax(response, '#SelectDataLocationS3');
         });
     });
 
-
+    function selectAjax(response, selector){
+        var  result;
+        for (var key in response.data) {
+            result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+        }
+        $(selector).html(result);
+    };
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);

@@ -24,28 +24,27 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
-                        {{ csrf_field() }}
-                        <br><br>
+                        {{ csrf_field() }}                        
                         <div class="form-group">
                            <label for="DataSourceName">Data source name</label>
                            <input type="text" class="form-control" id="DataSourceName" placeholder="Data source name" name="DataSourceName">
-                        </div>
-                        <div class="form-group">
-                           <label for="DataLocationS3">Data location S3</label>
-                           <input type="text" class="form-control" id="DataLocationS3" placeholder="s3://bucket/file.csv" name="DataLocationS3">
-                        </div>
+                        </div>                        
                         <div class="form-group">
                              <label for="SelectDataLocationS3">Data location S3</label>
-                             <select class="form-control" id="SelectDataLocationS3">                                
-                                
-                            </select>
-
+                             <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
+                             </select>
                         </div>
-                        <div id="55">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="DataRearrangement">Data rearrangement Begin</label>
+                                <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementBegin">
+                            </div>
                         </div>
-                        <div class="form-group">
-                           <label for="DataRearrangement">Data rearrangement</label>
-                           <input type="text" class="form-control" id="DataRearrangement" value='{"splitting":{"percentBegin":0,"percentEnd":70}}' name="DataRearrangement">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="DataRearrangement">Data rearrangement End</label>
+                                <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementEnd">
+                            </div>
                         </div>
                         <div class="form-group">
                            <label for="DataSchema">Data schema</label>
@@ -99,11 +98,16 @@
                         </div>
                         <div class="form-group">
                            <label for="MLModelType">ML model type</label>
-                           <input type="text" class="form-control" id="MLModelType" placeholder="REGRESSION|BINARY|MULTICLASS" name="MLModelType">
+                            <select class="form-control" id="MLModelType" name="MLModelType">
+                                <option selected value="BINARY">BINARY</option>
+                                <option value="REGRESSION">REGRESSION</option>
+                                <option value="MULTICLASS">MULTICLASS</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                           <label for="DataSourceId">Data source id</label>
-                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
+                           <label for="SelectMLModel">Data source id</label>
+                           <select class="form-control" id="SelectMLModel" name="DataSourceId">
+                           </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

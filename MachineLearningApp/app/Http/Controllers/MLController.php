@@ -51,13 +51,19 @@ class MLController extends Controller
         return view('ml.index',['result' => $result]);
     }
 
-    public function ListS3()
+    public function selectObjectsS3()
     {
         $list = new S3Controller;
         $result = $list->ListObjectsS3();
         /*echo '<pre>';
         print_r($result);*/
         return response()->json(['data' => (array)$result]);
+    }
+
+    public function selectDataSources()
+    {
+
+
     }
 
 
@@ -265,9 +271,10 @@ class MLController extends Controller
 
         $DataSourceId = 'ds-' . uniqid();
         $DataSourceName = $request->input('DataSourceName');
-        $DataLocationS3 = $request->input('DataLocationS3');
+        $DataLocationS3 = 's3://' . $this->bucket . '/' . $request->input('DataLocationS3');
         $DataSchema = $request->input('DataSchema');
-        $DataRearrangement = $request->input('DataRearrangement');
+        $DataRearrangement = '{"splitting":{"percentBegin":' . $request->input("DataRearrangementBegin")
+                . ',"percentEnd":' . $request->input("DataRearrangementEnd") . '}}';
 
         try {
            $result = $this->client->createDataSourceFromS3([
