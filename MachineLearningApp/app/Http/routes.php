@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('predictions', 'S3Controller@predictionForm');
+
 Route::get('s3/list/', 'S3Controller@listS3');
 Route::post('/s3/upload', 'S3Controller@upload');
 Route::get('/s3/delete/{name}', 'S3Controller@delete');

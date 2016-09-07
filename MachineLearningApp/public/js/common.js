@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     $(".btn-create-bath-description").click(function() {
-        $(".create-bath-descriptions").toggle();
+        $(".create-bath-description").toggle();
         $(".container-describeBatchPredictions").toggle();
     });
 
@@ -38,6 +38,19 @@ $(document).ready(function() {
         }
     });
 
+    function successS3(selector, str) {
+        $(selector).append('<div class="alert alert-success upload-message-s3">'
+                            + '<ul><li><strong>Success! </strong>'
+                            + str  + '</li></ul></div>').show('slow').hide(4000);
+    }
+
+    function errorS3(selector) {
+        $(selector).append('<div class="alert alert-danger upload-message-s3">'
+                            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
+                            + '</li></ul></div>').show('slow').hide(4000);
+
+    }
+
     $(document).on('click', '.btn-delete', function(e){
         e.preventDefault();
         var url = $(this).attr('href');
@@ -48,15 +61,15 @@ $(document).ready(function() {
                             if(data.success) {
                                 $(e.target).closest('tr').hide("fast");
                             }
-                            $('.notification-s3').append('<div class="alert alert-success upload-message-s3">'
-                                                            + '<ul><li><strong>Success!</strong>'
-                                                            + '   File delete!</li></ul></div>').show('slow').hide(4000);
+                            successS3('.notification-s3', 'File delete!');
                       }
         });
     });
 
+
     //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function(e){
+        console.log($(".form-upload"));
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
         $.ajax({
@@ -67,15 +80,11 @@ $(document).ready(function() {
             cache       : false,
             processData : false,
             success     : function (data) {
-                                getListS3();
-                                $('.notification-s3').append('<div class="alert alert-success upload-message-s3">'
-                                                            + '<ul><li><strong>Success!</strong>'
-                                                            + '   File successfully uploaded to S3!</li></ul></div>').show('slow').hide(4000);
-                          },
+                              getListS3();
+                              successS3('.notification-s3', 'File uploaded to S3!');
+                         },
             error       : function () {
-                                $('.notification-s3').append('<div class="alert alert-danger upload-message-s3">'
-                                                            + '<ul><li><strong>Error! File no upload to S3!</strong>'
-                                                            + '</li></ul></div>').show('slow').hide(4000);
+                              errorS3('.notification-s3');
                           },
         });
     });
@@ -86,7 +95,6 @@ $(document).ready(function() {
             url         : '/s3/list',
             method      : 'GET',
             success     : function (data) {
-                              console.log($(data).find('div.pagination-list'));
                               $('.s3-pagination').html($(data).find('div.pagination-list'));
                               $('.s3-table').html($(data).find('table'));
                           }

@@ -372,6 +372,7 @@ class MLController extends Controller
     }
 
 
+
     public function deleteRealtimeEndpoint($MLModelId)
     {
 
@@ -387,10 +388,24 @@ class MLController extends Controller
     }
 
 
-    public function predict($MLModelId)
+
+    public function predict(Request $request)
+
     {
 
         $client = $this->connectToML();
+
+        $country                 = $request->input('country');
+        $stringsCount            = $request->input('strings_count');
+        $membersCount            = $request->input('members_count');
+        $projectCount            = $request->input('projects_count');
+        $emailCustomDomain       = $request->input('email_custom_domain');
+        $hasPrivateProject       = $request->input('has_private_project');
+        $daysAfterLastLogin      = $request->input('days_after_last_login');
+        $sameEmailDomainCount    = $request->input('same_email_domain_count');
+        $sameLoginAndProjectName = $request->input('same_login_and_project_name');
+
+
 
         try {
            $result = $client->predict([
