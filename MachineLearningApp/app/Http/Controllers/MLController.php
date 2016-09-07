@@ -249,127 +249,108 @@ class MLController extends Controller
     }
 
 
-    public function createDataSourceFromS3($DataSourceId, $DataSourceName, $DataSchema)
+    public function createDataSourceFromS3(Request $request)
     {
 
-        $client = $this->connectToML();
+        $DataSourceId = 'ds-' . uniqid();
+        $DataSourceName = $request->input('DataSourceName');
+        $DataLocationS3 = $request->input('DataLocationS3');
+        $DataSchema = $request->input('DataSchema');
+        $DataRearrangement = $request->input('DataRearrangement');
 
         try {
-           $result = $client->createDataSourceFromS3([
+           $result = $this->client->createDataSourceFromS3([
                 'ComputeStatistics' => true,
                 'DataSourceId' => $DataSourceId, // REQUIRED
                 'DataSourceName' => $DataSourceName,
                 'DataSpec' => [ // REQUIRED
-                    'DataLocationS3' => 's3://ml-datasets-test/123.csv', // REQUIRED
-                    'DataRearrangement' => '{"splitting":{"percentBegin":0,"percentEnd":70}}',
+                    'DataLocationS3' => $DataLocationS3, // REQUIRED
+                    'DataRearrangement' => $DataRearrangement,
                     'DataSchema' => $DataSchema
                 ],
             ]);
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
-        }
-        echo '<pre>';
-        print_r($result);
-        return $result['DataSourceId'];
+        }      
+        
+        return back();
     }
 
 
-    public function createMLModel($ModelId, $ModelName, $ModelType, $DataSourceId)
+    public function createMLModel(Request $request)
     {
 
-        $client = $this->connectToML();
+        $ModelId = 'ml-' . uniqid();
+        $ModelName = $request->input('MLModelName');
+        $ModelType = $request->input('MLSModelType');
+        $DataSourceId = $request->input('DataSourceId');
 
         try {
 
-            $result = $client->createMLModel([
-                'MLModelId' => $ModelId, // REQUIRED
+            $result = $this->client->createMLModel([
+                'MLModelId' => $ModelId,
                 'MLModelName' => $ModelName,
-                'MLModelType' => $ModelType, // REQUIRED
-                //'Parameters' => ['<string>', ...],
-                //'Recipe' => '<string>',
-                //'RecipeUri' => '<string>',
-                'TrainingDataSourceId' => $DataSourceId, // REQUIRED
+                'MLModelType' => $ModelType,
+                'TrainingDataSourceId' => $DataSourceId,
             ]);
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
-        return $result['MLModelId'];
+        
+        return back();
     }
 
 
-    public function createEvaluation($EvaluationName, $EvaluationId, $ModelId, $EvaluationDataSourceId)
+    public function createEvaluation(Request $request)
     {
 
-        $client = $this->connectToML();
+        $DataSourceId = $request->input('DataSourceId');
+        $EvaluationId = 'ev-' . uniqid();
+        $EvaluationName = $request->input('EvaluationName');
+        $MLModelId = $request->input('MLModelId');
 
         try {
 
-            $result = $client->createEvaluation([
-                'EvaluationDataSourceId' => $EvaluationDataSourceId, // REQUIRED
-                'EvaluationId' => $EvaluationId, // REQUIRED
+            $result = $this->client->createEvaluation([
+                'EvaluationDataSourceId' => $DataSourceId,
+                'EvaluationId' => $EvaluationId,
                 'EvaluationName' => $EvaluationName,
-                'MLModelId' => $ModelId, // REQUIRED
+                'MLModelId' => $MLModelId,
             ]);
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
 
-        return $result['EvaluationId'];
+        return back();
     }
 
 
-    public function createDataSourceBathFromS3($DataSourceId, $DataSourceName, $DataSchema)
+    public function createBatchPrediction(Request $request)
     {
-
-        $client = $this->connectToML();
+        
+        $DataSourceId = $request->input('DataSourceId');
+        $BatchPredictionId = 'bp-' . uniqid();
+        $BatchPredictionName = $request->input('BatchPredictionName');
+        $MLModelId = $request->input('MLModelId');
+        $OutputUri = 's3://' . $this->bucket . '/bathPrediction/';
 
         try {
-           $result = $client->createDataSourceFromS3([
-                'ComputeStatistics' => true,
-                'DataSourceId' => $DataSourceId, // REQUIRED
-                'DataSourceName' => $DataSourceName,
-                'DataSpec' => [ // REQUIRED
-                    'DataLocationS3' => 's3://ml-datasets-test/123_b.csv', // REQUIRED
-                    'DataSchema' => $DataSchema
-                ],
-            ]);
-
-        } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
-        }
-        echo '<pre>';
-        print_r($result);
-        return $result['DataSourceId'];
-    }
-
-
-    public function createBatchPrediction($BatchPredictionDataSourceId, $BatchPredictionId, $BatchPredictionName, $ModelId, $OutputUri)
-    {
-
-        $client = $this->connectToML();
-
-        try {
-           $result = $client->createBatchPrediction([
-                'BatchPredictionDataSourceId' => $BatchPredictionDataSourceId, // REQUIRED
-                'BatchPredictionId' => $BatchPredictionId, // REQUIRED
+           $result = $this->client->createBatchPrediction([
+                'BatchPredictionDataSourceId' => $DataSourceId, // REQUIRED
+                'BatchPredictionId' => $SBatchPredictionId, // REQUIRED
                 'BatchPredictionName' => $BatchPredictionName,
-                'MLModelId' => $ModelId, // REQUIRED
+                'MLModelId' => $MLModelId, // REQUIRED
                 'OutputUri' => $OutputUri, // REQUIRED
             ]);
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
-        return $result['BatchPredictionId'];
+
+        return back();
     }
 
 
