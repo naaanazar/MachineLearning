@@ -7,42 +7,52 @@
     <h3 class="title">Real time prediction</h3>
     <br>
     <div class="col-lg-8 col-md-8 col-ms-8 col-xs-8">
-        <form class="form-horizontal" method="post" action="#">
+        <form class="form-horizontal" method="post" action="{{ action('MLController@predict') }}">
+            {{ csrf_field() }}
             <div class="form-group">
-                <label for="email" class="control-label batch-label text-right">Email custom domain</label>
-                <input id="email" name="email_custom_domain" type="text" class="form-control batch-input" placeholder="Email custom domain">
+                <label for="ml_model" class="control-label batch-label text-right">ML Model ID</label>
+                <select id="ml_model" name="ml_model_id" type="text" class="form-control batch-input" placeholder="ML Model ID" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="email" class="control-label batch-label text-right">Email custom domain <span class="prediction-type">[int]</span></label>
+                <input id="email" name="email_custom_domain" type="number" class="form-control batch-input" placeholder="Email custom domain" min="0" max="1" required>
             </div>
             <div class="form-group">
-                <label for="same-email" class="control-label batch-label text-right">Same email domain count</label>
-                <input id="same-email" name="same_email_domain_count" type="text" class="form-control batch-input" placeholder="Same email domain count">
+                <label for="same-email" class="control-label batch-label text-right">Same email domain count <span class="prediction-type">[int]</span></label>
+                <input id="same-email" name="same_email_domain_count" type="number" class="form-control batch-input" placeholder="Same email domain count" required>
             </div>
             <div class="form-group">
-                <label for="projects-count" class="control-label batch-label text-right">Projects count</label>
-                <input id="projects-count" name="projects_count" type="text" class="form-control batch-input" placeholder="Projects count">
+                <label for="projects-count" class="control-label batch-label text-right">Projects count <span class="prediction-type">[int]</span></label>
+                <input id="projects-count" name="projects_count" type="number" class="form-control batch-input" placeholder="Projects count" required>
             </div>
             <div class="form-group">
-                <label for="string-count" class="control-label batch-label text-right">Strings count</label>
-                <input id="string-count" name="strings_count" type="text" class="form-control batch-input" placeholder="Strings count">
+                <label for="string-count" class="control-label batch-label text-right">Strings count <span class="prediction-type">[int]</span></label>
+                <input id="string-count" name="strings_count" type="number" class="form-control batch-input" placeholder="Strings count" required>
             </div>
             <div class="form-group">
-                <label for="members-count" class="control-label batch-label text-right">Members count</label>
-                <input id="members-count" name="members_count" type="text" class="form-control batch-input" placeholder="Members count">
+                <label for="members-count" class="control-label batch-label text-right">Members count <span class="prediction-type">[int]</span></label>
+                <input id="members-count" name="members_count" type="number" class="form-control batch-input" placeholder="Members count" required>
             </div>
             <div class="form-group">
-                <label for="has-privat-project" class="control-label batch-label text-right">Has private project</label>
-                <input id="has-privat-project" name="has_private_project" type="text" class="form-control batch-input" placeholder="Has private project">
+                <label for="has-privat-project" class="control-label batch-label text-right">Has private project <span class="prediction-type">[int]</span></label>
+                <input id="has-privat-project" name="has_private_project" type="number" class="form-control batch-input" placeholder="Has private project" min="0" max="1" required>
             </div>
             <div class="form-group">
-                <label for="same-log-project" class="control-label batch-label text-right">Same login and project name</label>
-                <input id="same-log-project" name="same_login_and_project_name" type="text" class="form-control batch-input" placeholder="Same login and project name">
+                <label for="same-log-project" class="control-label batch-label text-right">Same login and project name <span class="prediction-type">int</span></label>
+                <input id="same-log-project" name="same_login_and_project_name" type="number" class="form-control batch-input" placeholder="Same login and project name" min="0" max="1" required>
             </div>
             <div class="form-group">
-                <label for="last-login" class="control-label batch-label text-right">Days after last login</label>
-                <input id="last-login" name="days_after_last_login" type="text" class="form-control batch-input" placeholder="Days after last login">
+                <label for="last-login" class="control-label batch-label text-right">Days after last login <span class="prediction-type">int</span></label>
+                <input id="last-login" name="days_after_last_login" type="number" class="form-control batch-input" placeholder="Days after last login" required>
             </div>
             <div class="form-group">
-                <label for="country" class="control-label batch-label text-right">Country</label>
-                <input id="country" name="country" type="text" class="form-control batch-input" placeholder="Country">
+                <label for="country" class="control-label batch-label text-right">Country <span class="prediction-type">str</span></label>
+                <input id="country" name="country" type="text" class="form-control batch-input" placeholder="Country" required>
             </div>
             <div class="form-group">
                 <input class="btn btn-primary pull-right" value="Send" type="submit">

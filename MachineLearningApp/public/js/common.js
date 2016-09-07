@@ -66,7 +66,6 @@ $(document).ready(function() {
         });
     });
 
-
     //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function(e){
         console.log($(".form-upload"));
@@ -92,9 +91,9 @@ $(document).ready(function() {
     // update list s3
     function getListS3() {
         $.ajax({
-            url         : '/s3/list',
-            method      : 'GET',
-            success     : function (data) {
+            url     : '/s3/list',
+            method  : 'GET',
+            success : function (data) {
                               $('.s3-pagination').html($(data).find('div.pagination-list'));
                               $('.s3-table').html($(data).find('table'));
                           }
