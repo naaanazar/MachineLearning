@@ -29,38 +29,19 @@
         <![endif]-->
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class ="col-md-4 col-lg-4 col-sm-4 col-xs-5">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/">
-                            <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
-                        </a>
-                    </div>
-                </div>
-                <div class="main-menu col-md-8 col-lg-8 col-sm-8 col-xs-7">
-                    <ul class="nav navbar-nav"> 
-                        <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
-                            <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
-                        </li>
-                        <li {{ (Request::is('ml') ? 'class=active' : '') }}>
-                            <a href="{{ action('MLController@index') }}">ML</a>
-                        </li>
-                        <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
-                            <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
-                        </li>
-                        <li {{ (Request::is('generator') ? 'class=active' : '') }}>
-                            <a href="{{ URL::to('generator') }}">Generator</a>
-                        </li>
-                        <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
-                            <a href="{{ action('BucketController@index') }}">Buckets</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dropdown-main-menu col-md-8 col-lg-8 col-sm-8 col-xs-7">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"              aria-haspopup="true" aria-expanded="true">Menu<span class="caret"></span>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                 <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                <div class="navbar-menu">
+                    <ul class="nav navbar-nav">
                             <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
                                 <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
                             </li>
@@ -76,15 +57,14 @@
                             <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
                                 <a href="{{ action('BucketController@index') }}">Buckets</a>
                             </li>
-                        </ul>
+                    </ul>
+                    </div>
                 </div>
-            </div>     
+            </div>
         </nav>
 
         @yield('content')
-
-        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Back to Top" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-chevron-up"></span></a>
-        
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"  data-placement="top"><span class="glyphicon glyphicon-chevron-up"></span></a>
         <div class="footer panel panel-margin">
             <div class="panel-footer text-center">
                 <span class="copy">2016 &copy; Crowdin.Space</span>
