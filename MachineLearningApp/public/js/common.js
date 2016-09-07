@@ -62,7 +62,7 @@ $(document).ready(function() {
         $.ajax({
             url         : '/s3/upload',
             method      : 'POST',
-            data        : new FormData($(".form-upload")[0]),
+            data        : new FormData($(".form-upload")),
             contentType : false,
             cache       : false,
             processData : false,
@@ -86,7 +86,6 @@ $(document).ready(function() {
             url         : '/s3/list',
             method      : 'GET',
             success     : function (data) {
-                              console.log($(data).find('div.pagination-list'));
                               $('.s3-pagination').html($(data).find('div.pagination-list'));
                               $('.s3-table').html($(data).find('table'));
                           }
