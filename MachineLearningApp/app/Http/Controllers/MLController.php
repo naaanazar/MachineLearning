@@ -1,34 +1,41 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
+
 class MLController extends Controller
 {
 
     public $bucket = 'ml-datasets-test';
     private $client;
-    function __construct() {
+
+    function __construct()
+    {
         $this->client = $this->connectToML();
     }
+
     public function index()
     {
         return view('ml.index');
     }
+
     private function connectToML()
     {
         $ml = new MachineLearningClient([
-            'version'     => 'latest',
-            'region'      => 'us-east-1',
+            'version' => 'latest',
+            'region' => 'us-east-1',
             'credentials' => [
-                'key'    => 'AKIAI5RJSS2CYUZ6STHQ',
+                'key' => 'AKIAI5RJSS2CYUZ6STHQ',
                 'secret' => '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'
             ]
         ]);
         return $ml;
     }
+
     public function listMLData()
     {
         $result['describeDataSources'] = $this->describeDataSources();
@@ -36,9 +43,10 @@ class MLController extends Controller
         $result['describeEvaluations'] = $this->describeEvaluations();
         $result['describeBatchPredictions'] = $this->describeBatchPredictions();
 
-        return view('ml.index',['result' => $result]);
+        return view('ml.index', ['result' => $result]);
     }
-    public function describeDataSources ()
+
+    public function describeDataSources()
     {
         try {
             $result = $this->client->describeDataSources([
@@ -49,7 +57,8 @@ class MLController extends Controller
         }
         return $result['Results'];
     }
-    public function describeMLModels ()
+
+    public function describeMLModels()
     {
         try {
             $result = $this->client->describeMLModels([
@@ -60,6 +69,7 @@ class MLController extends Controller
         }
         return $result['Results'];
     }
+
     public function describeEvaluations()
     {
         try {
@@ -71,6 +81,7 @@ class MLController extends Controller
         }
         return $result['Results'];
     }
+
     public function describeBatchPredictions()
     {
         try {
@@ -93,8 +104,11 @@ class MLController extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        $arr = [$result['Name'], $result['DataLocationS3']];
-        //dd($arr);
+        $arr = [$result['Name'],
+            $result['DataSizeInBytes'],
+            $result['NumberOfFiles'],
+            $result['Message']];
+        //dd($result);
 
         return response()->json(['data' => (array)$arr]);
     }
@@ -109,9 +123,15 @@ class MLController extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
+        $arr = [$result['Name'],
+            $result['SizeInBytes'],
+            $result['InputDataLocationS3'],
+            $result['Message']];
+        //dd($arr);
+        return response()->json(['data' => (array)$arr]);
+
     }
+
     public function getEvaluation($EvaluationId)
     {
         try {
@@ -122,9 +142,14 @@ class MLController extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
+        $arr = [$result['Name'],
+            $result['ComputeTime'],
+            $result['InputDataLocationS3'],
+            $result['Message']];
+
+        return response()->json(['data' => (array)$arr]);
     }
+
     public function getBatchPrediction($getBatchPredictionId)
     {
         try {
@@ -134,9 +159,14 @@ class MLController extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
+        $arr = [$result['Name'],
+            $result['ComputeTime'],
+            $result['InputDataLocationS3'],
+            $result['Message']];
+
+        return response()->json(['data' => (array)$arr]);
     }
+
     public function deleteDataSource($DataSourceId)
     {
         try {
@@ -149,6 +179,7 @@ class MLController extends Controller
         return back();
 
     }
+
     public function deleteEvaluation($EvaluationId)
     {
 
@@ -161,6 +192,7 @@ class MLController extends Controller
         }
         return back();
     }
+
     public function deleteMLModel($MLModelId)
     {
 
@@ -173,6 +205,7 @@ class MLController extends Controller
         }
         return back();
     }
+
     public function deleteBatchPrediction($BatchPredictionId)
     {
         try {
@@ -184,6 +217,7 @@ class MLController extends Controller
         }
         return back();
     }
+
     public function createDataSourceFromS3($DataSourceId, $DataSourceName, $DataSchema)
     {
         $client = $this->connectToML();
@@ -205,6 +239,7 @@ class MLController extends Controller
         print_r($result);
         return $result['DataSourceId'];
     }
+
     public function createMLModel($ModelId, $ModelName, $ModelType, $DataSourceId)
     {
         $client = $this->connectToML();
@@ -225,6 +260,7 @@ class MLController extends Controller
         print_r($result);
         return $result['MLModelId'];
     }
+
     public function createEvaluation($EvaluationName, $EvaluationId, $ModelId, $EvaluationDataSourceId)
     {
         $client = $this->connectToML();
@@ -242,6 +278,7 @@ class MLController extends Controller
         print_r($result);
         return $result['EvaluationId'];
     }
+
     public function createDataSourceBathFromS3($DataSourceId, $DataSourceName, $DataSchema)
     {
         $client = $this->connectToML();
@@ -262,6 +299,7 @@ class MLController extends Controller
         print_r($result);
         return $result['DataSourceId'];
     }
+
     public function createBatchPrediction($BatchPredictionDataSourceId, $BatchPredictionId, $BatchPredictionName, $ModelId, $OutputUri)
     {
         $client = $this->connectToML();
@@ -280,6 +318,7 @@ class MLController extends Controller
         print_r($result);
         return $result['BatchPredictionId'];
     }
+
     public function createRealtimeEndpoint($MLModelId)
     {
         $client = $this->connectToML();
@@ -293,6 +332,7 @@ class MLController extends Controller
         echo '<pre>';
         print_r($result);
     }
+
     public function predict($MLModelId)
     {
         $client = $this->connectToML();
@@ -301,15 +341,15 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId, // REQUIRED
                 'PredictEndpoint' => 'https://realtime.machinelearning.us-east-1.amazonaws.com', // REQUIRED
                 'Record' => [
-                    "email_custom_domain"=>"0",
-                    "same_email_domain_count"=>"956",
-                    "projects_count"=>"67",
-                    "strings_count"=>"46",
-                    "members_count"=>"843",
-                    "has_private_project"=>"1",
-                    "same_login_and_project_name"=>"1",
-                    "days_after_last_login"=>"8",
-                    "country"=>"China"]
+                    "email_custom_domain" => "0",
+                    "same_email_domain_count" => "956",
+                    "projects_count" => "67",
+                    "strings_count" => "46",
+                    "members_count" => "843",
+                    "has_private_project" => "1",
+                    "same_login_and_project_name" => "1",
+                    "days_after_last_login" => "8",
+                    "country" => "China"]
             ]);
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
@@ -317,10 +357,6 @@ class MLController extends Controller
         echo '<pre>';
         print_r($result);
     }
-
-
-
-
 
 
 }

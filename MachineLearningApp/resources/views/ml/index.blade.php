@@ -15,7 +15,6 @@
                         <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
                         <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
                         <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
-                        <li><a href="#modal" role="button" class="btn" data-toggle="modal" id="info_click">Click Me</a>
                         </li>
                     </ul>
                 </div>
@@ -64,10 +63,12 @@
                                         <td>{{ $value['DataLocationS3'] }}</td>
                                         <td>{{ $value['LastUpdatedAt'] }}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal" data-toggle="modal" id="info_{{ $i }}">
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}">
                                                 <span class="glyphicon glyphicon-info-sign"></span>
                                             </a>
-                                            <a class="btn btn-danger btn-sm btn-list datasource-delete" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}">
+                                            <a class="btn btn-danger btn-sm btn-list datasource-delete"
+                                               href="/ml/delete-datasource/{{ $value['DataSourceId'] }}">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </td>
@@ -110,6 +111,7 @@
                                     <td>Last Updated</td>
                                     <td>&nbsp;</td>
                                 </tr>
+                                <span class="hide">{{$i = 1}}</span>
                                 @foreach($result['describeMLModels'] as $key => $value)
                                     <tr>
                                         <td>{{ $value['MLModelId'] }}</td>
@@ -119,14 +121,15 @@
                                         <td>{{ $value['MLModelType'] }}</td>
                                         <td>{{ $value['LastUpdatedAt'] }}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm btn-list"
-                                               href="/ml/getmlmodel/{{ $value['MLModelId'] }}"><span
-                                                        class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}">
+                                                <span class="glyphicon glyphicon-info-sign"></span></a>
                                             <a class="btn btn-danger btn-sm btn-list"
                                                href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span
                                                         class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
+                                    <span class="hide">{{ $i = $i+1 }}</span>
                                 @endforeach
                             </table>
                         </div>
@@ -166,6 +169,7 @@
                                 <td>Last Updated</td>
                                 <td>&nbsp;</td>
                             </tr>
+                            <span class="hide">{{$i = 1}}</span>
                             @foreach($result['describeEvaluations'] as $key => $value)
                                 <tr>
                                     <td>{{ $value['EvaluationId'] }}</td>
@@ -176,14 +180,15 @@
                                     <td>{{ $value['EvaluationDataSourceId'] }}</td>
                                     <td>{{ $value['LastUpdatedAt'] }}</td>
                                     <td>
-                                        <a class="btn btn-info btn-sm btn-list"
-                                           href="/ml/getevaluation/{{ $value['EvaluationId'] }}"><span
-                                                    class="glyphicon glyphicon-info-sign"></span></a>
+                                        <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                           data-toggle="modal" id="info_{{ $i }}">
+                                            <span class="glyphicon glyphicon-info-sign"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list"
                                            href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span
                                                     class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                 </tr>
+                                <span class="hide">{{ $i = $i+1 }}</span>
                             @endforeach
                         </table>
                     </div>
@@ -224,6 +229,7 @@
                                     <td>TotalRecordCount</td>
                                     <td>&nbsp;</td>
                                 </tr>
+                                <span class="hide">{{$i = 1}}</span>
                                 @foreach($result['describeBatchPredictions'] as $key => $value)
                                     <tr>
                                         <td>{{ $value['BatchPredictionId'] }}</td>
@@ -239,16 +245,16 @@
                                         </td>
                                         <td>{{ $value['LastUpdatedAt'] }}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm btn-list"
-                                               href="/ml/getbatchprediction/{{ $value['BatchPredictionId'] }}"><span
-                                                        class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}">
+                                                <span class="glyphicon glyphicon-info-sign"></span></a>
                                             <a class="btn btn-danger btn-sm btn-list"
                                                href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span
                                                         class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
 
-
+                                    <span class="hide">{{ $i = $i+1 }}</span>
                                 @endforeach
                             </table>
                         </div>
@@ -265,7 +271,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h2>Information</h2>
+                    <h2 align="center">Information</h2>
                 </div>
                 <div class="modal-body" id="result_info">
 
