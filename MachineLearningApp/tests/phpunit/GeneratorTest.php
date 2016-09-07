@@ -12,8 +12,10 @@ class GeneratorTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->fixture = new GeneratorController();
-        
-        
+
+        // Hack!
+        // TODO: Find a better solution
+        require_once __DIR__.'/../../bootstrap/app.php';
     }
 
     protected function tearDown()
