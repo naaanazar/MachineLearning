@@ -29,8 +29,7 @@ class DatasetGenerator
         'purchase'                      // 30% of purchasing
     );
 
-    
-    public $targetFile = 'datasets/dataset.csv';
+    public $targetFile;
     private $file;
     public $rowsCount = 15000;
     public $total = 0;
@@ -39,6 +38,7 @@ class DatasetGenerator
 
     public function __construct()
     {
+        $this->targetFile = public_path() . '/datasets/dataset.csv';
         $this->file = fopen($this->targetFile, 'w+');
     }
 

@@ -27,7 +27,7 @@ class GeneratorController extends Controller
             'recordsNumber' => $datasetFeeder->rowsCount,
             'purchaseNumber' => $datasetFeeder->total,
             'purchasePercentage' => $datasetFeeder->percents,
-            'path' => $datasetFeeder->targetFile
+            'path' => basename($datasetFeeder->targetFile),
         );
 
         return json_encode(array('stats' => $stats));

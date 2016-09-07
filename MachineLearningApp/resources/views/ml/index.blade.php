@@ -42,6 +42,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
+
                         <div class="container-describeDataSources">
                             <table class="table table-bordered table-font text-center">
                                 <tr class="active">
@@ -52,24 +53,26 @@
                                     <td>Last Updated</td>
                                     <td>&nbsp;</td>
                                 </tr>
+                                <span class="hide">{{$i = 1}}</span>
 
                                 @foreach($result['describeDataSources'] as $key => $value)
                                     <tr>
+
                                         <td>{{ $value['DataSourceId'] }}</td>
                                         <td>{{ $value['Name'] }}</td>
                                         <td>{{ $value['Status'] }}</td>
                                         <td>{{ $value['DataLocationS3'] }}</td>
                                         <td>{{ $value['LastUpdatedAt'] }}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm btn-list"
-                                               href="#modal" data-toggle="modal"
-                                               id="info"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                            <a class="btn btn-danger btn-sm btn-list"
-                                               href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span
-                                                        class="glyphicon glyphicon-trash"></span></a>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal" data-toggle="modal" id="info_{{ $i }}">
+                                                <span class="glyphicon glyphicon-info-sign"></span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm btn-list datasource-delete" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
                                         </td>
                                     </tr>
-
+                                    <span class="hide">{{ $i = $i+1 }}</span>
                                 @endforeach
                             </table>
                         </div>
@@ -262,7 +265,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h2>Lorem Ipsum</h2>
+                    <h2>Information</h2>
                 </div>
                 <div class="modal-body" id="result_info">
 

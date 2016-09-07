@@ -91,53 +91,19 @@ $(document).ready(function () {
         });
     }
 
+    //modal window ML
+    $(document).on("click", '.datasource-info', function (event) {
+        var datasourceId = $(event.target).closest('tr').find('td:first').text();
 
-
-    // $('#info').click(function(){
-    //     $.post(
-    //         "/скрипт/который/будет/обрабатывать/эту_форму.php",
-    //         { myActionName: "Выполнить" }
-    //     );
-    // });
-
-
-
-
-    $(document).on("click", function (event) {
-        $.get('/ml/getdatasource/123456789', function (response) {
-
-            var result = event.target.nodeName;
+        $.get('/ml/getdatasource/' + datasourceId, function (response) {
+            var result = '<p>' + '<span class="text-success">' + '<h4>' + 'Name:' + '</h4>' + response.data[0] + '</span></p><br><p><span class="text-success">' + '<h4>' + 'DataLocationS3:' + '</h4>' + response.data[1] + '</span></p>';
 
             $('#result_info').html(result);
         });
 
         event.preventDefault();
-        //event.stopPropagation();
     });
 
 
-
-
-
-
-
-
-//data to modal windows
-//     $('#info').on("click", function (event) {
-//         $.get('/ml/getdatasource/123456789', function (response) {
-//
-//             var result = '' +
-//                 '<table>' +
-//                 '<tr>' +
-//                 '<td>' + '<p>' + '<h5>' + 'Name:' + '</h5>' + '<h5>' + 'DataLocationS3:' + '</h5>' + '</p>' + '</td>' +
-//                 '<td>' + '<p>' + response.data[Object.keys(response.data)[0]] + '</p>' + '<p>' + response.data[Object.keys(response.data)[1]] + '</p>' + '</td>' +
-//                 '</tr>' +
-//                 '</table>';
-//
-//             $('#result_info').html(result);
-//         });
-//
-//         event.preventDefault();
-//     });
 
 });
