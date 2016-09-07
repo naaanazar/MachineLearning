@@ -151,7 +151,7 @@ class MLController extends Controller
                 'Verbose' => true || false,
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -169,7 +169,7 @@ class MLController extends Controller
             'Verbose' => true,
         ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -186,7 +186,7 @@ class MLController extends Controller
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -202,7 +202,7 @@ class MLController extends Controller
                 'BatchPredictionId' => $getBatchPredictionId, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -296,7 +296,7 @@ class MLController extends Controller
                 ],
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }      
         
@@ -321,7 +321,7 @@ class MLController extends Controller
                 'TrainingDataSourceId' => $DataSourceId,
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         
@@ -346,7 +346,7 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId,
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -356,7 +356,6 @@ class MLController extends Controller
 
     public function createBatchPrediction(Request $request)
     {
-        
         $DataSourceId = $request->input('DataSourceId');
         $BatchPredictionId = 'bp-' . uniqid();
         $BatchPredictionName = $request->input('BatchPredictionName');
@@ -372,7 +371,7 @@ class MLController extends Controller
                 'OutputUri' => $OutputUri, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -387,42 +386,69 @@ class MLController extends Controller
 
         try {
             $result = $client->createRealtimeEndpoint([
+                'MLModelId' => $MLModelId // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        
+        return $result;
+    }
+
+    public function deleteRealtimeEndpoint($MLModelId)
+    {
+
+        try {
+            $result = $this->client->deleteRealtimeEndpoint([
                 'MLModelId' => $MLModelId, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
+        
     }
 
 
-    public function predict($MLModelId)
+    public function predict(Request $request)
     {
+        $country                 = $request->input('country');
+        $MLModelId               = $request->input('ml_model_id');
+        $stringsCount            = $request->input('strings_count');
+        $membersCount            = $request->input('members_count');
+        $projectCount            = $request->input('projects_count');
+        $emailCustomDomain       = $request->input('email_custom_domain');
+        $hasPrivateProject       = $request->input('has_private_project');
+        $daysAfterLastLogin      = $request->input('days_after_last_login');
+        $sameEmailDomainCount    = $request->input('same_email_domain_count');
+        $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
-        $client = $this->connectToML();
+        $endPoint = $this->createRealtimeEndpoint($MLModelId);
 
         try {
-           $result = $client->predict([
-            'MLModelId' => $MLModelId, // REQUIRED
-            'PredictEndpoint' => 'https://realtime.machinelearning.us-east-1.amazonaws.com', // REQUIRED
-            'Record' => [
-                "email_custom_domain"=>"0",
-                "same_email_domain_count"=>"956",
-                "projects_count"=>"67",
-                "strings_count"=>"46",
-                "members_count"=>"843",
-                "has_private_project"=>"1",
-                "same_login_and_project_name"=>"1",
-                "days_after_last_login"=>"8",
-                "country"=>"China"]
+            $result = $this->client->predict([
+                'MLModelId' => $MLModelId, // REQUIRED
+                'PredictEndpoint' => $endPoint, // REQUIRED
+                    'Record' => [
+                        "email_custom_domain" => $emailCustomDomain,
+                        "same_email_domain_count" => $sameEmailDomainCount,
+                        "projects_count" => $projectCount,
+                        "strings_count" => $stringsCount,
+                        "members_count" => $membersCount,
+                        "has_private_project" => $hasPrivateProject,
+                        "same_login_and_project_name" => $sameLoginAndProjectName,
+                        "days_after_last_login" => $daysAfterLastLogin,
+                        "country" => $country
+                    ]
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        echo '<pre>';
-        print_r($result);
+
+        $this->deleteRealtimeEndpoint($MLModelId);
+
+        dd($result);
     }
 }
