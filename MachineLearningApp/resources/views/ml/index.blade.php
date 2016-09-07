@@ -3,9 +3,10 @@
 @section('content')
 
     <div class="container">
-        <div class = "row" >
+        <div class="row">
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
+                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
+                    Learning</h2>
             </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6" style="padding: 0">
@@ -22,16 +23,19 @@
                             <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                            <form class="create-datasource" style="display: none;" method="post"
+                                  action="{{ action('MLController@createDataSourceFromS3') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                           placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -57,8 +61,11 @@
                                         <td>{{ $value['LastUpdatedAt'] }}</td>
                                         <td>
                                             <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
-                                               data-toggle="modal" id="info_{{ $i }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                               data-toggle="modal" id="info_{{ $i }}"><span
+                                                        class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list"
+                                               href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span
+                                                        class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
                                     <span class="hide">{{ $i = $i+1 }}</span>
@@ -71,16 +78,19 @@
                             <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                            <form class="create-mlmodel" style="display:none;" method="post"
+                                  action="{{ action('MLController@createDataSourceFromS3') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                           placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -109,7 +119,9 @@
                                             <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
                                                data-toggle="modal" id="info_{{ $i }}">
                                                 <span class="glyphicon glyphicon-info-sign"></span></a>
-                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list"
+                                               href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span
+                                                        class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
                                     <span class="hide">{{ $i = $i+1 }}</span>
@@ -119,20 +131,24 @@
                     </div>
                     <div id="describeEvaluations" class="tab-pane fade">
                         <div class="create-evaluation">
-                            <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>
+                            <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations
+                            </button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                            <form class="create-evaluations" style="display:none;" method="post"
+                                  action="{{ action('MLController@createDataSourceFromS3') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <br><br>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                           placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -162,7 +178,9 @@
                                         <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
                                            data-toggle="modal" id="info_{{ $i }}">
                                             <span class="glyphicon glyphicon-info-sign"></span></a>
-                                        <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-danger btn-sm btn-list"
+                                           href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span
+                                                    class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                 </tr>
                                 <span class="hide">{{ $i = $i+1 }}</span>
@@ -171,19 +189,24 @@
                     </div>
                     <div id="describeBatchPredictions" class="tab-pane fade">
                         <div class="create-bath-description">
-                            <button class="btn btn-primary btn-create-bath-description pull-right">Create Bath Description</button>
+                            <button class="btn btn-primary btn-create-bath-description pull-right">Create Bath
+                                Description
+                            </button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-bath-description" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                            <form class="create-bath-description" style="display:none;" method="post"
+                                  action="{{ action('MLController@createDataSourceFromS3') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                           placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -220,7 +243,9 @@
                                             <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
                                                data-toggle="modal" id="info_{{ $i }}">
                                                 <span class="glyphicon glyphicon-info-sign"></span></a>
-                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list"
+                                               href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span
+                                                        class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
                                     <span class="hide">{{ $i = $i+1 }}</span>
