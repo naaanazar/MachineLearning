@@ -10,11 +10,11 @@ $(document).on('input', '#rows-number', function(e){
     var newVal = value.replace(reg, "");
     $("#rows-number").val(newVal);
 
-    if($("#rows-number").val() !== "") {
-        $('#generate-btn').removeClass('disabled');
-    } else {
-        $('#generate-btn').addClass('disabled');
-    }
+//    if($("#rows-number").val() !== "") {
+//        $('#generate-btn').removeClass('disabled');
+//    } else {
+//        $('#generate-btn').addClass('disabled');
+//    }
 });
 
 $(document).ready(function() {    
@@ -24,6 +24,12 @@ $(document).ready(function() {
         $('.messages').empty();        
         var route = $(this).attr('href');
         var rowsNumber = $('#rows-number').val();        
+
+        if(rowsNumber === "") {
+            $(".empty-msg").html("This Field is required!");
+            $('#rows-number').addClass('warning');
+            return;
+        }
 
         $('i.fa-spinner').show();
         
@@ -59,7 +65,7 @@ $(document).ready(function() {
                 }
                 var errorMessages = xhr.responseJSON.rows;
                 console.log(errorMessages);
-                $('.messages').html(errorMessages);
+                $(e.target).append(errorMessages);
                 $('#rows-number').addClass('warning');
             }
         });
