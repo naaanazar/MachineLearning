@@ -26,7 +26,17 @@ $(document).ready(function() {
     $(".btn-create-datasource").click(function() {
         $(".create-datasource").toggle();
         $(".container-describeDataSources").toggle();
+
+        $.get("/s3/select-data-source", function(response){
+          for (var key in response.data) {
+              console.log(response.data[key].Key);
+          }
+          alert(response.data[0][Key]);
+          
+        });
     });
+
+
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);

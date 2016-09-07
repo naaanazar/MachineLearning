@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
 
+use App\Http\Controllers\S3Controller;
+
 class MLController extends Controller
 {
     
@@ -47,6 +49,15 @@ class MLController extends Controller
         $result['describeBatchPredictions'] = $this->describeBatchPredictions();
         
         return view('ml.index',['result' => $result]);
+    }
+
+    public function ListS3()
+    {
+        $list = new S3Controller;
+        $result = $list->ListObjectsS3();
+        /*echo '<pre>';
+        print_r($result);*/
+        return response()->json(['data' => (array)$result]);
     }
 
 

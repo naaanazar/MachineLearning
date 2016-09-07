@@ -35,6 +35,15 @@
                            <input type="text" class="form-control" id="DataLocationS3" placeholder="s3://bucket/file.csv" name="DataLocationS3">
                         </div>
                         <div class="form-group">
+                             <label for="SelectDataLocationS3">Data location S3</label>
+                             <select class="form-control" id="SelectDataLocationS3">                                
+                                
+                            </select>
+
+                        </div>
+                        <div id="55">
+                        </div>
+                        <div class="form-group">
                            <label for="DataRearrangement">Data rearrangement</label>
                            <input type="text" class="form-control" id="DataRearrangement" value='{"splitting":{"percentBegin":0,"percentEnd":70}}' name="DataRearrangement">
                         </div>
