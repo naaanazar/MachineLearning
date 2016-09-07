@@ -17,7 +17,7 @@ $(document).ready(function() {
             
             for (var key in response.data) {
 
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectDataSource').html(result);
         });       
@@ -25,8 +25,28 @@ $(document).ready(function() {
 
 
     $(".btn-create-bath-description").click(function() {
-        $(".create-bath-description").toggle();
+        $(".create-bath-descriptions").toggle();
         $(".container-describeBatchPredictions").toggle();
+
+        $.get("/ml/select-ml-model", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectBathMLModel').html(result);
+        });
+
+        $.get("/ml/select-data-source", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectBathDataSource').html(result);
+        });
     });
 
 
@@ -39,7 +59,7 @@ $(document).ready(function() {
 
             for (var key in response.data) {
 
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+                result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectMLModelId').html(result);
         });
@@ -49,7 +69,7 @@ $(document).ready(function() {
 
             for (var key in response.data) {
 
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectEvDataSource').html(result);
         });      
