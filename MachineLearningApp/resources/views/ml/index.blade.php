@@ -209,7 +209,7 @@
                         </div>
                         <div class="form-group">
                            <label for="SelectMLModelId">ML model id</label>
-                           <select class="form-control" id="SelectMLModelId" name="DataSourceId">
+                           <select class="form-control" id="SelectMLModelId" name="MLModelId">
                            </select>
                         </div>
                         <div class="form-group">
@@ -271,12 +271,14 @@
                            <input type="text" class="form-control" id="BatchPredictionName" placeholder="Batch prediction name" name="BatchPredictionName">
                         </div>
                         <div class="form-group">
-                           <label for="MLModelId">ML model id</label>
-                           <input type="text" class="form-control" id="MLModelId" placeholder="ML model id" name="MLModelId">
+                           <label for="SelectBathMLModel">ML model id</label>                           
+                           <select class="form-control" id="SelectBathMLModel" name="MLModelId">
+                           </select>
                         </div>
                         <div class="form-group">
-                           <label for="DataSourceId">Data source id</label>
-                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
+                           <label for="SelectBathDataSource">Batch prediction data source id</label>
+                           <select class="form-control" id="SelectBathDataSource" name="DataSourceId">
+                           </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
