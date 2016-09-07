@@ -54,15 +54,23 @@ class MLController extends Controller
     public function selectObjectsS3()
     {
         $list = new S3Controller;
-        $result = $list->ListObjectsS3();
-        /*echo '<pre>';
-        print_r($result);*/
+        $result = $list->ListObjectsS3();        
         return response()->json(['data' => (array)$result]);
     }
 
+
     public function selectDataSources()
     {
+        $result = $this->describeDataSources();
+        return response()->json(['data' => (array)$result]);
 
+    }
+
+
+    public function selectMLModel()
+    {
+        $result = $this->describeMLModels();
+        return response()->json(['data' => (array)$result]);
 
     }
 

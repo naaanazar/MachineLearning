@@ -33,7 +33,9 @@ Route::get('/ml/delete-ml-model/{id}', 'MLController@deleteMLModel');
 Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
 Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPrediction');
 
-Route::get('/s3/select-data-source', 'MLController@selectObjectsS3v');
+Route::get('/s3/select-S3objects', 'MLController@selectObjectsS3');
+Route::get('/s3/select-data-source', 'MLController@selectDataSources');
+Route::get('/s3/select-ml-model', 'MLController@selectMLModel');
 
 
 Route::get('generator', 'GeneratorController@index');

@@ -7,43 +7,70 @@ $(document).ready(function() {
         $('.form-upload').submit();
     });
 
-    //ml hide/show form create
+    
     $('.btn-create-mlmodel').click(function(){
         $('.create-mlmodel').toggle();
         $(".container-describeMLModels").toggle();
 
-        $.get("/s3/select-mlmodel", function(response){
-            selectAjax(response, '#SelectMLModel');
-        });
+        $.get("/s3/select-data-source", function(response){
+            var  result;
+            
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectDataSource').html(result);
+        });       
     });
+
 
     $(".btn-create-bath-description").click(function() {
         $(".create-bath-descriptions").toggle();
         $(".container-describeBatchPredictions").toggle();
     });
 
+
     $(".btn-create-evaluations").click(function() {
         $(".create-evaluations").toggle();
         $(".container-describeEvaluations").toggle();
 
+        $.get("/s3/select-ml-model", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectMLModelId').html(result);
+        });
+
+        $.get("/s3/select-data-source", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectEvDataSource').html(result);
+        });      
     });
 
     $(".btn-create-datasource").click(function() {
         $(".create-datasource").toggle();
         $(".container-describeDataSources").toggle();
 
-        $.get("/s3/select-data-source", function(response){
-            selectAjax(response, '#SelectDataLocationS3');
+        $.get("/s3/select-S3objects", function(response){
+            var  result;
+            for (var key in response.data) {
+                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+            }
+            $('#SelectDataLocationS3').html(result);
         });
     });
 
-    function selectAjax(response, selector){
-        var  result;
-        for (var key in response.data) {
-            result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
-        }
-        $(selector).html(result);
-    };
+    
+        
+   
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);

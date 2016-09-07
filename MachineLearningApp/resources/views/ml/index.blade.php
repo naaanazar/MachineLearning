@@ -105,8 +105,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                           <label for="SelectMLModel">Data source id</label>
-                           <select class="form-control" id="SelectMLModel" name="DataSourceId">
+                           <label for="SelectDataSource">Data source id</label>
+                           <select class="form-control" id="SelectDataSource" name="DataSourceId">
                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -157,12 +157,14 @@
                            <input type="text" class="form-control" id="EvaluationName" placeholder="Evaluation name" name="EvaluationName">
                         </div>
                         <div class="form-group">
-                           <label for="MLModelId">ML model id</label>
-                           <input type="text" class="form-control" id="MLModelId" placeholder="ML model id" name="MLModelId">
+                           <label for="SelectMLModelId">ML model id</label>
+                           <select class="form-control" id="SelectMLModelId" name="DataSourceId">
+                           </select>
                         </div>
                         <div class="form-group">
-                           <label for="DataSourceId">Data source id</label>
-                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
+                           <label for="SelectEvDataSource">Data source id</label>
+                           <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
+                           </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
