@@ -9,12 +9,20 @@
     <div class="col-lg-8 col-md-8 col-ms-8 col-xs-8">
         <form class="form-horizontal" method="post" action="{{ action('MLController@predict') }}">
             {{ csrf_field() }}
+            <script>
+            $.get("/ml/select-ml-model", function(response){
+            var  result;
+
+            for (var key in response.data) {
+
+                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+            }
+            $('#SelectMLModelId').html(result);
+        });
+            </script>
             <div class="form-group">
-                <label for="ml_model" class="control-label batch-label text-right">ML Model ID</label>
-                <select id="ml_model" name="ml_model_id" type="text" class="form-control batch-input" placeholder="ML Model ID" required>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                <label for="SelectMLModelId">ML model id</label>
+                <select class="form-control" id="SelectMLModelId" name="DataSourceId">
                 </select>
             </div>
             <br>

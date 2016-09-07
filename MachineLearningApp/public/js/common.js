@@ -12,7 +12,7 @@ $(document).ready(function() {
         $('.create-mlmodel').toggle();
         $(".container-describeMLModels").toggle();
 
-        $.get("/s3/select-data-source", function(response){
+        $.get("/ml/select-data-source", function(response){
             var  result;
             
             for (var key in response.data) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
         $(".create-evaluations").toggle();
         $(".container-describeEvaluations").toggle();
 
-        $.get("/s3/select-ml-model", function(response){
+        $.get("/ml/select-ml-model", function(response){
             var  result;
 
             for (var key in response.data) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
             $('#SelectMLModelId').html(result);
         });
 
-        $.get("/s3/select-data-source", function(response){
+        $.get("/ml/select-data-source", function(response){
             var  result;
 
             for (var key in response.data) {
@@ -59,7 +59,7 @@ $(document).ready(function() {
         $(".create-datasource").toggle();
         $(".container-describeDataSources").toggle();
 
-        $.get("/s3/select-S3objects", function(response){
+        $.get("/ml/select-S3objects", function(response){
             var  result;
             for (var key in response.data) {
                 result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
