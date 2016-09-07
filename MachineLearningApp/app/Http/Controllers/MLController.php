@@ -126,7 +126,7 @@ class MLController extends Controller
                 'Verbose' => true || false,
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -144,7 +144,7 @@ class MLController extends Controller
             'Verbose' => true,
         ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -161,7 +161,7 @@ class MLController extends Controller
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -177,7 +177,7 @@ class MLController extends Controller
                 'BatchPredictionId' => $getBatchPredictionId, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
@@ -270,7 +270,7 @@ class MLController extends Controller
                 ],
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }      
         
@@ -295,7 +295,7 @@ class MLController extends Controller
                 'TrainingDataSourceId' => $DataSourceId,
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         
@@ -320,7 +320,7 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId,
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -346,7 +346,7 @@ class MLController extends Controller
                 'OutputUri' => $OutputUri, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
@@ -364,11 +364,26 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId, // REQUIRED
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
         print_r($result);
+    }
+
+
+    public function deleteRealtimeEndpoint($MLModelId)
+    {
+
+        try {
+            $result = $this->client->deleteRealtimeEndpoint([
+                'MLModelId' => $MLModelId, // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        
     }
 
 
@@ -393,7 +408,7 @@ class MLController extends Controller
                 "country"=>"China"]
             ]);
 
-        } catch (S3Exception $e) {
+        } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
         echo '<pre>';
