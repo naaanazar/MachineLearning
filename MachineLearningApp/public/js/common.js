@@ -38,10 +38,10 @@ $(document).ready(function() {
         }
     });
 
-    function successS3(selector) {
+    function successS3(selector, str) {
         $(selector).append('<div class="alert alert-success upload-message-s3">'
-                            + '<ul><li><strong>Success!</strong>'
-                            + '   File delete!</li></ul></div>').show('slow').hide(4000);
+                            + '<ul><li><strong>Success! </strong>'
+                            + str  + '</li></ul></div>').show('slow').hide(4000);
     }
 
     function errorS3(selector) {
@@ -61,7 +61,7 @@ $(document).ready(function() {
                             if(data.success) {
                                 $(e.target).closest('tr').hide("fast");
                             }
-                            successS3('.notification-s3');
+                            successS3('.notification-s3', 'File delete!');
                       }
         });
     });
@@ -81,7 +81,7 @@ $(document).ready(function() {
             processData : false,
             success     : function (data) {
                               getListS3();
-                              successS3('.notification-s3');
+                              successS3('.notification-s3', 'File uploaded to S3!');
                          },
             error       : function () {
                               errorS3('.notification-s3');
