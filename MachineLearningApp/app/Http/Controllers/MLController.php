@@ -165,10 +165,6 @@ class MLController extends Controller
             'Verbose' => true,
         ]);
 
-        } catch (MachineLearningException $e) {
-                'MLModelId' => $ModelId,
-                'Verbose' => true,
-            ]);
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
@@ -233,7 +229,7 @@ class MLController extends Controller
 
     public function deleteEvaluation($EvaluationId)
     {
-        
+
         try {
            $result = $this->client->deleteEvaluation([
                 'EvaluationId' => $EvaluationId, // REQUIRED
@@ -249,7 +245,7 @@ class MLController extends Controller
 
     public function deleteMLModel($MLModelId)
     {
-  
+
         try {
             $result = $this->client->deleteMLModel([
                 'MLModelId' => $MLModelId, // REQUIRED
