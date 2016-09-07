@@ -67,6 +67,11 @@ body {
     width: 200px;
     margin-right: 40px;}
 
+.create-datasource{
+    vertical-align: middle;
+}
+
+
 .batch-label,
 .batch-input {
     float: left;

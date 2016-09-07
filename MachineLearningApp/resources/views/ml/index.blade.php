@@ -5,10 +5,12 @@
 <div class="container">
 <div class = "row" >
     <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
+                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
         <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
     </div>     
+
     <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6" style="padding: 0">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-6" style="padding: 0">
             <ul class="nav nav nav-tabs nav-justified">
               <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
               <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
@@ -18,9 +20,7 @@
         </div>
         <div class="tab-content">
             <div id="describeDataSources" class="tab-pane fade in active">
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
-                </div>
+                
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <form class="create-datasource" style="display: none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                         <br>
