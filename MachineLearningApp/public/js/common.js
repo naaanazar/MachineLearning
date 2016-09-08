@@ -1,31 +1,31 @@
-$(document).ready(function () {
+$(document).ready(function() {
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
     // upload button without submit
-    $('#input-file').change(function () {
+    $('#input-file').change(function() {
         $('.form-upload').submit();
     });
 
-    
+
     $('.btn-create-mlmodel').click(function(){
         $('.create-mlmodel').toggle();
         $(".container-describeMLModels").toggle();
 
         $.get("/ml/select-data-source", function(response){
             var  result;
-            
+
             for (var key in response.data) {
 
                 result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectDataSource').html(result);
-        });       
+        });
     });
 
 
-    $(".btn-create-bath-description").click(function () {
-        $(".create-bath-description").toggle();
+    $(".btn-create-bath-description").click(function() {
+        $(".create-bath-descriptions").toggle();
         $(".container-describeBatchPredictions").toggle();
 
         $.get("/ml/select-ml-model", function(response){
@@ -49,7 +49,8 @@ $(document).ready(function () {
         });
     });
 
-    $(".btn-create-evaluations").click(function () {
+
+    $(".btn-create-evaluations").click(function() {
         $(".create-evaluations").toggle();
         $(".container-describeEvaluations").toggle();
 
@@ -71,13 +72,25 @@ $(document).ready(function () {
                 result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
             $('#SelectEvDataSource').html(result);
-        });      
+        });
     });
 
-    $(".btn-create-datasource").click(function () {
+    $(".btn-create-datasource").click(function() {
         $(".create-datasource").toggle();
         $(".container-describeDataSources").toggle();
+
+        $.get("/ml/select-S3objects", function(response){
+            var  result;
+            for (var key in response.data) {
+                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+            }
+            $('#SelectDataLocationS3').html(result);
+        });
     });
+
+
+
+
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
@@ -91,14 +104,14 @@ $(document).ready(function () {
 
     function successS3(selector, str) {
         $(selector).append('<div class="alert alert-success upload-message-s3">'
-                            + '<ul><li><strong>Success! </strong>'
-                            + str  + '</li></ul></div>').show('slow').hide(4000);
+            + '<ul><li><strong>Success! </strong>'
+            + str  + '</li></ul></div>').show('slow').hide(4000);
     }
 
     function errorS3(selector) {
         $(selector).append('<div class="alert alert-danger upload-message-s3">'
-                            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
-                            + '</li></ul></div>').show('slow').hide(4000);
+            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
+            + '</li></ul></div>').show('slow').hide(4000);
 
     }
 
@@ -109,11 +122,11 @@ $(document).ready(function () {
             url     : url,
             method  : 'GET',
             success : function(data) {
-                            if(data.success) {
-                                $(e.target).closest('tr').hide("fast");
-                            }
-                            successS3('.notification-s3', 'File delete!');
-                      }
+                if(data.success) {
+                    $(e.target).closest('tr').hide("fast");
+                }
+                successS3('.notification-s3', 'File delete!');
+            }
         });
     });
 
@@ -130,12 +143,12 @@ $(document).ready(function () {
             cache       : false,
             processData : false,
             success     : function (data) {
-                              getListS3();
-                              successS3('.notification-s3', 'File uploaded to S3!');
-                         },
+                getListS3();
+                successS3('.notification-s3', 'File uploaded to S3!');
+            },
             error       : function () {
-                              errorS3('.notification-s3');
-                          },
+                errorS3('.notification-s3');
+            },
         });
     });
 
@@ -145,13 +158,12 @@ $(document).ready(function () {
             url     : '/s3/list',
             method  : 'GET',
             success : function (data) {
-                              $('.s3-pagination').html($(data).find('div.pagination-list'));
-                              $('.s3-table').html($(data).find('table'));
-                          }
+                $('.s3-pagination').html($(data).find('div.pagination-list'));
+                $('.s3-table').html($(data).find('table'));
+            }
         });
     }
-
-    //modal window ML
+//modal window ML
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
 
