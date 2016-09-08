@@ -231,8 +231,8 @@
                                     <input type="text" class="form-control" id="BatchPredictionName" placeholder="Batch prediction name" name="BatchPredictionName">
                                 </div>
                                 <div class="form-group">
-                                    <label for="SelectBathMLModelId">ML model id</label>
-                                    <select class="form-control" id="SelectBathMLModelId" name="MLModelId">
+                                    <label for="SelectBathMLModel">ML model id</label>
+                                    <select class="form-control" id="SelectBathMLModel" name="MLModelId">
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -227,6 +227,16 @@ class MLController extends Controller
     }
 
 
+    public function getEndpointStatus($modelId)
+    {
+        $result = $this->client->getMLModel([
+            'MLModelId' => $modelId,
+            'Verbose' => true,
+        ]);
+        return $result['EndpointInfo']['EndpointStatus'];
+    }
+
+
     public function deleteEvaluation($EvaluationId)
     {
 
