@@ -10,11 +10,11 @@ $(document).on('input', '#rows-number', function(e){
     var newVal = value.replace(reg, "");
     $("#rows-number").val(newVal);
 
-//    if($("#rows-number").val() !== "") {
-//        $('#generate-btn').removeClass('disabled');
-//    } else {
-//        $('#generate-btn').addClass('disabled');
-//    }
+    if($("#rows-number").val() !== "") {
+        $('#generate-btn').removeClass('disabled');
+    } else {
+        $('#generate-btn').addClass('disabled');
+    }
 });
 
 $(document).ready(function() {    
