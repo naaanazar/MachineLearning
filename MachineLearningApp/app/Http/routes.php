@@ -59,3 +59,9 @@ Route::get('bucket/delete_all/{name_bucket}', 'BucketController@deleteAllObjects
 Route::get('bucket', 'BucketController@index');
 Route::get('bucket', 'BucketController@listOfBuckets');
 Route::post('bucket/create_bucket', 'BucketController@createBucket');
+
+//Update
+Route::get('/ml/datasource/{DataSourceId}/update', 'MLController@updateDataSource');
+Route::get('/ml/mlmodel/{ModelId}/update', 'MLController@updateMLModel');
+Route::get('/ml/evaluation/{EvaluationId}/update', 'MLController@updateEvaluation');
+Route::get('/ml/batchprediction/{getBatchPredictionId}/update', 'MLController@updateBatchPrediction');

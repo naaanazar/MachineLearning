@@ -461,4 +461,73 @@ class MLController extends Controller
 
         dd($result);
     }
+
+    public function updateDataSource($DataSourceId)
+    {
+        try {
+
+            $result = $this->client->getDataSource([
+                'DataSourceId' => $DataSourceId,
+            ]);
+
+            $this->client->updateDataSource([
+                'DataSourceId' => $result['DataSourceId'],
+                'DataSourceName' => $result['Name'],
+            ]);
+
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
+
+    public function updateMLModel($ModelId)
+    {
+        try {
+            $result = $this->client->updateMLModel([
+                'MLModelId' => $ModelId,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
+
+    public function updateEvaluation($EvaluationId)
+    {
+
+        try {
+            $result = $this->client->getEvaluation([
+                'EvaluationId' => $EvaluationId,
+            ]);
+
+            $this->client->updateEvaluation([
+                'EvaluationId' => $result['EvaluationId'],
+                'EvaluationName' => $result['Name'],
+            ]);
+
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
+
+    public function updateBatchPrediction($getBatchPredictionId)
+    {
+        try {
+
+            $result = $this->client->getBatchPrediction([
+                'BatchPredictionId' => $getBatchPredictionId, // REQUIRED
+            ]);
+            dd($result['BatchPredictionId'], $result['Name']);
+            $this->client->updateBatchPrediction([
+                'BatchPredictionId' => $result['BatchPredictionId'],
+                'BatchPredictionName' => $result['Name'],
+            ]);
+
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
 }
