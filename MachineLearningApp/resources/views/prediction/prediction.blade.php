@@ -2,6 +2,8 @@
 
 @section('content')
 
+<script type="text/javascript" src="{{ URL::to('js/countries.js.js') }}"></script>
+
 <div class="container">
 
     <h3 class="title">Real time prediction</h3>

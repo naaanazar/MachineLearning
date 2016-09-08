@@ -5,10 +5,11 @@
     <div class="container">
         <div class = "row" >
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
+            <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
             </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding: 0">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
                         <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
@@ -18,10 +19,8 @@
                 </div>
                 <div class="tab-content">
                     <div id="describeDataSources" class="tab-pane fade in active">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                       
+                        <div class="col-lg-6 col-md-6 col-sm-9 col-xs-10">
                             <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
                                 <br>
                                 {{ csrf_field() }}
@@ -34,13 +33,13 @@
                                     <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label for="DataRearrangement">Data rearrangement Begin</label>
                                         <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementBegin">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6  col-md-6">
                                     <div class="form-group">
                                         <label for="DataRearrangement">Data rearrangement End</label>
                                         <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementEnd">
@@ -50,7 +49,7 @@
                                     <label for="DataSchema">Data schema</label>
                                     <textarea class="form-control" id="DataSchema" placeholder="Data schema"  rows="10" name="DataSchema"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button  type="submit" class="btn btn-primary submit-button">Submit</button>
                             </form>
                         </div>
                         <div class="container-describeDataSources">
