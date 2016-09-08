@@ -423,23 +423,31 @@ class MLController extends Controller
 
     public function predict(Request $request)
     {
-        $country = $request->input('country');
-        $MLModelId = $request->input('ml_model_id');
-        $stringsCount = $request->input('strings_count');
-        $membersCount = $request->input('members_count');
-        $projectCount = $request->input('projects_count');
-        $emailCustomDomain = $request->input('email_custom_domain');
-        $hasPrivateProject = $request->input('has_private_project');
-        $daysAfterLastLogin = $request->input('days_after_last_login');
-        $sameEmailDomainCount = $request->input('same_email_domain_count');
+        $country                 = $request->input('country');
+        $MLModelId               = $request->input('ml_model_id');
+        $stringsCount            = $request->input('strings_count');
+        $membersCount            = $request->input('members_count');
+        $projectCount            = $request->input('projects_count');
+        $emailCustomDomain       = $request->input('email_custom_domain');
+        $hasPrivateProject       = $request->input('has_private_project');
+        $daysAfterLastLogin      = $request->input('days_after_last_login');
+        $sameEmailDomainCount    = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
         $endPoint = $this->createRealtimeEndpoint($MLModelId);
+        $predictEndpoint = $endPoint["RealtimeEndpointInfo"]["EndpointUrl"];
+        $endpointStatus = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
+
+        $point = 0;
+        while ($point !== 1) {
+            if ($endpointStatus == "READY") $point = 1;
+            else sleep(2);
+        }
 
         try {
             $result = $this->client->predict([
                 'MLModelId' => $MLModelId, // REQUIRED
-                'PredictEndpoint' => $endPoint, // REQUIRED
+                'PredictEndpoint' => $predictEndpoint, // REQUIRED
                 'Record' => [
                     "email_custom_domain" => $emailCustomDomain,
                     "same_email_domain_count" => $sameEmailDomainCount,
@@ -459,7 +467,7 @@ class MLController extends Controller
 
         $this->deleteRealtimeEndpoint($MLModelId);
 
-        dd($result);
+        return redirect('/predictions')->with('result', $result);
     }
 
     public function updateDataSource($DataSourceId)

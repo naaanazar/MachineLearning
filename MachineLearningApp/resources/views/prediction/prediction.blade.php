@@ -61,7 +61,11 @@
         </form>
     </div>
     <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
-        <div class="block-output"></div>
+        <div class="block-output">
+            @if (session('result'))
+                {{ session('result') }}
+            @endif
+        </div>
     </div>
 </div>
 <hr>
