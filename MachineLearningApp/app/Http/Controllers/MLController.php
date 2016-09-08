@@ -219,10 +219,13 @@ class MLController extends Controller
             $result = $this->client->deleteDataSource([
                 'DataSourceId' => $DataSourceId, // REQUIRED
             ]);
+
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -245,10 +248,12 @@ class MLController extends Controller
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -261,10 +266,12 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -277,10 +284,12 @@ class MLController extends Controller
                 'BatchPredictionId' => $BatchPredictionId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
     }
 
 
