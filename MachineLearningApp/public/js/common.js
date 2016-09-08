@@ -163,6 +163,18 @@ $(document).ready(function() {
             }
         });
     }
+
+    // prediction: get id model
+    $.get("/ml/select-ml-model", function(response){
+    var  result;
+
+    for (var key in response.data) {
+
+            result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
+        }
+        $('#ml_model_id').html(result);
+    });
+
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
