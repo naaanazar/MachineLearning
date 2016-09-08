@@ -297,53 +297,24 @@ $(document).ready(function () {
 
     });
 
+
     $(document).on("click", '.delete', function (event) {
-        var datasourceId = $(event.target).closest('tr').find('td:first').text();
-        var target = $(event.target).closest('table').find('tr:first').find('td:first').text();
-        if (target == 'DataSourceId') {
-            $.get('/ml/delete-datasource/' + datasourceId, function (response) {
-                if (response.deleted == 'Ok') {
-                    $(event.target).closest('tr').fadeOut();
-                }
-            });
-        } else if (target == 'MLModelId') {
-            $.get('/ml/delete-ml-model/' + datasourceId, function (response) {
-                if (response.deleted == 'Ok') {
-                    $(event.target).closest('tr').fadeOut();
-                }
-            });
-        } else if (target == 'EvaluationId') {
-            $.get('/ml/delete-evaluation/' + datasourceId, function (response) {
-                if (response.deleted == 'Ok') {
-                    $(event.target).closest('tr').fadeOut();
-                }
-            });
-        } else if (target == 'BatchPredictionId') {
-            $.get('/ml/delete-batch-prediction/' + datasourceId, function (response) {
-                if (response.deleted == 'Ok') {
-                    $(event.target).closest('tr').fadeOut();
-                }
-            });
+        function deleteObject(datasourceIdVar, url) {
+
+            this.datasourceId = $(event.target).closest('tr').find('td:first').text();
+            this.target = $(event.target).closest('table').find('tr:first').find('td:first').text();
+
+            if (this.target == dataSourceIdVar) {
+                $.get(url + this.datasourceId, function (response) {
+                    if (response.deleted == 'Ok') {
+                        $(event.target).closest('tr').fadeOut();
+                    }
+                });
+                event.preventDefault();
+            }
         }
 
-        event.preventDefault();
+        var deleteVar = new deleteObject('EvaluationId', '/ml/delete-evaluation/');
+        deleteVar.run();
     });
-
-    function deleteObject(dataSourceId, url) {
-
-        this.datasourceId = $(event.target).closest('tr').find('td:first').text();
-        this.target = $(event.target).closest('table').find('tr:first').find('td:first').text();
-
-        if (target == dataSourceId) {
-            $.get(url + this.datasourceId, function (response) {
-                if (response.deleted == 'Ok') {
-                    $(event.target).closest('tr').fadeOut();
-                }
-            });
-
-        }
-    }
-
-
-
 });
