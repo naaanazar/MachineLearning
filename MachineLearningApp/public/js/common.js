@@ -147,7 +147,7 @@ $(document).ready(function () {
         }
 
         $.get(url + datasourceId, function (response) {
-            console.log(response.data[5]);
+
             switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
 
                 case 'DataSourceId':
@@ -221,7 +221,7 @@ $(document).ready(function () {
                 default:
                     break;
             }
-console.log(firstRow);
+
             var result = '<table class="table table-condensed">' +
                 '<thead>' +
                 '<tr>' +
