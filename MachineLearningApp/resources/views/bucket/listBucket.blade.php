@@ -74,7 +74,7 @@
                         @foreach($results as $key => $value)
                             <tr>
                                 <td>{{ ++$key }}</td>
-                                <td>{{ $value['Name'] }}</td>
+                                <td class="afretclickremove">{{ $value['Name'] }}</td>
                                 <td><a class="btn btn-danger btn-sm btn-list"
                                        href="/bucket/delete/{{ $value['Name'] }}"
                                        id="delete-{{ $key }}"><span

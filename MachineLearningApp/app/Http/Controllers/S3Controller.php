@@ -99,4 +99,25 @@ class S3Controller extends Controller
 
         return view('s3.list', ['results' => $paginatedSearchResults]);
     }
+
+    public function listS3frombuck($name)
+    {
+        $client = $this->connect();
+
+        try {
+            $result = $client->listObjects([
+                'Bucket' => $name,
+                'Delimiter' => '|'
+            ]);
+
+            $results = $result['Contents'];
+
+            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 6, '/s3/list/');
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return view('s3.list', ['results' => $paginatedSearchResults]);
+    }
 }
