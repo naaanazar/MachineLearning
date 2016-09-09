@@ -28,7 +28,8 @@ $(document).ready(function() {
             var i=1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
-                                '<tr class="active">' +                                   
+                                '<tr class="active">' +
+                                    '<td class="hide">DataSourceId</td>' +
                                     '<td>Name</td>' +
                                     '<td>Status</td>' +
                                     '<td>DataLocationS3</td>' +
@@ -41,7 +42,8 @@ $(document).ready(function() {
                                     date = response.data[key].LastUpdatedAt.replace('T', '  ');
                                     date = date.substring(0, date.indexOf('+'));
                                     res += '' +
-                                    '<tr>' +                                       
+                                    '<tr>' +
+                                        '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
                                         '<td>';
                                             if (response.data[key].Name !== undefined) {
                                                 res += response.data[key].Name;
