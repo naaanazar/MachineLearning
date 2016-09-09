@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     });
 
-    function successS3(selector, str) {
+    function success(selector, str) {
         $(selector).append('<div class="alert alert-success upload-message-s3">'
             + '<ul><li><strong>Success! </strong>'
             + str + '</li></ul></div>').show('slow').hide(4000);
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 if (data.success) {
                     $(e.target).closest('tr').hide("fast");
                 }
-                successS3('.notification-s3', 'File delete!');
+                success('.notification-s3', 'File delete!');
             }
         });
     });

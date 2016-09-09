@@ -27,12 +27,13 @@
                         <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch
                                 Predictions</a></li>
                     </ul>
+                </div>                
                 </div>
                 <div class="tab-content">
                     <div id="describeDataSources" class="tab-pane fade in active">
                         <div class="col-lg-6 col-md-6 col-sm-9 col-xs-10">
-                            <form class="create-datasource" style="display:none;" method="post"
-                                  action="{{ action('MLController@createDataSourceFromS3') }}">
+                            <form class="create-datasource-form" style="display:none;" method="post"
+                                 action="ml/create-datasource">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -67,8 +68,8 @@
                     </div>
                     <div id="describeMLModels" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-mlmodel" style="display:none;" method="post"
-                                  action="{{ action('MLController@createMLModel') }}">
+                            <form class="create-mlmodel-form" style="display:none;" method="post"
+                                  action="ml/create-ml-model">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -97,8 +98,8 @@
                     </div>
                     <div id="describeEvaluations" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-evaluations" style="display:none;" method="post"
-                                  action="{{ action('MLController@createEvaluation') }}">
+                            <form class="create-evaluations-form" style="display:none;" method="post"
+                                  action="ml/create-evaluation">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -124,8 +125,8 @@
                     </div>
                     <div id="describeBatchPredictions" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-bath-descriptions" style="display:none;" method="post"
-                                  action="{{ action('MLController@createBatchPrediction') }}">
+                            <form class="create-bath-descriptions-form" style="display:none;" method="post"
+                                  action="ml/create-batch-prediction">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">

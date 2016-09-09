@@ -32,7 +32,7 @@ Route::get('/ml/describe-batch-prediction', 'MLController@listBatchPredictions')
 Route::post('ml/create-datasource', 'MLController@createDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@createMLModel');
 Route::post('ml/create-evaluation', 'MLController@createEvaluation');
-Route::post('ml/create-batch-prediction', 'MLController@createBatchPrediction');
+Route::post('/ml/create-batch-prediction', 'MLController@createBatchPrediction');
 Route::post('ml/real-time-prediction', 'MLController@predict');
 
 Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');

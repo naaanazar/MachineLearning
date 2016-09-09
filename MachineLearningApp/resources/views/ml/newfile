@@ -431,3 +431,27 @@
                                     <span class="hide">{{ $i = $i+1 }}</span>
                                 @endforeach
                             </table>
+
+
+action="{{ action('MLController@createDataSourceFromS3') }}">
+
+
+$('.create-datasource-form').submit(function (e) {
+        alert("1212123123");
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: '/ml/create-datasource',
+            data: $('.create-datasource-form').serialize(),
+            success: function (data) {
+                $(".create-datasource-form").toggle();
+                $(".container-describeDataSources").toggle();
+                listDataSource();
+                successCreate('.notification', 'Create datasource')
+            },
+            error: function () {
+                alert('.notification-s3');
+            },
+        });
+        alert("sdfsdsd");
+    });

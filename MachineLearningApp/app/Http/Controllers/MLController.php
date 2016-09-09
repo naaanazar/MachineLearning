@@ -386,7 +386,7 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -411,7 +411,7 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -436,7 +436,7 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -458,13 +458,13 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            $ex = $e->getMessage() . "\n";
         }
 
-        return back();
+        return response()->json(['data' => $ex ]);
     }
 
-
+    
     public function createRealtimeEndpoint($MLModelId)
     {
 

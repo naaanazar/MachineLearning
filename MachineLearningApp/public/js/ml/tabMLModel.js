@@ -1,7 +1,23 @@
 $(document).ready(function() {
 
+    $('.create-mlmodel-form').submit(function (e) {        
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: 'ml/create-ml-model',
+            data: $('.create-mlmodel-form').serialize(),
+            success: function (data) {
+                $(".create-mlmodel-form").toggle();
+                $(".container-describeMLModels").toggle();
+                listMLModel();           
+            },
+            error: function () {                
+            },
+        });      
+    });
+
     $(document).on("click", ".btn-create-mlmodel", function () {
-        $('.create-mlmodel').toggle();
+        $('.create-mlmodel-form').toggle();
         $(".container-describeMLModels").toggle();
 
         $.get("/ml/select-data-source", function(response){
@@ -16,6 +32,10 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
+        listMLModel();
+    });
+
+    function listMLModel() {    
         var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
         $('#ml-button-create').html(button);
 
@@ -65,5 +85,5 @@ $(document).ready(function() {
 
             $('.container-describeMLModels').html(res);
         });
-     });
+    };
 });
