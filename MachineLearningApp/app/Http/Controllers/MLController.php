@@ -438,11 +438,11 @@ class MLController extends Controller
         $predictEndpoint = $endPoint["RealtimeEndpointInfo"]["EndpointUrl"];
         $endpointStatus = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
 
-        $point = 0;
-        while ($point !== 1) {
-            if ($endpointStatus == "READY") $point = 1;
-            else sleep(2);
-        }
+        // $point = 0;
+        // while ($point !== 1) {
+        //     if ($endpointStatus == "READY") $point = 1;
+        //     else sleep(2);
+        // }
 
         try {
             $result = $this->client->predict([
@@ -466,6 +466,7 @@ class MLController extends Controller
         }
 
         $this->deleteRealtimeEndpoint($MLModelId);
+        $result = "Prediction: " . $result["Prediction"]["predictedLabel"];
 
         return redirect('/predictions')->with('result', $result);
     }
