@@ -5,33 +5,40 @@
     <script src="{{ URL::to('js/ml/tabDataSource.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabMLModel.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
-    <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>    
+    <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
 
     <div class="container">
-        <div class = "row" >
+        <div class="row">
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div id="ml-button-create">
                 </div>
-                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2> 
-            </div>            
+                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
+                    Learning</h2>
+            </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified">
-                        <li class="active"><a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Data Source</a></li>
-                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">ML Models</a></li>
-                        <li><a data-toggle="tab" href="#describeEvaluations" id="describeEvaluationsContent">Evaluations</a></li>
-                        <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a></li>
+                        <li class="active"><a data-toggle="tab" href="#describeDataSources"
+                                              id="describeDataSourcesContent">Data Source</a></li>
+                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">ML Models</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#describeEvaluations"
+                               id="describeEvaluationsContent">Evaluations</a></li>
+                        <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch
+                                Predictions</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                    <div id="describeDataSources" class="tab-pane fade in active">                       
+                    <div id="describeDataSources" class="tab-pane fade in active">
                         <div class="col-lg-6 col-md-6 col-sm-9 col-xs-10">
-                            <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
+                            <form class="create-datasource" style="display:none;" method="post"
+                                  action="{{ action('MLController@createDataSourceFromS3') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="DataSourceName">Data source name</label>
-                                    <input type="text" class="form-control" id="DataSourceName" placeholder="Data source name" name="DataSourceName">
+                                    <input type="text" class="form-control" id="DataSourceName"
+                                           placeholder="Data source name" name="DataSourceName">
                                 </div>
                                 <div class="form-group">
                                     <label for="SelectDataLocationS3">Data location S3</label>
@@ -41,29 +48,33 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label for="DataRearrangement">Data rearrangement Begin</label>
-                                        <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementBegin">
+                                        <input type="number" class="form-control form-control-sm" id="DataRearrangement"
+                                               name="DataRearrangementBegin">
                                     </div>
                                 </div>
                                 <div class="col-lg-6  col-md-6">
                                     <div class="form-group">
                                         <label for="DataRearrangement">Data rearrangement End</label>
-                                        <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementEnd">
+                                        <input type="number" class="form-control form-control-sm" id="DataRearrangement"
+                                               name="DataRearrangementEnd">
                                     </div>
                                 </div>                                
                                 <button  type="submit" class="btn btn-primary submit-button">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeDataSources">                            
+                        <div class="container-describeDataSources">
                         </div>
-                    </div>                    
-                    <div id="describeMLModels" class="tab-pane fade">                        
+                    </div>
+                    <div id="describeMLModels" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createMLModel') }}">
+                            <form class="create-mlmodel" style="display:none;" method="post"
+                                  action="{{ action('MLController@createMLModel') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="MLModelName">ML model name</label>
-                                    <input type="text" class="form-control" id="MLModelName" placeholder="ML model name" name="MLModelName">
+                                    <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
+                                           name="MLModelName">
                                 </div>
                                 <div class="form-group">
                                     <label for="MLModelType">ML model type</label>
@@ -80,18 +91,20 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
-                        </div>                      
-                        <div class="container-describeMLModels">                            
+                        </div>
+                        <div class="container-describeMLModels">
                         </div>
                     </div>
-                    <div id="describeEvaluations" class="tab-pane fade">                       
+                    <div id="describeEvaluations" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createEvaluation') }}">
+                            <form class="create-evaluations" style="display:none;" method="post"
+                                  action="{{ action('MLController@createEvaluation') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="EvaluationName">Evaluation name</label>
-                                    <input type="text" class="form-control" id="EvaluationName" placeholder="Evaluation name" name="EvaluationName">
+                                    <input type="text" class="form-control" id="EvaluationName"
+                                           placeholder="Evaluation name" name="EvaluationName">
                                 </div>
                                 <div class="form-group">
                                     <label for="SelectMLModelId">ML model id</label>
@@ -106,17 +119,19 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeEvaluations">                            
+                        <div class="container-describeEvaluations">
                         </div>
                     </div>
-                    <div id="describeBatchPredictions" class="tab-pane fade">                        
+                    <div id="describeBatchPredictions" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-bath-descriptions" style="display:none;" method="post" action="{{ action('MLController@createBatchPrediction') }}">
+                            <form class="create-bath-descriptions" style="display:none;" method="post"
+                                  action="{{ action('MLController@createBatchPrediction') }}">
                                 <br>
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="BatchPredictionName">Batch prediction name</label>
-                                    <input type="text" class="form-control" id="BatchPredictionName" placeholder="Batch prediction name" name="BatchPredictionName">
+                                    <input type="text" class="form-control" id="BatchPredictionName"
+                                           placeholder="Batch prediction name" name="BatchPredictionName">
                                 </div>
                                 <div class="form-group">
                                     <label for="SelectBathMLModel">ML model id</label>
@@ -131,7 +146,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeBatchPredictions">                           
+                        <div class="container-describeBatchPredictions">
                         </div>
                     </div>
                 </div>

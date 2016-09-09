@@ -93,7 +93,7 @@ class MLController extends Controller
 
         return response()->json(['data' => (array)$result]);
     }
-    
+
     public function listMLModels()
     {
         $result = $this->describeMLModels();
@@ -102,7 +102,7 @@ class MLController extends Controller
     }
 
     public function listEvaluations()
-    {       
+    {
         $result = $this->describeEvaluations();
 
         return response()->json(['data' => (array)$result]);
@@ -286,10 +286,13 @@ class MLController extends Controller
             $result = $this->client->deleteDataSource([
                 'DataSourceId' => $DataSourceId, // REQUIRED
             ]);
+
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -312,10 +315,12 @@ class MLController extends Controller
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -328,10 +333,12 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -344,10 +351,12 @@ class MLController extends Controller
                 'BatchPredictionId' => $BatchPredictionId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
     }
 
 
@@ -452,8 +461,8 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        //return back();
-    }    
+        return back();
+    }
 
 
     public function createRealtimeEndpoint($MLModelId)
@@ -490,15 +499,15 @@ class MLController extends Controller
 
     public function predict(Request $request)
     {
-        $country                 = $request->input('country');
-        $MLModelId               = $request->input('ml_model_id');
-        $stringsCount            = $request->input('strings_count');
-        $membersCount            = $request->input('members_count');
-        $projectCount            = $request->input('projects_count');
-        $emailCustomDomain       = $request->input('email_custom_domain');
-        $hasPrivateProject       = $request->input('has_private_project');
-        $daysAfterLastLogin      = $request->input('days_after_last_login');
-        $sameEmailDomainCount    = $request->input('same_email_domain_count');
+        $country = $request->input('country');
+        $MLModelId = $request->input('ml_model_id');
+        $stringsCount = $request->input('strings_count');
+        $membersCount = $request->input('members_count');
+        $projectCount = $request->input('projects_count');
+        $emailCustomDomain = $request->input('email_custom_domain');
+        $hasPrivateProject = $request->input('has_private_project');
+        $daysAfterLastLogin = $request->input('days_after_last_login');
+        $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
         $endPoint = $this->createRealtimeEndpoint($MLModelId);

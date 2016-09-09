@@ -31,7 +31,7 @@
                 'url': $(e.target).attr('href'),
                 'type': 'DELETE',
                 success : function (response) {
-                    if(response.success) {
+                    if (response.success) {
                         $(e.target).closest('div.product').fadeOut();
                         location.reload();
                     }
