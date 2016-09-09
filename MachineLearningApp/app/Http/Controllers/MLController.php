@@ -383,7 +383,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
         //return back();
@@ -408,7 +408,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
         //return back();
@@ -433,7 +433,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
         //return back();
@@ -458,10 +458,10 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            $ex = $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return response()->json(['data' => $ex ]);
+        
     }
 
     

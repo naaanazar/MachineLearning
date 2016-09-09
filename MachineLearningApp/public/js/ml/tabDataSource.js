@@ -11,7 +11,8 @@ $(document).ready(function() {
             success: function (data) {
                 $(".create-datasource-form").toggle();
                 $(".container-describeDataSources").toggle();
-                listDataSource();                
+                listDataSource();
+                console.log(data);
             },
             error: function () {                
             },

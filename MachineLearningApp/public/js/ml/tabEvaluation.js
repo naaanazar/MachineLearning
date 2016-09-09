@@ -10,6 +10,7 @@ $(document).ready(function() {
                 $(".create-evaluations-form").toggle();
                 $(".container-describeEvaluations").toggle();
                 listEvaluations();
+                console.log(data);
             },
             error: function () {
             },
