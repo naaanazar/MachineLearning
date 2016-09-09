@@ -90,6 +90,57 @@ $(document).ready(function () {
         $('#ml_model_id').html(result);
     });
 
+    // prediction: send form
+    $('.form-prediction').on('submit', function(e) {
+        e.preventDefault();
+
+        addPredictionProgress();
+
+        $.ajaxSetup({
+            headers: { 'X-XSRF-Token': $('meta[name="_token"]').attr('content') }
+        });
+
+        var formData   = $(this).serialize();
+        var formAction = $(this).attr('action');
+        var formMethod = $(this).attr('method');
+
+        function formPredict() {
+            $.ajax({
+                type    : formMethod,
+                url     : formAction,
+                data    : formData,
+                cache   : false,
+                success : function(data) {
+                              if (data == 'Updating') {
+                                  setTimeout(formPredict(), 3000);
+                              }
+                              else {
+                                removePredictionProgress()
+                                $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
+                              }
+                          },
+                error   : function() {
+                              setTimeout(formPredict(), 3000);
+                          }
+            });
+        }
+
+        formPredict();
+    });
+
+    // prediction: form processing style
+    function addPredictionProgress() {
+        $('.spinner-prediction').show('slow');
+        $('.form-prediction').addClass('form-pred-disabled');
+        $('.block-prediction').addClass('block-pred-disabled');
+    }
+
+    function removePredictionProgress() {
+        $('.spinner-prediction').hide('slow');
+        $('.form-prediction').removeClass('form-pred-disabled');
+        $('.block-prediction').removeClass('block-pred-disabled');
+    }
+
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
@@ -101,7 +152,15 @@ $(document).ready(function () {
             "Message": "Message",
             "SizeInBytes": "SizeInBytes",
             "InputDataLocationS3": "InputDataLocationS3",
-            "ComputeTime": "ComputeTime"
+            "DataLocationS3": "DataLocationS3",
+            "DataSourceId": "DataSourceId",
+            "MLModelId": "MLModelId",
+            "TrainingDataSourceId": "TrainingDataSourceId",
+            "EvaluationId": "EvaluationId",
+            "EvaluationDataSourceId": "EvaluationDataSourceId",
+            "BatchPredictionId": "BatchPredictionId",
+            "BatchPredictionDataSourceId": "BatchPredictionDataSourceId"
+
         };
 
         var firstRow;
@@ -112,6 +171,12 @@ $(document).ready(function () {
         var resDataThree;
         var fourthRow;
         var resDataFourth;
+        var fifthRow;
+        var resDataFifth;
+        var sixthRow;
+        var resDataSixth;
+        var seventhRow;
+        var resDataSeventh;
         var url;
 
         switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
@@ -133,8 +198,8 @@ $(document).ready(function () {
         }
 
         $.get(url + datasourceId, function (response) {
-            switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
 
+            switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
 
                 case 'DataSourceId':
                     firstRow = myArray['Name'];
@@ -145,6 +210,13 @@ $(document).ready(function () {
                     resDataThree = response.data[2];
                     fourthRow = myArray['Message'];
                     resDataFourth = response.data[3];
+                    fifthRow = myArray['DataLocationS3'];
+                    resDataFifth = response.data[4];
+                    sixthRow = myArray['DataSourceId'];
+                    resDataSixth = response.data[5];
+
+                    seventhRow = ' class="hide"><td>';
+                    resDataSeventh = response.data[6];
                     break;
                 case 'MLModelId':
                     firstRow = myArray['Name'];
@@ -155,6 +227,13 @@ $(document).ready(function () {
                     resDataThree = response.data[2];
                     fourthRow = myArray['Message'];
                     resDataFourth = response.data[3];
+                    fifthRow = myArray['MLModelId'];
+                    resDataFifth = response.data[4];
+                    sixthRow = myArray['TrainingDataSourceId'];
+                    resDataSixth = response.data[5];
+
+                    seventhRow = ' class="hide"><td>';
+                    resDataSeventh = response.data[6];
                     break;
                 case 'EvaluationId':
                     firstRow = myArray['Name'];
@@ -165,6 +244,13 @@ $(document).ready(function () {
                     resDataThree = response.data[2];
                     fourthRow = myArray['Message'];
                     resDataFourth = response.data[3];
+
+                    fifthRow = myArray['EvaluationId'];
+                    resDataFifth = response.data[4];
+                    sixthRow = myArray['MLModelId'];
+                    resDataSixth = response.data[5];
+                    seventhRow = '><td>' + myArray['EvaluationDataSourceId'];
+                    resDataSeventh = response.data[6];
                     break;
                 case 'BatchPredictionId':
                     firstRow = myArray['Name'];
@@ -175,6 +261,13 @@ $(document).ready(function () {
                     resDataThree = response.data[2];
                     fourthRow = myArray['Message'];
                     resDataFourth = response.data[3];
+
+                    fifthRow = myArray['BatchPredictionId'];
+                    resDataFifth = response.data[4];
+                    sixthRow = myArray['BatchPredictionDataSourceId'];
+                    resDataSixth = response.data[5];
+                    seventhRow = '><td>' + myArray['MLModelId'];
+                    resDataSeventh = response.data[6];
                     break;
                 default:
                     break;
@@ -203,6 +296,17 @@ $(document).ready(function () {
                 '<tr>' +
                 '<td>' + fourthRow + '</td>' +
                 '<td>' + resDataFourth + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>' + fifthRow + '</td>' +
+                '<td>' + resDataFifth + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>' + sixthRow + '</td>' +
+                '<td>' + resDataSixth + '</td>' +
+                '</tr>' +
+                '<tr' + seventhRow + '</td>' +
+                '<td>' + resDataSeventh + '</td>' +
                 '</tr>' +
                 '</tbody>' +
                 '</table>';
