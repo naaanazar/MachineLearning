@@ -28,8 +28,7 @@ $(document).ready(function() {
             var i=1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
-                                '<tr class="active">' +
-                                    '<td>DataSourceId</td>' +
+                                '<tr class="active">' +                                   
                                     '<td>Name</td>' +
                                     '<td>Status</td>' +
                                     '<td>DataLocationS3</td>' +
@@ -39,9 +38,10 @@ $(document).ready(function() {
                                 '<span class="hide">' + i + '</span>';
                                 for (var key in response.data) {
                                     i = i+1;
+                                    date = response.data[key].LastUpdatedAt.replace('T', '  ');
+                                    date = date.substring(0, date.indexOf('+'));
                                     res += '' +
-                                    '<tr>' +
-                                        '<td>' + response.data[key].DataSourceId + '</td>' +
+                                    '<tr>' +                                       
                                         '<td>';
                                             if (response.data[key].Name !== undefined) {
                                                 res += response.data[key].Name;
@@ -50,7 +50,7 @@ $(document).ready(function() {
                                         '</td>' +
                                         '<td>' + response.data[key].Status + '</td>' +
                                         '<td>' + response.data[key].DataLocationS3 + '</td>' +
-                                        '<td>' + response.data[key].LastUpdatedAt + '</td>' +
+                                        '<td>' + date + '</td>' +
                                         '<td>' +
                                             '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                                'data-toggle="modal" id="info_' + i + '"><span ' +

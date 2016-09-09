@@ -14,6 +14,55 @@ class MLController extends Controller
 
     public $bucket = 'ml-datasets-test';
     private $client;
+    public $DataSchema = '{"version":"1.0",
+        "rowId":null,
+        "rowWeight":null,
+        "targetAttributeName":"purchase",
+        "dataFormat":"CSV",
+        "dataFileContainsHeader":true,
+        "attributes":[{
+           "attributeName":"email_custom_domain","attributeType":"BINARY"},
+           {"attributeName":"same_email_domain_count","attributeType":"NUMERIC"},
+           {"attributeName":"projects_count","attributeType":"NUMERIC"},
+           {"attributeName":"strings_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"members_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"has_private_project",
+           "attributeType":"BINARY"},
+           {"attributeName":"same_login_and_project_name",
+           "attributeType":"BINARY"},
+           {"attributeName":"days_after_last_login",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"country",
+           "attributeType":"CATEGORICAL"},
+           {"attributeName":"purchase","attributeType":"BINARY"}],
+           "excludedAttributeNames":[]
+    }';
+
+    public $BathDataSchema = '{"version":"1.0",
+        "rowId":null,
+        "rowWeight":null,
+        "dataFormat":"CSV",
+        "dataFileContainsHeader":true,
+        "attributes":[{
+           "attributeName":"email_custom_domain","attributeType":"BINARY"},
+           {"attributeName":"same_email_domain_count","attributeType":"NUMERIC"},
+           {"attributeName":"projects_count","attributeType":"NUMERIC"},
+           {"attributeName":"strings_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"members_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"has_private_project",
+           "attributeType":"BINARY"},
+           {"attributeName":"same_login_and_project_name",
+           "attributeType":"BINARY"},
+           {"attributeName":"days_after_last_login",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"country",
+           "attributeType":"CATEGORICAL"}],
+           "excludedAttributeNames":[]
+    }';
 
     function __construct()
     {
@@ -308,7 +357,7 @@ class MLController extends Controller
         $DataSourceId = 'ds-' . uniqid();
         $DataSourceName = $request->input('DataSourceName');
         $DataLocationS3 = 's3://' . $this->bucket . '/' . $request->input('DataLocationS3');
-        $DataSchema = $request->input('DataSchema');
+        $DataSchema = $this->DataSchema;
         $DataRearrangement = '{"splitting":{"percentBegin":' . $request->input("DataRearrangementBegin")
             . ',"percentEnd":' . $request->input("DataRearrangementEnd") . '}}';
 

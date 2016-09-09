@@ -45,7 +45,13 @@ $(document).ready(function() {
                     '</tr>' +
                     '<span class="hide">' + i + '</span>';
                     for (var key in response.data) {
-                    i = i+1;
+                    var i = i+1;
+                    var date = response.data[key].LastUpdatedAt.replace('T', '  ');
+                    date = date.substring(0, date.indexOf('+'));
+                    var auc = '';
+                    if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
+                        auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
+                    }
                     res += '' +
                         '<tr>' +
                             '<td>' + response.data[key].EvaluationId + '</td>' +
@@ -56,15 +62,12 @@ $(document).ready(function() {
                             res += '' +
                             '</td>' +
                             '<td>' + response.data[key].Status + '</td>' +
-                            '<td>';
-                                if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
-                                    res +=response.data[key].PerformanceMetrics.Properties.BinaryAUC;
-                                }
-                            res += '' +
+                            '<td>' +
+                                 auc +  
                             '</td>' +
                             '<td>' + response.data[key].MLModelId + '</td>' +
                             '<td>' + response.data[key].EvaluationDataSourceId + '</td>' +
-                            '<td>' + response.data[key].LastUpdatedAt + '</td>' +
+                            '<td>' + date + '</td>' +
                             '<td>' +
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                    'data-toggle="modal" id="info_' + i + '">' +

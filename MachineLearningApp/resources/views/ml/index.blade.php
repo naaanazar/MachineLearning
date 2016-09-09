@@ -49,11 +49,7 @@
                                         <label for="DataRearrangement">Data rearrangement End</label>
                                         <input type="number" class="form-control form-control-sm" id="DataRearrangement"  name="DataRearrangementEnd">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="DataSchema">Data schema</label>
-                                    <textarea class="form-control" id="DataSchema" placeholder="Data schema"  rows="10" name="DataSchema"></textarea>
-                                </div>
+                                </div>                                
                                 <button  type="submit" class="btn btn-primary submit-button">Submit</button>
                             </form>
                         </div>

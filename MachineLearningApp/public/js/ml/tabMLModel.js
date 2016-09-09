@@ -36,6 +36,8 @@ $(document).ready(function() {
                     '<span class="hide">' + i + '</span>';
                     for (var key in response.data) {
                     i = i+1;
+                    date = response.data[key].LastUpdatedAt.replace('T', '  ');
+                    date = date.substring(0, date.indexOf('+'));
                     res += '' +
                         '<tr>' +
                             '<td>' + response.data[key].MLModelId + '</td>' +
@@ -49,7 +51,7 @@ $(document).ready(function() {
                             '<td>' + response.data[key].EndpointInfo.EndpointStatus + '</td>' +
                             '<td>' + response.data[key].TrainingDataSourceId + '</td>' +
                             '<td>' + response.data[key].MLModelType + '</td>' +
-                            '<td>' + response.data[key].LastUpdatedAt + '</td>' +
+                            '<td>' + date + '</td>' +
                             '<td>' +
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                    'data-toggle="modal" id="info_' + i + '">' +

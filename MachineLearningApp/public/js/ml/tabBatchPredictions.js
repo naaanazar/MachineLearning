@@ -41,12 +41,14 @@ $(document).ready(function() {
                     '<td>BatchPredictionDataSourceId</td>' +
                     '<td>OutputUri</td>' +
                     '<td>Count</td>' +
-                    '<td>TotalRecordCount</td>' +
+                    '<td>Last Updated</td>' +
                     '<td>&nbsp;</td>' +
                 '</tr>' +
                 '<span class="hide">'+ i +'</span>';
                 for (var key in response.data) {
                     i = i+1;
+                    var date = response.data[key].LastUpdatedAt.replace('T', '  ');
+                    date = date.substring(0, date.indexOf('+'));
                     res +=
                         '<tr>' +
                             '<td>' + response.data[key].BatchPredictionId + '</td>' +
@@ -60,7 +62,7 @@ $(document).ready(function() {
                                     res += response.data[key].TotalRecordCount;
                                 };
                     res +=  '</td>' +
-                            '<td>' + response.data[key].LastUpdatedAt + '</td>' +
+                            '<td>' + date + '</td>' +
                             '<td>' +
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                    'data-toggle="modal" id="info_' + i +'">' +
