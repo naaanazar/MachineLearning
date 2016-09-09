@@ -44,7 +44,7 @@ class MLController extends Controller
 
         return response()->json(['data' => (array)$result]);
     }
-    
+
     public function listMLModels()
     {
         $result = $this->describeMLModels();
@@ -53,7 +53,7 @@ class MLController extends Controller
     }
 
     public function listEvaluations()
-    {       
+    {
         $result = $this->describeEvaluations();
 
         return response()->json(['data' => (array)$result]);
@@ -413,7 +413,7 @@ class MLController extends Controller
         }
 
         return back();
-    }    
+    }
 
 
     public function createRealtimeEndpoint($MLModelId)
@@ -450,15 +450,15 @@ class MLController extends Controller
 
     public function predict(Request $request)
     {
-        $country                 = $request->input('country');
-        $MLModelId               = $request->input('ml_model_id');
-        $stringsCount            = $request->input('strings_count');
-        $membersCount            = $request->input('members_count');
-        $projectCount            = $request->input('projects_count');
-        $emailCustomDomain       = $request->input('email_custom_domain');
-        $hasPrivateProject       = $request->input('has_private_project');
-        $daysAfterLastLogin      = $request->input('days_after_last_login');
-        $sameEmailDomainCount    = $request->input('same_email_domain_count');
+        $country = $request->input('country');
+        $MLModelId = $request->input('ml_model_id');
+        $stringsCount = $request->input('strings_count');
+        $membersCount = $request->input('members_count');
+        $projectCount = $request->input('projects_count');
+        $emailCustomDomain = $request->input('email_custom_domain');
+        $hasPrivateProject = $request->input('has_private_project');
+        $daysAfterLastLogin = $request->input('days_after_last_login');
+        $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
         $endPoint = $this->createRealtimeEndpoint($MLModelId);

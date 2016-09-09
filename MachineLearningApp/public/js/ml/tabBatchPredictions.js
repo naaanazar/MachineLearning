@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
     $(document).on("click", ".btn-create-bath-description", function () {
         $(".create-bath-descriptions").toggle();
         $(".container-describeBatchPredictions").toggle();
