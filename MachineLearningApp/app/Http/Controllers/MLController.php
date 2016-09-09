@@ -15,6 +15,55 @@ class MLController extends Controller
 
     public $bucket = 'ml-datasets-test';
     private $client;
+    public $DataSchema = '{"version":"1.0",
+        "rowId":null,
+        "rowWeight":null,
+        "targetAttributeName":"purchase",
+        "dataFormat":"CSV",
+        "dataFileContainsHeader":true,
+        "attributes":[{
+           "attributeName":"email_custom_domain","attributeType":"BINARY"},
+           {"attributeName":"same_email_domain_count","attributeType":"NUMERIC"},
+           {"attributeName":"projects_count","attributeType":"NUMERIC"},
+           {"attributeName":"strings_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"members_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"has_private_project",
+           "attributeType":"BINARY"},
+           {"attributeName":"same_login_and_project_name",
+           "attributeType":"BINARY"},
+           {"attributeName":"days_after_last_login",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"country",
+           "attributeType":"CATEGORICAL"},
+           {"attributeName":"purchase","attributeType":"BINARY"}],
+           "excludedAttributeNames":[]
+    }';
+
+    public $BathDataSchema = '{"version":"1.0",
+        "rowId":null,
+        "rowWeight":null,
+        "dataFormat":"CSV",
+        "dataFileContainsHeader":true,
+        "attributes":[{
+           "attributeName":"email_custom_domain","attributeType":"BINARY"},
+           {"attributeName":"same_email_domain_count","attributeType":"NUMERIC"},
+           {"attributeName":"projects_count","attributeType":"NUMERIC"},
+           {"attributeName":"strings_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"members_count",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"has_private_project",
+           "attributeType":"BINARY"},
+           {"attributeName":"same_login_and_project_name",
+           "attributeType":"BINARY"},
+           {"attributeName":"days_after_last_login",
+           "attributeType":"NUMERIC"},
+           {"attributeName":"country",
+           "attributeType":"CATEGORICAL"}],
+           "excludedAttributeNames":[]
+    }';
 
     function __construct()
     {
@@ -39,14 +88,32 @@ class MLController extends Controller
         return $ml;
     }
 
-    public function listMLData()
+    public function listDataSources()
     {
-        $result['describeDataSources'] = $this->describeDataSources();
-        $result['describeMLModels'] = $this->describeMLModels();
-        $result['describeEvaluations'] = $this->describeEvaluations();
-        $result['describeBatchPredictions'] = $this->describeBatchPredictions();
+        $result = $this->describeDataSources();
 
-        return view('ml.index', ['result' => $result]);
+        return response()->json(['data' => (array)$result]);
+    }
+
+    public function listMLModels()
+    {
+        $result = $this->describeMLModels();
+
+        return response()->json(['data' => (array)$result]);
+    }
+
+    public function listEvaluations()
+    {
+        $result = $this->describeEvaluations();
+
+        return response()->json(['data' => (array)$result]);
+    }
+
+    public function listBatchPredictions()
+    {
+        $result = $this->describeBatchPredictions();
+
+        return response()->json(['data' => (array)$result]);
     }
 
     public function selectObjectsS3()
@@ -220,10 +287,13 @@ class MLController extends Controller
             $result = $this->client->deleteDataSource([
                 'DataSourceId' => $DataSourceId, // REQUIRED
             ]);
+
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -236,10 +306,12 @@ class MLController extends Controller
                 'EvaluationId' => $EvaluationId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -252,10 +324,12 @@ class MLController extends Controller
                 'MLModelId' => $MLModelId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
 
     }
 
@@ -268,10 +342,12 @@ class MLController extends Controller
                 'BatchPredictionId' => $BatchPredictionId, // REQUIRED
             ]);
 
+            return response()->json(['deleted' => 'Ok']);
+
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        return back();
+
     }
 
 
@@ -281,7 +357,7 @@ class MLController extends Controller
         $DataSourceId = 'ds-' . uniqid();
         $DataSourceName = $request->input('DataSourceName');
         $DataLocationS3 = 's3://' . $this->bucket . '/' . $request->input('DataLocationS3');
-        $DataSchema = $request->input('DataSchema');
+        $DataSchema = $this->DataSchema;
         $DataRearrangement = '{"splitting":{"percentBegin":' . $request->input("DataRearrangementBegin")
             . ',"percentEnd":' . $request->input("DataRearrangementEnd") . '}}';
 
@@ -301,7 +377,7 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -326,7 +402,7 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -351,7 +427,7 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -373,13 +449,13 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            $ex = $e->getMessage() . "\n";
         }
 
-        return back();
+        return response()->json(['data' => $ex ]);
     }
 
-
+    
     public function createRealtimeEndpoint($MLModelId)
     {
 
@@ -412,15 +488,15 @@ class MLController extends Controller
 
     public function predict(Request $request)
     {
-        $country                 = $request->input('country');
-        $MLModelId               = $request->input('ml_model_id');
-        $stringsCount            = $request->input('strings_count');
-        $membersCount            = $request->input('members_count');
-        $projectCount            = $request->input('projects_count');
-        $emailCustomDomain       = $request->input('email_custom_domain');
-        $hasPrivateProject       = $request->input('has_private_project');
-        $daysAfterLastLogin      = $request->input('days_after_last_login');
-        $sameEmailDomainCount    = $request->input('same_email_domain_count');
+        $country = $request->input('country');
+        $MLModelId = $request->input('ml_model_id');
+        $stringsCount = $request->input('strings_count');
+        $membersCount = $request->input('members_count');
+        $projectCount = $request->input('projects_count');
+        $emailCustomDomain = $request->input('email_custom_domain');
+        $hasPrivateProject = $request->input('has_private_project');
+        $daysAfterLastLogin = $request->input('days_after_last_login');
+        $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
         $endPoint = $this->createRealtimeEndpoint($MLModelId);
