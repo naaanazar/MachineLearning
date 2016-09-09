@@ -60,8 +60,49 @@ body {
 
 
 /***************************************
+    Prediction
+***************************************/
+
+.progress-prediction {
+    position: relative;
+    padding-top: 25px;
+    border-radius: 15px;
+}
+
+.spinner-prediction {
+    position: absolute;
+    top: 35%;
+    left: 41%;
+    display: none;
+    font-size: 80px;
+    transform: translateX(-50%);
+}
+
+.form-prediction {
+    position: relative;
+}
+
+.form-pred-disabled,
+.block-pred-disabled {
+    z-index: -1;
+}
+
+.block-prediction {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    height: 450px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #eee;
+    border-radius: 15px;
+}
+
+
+/***************************************
     Other
 ***************************************/
+
 .logo {
     margin:auto;
     width: 200px;
@@ -91,14 +132,6 @@ body {
 .block-add { margin-bottom: -55px; }
 .active-radius a { border-radius: 50%; }
 .pagination-border li > a { border: none; }
-
-.block-output {
-    width: 100%;
-    height: 450px;
-    margin: 0 auto;
-    background: #eee;
-    border-radius: 15px;
-}
 
 .table-font { font-size: 11px; }
 .table-font tr td:last-child { width: 110px; }

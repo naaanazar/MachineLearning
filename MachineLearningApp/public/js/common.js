@@ -90,6 +90,57 @@ $(document).ready(function () {
         $('#ml_model_id').html(result);
     });
 
+    // prediction: send form
+    $('.form-prediction').on('submit', function(e) {
+        e.preventDefault();
+
+        addPredictionProgress();
+
+        $.ajaxSetup({
+            headers: { 'X-XSRF-Token': $('meta[name="_token"]').attr('content') }
+        });
+
+        var formData   = $(this).serialize();
+        var formAction = $(this).attr('action');
+        var formMethod = $(this).attr('method');
+
+        function formPredict() {
+            $.ajax({
+                type    : formMethod,
+                url     : formAction,
+                data    : formData,
+                cache   : false,
+                success : function(data) {
+                              if (data == 'Updating') {
+                                  setTimeout(formPredict(), 3000);
+                              }
+                              else {
+                                removePredictionProgress()
+                                $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
+                              }
+                          },
+                error   : function() {
+                              setTimeout(formPredict(), 3000);
+                          }
+            });
+        }
+
+        formPredict();
+    });
+
+    // prediction: form processing style
+    function addPredictionProgress() {
+        $('.spinner-prediction').show('slow');
+        $('.form-prediction').addClass('form-pred-disabled');
+        $('.block-prediction').addClass('block-pred-disabled');
+    }
+
+    function removePredictionProgress() {
+        $('.spinner-prediction').hide('slow');
+        $('.form-prediction').removeClass('form-pred-disabled');
+        $('.block-prediction').removeClass('block-pred-disabled');
+    }
+
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
