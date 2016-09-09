@@ -71,7 +71,6 @@ body {
     vertical-align: middle;
 }
 
-
 .batch-label,
 .batch-input {
     float: left;
@@ -80,6 +79,10 @@ body {
     font-weight: normal;
 }
 
+.submit-button{
+    margin-bottom: 8%;
+    margin-left: 1%;
+}
 .error { color: red; }
 #input-file { display: none ; }
 .btn-batch { margin-right: 42px; }
@@ -106,6 +109,24 @@ body {
     bottom: 55px;
     left: 15px;
     display: none;
+}
+@media screen and (max-width:880px){
+    .back-to-top{
+        opacity: 0.5;
+    }
+    .submit-button{
+        margin-left: 60px
+    }
+}
+
+@media screen and (max-width: 992px){
+    .form-horizontal .control-label{
+        text-align: left !important;
+    }
+     .prediction-type{
+        display: none;
+     }
+    }
 }
 
 .jGrowl {
@@ -215,3 +236,4 @@ body {
     -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
+

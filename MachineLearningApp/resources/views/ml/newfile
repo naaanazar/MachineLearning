@@ -276,3 +276,158 @@
 
 @stop
 
+
+
+
+<table class="table table-bordered table-font text-center">
+                                <tr class="active">
+                                    <td>BatchPredictionId</td>
+                                    <td>Name</td>
+                                    <td>Status</td>
+                                    <td>MLModelId</td>
+                                    <td>BatchPredictionDataSourceId</td>
+                                    <td>OutputUri</td>
+                                    <td>Count</td>
+                                    <td>TotalRecordCount</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <span class="hide">{{$i = 1}}</span>
+                                @foreach($result['describeBatchPredictions'] as $key => $value)
+                                    <tr>
+                                        <td>{{ $value['BatchPredictionId'] }}</td>
+                                        <td>{{ $value['Name'] }}</td>
+                                        <td>{{ $value['Status'] }}</td>
+                                        <td>{{ $value['MLModelId'] }}</td>
+                                        <td>{{ $value['BatchPredictionDataSourceId'] }}</td>
+                                        <td>{{ $value['OutputUri'] }}</td>
+                                        <td>
+                                            @if (isset($value['TotalRecordCount']) > 0)
+                                                {{ $value['TotalRecordCount'] }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $value['LastUpdatedAt'] }}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}">
+                                                <span class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                    <span class="hide">{{ $i = $i+1 }}</span>
+                                @endforeach
+                            </table>
+
+
+
+
+
+<table class="table table-bordered table-font text-center">
+                                <tr class="active">
+                                    <td>EvaluationId</td>
+                                    <td>Name</td>
+                                    <td>Status</td>
+                                    <td>BinaryAUC</td>
+                                    <td>MLModelId</td>
+                                    <td>EvaluationDataSourceId</td>
+                                    <td>Last Updated</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <span class="hide">{{$i = 1}}</span>
+                                @foreach($result['describeEvaluations'] as $key => $value)
+                                    <tr>
+                                        <td>{{ $value['EvaluationId'] }}</td>
+                                        <td>
+                                            @if (isset($value['Name']))
+                                                {{ $value['Name'] }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $value['Status'] }}</td>
+                                        <td>
+                                            @if (isset($value['PerformanceMetrics']['Properties']['BinaryAUC']))
+                                                {{ $value['PerformanceMetrics']['Properties']['BinaryAUC'] }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $value['MLModelId'] }}</td>
+                                        <td>{{ $value['EvaluationDataSourceId'] }}</td>
+                                        <td>{{ $value['LastUpdatedAt'] }}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}">
+                                                <span class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                    <span class="hide">{{ $i = $i+1 }}</span>
+                                @endforeach
+                            </table>
+
+
+<table class="table table-bordered table-font text-center">
+                                <tr class="active">
+                                    <td>MLModelId</td>
+                                    <td>Name</td>
+                                    <td>Status</td>
+                                    <td>EndpointStatus</td>
+                                    <td>TrainingDataSourceId</td>
+                                    <td>MLModelType</td>
+                                    <td>Last Updated</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <span class="hide">{{$i = 1}}</span>
+                                @foreach($result['describeMLModels'] as $key => $value)
+                                    <tr>
+                                        <td>{{ $value['MLModelId'] }}</td>
+                                        <td>
+                                            @if (isset($value['Name']))
+                                                {{ $value['Name'] }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $value['Status'] }}</td>
+                                        <td>{{ $value['EndpointInfo']['EndpointStatus'] }}</td>
+                                        <td>{{ $value['TrainingDataSourceId'] }}</td>
+                                        <td>{{ $value['MLModelType'] }}</td>
+                                        <td>{{ $value['LastUpdatedAt'] }}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}">
+                                                <span class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                    <span class="hide">{{ $i = $i+1 }}</span>
+                                @endforeach
+                            </table>
+
+
+
+<table class="table table-bordered table-font text-center">
+                                <tr class="active">
+                                    <td>DataSourceId</td>
+                                    <td>Name</td>
+                                    <td>Status</td>
+                                    <td>DataLocationS3</td>
+                                    <td>Last Updated</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <span class="hide">{{$i = 1}}</span>
+                                @foreach($result['describeDataSources'] as $key => $value)
+                                    <tr>
+                                        <td>{{ $value['DataSourceId'] }}</td>
+                                        <td>
+                                            @if (isset($value['Name']))
+                                                {{ $value['Name'] }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $value['Status'] }}</td>
+                                        <td>{{ $value['DataLocationS3'] }}</td>
+                                        <td>{{ $value['LastUpdatedAt'] }}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"
+                                               data-toggle="modal" id="info_{{ $i }}"><span
+                                                        class="glyphicon glyphicon-info-sign"></span></a>
+                                            <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                    <span class="hide">{{ $i = $i+1 }}</span>
+                                @endforeach
+                            </table>

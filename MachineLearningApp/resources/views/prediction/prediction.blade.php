@@ -2,6 +2,8 @@
 
 @section('content')
 
+<script type="text/javascript" src="{{ URL::to('js/countries.js.js') }}"></script>
+
 <div class="container">
 
     <h3 class="title">Real time prediction</h3>
@@ -10,44 +12,35 @@
         <form class="form-horizontal" method="post" action="{{ action('MLController@predict') }}">
             {{ csrf_field() }}
             <script>
-            $.get("/ml/select-ml-model", function(response){
-            var  result;
-
-            for (var key in response.data) {
-
-                result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
-            }
-            $('#SelectMLModelId').html(result);
-        });
+            
             </script>
             <div class="form-group">
-                <label for="SelectMLModelId">ML model id</label>
-                <select class="form-control" id="SelectMLModelId" name="DataSourceId">
-                </select>
+                <label for="SelectMLModelId" class="control-label batch-label text-right">ML model id</label>
+                <select class="form-control batch-input" id="ml_model_id" name="ml_model_id"></select>
             </div>
             <br>
             <div class="form-group">
-                <label for="email" class="control-label batch-label text-right">Email custom domain <span class="prediction-type">[int]</span></label>
+                <label for="email" class="control-label batch-label text-right">Email custom domain <span class="prediction-type">int</span></label>
                 <input id="email" name="email_custom_domain" type="number" class="form-control batch-input" placeholder="Email custom domain" min="0" max="1" required>
             </div>
             <div class="form-group">
-                <label for="same-email" class="control-label batch-label text-right">Same email domain count <span class="prediction-type">[int]</span></label>
+                <label for="same-email" class="control-label batch-label text-right">Same email domain count <span class="prediction-type">int</span></label>
                 <input id="same-email" name="same_email_domain_count" type="number" class="form-control batch-input" placeholder="Same email domain count" required>
             </div>
             <div class="form-group">
-                <label for="projects-count" class="control-label batch-label text-right">Projects count <span class="prediction-type">[int]</span></label>
+                <label for="projects-count" class="control-label batch-label text-right">Projects count <span class="prediction-type">int</span></label>
                 <input id="projects-count" name="projects_count" type="number" class="form-control batch-input" placeholder="Projects count" required>
             </div>
             <div class="form-group">
-                <label for="string-count" class="control-label batch-label text-right">Strings count <span class="prediction-type">[int]</span></label>
+                <label for="string-count" class="control-label batch-label text-right">Strings count <span class="prediction-type">int</span></label>
                 <input id="string-count" name="strings_count" type="number" class="form-control batch-input" placeholder="Strings count" required>
             </div>
             <div class="form-group">
-                <label for="members-count" class="control-label batch-label text-right">Members count <span class="prediction-type">[int]</span></label>
+                <label for="members-count" class="control-label batch-label text-right">Members count <span class="prediction-type">int</span></label>
                 <input id="members-count" name="members_count" type="number" class="form-control batch-input" placeholder="Members count" required>
             </div>
             <div class="form-group">
-                <label for="has-privat-project" class="control-label batch-label text-right">Has private project <span class="prediction-type">[int]</span></label>
+                <label for="has-privat-project" class="control-label batch-label text-right">Has private project <span class="prediction-type">int</span></label>
                 <input id="has-privat-project" name="has_private_project" type="number" class="form-control batch-input" placeholder="Has private project" min="0" max="1" required>
             </div>
             <div class="form-group">
@@ -68,7 +61,11 @@
         </form>
     </div>
     <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
-        <div class="block-output"></div>
+        <div class="block-output">
+            @if (session('result'))
+                {{ session('result') }}
+            @endif
+        </div>
     </div>
 </div>
 <hr>
