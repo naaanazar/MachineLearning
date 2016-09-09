@@ -220,7 +220,9 @@ class MLController extends Controller
         $arr = [$result['Name'],
             $result['DataSizeInBytes'],
             $result['NumberOfFiles'],
-            $result['Message']];
+            $result['Message'],
+            $result['DataLocationS3'],
+            $result['DataSourceId']];
         //dd($result);
 
         return response()->json(['data' => (array)$arr]);
@@ -240,7 +242,9 @@ class MLController extends Controller
         $arr = [$result['Name'],
             $result['SizeInBytes'],
             $result['InputDataLocationS3'],
-            $result['Message']];
+            $result['Message'],
+            $result['MLModelId'],
+            $result['TrainingDataSourceId']];
         //dd($arr);
         return response()->json(['data' => (array)$arr]);
 
@@ -259,7 +263,11 @@ class MLController extends Controller
         $arr = [$result['Name'],
             $result['ComputeTime'],
             $result['InputDataLocationS3'],
-            $result['Message']];
+            $result['Message'],
+            $result['EvaluationId'],
+            $result['MLModelId'],
+            $result['EvaluationDataSourceId']
+        ];
 
         return response()->json(['data' => (array)$arr]);
     }
@@ -277,7 +285,11 @@ class MLController extends Controller
         $arr = [$result['Name'],
             $result['ComputeTime'],
             $result['InputDataLocationS3'],
-            $result['Message']];
+            $result['Message'],
+            $result['BatchPredictionId'],
+            $result['BatchPredictionDataSourceId'],
+            $result['MLModelId'],
+        ];
 
         return response()->json(['data' => (array)$arr]);
     }
