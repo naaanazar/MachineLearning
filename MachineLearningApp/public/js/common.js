@@ -94,139 +94,127 @@ $(document).ready(function () {
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
 
-        if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'DataSourceId') {
+        var myArray = {
+            "Name": "Name",
+            "DataSizeInBytes": "DataSizeInBytes",
+            "NumberOfFiles": "NumberOfFiles",
+            "Message": "Message",
+            "SizeInBytes": "SizeInBytes",
+            "InputDataLocationS3": "InputDataLocationS3",
+            "ComputeTime": "ComputeTime"
+        };
 
+        var firstRow;
+        var resDataOne;
+        var secondRow;
+        var resDataTwo;
+        var thirdRow;
+        var resDataThree;
+        var fourthRow;
+        var resDataFourth;
+        var url;
 
-            $.get('/ml/getdatasource/' + datasourceId, function (response) {
-                var result = '<table class="table table-condensed">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>' + 'NameData' + '</th>' +
-                    '<th>' + 'InfoData' + '</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + 'Name' + '</td>' +
-                    '<td>' + response.data[0] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'DataSizeInBytes' + '</td>' +
-                    '<td>' + response.data[1] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'NumberOfFiles' + '</td>' +
-                    '<td>' + response.data[2] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Message' + '</td>' +
-                    '<td>' + response.data[3] + '</td>' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>';
+        switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
+            case 'DataSourceId':
+                url = '/ml/getdatasource/';
+                break;
+            case 'MLModelId':
+                url = '/ml/getmlmodel/';
+                break;
+            case 'EvaluationId':
+                url = '/ml/getevaluation/';
+                break;
+            case 'BatchPredictionId':
+                url = '/ml/getbatchprediction/';
+                break;
 
-                $('#result_info').html(result);
-                event.preventDefault();
-            });
-
-        } else if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'MLModelId') {
-
-            $.get('/ml/getmlmodel/' + datasourceId, function (response) {
-                var result = '<table class="table table-condensed">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>' + 'NameData' + '</th>' +
-                    '<th>' + 'InfoData' + '</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + 'Name' + '</td>' +
-                    '<td>' + response.data[0] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'SizeInBytes' + '</td>' +
-                    '<td>' + response.data[1] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'InputDataLocationS3' + '</td>' +
-                    '<td>' + response.data[2] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Message' + '</td>' +
-                    '<td>' + response.data[3] + '</td>' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>';
-
-                $('#result_info').html(result);
-                event.preventDefault();
-            });
-        } else if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'EvaluationId') {
-
-            $.get('/ml/getevaluation/' + datasourceId, function (response) {
-                var result = '<table class="table table-condensed">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>' + 'NameData' + '</th>' +
-                    '<th>' + 'InfoData' + '</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + 'ComputeTime' + '</td>' +
-                    '<td>' + response.data[0] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'InputDataLocationS3' + '</td>' +
-                    '<td>' + response.data[2] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Message' + '</td>' +
-                    '<td>' + response.data[3] + '</td>' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>';
-
-                $('#result_info').html(result);
-                event.preventDefault();
-            });
-
-        } else if (($(event.target).closest('table').find('tr:first').find('td:first').text()) == 'BatchPredictionId') {
-
-            $.get('/ml/getbatchprediction/' + datasourceId, function (response) {
-                var result = '<table class="table table-condensed">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>' + 'NameData' + '</th>' +
-                    '<th>' + 'InfoData' + '</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + 'ComputeTime' + '</td>' +
-                    '<td>' + response.data[0] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'InputDataLocationS3' + '</td>' +
-                    '<td>' + response.data[2] + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Message' + '</td>' +
-                    '<td>' + response.data[3] + '</td>' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>';
-
-                $('#result_info').html(result);
-                event.preventDefault();
-            });
-
+            default:
+                break;
         }
+
+        $.get(url + datasourceId, function (response) {
+            switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
+
+
+                case 'DataSourceId':
+                    firstRow = myArray['Name'];
+                    resDataOne = response.data[0];
+                    secondRow = myArray['DataSizeInBytes'];
+                    resDataTwo = response.data[1];
+                    thirdRow = myArray['NumberOfFiles'];
+                    resDataThree = response.data[2];
+                    fourthRow = myArray['Message'];
+                    resDataFourth = response.data[3];
+                    break;
+                case 'MLModelId':
+                    firstRow = myArray['Name'];
+                    resDataOne = response.data[0];
+                    secondRow = myArray['SizeInBytes'];
+                    resDataTwo = response.data[1];
+                    thirdRow = myArray['InputDataLocationS3'];
+                    resDataThree = response.data[2];
+                    fourthRow = myArray['Message'];
+                    resDataFourth = response.data[3];
+                    break;
+                case 'EvaluationId':
+                    firstRow = myArray['Name'];
+                    resDataOne = response.data[0];
+                    secondRow = myArray['ComputeTime'];
+                    resDataTwo = response.data[1];
+                    thirdRow = myArray['InputDataLocationS3'];
+                    resDataThree = response.data[2];
+                    fourthRow = myArray['Message'];
+                    resDataFourth = response.data[3];
+                    break;
+                case 'BatchPredictionId':
+                    firstRow = myArray['Name'];
+                    resDataOne = response.data[0];
+                    secondRow = myArray['ComputeTime'];
+                    resDataTwo = response.data[1];
+                    thirdRow = myArray['InputDataLocationS3'];
+                    resDataThree = response.data[2];
+                    fourthRow = myArray['Message'];
+                    resDataFourth = response.data[3];
+                    break;
+                default:
+                    break;
+            }
+
+            var result = '<table class="table table-condensed">' +
+                '<thead>' +
+                '<tr>' +
+                '<th>' + 'NameData' + '</th>' +
+                '<th>' + 'InfoData' + '</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                '<td>' + firstRow + '</td>' +
+                '<td>' + resDataOne + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>' + secondRow + '</td>' +
+                '<td>' + resDataTwo + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>' + thirdRow + '</td>' +
+                '<td>' + resDataThree + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>' + fourthRow + '</td>' +
+                '<td>' + resDataFourth + '</td>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>';
+
+            $('#result_info').html(result);
+            event.preventDefault();
+        });
+
 
     });
 
-
+// Delete Ajax
     $(document).on("click", '.delete', function (event) {
         function deleteObject(dataSourceIdVar, url) {
 
