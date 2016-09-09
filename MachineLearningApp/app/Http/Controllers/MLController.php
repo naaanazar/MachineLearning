@@ -38,14 +38,32 @@ class MLController extends Controller
         return $ml;
     }
 
-    public function listMLData()
+    public function listDataSources()
     {
-        $result['describeDataSources'] = $this->describeDataSources();
-        $result['describeMLModels'] = $this->describeMLModels();
-        $result['describeEvaluations'] = $this->describeEvaluations();
-        $result['describeBatchPredictions'] = $this->describeBatchPredictions();
+        $result = $this->describeDataSources();
 
-        return view('ml.index', ['result' => $result]);
+        return response()->json(['data' => (array)$result]);
+    }
+    
+    public function listMLModels()
+    {
+        $result = $this->describeMLModels();
+
+        return response()->json(['data' => (array)$result]);
+    }
+
+    public function listEvaluations()
+    {       
+        $result = $this->describeEvaluations();
+
+        return response()->json(['data' => (array)$result]);
+    }
+
+    public function listBatchPredictions()
+    {
+        $result = $this->describeBatchPredictions();
+
+        return response()->json(['data' => (array)$result]);
     }
 
     public function selectObjectsS3()
@@ -385,8 +403,8 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return back();
-    }
+        //return back();
+    }    
 
 
     public function createRealtimeEndpoint($MLModelId)

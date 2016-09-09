@@ -23,7 +23,11 @@ Route::get('/s3/delete/{name}', 'S3Controller@delete');
 
 //ML
 Route::get('ml', 'MLController@index');
-Route::get('ml', 'MLController@listMLData');
+
+Route::get('/ml/describe-data-sources', 'MLController@listDataSources');
+Route::get('/ml/describe-ml-model', 'MLController@listMLModels');
+Route::get('/ml/describe-evaluations', 'MLController@listEvaluations');
+Route::get('/ml/describe-batch-prediction', 'MLController@listBatchPredictions');
 
 Route::post('ml/create-datasource', 'MLController@createDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@createMLModel');
@@ -42,7 +46,7 @@ Route::get('/ml/getmlmodel/{ModelId}', 'MLController@getMLModel');
 Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@getEvaluation');
 Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@getBatchPrediction');
 
-Route::get('/ml/get/{id}', 'MLController@getStatusMLModel');
+
 
 //Generator
 Route::get('/ml/select-S3objects', 'MLController@selectObjectsS3');
