@@ -54,8 +54,7 @@ $(document).ready(function() {
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                    'data-toggle="modal" id="info_' + i + '">' +
                                     '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                                '<a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/' + response.data[key].MLModelId +
-                                    '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                                '<a class="btn btn-danger btn-sm btn-list delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>' +
                             '</td>' +
                         '</tr>' +
                         '<span class="hide">' + i + '</span>';

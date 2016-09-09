@@ -226,4 +226,52 @@ $(document).ready(function() {
 
     });
 
+
+
+
+
+    $(document).on("click", '.delete', function (event) {
+        function deleteObject(dataSourceIdVar, url) {
+
+            this.datasourceId = $(event.target).closest('tr').find('td:first').text();
+            this.target = $(event.target).closest('table').find('tr:first').find('td:first').text();
+
+            if (this.target == dataSourceIdVar) {
+                $.get(url + this.datasourceId, function (response) {
+                    if (response.deleted == 'Ok') {
+                        $(event.target).closest('tr').fadeOut();
+                    }
+                });
+                event.preventDefault();
+            }
+        }
+
+        switch($(event.target).closest('table').find('tr:first').find('td:first').text()) {
+            case 'DataSourceId':
+                var deleteVar = new deleteObject('DataSourceId', '/ml/delete-datasource/');
+                break;
+            case 'MLModelId':
+                var deleteVar = new deleteObject('MLModelId', '/ml/delete-ml-model/');
+                break;
+            case 'EvaluationId':
+                var deleteVar = new deleteObject('EvaluationId', '/ml/delete-evaluation/');
+                break;
+            case 'BatchPredictionId':
+                var deleteVar = new deleteObject('BatchPredictionId', '/ml/delete-batch-prediction/');
+                break;
+
+            default:
+
+                break;
+        }
+
+
+
+
+
+
+
+
+
+    });
 });
