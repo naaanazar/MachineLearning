@@ -19,7 +19,11 @@ Route::get('predictions', 'S3Controller@predictionForm');
 
 Route::get('s3/list/', 'S3Controller@listS3');
 Route::post('/s3/upload', 'S3Controller@upload');
-Route::get('/s3/delete/{name}', 'S3Controller@delete');
+Route::post('/s3/delete', 'S3Controller@delete');
+
+Route::get('/s3/del/{name}', 'S3Controller@deleteF');
+Route::get('s3/l/', 'S3Controller@ListObjectsS3');
+
 
 //ML
 Route::get('ml', 'MLController@index');

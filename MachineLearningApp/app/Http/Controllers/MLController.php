@@ -15,7 +15,7 @@ class MLController extends Controller
 
     public $bucket = 'ml-datasets-test';
     private $client;
-    public $DataSchema = '{"version":"1.0",
+  /*  public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "targetAttributeName":"purchase",
@@ -39,9 +39,9 @@ class MLController extends Controller
            "attributeType":"CATEGORICAL"},
            {"attributeName":"purchase","attributeType":"BINARY"}],
            "excludedAttributeNames":[]
-    }';
+    }';*/
 
-    public $BathDataSchema = '{"version":"1.0",
+    public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "dataFormat":"CSV",
