@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Library\Pagination\Pagination as S3Pagination;
 
+use Illuminate\Support\Facades\Storage;
+
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 
@@ -126,22 +128,36 @@ class S3Controller extends Controller
         return $results;
     }
 
-    /*public function getFile()
+    public function getFile()
     {
         $client = $this->connect();
-        $path = storage_path('app/download');
+        $path = storage_path('app/');
+        $fileName = $path . 'dY11.tx';
         try {
             $result = $client->getObject([
-    'Bucket' => $this->bucket, // REQUIRED
-    'Key' => 'batch.csv',
-    'SaveAs' => $path . 'datasets8.txt',
+                'Bucket' => $this->bucket, // REQUIRED
+                'Key' => 'batch.csv',
+                'SaveAs' => $fileName,
 
-]);
+            ]);
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-print_r($result);
-        return $result;
-    }*/
+        sleep(1);
+
+        return response()->download($fileName);
+        File::delete($fileName);
+    }
+
+    public function del()
+    {
+        $path = storage_path('app/');
+        $fileName = $path . 'dY43.tx';
+
+        $k = Storage::delete('dY43.tx');
+        echo $k;
+    }
+
+
 }
