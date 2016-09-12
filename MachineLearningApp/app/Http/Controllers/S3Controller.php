@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Library\Pagination\Pagination as S3Pagination;
 
 use Aws\S3\S3Client;
@@ -41,7 +42,7 @@ class S3Controller extends Controller
 
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $storagePath = storage_path('app/uploads');
+        $storagePath = storage_path('app/');
         $file->move($storagePath, $fileName);
 
         $filepath = $storagePath . '/' . $fileName;
@@ -59,7 +60,10 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        return redirect('s3/list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
+
+        Storage::delete($fileName);
+
+        return redirect('s3/list');
     }
 
     public function delete()
