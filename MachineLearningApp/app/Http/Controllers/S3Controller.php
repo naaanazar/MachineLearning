@@ -110,7 +110,7 @@ class S3Controller extends Controller
                 'Delimiter' => '|'
             ]);
 
-            $results = $result['Contents'];            
+            $results = $result['Contents'];
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";

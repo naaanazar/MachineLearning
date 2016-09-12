@@ -612,8 +612,6 @@ class MLController extends Controller
                 'BatchPredictionId' => $result['BatchPredictionId'],
                 'BatchPredictionName' => $result['Name'],
             ]);
-
-
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
