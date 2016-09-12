@@ -280,4 +280,10 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
+
+        //loading data
+        $('.modal').on('hidden.bs.modal', function() {
+            $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        });
+
 });
