@@ -91,37 +91,37 @@ $(document).ready(function () {
     });
 
     // prediction: send form
-    $('.form-prediction').on('submit', function(e) {
+    $('.form-prediction').on('submit', function (e) {
         e.preventDefault();
 
         addPredictionProgress();
 
         $.ajaxSetup({
-            headers: { 'X-XSRF-Token': $('meta[name="_token"]').attr('content') }
+            headers: {'X-XSRF-Token': $('meta[name="_token"]').attr('content')}
         });
 
-        var formData   = $(this).serialize();
+        var formData = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
 
         function formPredict() {
             $.ajax({
-                type    : formMethod,
-                url     : formAction,
-                data    : formData,
-                cache   : false,
-                success : function(data) {
-                              if (data == 'Updating') {
-                                  setTimeout(formPredict(), 3000);
-                              }
-                              else {
-                                removePredictionProgress()
-                                $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
-                              }
-                          },
-                error   : function() {
-                              setTimeout(formPredict(), 3000);
-                          }
+                type: formMethod,
+                url: formAction,
+                data: formData,
+                cache: false,
+                success: function (data) {
+                    if (data == 'Updating') {
+                        setTimeout(formPredict(), 3000);
+                    }
+                    else {
+                        removePredictionProgress()
+                        $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
+                    }
+                },
+                error: function () {
+                    setTimeout(formPredict(), 3000);
+                }
             });
         }
 
@@ -145,42 +145,11 @@ $(document).ready(function () {
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
 
-        // var data = {
-        //     "Name": "Name",
-        //     "DataSizeInBytes": "DataSizeInBytes",
-        //     "NumberOfFiles": "NumberOfFiles",
-        //     "Message": "Message",
-        //     "SizeInBytes": "SizeInBytes",
-        //     "InputDataLocationS3": "InputDataLocationS3",
-        //     "DataLocationS3": "DataLocationS3",
-        //     "DataSourceId": "DataSourceId",
-        //     "MLModelId": "MLModelId",
-        //     "TrainingDataSourceId": "TrainingDataSourceId",
-        //     "EvaluationId": "EvaluationId",
-        //     "EvaluationDataSourceId": "EvaluationDataSourceId",
-        //     "BatchPredictionId": "BatchPredictionId",
-        //     "BatchPredictionDataSourceId": "BatchPredictionDataSourceId"
-        // };
-
         var data = {
             Name: "",
             Message: ""
         };
 
-        var firstRow;
-        var resDataOne;
-        var secondRow;
-        var resDataTwo;
-        var thirdRow;
-        var resDataThree;
-        var fourthRow;
-        var resDataFourth;
-        var fifthRow;
-        var resDataFifth;
-        var sixthRow;
-        var resDataSixth;
-        var seventhRow;
-        var resDataSeventh;
         var url;
 
         switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
@@ -211,61 +180,32 @@ $(document).ready(function () {
                     data.Location = response.data[4];
                     data.DataSourceId = response.data[5];
                     data.DatasetId = response.data[6];
-
                     break;
                 case 'MLModelId':
-                    firstRow = data['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = data['SizeInBytes'];
-                    resDataTwo = response.data[1];
-                    thirdRow = data['InputDataLocationS3'];
-                    resDataThree = response.data[2];
-                    fourthRow = data['Message'];
-                    resDataFourth = response.data[3];
-                    fifthRow = data['MLModelId'];
-                    resDataFifth = response.data[4];
-                    sixthRow = data['TrainingDataSourceId'];
-                    resDataSixth = response.data[5];
-
-                    seventhRow = ' class="hide"><td>';
-                    resDataSeventh = response.data[6];
-
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.Size = response.data[1] + ' Bytes';
+                    data.DataLocation = response.data[2];
+                    data.ModelId = response.data[4];
+                    data.TrainingData = response.data[5];
                     break;
                 case 'EvaluationId':
-                    firstRow = data['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = data['ComputeTime'];
-                    resDataTwo = response.data[1];
-                    thirdRow = data['InputDataLocationS3'];
-                    resDataThree = response.data[2];
-                    fourthRow = data['Message'];
-                    resDataFourth = response.data[3];
-
-                    fifthRow = data['EvaluationId'];
-                    resDataFifth = response.data[4];
-                    sixthRow = data['MLModelId'];
-                    resDataSixth = response.data[5];
-                    seventhRow = '><td>' + data['EvaluationDataSourceId'];
-                    resDataSeventh = response.data[6];
-
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.ComputeTime = response.data[1];
+                    data.DataLocation = response.data[2];
+                    data.EvaluationId = response.data[4];
+                    data.ModelId = response.data[5];
+                    data.EvaluationData = response.data[6];
                     break;
                 case 'BatchPredictionId':
-                    firstRow = data['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = data['ComputeTime'];
-                    resDataTwo = response.data[1];
-                    thirdRow = data['InputDataLocationS3'];
-                    resDataThree = response.data[2];
-                    fourthRow = data['Message'];
-                    resDataFourth = response.data[3];
-
-                    fifthRow = data['BatchPredictionId'];
-                    resDataFifth = response.data[4];
-                    sixthRow = data['BatchPredictionDataSourceId'];
-                    resDataSixth = response.data[5];
-                    seventhRow = '><td>' + data['MLModelId'];
-                    resDataSeventh = response.data[6];
-
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.ComputeTime = response.data[1];
+                    data.DataLocation = response.data[2];
+                    data.BatchPredictionId = response.data[4];
+                    data.BatchPredictionDataSourceId = response.data[5];
+                    data.ModelId = response.data[6];
                     break;
             }
 
@@ -277,24 +217,24 @@ $(document).ready(function () {
             var tbody = '<tbody>';
 
             for (var key in data) {
-                if(key === 'Name') {
+                if (key === 'Name') {
                     thead += '' +
                         '<tr>' +
-                            '<th>Name</th>' +
-                            '<th>' + data.Name + '</th>' +
+                        '<th>Name</th>' +
+                        '<th>' + data.Name + '</th>' +
                         '</tr>';
                 } else {
-                    if (typeof data[key] !== 'undefined' || data[key] === 'null') {
+                    if (typeof data[key] !== 'undefined') {
                         tbody += '' +
                             '<tr>' +
-                                '<td>' + key + '</td>' +
-                                '<td>' + data[key] + '</td>' +
+                            '<td>' + key + '</td>' +
+                            '<td>' + data[key] + '</td>' +
                             '</tr>';
                     }
                 }
             }
 
-            thead += '</thead>'
+            thead += '</thead>';
             tbody += '</tbody';
 
             var result = '<table class="table table-condensed">' + thead + tbody + '</table>';
