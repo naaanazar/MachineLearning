@@ -62,27 +62,23 @@ class S3Controller extends Controller
         return redirect('s3/list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
-    public function delete(Request $request)
+    public function delete()
     {
-        $filename = $request->has('name');        
+        $filename = $_POST['name'];
         $client = $this->connect();
-        $filename = urldecode($filename);
-
-        if(stristr($filename, '/') !== FALSE) {
-            $filename = '/' . $filename;
-        }
+        $filename = urldecode($filename);    
 
         try {
-            $client->deleteObject([
+            $result = $client->deleteObject([
                 'Bucket' => $this->bucket,
                 'Key' => $filename,
                 'RequestPayer' => 'requester'
             ]);
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            return  Response()->json(['success' => (array)$e->getMessage()]);
         }
 
-       return Response()->json(['success' => $filename]);
+       return Response()->json(['success' => (array)$result]);
     }
 
     public function listS3()
@@ -129,4 +125,23 @@ class S3Controller extends Controller
         dd($result);
         return $results;
     }
+
+    /*public function getFile()
+    {
+        $client = $this->connect();
+        $path = storage_path('app/download');
+        try {
+            $result = $client->getObject([
+    'Bucket' => $this->bucket, // REQUIRED
+    'Key' => 'batch.csv',
+    'SaveAs' => $path . 'datasets8.txt',
+
+]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+print_r($result);
+        return $result;
+    }*/
 }

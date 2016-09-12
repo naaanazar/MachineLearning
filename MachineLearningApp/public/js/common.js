@@ -31,7 +31,7 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.btn-delete', function (e) {
-        e.preventDefault();
+        e.preventDefault();        
         var url = $(this).attr('href');
         $.ajax({
             url: '/s3/delete',

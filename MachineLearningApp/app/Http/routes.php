@@ -22,7 +22,7 @@ Route::post('/s3/upload', 'S3Controller@upload');
 Route::post('/s3/delete', 'S3Controller@delete');
 
 Route::get('/s3/del/{name}', 'S3Controller@deleteF');
-Route::get('s3/l/', 'S3Controller@ListObjectsS3');
+//Route::get('/s3/get', 'S3Controller@getFile');
 
 
 //ML
