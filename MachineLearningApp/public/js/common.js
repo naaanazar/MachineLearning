@@ -136,7 +136,6 @@ $(document).ready(function () {
     // prediction: form processing style
     $('.spinner-prediction').hide();
     function addPredictionProgress() {
-        // $('.spinner-prediction').fadeIn('slow');
         $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeIn('slow');
         $('.pred-data').remove();
         $('.form-prediction').addClass('form-pred-disabled');
@@ -144,11 +143,49 @@ $(document).ready(function () {
     }
 
     function removePredictionProgress() {
-        // $('.spinner-prediction').fadeOut('slow');
         $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeOut('slow');
         $('.form-prediction').removeClass('form-pred-disabled');
         $('.block-prediction').removeClass('block-pred-disabled');
     }
+
+    // prediction: validation form
+    function predValOne(selector) {
+        $('.form-prediction').on('input', selector, function(e){
+            var value = $(e.target).val();
+            var regExp = new RegExp("[^0-1]", "g");
+            value = value.replace(regExp, "");
+            $(selector).val(value.substr(0, 1));
+        });
+    }
+
+    function predValTwo(selector, length) {
+        $('.form-prediction').on('input', selector, function(e){
+            var value = $(e.target).val();
+            var regExp = new RegExp("[^0-9]", "g");
+            var value = value.replace(regExp, "");
+            $(selector).val(value.substr(0, length));
+        });
+    }
+
+    function predValCountry(selector, length) {
+        $('.form-prediction').on('input', selector, function(e){
+            var value = $(e.target).val();
+            var regExp = new RegExp("^ |[^a-zA-Z ]", "g");
+            var value = value.replace(regExp, "");
+            $(selector).val(value.substr(0, length));
+        });
+    }
+
+    predValOne("#email");
+    predValOne("#has-privat-project");
+    predValOne("#same-log-project");
+    predValTwo("#same-email", 10);
+    predValTwo("#projects-count", 10);
+    predValTwo("#string-count");
+    predValTwo("#string-count", 10);
+    predValTwo("#members-count", 10);
+    predValTwo("#last-login", 10);
+    predValCountry("#country", 60)
 
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
