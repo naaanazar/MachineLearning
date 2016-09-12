@@ -109,7 +109,7 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px; 
-    width: 80%;        
+    width: 85.7%;        
     position: absolute;
 }
 
@@ -117,7 +117,7 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 80%;      
+    width: 85.7%;      
     position: absolute;
 }
 
@@ -125,7 +125,7 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 80%;      
+    width: 85.7%;      
     position: absolute;
 }
 
@@ -133,7 +133,7 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 80%;      
+    width: 85.7%;      
     position: absolute;
 }
 @media screen and (max-width:768px){
@@ -143,14 +143,18 @@ body {
     .container-describeBatchPredictions{
         margin-top: 200px;
         position: static;
+        width: 100%;
+        margin-bottom: 25px;
 
     }
     .table {
         margin-bottom: 100px;
     }
     .footer {
-        position: fixed;}
+        position: fixed;
     }
+    }
+
 
 /***************************************
     Other
