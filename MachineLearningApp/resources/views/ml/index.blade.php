@@ -15,17 +15,16 @@
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
-            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8" style="padding: 0">
-                    <ul class="nav nav nav-tabs nav-justified">
+            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6" >
+                <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
+                    <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
-                                              id="describeDataSourcesContent">Data Source</a></li>
+                            id="describeDataSourcesContent">Data Source</a></li>
                         <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">ML Models</a>
                         </li>
                         <li><a data-toggle="tab" href="#describeEvaluations"
-                               id="describeEvaluationsContent">Evaluations</a></li>
-                        <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch
-                                Predictions</a></li>
+                            id="describeEvaluationsContent">Evaluations</a></li>
+                        <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a></li>
                     </ul>
                 </div>                
                 </div>
@@ -63,7 +62,7 @@
                                 <button  type="submit" class="btn btn-primary submit-button">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeDataSources">
+                        <div class="container-describeDataSources table-scroll">
                         </div>
                     </div>
                     <div id="describeMLModels" class="tab-pane fade">
@@ -93,7 +92,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeMLModels">
+                        <div class="container-describeMLModels table-scroll-ML ">
                         </div>
                     </div>
                     <div id="describeEvaluations" class="tab-pane fade">
@@ -120,7 +119,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeEvaluations">
+                        <div class="container-describeEvaluations table-scroll-evaluation">
                         </div>
                     </div>
                     <div id="describeBatchPredictions" class="tab-pane fade">
@@ -147,7 +146,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                        <div class="container-describeBatchPredictions">
+                        <div class="container-describeBatchPredictions table-scroll-batch ">
                         </div>
                     </div>
                 </div>

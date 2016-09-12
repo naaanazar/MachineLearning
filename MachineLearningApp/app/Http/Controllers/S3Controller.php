@@ -112,7 +112,7 @@ class S3Controller extends Controller
                 
             ]);
 
-            $results = $result['Contents'];            
+            $results = $result['Contents'];
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";

@@ -16,7 +16,7 @@
                     </div>
                 </form>
                 <div class="s3-pagination">
-                    <div class="pagination-list pagination-ajas-s3">
+                    <div class="pagination-list pagination-ajax-s3">
                         <?= $results->render(); ?>
                     </div>
                 </div>
