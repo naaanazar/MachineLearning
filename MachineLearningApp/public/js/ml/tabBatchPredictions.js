@@ -47,6 +47,10 @@ $(document).ready(function() {
         listBatchPrediction();
      });
 
+    //loading data
+    $('#describeBatchPredictionsContent').on('click', function() {
+        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
 
     function listBatchPrediction() {
         var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'

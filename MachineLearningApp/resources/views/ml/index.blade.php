@@ -58,8 +58,8 @@
                                         <input type="number" class="form-control form-control-sm" id="DataRearrangement"
                                                name="DataRearrangementEnd">
                                     </div>
-                                </div>                                
-                                <button  type="submit" class="btn btn-primary submit-button">Submit</button>
+                                </div>
+                                <button type="submit" class="btn btn-primary submit-button">Submit</button>
                             </form>
                         </div>
                         <div class="container-describeDataSources table-scroll">
@@ -156,12 +156,17 @@
     <br>
     <div id="modal" class="modal">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="center modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h2 align="center">Information</h2>
                 </div>
-                <div class="modal-body" id="result_info">
+                <div class="center modal-body" id="result_info">
+                    <div class="row" id="modal_row">
+                        <div class="loader col-md-2 col-md-offset-5" id="loader">
+
+                        </div>
+                    </div>
 
                 </div>
             </div>
