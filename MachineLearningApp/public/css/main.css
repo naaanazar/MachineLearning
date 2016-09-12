@@ -88,6 +88,10 @@ body {
     z-index: -1;
 }
 
+.btn-prediction {
+    margin-right: 61px;
+}
+
 .block-prediction {
     position: relative;
     z-index: -1;

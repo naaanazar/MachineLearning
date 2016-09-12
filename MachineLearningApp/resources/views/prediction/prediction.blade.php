@@ -52,7 +52,7 @@
                     <input id="country" name="country" type="text" class="form-control batch-input" placeholder="String" required>
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-primary pull-right" value="Send" type="submit">
+                    <input class="btn btn-primary pull-right btn-prediction" value="Send" type="submit">
                 </div>
             </form>
         </div>
