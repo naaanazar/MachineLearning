@@ -36,6 +36,11 @@ $(document).ready(function() {
         listMLModel();
     });
 
+    //loading data
+    $('#describeMLModelsContent').on('click', function() {
+        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
+
     function listMLModel() {    
         var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
         $('#ml-button-create').html(button);

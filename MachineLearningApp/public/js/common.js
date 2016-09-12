@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     });
 
-    function successS3(selector, str) {
+    function success(selector, str) {
         $(selector).append('<div class="alert alert-success upload-message-s3">'
             + '<ul><li><strong>Success! </strong>'
             + str + '</li></ul></div>').show('slow').hide(4000);
@@ -31,7 +31,7 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.btn-delete', function (e) {
-        e.preventDefault();        
+        e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
             url: '/s3/delete',
@@ -40,10 +40,10 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 if (data.success) {
-                    
+
                     $(e.target).closest('tr').hide("fast");
                 }
-                successS3('.notification-s3', 'File delete!');
+                success('.notification-s3', 'File delete!');
             }
         });
     });
@@ -92,6 +92,58 @@ $(document).ready(function () {
         }
         $('#ml_model_id').html(result);
     });
+
+    // prediction: send form
+    $('.form-prediction').on('submit', function (e) {
+        e.preventDefault();
+
+        addPredictionProgress();
+
+        $.ajaxSetup({
+            headers: {'X-XSRF-Token': $('meta[name="_token"]').attr('content')}
+        });
+
+        var formData = $(this).serialize();
+        var formAction = $(this).attr('action');
+        var formMethod = $(this).attr('method');
+
+        function formPredict() {
+            $.ajax({
+                type: formMethod,
+                url: formAction,
+                data: formData,
+                cache: false,
+                success: function (data) {
+                    if (data == 'Updating') {
+                        setTimeout(formPredict(), 3000);
+                    }
+                    else {
+                        removePredictionProgress()
+                        $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
+                    }
+                },
+                error: function () {
+                    setTimeout(formPredict(), 3000);
+                }
+            });
+        }
+
+        formPredict();
+    });
+
+    // prediction: form processing style
+    function addPredictionProgress() {
+        $('.spinner-prediction').show('slow');
+        $('.form-prediction').addClass('form-pred-disabled');
+        $('.block-prediction').addClass('block-pred-disabled');
+    }
+
+    function removePredictionProgress() {
+        $('.spinner-prediction').hide('slow');
+        $('.form-prediction').removeClass('form-pred-disabled');
+        $('.block-prediction').removeClass('block-pred-disabled');
+    }
+
 
     // prediction: send form
     $('.form-prediction').on('submit', function(e) {
@@ -191,38 +243,11 @@ $(document).ready(function () {
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
 
-        var myArray = {
-            "Name": "Name",
-            "DataSizeInBytes": "DataSizeInBytes",
-            "NumberOfFiles": "NumberOfFiles",
-            "Message": "Message",
-            "SizeInBytes": "SizeInBytes",
-            "InputDataLocationS3": "InputDataLocationS3",
-            "DataLocationS3": "DataLocationS3",
-            "DataSourceId": "DataSourceId",
-            "MLModelId": "MLModelId",
-            "TrainingDataSourceId": "TrainingDataSourceId",
-            "EvaluationId": "EvaluationId",
-            "EvaluationDataSourceId": "EvaluationDataSourceId",
-            "BatchPredictionId": "BatchPredictionId",
-            "BatchPredictionDataSourceId": "BatchPredictionDataSourceId"
-
+        var data = {
+            Name: "",
+            Message: ""
         };
 
-        var firstRow;
-        var resDataOne;
-        var secondRow;
-        var resDataTwo;
-        var thirdRow;
-        var resDataThree;
-        var fourthRow;
-        var resDataFourth;
-        var fifthRow;
-        var resDataFifth;
-        var sixthRow;
-        var resDataSixth;
-        var seventhRow;
-        var resDataSeventh;
         var url;
 
         switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
@@ -244,162 +269,119 @@ $(document).ready(function () {
         }
 
         $.get(url + datasourceId, function (response) {
-
             switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
-
                 case 'DataSourceId':
-                    firstRow = myArray['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = myArray['DataSizeInBytes'];
-                    resDataTwo = response.data[1];
-                    thirdRow = myArray['NumberOfFiles'];
-                    resDataThree = response.data[2];
-                    fourthRow = myArray['Message'];
-                    resDataFourth = response.data[3];
-                    fifthRow = myArray['DataLocationS3'];
-                    resDataFifth = response.data[4];
-                    sixthRow = myArray['DataSourceId'];
-                    resDataSixth = response.data[5];
-
-                    seventhRow = ' class="hide"><td>';
-                    resDataSeventh = response.data[6];
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.Size = response.data[1] + ' Bytes';
+                    data.NumberOfFiles = response.data[2] + ' Files';
+                    data.Location = response.data[4];
+                    data.DataSourceId = response.data[5];
+                    data.DatasetId = response.data[6];
                     break;
                 case 'MLModelId':
-                    firstRow = myArray['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = myArray['SizeInBytes'];
-                    resDataTwo = response.data[1];
-                    thirdRow = myArray['InputDataLocationS3'];
-                    resDataThree = response.data[2];
-                    fourthRow = myArray['Message'];
-                    resDataFourth = response.data[3];
-                    fifthRow = myArray['MLModelId'];
-                    resDataFifth = response.data[4];
-                    sixthRow = myArray['TrainingDataSourceId'];
-                    resDataSixth = response.data[5];
-
-                    seventhRow = ' class="hide"><td>';
-                    resDataSeventh = response.data[6];
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.Size = response.data[1] + ' Bytes';
+                    data.DataLocation = response.data[2];
+                    data.ModelId = response.data[4];
+                    data.TrainingData = response.data[5];
                     break;
                 case 'EvaluationId':
-                    firstRow = myArray['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = myArray['ComputeTime'];
-                    resDataTwo = response.data[1];
-                    thirdRow = myArray['InputDataLocationS3'];
-                    resDataThree = response.data[2];
-                    fourthRow = myArray['Message'];
-                    resDataFourth = response.data[3];
-
-                    fifthRow = myArray['EvaluationId'];
-                    resDataFifth = response.data[4];
-                    sixthRow = myArray['MLModelId'];
-                    resDataSixth = response.data[5];
-                    seventhRow = '><td>' + myArray['EvaluationDataSourceId'];
-                    resDataSeventh = response.data[6];
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.ComputeTime = response.data[1];
+                    data.DataLocation = response.data[2];
+                    data.EvaluationId = response.data[4];
+                    data.ModelId = response.data[5];
+                    data.EvaluationData = response.data[6];
                     break;
                 case 'BatchPredictionId':
-                    firstRow = myArray['Name'];
-                    resDataOne = response.data[0];
-                    secondRow = myArray['ComputeTime'];
-                    resDataTwo = response.data[1];
-                    thirdRow = myArray['InputDataLocationS3'];
-                    resDataThree = response.data[2];
-                    fourthRow = myArray['Message'];
-                    resDataFourth = response.data[3];
-
-                    fifthRow = myArray['BatchPredictionId'];
-                    resDataFifth = response.data[4];
-                    sixthRow = myArray['BatchPredictionDataSourceId'];
-                    resDataSixth = response.data[5];
-                    seventhRow = '><td>' + myArray['MLModelId'];
-                    resDataSeventh = response.data[6];
-                    break;
-                default:
+                    data.Name = response.data[0];
+                    data.Message = response.data[3];
+                    data.ComputeTime = response.data[1];
+                    data.DataLocation = response.data[2];
+                    data.BatchPredictionId = response.data[4];
+                    data.BatchPredictionDataSourceId = response.data[5];
+                    data.ModelId = response.data[6];
                     break;
             }
 
-            var result = '<table class="table table-condensed">' +
-                '<thead>' +
-                '<tr>' +
-                '<th>' + 'NameData' + '</th>' +
-                '<th>' + 'InfoData' + '</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody>' +
-                '<tr>' +
-                '<td>' + firstRow + '</td>' +
-                '<td>' + resDataOne + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>' + secondRow + '</td>' +
-                '<td>' + resDataTwo + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>' + thirdRow + '</td>' +
-                '<td>' + resDataThree + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>' + fourthRow + '</td>' +
-                '<td>' + resDataFourth + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>' + fifthRow + '</td>' +
-                '<td>' + resDataFifth + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>' + sixthRow + '</td>' +
-                '<td>' + resDataSixth + '</td>' +
-                '</tr>' +
-                '<tr' + seventhRow + '</td>' +
-                '<td>' + resDataSeventh + '</td>' +
-                '</tr>' +
-                '</tbody>' +
-                '</table>';
-
-            $('#result_info').html(result);
-            event.preventDefault();
+            display(data);
         });
 
+        function display(data) {
+            var thead = '<thead>';
+            var tbody = '<tbody>';
 
+            for (var key in data) {
+                if (key === 'Name') {
+                    thead += '' +
+                        '<tr>' +
+                        '<th>Name</th>' +
+                        '<th>' + data.Name + '</th>' +
+                        '</tr>';
+                } else {
+                    if (typeof data[key] !== 'undefined') {
+                        tbody += '' +
+                            '<tr>' +
+                            '<td>' + key + '</td>' +
+                            '<td>' + data[key] + '</td>' +
+                            '</tr>';
+                    }
+                }
+            }
+
+            thead += '</thead>';
+            tbody += '</tbody';
+
+            var result = '<table class="table table-condensed">' + thead + tbody + '</table>';
+
+            $('#result_info').html(result);
+        }
+
+        event.preventDefault();
     });
 
-// Delete Ajax
-    $(document).on("click", '.delete', function (event) {
+    // Delete Ajax
+    $(document).on('click', '.delete', function (event) {
+        var target = $(event.target).closest('table').find('tr:first').find('td:first').text();
+
+        $(event.target).closest('tr').fadeOut();
+
         function deleteObject(dataSourceIdVar, url) {
+            var datasourceId = $(event.target).closest('tr').find('td:first').text();
 
-            this.datasourceId = $(event.target).closest('tr').find('td:first').text();
-            this.target = $(event.target).closest('table').find('tr:first').find('td:first').text();
-
-            if (this.target == dataSourceIdVar) {
-                $.get(url + this.datasourceId, function (response) {
-                    if (response.deleted == 'Ok') {
-                        $(event.target).closest('tr').fadeOut();
+            if (target == dataSourceIdVar) {
+                $.get(url + datasourceId, function (response) {
+                    if (response.deleted !== 'Ok') {
+                        $.jGrowl('An error occurred during delete process', {theme: 'jgrowl-danger'});
                     }
                 });
-                event.preventDefault();
             }
         }
 
-        switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
+        switch (target) {
             case 'DataSourceId':
-                var deleteVar = new deleteObject('DataSourceId', '/ml/delete-datasource/');
+                deleteObject('DataSourceId', '/ml/delete-datasource/');
                 break;
             case 'MLModelId':
-                var deleteVar = new deleteObject('MLModelId', '/ml/delete-ml-model/');
+                deleteObject('MLModelId', '/ml/delete-ml-model/');
                 break;
             case 'EvaluationId':
-                var deleteVar = new deleteObject('EvaluationId', '/ml/delete-evaluation/');
+                deleteObject('EvaluationId', '/ml/delete-evaluation/');
                 break;
             case 'BatchPredictionId':
-                var deleteVar = new deleteObject('BatchPredictionId', '/ml/delete-batch-prediction/');
-                break;
-
-            default:
-
+                deleteObject('BatchPredictionId', '/ml/delete-batch-prediction/');
                 break;
         }
 
-
+        event.preventDefault();
     });
+
+        //loading data
+        $('.modal').on('hidden.bs.modal', function() {
+            $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        });
+
 });
