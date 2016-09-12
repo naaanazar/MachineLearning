@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     listDataSource();
 
-    $('.create-datasource-form').submit(function (e) {        
+    $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
         $.ajax({
             type: "post",
@@ -14,11 +14,11 @@ $(document).ready(function() {
                 listDataSource();
                 console.log(data);
             },
-            error: function () {                
+            error: function () {
             },
-        });      
+        });
     });
-    
+
     $(document).on("click", ".btn-create-datasource", function () {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
@@ -36,7 +36,11 @@ $(document).ready(function() {
         listDataSource();
      });
 
-     
+    //loading data
+    $('#describeDataSourcesContent').on('click', function() {
+        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
+
     function listDataSource() {
 
         var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
