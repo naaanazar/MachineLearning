@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
@@ -14,7 +15,7 @@ class MLController extends Controller
 
     public $bucket = 'ml-datasets-test';
     private $client;
-    public $DataSchema = '{"version":"1.0",
+  /*  public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "targetAttributeName":"purchase",
@@ -38,9 +39,9 @@ class MLController extends Controller
            "attributeType":"CATEGORICAL"},
            {"attributeName":"purchase","attributeType":"BINARY"}],
            "excludedAttributeNames":[]
-    }';
+    }';*/
 
-    public $BathDataSchema = '{"version":"1.0",
+    public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "dataFormat":"CSV",
@@ -93,6 +94,7 @@ class MLController extends Controller
 
         return response()->json(['data' => (array)$result]);
     }
+
 
     public function listMLModels()
     {
@@ -305,17 +307,6 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
 
-
-    }
-
-
-    public function getEndpointStatus($modelId)
-    {
-        $result = $this->client->getMLModel([
-            'MLModelId' => $modelId,
-            'Verbose' => true,
-        ]);
-        return $result['EndpointInfo']['EndpointStatus'];
     }
 
 
@@ -395,10 +386,10 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -420,10 +411,10 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -445,10 +436,10 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return back();
+        //return back();
     }
 
 
@@ -470,13 +461,13 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return back();
+        
     }
 
-
+    
     public function createRealtimeEndpoint($MLModelId)
     {
 
@@ -505,9 +496,7 @@ class MLController extends Controller
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-
     }
-
 
     public function predict(Request $request)
     {
@@ -523,40 +512,42 @@ class MLController extends Controller
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
         $endPoint = $this->createRealtimeEndpoint($MLModelId);
+
+        $endpointStatus  = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
         $predictEndpoint = $endPoint["RealtimeEndpointInfo"]["EndpointUrl"];
-        $endpointStatus = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
 
-        // $point = 0;
-        // while ($point !== 1) {
-        //     if ($endpointStatus == "READY") $point = 1;
-        //     else sleep(2);
-        // }
+        if ($endpointStatus != 'READY') {
+            $status = 'Updating';
+            return $status;
+        } else {
+            try {
+                $result = $this->client->predict([
+                    'MLModelId'       => $MLModelId,
+                    'PredictEndpoint' => $predictEndpoint,
+                    'Record' => [
+                        "country" => $country,
+                        "members_count" => $membersCount,
+                        "strings_count" => $stringsCount,
+                        "projects_count" => $projectCount,
+                        "has_private_project" => $hasPrivateProject,
+                        "email_custom_domain" => $emailCustomDomain,
+                        "days_after_last_login" => $daysAfterLastLogin,
+                        "same_email_domain_count" => $sameEmailDomainCount,
+                        "same_login_and_project_name" => $sameLoginAndProjectName,
+                    ]
+                ]);
 
-        try {
-            $result = $this->client->predict([
-                'MLModelId' => $MLModelId, // REQUIRED
-                'PredictEndpoint' => $predictEndpoint, // REQUIRED
-                'Record' => [
-                    "email_custom_domain" => $emailCustomDomain,
-                    "same_email_domain_count" => $sameEmailDomainCount,
-                    "projects_count" => $projectCount,
-                    "strings_count" => $stringsCount,
-                    "members_count" => $membersCount,
-                    "has_private_project" => $hasPrivateProject,
-                    "same_login_and_project_name" => $sameLoginAndProjectName,
-                    "days_after_last_login" => $daysAfterLastLogin,
-                    "country" => $country
-                ]
-            ]);
+            } catch (MachineLearningException $e) {
+                echo $e->getMessage() . "\n";
+            }
 
-        } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            $result = "<h3><strong>Prediction:</strong> " . $result["Prediction"]["predictedLabel"] . "</h3>";
+
+            $this->deleteRealtimeEndpoint($MLModelId);
+
+            if($request->ajax()) return $result;
+            else return false;
         }
-
-        $this->deleteRealtimeEndpoint($MLModelId);
-        $result = "Prediction: " . $result["Prediction"]["predictedLabel"];
-
-        return redirect('/predictions')->with('result', $result);
     }
 
     public function updateDataSource($DataSourceId)
@@ -621,8 +612,6 @@ class MLController extends Controller
                 'BatchPredictionId' => $result['BatchPredictionId'],
                 'BatchPredictionName' => $result['Name'],
             ]);
-
-
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }

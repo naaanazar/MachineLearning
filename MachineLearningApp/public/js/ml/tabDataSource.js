@@ -2,8 +2,25 @@ $(document).ready(function() {
 
     listDataSource();
 
+    $('.create-datasource-form').submit(function (e) {        
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: '/ml/create-datasource',
+            data: $('.create-datasource-form').serialize(),
+            success: function (data) {
+                $(".create-datasource-form").toggle();
+                $(".container-describeDataSources").toggle();
+                listDataSource();
+                console.log(data);
+            },
+            error: function () {                
+            },
+        });      
+    });
+    
     $(document).on("click", ".btn-create-datasource", function () {
-        $(".create-datasource").toggle();
+        $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
         $.get("/ml/select-S3objects", function(response){
@@ -19,6 +36,7 @@ $(document).ready(function() {
         listDataSource();
      });
 
+     
     function listDataSource() {
 
         var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'

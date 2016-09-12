@@ -1,7 +1,25 @@
 $(document).ready(function() {
 
+    $('.create-bath-descriptions-form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: 'ml/create-batch-prediction',
+            data: $('.create-bath-descriptions-form').serialize(),
+            success: function (data) {
+                $(".create-bath-descriptions-form").toggle();
+                $(".container-describeBatchPredictions").toggle();
+                listBatchPrediction();
+                console.log(data);
+            },
+            error: function () {                
+            },
+        });
+    });
+
+
     $(document).on("click", ".btn-create-bath-description", function () {
-        $(".create-bath-descriptions").toggle();
+        $(".create-bath-descriptions-form").toggle();
         $(".container-describeBatchPredictions").toggle();
 
         $.get("/ml/select-ml-model", function(response){
@@ -26,6 +44,11 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeBatchPredictionsContent', function () {
+        listBatchPrediction();
+     });
+
+
+    function listBatchPrediction() {
         var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
         $('#ml-button-create').html(button);
 
@@ -76,5 +99,5 @@ $(document).ready(function() {
 
             $('.container-describeBatchPredictions').html(res);
         });
-     });
+    }
 });

@@ -1,0 +1,5 @@
+email_custom_domain,same_email_domain_count,projects_count,strings_count,members_count,has_private_project,same_login_and_project_name,days_after_last_login,country
+1,449,36,31,956,1,1,0,Polland
+0,956,67,46,843,1,1,8,China
+1,840,95,44,125,0,0,17,Germany
+1,634,66,31,595,1,0,1,Spain

@@ -16,7 +16,7 @@
                     </div>
                 </form>
                 <div class="s3-pagination">
-                    <div class="pagination-list pagination-ajas-s3">
+                    <div class="pagination-list pagination-ajax-s3">
                         <?= $results->render(); ?>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                 <td>{{ $value['LastModified'] }}</td>
                                 <td>
                                     <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
-                                    <a class="btn btn-danger btn-sm btn-delete" href="/s3/delete/{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a class="btn btn-danger btn-sm btn-delete" href="#d" id ="{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                         @endforeach

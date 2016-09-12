@@ -34,10 +34,13 @@ $(document).ready(function () {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
-            url: url,
-            method: 'GET',
+            url: '/s3/delete',
+            method: 'post',
+            data: {name: $(this).attr('id')},
             success: function (data) {
+                console.log(data);
                 if (data.success) {
+
                     $(e.target).closest('tr').hide("fast");
                 }
                 success('.notification-s3', 'File delete!');
@@ -141,7 +144,65 @@ $(document).ready(function () {
         $('.block-prediction').removeClass('block-pred-disabled');
     }
 
-    // modal window ML
+
+    // prediction: send form
+    $('.form-prediction').on('submit', function(e) {
+        e.preventDefault();
+
+        addPredictionProgress();
+
+        $.ajaxSetup({
+            headers: { 'X-XSRF-Token': $('meta[name="_token"]').attr('content') }
+        });
+
+        var formData   = $(this).serialize();
+        var formAction = $(this).attr('action');
+        var formMethod = $(this).attr('method');
+
+        function formPredict() {
+            $.ajax({
+                type    : formMethod,
+                url     : formAction,
+                data    : formData,
+                cache   : false,
+                success : function(data) {
+                              if (data == 'Updating') {
+                                  setTimeout(formPredict(), 3000);
+                              }
+                              else {
+                                removePredictionProgress()
+                                $('.block-prediction .prediction-data').html('<div class="pred-data">'
+                                    + '<h1 class="text-center">Done</h1> '
+                                    + data + "</div>");
+                              }
+                          },
+                error   : function() {
+                              setTimeout(formPredict(), 3000);
+                          }
+            });
+        }
+
+        formPredict();
+    });
+
+    // prediction: form processing style
+    $('.spinner-prediction').hide();
+    function addPredictionProgress() {
+        // $('.spinner-prediction').fadeIn('slow');
+        $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeIn('slow');
+        $('.pred-data').remove();
+        $('.form-prediction').addClass('form-pred-disabled');
+        $('.block-prediction').addClass('block-pred-disabled');
+    }
+
+    function removePredictionProgress() {
+        // $('.spinner-prediction').fadeOut('slow');
+        $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeOut('slow');
+        $('.form-prediction').removeClass('form-pred-disabled');
+        $('.block-prediction').removeClass('block-pred-disabled');
+    }
+
+//modal window ML
     $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('tr').find('td:first').text();
 

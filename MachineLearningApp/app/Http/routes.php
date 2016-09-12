@@ -19,7 +19,11 @@ Route::get('predictions', 'S3Controller@predictionForm');
 
 Route::get('s3/list/', 'S3Controller@listS3');
 Route::post('/s3/upload', 'S3Controller@upload');
-Route::get('/s3/delete/{name}', 'S3Controller@delete');
+Route::post('/s3/delete', 'S3Controller@delete');
+
+Route::get('/s3/del/{name}', 'S3Controller@deleteF');
+//Route::get('/s3/get', 'S3Controller@getFile');
+
 
 //ML
 Route::get('ml', 'MLController@index');
@@ -32,7 +36,7 @@ Route::get('/ml/describe-batch-prediction', 'MLController@listBatchPredictions')
 Route::post('ml/create-datasource', 'MLController@createDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@createMLModel');
 Route::post('ml/create-evaluation', 'MLController@createEvaluation');
-Route::post('ml/create-batch-prediction', 'MLController@createBatchPrediction');
+Route::post('/ml/create-batch-prediction', 'MLController@createBatchPrediction');
 Route::post('ml/real-time-prediction', 'MLController@predict');
 
 Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');

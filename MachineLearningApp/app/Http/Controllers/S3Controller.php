@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Library\Pagination\Pagination as S3Pagination;
 
 use Aws\S3\S3Client;
@@ -41,7 +42,7 @@ class S3Controller extends Controller
 
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $storagePath = storage_path('app/uploads');
+        $storagePath = storage_path('app/');
         $file->move($storagePath, $fileName);
 
         $filepath = $storagePath . '/' . $fileName;
@@ -59,24 +60,29 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        return redirect('s3/list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
+
+        Storage::delete($fileName);
+
+        return redirect('s3/list');
     }
 
-    public function delete($filename)
+    public function delete()
     {
+        $filename = $_POST['name'];
         $client = $this->connect();
+        $filename = urldecode($filename);    
 
         try {
-            $client->deleteObject([
+            $result = $client->deleteObject([
                 'Bucket' => $this->bucket,
                 'Key' => $filename,
                 'RequestPayer' => 'requester'
             ]);
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            return  Response()->json(['success' => (array)$e->getMessage()]);
         }
 
-       return Response()->json(['success' => true]);
+       return Response()->json(['success' => (array)$result]);
     }
 
     public function listS3()
@@ -86,7 +92,7 @@ class S3Controller extends Controller
         try {
             $result = $client->listObjects([
                 'Bucket' => $this->bucket,
-                'Delimiter' => '|'
+                
             ]);
 
             $results = $result['Contents'];
@@ -107,14 +113,39 @@ class S3Controller extends Controller
         try {
             $result = $client->listObjects([
                 'Bucket' => $this->bucket,
-                'Delimiter' => '|'
+                
             ]);
 
-            $results = $result['Contents'];            
+            $results = $result['Contents'];
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
-        }        
+        }
+
+        $client->deleteObject(array(
+                        'Bucket' => $this->bucket,
+                        'Key' => '/batch.csv',
+                    ));
+        dd($result);
         return $results;
     }
+
+    /*public function getFile()
+    {
+        $client = $this->connect();
+        $path = storage_path('app/download');
+        try {
+            $result = $client->getObject([
+    'Bucket' => $this->bucket, // REQUIRED
+    'Key' => 'batch.csv',
+    'SaveAs' => $path . 'datasets8.txt',
+
+]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+print_r($result);
+        return $result;
+    }*/
 }

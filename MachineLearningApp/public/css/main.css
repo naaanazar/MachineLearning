@@ -24,7 +24,6 @@ body {
     font-size: 13px;
 }
 
-
 /***************************************
     S3 Style
 ***************************************/
@@ -60,8 +59,107 @@ body {
 
 
 /***************************************
+    Prediction
+***************************************/
+
+.progress-prediction {
+    position: relative;
+    padding-top: 25px;
+    border-radius: 15px;
+}
+
+.spinner-prediction {
+    position: absolute;
+    top: 35%;
+    left: 41%;
+    font-size: 80px;
+    transform: translateX(-50%);
+}
+
+.form-prediction {
+    position: relative;
+}
+
+.form-pred-disabled,
+.block-pred-disabled {
+    z-index: -1;
+}
+
+.block-prediction {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    height: 450px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #eee;
+    border-radius: 15px;
+}
+
+
+/***************************************
+    Tables
+***************************************/
+
+.table-font { font-size: 11px; }
+.table-font tr td:last-child { width: 110px; }
+
+.table-scroll{
+    margin-top: 40px;
+    overflow-y: auto;      
+    height: 350px; 
+    width: 85.7%;        
+    position: absolute;
+}
+
+.table-scroll-ML{
+    margin-top: 40px;
+    overflow-y: auto;      
+    height: 350px;
+    width: 85.7%;      
+    position: absolute;
+}
+
+.table-scroll-evaluation{
+    margin-top: 40px;
+    overflow-y: auto;      
+    height: 350px;
+    width: 85.7%;      
+    position: absolute;
+}
+
+.table-scroll-batch{
+    margin-top: 40px;
+    overflow-y: auto;      
+    height: 350px;
+    width: 85.7%;      
+    position: absolute;
+}
+@media screen and (max-width:768px){
+    .container-describeDataSources,
+    .container-describeMLModels,
+    .container-describeEvaluations,
+    .container-describeBatchPredictions{
+        margin-top: 200px;
+        position: static;
+        width: 100%;
+        margin-bottom: 25px;
+
+    }
+    .table {
+        margin-bottom: 100px;
+    }
+    .footer {
+        position: fixed;
+    }
+    }
+
+
+
+/***************************************
     Other
 ***************************************/
+
 .logo {
     margin:auto;
     width: 200px;
@@ -92,17 +190,6 @@ body {
 .active-radius a { border-radius: 50%; }
 .pagination-border li > a { border: none; }
 
-.block-output {
-    width: 100%;
-    height: 450px;
-    margin: 0 auto;
-    background: #eee;
-    border-radius: 15px;
-}
-
-.table-font { font-size: 11px; }
-.table-font tr td:last-child { width: 110px; }
-
 .back-to-top {
     cursor: pointer;
     position: fixed;
@@ -127,7 +214,7 @@ body {
         display: none;
      }
     }
-}
+
 
 .jGrowl {
   margin-top: 50px;

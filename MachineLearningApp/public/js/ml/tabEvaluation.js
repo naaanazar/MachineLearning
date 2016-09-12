@@ -1,7 +1,24 @@
 $(document).ready(function() {
 
+    $('.create-evaluations-form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: 'ml/create-evaluation',
+            data: $('.create-evaluations-form').serialize(),
+            success: function (data) {
+                $(".create-evaluations-form").toggle();
+                $(".container-describeEvaluations").toggle();
+                listEvaluations();
+                console.log(data);
+            },
+            error: function () {
+            },
+        });
+    });
+
     $(document).on("click", ".btn-create-evaluations", function () {
-        $(".create-evaluations").toggle();
+        $(".create-evaluations-form").toggle();
         $(".container-describeEvaluations").toggle();
 
         $.get("/ml/select-ml-model", function(response){
@@ -26,6 +43,10 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
+        listEvaluations();
+     });
+
+    function listEvaluations() {
         var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
         $('#ml-button-create').html(button);
 
@@ -63,7 +84,7 @@ $(document).ready(function() {
                             '</td>' +
                             '<td>' + response.data[key].Status + '</td>' +
                             '<td>' +
-                                 auc +  
+                                 auc +
                             '</td>' +
                             '<td>' + response.data[key].MLModelId + '</td>' +
                             '<td>' + response.data[key].EvaluationDataSourceId + '</td>' +
@@ -81,5 +102,5 @@ $(document).ready(function() {
 
             $('.container-describeEvaluations').html(res);
         });
-     });
+    }
 });
