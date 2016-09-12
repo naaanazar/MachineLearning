@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     });
 
-    function success(selector, str) {
+    function successS3(selector, str) {
         $(selector).append('<div class="alert alert-success upload-message-s3">'
             + '<ul><li><strong>Success! </strong>'
             + str + '</li></ul></div>').show('slow').hide(4000);
@@ -32,15 +32,19 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-delete', function (e) {
         e.preventDefault();
+        console.log($(this).attr('id'));
         var url = $(this).attr('href');
         $.ajax({
-            url: url,
-            method: 'GET',
+            url: '/s3/delete',
+            method: 'post',
+            data: '{name: $(this).attr('id')}',
             success: function (data) {
+                console.log(data);
                 if (data.success) {
+                    
                     $(e.target).closest('tr').hide("fast");
                 }
-                success('.notification-s3', 'File delete!');
+                successS3('.notification-s3', 'File delete!');
             }
         });
     });

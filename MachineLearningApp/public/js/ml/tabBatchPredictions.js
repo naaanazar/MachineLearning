@@ -10,7 +10,7 @@ $(document).ready(function() {
                 $(".create-bath-descriptions-form").toggle();
                 $(".container-describeBatchPredictions").toggle();
                 listBatchPrediction();
-                alert(response.data);
+                console.log(data);
             },
             error: function () {                
             },

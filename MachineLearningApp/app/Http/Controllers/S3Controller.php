@@ -62,9 +62,15 @@ class S3Controller extends Controller
         return redirect('s3/list')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
-    public function delete($filename)
+    public function delete(Request $request)
     {
+        $filename = $request->has('name');        
         $client = $this->connect();
+        $filename = urldecode($filename);
+
+        if(stristr($filename, '/') !== FALSE) {
+            $filename = '/' . $filename;
+        }
 
         try {
             $client->deleteObject([
@@ -76,7 +82,7 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-       return Response()->json(['success' => true]);
+       return Response()->json(['success' => $filename]);
     }
 
     public function listS3()
@@ -86,7 +92,7 @@ class S3Controller extends Controller
         try {
             $result = $client->listObjects([
                 'Bucket' => $this->bucket,
-                'Delimiter' => '|'
+                
             ]);
 
             $results = $result['Contents'];
@@ -107,14 +113,20 @@ class S3Controller extends Controller
         try {
             $result = $client->listObjects([
                 'Bucket' => $this->bucket,
-                'Delimiter' => '|'
+                
             ]);
 
             $results = $result['Contents'];
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
-        }        
+        }
+
+        $client->deleteObject(array(
+                        'Bucket' => $this->bucket,
+                        'Key' => '/batch.csv',
+                    ));
+        dd($result);
         return $results;
     }
 }

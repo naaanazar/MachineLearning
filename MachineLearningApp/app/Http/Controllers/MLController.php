@@ -15,7 +15,7 @@ class MLController extends Controller
 
     public $bucket = 'ml-datasets-test';
     private $client;
-    public $DataSchema = '{"version":"1.0",
+  /*  public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "targetAttributeName":"purchase",
@@ -39,9 +39,9 @@ class MLController extends Controller
            "attributeType":"CATEGORICAL"},
            {"attributeName":"purchase","attributeType":"BINARY"}],
            "excludedAttributeNames":[]
-    }';
+    }';*/
 
-    public $BathDataSchema = '{"version":"1.0",
+    public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "dataFormat":"CSV",
@@ -386,7 +386,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
         //return back();
@@ -411,7 +411,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
         //return back();
@@ -436,7 +436,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
         //return back();
@@ -461,10 +461,10 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            $ex = $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return response()->json(['data' => $ex ]);
+        
     }
 
     

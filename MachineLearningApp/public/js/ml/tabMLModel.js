@@ -9,7 +9,8 @@ $(document).ready(function() {
             success: function (data) {
                 $(".create-mlmodel-form").toggle();
                 $(".container-describeMLModels").toggle();
-                listMLModel();           
+                listMLModel();
+                console.log(data);
             },
             error: function () {                
             },
