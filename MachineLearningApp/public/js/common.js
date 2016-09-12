@@ -119,7 +119,9 @@ $(document).ready(function () {
                               }
                               else {
                                 removePredictionProgress()
-                                $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
+                                $('.block-prediction .prediction-data').html('<div class="pred-data">'
+                                    + '<h1 class="text-center">Done</h1> '
+                                    + data + "</div>");
                               }
                           },
                 error   : function() {
@@ -132,14 +134,18 @@ $(document).ready(function () {
     });
 
     // prediction: form processing style
+    $('.spinner-prediction').hide();
     function addPredictionProgress() {
-        $('.spinner-prediction').show('slow');
+        // $('.spinner-prediction').fadeIn('slow');
+        $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeIn('slow');
+        $('.pred-data').remove();
         $('.form-prediction').addClass('form-pred-disabled');
         $('.block-prediction').addClass('block-pred-disabled');
     }
 
     function removePredictionProgress() {
-        $('.spinner-prediction').hide('slow');
+        // $('.spinner-prediction').fadeOut('slow');
+        $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeOut('slow');
         $('.form-prediction').removeClass('form-pred-disabled');
         $('.block-prediction').removeClass('block-pred-disabled');
     }

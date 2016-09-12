@@ -11,7 +11,7 @@
             <form class="form-horizontal form-prediction" method="post" action="{{ action('MLController@predict') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="SelectMLModelId" class="control-label batch-label text-right">ML model id</label>
+                    <label for="SelectMLModelId" class="control-label batch-label text-right">ML model</label>
                     <select class="form-control batch-input" id="ml_model_id" name="ml_model_id"></select>
                 </div>
                 <br>
@@ -21,19 +21,19 @@
                 </div>
                 <div class="form-group">
                     <label for="same-email" class="control-label batch-label text-right">Same email domain count <span class="prediction-type">int</span></label>
-                    <input id="same-email" name="same_email_domain_count" type="number" class="form-control batch-input" placeholder="Same email domain count" required>
+                    <input id="same-email" name="same_email_domain_count" type="number" class="form-control batch-input" placeholder="Same email domain count" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="projects-count" class="control-label batch-label text-right">Projects count <span class="prediction-type">int</span></label>
-                    <input id="projects-count" name="projects_count" type="number" class="form-control batch-input" placeholder="Projects count" required>
+                    <input id="projects-count" name="projects_count" type="number" class="form-control batch-input" placeholder="Projects count" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="string-count" class="control-label batch-label text-right">Strings count <span class="prediction-type">int</span></label>
-                    <input id="string-count" name="strings_count" type="number" class="form-control batch-input" placeholder="Strings count" required>
+                    <input id="string-count" name="strings_count" type="number" class="form-control batch-input" placeholder="Strings count" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="members-count" class="control-label batch-label text-right">Members count <span class="prediction-type">int</span></label>
-                    <input id="members-count" name="members_count" type="number" class="form-control batch-input" placeholder="Members count" required>
+                    <input id="members-count" name="members_count" type="number" class="form-control batch-input" placeholder="Members count" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="has-privat-project" class="control-label batch-label text-right">Has private project <span class="prediction-type">int</span></label>
@@ -58,7 +58,8 @@
         </div>
         <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
             <div class="block-prediction">
-                <i class="spinner-prediction fa fa-spinner fa-spin"></i>
+                <div class="prediction-data"></div>
+                <span class="block-sp"></span>
             </div>
         </div>
     </div>
