@@ -14,10 +14,10 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
     public function addDataProvider()
     {
         return array (
-//            array ('http://192.168.2.134:9515', DesiredCapabilities::chrome()),
-//            array ('http://192.168.2.134:4444/wd/hub', DesiredCapabilities::firefox())
-            array ('http://192.168.0.101:4444/wd/hub', DesiredCapabilities::firefox()),
-            array ('http://192.168.0.101:9515', DesiredCapabilities::chrome()),
+            array ('http://192.168.2.134:9515', DesiredCapabilities::chrome()),
+            array ('http://192.168.2.134:4444/wd/hub', DesiredCapabilities::firefox())
+//            array ('http://192.168.0.101:4444/wd/hub', DesiredCapabilities::firefox()),
+//            array ('http://192.168.0.101:9515', DesiredCapabilities::chrome()),
         );
     }
 
@@ -75,5 +75,6 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
 
         $deleteMLMode = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'selenium-test')]//..//a[2]"));
         $deleteMLMode->click();
+        sleep(2);
     }
 }
