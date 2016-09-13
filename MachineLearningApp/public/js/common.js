@@ -241,8 +241,11 @@ $(document).ready(function () {
 
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
-        var datasourceId = $(event.target).closest('tr').find('td:first').text();
+        var datasourceId = $(event.target).closest('a').data('source-id');
+        var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
+        var temp = $(event.target).closest('a').attr('href');
+console.log(datasourceId);
         var data = {
             Name: "",
             Message: ""
@@ -250,27 +253,25 @@ $(document).ready(function () {
 
         var url;
 
-        switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
-            case 'DataSourceId':
+        switch (tab) {
+            case 'Data Source':
                 url = '/ml/getdatasource/';
                 break;
-            case 'MLModelId':
+            case 'ML Models':
                 url = '/ml/getmlmodel/';
                 break;
-            case 'EvaluationId':
+            case 'Evaluations':
                 url = '/ml/getevaluation/';
                 break;
-            case 'BatchPredictionId':
+            case 'Batch Predictions':
                 url = '/ml/getbatchprediction/';
                 break;
 
-            default:
-                break;
         }
 
         $.get(url + datasourceId, function (response) {
-            switch ($(event.target).closest('table').find('tr:first').find('td:first').text()) {
-                case 'DataSourceId':
+            switch (tab) {
+                case 'Data Source':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.Size = response.data[1] + ' Bytes';
@@ -279,7 +280,7 @@ $(document).ready(function () {
                     data.DataSourceId = response.data[5];
                     data.DatasetId = response.data[6];
                     break;
-                case 'MLModelId':
+                case 'ML Models':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.Size = response.data[1] + ' Bytes';
@@ -287,7 +288,7 @@ $(document).ready(function () {
                     data.ModelId = response.data[4];
                     data.TrainingData = response.data[5];
                     break;
-                case 'EvaluationId':
+                case 'Evaluations':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.ComputeTime = response.data[1];
@@ -296,7 +297,7 @@ $(document).ready(function () {
                     data.ModelId = response.data[5];
                     data.EvaluationData = response.data[6];
                     break;
-                case 'BatchPredictionId':
+                case 'Batch Predictions':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.ComputeTime = response.data[1];
