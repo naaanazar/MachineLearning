@@ -46,6 +46,11 @@ $(document).ready(function() {
         listEvaluations();
      });
 
+    //loading data
+    $('#describeEvaluationsContent').on('click', function() {
+        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
+
     function listEvaluations() {
         var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
         $('#ml-button-create').html(button);

@@ -1,6 +1,7 @@
 /***************************************
     Main Style
 ***************************************/
+
 html {
     height: 100%;
 }
@@ -24,9 +25,11 @@ body {
     font-size: 13px;
 }
 
+
 /***************************************
     S3 Style
 ***************************************/
+
 .logo-s3 {
     width: 100px;
 }
@@ -72,6 +75,7 @@ body {
     position: absolute;
     top: 35%;
     left: 41%;
+    display: none;
     font-size: 80px;
     transform: translateX(-50%);
 }
@@ -80,9 +84,9 @@ body {
     position: relative;
 }
 
-.form-pred-disabled,
-.block-pred-disabled {
-    z-index: -1;
+
+.btn-prediction {
+    margin-right: 61px;
 }
 
 .block-prediction {
@@ -108,15 +112,16 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px; 
-    width: 85.7%;        
+    width: 100%;        
     position: absolute;
+    margin-left: -15px;
 }
 
 .table-scroll-ML{
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
 }
 
@@ -124,28 +129,28 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
 }
 
 .table-scroll-batch{
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
 }
+.tab-content{
+    width: 100%;
+}
+
 @media screen and (max-width:768px){
-    .container-describeDataSources,
-    .container-describeMLModels,
-    .container-describeEvaluations,
-    .container-describeBatchPredictions{
+    .table-scroll{
         margin-top: 200px;
         position: static;
         width: 100%;
         margin-bottom: 25px;
-
-    }
+            }
     .table {
         margin-bottom: 100px;
     }
@@ -302,9 +307,19 @@ body {
     background-color: green !important;
 }
 
+
+.generator-input-container,
+.generator-button-container {
+    margin: 4% 0;
+}
+
 #rows-number.warning {
     box-shadow: inset 0 0 1px rgba(255, 0, 0, .6), 0 0 8px rgba(255, 0, 0, .6);
     border-color: rgb(255, 0, 0);
+}
+.spinner-warapper {
+    clear: both;
+    text-align: center;
 }
 .generator-form .empty-msg {
     color: red;
@@ -324,3 +339,16 @@ body {
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

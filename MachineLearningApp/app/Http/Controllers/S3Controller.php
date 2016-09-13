@@ -135,11 +135,11 @@ class S3Controller extends Controller
     {
         $client = $this->connect();
         $path = storage_path('app/');
-        $fileName = $path . 'dY11.tx';
+        $fileName = $path . 'dY11.txt';
         try {
             $result = $client->getObject([
                 'Bucket' => $this->bucket, // REQUIRED
-                'Key' => 'batch.csv',
+                'Key' => 'bathPrediction/batch-prediction/bp-57d7d30a2be64.manifest',
                 'SaveAs' => $fileName,
 
             ]);
@@ -150,7 +150,7 @@ class S3Controller extends Controller
         sleep(1);
 
         return response()->download($fileName);
-        File::delete($fileName);
+        //File::delete($fileName);
     }
 
     public function del()

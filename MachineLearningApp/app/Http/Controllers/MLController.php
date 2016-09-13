@@ -478,7 +478,7 @@ class MLController extends Controller
         $BatchPredictionId = 'bp-' . uniqid();
         $BatchPredictionName = $BatchPredictionId;
         $MLModelId = $request->input('MLModelId');
-        $OutputUri = 's3://' . $this->bucket . '/bathPrediction/';
+        $OutputUri = 's3://' . $this->bucket . '/';
 
         try {
             $result = $this->client->createBatchPrediction([
@@ -533,6 +533,21 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
         return response()->json(['data' => $result['Status']]);
+    }
+
+    public function statusBatch($BatchPredictionId)
+    {
+        try {
+            $result = $this->client->getBatchPrediction([
+                'BatchPredictionId' => $BatchPredictionId,
+                'Verbose' => true || false,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        dd($result);
+        return $result;
     }
 
 
@@ -634,11 +649,21 @@ class MLController extends Controller
                 echo $e->getMessage() . "\n";
             }
 
-            $result = "<h3><strong>Prediction:</strong> " . $result["Prediction"]["predictedLabel"] . "</h3>";
+            $predictedLabel = $result["Prediction"]["predictedLabel"];
+            $predictedScores = $result["Prediction"]["predictedScores"];
+            $details = $result["Prediction"]["details"];
+            $preScores = $predictedScores[0];
+            $algorithm = $details["Algorithm"];
+            $modelType = $details["PredictiveModelType"];
+
+            $output = "<h4><strong>Prediction: </strong>" . $predictedLabel . "</h4>"
+                    . "<h4><strong>Predicted Scores: </strong>" . $preScores . "</h4>"
+                    . "<h4><strong>Algorithm: </strong>" . $algorithm . "</h4>"
+                    . "<h4><strong>Model Type: </strong>" . $modelType . "</h4>";
 
             $this->deleteRealtimeEndpoint($MLModelId);
 
-            if($request->ajax()) return $result;
+            if($request->ajax()) return $output;
             else return false;
         }
     }
