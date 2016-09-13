@@ -100,6 +100,20 @@ body {
     border-radius: 15px;
 }
 
+.pred-error {
+    color: red;
+    display: none;
+}
+
+.pred-alert {
+    float: right;
+    width: 45%;
+    margin: 10px 61px 0 0;
+    padding: 5px;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+}
 
 /***************************************
     Tables

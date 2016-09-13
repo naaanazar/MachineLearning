@@ -27,7 +27,6 @@ $(document).ready(function () {
         $(selector).append('<div class="alert alert-danger upload-message-s3">'
             + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
             + '</li></ul></div>').show('slow').hide(4000);
-
     }
 
     $(document).on('click', '.btn-delete', function (e) {
@@ -144,12 +143,27 @@ $(document).ready(function () {
     }
 
     // prediction: validation form
+    function errorPred(data) {
+        var content = '<div class="alert alert-danger pred-alert">'
+                    + '<ul><li><strong>' + data + '</strong>'
+                    + '</li></ul></div>';
+
+        return content;
+    }
+
     function predValOne(selector) {
         $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
+            var error = selector + " + .pred-error";
             var regExp = new RegExp("[^0-1]", "g");
             value = value.replace(regExp, "");
             $(selector).val(value.substr(0, 1));
+            if (!value.replace(regExp, "")) {
+                $(error).fadeIn('slow');
+                $(error).html(errorPred("Type 0 or 1"));
+            } else {
+                $(error).fadeOut('slow');
+            }
         });
     }
 
