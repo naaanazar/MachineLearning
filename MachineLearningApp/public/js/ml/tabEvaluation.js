@@ -43,15 +43,18 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
-        listEvaluations();
+        if(!$('.container-describeEvaluations').hasClass('loaded')) {
+            listEvaluations();
+        }
      });
 
-    //loading data
-    $('#describeEvaluationsContent').on('click', function() {
-        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    });
+//    //loading data
+//    $('#describeEvaluationsContent').on('click', function() {
+//        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+//    });
 
     function listEvaluations() {
+        $('.container-describeEvaluations').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
         $('#ml-button-create').html(button);
 
@@ -106,6 +109,7 @@ $(document).ready(function() {
                 res += '</table>';
 
             $('.container-describeEvaluations').html(res);
+            $('.container-describeEvaluations').addClass('loaded');
         });
     }
 });
