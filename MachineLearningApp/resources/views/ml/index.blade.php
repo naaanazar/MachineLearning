@@ -15,7 +15,7 @@
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4" >
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 tabs" >
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
@@ -27,7 +27,7 @@
                         </li>
                         <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a></li>
                     </ul>
-                </div>                
+                </div>
             </div>
             <div class="tab-content col-md-12">
                 <div id="describeDataSources" class="tab-pane fade in active">
@@ -63,7 +63,7 @@
                             <button type="submit" class="btn btn-primary submit-button">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeDataSources table-scroll">
+                    <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
                 </div>
                 <div id="describeMLModels" class="tab-pane fade">
@@ -93,37 +93,36 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeMLModels table-scroll-ML ">
+                    <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
                     </div>
                 </div>
-                    <div id="describeEvaluations" class="tab-pane fade">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-evaluations-form" style="display:none;" method="post"
-                                  action="ml/create-evaluation">
-                                <br>
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="EvaluationName">Evaluation name</label>
-                                    <input type="text" class="form-control" id="EvaluationName"
-                                           placeholder="Evaluation name" name="EvaluationName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="SelectMLModelId">ML model id</label>
-                                    <select class="form-control" id="SelectMLModelId" name="MLModelId">
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="SelectEvDataSource">Data source id</label>
-                                    <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                        <div class="container-describeEvaluations table-scroll-evaluation">
-                        </div>
-                    </div>               
-
+                <div id="describeEvaluations" class="tab-pane fade">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <form class="create-evaluations-form" style="display:none;" method="post"
+                              action="ml/create-evaluation">
+                            <br>
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="EvaluationName">Evaluation name</label>
+                                <input type="text" class="form-control" id="EvaluationName"
+                                       placeholder="Evaluation name" name="EvaluationName">
+                            </div>
+                            <div class="form-group">
+                                <label for="SelectMLModelId">ML model id</label>
+                                <select class="form-control" id="SelectMLModelId" name="MLModelId">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="SelectEvDataSource">Data source id</label>
+                                <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
+                    </div>
+                </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                        <form class="create-bath-predictios-form" style="display:none;" method="post"
@@ -146,7 +145,7 @@
                         </form>
 
                     </div>
-                    <div class="container-describeBatchPredictions table-scroll-batch ">
+                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
                     </div>
                 </div>
             </div>

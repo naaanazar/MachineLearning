@@ -626,10 +626,12 @@ class MLController extends Controller
             $algorithm = $details["Algorithm"];
             $modelType = $details["PredictiveModelType"];
 
-            $output = "<h4><strong>Prediction: </strong>" . $predictedLabel . "</h4>"
+            $output = "<section class='pred-data'><h1 class='text-center'>Result</h1>"
+                    . "<h4><strong>Prediction: </strong>" . $predictedLabel . "</h4>"
                     . "<h4><strong>Predicted Scores: </strong>" . $preScores . "</h4>"
                     . "<h4><strong>Algorithm: </strong>" . $algorithm . "</h4>"
-                    . "<h4><strong>Model Type: </strong>" . $modelType . "</h4>";
+                    . "<h4><strong>Model Type: </strong>" . $modelType . "</h4>"
+                    . "</section>";
 
             $this->deleteRealtimeEndpoint($MLModelId);
 

@@ -141,10 +141,11 @@ $(document).ready(function() {
                             '<td>' + date + '</td>' +
                             '<td style="width:140px" nowrap>' +
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
-                                   'data-toggle="modal" id="info_' + i +'">' +
+                                   'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId + '">' +
                                     '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
                                 '<a class="btn btn-success btn-sm btn-list download-batch-result" href="#"><span class="glyphicon glyphicon-cloud-download"></span></a>&nbsp;' +
-                                '<a class="btn btn-danger btn-sm btn-list delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>' +
+                                '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].BatchPredictionId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+
                             '</td>' +
                         '</tr>' +
                     '<span class="hide">' + i + '</span>';
