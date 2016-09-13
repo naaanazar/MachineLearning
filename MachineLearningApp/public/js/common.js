@@ -346,34 +346,37 @@ console.log(datasourceId);
 
     // Delete Ajax
     $(document).on('click', '.delete', function (event) {
-        var target = $(event.target).closest('table').find('tr:first').find('td:first').text();
+        var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
         $(event.target).closest('tr').fadeOut();
 
         function deleteObject(dataSourceIdVar, url) {
-            var datasourceId = $(event.target).closest('tr').find('td:first').text();
+            var datasourceId = $(event.target).closest('a').data('delete-id');
 
             if (target == dataSourceIdVar) {
                 $.get(url + datasourceId, function (response) {
                     if (response.deleted !== 'Ok') {
                         $.jGrowl('An error occurred during delete process', {theme: 'jgrowl-danger'});
+                    }else {
+                        $.jGrowl('Success', {theme: 'jgrowl-success'});
+
                     }
                 });
             }
         }
 
         switch (target) {
-            case 'DataSourceId':
-                deleteObject('DataSourceId', '/ml/delete-datasource/');
+            case 'Data Source':
+                deleteObject('Data Source', '/ml/delete-datasource/');
                 break;
-            case 'MLModelId':
-                deleteObject('MLModelId', '/ml/delete-ml-model/');
+            case 'ML Models':
+                deleteObject('ML Models', '/ml/delete-ml-model/');
                 break;
-            case 'EvaluationId':
-                deleteObject('EvaluationId', '/ml/delete-evaluation/');
+            case 'Evaluations':
+                deleteObject('Evaluations', '/ml/delete-evaluation/');
                 break;
-            case 'BatchPredictionId':
-                deleteObject('BatchPredictionId', '/ml/delete-batch-prediction/');
+            case 'Batch Predictions':
+                deleteObject('Batch Predictions', '/ml/delete-batch-prediction/');
                 break;
         }
 

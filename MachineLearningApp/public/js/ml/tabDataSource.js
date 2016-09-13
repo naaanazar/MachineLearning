@@ -78,7 +78,7 @@ $(document).ready(function() {
                                         '<td>' +
                                             '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' + 'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].DataSourceId + '"><span ' +
                                                         'class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                                            '<a class="btn btn-danger btn-sm btn-list delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>' +
+                                            '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].DataSourceId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                                         '</td>' +
                                     '</tr>' +
                                     '<span class="hide">' + i + '</span>';
