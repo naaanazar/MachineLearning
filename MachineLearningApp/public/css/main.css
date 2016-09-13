@@ -104,7 +104,6 @@ body {
 /***************************************
     Tables
 ***************************************/
-
 .table-font { font-size: 11px; }
 .table-font tr td:last-child { width: 110px; }
 
@@ -115,6 +114,7 @@ body {
     width: 100%;        
     position: absolute;
     margin-left: -15px;
+    margin-top:-1px;
 }
 
 .table-scroll-ML{
@@ -123,6 +123,8 @@ body {
     height: 350px;
     width: 100%;      
     position: absolute;
+    margin-top:-1px;
+    margin-left: -15px;
 }
 
 .table-scroll-evaluation{
@@ -131,6 +133,8 @@ body {
     height: 350px;
     width: 100%;      
     position: absolute;
+    margin-top:-1px;
+    margin-left: -15px;
 }
 
 .table-scroll-batch{
@@ -139,6 +143,8 @@ body {
     height: 350px;
     width: 100%;      
     position: absolute;
+    margin-top:-1px;
+    margin-left: -15px;
 }
 .tab-content{
     width: 100%;
