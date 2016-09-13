@@ -170,10 +170,10 @@ $(document).ready(function () {
                                   setTimeout(formPredict(), 3000);
                               }
                               else {
-                                removePredictionProgress()
-                                $('.block-prediction .prediction-data').html('<div class="pred-data">'
-                                    + '<h1 class="text-center">Done</h1> '
-                                    + data + "</div>");
+                                removePredictionProgress();
+                                $('.prediction-data').append("<section class='pred-data'>"
+                                    + "<h1 class='text-center'>Result</h1>"
+                                    + data + "</section>");
                               }
                           },
                 error   : function() {
@@ -186,18 +186,13 @@ $(document).ready(function () {
     });
 
     // prediction: form processing style
-    $('.spinner-prediction').hide();
     function addPredictionProgress() {
-        $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeIn('slow');
-        $('.pred-data').remove();
-        $('.form-prediction').addClass('form-pred-disabled');
-        $('.block-prediction').addClass('block-pred-disabled');
+        $('.spinner-prediction').fadeIn('slow');
+        $('.prediction-data').empty();
     }
 
     function removePredictionProgress() {
-        $('.block-sp').append('<i class="spinner-prediction spinner-disabled fa fa-spinner fa-spin"></i>').fadeOut('slow');
-        $('.form-prediction').removeClass('form-pred-disabled');
-        $('.block-prediction').removeClass('block-pred-disabled');
+        $('.spinner-prediction').hide('slow');
     }
 
     // prediction: validation form

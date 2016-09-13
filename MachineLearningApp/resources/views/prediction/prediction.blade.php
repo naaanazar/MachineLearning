@@ -17,7 +17,7 @@
                 <br>
                 <div class="form-group">
                     <label for="email" class="control-label batch-label text-right">Email custom domain</label>
-                    <input id="email" name="email_custom_domain" type="number" class="form-control batch-input" placeholder="Integer" min="0" max="1" required>
+                    <input id="email" name="email_custom_domain" type="number" class="form-control batch-input" placeholder="Integer [0 or 1]" min="0" max="1" required>
                 </div>
                 <div class="form-group">
                     <label for="same-email" class="control-label batch-label text-right">Same email domain count</label>
@@ -37,11 +37,11 @@
                 </div>
                 <div class="form-group">
                     <label for="has-privat-project" class="control-label batch-label text-right">Has private project</label>
-                    <input id="has-privat-project" name="has_private_project" type="number" class="form-control batch-input" placeholder="Integer" min="0" max="1" required>
+                    <input id="has-privat-project" name="has_private_project" type="number" class="form-control batch-input" placeholder="Integer [0 or 1]" min="0" max="1" required>
                 </div>
                 <div class="form-group">
                     <label for="same-log-project" class="control-label batch-label text-right">Same login and project name</label>
-                    <input id="same-log-project" name="same_login_and_project_name" type="number" class="form-control batch-input" placeholder="Integer" min="0" max="1" required>
+                    <input id="same-log-project" name="same_login_and_project_name" type="number" class="form-control batch-input" placeholder="Integer [0 or 1]" min="0" max="1" required>
                 </div>
                 <div class="form-group">
                     <label for="last-login" class="control-label batch-label text-right">Days after last login</label>
@@ -59,7 +59,7 @@
         <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
             <div class="block-prediction">
                 <div class="prediction-data"></div>
-                <span class="block-sp"></span>
+                <i class="spinner-prediction fa fa-spinner fa-spin"></i>
             </div>
         </div>
     </div>

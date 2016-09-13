@@ -541,11 +541,21 @@ class MLController extends Controller
                 echo $e->getMessage() . "\n";
             }
 
-            $result = "<h3><strong>Prediction:</strong> " . $result["Prediction"]["predictedLabel"] . "</h3>";
+            $predictedLabel = $result["Prediction"]["predictedLabel"];
+            $predictedScores = $result["Prediction"]["predictedScores"];
+            $details = $result["Prediction"]["details"];
+            $preScores = $predictedScores[0];
+            $algorithm = $details["Algorithm"];
+            $modelType = $details["PredictiveModelType"];
+
+            $output = "<h4><strong>Prediction: </strong>" . $predictedLabel . "</h4>"
+                    . "<h4><strong>Predicted Scores: </strong>" . $preScores . "</h4>"
+                    . "<h4><strong>Algorithm: </strong>" . $algorithm . "</h4>"
+                    . "<h4><strong>Model Type: </strong>" . $modelType . "</h4>";
 
             $this->deleteRealtimeEndpoint($MLModelId);
 
-            if($request->ajax()) return $result;
+            if($request->ajax()) return $output;
             else return false;
         }
     }
