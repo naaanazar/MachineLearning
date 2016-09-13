@@ -121,30 +121,32 @@
                         </div>
                         <div class="container-describeEvaluations table-scroll-evaluation">
                         </div>
-                    </div>
+                    </div>               
+                  
+
                     <div id="describeBatchPredictions" class="tab-pane fade">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <form class="create-bath-descriptions-form" style="display:none;" method="post"
+                           <form class="create-bath-predictios-form" style="display:none;" method="post"
                                   action="ml/create-batch-prediction">
                                 <br>
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="BatchPredictionName">Batch prediction name</label>
-                                    <input type="text" class="form-control" id="BatchPredictionName"
-                                           placeholder="Batch prediction name" name="BatchPredictionName">
-                                </div>
+
                                 <div class="form-group">
                                     <label for="SelectBathMLModel">ML model id</label>
                                     <select class="form-control" id="SelectBathMLModel" name="MLModelId">
                                     </select>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="SelectBathDataSource">Batch prediction data source id</label>
-                                    <select class="form-control" id="SelectBathDataSource" name="DataSourceId">
-                                    </select>
+                                    <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
+                                        <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file-source" type="file" name="file">
+                                    </label>
+                                    <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
+
+
                         </div>
                         <div class="container-describeBatchPredictions table-scroll-batch ">
                         </div>

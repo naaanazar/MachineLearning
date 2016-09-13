@@ -182,7 +182,7 @@ body {
     margin-left: 1%;
 }
 .error { color: red; }
-#input-file { display: none ; }
+#input-file, #input-file-source { display: none ; }
 .btn-batch { margin-right: 42px; }
 .panel-margin { margin-bottom: 0; }
 .batch-label { margin-right: 15px; }

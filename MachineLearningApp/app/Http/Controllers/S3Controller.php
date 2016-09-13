@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Library\Pagination\Pagination as S3Pagination;
 
-use Illuminate\Support\Facades\Storage;
-
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 
@@ -36,7 +34,7 @@ class S3Controller extends Controller
         return $s3;
     }
 
-    public function upload(Request $request)
+    public function fileUpload($request)
     {
         $this->validate($request, [
             'file' => 'required|file|mimes:csv,txt',
@@ -62,9 +60,15 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-
+        $file = $fileName;
         Storage::delete($fileName);
 
+        return $file;
+    }
+
+    public function upload(Request $request)
+    {
+        $this->fileUpload($request);
         return redirect('s3/list');
     }
 
@@ -123,12 +127,7 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-
-        $client->deleteObject(array(
-                        'Bucket' => $this->bucket,
-                        'Key' => '/batch.csv',
-                    ));
-        dd($result);
+        
         return $results;
     }
 

@@ -465,38 +465,18 @@ class MLController extends Controller
 //        }
 //    }
 
-     public function createBatchDataSourceFromS3($fileName)
-    {
-
-        $DataSourceId = 'ds-batch' . uniqid();
-        $DataLocationS3 = 's3://' . $this->bucket . '/' . $fileName;
-        $DataSchema = $this->$DataSchemaBatch;
-
-
-        try {
-            $result = $this->client->createDataSourceFromS3([
-                'ComputeStatistics' => true,
-                'DataSourceId' => $DataSourceId, // REQUIRED
-                'DataSpec' => [ // REQUIRED
-                    'DataLocationS3' => $DataLocationS3, // REQUIRED
-                    'DataSchema' => $DataSchema
-                ],
-            ]);
-
-        } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
-        }
-
-        //return back();
-    }
-
-
-
     public function createBatchPrediction(Request $request)
     {
-        $DataSourceId = $request->input('DataSourceId');
+
+        $S3 = New S3Controller;
+        $fileName = $S3->fileUpload($request);
+        sleep(2);
+
+        $DataSourceId = $this->createBatchDataSourceFromS3();    
+        sleep(4);
+
         $BatchPredictionId = 'bp-' . uniqid();
-        $BatchPredictionName = $request->input('BatchPredictionName');
+        $BatchPredictionName = $BatchPredictionId;
         $MLModelId = $request->input('MLModelId');
         $OutputUri = 's3://' . $this->bucket . '/bathPrediction/';
 
@@ -512,7 +492,72 @@ class MLController extends Controller
         } catch (MachineLearningException $e) {
             return response()->json(['data' => $e->getMessage() ]);
         }
+
+        return response()->json(['data' => $result['BatchPredictionId']]);
     }
+
+
+    public function createBatchDataSourceFromS3()
+    {
+        $DataSourceId = 'bt-' . uniqid();
+        $DataLocationS3 = 's3://' . $this->bucket . '/' . 'batch.csv';
+        $DataSchema = $this->DataSchemaBatch;
+
+        try {
+            $result = $this->client->createDataSourceFromS3([
+                'ComputeStatistics' => true,
+                'DataSourceId' => $DataSourceId, // REQUIRED
+                'DataSourceName' => $DataSourceId,
+                'DataSpec' => [ // REQUIRED
+                    'DataLocationS3' => $DataLocationS3, // REQUIRED
+                    'DataSchema' => $DataSchema
+                ],
+            ]);
+
+        } catch (MachineLearningException $e) {
+            return response()->json(['data' => $e->getMessage() ]);
+        }
+        return $result['DataSourceId'];
+      
+    }
+
+    public function statusDataSource($DataSourceId)
+    {
+        try {
+            $result = $this->client->getDataSource([
+                'DataSourceId' => $DataSourceId,
+                'Verbose' => true || false,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return response()->json(['data' => $result['Status']]);
+    }
+
+
+//
+//    public function createBatchPrediction(Request $request)
+//    {
+//        $DataSourceId = $request->input('DataSourceId');
+//        $BatchPredictionId = 'bp-' . uniqid();
+//        $BatchPredictionName = $request->input('BatchPredictionName');
+//        $MLModelId = $request->input('MLModelId');
+//        $OutputUri = 's3://' . $this->bucket . '/bathPrediction/';
+//
+//        try {
+//            $result = $this->client->createBatchPrediction([
+//                'BatchPredictionDataSourceId' => $DataSourceId, // REQUIRED
+//                'BatchPredictionId' => $BatchPredictionId, // REQUIRED
+//                'BatchPredictionName' => $BatchPredictionName,
+//                'MLModelId' => $MLModelId, // REQUIRED
+//                'OutputUri' => $OutputUri, // REQUIRED
+//            ]);
+//
+//        } catch (MachineLearningException $e) {
+//            return response()->json(['data' => $e->getMessage() ]);
+//        }
+//    }
 
 
     

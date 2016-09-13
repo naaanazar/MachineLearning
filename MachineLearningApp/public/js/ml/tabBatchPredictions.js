@@ -1,25 +1,72 @@
 $(document).ready(function() {
+     $("[data-toggle='tooltip']").tooltip();
 
-    $('.create-bath-descriptions-form').submit(function (e) {
+     // upload button without submit
+   // $('#input-file-source').change(function () {
+     //   $('.create-bath-predictios-form').submit();
+    //});
+
+    // upload show/hide message
+    $(".upload-message").show().delay(1500).fadeOut(1000);    
+    
+    //upload file to s3 bucket using ajax
+    $('.create-bath-predictios-form').on("submit", function (e) {
+        console.log($(".create-bath-predictios-form"));
         e.preventDefault();
+      //  $('.preload-s3').show('fast').delay(4000).fadeOut(400);
         $.ajax({
-            type: "post",
-            url: 'ml/create-batch-prediction',
-            data: $('.create-bath-descriptions-form').serialize(),
-            success: function (data) {
-                $(".create-bath-descriptions-form").toggle();
+            url: '/ml/upload-batch-source',
+            method: 'POST',
+            data: new FormData($(".create-bath-predictios-form")[0]),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                console.log(response.data);
+                $(".create-bath-predictios-form").toggle();
                 $(".container-describeBatchPredictions").toggle();
                 listBatchPrediction();
-                console.log(data);
+               
             },
-            error: function () {                
+            error: function () {
+              //  errorS3('.notification-s3');
             },
         });
     });
 
 
+    function successS3(selector, str) {
+        $(selector).append('<div class="alert alert-success upload-message-s3">'
+            + '<ul><li><strong>Success! </strong>'
+            + str + '</li></ul></div>').show('slow').hide(4000);
+    }
+
+    function errorS3(selector) {
+        $(selector).append('<div class="alert alert-danger upload-message-s3">'
+            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
+            + '</li></ul></div>').show('slow').hide(4000);
+
+    }
+//    $('.create-bath-predictios-form').submit(function (e) {
+//        e.preventDefault();
+//        $.ajax({
+//            type: "post",
+//            url: 'ml/create-batch-prediction',
+//            data: $('.create-bath-predictios-form').serialize(),
+//            success: function (data) {
+//                $(".create-bath-predictios-form").toggle();
+//                $(".container-describeBatchPredictions").toggle();
+//                listBatchPrediction();
+//                console.log(data);
+//            },
+//            error: function () {
+//            },
+//        });
+//    });
+
+
     $(document).on("click", ".btn-create-bath-description", function () {
-        $(".create-bath-descriptions-form").toggle();
+        $(".create-bath-predictios-form").toggle();
         $(".container-describeBatchPredictions").toggle();
 
         $.get("/ml/select-ml-model", function(response){
