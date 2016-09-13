@@ -94,55 +94,6 @@ $(document).ready(function () {
     });
 
     // prediction: send form
-    $('.form-prediction').on('submit', function (e) {
-        e.preventDefault();
-
-        addPredictionProgress();
-
-        $.ajaxSetup({
-            headers: {'X-XSRF-Token': $('meta[name="_token"]').attr('content')}
-        });
-
-        var formData = $(this).serialize();
-        var formAction = $(this).attr('action');
-        var formMethod = $(this).attr('method');
-
-        function formPredict() {
-            $.ajax({
-                type: formMethod,
-                url: formAction,
-                data: formData,
-                cache: false,
-                success: function (data) {
-                    if (data == 'Updating') {
-                        setTimeout(formPredict(), 3000);
-                    }
-                    else {
-                        removePredictionProgress()
-                        $('.prediction-data').append('<h1 class="text-center">Result</h1> ' + data);
-                    }
-                },
-                error: function () {
-                    setTimeout(formPredict(), 3000);
-                }
-            });
-        }
-
-        formPredict();
-    });
-
-    // prediction: form processing style
-    function addPredictionProgress() {
-        $('.spinner-prediction').fadeIn('slow');
-        $('.prediction-data').empty();
-    }
-
-    function removePredictionProgress() {
-        $('.spinner-prediction').fadeOut('slow');
-    }
-
-
-    // prediction: send form
     $('.form-prediction').on('submit', function(e) {
         e.preventDefault();
 
@@ -168,9 +119,7 @@ $(document).ready(function () {
                               }
                               else {
                                 removePredictionProgress();
-                                $('.prediction-data').append("<section class='pred-data'>"
-                                    + "<h1 class='text-center'>Result</h1>"
-                                    + data + "</section>");
+                                $('.prediction-data').append(data);
                               }
                           },
                 error   : function() {
@@ -185,7 +134,7 @@ $(document).ready(function () {
     // prediction: form processing style
     function addPredictionProgress() {
         $('.spinner-prediction').fadeIn('slow');
-        $('.prediction-data').empty();
+        $('.pred-data').empty();
     }
 
     function removePredictionProgress() {
