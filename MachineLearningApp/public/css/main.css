@@ -115,15 +115,16 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px; 
-    width: 85.7%;        
+    width: 100%;        
     position: absolute;
+    margin-left: -15px;
 }
 
 .table-scroll-ML{
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
 }
 
@@ -131,7 +132,7 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
 }
 
@@ -139,20 +140,20 @@ body {
     margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
 }
+.tab-content{
+    width: 100%;
+}
+
 @media screen and (max-width:768px){
-    .container-describeDataSources,
-    .container-describeMLModels,
-    .container-describeEvaluations,
-    .container-describeBatchPredictions{
+    .table-scroll{
         margin-top: 200px;
         position: static;
         width: 100%;
         margin-bottom: 25px;
-
-    }
+            }
     .table {
         margin-bottom: 100px;
     }
