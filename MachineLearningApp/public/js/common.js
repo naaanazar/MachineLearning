@@ -171,7 +171,8 @@ $(document).ready(function () {
                               }
                               else {
                                 removePredictionProgress();
-                                $('.prediction-data').append("<section class='pred-data'><h1 class='text-center'>Result</h1>"
+                                $('.prediction-data').append("<section class='pred-data'>"
+                                    + "<h1 class='text-center'>Result</h1>"
                                     + data + "</section>");
                               }
                           },
