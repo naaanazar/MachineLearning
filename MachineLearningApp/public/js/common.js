@@ -62,7 +62,7 @@ $(document).ready(function () {
             processData: false,
             success: function (data) {
                 getListS3();
-                successS3('.notification-s3', 'File uploaded to S3!');
+                success('.notification-s3', 'File uploaded to S3!');
             },
             error: function () {
                 errorS3('.notification-s3');
