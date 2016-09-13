@@ -133,12 +133,14 @@ $(document).ready(function () {
 
     // prediction: form processing style
     function addPredictionProgress() {
+        $('input').attr('disabled', 'disabled');
         $('.spinner-prediction').fadeIn('slow');
         $('.pred-data').empty();
     }
 
     function removePredictionProgress() {
         $('.spinner-prediction').hide('slow');
+        $('input').removeAttr('disabled');
     }
 
     // prediction: validation form
