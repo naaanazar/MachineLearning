@@ -59,10 +59,13 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
 
         $selectDataSourceId = new WebDriverSelect($this->driver->findElement($dropdownmenuDataSourceId));
         sleep(1);
-        $selectDataSourceId->selectByValue('ds-57d2bcbb7c954');
+        $selectDataSourceId->selectByValue('d-57d7f4d9a323a');
 
         $submit = $this->driver->findElement($buttonSubmit);
         $submit->click();
+
+        sleep(2);
+
         $this->driver->wait()->until(WebDriverExpectedCondition::elementToBeClickable($insetMLModels));
         $MLModels1 = $this->driver->findElement($insetMLModels);
         $MLModels1->click();
