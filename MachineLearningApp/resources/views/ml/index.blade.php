@@ -63,7 +63,7 @@
                             <button type="submit" class="btn btn-primary submit-button">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeDataSources table-scroll">
+                    <div class="container-describeDataSources">
                     </div>
                 </div>
                 <div id="describeMLModels" class="tab-pane fade">
@@ -93,7 +93,7 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeMLModels table-scroll-ML ">
+                    <div class="container-describeMLModels">
                     </div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
@@ -120,7 +120,7 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeEvaluations table-scroll-evaluation">
+                    <div class="container-describeEvaluations">
                     </div>
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
@@ -147,7 +147,7 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeBatchPredictions table-scroll-batch ">
+                    <div class="container-describeBatchPredictions">
                     </div>
                 </div>
             </div>

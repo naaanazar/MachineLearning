@@ -36,9 +36,9 @@ $(document).ready(function() {
         listMLModel();
     });
 
-    //loading data
+    //loading data(tabs)
     $('#describeMLModelsContent').on('click', function() {
-        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"><div class="container-describeDataSources table-scroll-ML"></div></div></div>');
     });
 
     function listMLModel() {    

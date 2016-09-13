@@ -46,9 +46,9 @@ $(document).ready(function() {
         listEvaluations();
      });
 
-    //loading data
+    //loading data(tabs)
     $('#describeEvaluationsContent').on('click', function() {
-        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"><div class="container-describeDataSources table-scroll-evaluation"></div></div></div>');
     });
 
     function listEvaluations() {

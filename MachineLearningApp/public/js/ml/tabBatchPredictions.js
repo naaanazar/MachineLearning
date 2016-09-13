@@ -47,9 +47,9 @@ $(document).ready(function() {
         listBatchPrediction();
      });
 
-    //loading data
+    //loading data(tabs)
     $('#describeBatchPredictionsContent').on('click', function() {
-        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"><div class="container-describeDataSources table-scroll-batch"></div></div></div>');
     });
 
     function listBatchPrediction() {

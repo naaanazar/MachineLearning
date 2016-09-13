@@ -36,10 +36,10 @@ $(document).ready(function() {
         listDataSource();
      });
 
-    //loading data
-    $('#describeDataSourcesContent').on('click', function() {
-        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    });
+    //loading data(tabs)
+    // $('#describeDataSourcesContent').on('click', function() {
+    //     $('.container-describeDataSources').html('<div class="container-describeDataSources table-scroll"></div>');
+    // });
 
     function listDataSource() {
 
