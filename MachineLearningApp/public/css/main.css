@@ -302,22 +302,26 @@ body {
 }
 
 .jGrowl-notification {
-    background-color: #31b0d5 !important;
-    border-color: #269abc !important;
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
 }
 .jgrowl-danger {
-    background-color: #c9302c !important;
-    border-color: #ac2925 !important;
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
 }
 
 .jgrowl-warning {
-    background-color: #ec971f !important;
-    border-color: #d58512 !important;
+    color: #8a6d3b !important;
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
 }
 
 .jgrowl-success {
-    background-color: #449d44 !important;
-    border-color: #398439 !important;
+    color: #3c763d !important;
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
 }
 
 
