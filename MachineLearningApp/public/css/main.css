@@ -330,17 +330,34 @@ body {
     font-size: 18px;
     width: 300px !important;
 }
+
+.jGrowl-notification {
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+}
 .jgrowl-danger {
-    background-color: red !important;
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
 }
 
 .jgrowl-warning {
-    background-color: yellow !important;
-    color: #000000 !important;
+    color: #8a6d3b !important;
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
 }
 
 .jgrowl-success {
-    background-color: green !important;
+    color: #3c763d !important;
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+}
+.jGrowl-closer {
+    font-size: 13px !important;
+    background-color: #ededed !important;
+    width: 300px !important;
+    color: #2e2d2d;
 }
 
 
