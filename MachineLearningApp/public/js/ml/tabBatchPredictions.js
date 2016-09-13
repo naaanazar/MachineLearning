@@ -110,7 +110,7 @@ $(document).ready(function() {
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                    '<td>BatchPredictionId</td>' +
+                //    '<td>BatchPredictionId</td>' +
                     '<td>Name</td>' +
                     '<td>Status</td>' +
                     '<td>MLModelId</td>' +
@@ -127,7 +127,7 @@ $(document).ready(function() {
                     date = date.substring(0, date.indexOf('+'));
                     res +=
                         '<tr>' +
-                            '<td>' + response.data[key].BatchPredictionId + '</td>' +
+                           // '<td>' + response.data[key].BatchPredictionId + '</td>' +
                             '<td>' + response.data[key].Name + '</td>' +
                             '<td>' + response.data[key].Status + '</td>' +
                             '<td>' + response.data[key].MLModelId + '</td>' +
@@ -139,10 +139,11 @@ $(document).ready(function() {
                                 };
                     res +=  '</td>' +
                             '<td>' + date + '</td>' +
-                            '<td>' +
+                            '<td style="width:140px" nowrap>' +
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                    'data-toggle="modal" id="info_' + i +'">' +
                                     '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
+                                '<a class="btn btn-success btn-sm btn-list download-batch-result" href="#"><span class="glyphicon glyphicon-cloud-download"></span></a>&nbsp;' +
                                 '<a class="btn btn-danger btn-sm btn-list delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>' +
                             '</td>' +
                         '</tr>' +

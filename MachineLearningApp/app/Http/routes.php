@@ -50,6 +50,8 @@ Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPredicti
 
 
 Route::get('/ml/sb/{BatchPredictionId}', 'MLController@statusBatch');
+Route::get('/ml/ds', 'MLController@describeDataSources');
+Route::get('/ml/getd', 'MLController@getD');
 
 
 
