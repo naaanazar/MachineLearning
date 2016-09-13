@@ -4,12 +4,14 @@
 
 html {
     height: 100%;
+    min-width: 500px;
 }
 
 body {
     position: relative;
     margin: 0;
     min-height: 100%;
+    min-width: 500px;
 }
 
 .footer {
@@ -75,6 +77,7 @@ body {
     position: absolute;
     top: 35%;
     left: 41%;
+    display: none;
     font-size: 80px;
     transform: translateX(-50%);
 }
@@ -83,10 +86,6 @@ body {
     position: relative;
 }
 
-.form-pred-disabled,
-.block-pred-disabled {
-    z-index: -1;
-}
 
 .btn-prediction {
     margin-right: 61px;
@@ -107,65 +106,103 @@ body {
 /***************************************
     Tables
 ***************************************/
-
 .table-font { font-size: 11px; }
 .table-font tr td:last-child { width: 110px; }
 
 .table-scroll{
-    margin-top: 40px;
     overflow-y: auto;      
     height: 350px; 
-    width: 85.7%;        
+    width: 100%;        
     position: absolute;
+    margin-left: -15px;
+
 }
 
 .table-scroll-ML{
-    margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
+    margin-left: -15px;
 }
 
 .table-scroll-evaluation{
-    margin-top: 40px;
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
+    margin-left: -15px;
 }
 
-.table-scroll-batch{
-    margin-top: 40px;
+.table-scroll-batch {
     overflow-y: auto;      
     height: 350px;
-    width: 85.7%;      
+    width: 100%;      
     position: absolute;
+    margin-left: -15px;
+}
+.tab-content{
+    width: 100%;
 }
 @media screen and (max-width:768px){
-    .container-describeDataSources,
-    .container-describeMLModels,
-    .container-describeEvaluations,
-    .container-describeBatchPredictions{
+ .loader {
+        margin-left: 550px;
+    }
+}
+@media screen and (max-width:992px){
+    .ML-tables-content{
+        margin-top: 40px;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    
+    .footer {
+        position: fixed;
+    }
+
+    .loader {
+        margin-left: 360px;
+        width: 40px;
+        height: 40px;
+
+    }
+}
+@media screen and (max-width:768px){
+    .ML-tables-content{
+        margin-top: 200px;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+     .loader {
+        margin-left: 200px;
+        width: 40px;
+        height: 40px;
+
+    }
+
+    .back-to-top{
+        padding:5px 10px;
+        font-size:12px;
+        line-height:1.5;
+        border-radius:3px
+    }
+
+    .table-scroll{
         margin-top: 200px;
         position: static;
         width: 100%;
         margin-bottom: 25px;
-
-    }
-    .table {
-        margin-bottom: 100px;
-    }
-    .footer {
-        position: fixed;
-    }
-    }
-
-
-
+            }
+    
+}
 /***************************************
     Other
 ***************************************/
+@media screen and (max-width:492px){
+.for-mobile{
+
+}
+}
 
 .logo {
     margin:auto;
@@ -189,7 +226,7 @@ body {
     margin-left: 1%;
 }
 .error { color: red; }
-#input-file { display: none ; }
+#input-file, #input-file-source { display: none ; }
 .btn-batch { margin-right: 42px; }
 .panel-margin { margin-bottom: 0; }
 .batch-label { margin-right: 15px; }
@@ -209,7 +246,7 @@ body {
         opacity: 0.5;
     }
     .submit-button{
-        margin-left: 60px
+        margin-left: 60px;
     }
 }
 
@@ -296,17 +333,34 @@ body {
     font-size: 18px;
     width: 300px !important;
 }
+
+.jGrowl-notification {
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+}
 .jgrowl-danger {
-    background-color: red !important;
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
 }
 
 .jgrowl-warning {
-    background-color: yellow !important;
-    color: #000000 !important;
+    color: #8a6d3b !important;
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
 }
 
 .jgrowl-success {
-    background-color: green !important;
+    color: #3c763d !important;
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+}
+.jGrowl-closer {
+    font-size: 13px !important;
+    background-color: #ededed !important;
+    width: 300px !important;
+    color: #2e2d2d;
 }
 
 
@@ -342,12 +396,13 @@ body {
 }
 
 .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 60px;
+    height: 60px;
     animation: spin 2s linear infinite;
+    margin-left: 545px;
 }
 
 @keyframes spin {

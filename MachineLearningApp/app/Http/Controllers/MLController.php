@@ -15,7 +15,7 @@ class MLController extends Controller
 
     public $bucket = 'ml-datasets-test';
     private $client;
-  /*  public $DataSchema = '{"version":"1.0",
+    public $DataSchema = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "targetAttributeName":"purchase",
@@ -39,9 +39,9 @@ class MLController extends Controller
            "attributeType":"CATEGORICAL"},
            {"attributeName":"purchase","attributeType":"BINARY"}],
            "excludedAttributeNames":[]
-    }';*/
+    }';
 
-    public $DataSchema = '{"version":"1.0",
+    public $DataSchemaBatch = '{"version":"1.0",
         "rowId":null,
         "rowWeight":null,
         "dataFormat":"CSV",
@@ -141,20 +141,37 @@ class MLController extends Controller
     }
 
 
-    public function describeDataSources()
+        public function describeDataSources()
     {
 
         try {
 
-            $result = $this->client->describeDataSources([
-                'SortOrder' => 'asc'
+            $result = $this->client->describeDataSources([           
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        //dd($result);
+        return $result['Results'];
+    }
+
+    //test
+    public function getD()
+    {
+        try {
+            $result = $this->client->getDataSource([
+                'DataSourceId' => 'ds-57d7eb2c8c3d7',
+                'Verbose' => true || false,
             ]);
 
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
 
-        return $result['Results'];
+        dd($result);
+
+
     }
 
 
@@ -366,7 +383,7 @@ class MLController extends Controller
     public function createDataSourceFromS3(Request $request)
     {
 
-        $DataSourceId = 'ds-' . uniqid();
+        $DataSourceId = uniqid();
         $DataSourceName = $request->input('DataSourceName');
         $DataLocationS3 = 's3://' . $this->bucket . '/' . $request->input('DataLocationS3');
         $DataSchema = $this->DataSchema;
@@ -389,7 +406,7 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage() ]);
         }
 
-        //return back();
+        return response()->json(['data' => (array)$result]);
     }
 
 
@@ -445,11 +462,18 @@ class MLController extends Controller
 
     public function createBatchPrediction(Request $request)
     {
-        $DataSourceId = $request->input('DataSourceId');
+
+        $S3 = New S3Controller;
+        $fileName = $S3->fileUpload($request);
+        sleep(2);
+
+        $DataSourceId = $this->createBatchDataSourceFromS3($fileName);
+        sleep(4);
+
         $BatchPredictionId = 'bp-' . uniqid();
-        $BatchPredictionName = $request->input('BatchPredictionName');
+        $BatchPredictionName = $BatchPredictionId;
         $MLModelId = $request->input('MLModelId');
-        $OutputUri = 's3://' . $this->bucket . '/bathPrediction/';
+        $OutputUri = 's3://' . $this->bucket . '/';
 
         try {
             $result = $this->client->createBatchPrediction([
@@ -464,10 +488,64 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage() ]);
         }
 
-        
+        return response()->json(['data' => $result['BatchPredictionId']]);
     }
 
-    
+
+    public function createBatchDataSourceFromS3($fileName)
+    {
+        $DataSourceId = uniqid();
+        $DataLocationS3 = 's3://' . $this->bucket . '/' . $fileName ;
+        $DataSchema = $this->DataSchemaBatch;
+
+        try {
+            $result = $this->client->createDataSourceFromS3([
+                'ComputeStatistics' => true,
+                'DataSourceId' => $DataSourceId, // REQUIRED
+                'DataSourceName' => $DataSourceId,
+                'DataSpec' => [ // REQUIRED
+                    'DataLocationS3' => $DataLocationS3, // REQUIRED
+                    'DataSchema' => $DataSchema
+                ],
+            ]);
+
+        } catch (MachineLearningException $e) {
+            return response()->json(['data' => $e->getMessage() ]);
+        }
+        return $result['DataSourceId'];
+      
+    }
+
+    public function statusDataSource($DataSourceId)
+    {
+        try {
+            $result = $this->client->getDataSource([
+                'DataSourceId' => $DataSourceId,
+                'Verbose' => true || false,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return response()->json(['data' => $result['Status']]);
+    }
+
+    public function statusBatch($BatchPredictionId)
+    {
+        try {
+            $result = $this->client->getBatchPrediction([
+                'BatchPredictionId' => $BatchPredictionId,
+                'Verbose' => true || false,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        dd($result);
+        return $result;
+    }
+
+   
     public function createRealtimeEndpoint($MLModelId)
     {
 
@@ -541,11 +619,23 @@ class MLController extends Controller
                 echo $e->getMessage() . "\n";
             }
 
-            $result = "<h3><strong>Prediction:</strong> " . $result["Prediction"]["predictedLabel"] . "</h3>";
+            $predictedLabel = $result["Prediction"]["predictedLabel"];
+            $predictedScores = $result["Prediction"]["predictedScores"];
+            $details = $result["Prediction"]["details"];
+            $preScores = $predictedScores[0];
+            $algorithm = $details["Algorithm"];
+            $modelType = $details["PredictiveModelType"];
+
+            $output = "<section class='pred-data'><h1 class='text-center'>Result</h1>"
+                    . "<h4><strong>Prediction: </strong>" . $predictedLabel . "</h4>"
+                    . "<h4><strong>Predicted Scores: </strong>" . $preScores . "</h4>"
+                    . "<h4><strong>Algorithm: </strong>" . $algorithm . "</h4>"
+                    . "<h4><strong>Model Type: </strong>" . $modelType . "</h4>"
+                    . "</section>";
 
             $this->deleteRealtimeEndpoint($MLModelId);
 
-            if($request->ajax()) return $result;
+            if($request->ajax()) return $output;
             else return false;
         }
     }

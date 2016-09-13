@@ -33,15 +33,19 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
-        listMLModel();
+        if(!$('.container-describeMLModels').hasClass('loaded')) {
+            listMLModel();
+        }
     });
 
-    //loading data
-    $('#describeMLModelsContent').on('click', function() {
-        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    });
+//    //loading data
+//    $('#describeMLModelsContent').on('click', function() {
+//        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+//    });
 
-    function listMLModel() {    
+    function listMLModel() {
+
+        $('.container-describeMLModels').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
         $('#ml-button-create').html(button);
 
@@ -80,9 +84,9 @@ $(document).ready(function() {
                             '<td>' + date + '</td>' +
                             '<td>' +
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
-                                   'data-toggle="modal" id="info_' + i + '">' +
+                                   'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].MLModelId + '">' +
                                     '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                                '<a class="btn btn-danger btn-sm btn-list delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>' +
+                                '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].MLModelId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                             '</td>' +
                         '</tr>' +
                         '<span class="hide">' + i + '</span>';
@@ -90,6 +94,8 @@ $(document).ready(function() {
                 res += '</table>';
 
             $('.container-describeMLModels').html(res);
+            $('.container-describeMLModels').addClass('loaded');
+
         });
     };
 });
