@@ -15,7 +15,7 @@
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4" >
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 tabs" >
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
@@ -27,7 +27,7 @@
                         </li>
                         <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a></li>
                     </ul>
-                </div>                
+                </div>
             </div>
             <div class="tab-content col-md-12">
                 <div id="describeDataSources" class="tab-pane fade in active">

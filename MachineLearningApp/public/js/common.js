@@ -240,7 +240,7 @@ $(document).ready(function () {
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
         var temp = $(event.target).closest('a').attr('href');
-console.log(datasourceId);
+
         var data = {
             Name: "",
             Message: ""
