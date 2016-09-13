@@ -119,7 +119,7 @@ $(document).ready(function () {
                     }
                     else {
                         removePredictionProgress()
-                        $('.block-prediction').html('<h1 class="text-center">Done</h1> ' + data);
+                        $('.prediction-data').append('<h1 class="text-center">Result</h1> ' + data);
                     }
                 },
                 error: function () {
@@ -133,15 +133,12 @@ $(document).ready(function () {
 
     // prediction: form processing style
     function addPredictionProgress() {
-        $('.spinner-prediction').show('slow');
-        $('.form-prediction').addClass('form-pred-disabled');
-        $('.block-prediction').addClass('block-pred-disabled');
+        $('.spinner-prediction').fadeIn('slow');
+        $('.prediction-data').empty();
     }
 
     function removePredictionProgress() {
-        $('.spinner-prediction').hide('slow');
-        $('.form-prediction').removeClass('form-pred-disabled');
-        $('.block-prediction').removeClass('block-pred-disabled');
+        $('.spinner-prediction').fadeOut('slow');
     }
 
 
