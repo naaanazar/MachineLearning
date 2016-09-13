@@ -323,6 +323,12 @@ body {
     background-color: #dff0d8 !important;
     border-color: #d6e9c6 !important;
 }
+.jGrowl-closer {
+    font-size: 13px !important;
+    background-color: #ededed !important;
+    width: 300px !important;
+    color: #2e2d2d;
+}
 
 
 .generator-input-container,
