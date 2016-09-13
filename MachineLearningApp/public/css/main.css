@@ -75,6 +75,7 @@ body {
     position: absolute;
     top: 35%;
     left: 41%;
+    display: none;
     font-size: 80px;
     transform: translateX(-50%);
 }
@@ -83,10 +84,6 @@ body {
     position: relative;
 }
 
-.form-pred-disabled,
-.block-pred-disabled {
-    z-index: -1;
-}
 
 .btn-prediction {
     margin-right: 61px;

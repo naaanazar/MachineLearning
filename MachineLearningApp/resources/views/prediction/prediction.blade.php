@@ -59,7 +59,7 @@
         <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
             <div class="block-prediction">
                 <div class="prediction-data"></div>
-                <span class="block-sp"></span>
+                <i class="spinner-prediction fa fa-spinner fa-spin"></i>
             </div>
         </div>
     </div>
