@@ -300,17 +300,24 @@ body {
     font-size: 18px;
     width: 300px !important;
 }
+
+.jGrowl-notification {
+    background-color: #31b0d5 !important;
+    border-color: #269abc !important;
+}
 .jgrowl-danger {
-    background-color: red !important;
+    background-color: #c9302c !important;
+    border-color: #ac2925 !important;
 }
 
 .jgrowl-warning {
-    background-color: yellow !important;
-    color: #000000 !important;
+    background-color: #ec971f !important;
+    border-color: #d58512 !important;
 }
 
 .jgrowl-success {
-    background-color: green !important;
+    background-color: #449d44 !important;
+    border-color: #398439 !important;
 }
 
 
