@@ -72,5 +72,8 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
         $a = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'selenium-test')]"))->getText();
         $b = 'selenium-test';
         $this->assertEquals($a, $b);
+
+        $deleteMLMode = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'selenium-test')]//..//a[2]"));
+        $deleteMLMode->click();
     }
 }
