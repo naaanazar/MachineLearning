@@ -63,7 +63,7 @@
                     <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-primary btn-pred" value="Send" type="submit">
+                    <input class="btn btn-primary btn-lg btn-pred" value="Send" type="submit">
                 </div>
             </form>
         </div>
