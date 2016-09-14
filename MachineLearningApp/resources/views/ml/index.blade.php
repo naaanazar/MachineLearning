@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 for-mobile">
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4">
                 <div id="ml-button-create">
                 </div>
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
