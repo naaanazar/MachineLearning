@@ -151,50 +151,32 @@ $(document).ready(function () {
         return content;
     }
 
-    function predValOne(selector) {
+    function predValidation(selector, length, regexp, message) {
         $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
             var error = selector + " + .pred-error";
-            var regExp = new RegExp("[^0-1]", "g");
+            var regExp = new RegExp(regexp, "g");
             value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, 1));
+            $(selector).val(value.substr(0, length));
             if (!value.replace(regExp, "")) {
                 $(error).fadeIn('slow');
-                $(error).html(errorPred("Type 0 or 1"));
+                $(error).html(errorPred(message));
             } else {
                 $(error).fadeOut('slow');
             }
         });
     }
 
-    function predValTwo(selector, length) {
-        $('.form-prediction').on('input', selector, function(e){
-            var value = $(e.target).val();
-            var regExp = new RegExp("[^0-9]", "g");
-            var value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
-        });
-    }
-
-    function predValCountry(selector, length) {
-        $('.form-prediction').on('input', selector, function(e){
-            var value = $(e.target).val();
-            var regExp = new RegExp("^ |[^a-zA-Z ]", "g");
-            var value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
-        });
-    }
-
-    predValOne("#email");
-    predValOne("#has-privat-project");
-    predValOne("#same-log-project");
-    predValTwo("#same-email", 10);
-    predValTwo("#projects-count", 10);
-    predValTwo("#string-count");
-    predValTwo("#string-count", 10);
-    predValTwo("#members-count", 10);
-    predValTwo("#last-login", 10);
-    predValCountry("#country", 60)
+    predValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
+    predValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
+    predValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
+    predValidation("#same-email", 10, "[^0-9]", "Enter the number, length <= 10");
+    predValidation("#projects-count", 10, "[^0-9]", "Enter the number, length <= 10");
+    predValidation("#string-count", 10, "[^0-9]", "Enter the number, length <= 10");
+    predValidation("#string-count", 10, "[^0-9]", "Enter the number, length <= 10");
+    predValidation("#members-count", 10, "[^0-9]", "Enter the number, length <= 10");
+    predValidation("#last-login", 10, "[^0-9]", "Enter the number, length <= 10");
+    predValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
 
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
