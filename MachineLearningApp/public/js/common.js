@@ -103,7 +103,7 @@ $(document).ready(function () {
         });
 
         var formData   = $(this).serialize();
-        var formAction = $(this).attr('action');
+        // var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
 
         function formPredict() {
@@ -151,13 +151,16 @@ $(document).ready(function () {
         return content;
     }
 
-    function predValidation(selector, length, regexp, message) {
+    function realTimePredictionValidation(selector, length, regexp, message) {
         $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
             var error = selector + " + .pred-error";
             var regExp = new RegExp(regexp, "g");
             value = value.replace(regExp, "");
             $(selector).val(value.substr(0, length));
+            $(selector).focusout(function(event) {
+                $(error).fadeOut('slow');
+            });
             if (!value.replace(regExp, "")) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred(message));
@@ -167,16 +170,16 @@ $(document).ready(function () {
         });
     }
 
-    predValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
-    predValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
-    predValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-    predValidation("#same-email", 10, "[^0-9]", "Enter the number, length <= 10");
-    predValidation("#projects-count", 10, "[^0-9]", "Enter the number, length <= 10");
-    predValidation("#string-count", 10, "[^0-9]", "Enter the number, length <= 10");
-    predValidation("#string-count", 10, "[^0-9]", "Enter the number, length <= 10");
-    predValidation("#members-count", 10, "[^0-9]", "Enter the number, length <= 10");
-    predValidation("#last-login", 10, "[^0-9]", "Enter the number, length <= 10");
-    predValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
+    realTimePredictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
+    realTimePredictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
+    realTimePredictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
+    realTimePredictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
 
 //modal window ML
     $(document).on("click", '.datasource-info', function (event) {
