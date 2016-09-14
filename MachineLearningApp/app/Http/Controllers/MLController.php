@@ -635,8 +635,11 @@ class MLController extends Controller
 
             $this->deleteRealtimeEndpoint($MLModelId);
 
-            if($request->ajax()) return $output;
-            else return false;
+            if($request->ajax()) {
+                return $output;
+            } else {
+                return false;
+            }
         }
     }
 
