@@ -1,9 +1,9 @@
-$(document).ready(function () {
+$(document).ready(function() {
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
     // upload button without submit
-    $('#input-file').change(function () {
+    $('#input-file').change(function() {
         $('.form-upload').submit();
     });
 
@@ -18,26 +18,28 @@ $(document).ready(function () {
     });
 
     function success(selector, str) {
-        $(selector).append('<div class="alert alert-success upload-message-s3">'
-            + '<ul><li><strong>Success! </strong>'
-            + str + '</li></ul></div>').show('slow').hide(4000);
+        $(selector).append('<div class="alert alert-success upload-message-s3">' +
+            '<ul><li><strong>Success! </strong>' +
+            str + '</li></ul></div>').show('slow').hide(4000);
     }
 
     function errorS3(selector) {
-        $(selector).append('<div class="alert alert-danger upload-message-s3">'
-            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
-            + '</li></ul></div>').show('slow').hide(4000);
+        $(selector).append('<div class="alert alert-danger upload-message-s3">' +
+            '<ul><li><strong>Error! File is not loaded to S3!</strong>' +
+            '</li></ul></div>').show('slow').hide(4000);
 
     }
 
-    $(document).on('click', '.btn-delete', function (e) {
+    $(document).on('click', '.btn-delete', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
             url: '/s3/delete',
             method: 'post',
-            data: {name: $(this).attr('id')},
-            success: function (data) {
+            data: {
+                name: $(this).attr('id')
+            },
+            success: function(data) {
                 console.log(data);
                 if (data.success) {
 
@@ -49,7 +51,7 @@ $(document).ready(function () {
     });
 
     //upload file to s3 bucket using ajax
-    $('.form-upload').on("submit", function (e) {
+    $('.form-upload').on("submit", function(e) {
         console.log($(".form-upload"));
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
@@ -60,11 +62,11 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             processData: false,
-            success: function (data) {
+            success: function(data) {
                 getListS3();
                 success('.notification-s3', 'File uploaded to S3!');
             },
-            error: function () {
+            error: function() {
                 errorS3('.notification-s3');
             },
         });
@@ -75,7 +77,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/s3/list',
             method: 'GET',
-            success: function (data) {
+            success: function(data) {
                 $('.s3-pagination').html($(data).find('div.pagination-list'));
                 $('.s3-table').html($(data).find('table'));
             }
@@ -83,7 +85,7 @@ $(document).ready(function () {
     }
 
     // prediction: get id model
-    $.get("/ml/select-ml-model", function (response) {
+    $.get("/ml/select-ml-model", function(response) {
         var result;
 
         for (var key in response.data) {
@@ -100,31 +102,32 @@ $(document).ready(function () {
         addPredictionProgress();
 
         $.ajaxSetup({
-            headers: { 'X-XSRF-Token': $('meta[name="_token"]').attr('content') }
+            headers: {
+                'X-XSRF-Token': $('meta[name="_token"]').attr('content')
+            }
         });
 
-        var formData   = $(this).serialize();
+        var formData = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
 
         function formPredict() {
             $.ajax({
-                type    : formMethod,
-                url     : formAction,
-                data    : formData,
-                cache   : false,
-                success : function(data) {
-                              if (data == 'Updating') {
-                                  setTimeout(formPredict(), 3000);
-                              }
-                              else {
-                                removePredictionProgress();
-                                $('.prediction-data').append(data);
-                              }
-                          },
-                error   : function() {
-                              setTimeout(formPredict(), 3000);
-                          }
+                type: formMethod,
+                url: formAction,
+                data: formData,
+                cache: false,
+                success: function(data) {
+                    if (data == 'Updating') {
+                        setTimeout(formPredict(), 3000);
+                    } else {
+                        removePredictionProgress();
+                        $('.prediction-data').append(data);
+                    }
+                },
+                error: function() {
+                    setTimeout(formPredict(), 3000);
+                }
             });
         }
 
@@ -145,7 +148,7 @@ $(document).ready(function () {
 
     // prediction: validation form
     function predValOne(selector) {
-        $('.form-prediction').on('input', selector, function(e){
+        $('.form-prediction').on('input', selector, function(e) {
             var value = $(e.target).val();
             var regExp = new RegExp("[^0-1]", "g");
             value = value.replace(regExp, "");
@@ -154,7 +157,7 @@ $(document).ready(function () {
     }
 
     function predValTwo(selector, length) {
-        $('.form-prediction').on('input', selector, function(e){
+        $('.form-prediction').on('input', selector, function(e) {
             var value = $(e.target).val();
             var regExp = new RegExp("[^0-9]", "g");
             var value = value.replace(regExp, "");
@@ -163,7 +166,7 @@ $(document).ready(function () {
     }
 
     function predValCountry(selector, length) {
-        $('.form-prediction').on('input', selector, function(e){
+        $('.form-prediction').on('input', selector, function(e) {
             var value = $(e.target).val();
             var regExp = new RegExp("^ |[^a-zA-Z ]", "g");
             var value = value.replace(regExp, "");
@@ -182,8 +185,8 @@ $(document).ready(function () {
     predValTwo("#last-login", 10);
     predValCountry("#country", 60)
 
-//modal window ML
-    $(document).on("click", '.datasource-info', function (event) {
+    //modal window ML
+    $(document).on("click", '.datasource-info', function(event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
@@ -212,7 +215,7 @@ $(document).ready(function () {
 
         }
 
-        $.get(url + datasourceId, function (response) {
+        $.get(url + datasourceId, function(response) {
             switch (tab) {
                 case 'Data Source':
                     data.Name = response.data[0];
@@ -288,7 +291,7 @@ $(document).ready(function () {
     });
 
     // Delete Ajax
-    $(document).on('click', '.delete', function (event) {
+    $(document).on('click', '.delete', function(event) {
         var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
         $(event.target).closest('tr').fadeOut();
@@ -297,11 +300,15 @@ $(document).ready(function () {
             var datasourceId = $(event.target).closest('a').data('delete-id');
 
             if (target == dataSourceIdVar) {
-                $.get(url + datasourceId, function (response) {
+                $.get(url + datasourceId, function(response) {
                     if (response.deleted !== 'Ok') {
-                        $.jGrowl('An error occurred during delete process', {theme: 'jgrowl-danger'});
-                    }else {
-                        $.jGrowl('Success', {theme: 'jgrowl-success'});
+                        $.jGrowl('An error occurred during delete process', {
+                            theme: 'jgrowl-danger'
+                        });
+                    } else {
+                        $.jGrowl('Success', {
+                            theme: 'jgrowl-success'
+                        });
 
                     }
                 });
@@ -326,9 +333,9 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-        //loading data
-        $('.modal').on('hidden.bs.modal', function() {
-            $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        });
+    //loading data
+    $('.modal').on('hidden.bs.modal', function() {
+        $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
 
 });
