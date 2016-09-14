@@ -3,11 +3,10 @@
 @section('content')
 
 <div class="container">
-
     <h3 class="title">Real time prediction</h3>
     <br>
     <div class="progress-prediction clearfix">
-        <div class="col-lg-8 col-md-8 col-ms-8 col-xs-8">
+        <div>
             <form class="form-horizontal form-prediction" method="post" action="{{ action('MLController@predict') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -65,12 +64,10 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-4 col-md-4 col-ms-4 col-xs-4">
-            <div class="block-prediction">
-                <div class="prediction-data"></div>
-                <i class="spinner-prediction fa fa-spinner fa-spin"></i>
-            </div>
-        </div>
+    </div>
+    <div class="block-prediction">
+        <div class="prediction-data"></div>
+        <i class="spinner-prediction fa fa-spinner fa-spin"></i>
     </div>
 </div>
 @endsection

@@ -5,6 +5,7 @@
 html {
     height: 100%;
     min-width: 500px;
+    min-height: 700px;
 }
 body {
     position: relative;
@@ -58,8 +59,11 @@ body {
 
 .progress-prediction {
     position: relative;
-    padding-top: 25px;
+    float:left;
+    width: 60%;
+    padding-top: 10px;
     border-radius: 15px;
+
 }
 .spinner-prediction {
     position: absolute;
@@ -77,12 +81,9 @@ body {
     margin-bottom: 30px;
 }
 .block-prediction {
-    position: relative;
-    z-index: -1;
-    width: 100%;
-    height: 450px;
-    margin: 0 auto;
-    padding: 30px;
+    float: right;
+    width: 35%;
+    height: 460px;
     background: #eee;
     border-radius: 15px;
 }
@@ -142,11 +143,13 @@ body {
 .tab-content {
     width: 100%;
 }
-@media screen and (max-width: 769px) {
-    .loader {
-        margin-left: 550px;
+@media screen and (max-width: 1200px) {
+    .btn-prediction {
+        margin-right: 35px;
+        margin-bottom: 15px;
     }
 }
+
 @media screen and (max-width: 992px) {
     .ML-tables-content {
         margin-top: 40px;
@@ -156,34 +159,69 @@ body {
     .footer {
         position: fixed;
     }
-    .loader {
-        margin-left: 360px;
-        width: 40px;
-        height: 40px;
+    .form-horizontal .control-label {
+        text-align: left !important;
+    }
+    .prediction-type {
+        display: none;
+    }
+    .loader{
+        margin-left: 250px;
     }
 }
-@media screen and (max-width: 769px) {
+
+@media screen and (max-width: 880px) {
+    .back-to-top {
+        opacity: 0.5;
+    }
+    .submit-button {
+        margin-left: 60px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .ML-tables-content {
         margin-top: 200px;
         width: 100%;
         margin-bottom: 25px;
     }
-    .loader {
-        margin-left: 200px;
-        width: 40px;
-        height: 40px;
-    }
     .back-to-top {
         padding: 5px 10px;
         font-size: 12px;
         line-height: 1.5;
-        border-radius: 3px
+        border-radius: 3px;
+        
     }
     .table-scroll {
         margin-top: 200px;
         position: absolute;
         width: 100%;
         margin-bottom: 25px;
+    }
+    .loader{
+        margin-left: 25px;
+    }
+    .table{
+        width: 96%;
+        margin-left: 2%; 
+
+    }
+    .btn-prediction {
+        margin-right: 8%;
+
+    }
+    .block-prediction {
+    width: 90%;
+    height: 170px;
+    margin-right: 30px;
+    margin-bottom: 90px;
+    background: #eee;
+    border-radius: 15px;
+    }
+    .progress-prediction{
+        margin-left: 4%;
+        margin-right: 4%;
+        width: 96%
     }
 }
 /***************************************
@@ -241,22 +279,7 @@ body {
     left: 15px;
     display: none;
 }
-@media screen and (max-width: 880px) {
-    .back-to-top {
-        opacity: 0.5;
-    }
-    .submit-button {
-        margin-left: 60px;
-    }
-}
-@media screen and (max-width: 992px) {
-    .form-horizontal .control-label {
-        text-align: left !important;
-    }
-    .prediction-type {
-        display: none;
-    }
-}
+
 .jGrowl {
     margin-top: 50px;
 }
@@ -382,7 +405,7 @@ body {
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;
-    margin-left: 545px;
+    float: center;
 }
 @keyframes spin {
     0% {
