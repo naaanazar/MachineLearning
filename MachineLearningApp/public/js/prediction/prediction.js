@@ -14,6 +14,7 @@ $(document).ready(function() {
     // prediction: send form
     $('.form-prediction').on('submit', function(e) {
         e.preventDefault();
+        $('body,html').animate({scrollTop: top}, "slow");
         addPredictionProgress();
         $.ajaxSetup({
             headers: {
