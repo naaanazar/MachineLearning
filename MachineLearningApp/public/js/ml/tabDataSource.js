@@ -23,6 +23,40 @@ $(document).ready(function() {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
+        var resp = '';
+        $('input#DataSourceName').unbind().blur( function(){
+            var id = $(this).attr('id');
+            var val = $(this).val();
+            $(this).closest('div').find('span').addClass('hide');
+
+            switch(id)
+            {
+                case 'DataSourceName':
+                    var rv_name = /^[a-zA-Zа-яА-Я]{1,40}$/;
+
+                    if(val.length > 2 && val != '' && rv_name.test(val))
+                    {
+                        $(this).removeClass('error').addClass('not_error');
+                        $(this).closest('div').removeClass('has-error');
+                        $(this).closest('div').addClass('has-success has-feedback');
+                        $(this).closest('div').find('span').removeClass('hide');
+resp = 'OK';
+
+                    }
+                    else
+                    {
+                        $(this).removeClass('not_error').addClass('error');
+                        $(this).closest('div').addClass('has-error has-feedback');
+                        $(this).closest('div').find('span').addClass('hide');
+                        resp = 'Not Ok';
+                    }
+                    break;
+            }
+
+        });
+
+console.log(resp);
+if (resp == 'OK'){
         $.get("/ml/select-S3objects", function(response){
             var  result;
             for (var key in response.data) {
@@ -30,6 +64,9 @@ $(document).ready(function() {
             }
             $('#SelectDataLocationS3').html(result);
         });
+             }else {
+                $(this).closest('form').find('button').addClass('disabled');
+        }
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {

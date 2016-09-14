@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4">
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 for-mobile">
                 <div id="ml-button-create">
                 </div>
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
@@ -40,6 +40,7 @@
                                 <label for="DataSourceName">Data source name</label>
                                 <input type="text" class="form-control" id="DataSourceName"
                                        placeholder="Data source name" name="DataSourceName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
                                 <label for="SelectDataLocationS3">Data location S3</label>
@@ -60,10 +61,11 @@
                                            name="DataRearrangementEnd">
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-primary submit-button">Submit</button>
                         </form>
-                    </div>
-                    <div class="container-describeDataSources">
+
+                    <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
                 </div>
                 <div id="describeMLModels" class="tab-pane fade">
@@ -93,7 +95,7 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-                    <div class="container-describeMLModels">
+                    <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
                     </div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
@@ -106,6 +108,8 @@
                                 <label for="EvaluationName">Evaluation name</label>
                                 <input type="text" class="form-control" id="EvaluationName"
                                        placeholder="Evaluation name" name="EvaluationName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                <span id="inputSuccess3Status" class="sr-only">(success)</span>
                             </div>
                             <div class="form-group">
                                 <label for="SelectMLModelId">ML model id</label>
@@ -119,41 +123,40 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+
                     </div>
-                    <div class="container-describeEvaluations">
+                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
                     </div>
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <form class="create-bath-descriptions-form" style="display:none;" method="post"
+                       <form class="create-bath-predictios-form" style="display:none;" method="post"
                               action="ml/create-batch-prediction">
                             <br>
                             {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="BatchPredictionName">Batch prediction name</label>
-                                <input type="text" class="form-control" id="BatchPredictionName"
-                                       placeholder="Batch prediction name" name="BatchPredictionName">
-                            </div>
+
                             <div class="form-group">
                                 <label for="SelectBathMLModel">ML model id</label>
                                 <select class="form-control" id="SelectBathMLModel" name="MLModelId">
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="SelectBathDataSource">Batch prediction data source id</label>
-                                <select class="form-control" id="SelectBathDataSource" name="DataSourceId">
-                                </select>
+                                <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
+                                    <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file-source" type="file" name="file">
+                                </label>
+                                <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+
                     </div>
-                    <div class="container-describeBatchPredictions">
+                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
+    
     <br>
     <div id="modal" class="modal">
         <div class="modal-dialog">
