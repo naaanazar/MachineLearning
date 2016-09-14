@@ -33,16 +33,19 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
-        listDataSource();
+        if(!$('.container-describeDataSources').hasClass('loaded')) {
+            listDataSource();
+        }
      });
 
-    //loading data
-    $('#describeDataSourcesContent').on('click', function() {
-        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    });
+//    //loading data
+//    $('#describeDataSourcesContent').on('click', function() {
+//        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+//    });
 
     function listDataSource() {
 
+        $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
         $('#ml-button-create').html(button);
 
@@ -86,6 +89,7 @@ $(document).ready(function() {
                             res += '</table>';
 
             $('.container-describeDataSources').html(res);
+            $('.container-describeDataSources').addClass('loaded');
         });
     };
 });
