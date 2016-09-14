@@ -30,8 +30,8 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
         $this->driver->get('http://laravel:3080/bucket');
 
-        $Predictions = $this->driver->findElement(WebDriverBy::xpath("//nav//div[2]/ul/li[1]/a"));
-        $Predictions->click();
+        $predictions = $this->driver->findElement(WebDriverBy::xpath("//a[.='Predictions']"));
+        $predictions->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::titleIs("Crowdin Space Machine Learning App"));
         $this->assertEquals('http://laravel:3080/predictions', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки
@@ -45,8 +45,8 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
         $this->driver->get('http://laravel:3080');
 
-        $Predictions = $this->driver->findElement(WebDriverBy::xpath("//nav//div[2]/ul/li[2]/a"));
-        $Predictions->click();
+        $ml = $this->driver->findElement(WebDriverBy::xpath("//a[.='ML']"));
+        $ml->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::titleIs("Crowdin Space Machine Learning App"));
         $this->assertEquals('http://laravel:3080/ml', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки
@@ -60,8 +60,8 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
         $this->driver->get('http://laravel:3080');
 
-        $Predictions = $this->driver->findElement(WebDriverBy::xpath("//nav//div[2]/ul/li[3]/a"));
-        $Predictions->click();
+        $listS3 = $this->driver->findElement(WebDriverBy::xpath("//a[.='List S3']"));
+        $listS3->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::titleIs("Crowdin Space Machine Learning App"));
         $this->assertEquals('http://laravel:3080/s3/list', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки
@@ -75,8 +75,8 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
         $this->driver->get('http://laravel:3080');
 
-        $Predictions = $this->driver->findElement(WebDriverBy::xpath("//nav//div[2]/ul/li[4]/a"));
-        $Predictions->click();
+        $generator = $this->driver->findElement(WebDriverBy::xpath("//a[.='Generator']"));
+        $generator->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::titleIs("Crowdin Space Machine Learning App"));
         $this->assertEquals('http://laravel:3080/generator', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки
@@ -90,8 +90,8 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
         $this->driver->get('http://laravel:3080');
 
-        $Predictions = $this->driver->findElement(WebDriverBy::xpath("//nav//div[2]/ul/li[5]/a"));
-        $Predictions->click();
+        $buckets = $this->driver->findElement(WebDriverBy::xpath("//a[.='Buckets']"));
+        $buckets->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::titleIs("Crowdin Space Machine Learning App"));
         $this->assertEquals('http://laravel:3080/bucket', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки

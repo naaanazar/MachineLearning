@@ -27,7 +27,6 @@ $(document).ready(function() {
         $(selector).append('<div class="alert alert-danger upload-message-s3">' +
             '<ul><li><strong>Error! File is not loaded to S3!</strong>' +
             '</li></ul></div>').show('slow').hide(4000);
-
     }
 
     $(document).on('click', '.btn-delete', function(e) {
@@ -107,8 +106,8 @@ $(document).ready(function() {
             }
         });
 
-        var formData = $(this).serialize();
-        var formAction = $(this).attr('action');
+        var formData   = $(this).serialize();
+        // var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
 
         function formPredict() {
@@ -147,43 +146,44 @@ $(document).ready(function() {
     }
 
     // prediction: validation form
-    function predValOne(selector) {
-        $('.form-prediction').on('input', selector, function(e) {
+
+    function errorPred(data) {
+        var content = '<div class="alert alert-danger pred-alert">'
+                    + '<ul><li><strong>' + data + '</strong>'
+                    + '</li></ul></div>';
+
+        return content;
+    }
+
+    function realTimePredictionValidation(selector, length, regexp, message) {
+        $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
-            var regExp = new RegExp("[^0-1]", "g");
+            var error = selector + " + .pred-error";
+            var regExp = new RegExp(regexp, "g");
             value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, 1));
-        });
-    }
-
-    function predValTwo(selector, length) {
-        $('.form-prediction').on('input', selector, function(e) {
-            var value = $(e.target).val();
-            var regExp = new RegExp("[^0-9]", "g");
-            var value = value.replace(regExp, "");
             $(selector).val(value.substr(0, length));
+            $(selector).focusout(function(event) {
+                $(error).fadeOut('slow');
+            });
+            if (!value.replace(regExp, "")) {
+                $(error).fadeIn('slow');
+                $(error).html(errorPred(message));
+            } else {
+                $(error).fadeOut('slow');
+            }
         });
     }
 
-    function predValCountry(selector, length) {
-        $('.form-prediction').on('input', selector, function(e) {
-            var value = $(e.target).val();
-            var regExp = new RegExp("^ |[^a-zA-Z ]", "g");
-            var value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
-        });
-    }
-
-    predValOne("#email");
-    predValOne("#has-privat-project");
-    predValOne("#same-log-project");
-    predValTwo("#same-email", 10);
-    predValTwo("#projects-count", 10);
-    predValTwo("#string-count");
-    predValTwo("#string-count", 10);
-    predValTwo("#members-count", 10);
-    predValTwo("#last-login", 10);
-    predValCountry("#country", 60)
+    realTimePredictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
+    realTimePredictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
+    realTimePredictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
+    realTimePredictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
+    realTimePredictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
 
     //modal window ML
     $(document).on("click", '.datasource-info', function(event) {
