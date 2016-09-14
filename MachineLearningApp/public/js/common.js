@@ -102,17 +102,3 @@ $(document).ready(function() {
     }
 });
 
-    $(document).ready(function() {
-        $('.afretclickremove').click(function () {
-            var $ref = $(this);
-            var name = $ref.text();
-            $('table').remove();
-            $.post(
-                's3/list' + name,
-                name,
-                function () {
-                    
-                }
-            )
-        });
-    });

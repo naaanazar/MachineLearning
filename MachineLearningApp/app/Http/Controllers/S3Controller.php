@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use GuzzleHttp\Message\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Library\Pagination\Pagination as S3Pagination;
@@ -118,6 +119,6 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return view('s3.list', ['results' => $paginatedSearchResults]);
+        return response()->json($results);
     }
 }

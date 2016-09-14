@@ -9,11 +9,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+use App\Http\Controllers\S3Controller;
+use Aws;
 
 class BucketController extends Controller
 {
     public $bucket = 'ml-datasets-test';
     public $newBucketName = 'ml-datasets-testing';
+    public $s3;
+    private $s3Client;
+
+    public function __construct()
+    {
+        $this->s3Client = $this->connect();
+    }
 
     public function index()
     {
@@ -46,6 +55,31 @@ class BucketController extends Controller
             echo $e->getMessage() . "\n";
         }
         return view('bucket.listBucket', ['results' => $result['Buckets']]);
+    }
+
+    public function allBuckets() {
+        $client = $this->connect();
+
+        try {
+            $result = $client->listBuckets([
+            ]);
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return $result['Buckets'];
+    }
+
+    public function bucketStruct()
+    {
+        $objects = $this->getIterator('ListObjects', array(
+            'Bucket' => $this->bucket,
+            'Prefix' => 'files/'
+        ));
+
+        foreach ($objects as $object) {
+            echo $object['Key'] . "\n";
+        }
     }
 
 

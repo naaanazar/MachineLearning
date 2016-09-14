@@ -20,7 +20,15 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-                <br>
+                <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@upload') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
+                            <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">
+                        </label>
+                        <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
+                    </div>
+                </form>
             </div>
 
             <br>
@@ -62,33 +70,31 @@
 
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <table class="table table-bordered table-font text-center">
+                    <table class="table table-bordered table-font text-center" id="myTable">
                         <tr class="active">
                             <td>Id</td>
                             <td>Name</td>
-                            <td>Delete bucket</td>
-                            <td>Delete all files</td>
+                            <td>Size</td>
+                            <td>Last modified/Create</td>
+                            <td>Delete bucket/Delete all files</td>
 
                         </tr>
 
                         @foreach($results as $key => $value)
-                            <tr>
+                            <tr class="content">
                                 <td>{{ ++$key }}</td>
-                                <td class="afretclickremove">{{ $value['Name'] }}</td>
-                                <td><a class="btn btn-danger btn-sm btn-list"
+                                <td class="reference">{{ $value['Name'] }}</td>
+                                <td>0</td>
+                                <td>{{ $value['CreationDate'] }}</td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm btn-list"
                                        href="/bucket/delete/{{ $value['Name'] }}"
                                        id="delete-{{ $key }}"><span
-                                                class="glyphicon glyphicon-trash"></span></a></td>
-                                <td><a class="btn btn-danger btn-sm btn-list"
+                                                class="glyphicon glyphicon-trash"></span></a>
+                                    <a class="btn btn-danger btn-sm btn-list"
                                        href="bucket/delete_all/{{ $value['Name'] }}"><span class="glyphicon"></span>Delete
-                                        all files in bucket</a></td>
-                                {{--<td>--}}
-                                {{--<a class="btn btn-default btn-sm"--}}
-                                {{--href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span--}}
-                                {{--class="glyphicon glyphicon-download"></span></a>--}}
-                                {{--<a class="btn btn-danger btn-sm btn-list" href="/s3/delete/{{ $value['Key'] }}"><span--}}
-                                {{--class="glyphicon glyphicon-trash"></span></a>--}}
-                                {{--</td>--}}
+                                        all files</a>
+                                </td>
                             </tr>
                         @endforeach
                         <div class="pagination-list">

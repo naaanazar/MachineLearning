@@ -190,3 +190,7 @@ body {
 .jgrowl-success {
     background-color: green !important;
 }
+
+.reference:hover {
+    cursor: pointer;
+}

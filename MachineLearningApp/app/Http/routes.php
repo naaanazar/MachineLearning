@@ -37,9 +37,13 @@ Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPredicti
 Route::get('generator', 'GeneratorController@index');
 Route::post('generate', 'GeneratorController@generateDataset');
 
+Route::get('bucket/allbuckets', 'BucketController@bucketStruct');
 //Buckets
 Route::get('bucket/delete/{name_bucket}', 'BucketController@deleteBucket');
 Route::get('bucket/delete_all/{name_bucket}', 'BucketController@deleteAllObjectsFromBucket');
 Route::get('bucket', 'BucketController@index');
 Route::get('bucket', 'BucketController@listOfBuckets');
 Route::post('bucket/create_bucket', 'BucketController@createBucket');
+
+
+
