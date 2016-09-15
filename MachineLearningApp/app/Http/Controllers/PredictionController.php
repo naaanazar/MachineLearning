@@ -61,16 +61,16 @@ class PredictionController extends Controller
     public function doPredict(Request $request)
     {
         $this->validate($request, [
-            'country' => 'required|string',
+            'country' => 'required|string|max:60',
             'ml_model_id' => 'required',
-            'strings_count' => 'required|integer',
-            'members_count' => 'required|integer',
-            'projects_count' => 'required|integer',
-            'email_custom_domain' => 'required|integer',
-            'has_private_project' => 'required|integer',
-            'days_after_last_login' => 'required|integer',
-            'same_email_domain_count' => 'required|integer',
-            'same_login_and_project_name' => 'required|integer',
+            'strings_count' => 'required|integer|min:0|max:10000000000',
+            'members_count' => 'required|integer|min:0|max:10000000000',
+            'projects_count' => 'required|integer|min:0|max:10000000000',
+            'email_custom_domain' => 'required|integer|digits_between:0,1',
+            'has_private_project' => 'required|integer|digits_between:0,1',
+            'days_after_last_login' => 'required|integer|min:0|max:10000000000',
+            'same_email_domain_count' => 'required|integer|min:0|max:10000000000',
+            'same_login_and_project_name' => 'required|integer|digits_between:0,1',
         ]);
 
         $country = $request->input('country');

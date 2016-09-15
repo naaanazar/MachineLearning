@@ -4,10 +4,6 @@ $(document).ready(function () {
         listDataSource();
     }
 
-    if (window.location.hash == '#describeDataSources') {
-        listDataSource();
-    }
-
     listDataSource();
 
     $('.create-datasource-form').submit(function (e) {

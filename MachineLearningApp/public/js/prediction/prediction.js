@@ -14,7 +14,7 @@ $(document).ready(function() {
     // prediction: send form
     $('.form-prediction').on('submit', function(e) {
         e.preventDefault();
-        $('body,html').animate({scrollTop: top}, "slow");
+        $('html, body').animate({scrollTop:0}, '500', 'swing');
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': $('meta[name="_token"]').attr('content')
@@ -81,7 +81,7 @@ $(document).ready(function() {
             if (empty) {
                 $('.btn-pred').attr('disabled', 'disabled');
             } else {
-                $('.btn-pred').attr('disabled', false);
+                 $('.btn-pred').removeAttr('disabled');
             }
         });
     }
@@ -100,7 +100,6 @@ $(document).ready(function() {
             if (newValue.length > lengthVal) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred("Length no more " + lengthVal));
-                $(error).fadeOut('slow');
             } else if (!newValue) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred(message));
