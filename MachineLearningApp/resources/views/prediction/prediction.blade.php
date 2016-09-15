@@ -5,7 +5,7 @@
 <div class="container">
     <h3 class="title">Real time prediction</h3>
     <div class="main-prediction clearfix">
-        <div class="col-lg-8 col-md-8 col-ms-8 col-xs-8 col-md-offset-2">
+        <div class="col-lg-8 col-md-8 col-ms-12 col-xs-12 col-md-offset-2">
             <div class="block-prediction clearfix">
                 <div class="prediction-data"></div>
                 <i class="spinner-prediction fa fa-spinner fa-spin"></i>
@@ -13,7 +13,7 @@
             <form class="form-horizontal form-prediction" method="post" action="{{ action('PredictionController@doPredict') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="ml_model_id" class="control-label label-pred">ML model</label>
+                    <label for="ml_model_id" class="control-label label-pred ML-model">ML model</label>
                     <select class="form-control input-pred" id="ml_model_id" name="ml_model_id"></select>
                 </div>
                 <hr>
@@ -63,7 +63,7 @@
                     <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-primary btn-lg btn-pred" value="Send" type="submit">
+                    <input class="btn btn-primary btn-lg btn-pred" value="Send" type="submit" disabled>
                 </div>
             </form>
         </div>
