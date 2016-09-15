@@ -95,25 +95,6 @@ $(document).ready(function() {
         }
     });
 
-//    //loading data
-//    $('#describeBatchPredictionsContent').on('click', function() {
-//        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-//    });
-
-//    $(document).on('click', '.download-batch-result', function (e) {
-//       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
-//       $.get('/s3/file-exists', {
-//           name: encodeURI($(this).data('download-path')) }, function (response) {
-//            if (response.data == true ) {
-//                window.location = url;
-//            } else {
-//                $.jGrowl('File not exists', {
-//                    theme: 'jgrowl-danger'
-//                });
-//            }
-//
-//       });
-//    });
 
     function listBatchPrediction() {
         $('.container-describeBatchPredictions').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
