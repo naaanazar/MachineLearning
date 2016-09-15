@@ -95,8 +95,10 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeBatchPredictionsContent', function() {
-        if (!$('.container-describeBatchPredictions').hasClass('loaded')) {
+    $(document).on("click", '#describeBatchPredictionsContent', function () {
+        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
+        $('#ml-button-create').html(button);
+        if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
             listBatchPrediction();
         }
     });
@@ -108,8 +110,8 @@ $(document).ready(function() {
 
     function listBatchPrediction() {
         $('.container-describeBatchPredictions').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
-        $('#ml-button-create').html(button);
+//        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
+//        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-batch-prediction", function(response) {
             var i = 1;
