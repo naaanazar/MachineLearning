@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use URL;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
 
@@ -543,101 +545,6 @@ class MLController extends Controller
         }
         dd($result);
         return $result;
-    }
-
-   
-    public function createRealtimeEndpoint($MLModelId)
-    {
-
-        $client = $this->connectToML();
-
-        try {
-            $result = $client->createRealtimeEndpoint([
-                'MLModelId' => $MLModelId // REQUIRED
-            ]);
-
-        } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
-        }
-
-        return $result;
-    }
-
-    public function deleteRealtimeEndpoint($MLModelId)
-    {
-
-        try {
-            $result = $this->client->deleteRealtimeEndpoint([
-                'MLModelId' => $MLModelId, // REQUIRED
-            ]);
-
-        } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
-        }
-    }
-
-    public function predict(Request $request)
-    {
-        $country = $request->input('country');
-        $MLModelId = $request->input('ml_model_id');
-        $stringsCount = $request->input('strings_count');
-        $membersCount = $request->input('members_count');
-        $projectCount = $request->input('projects_count');
-        $emailCustomDomain = $request->input('email_custom_domain');
-        $hasPrivateProject = $request->input('has_private_project');
-        $daysAfterLastLogin = $request->input('days_after_last_login');
-        $sameEmailDomainCount = $request->input('same_email_domain_count');
-        $sameLoginAndProjectName = $request->input('same_login_and_project_name');
-
-        $endPoint = $this->createRealtimeEndpoint($MLModelId);
-
-        $endpointStatus  = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
-        $predictEndpoint = $endPoint["RealtimeEndpointInfo"]["EndpointUrl"];
-
-        if ($endpointStatus != 'READY') {
-            $status = 'Updating';
-            return $status;
-        } else {
-            try {
-                $result = $this->client->predict([
-                    'MLModelId'       => $MLModelId,
-                    'PredictEndpoint' => $predictEndpoint,
-                    'Record' => [
-                        "country" => $country,
-                        "members_count" => $membersCount,
-                        "strings_count" => $stringsCount,
-                        "projects_count" => $projectCount,
-                        "has_private_project" => $hasPrivateProject,
-                        "email_custom_domain" => $emailCustomDomain,
-                        "days_after_last_login" => $daysAfterLastLogin,
-                        "same_email_domain_count" => $sameEmailDomainCount,
-                        "same_login_and_project_name" => $sameLoginAndProjectName,
-                    ]
-                ]);
-
-            } catch (MachineLearningException $e) {
-                echo $e->getMessage() . "\n";
-            }
-
-            $predictedLabel = $result["Prediction"]["predictedLabel"];
-            $predictedScores = $result["Prediction"]["predictedScores"];
-            $details = $result["Prediction"]["details"];
-            $preScores = $predictedScores[0];
-            $algorithm = $details["Algorithm"];
-            $modelType = $details["PredictiveModelType"];
-
-            $output = "<section class='pred-data'><h1 class='text-center'>Result</h1>"
-                    . "<h4><strong>Prediction: </strong>" . $predictedLabel . "</h4>"
-                    . "<h4><strong>Predicted Scores: </strong>" . $preScores . "</h4>"
-                    . "<h4><strong>Algorithm: </strong>" . $algorithm . "</h4>"
-                    . "<h4><strong>Model Type: </strong>" . $modelType . "</h4>"
-                    . "</section>";
-
-            $this->deleteRealtimeEndpoint($MLModelId);
-
-            if($request->ajax()) return $output;
-            else return false;
-        }
     }
 
     public function updateDataSource($DataSourceId)
