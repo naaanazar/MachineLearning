@@ -4,10 +4,6 @@ $(document).ready(function () {
         listDataSource();
     }
 
-    if (window.location.hash == '#describeDataSources') {
-        listDataSource();
-    }
-
     listDataSource();
 
     $('.create-datasource-form').submit(function (e) {
@@ -103,6 +99,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
+        var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
+        $('#ml-button-create').html(button);
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }

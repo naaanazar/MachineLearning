@@ -4,7 +4,7 @@
 
 html {
     height: 100%;
-    min-width: 500px;
+    min-width: 530px;
     min-height: 700px;
 }
 body {
@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding-bottom: 70px;
     min-height: 100%;
-    min-width: 500px;
+    min-width: 530px;
 }
 .footer {
     position: absolute;
@@ -25,7 +25,6 @@ body {
     font-weight: bold;
     font-size: 13px;
 }
-
 /***************************************
     S3 Style
 ***************************************/
@@ -55,7 +54,6 @@ body {
     float: right;
     margin: 3px 10px;
 }
-
 /***************************************
     Prediction
 ***************************************/
@@ -63,12 +61,11 @@ body {
 .main-prediction {
     position: relative;
     margin-top: -46px;
-    float:left;
+    float: left;
     width: 100%;
     padding-top: 10px;
     border-radius: 15px;
 }
-
 .spinner-prediction {
     position: absolute;
     top: 18%;
@@ -81,26 +78,19 @@ body {
     position: relative;
     margin-top: 82px;
 }
-
 .label-pred {
     float: left;
     width: 30%;
     margin-right: 20px;
     text-align: left;
 }
-
 .input-pred {
     width: 50%;
 }
-
 .btn-pred {
     width: 50%;
     float: right;
-    margin-right: 130px;
-}
-.btn-prediction {
-    margin-right: 61px;
-    margin-bottom: 30px;
+    margin-right: 17%;
 }
 .block-prediction {
     position: relative;
@@ -115,8 +105,8 @@ body {
     background: #eee;
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
 .pred-error {
     position: relative;
@@ -129,10 +119,9 @@ body {
     width: 30%;
     padding: 6px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
-
 /***************************************
     Tables
 ***************************************/
@@ -175,12 +164,10 @@ body {
     width: 100%;
 }
 @media screen and (max-width: 1200px) {
-    .btn-prediction {
-        margin-right: 35px;
-        margin-bottom: 15px;
+    .block-prediction {
+        margin-right: 90px;
     }
 }
-
 @media screen and (max-width: 992px) {
     .ML-tables-content {
         margin-top: 40px;
@@ -190,17 +177,22 @@ body {
     .footer {
         position: fixed;
     }
-    .form-horizontal .control-label {
+    .control-label {
         text-align: left !important;
     }
     .prediction-type {
         display: none;
     }
-    .loader{
-        margin-left: 250px;
+    .block-prediction {
+        margin-right: 110px;
+    }
+    .form-group {
+        margin-left: 0px;
+    }
+    .main-prediction {
+        margin-top: 80px;
     }
 }
-
 @media screen and (max-width: 880px) {
     .back-to-top {
         opacity: 0.5;
@@ -209,8 +201,7 @@ body {
         margin-left: 60px;
     }
 }
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .ML-tables-content {
         margin-top: 200px;
         width: 100%;
@@ -221,7 +212,6 @@ body {
         font-size: 12px;
         line-height: 1.5;
         border-radius: 3px;
-        
     }
     .table-scroll {
         margin-top: 200px;
@@ -229,30 +219,13 @@ body {
         width: 100%;
         margin-bottom: 25px;
     }
-    .loader{
-        margin-left: 25px;
-    }
-    .table{
+    .table {
         width: 96%;
-        margin-left: 2%; 
-
-    }
-    .btn-prediction {
-        margin-right: 8%;
-
+        margin-left: 2%;
     }
     .block-prediction {
-    width: 90%;
-    height: 170px;
-    margin-right: 30px;
-    margin-bottom: 90px;
-    background: #eee;
-    border-radius: 15px;
-    }
-    .progress-prediction{
-        margin-left: 4%;
-        margin-right: 4%;
-        width: 96%
+        width: 51%;
+        margin-right: 15%
     }
 }
 /***************************************
@@ -307,7 +280,6 @@ body {
     left: 15px;
     display: none;
 }
-
 .jGrowl {
     margin-top: 50px;
 }
@@ -427,13 +399,17 @@ body {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 .loader {
-    border: 8px solid #f3f3f3;/* Light grey */
-    border-top: 8px solid #3498db;/* Blue */
+    border: 8px solid #f3f3f3;
+    /* Light grey */
+    
+    border-top: 8px solid #3498db;
+    /* Blue */
+    
     border-radius: 50%;
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;
-    float: center;
+    margin-left: 45%;
 }
 @keyframes spin {
     0% {

@@ -14,8 +14,7 @@ $(document).ready(function() {
     // prediction: send form
     $('.form-prediction').on('submit', function(e) {
         e.preventDefault();
-        $('body,html').animate({scrollTop: top}, "slow");
-        addPredictionProgress();
+        $('html, body').animate({scrollTop:0}, '500', 'swing');
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': $('meta[name="_token"]').attr('content')
@@ -25,6 +24,8 @@ $(document).ready(function() {
         var formData   = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
+
+        addPredictionProgress();
 
         function formPredict() {
             $.ajax({
@@ -68,34 +69,56 @@ $(document).ready(function() {
         return content;
     }
 
-    function realTimePredictionValidation(selector, length, regexp, message) {
+    function predDisabledBtn() {
+        $('.input-pred').on('keyup mouseenter', function() {
+           var empty = false;
+            $('.input-pred').each(function() {
+                var value = $(this).val() === null ? 0 : $(this).val().length;
+                if (value === 0) {
+                    empty = true;
+                }
+            });
+            if (empty) {
+                $('.btn-pred').attr('disabled', 'disabled');
+            } else {
+                 $('.btn-pred').removeAttr('disabled');
+            }
+        });
+    }
+
+    function predictionValidation(selector, lengthVal, regexp, message) {
         $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
             var error = selector + " + .pred-error";
             var regExp = new RegExp(regexp, "g");
-            value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
+            var newValue = value.replace(regExp, "");
+            $(selector).val(newValue.substr(0, lengthVal));
             $(selector).focusout(function(event) {
                 $(error).fadeOut('slow');
             });
-            if (!value.replace(regExp, "")) {
+
+            if (newValue.length > lengthVal) {
+                $(error).fadeIn('slow');
+                $(error).html(errorPred("Length no more " + lengthVal));
+            } else if (!newValue) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred(message));
-            } else {
+            } else if (newValue) {
                 $(error).fadeOut('slow');
             }
         });
     }
 
-    realTimePredictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
-    realTimePredictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
-    realTimePredictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-    realTimePredictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
+    predDisabledBtn();
+    predictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
+    predictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
+    predictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
+    predictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
 
 });

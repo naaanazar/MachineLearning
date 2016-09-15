@@ -75,9 +75,10 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeEvaluationsContent', function() {
-
-        if (!$('.container-describeEvaluations').hasClass('loaded') ) {
+    $(document).on("click", '#describeEvaluationsContent', function () {
+        var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
+        $('#ml-button-create').html(button);
+        if(!$('.container-describeEvaluations').hasClass('loaded')) {
             listEvaluations();
         }
     });
@@ -89,8 +90,8 @@ $(document).ready(function() {
 
     function listEvaluations() {
         $('.container-describeEvaluations').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
-        $('#ml-button-create').html(button);
+//        var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
+//        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-evaluations", function(response) {
             var i = 1;

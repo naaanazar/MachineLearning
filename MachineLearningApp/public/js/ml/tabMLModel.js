@@ -65,8 +65,10 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeMLModelsContent', function() {
-        if (!$('.container-describeMLModels').hasClass('loaded')) {
+    $(document).on("click", '#describeMLModelsContent', function () {
+        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
+        $('#ml-button-create').html(button);
+        if(!$('.container-describeMLModels').hasClass('loaded')) {
             listMLModel();
         }
     });
@@ -79,8 +81,8 @@ $(document).ready(function() {
     function listMLModel() {
 
         $('.container-describeMLModels').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
-        $('#ml-button-create').html(button);
+//        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
+//        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-ml-model", function(response) {
             var i = 1;
