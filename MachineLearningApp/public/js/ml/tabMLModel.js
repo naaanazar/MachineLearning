@@ -1,60 +1,64 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     if (window.location.hash == '#describeMLModels') {
         listMLModel();
     }
 
-    $('.create-mlmodel-form').submit(function(e) {
+    $('.create-mlmodel-form').submit(function (e) {
         e.preventDefault();
         $.ajax({
             type: "post",
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
-            success: function(data) {
+            success: function (data) {
                 $(".create-mlmodel-form").toggle();
                 $(".container-describeMLModels").toggle();
                 listMLModel();
                 console.log(data);
             },
-            error: function() {},
+            error: function () {
+            },
         });
     });
 
-    $(document).on("click", ".btn-create-mlmodel", function() {
+    $(document).on('blur', '.form-control', function (e) {
+        var id = e.target.id;
+        var val = e.target.value;
+        $(this).closest('div').find('span').addClass('hide');
+
+        switch (id) {
+            case 'MLModelName':
+                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+
+                if (val.length > 2 && val != '' && rv_name.test(val)) {
+                    $(this).removeClass('error').addClass('not_error');
+                    $(this).closest('div').removeClass('has-error');
+                    $(this).closest('div').addClass('has-success has-feedback');
+                    $(this).closest('div').find('span').removeClass('hide');
+
+                }
+                else {
+                    $(this).removeClass('not_error').addClass('error');
+                    $(this).closest('div').addClass('has-error has-feedback');
+                    $(this).closest('div').find('span').addClass('hide');
+                }
+                break;
+
+        }
+        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
+            $(this).closest('form').find('button').addClass('disabled');
+        } else {
+            $(this).closest('form').find('button').removeClass('disabled');
+        }
+
+
+    });
+    $(document).on("click", ".btn-create-mlmodel", function () {
         $('.create-mlmodel-form').toggle();
         $(".container-describeMLModels").toggle();
 
-        $(document).on('blur', '.form-control', function (e) {
-            $(e.target).blur(function () {
-                console.log(e.target.value);
-                var id = e.target.id;
-                var val = e.target.value;
-                $(this).closest('div').find('span').addClass('hide');
 
-                switch (id) {
-                    case 'MLModelName':
-                        var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                        if (val.length > 2 && val != '' && rv_name.test(val)) {
-                            $(this).removeClass('error').addClass('not_error');
-                            $(this).closest('div').removeClass('has-error');
-                            $(this).closest('div').addClass('has-success has-feedback');
-                            $(this).closest('div').find('span').removeClass('hide');
-
-                        }
-                        else {
-                            $(this).removeClass('not_error').addClass('error');
-                            $(this).closest('div').addClass('has-error has-feedback');
-                            $(this).closest('div').find('span').addClass('hide');
-                        }
-                        break;
-
-                }
-
-            });
-        });
-
-        $.get("/ml/select-data-source", function(response) {
+        $.get("/ml/select-data-source", function (response) {
             var result;
 
             for (var key in response.data) {
@@ -65,16 +69,16 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeMLModelsContent', function() {
+    $(document).on("click", '#describeMLModelsContent', function () {
         if (!$('.container-describeMLModels').hasClass('loaded')) {
             listMLModel();
         }
     });
 
-    //    //loading data
-    //    $('#describeMLModelsContent').on('click', function() {
-    //        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
+//    //loading data
+//    $('#describeMLModelsContent').on('click', function() {
+//        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+//    });
 
     function listMLModel() {
 
@@ -82,7 +86,7 @@ $(document).ready(function() {
         var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
         $('#ml-button-create').html(button);
 
-        $.get("/ml/describe-ml-model", function(response) {
+        $.get("/ml/describe-ml-model", function (response) {
             var i = 1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
@@ -131,4 +135,5 @@ $(document).ready(function() {
 
         });
     };
-});
+})
+;
