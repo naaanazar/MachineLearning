@@ -34,7 +34,6 @@ $(document).ready(function () {
 
         $(document).on('blur', '.form-control', function (e) {
             $(e.target).blur(function () {
-                console.log(e.target.value);
                 var id = e.target.id;
                 var val = e.target.value;
                 $(this).closest('div').find('span').addClass('hide');
