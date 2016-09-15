@@ -462,14 +462,19 @@ class MLController extends Controller
 
     public function createBatchPrediction(Request $request)
     {
+        $S3 = new S3Controller;
+        $client = $S3->getClient();
+        $client->registerStreamWrapper();
 
-        $S3 = New S3Controller;
-        $fileName = $S3->fileUpload($request);
-        sleep(2);
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $data = file_get_contents($file);
 
-        $DataSourceId = $this->createBatchDataSourceFromS3($fileName);
-        sleep(4);
+        $stream = fopen('s3://' . $this->bucket .'/' . $fileName , 'w');
+        fwrite($stream, $data);
+        fclose($stream);
 
+        $DataSourceId = $this->createBatchDataSourceFromS3($fileName);        
         $BatchPredictionId = 'bp-' . uniqid();
         $BatchPredictionName = $BatchPredictionId;
         $MLModelId = $request->input('MLModelId');
@@ -488,7 +493,7 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return response()->json(['data' => $result['BatchPredictionId']]);
+        return response()->json(['data' => '$result[BatchPredictionId]']);
     }
 
 

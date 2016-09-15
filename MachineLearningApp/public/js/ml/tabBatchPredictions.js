@@ -16,8 +16,7 @@ $(document).ready(function() {
        $(".create-bath-predictios-form").toggle();
        $(".container-describeBatchPredictions").toggle();
        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        e.preventDefault();
-      //  $('.preload-s3').show('fast').delay(4000).fadeOut(400);
+        e.preventDefault();    
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -26,10 +25,8 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function (response) {
-                console.log(response.data);
-                
-                listBatchPrediction();
-               
+                console.log(response.data);                
+                listBatchPrediction();               
             },
             error: function () {             
             },
@@ -96,11 +93,26 @@ $(document).ready(function() {
         if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
             listBatchPrediction();
         }
-     });
+    });
 
 //    //loading data
 //    $('#describeBatchPredictionsContent').on('click', function() {
 //        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+//    });
+
+//    $(document).on('click', '.download-batch-result', function (e) {
+//       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+//       $.get('/s3/file-exists', {
+//           name: encodeURI($(this).data('download-path')) }, function (response) {
+//            if (response.data == true ) {
+//                window.location = url;
+//            } else {
+//                $.jGrowl('File not exists', {
+//                    theme: 'jgrowl-danger'
+//                });
+//            }
+//
+//       });
 //    });
 
     function listBatchPrediction() {
@@ -127,7 +139,9 @@ $(document).ready(function() {
                 for (var key in response.data) {
                     i = i+1;
                     var date = response.data[key].LastUpdatedAt.replace('T', '  ');
+                    fileName = response.data[key].InputDataLocationS3.split('/').reverse()[0];
                     date = date.substring(0, date.indexOf('+'));
+                    path = response.data[key].OutputUri + 'batch-prediction/result/' +  response.data[key].BatchPredictionId + '-' + fileName + '.gz';
                     res +=
                         '<tr>' +
                            // '<td>' + response.data[key].BatchPredictionId + '</td>' +
@@ -146,7 +160,7 @@ $(document).ready(function() {
                                 '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                                    'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId + '">' +
                                     '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                                '<a class="btn btn-success btn-sm btn-list download-batch-result" href="#"><span class="glyphicon glyphicon-cloud-download"></span></a>&nbsp;' +
+                                '<a class="btn btn-success btn-sm btn-list download" href="#" data-download-path="' + path +'" ><span class="glyphicon glyphicon-cloud-download"></span></a>&nbsp;' +
                                 '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].BatchPredictionId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
 
                             '</td>' +
@@ -159,4 +173,6 @@ $(document).ready(function() {
             $('.container-describeBatchPredictions').addClass('loaded');
         });
     }
+
+
 });

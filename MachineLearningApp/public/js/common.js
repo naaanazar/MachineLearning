@@ -47,6 +47,21 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click', '.download', function (e) {
+       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+       $.get('/s3/file-exists', {
+           name: encodeURI($(this).data('download-path')) }, function (response) {
+            if (response.data == true ) {
+                window.location = url;
+            } else {
+                $.jGrowl('File not exists', {
+                    theme: 'jgrowl-danger'
+                });
+            }
+
+       });
+    });
+
     //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function (e) {
         console.log($(".form-upload"));

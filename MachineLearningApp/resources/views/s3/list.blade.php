@@ -36,7 +36,7 @@
                                 <td>{{ $value['Size'] }}</td>
                                 <td>{{ $value['LastModified'] }}</td>
                                 <td>
-                                    <a class="btn btn-default btn-sm" href="https://s3.amazonaws.com/ml-datasets-test/{{ $value['Key'] }}"><span class="glyphicon glyphicon-download"></span></a>
+                                    <a class="btn btn-default btn-sm download" data-download-path="s3://ml-datasets-test/{{ $value['Key'] }}"href="#do"><span class="glyphicon glyphicon-download"></span></a>
                                     <a class="btn btn-danger btn-sm btn-delete" href="#d" id ="{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>

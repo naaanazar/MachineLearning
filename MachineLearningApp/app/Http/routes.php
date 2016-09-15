@@ -25,6 +25,8 @@ Route::get('/s3/del/{name}', 'S3Controller@deleteF');
 Route::get('/s3/get', 'S3Controller@getFile');
 Route::get('/s3/d', 'S3Controller@del');
 
+Route::get('/s3/download-from-s3/', 'S3Controller@downloadFromS3');
+Route::get('/s3/file-exists/', 'S3Controller@fileExists');
 
 //ML
 Route::get('ml', 'MLController@index');
@@ -42,6 +44,7 @@ Route::post('ml/real-time-prediction', 'MLController@predict');
 
 Route::post('/ml/upload-batch-source', 'MLController@createBatchPrediction');
 Route::get('/ml/status-batch-data-source/{DataSourceId}', 'MLController@statusDataSource');
+
 
 Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');
 Route::get('/ml/delete-ml-model/{id}', 'MLController@deleteMLModel');
