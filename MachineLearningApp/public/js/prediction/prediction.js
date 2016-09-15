@@ -69,8 +69,24 @@ $(document).ready(function() {
         return content;
     }
 
-    function realTimePredictionValidation(selector, lengthVal, regexp, message) {
+    function predDisabledBtn() {
+        $('.input-pred').on('keyup mouseenter', function() {
+           var empty = false;
+            $('.input-pred').each(function() {
+                var value = $(this).val() === null ? 0 : $(this).val().length;
+                if (value === 0) {
+                    empty = true;
+                }
+            });
+            if (empty) {
+                $('.btn-pred').attr('disabled', 'disabled');
+            } else {
+                $('.btn-pred').attr('disabled', false);
+            }
+        });
+    }
 
+    function predictionValidation(selector, lengthVal, regexp, message) {
         $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
             var error = selector + " + .pred-error";
@@ -80,7 +96,6 @@ $(document).ready(function() {
             $(selector).focusout(function(event) {
                 $(error).fadeOut('slow');
             });
-
 
             if (newValue.length > lengthVal) {
                 $(error).fadeIn('slow');
@@ -95,15 +110,16 @@ $(document).ready(function() {
         });
     }
 
-    realTimePredictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
-    realTimePredictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
-    realTimePredictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-    realTimePredictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
-    realTimePredictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
+    predDisabledBtn();
+    predictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
+    predictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
+    predictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
+    predictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
 
 });
