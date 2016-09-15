@@ -15,7 +15,6 @@ $(document).ready(function() {
     $('.form-prediction').on('submit', function(e) {
         e.preventDefault();
         $('body,html').animate({scrollTop: top}, "slow");
-        addPredictionProgress();
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': $('meta[name="_token"]').attr('content')
@@ -25,6 +24,8 @@ $(document).ready(function() {
         var formData   = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
+
+        addPredictionProgress();
 
         function formPredict() {
             $.ajax({
@@ -68,20 +69,27 @@ $(document).ready(function() {
         return content;
     }
 
-    function realTimePredictionValidation(selector, length, regexp, message) {
+    function realTimePredictionValidation(selector, lengthVal, regexp, message) {
+
         $('.form-prediction').on('input', selector, function(e){
             var value = $(e.target).val();
             var error = selector + " + .pred-error";
             var regExp = new RegExp(regexp, "g");
-            value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
+            var newValue = value.replace(regExp, "");
+            $(selector).val(newValue.substr(0, lengthVal));
             $(selector).focusout(function(event) {
                 $(error).fadeOut('slow');
             });
-            if (!value.replace(regExp, "")) {
+
+
+            if (newValue.length > lengthVal) {
+                $(error).fadeIn('slow');
+                $(error).html(errorPred("Length no more " + lengthVal));
+                $(error).fadeOut('slow');
+            } else if (!newValue) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred(message));
-            } else {
+            } else if (newValue) {
                 $(error).fadeOut('slow');
             }
         });
