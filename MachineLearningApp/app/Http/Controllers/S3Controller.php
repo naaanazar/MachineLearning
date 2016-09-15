@@ -15,11 +15,6 @@ class S3Controller extends Controller
 {
     public $bucket = 'ml-datasets-test';
 
-    public function predictionForm()
-    {
-        return view('prediction.prediction');
-    }
-
     private function connect()
     {
         $s3 = new S3Client([
@@ -34,7 +29,7 @@ class S3Controller extends Controller
         return $s3;
     }
 
-    public function upload(Request $request)
+    public function fileUpload($request)
     {
         $this->validate($request, [
             'file' => 'required|file|mimes:csv,txt',
@@ -60,9 +55,15 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-
+        $file = $fileName;
         Storage::delete($fileName);
 
+        return $file;
+    }
+
+    public function upload(Request $request)
+    {
+        $this->fileUpload($request);
         return redirect('s3/list');
     }
 
@@ -121,31 +122,40 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-
-        $client->deleteObject(array(
-                        'Bucket' => $this->bucket,
-                        'Key' => '/batch.csv',
-                    ));
-        dd($result);
+        
         return $results;
     }
 
-    /*public function getFile()
+    public function getFile()
     {
         $client = $this->connect();
-        $path = storage_path('app/download');
+        $path = storage_path('app/');
+        $fileName = $path . 'dY11.txt';
         try {
             $result = $client->getObject([
-    'Bucket' => $this->bucket, // REQUIRED
-    'Key' => 'batch.csv',
-    'SaveAs' => $path . 'datasets8.txt',
+                'Bucket' => $this->bucket, // REQUIRED
+                'Key' => 'bathPrediction/batch-prediction/bp-57d7d30a2be64.manifest',
+                'SaveAs' => $fileName,
 
-]);
+            ]);
 
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-print_r($result);
-        return $result;
-    }*/
+        sleep(1);
+
+        return response()->download($fileName);
+        //File::delete($fileName);
+    }
+
+    public function del()
+    {
+        $path = storage_path('app/');
+        $fileName = $path . 'dY43.tx';
+
+        $k = Storage::delete('dY43.tx');
+        echo $k;
+    }
+
+
 }

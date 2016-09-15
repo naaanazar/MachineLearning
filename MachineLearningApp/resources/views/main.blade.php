@@ -18,6 +18,7 @@
        <script src="{{ URL::to('js/lib/jGrowl/jquery.jgrowl.min.js') }}"></script>
 
        <script src="{{ URL::to('js/common.js') }}"></script>
+       <script src="{{ URL::to('js/prediction/prediction.js') }}"></script>
        <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
        <script src="{{ URL::to('js/back-to-top.js') }}"></script>
 
@@ -42,8 +43,8 @@
                <div class="collapse navbar-collapse" id="myNavbar">
                <div class="navbar-menu">
                    <ul class="nav navbar-nav">
-                           <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
-                               <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
+                           <li {{ (Request::is('prediction') ? 'class=active' : '') }}>
+                               <a href="{{ action('PredictionController@doView') }}">Prediction</a>
                            </li>
                            <li {{ (Request::is('ml') ? 'class=active' : '') }}>
                                <a href="{{ action('MLController@index') }}">ML</a>

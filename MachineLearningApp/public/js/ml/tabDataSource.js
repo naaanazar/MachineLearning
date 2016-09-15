@@ -1,28 +1,33 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     listDataSource();
 
-    $('.create-datasource-form').submit(function (e) {
+    $('.create-datasource-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function (data) {
+            success: function(data) {
                 $(".create-datasource-form").toggle();
                 $(".container-describeDataSources").toggle();
                 listDataSource();
                 console.log(data);
             },
-            error: function () {
-            },
+            error: function() {},
         });
     });
 
-    $(document).on("click", ".btn-create-datasource", function () {
+    $(document).on("click", ".btn-create-datasource", function() {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
+        $.get("/ml/select-S3objects", function(response) {
+            var result;
+            for (var key in response.data) {
+                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+            }
+            $('#SelectDataLocationS3').html(result);
         $(document).on('blur', '.form-control', function (e) {
             var resp = '';
             $(e.target).blur(function () {
@@ -97,21 +102,24 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("click", '#describeDataSourcesContent', function () {
-        listDataSource();
+    $(document).on("click", '#describeDataSourcesContent', function() {
+        if (!$('.container-describeDataSources').hasClass('loaded')) {
+            listDataSource();
+        }
     });
 
-    //loading data(tabs)
-    // $('#describeDataSourcesContent').on('click', function() {
-    //     $('.container-describeDataSources').html('<div class="container-describeDataSources table-scroll"></div>');
-    // });
+    //    //loading data
+    //    $('#describeDataSourcesContent').on('click', function() {
+    //        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    //    });
 
     function listDataSource() {
 
+        $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
         $('#ml-button-create').html(button);
 
-        $.get("/ml/describe-data-sources", function (response) {
+        $.get("/ml/describe-data-sources", function(response) {
 
             var i = 1;
             var res = '' +
@@ -151,6 +159,7 @@ $(document).ready(function () {
             res += '</table>';
 
             $('.container-describeDataSources').html(res);
+            $('.container-describeDataSources').addClass('loaded');
         });
     };
 });

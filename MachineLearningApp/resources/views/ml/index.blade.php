@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 for-mobile">
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4">
                 <div id="ml-button-create">
                 </div>
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
@@ -66,7 +66,7 @@
 
                             <button type="submit" class="btn btn-primary submit-button">Submit</button>
                         </form>
-
+                    </div>
                     <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
                 </div>
@@ -110,8 +110,6 @@
                                 <label for="EvaluationName">Evaluation name</label>
                                 <input type="text" class="form-control" id="EvaluationName"
                                        placeholder="Evaluation name" name="EvaluationName">
-                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputSuccess3Status" class="sr-only">(success)</span>
                             </div>
                             <div class="form-group">
                                 <label for="SelectMLModelId">ML model id</label>
@@ -125,7 +123,6 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
-
                     </div>
                     <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
                     </div>
@@ -158,7 +155,7 @@
             </div>
         </div>
     </div>
-    
+
     <br>
     <div id="modal" class="modal">
         <div class="modal-dialog">
