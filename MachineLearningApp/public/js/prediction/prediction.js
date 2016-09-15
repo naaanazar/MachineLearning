@@ -95,16 +95,21 @@ $(document).ready(function() {
             $(selector).val(newValue.substr(0, lengthVal));
             $(selector).focusout(function(event) {
                 $(error).fadeOut('slow');
+                $(selector).removeClass('pred-input-error');
+
             });
 
             if (newValue.length > lengthVal) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred("Length no more " + lengthVal));
+                $(selector + ":focus").addClass('pred-input-error');
             } else if (!newValue) {
+                $(selector + ":focus").addClass('pred-input-error');
                 $(error).fadeIn('slow');
                 $(error).html(errorPred(message));
-            } else if (newValue) {
+            } else {
                 $(error).fadeOut('slow');
+                $(selector).removeClass('pred-input-error');
             }
         });
     }
