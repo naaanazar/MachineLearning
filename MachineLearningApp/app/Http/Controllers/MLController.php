@@ -457,8 +457,7 @@ class MLController extends Controller
         } catch (MachineLearningException $e) {
             return response()->json(['data' => $e->getMessage() ]);
         }
-
-        //return back();
+        
     }
 
 
@@ -472,9 +471,12 @@ class MLController extends Controller
         $fileName = $file->getClientOriginalName();
         $data = file_get_contents($file);
 
-        $stream = fopen('s3://' . $this->bucket .'/' . $fileName , 'w');
-        fwrite($stream, $data);
-        fclose($stream);
+        $result = $client->putObject(array(
+                'Bucket' => $this->bucket,
+                'Key'    => $fileName,
+                'Body'   => $data,
+                'ACL'    => 'public-read',
+        ));
 
         $DataSourceId = $this->createBatchDataSourceFromS3($fileName);        
         $BatchPredictionId = 'bp-' . uniqid();
@@ -495,7 +497,7 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return response()->json(['data' => '$result[BatchPredictionId]']);
+        return response()->json(['data' => $DataSourceId]);
     }
 
 

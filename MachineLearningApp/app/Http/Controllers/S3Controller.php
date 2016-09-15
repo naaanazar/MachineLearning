@@ -204,6 +204,81 @@ class S3Controller extends Controller
         return $client;
     }
 
+    public function getObjectACL()
+    {
+    $client = $this->connect();
+    $result = $client->getObjectAcl([
+        'Bucket' => $this->bucket, // REQUIRED
+        'Key' => 'dataset.csv', // REQUIRED
+        'RequestPayer' => 'requester',
+       
+    ]);
+
+    dd($result);
+
+    }
+
+     public function putObjectACL()
+    {
+        $client = $this->connect();
+
+//        $result = $client->putObjectAcl([
+//           'AccessControlPolicy' => [
+//                'Grants' => [
+//                    [
+//                        'Grantee' => [
+//                            'Type' => 'CanonicalUser',
+//                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
+//                        ],
+//                        'Permission' => 'READ',
+//                    ],
+//                    // ...
+//                ],
+//            ],
+//            'Bucket' => $this->bucket,
+//            'Key' => 'batch.csv', // REQUIRED
+//            'RequestPayer' => 'requester',
+//        ]);
+
+        $result = $client->putObjectAcl([    
+            'AccessControlPolicy' => [
+                'Grants' => [
+                    [
+                        'Grantee' => [
+                            'DisplayName' => '123',
+                            'ID' => '123',
+                            'Type' => 'CanonicalUser', // REQUIRED
+                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
+                        ],
+                        'Permission' => 'READ',
+                    ],
+                ],
+            ],
+            'Bucket' => $this->bucket, // REQUIRED
+            'Key' => 'dataset.csv', // REQUIRED
+        ]);
+
+//        $result = $client->putObjectAcl([
+//            'ACL' => 'public-read-write',
+//            'AccessControlPolicy' => [
+//                'Grants' => [
+//                    [
+//                        'Grantee' => [
+//                            'Type' => 'Group', // REQUIRED
+//                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
+//                        ],
+//                        'Permission' => 'READ',
+//                    ],
+//                ],
+//            ],
+//            'Bucket' => $this->bucket, // REQUIRED
+//            'Key' => 'dataset.csv', // REQUIRED
+//            'RequestPayer' => 'requester',
+//
+//        ]);
+
+        dd($result);
+    }
 //  
 
 
