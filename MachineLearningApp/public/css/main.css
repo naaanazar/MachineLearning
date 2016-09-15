@@ -104,12 +104,13 @@ body {
 }
 .block-prediction {
     position: relative;
+    top: -11px;
     float: right;
     z-index: -1;
     width: 52%;
     height: 50px;
     margin-bottom: 30px;
-    margin-right: 119px;
+    margin-right: 117px;
     padding: 6px 25px;
     background: #eee;
     border-radius: 15px;
