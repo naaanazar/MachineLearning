@@ -16,7 +16,7 @@ $(document).ready(function() {
     //upload file to s3 bucket using ajax
     $('.create-bath-predictios-form').on("submit", function(e) {
         console.log($(".create-bath-predictios-form"));
-        //loading data       
+        //loading data
         $(".create-bath-predictios-form").toggle();
         $(".container-describeBatchPredictions").toggle();
         $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');

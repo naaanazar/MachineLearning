@@ -40,6 +40,7 @@
                                 <label for="DataSourceName">Data source name</label>
                                 <input type="text" class="form-control" id="DataSourceName"
                                        placeholder="Data source name" name="DataSourceName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
                                 <label for="SelectDataLocationS3">Data location S3</label>
@@ -49,17 +50,20 @@
                             <div class="">
                                 <div class="form-group">
                                     <label for="DataRearrangement">Data rearrangement Begin</label>
-                                    <input type="number" class="form-control form-control-sm" id="DataRearrangement"
+                                    <input type="number" class="form-control form-control-sm" id="DataRearrangementBegin"
                                            name="DataRearrangementBegin">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="form-group">
                                     <label for="DataRearrangement">Data rearrangement End</label>
-                                    <input type="number" class="form-control form-control-sm" id="DataRearrangement"
+                                    <input type="number" class="form-control form-control-sm" id="DataRearrangementEnd"
                                            name="DataRearrangementEnd">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-primary submit-button">Submit</button>
                         </form>
                     </div>
@@ -76,6 +80,7 @@
                                 <label for="MLModelName">ML model name</label>
                                 <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
                                        name="MLModelName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
                                 <label for="MLModelType">ML model type</label>
@@ -106,6 +111,7 @@
                                 <label for="EvaluationName">Evaluation name</label>
                                 <input type="text" class="form-control" id="EvaluationName"
                                        placeholder="Evaluation name" name="EvaluationName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
                                 <label for="SelectMLModelId">ML model id</label>
@@ -151,7 +157,7 @@
             </div>
         </div>
     </div>
-    
+
     <br>
     <div id="modal" class="modal">
         <div class="modal-dialog">

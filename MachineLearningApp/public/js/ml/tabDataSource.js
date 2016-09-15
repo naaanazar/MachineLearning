@@ -1,4 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
+
+    if (window.location.hash == '#describeDataSources') {
+        listDataSource();
+    }
 
     if (window.location.hash == '#describeDataSources') {
         listDataSource();
@@ -6,27 +10,90 @@ $(document).ready(function() {
 
     listDataSource();
 
-    $('.create-datasource-form').submit(function(e) {
+    $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
         $.ajax({
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function(data) {
+            success: function (data) {
                 $(".create-datasource-form").toggle();
                 $(".container-describeDataSources").toggle();
                 listDataSource();
                 console.log(data);
             },
-            error: function() {},
+            error: function () {
+            },
         });
     });
 
-    $(document).on("click", ".btn-create-datasource", function() {
+    $(document).on("click", ".btn-create-datasource", function () {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
-        $.get("/ml/select-S3objects", function(response) {
+
+        $(document).on('blur', '.form-control', function (e) {
+            $(e.target).blur(function () {
+                var id = e.target.id;
+                var val = e.target.value;
+                $(this).closest('div').find('span').addClass('hide');
+
+                switch (id) {
+                    case 'DataSourceName':
+                        var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+
+                        if (val.length > 2 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
+
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+                    case 'DataRearrangementBegin':
+                        var rv_name = /^[1-9][0-9]?$|^100$/;
+
+                        if (val.length > 0 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
+
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+                    case 'DataRearrangementEnd':
+                        var rv_name = /^[1-9][0-9]?$|^100$/;
+
+                        if (val.length > 0 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
+
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+
+                }
+
+            });
+        });
+
+        $.get("/ml/select-S3objects", function (response) {
             var result;
             for (var key in response.data) {
                 result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
@@ -35,7 +102,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeDataSourcesContent', function() {
+    $(document).on("click", '#describeDataSourcesContent', function () {
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }
@@ -52,7 +119,7 @@ $(document).ready(function() {
         var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
         $('#ml-button-create').html(button);
 
-        $.get("/ml/describe-data-sources", function(response) {
+        $.get("/ml/describe-data-sources", function (response) {
 
             var i = 1;
             var res = '' +
