@@ -1,17 +1,22 @@
 $(document).ready(function() {
-     $("[data-toggle='tooltip']").tooltip();
+    $("[data-toggle='tooltip']").tooltip();
 
-     // upload button without submit
-   // $('#input-file-source').change(function () {
-     //   $('.create-bath-predictios-form').submit();
+    if (window.location.hash == '#describeBatchPredictions') {
+        listBatchPrediction();
+    }
+
+    // upload button without submit
+    // $('#input-file-source').change(function () {
+    //   $('.create-bath-predictios-form').submit();
     //});
 
     // upload show/hide message
-    $(".upload-message").show().delay(1500).fadeOut(1000);    
-    
+    $(".upload-message").show().delay(1500).fadeOut(1000);
+
     //upload file to s3 bucket using ajax
-    $('.create-bath-predictios-form').on("submit", function (e) {
+    $('.create-bath-predictios-form').on("submit", function(e) {
         console.log($(".create-bath-predictios-form"));
+
         //loading data       
        $(".create-bath-predictios-form").toggle();
        $(".container-describeBatchPredictions").toggle();
@@ -28,48 +33,47 @@ $(document).ready(function() {
                 console.log(response.data);                
                 listBatchPrediction();               
             },
-            error: function () {             
-            },
+            error: function() {},
         });
     });
 
 
     function successS3(selector, str) {
-        $(selector).append('<div class="alert alert-success upload-message-s3">'
-            + '<ul><li><strong>Success! </strong>'
-            + str + '</li></ul></div>').show('slow').hide(4000);
+        $(selector).append('<div class="alert alert-success upload-message-s3">' +
+            '<ul><li><strong>Success! </strong>' +
+            str + '</li></ul></div>').show('slow').hide(4000);
     }
 
     function errorS3(selector) {
-        $(selector).append('<div class="alert alert-danger upload-message-s3">'
-            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
-            + '</li></ul></div>').show('slow').hide(4000);
+        $(selector).append('<div class="alert alert-danger upload-message-s3">' +
+            '<ul><li><strong>Error! File is not loaded to S3!</strong>' +
+            '</li></ul></div>').show('slow').hide(4000);
 
     }
-//    $('.create-bath-predictios-form').submit(function (e) {
-//        e.preventDefault();
-//        $.ajax({
-//            type: "post",
-//            url: 'ml/create-batch-prediction',
-//            data: $('.create-bath-predictios-form').serialize(),
-//            success: function (data) {
-//                $(".create-bath-predictios-form").toggle();
-//                $(".container-describeBatchPredictions").toggle();
-//                listBatchPrediction();
-//                console.log(data);
-//            },
-//            error: function () {
-//            },
-//        });
-//    });
+    //    $('.create-bath-predictios-form').submit(function (e) {
+    //        e.preventDefault();
+    //        $.ajax({
+    //            type: "post",
+    //            url: 'ml/create-batch-prediction',
+    //            data: $('.create-bath-predictios-form').serialize(),
+    //            success: function (data) {
+    //                $(".create-bath-predictios-form").toggle();
+    //                $(".container-describeBatchPredictions").toggle();
+    //                listBatchPrediction();
+    //                console.log(data);
+    //            },
+    //            error: function () {
+    //            },
+    //        });
+    //    });
 
 
-    $(document).on("click", ".btn-create-bath-description", function () {
+    $(document).on("click", ".btn-create-bath-description", function() {
         $(".create-bath-predictios-form").toggle();
         $(".container-describeBatchPredictions").toggle();
 
-        $.get("/ml/select-ml-model", function(response){
-            var  result;
+        $.get("/ml/select-ml-model", function(response) {
+            var result;
 
             for (var key in response.data) {
 
@@ -78,8 +82,8 @@ $(document).ready(function() {
             $('#SelectBathMLModel').html(result);
         });
 
-        $.get("/ml/select-data-source", function(response){
-            var  result;
+        $.get("/ml/select-data-source", function(response) {
+            var result;
 
             for (var key in response.data) {
 
@@ -89,8 +93,8 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeBatchPredictionsContent', function () {
-        if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
+    $(document).on("click", '#describeBatchPredictionsContent', function() {
+        if (!$('.container-describeBatchPredictions').hasClass('loaded')) {
             listBatchPrediction();
         }
     });
@@ -101,20 +105,20 @@ $(document).ready(function() {
         var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
         $('#ml-button-create').html(button);
 
-        $.get("/ml/describe-batch-prediction", function(response){
-            var i=1;
+        $.get("/ml/describe-batch-prediction", function(response) {
+            var i = 1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
                 //    '<td>BatchPredictionId</td>' +
-                    '<td>Name</td>' +
-                    '<td>Status</td>' +
-                    '<td>MLModelId</td>' +
-                    '<td>BatchPredictionDataSourceId</td>' +
-                    '<td>OutputUri</td>' +
-                    '<td>Count</td>' +
-                    '<td>Last Updated</td>' +
-                    '<td>&nbsp;</td>' +
+                '<td>Name</td>' +
+                '<td>Status</td>' +
+                '<td>MLModelId</td>' +
+                '<td>BatchPredictionDataSourceId</td>' +
+                '<td>OutputUri</td>' +
+                '<td>Count</td>' +
+                '<td>Last Updated</td>' +
+                '<td>&nbsp;</td>' +
                 '</tr>' +
                 '<span class="hide">'+ i +'</span>';
                 for (var key in response.data) {
@@ -146,14 +150,14 @@ $(document).ready(function() {
 
                             '</td>' +
                         '</tr>' +
+
                     '<span class="hide">' + i + '</span>';
-                }
+            }
             res += '</table>';
 
             $('.container-describeBatchPredictions').html(res);
             $('.container-describeBatchPredictions').addClass('loaded');
         });
     }
-
-
 });
+

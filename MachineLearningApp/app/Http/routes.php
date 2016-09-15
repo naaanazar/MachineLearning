@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return redirect('predictions');
+    return redirect('prediction');
 });
 
-Route::get('predictions', 'S3Controller@predictionForm');
+Route::get('prediction', 'PredictionController@doView');
+Route::post('prediction/predict', 'PredictionController@doPredict');
 
 Route::get('s3/list/', 'S3Controller@listS3');
 Route::post('/s3/upload', 'S3Controller@upload');
@@ -40,7 +41,6 @@ Route::post('ml/create-datasource', 'MLController@createDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@createMLModel');
 Route::post('ml/create-evaluation', 'MLController@createEvaluation');
 //Route::post('/ml/create-batch-prediction', 'MLController@createBatchPrediction');
-Route::post('ml/real-time-prediction', 'MLController@predict');
 
 Route::post('/ml/upload-batch-source', 'MLController@createBatchPrediction');
 Route::get('/ml/status-batch-data-source/{DataSourceId}', 'MLController@statusDataSource');

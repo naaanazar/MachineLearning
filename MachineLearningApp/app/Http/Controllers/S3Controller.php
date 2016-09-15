@@ -15,11 +15,6 @@ class S3Controller extends Controller
 {
     public $bucket = 'ml-datasets-test';
 
-    public function predictionForm()
-    {
-        return view('prediction.prediction');
-    }
-
     private function connect()
     {
         $s3 = new S3Client([
