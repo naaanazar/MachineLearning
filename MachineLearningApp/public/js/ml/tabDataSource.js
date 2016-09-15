@@ -23,50 +23,77 @@ $(document).ready(function () {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
-        var resp = '';
-        $('input#DataSourceName').unbind().blur(function () {
-            var id = $(this).attr('id');
-            var val = $(this).val();
-            $(this).closest('div').find('span').addClass('hide');
+        $(document).on('blur', '.form-control', function (e) {
+            var resp = '';
+            $(e.target).blur(function () {
+                console.log(e.target.value);
+                var id = e.target.id;
+                var val = $(this).val();
+                $(this).closest('div').find('span').addClass('hide');
 
-            switch (id) {
-                case 'DataSourceName':
-                    var rv_name = /^[a-zA-Zа-яА-Я]{1,40}$/;
+                switch (id) {
+                    case 'DataSourceName':
+                        var rv_name = /^[a-zA-Zа-яА-Я]{1,40}$/;
 
-                    if (val.length > 2 && val != '' && rv_name.test(val)) {
-                        $(this).removeClass('error').addClass('not_error');
-                        $(this).closest('div').removeClass('has-error');
-                        $(this).closest('div').addClass('has-success has-feedback');
-                        $(this).closest('div').find('span').removeClass('hide');
-                        resp = 'OK';
+                        if (val.length > 2 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
+                            resp = 'OK';
 
-                    }
-                    else {
-                        $(this).removeClass('not_error').addClass('error');
-                        $(this).closest('div').addClass('has-error has-feedback');
-                        $(this).closest('div').find('span').addClass('hide');
-                        resp = 'Not Ok';
-                    }
-                    break;
-            }
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+                    case 'DataRearrangementBegin':
+                        var rv_name = /^\d{1,10}$/;
 
-            console.log(resp);
-            if (resp !== 'OK') {
-                $(this).closest('form').find('button').addClass('disabled');
+                        if (val.length > 1 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
 
-            } else {
-                $(this).closest('form').find('button').removeClass('disabled');
-            }
-        });
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+                    case 'DataRearrangementEnd':
+                        var rv_name = /^\d{1,10}$/;
+
+                        if (val.length > 1 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
+
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+
+                }
+
+            });
 
 
-
-        $.get("/ml/select-S3objects", function (response) {
-            var result;
-            for (var key in response.data) {
-                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
-            }
-            $('#SelectDataLocationS3').html(result);
+            $.get("/ml/select-S3objects", function (response) {
+                var result;
+                for (var key in response.data) {
+                    result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+                }
+                $('#SelectDataLocationS3').html(result);
+            });
         });
     });
 

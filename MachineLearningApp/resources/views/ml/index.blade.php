@@ -50,15 +50,17 @@
                             <div class="">
                                 <div class="form-group">
                                     <label for="DataRearrangement">Data rearrangement Begin</label>
-                                    <input type="number" class="form-control form-control-sm" id="DataRearrangement"
+                                    <input type="number" class="form-control form-control-sm" id="DataRearrangementBegin"
                                            name="DataRearrangementBegin">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="form-group">
                                     <label for="DataRearrangement">Data rearrangement End</label>
-                                    <input type="number" class="form-control form-control-sm" id="DataRearrangement"
+                                    <input type="number" class="form-control form-control-sm" id="DataRearrangementEnd"
                                            name="DataRearrangementEnd">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                                 </div>
                             </div>
 
