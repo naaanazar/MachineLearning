@@ -15,7 +15,7 @@
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 tabs" >
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 tabs ml-tabs" >
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"

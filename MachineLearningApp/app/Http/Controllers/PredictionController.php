@@ -60,6 +60,7 @@ class PredictionController extends Controller
 
     public function doPredict(Request $request)
     {
+
         $country = $request->input('country');
         $MLModelId = $request->input('ml_model_id');
         $stringsCount = $request->input('strings_count');

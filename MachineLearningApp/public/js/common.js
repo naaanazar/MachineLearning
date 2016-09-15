@@ -1,4 +1,15 @@
 $(document).ready(function() {
+    // ML: add hash tab to url
+    $('.ml-tabs').on('click', 'a', function (e) {
+        e.preventDefault();
+        window.location.hash = $(this).attr('href');
+        $(this).tab('show');
+    });
+    if(window.location.hash){
+       $('.ml-tabs').find('a[href="'+window.location.hash+'"]').tab('show');
+    }
+
+
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 

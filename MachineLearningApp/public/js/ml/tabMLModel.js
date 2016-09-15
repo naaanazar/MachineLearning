@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    if (window.location.hash == '#describeMLModels') {
+        listMLModel();
+    }
+
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
         $.ajax({

@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    if (window.location.hash == '#describeEvaluations') {
+        listEvaluations();
+    }
+
     $('.create-evaluations-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -42,7 +46,8 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeEvaluationsContent', function() {
-        if (!$('.container-describeEvaluations').hasClass('loaded')) {
+
+        if (!$('.container-describeEvaluations').hasClass('loaded') ) {
             listEvaluations();
         }
     });
