@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use URL;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
 

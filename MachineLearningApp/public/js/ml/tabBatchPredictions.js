@@ -1,6 +1,10 @@
 $(document).ready(function() {
     $("[data-toggle='tooltip']").tooltip();
 
+    if (window.location.hash == '#describeBatchPredictions') {
+        listBatchPrediction();
+    }
+
     // upload button without submit
     // $('#input-file-source').change(function () {
     //   $('.create-bath-predictios-form').submit();
