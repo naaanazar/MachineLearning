@@ -62,7 +62,7 @@ class PredictionController extends Controller
     {
         $this->validate($request, [
             'country' => 'required|string',
-            'ml_model_id' => 'required|integer',
+            'ml_model_id' => 'required',
             'strings_count' => 'required|integer',
             'members_count' => 'required|integer',
             'projects_count' => 'required|integer',
