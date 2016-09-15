@@ -1,51 +1,49 @@
-$(document).ready(function() {
+$(document).ready(function () {
+
+    if (window.location.hash == '#describeDataSources') {
+        listDataSource();
+    }
 
     listDataSource();
 
-    $('.create-datasource-form').submit(function(e) {
+    $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
         $.ajax({
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function(data) {
+            success: function (data) {
                 $(".create-datasource-form").toggle();
                 $(".container-describeDataSources").toggle();
                 listDataSource();
                 console.log(data);
             },
-            error: function() {},
+            error: function () {
+            },
         });
     });
 
-    $(document).on("click", ".btn-create-datasource", function() {
+    $(document).on("click", ".btn-create-datasource", function () {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
-        $.get("/ml/select-S3objects", function(response) {
-            var result;
-            for (var key in response.data) {
-                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
-            }
-            $('#SelectDataLocationS3').html(result);
+
         $(document).on('blur', '.form-control', function (e) {
-            var resp = '';
             $(e.target).blur(function () {
                 console.log(e.target.value);
                 var id = e.target.id;
-                var val = $(this).val();
+                var val = e.target.value;
                 $(this).closest('div').find('span').addClass('hide');
 
                 switch (id) {
                     case 'DataSourceName':
-                        var rv_name = /^[a-zA-Zа-яА-Я]{1,40}$/;
+                        var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
 
                         if (val.length > 2 && val != '' && rv_name.test(val)) {
                             $(this).removeClass('error').addClass('not_error');
                             $(this).closest('div').removeClass('has-error');
                             $(this).closest('div').addClass('has-success has-feedback');
                             $(this).closest('div').find('span').removeClass('hide');
-                            resp = 'OK';
 
                         }
                         else {
@@ -55,9 +53,9 @@ $(document).ready(function() {
                         }
                         break;
                     case 'DataRearrangementBegin':
-                        var rv_name = /^\d{1,10}$/;
+                        var rv_name = /^[1-9][0-9]?$|^100$/;
 
-                        if (val.length > 1 && val != '' && rv_name.test(val)) {
+                        if (val.length > 0 && val != '' && rv_name.test(val)) {
                             $(this).removeClass('error').addClass('not_error');
                             $(this).closest('div').removeClass('has-error');
                             $(this).closest('div').addClass('has-success has-feedback');
@@ -71,9 +69,9 @@ $(document).ready(function() {
                         }
                         break;
                     case 'DataRearrangementEnd':
-                        var rv_name = /^\d{1,10}$/;
+                        var rv_name = /^[1-9][0-9]?$|^100$/;
 
-                        if (val.length > 1 && val != '' && rv_name.test(val)) {
+                        if (val.length > 0 && val != '' && rv_name.test(val)) {
                             $(this).removeClass('error').addClass('not_error');
                             $(this).closest('div').removeClass('has-error');
                             $(this).closest('div').addClass('has-success has-feedback');
@@ -90,19 +88,18 @@ $(document).ready(function() {
                 }
 
             });
+        });
 
-
-            $.get("/ml/select-S3objects", function (response) {
-                var result;
-                for (var key in response.data) {
-                    result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
-                }
-                $('#SelectDataLocationS3').html(result);
-            });
+        $.get("/ml/select-S3objects", function (response) {
+            var result;
+            for (var key in response.data) {
+                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+            }
+            $('#SelectDataLocationS3').html(result);
         });
     });
 
-    $(document).on("click", '#describeDataSourcesContent', function() {
+    $(document).on("click", '#describeDataSourcesContent', function () {
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }
@@ -119,7 +116,7 @@ $(document).ready(function() {
         var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
         $('#ml-button-create').html(button);
 
-        $.get("/ml/describe-data-sources", function(response) {
+        $.get("/ml/describe-data-sources", function (response) {
 
             var i = 1;
             var res = '' +

@@ -80,6 +80,7 @@
                                 <label for="MLModelName">ML model name</label>
                                 <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
                                        name="MLModelName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
                                 <label for="MLModelType">ML model type</label>
@@ -110,6 +111,7 @@
                                 <label for="EvaluationName">Evaluation name</label>
                                 <input type="text" class="form-control" id="EvaluationName"
                                        placeholder="Evaluation name" name="EvaluationName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
                                 <label for="SelectMLModelId">ML model id</label>

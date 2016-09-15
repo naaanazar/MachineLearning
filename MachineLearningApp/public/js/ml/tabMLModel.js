@@ -20,6 +20,36 @@ $(document).ready(function() {
         $('.create-mlmodel-form').toggle();
         $(".container-describeMLModels").toggle();
 
+        $(document).on('blur', '.form-control', function (e) {
+            $(e.target).blur(function () {
+                console.log(e.target.value);
+                var id = e.target.id;
+                var val = e.target.value;
+                $(this).closest('div').find('span').addClass('hide');
+
+                switch (id) {
+                    case 'MLModelName':
+                        var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+
+                        if (val.length > 2 && val != '' && rv_name.test(val)) {
+                            $(this).removeClass('error').addClass('not_error');
+                            $(this).closest('div').removeClass('has-error');
+                            $(this).closest('div').addClass('has-success has-feedback');
+                            $(this).closest('div').find('span').removeClass('hide');
+
+                        }
+                        else {
+                            $(this).removeClass('not_error').addClass('error');
+                            $(this).closest('div').addClass('has-error has-feedback');
+                            $(this).closest('div').find('span').addClass('hide');
+                        }
+                        break;
+
+                }
+
+            });
+        });
+
         $.get("/ml/select-data-source", function(response) {
             var result;
 
