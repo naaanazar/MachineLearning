@@ -25,7 +25,6 @@ body {
     font-weight: bold;
     font-size: 13px;
 }
-
 /***************************************
     S3 Style
 ***************************************/
@@ -55,7 +54,6 @@ body {
     float: right;
     margin: 3px 10px;
 }
-
 /***************************************
     Prediction
 ***************************************/
@@ -63,12 +61,11 @@ body {
 .main-prediction {
     position: relative;
     margin-top: -46px;
-    float:left;
+    float: left;
     width: 100%;
     padding-top: 10px;
     border-radius: 15px;
 }
-
 .spinner-prediction {
     position: absolute;
     top: 18%;
@@ -81,24 +78,20 @@ body {
     position: relative;
     margin-top: 82px;
 }
-
 .label-pred {
     float: left;
     width: 30%;
     margin-right: 20px;
     text-align: left;
 }
-
 .input-pred {
     width: 50%;
 }
-
 .btn-pred {
     width: 50%;
     float: right;
     margin-right: 17%;
 }
-
 .block-prediction {
     position: relative;
     top: -11px;
@@ -112,8 +105,8 @@ body {
     background: #eee;
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
 .pred-error {
     position: relative;
@@ -132,10 +125,9 @@ body {
     width: 30%;
     padding: 6px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
-
 /***************************************
     Tables
 ***************************************/
@@ -178,11 +170,10 @@ body {
     width: 100%;
 }
 @media screen and (max-width: 1200px) {
-.block-prediction {
-    margin-right: 90px;
+    .block-prediction {
+        margin-right: 90px;
+    }
 }
-}
-
 @media screen and (max-width: 992px) {
     .ML-tables-content {
         margin-top: 40px;
@@ -199,20 +190,15 @@ body {
         display: none;
     }
     .block-prediction {
-    margin-right: 110px;
+        margin-right: 110px;
     }
-     .form-group{
+    .form-group {
         margin-left: 0px;
     }
-    .main-prediction{
+    .main-prediction {
         margin-top: 80px;
     }
-    .loader{
-        margin-left: 250px;
-    }
-
 }
-
 @media screen and (max-width: 880px) {
     .back-to-top {
         opacity: 0.5;
@@ -221,7 +207,6 @@ body {
         margin-left: 60px;
     }
 }
-
 @media screen and (max-width: 767px) {
     .ML-tables-content {
         margin-top: 200px;
@@ -233,7 +218,6 @@ body {
         font-size: 12px;
         line-height: 1.5;
         border-radius: 3px;
-        
     }
     .table-scroll {
         margin-top: 200px;
@@ -241,19 +225,15 @@ body {
         width: 100%;
         margin-bottom: 25px;
     }
-    .loader{
-        margin-left: 25px;
-    }
-    .table{
+    .table {
         width: 96%;
-        margin-left: 2%; 
+        margin-left: 2%;
     }
-    .block-prediction{
+    .block-prediction {
         width: 51%;
         margin-right: 15%
     }
 }
-
 /***************************************
     Other
 ***************************************/
@@ -306,7 +286,6 @@ body {
     left: 15px;
     display: none;
 }
-
 .jGrowl {
     margin-top: 50px;
 }
@@ -426,14 +405,17 @@ body {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 .loader {
-    border: 8px solid #f3f3f3;/* Light grey */
-    border-top: 8px solid #3498db;/* Blue */
+    border: 8px solid #f3f3f3;
+    /* Light grey */
+    
+    border-top: 8px solid #3498db;
+    /* Blue */
+    
     border-radius: 50%;
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;
-    float: center;
-    
+    margin-left: 45%;
 }
 @keyframes spin {
     0% {

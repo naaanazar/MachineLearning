@@ -41,23 +41,37 @@ $(document).ready(function() {
     }
 
     $(document).on('click', '.btn-delete', function(e) {
-        e.preventDefault();
+        e.preventDefault(); 
+        console.log($(this).attr('id'));
         var url = $(this).attr('href');
         $.ajax({
             url: '/s3/delete',
             method: 'post',
-            data: {
-                name: $(this).attr('id')
-            },
-            success: function(data) {
+            data: {name: $(this).attr('id')},
+            success: function (data) {
                 console.log(data);
                 if (data.success) {
 
                     $(e.target).closest('tr').hide("fast");
                 }
-                success('.notification-s3', 'File delete!');
+                successS3('.notification-s3', 'File delete!');
             }
         });
+    });
+
+    $(document).on('click', '.download', function (e) {
+       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+       $.get('/s3/file-exists', {
+           name: encodeURI($(this).data('download-path')) }, function (response) {
+            if (response.data == true ) {
+                window.location = url;
+            } else {
+                $.jGrowl('File not exists', {
+                    theme: 'jgrowl-danger'
+                });
+            }
+
+       });
     });
 
     //upload file to s3 bucket using ajax

@@ -158,4 +158,135 @@ class S3Controller extends Controller
     }
 
 
+   public function downloadFromS3(Request $request)
+    {
+      
+
+        $path = $request->name;       
+        $path = urldecode($path);  
+        $client = $this->connect();
+        $client->registerStreamWrapper();
+        $data = file_get_contents($path);
+        $fileName = basename($path);
+
+        error_reporting(0); //Errors may corrupt download
+        ob_start(); //Insert this
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $fileName);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length:' . filesize($data));
+        ob_clean();
+        ob_end_flush();
+
+        echo $data;
+        exit;
+    }
+
+
+    public function fileExists(Request $request)
+    {
+        $path = $request->name;
+        $path = urldecode($path);
+        $client = $this->connect();
+        $client->registerStreamWrapper();
+
+        if (file_exists($path)) {
+            return Response()->json(['data' => true]);
+        }
+    }
+
+    public function getClient()
+    {
+        $client = $this->connect();
+        return $client;
+    }
+
+    public function getObjectACL()
+    {
+    $client = $this->connect();
+    $result = $client->getObjectAcl([
+        'Bucket' => $this->bucket, // REQUIRED
+        'Key' => 'dataset.csv', // REQUIRED
+        'RequestPayer' => 'requester',
+       
+    ]);
+
+    dd($result);
+
+    }
+
+     public function putObjectACL()
+    {
+        $client = $this->connect();
+
+//        $result = $client->putObjectAcl([
+//           'AccessControlPolicy' => [
+//                'Grants' => [
+//                    [
+//                        'Grantee' => [
+//                            'Type' => 'CanonicalUser',
+//                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
+//                        ],
+//                        'Permission' => 'READ',
+//                    ],
+//                    // ...
+//                ],
+//            ],
+//            'Bucket' => $this->bucket,
+//            'Key' => 'batch.csv', // REQUIRED
+//            'RequestPayer' => 'requester',
+//        ]);
+
+        $result = $client->putObjectAcl([    
+            'AccessControlPolicy' => [
+                'Grants' => [
+                    [
+                        'Grantee' => [
+                            'DisplayName' => '123',
+                            'ID' => '123',
+                            'Type' => 'CanonicalUser', // REQUIRED
+                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
+                        ],
+                        'Permission' => 'READ',
+                    ],
+                ],
+            ],
+            'Bucket' => $this->bucket, // REQUIRED
+            'Key' => 'dataset.csv', // REQUIRED
+        ]);
+
+//        $result = $client->putObjectAcl([
+//            'ACL' => 'public-read-write',
+//            'AccessControlPolicy' => [
+//                'Grants' => [
+//                    [
+//                        'Grantee' => [
+//                            'Type' => 'Group', // REQUIRED
+//                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
+//                        ],
+//                        'Permission' => 'READ',
+//                    ],
+//                ],
+//            ],
+//            'Bucket' => $this->bucket, // REQUIRED
+//            'Key' => 'dataset.csv', // REQUIRED
+//            'RequestPayer' => 'requester',
+//
+//        ]);
+
+        dd($result);
+    }
+//  
+
+
+
+
+
+
+
+
+
 }
