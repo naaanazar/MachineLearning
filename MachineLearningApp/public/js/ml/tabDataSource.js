@@ -100,11 +100,6 @@ $(document).ready(function () {
         $(".create-datasource-form").toggle();
         $(".container-describeDataSources").toggle();
 
-
-
-
-
-
         $.get("/ml/select-S3objects", function (response) {
             var result;
             for (var key in response.data) {

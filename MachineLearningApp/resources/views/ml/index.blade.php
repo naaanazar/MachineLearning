@@ -19,11 +19,11 @@
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
-                            id="describeDataSourcesContent">Data Source</a></li>
+                                              id="describeDataSourcesContent">Data Source</a></li>
                         <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">ML Models</a>
                         </li>
                         <li><a data-toggle="tab" href="#describeEvaluations"
-                            id="describeEvaluationsContent">Evaluations</a>
+                               id="describeEvaluationsContent">Evaluations</a>
                         </li>
                         <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a></li>
                     </ul>
@@ -33,7 +33,7 @@
                 <div id="describeDataSources" class="tab-pane fade in active">
                     <div class="">
                         <form class="create-datasource-form" style="display:none;" method="post"
-                             action="ml/create-datasource">
+                              action="ml/create-datasource">
                             <br>
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -131,7 +131,7 @@
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                       <form class="create-bath-predictios-form" style="display:none;" method="post"
+                        <form class="create-bath-predictios-form" style="display:none;" method="post"
                               action="ml/create-batch-prediction">
                             <br>
                             {{ csrf_field() }}
@@ -178,4 +178,3 @@
         </div>
     </div>
 @stop
-
