@@ -427,6 +427,7 @@ body {
     height: 60px;
     animation: spin 2s linear infinite;
     float: center;
+    
 }
 @keyframes spin {
     0% {
