@@ -33,7 +33,7 @@
        <nav class="navbar navbar-default" >
            <div class="container-fluid">
                <div class="navbar-header">
-                <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}"<a>
+                <a href="/"><img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}"</a></a>
                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                        <span class="icon-bar"></span>
                        <span class="icon-bar"></span>
