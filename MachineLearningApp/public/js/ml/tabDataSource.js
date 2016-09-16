@@ -92,7 +92,11 @@ $(document).ready(function () {
         $.get("/ml/select-S3objects", function (response) {
             var result;
             for (var key in response.data) {
-                result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+                ext = response.data[key].Key.substr(-3);
+                
+                if ( ext == 'csv') {
+                    result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
+                }
             }
             $('#SelectDataLocationS3').html(result);
         });

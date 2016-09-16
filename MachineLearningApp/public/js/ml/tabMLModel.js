@@ -64,12 +64,11 @@ $(document).ready(function() {
         });
 
         $.get("/ml/select-data-source", function(response) {
-            var result;
-
-            for (var key in response.data) {
-
-                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
-            }
+            var result='';
+            
+            for (var key in response.data) {          
+                result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';             
+            };
             $('#SelectDataSource').html(result);
         });
     });
