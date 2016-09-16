@@ -10,10 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// Route::get('/', function () {
+//     return redirect('prediction');
+// });
 
-Route::get('/', function () {
-    return redirect('prediction');
-});
+Route::get('/','FirstPageController@firstPage');
+
 
 Route::get('prediction', 'PredictionController@doView');
 Route::post('prediction/predict', 'PredictionController@doPredict');
