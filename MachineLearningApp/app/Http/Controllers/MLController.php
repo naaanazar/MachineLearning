@@ -249,7 +249,6 @@ class MLController extends Controller
         }
     }
 
-
     public function deleteEvaluation($EvaluationId)
     {
         try {
@@ -264,7 +263,6 @@ class MLController extends Controller
         }
     }
 
-
     public function deleteMLModel($MLModelId)
     {
         try {
@@ -278,7 +276,6 @@ class MLController extends Controller
             echo $e->getMessage() . "\n";
         }
     }
-
 
     public function deleteBatchPrediction($BatchPredictionId)
     {
