@@ -24,6 +24,7 @@ $(document).ready(function() {
         var formData   = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
+        var error422 = '<h4 class="error text-center">All field required!</h4>';
 
         addPredictionProgress();
 
@@ -41,8 +42,14 @@ $(document).ready(function() {
                         $('.prediction-data').append(data);
                     }
                 },
-                error: function() {
-                    setTimeout(formPredict(), 3000);
+                error: function(jqXhr) {
+                    if( jqXhr.status === 422 ) {
+                        removePredictionProgress();
+                        $('.prediction-data').empty();
+                        $('.prediction-data').append(error422);
+                    } else {
+                        setTimeout(formPredict(), 3000);
+                    }
                 }
             });
         }
@@ -51,6 +58,7 @@ $(document).ready(function() {
 
     // prediction: form processing style
     function addPredictionProgress() {
+        $('.prediction-data').empty();
         $('input').attr('disabled', 'disabled');
         $('.spinner-prediction').fadeIn('slow');
         $('.pred-data').empty();
@@ -95,16 +103,21 @@ $(document).ready(function() {
             $(selector).val(newValue.substr(0, lengthVal));
             $(selector).focusout(function(event) {
                 $(error).fadeOut('slow');
+                $(selector).removeClass('pred-input-error');
+
             });
 
             if (newValue.length > lengthVal) {
                 $(error).fadeIn('slow');
                 $(error).html(errorPred("Length no more " + lengthVal));
+                $(selector + ":focus").addClass('pred-input-error');
             } else if (!newValue) {
+                $(selector + ":focus").addClass('pred-input-error');
                 $(error).fadeIn('slow');
                 $(error).html(errorPred(message));
-            } else if (newValue) {
+            } else {
                 $(error).fadeOut('slow');
+                $(selector).removeClass('pred-input-error');
             }
         });
     }

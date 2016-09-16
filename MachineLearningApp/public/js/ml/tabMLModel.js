@@ -4,6 +4,15 @@ $(document).ready(function() {
         listMLModel();
     }
 
+  
+    $(document).on('mouseenter', '.delete-endpoint', function (e) {
+        e.preventDefault();
+        $.jGrowl('delete RealtimeEndpoint', {
+            theme: 'jgrowl-notification'
+        });
+
+   });
+
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -78,6 +87,18 @@ $(document).ready(function() {
     //        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     //    });
 
+    $(document).on('click', '.delete-endpoint', function (e) {
+       e.preventDefault();
+       console.log($(this).data('model-id'));
+
+       $.post('/ml/delete-endpoint', {
+           id: $(this).data('model-id') }, function (data) {
+           console.log(data);
+           $(e.target).closest("tr").find('.status-endpoint').text('NONE');
+           $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
+       });
+   });
+
     function listMLModel() {
 
         $('.container-describeMLModels').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
@@ -103,6 +124,11 @@ $(document).ready(function() {
                 i = i + 1;
                 date = response.data[key].LastUpdatedAt.replace('T', '  ');
                 date = date.substring(0, date.indexOf('+'));
+                if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
+                    endpointDisabled = '';
+                } else {
+                    endpointDisabled = 'disabled';
+                };
                 res += '' +
                     '<tr>' +
                     '<td>' + response.data[key].MLModelId + '</td>' +
@@ -113,15 +139,19 @@ $(document).ready(function() {
                 res += '' +
                     '</td>' +
                     '<td>' + response.data[key].Status + '</td>' +
-                    '<td>' + response.data[key].EndpointInfo.EndpointStatus + '</td>' +
+                    '<td class="status-endpoint">' + response.data[key].EndpointInfo.EndpointStatus + '</td>' +
                     '<td>' + response.data[key].TrainingDataSourceId + '</td>' +
                     '<td>' + response.data[key].MLModelType + '</td>' +
                     '<td>' + date + '</td>' +
-                    '<td>' +
+                    '<td style="width:140px" nowrap>' +
+                    '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +
+                    'id="info_' + i + '" data-model-id="' + response.data[key].MLModelId + '">' +
+                        '<span class="glyphicon glyphicon glyphicon-minus"></span></a>&nbsp;' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                     'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].MLModelId + '">' +
-                    '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].MLModelId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                        '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
+                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].MLModelId + '">\n' +
+                        '<span class="glyphicon glyphicon-trash"></span></a>' +
                     '</td>' +
                     '</tr>' +
                     '<span class="hide">' + i + '</span>';

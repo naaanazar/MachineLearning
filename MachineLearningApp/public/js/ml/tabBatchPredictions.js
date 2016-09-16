@@ -16,12 +16,12 @@ $(document).ready(function() {
     //upload file to s3 bucket using ajax
     $('.create-bath-predictios-form').on("submit", function(e) {
         console.log($(".create-bath-predictios-form"));
-        //loading data
-        $(".create-bath-predictios-form").toggle();
-        $(".container-describeBatchPredictions").toggle();
-        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        e.preventDefault();
-        //  $('.preload-s3').show('fast').delay(4000).fadeOut(400);
+
+        //loading data       
+       $(".create-bath-predictios-form").toggle();
+       $(".container-describeBatchPredictions").toggle();
+       $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        e.preventDefault();    
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -29,11 +29,9 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(response) {
-                console.log(response.data);
-
-                listBatchPrediction();
-
+            success: function (response) {
+                console.log(response.data);                
+                listBatchPrediction();               
             },
             error: function() {},
         });
@@ -103,10 +101,6 @@ $(document).ready(function() {
         }
     });
 
-    //    //loading data
-    //    $('#describeBatchPredictionsContent').on('click', function() {
-    //        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
 
     function listBatchPrediction() {
         $('.container-describeBatchPredictions').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
@@ -128,34 +122,37 @@ $(document).ready(function() {
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
                 '</tr>' +
-                '<span class="hide">' + i + '</span>';
-            for (var key in response.data) {
-                i = i + 1;
-                var date = response.data[key].LastUpdatedAt.replace('T', '  ');
-                date = date.substring(0, date.indexOf('+'));
-                res +=
-                    '<tr>' +
-                    // '<td>' + response.data[key].BatchPredictionId + '</td>' +
-                    '<td>' + response.data[key].Name + '</td>' +
-                    '<td>' + response.data[key].Status + '</td>' +
-                    '<td>' + response.data[key].MLModelId + '</td>' +
-                    '<td>' + response.data[key].BatchPredictionDataSourceId + '</td>' +
-                    '<td>' + response.data[key].OutputUri + '</td>' +
-                    '<td>';
-                if (response.data[key].TotalRecordCount !== undefined) {
-                    res += response.data[key].TotalRecordCount;
-                };
-                res += '</td>' +
-                    '<td>' + date + '</td>' +
-                    '<td style="width:140px" nowrap>' +
-                    '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
-                    'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].BatchPredictionId + '">' +
-                    '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                    '<a class="btn btn-success btn-sm btn-list download-batch-result" href="#"><span class="glyphicon glyphicon-cloud-download"></span></a>&nbsp;' +
-                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].BatchPredictionId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                '<span class="hide">'+ i +'</span>';
+                for (var key in response.data) {
+                    i = i+1;
+                    var date = response.data[key].LastUpdatedAt.replace('T', '  ');
+                    fileName = response.data[key].InputDataLocationS3.split('/').reverse()[0];
+                    date = date.substring(0, date.indexOf('+'));
+                    path = response.data[key].OutputUri + 'batch-prediction/result/' +  response.data[key].BatchPredictionId + '-' + fileName + '.gz';
+                    res +=
+                        '<tr>' +
+                           // '<td>' + response.data[key].BatchPredictionId + '</td>' +
+                            '<td>' + response.data[key].Name + '</td>' +
+                            '<td>' + response.data[key].Status + '</td>' +
+                            '<td>' + response.data[key].MLModelId + '</td>' +
+                            '<td>' + response.data[key].BatchPredictionDataSourceId + '</td>' +
+                            '<td>' + response.data[key].OutputUri + '</td>' +
+                            '<td>';
+                                if (response.data[key].TotalRecordCount !== undefined) {
+                                    res += response.data[key].TotalRecordCount;
+                                };
+                    res +=  '</td>' +
+                            '<td>' + date + '</td>' +
+                            '<td style="width:140px" nowrap>' +
+                                '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
+                                   'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId + '">' +
+                                    '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
+                                '<a class="btn btn-success btn-sm btn-list download" href="#" data-download-path="' + path +'" ><span class="glyphicon glyphicon-cloud-download"></span></a>&nbsp;' +
+                                '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].BatchPredictionId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
 
-                    '</td>' +
-                    '</tr>' +
+                            '</td>' +
+                        '</tr>' +
+
                     '<span class="hide">' + i + '</span>';
             }
             res += '</table>';
@@ -165,3 +162,4 @@ $(document).ready(function() {
         });
     }
 });
+

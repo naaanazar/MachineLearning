@@ -112,6 +112,12 @@ body {
     position: relative;
     display: none;
 }
+.pred-input-error:focus {
+    border: 2px solid #ebccd1;
+    -webkit-box-shadow: 0 0 24px rgba(242, 222, 222, 1);
+       -moz-box-shadow: 0 0 24px rgba(242, 222, 222, 1);
+            box-shadow: 0 0 24px rgba(242, 222, 222, 1);
+}
 .pred-alert {
     position: absolute;
     top: -34px;
@@ -163,6 +169,11 @@ body {
 .tab-content {
     width: 100%;
 }
+
+.ml-table-data {
+width:140px;
+}
+
 @media screen and (max-width: 1200px) {
     .block-prediction {
         margin-right: 90px;
