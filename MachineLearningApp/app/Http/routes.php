@@ -56,13 +56,6 @@ Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
 Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPrediction');
 Route::post('/ml/delete-endpoint', 'MLController@deleteRealtimeEndpoint');
 
-
-Route::get('/ml/sb/{BatchPredictionId}', 'MLController@statusBatch');
-Route::get('/ml/ds', 'MLController@describeDataSources');
-Route::get('/ml/getd', 'MLController@getD');
-
-Route::post('/ml/datasource-update', 'MLController@updateDataSource');
-
 //ML info
 Route::get('/ml/getdatasource/{DataSourceId}', 'MLController@getDataSource');
 Route::get('/ml/getmlmodel/{ModelId}', 'MLController@getMLModel');

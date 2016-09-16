@@ -4,6 +4,15 @@ $(document).ready(function() {
         listMLModel();
     }
 
+  
+    $(document).on('mouseenter', '.delete-endpoint', function (e) {
+        e.preventDefault();
+        $.jGrowl('delete RealtimeEndpoint', {
+            theme: 'jgrowl-notification'
+        });
+
+   });
+
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -86,6 +95,7 @@ $(document).ready(function() {
            id: $(this).data('model-id') }, function (data) {
            console.log(data);
            $(e.target).closest("tr").find('.status-endpoint').text('NONE');
+           $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
    });
 
@@ -114,6 +124,11 @@ $(document).ready(function() {
                 i = i + 1;
                 date = response.data[key].LastUpdatedAt.replace('T', '  ');
                 date = date.substring(0, date.indexOf('+'));
+                if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
+                    endpointDisabled = '';
+                } else {
+                    endpointDisabled = 'disabled';
+                };
                 res += '' +
                     '<tr>' +
                     '<td>' + response.data[key].MLModelId + '</td>' +
@@ -129,7 +144,7 @@ $(document).ready(function() {
                     '<td>' + response.data[key].MLModelType + '</td>' +
                     '<td>' + date + '</td>' +
                     '<td style="width:140px" nowrap>' +
-                    '<a class="btn btn-warning btn-sm btn-list delete-endpoint" href="#modal"' +
+                    '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +
                     'id="info_' + i + '" data-model-id="' + response.data[key].MLModelId + '">' +
                         '<span class="glyphicon glyphicon glyphicon-minus"></span></a>&nbsp;' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
