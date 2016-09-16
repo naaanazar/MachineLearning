@@ -41,20 +41,21 @@ $(document).ready(function() {
     }
 
     $(document).on('click', '.btn-delete', function(e) {
-        e.preventDefault(); 
-        console.log($(this).attr('id'));
+        e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
             url: '/s3/delete',
             method: 'post',
-            data: {name: $(this).attr('id')},
-            success: function (data) {
+            data: {
+                name: $(this).attr('id')
+            },
+            success: function(data) {
                 console.log(data);
                 if (data.success) {
 
                     $(e.target).closest('tr').hide("fast");
                 }
-                successS3('.notification-s3', 'File delete!');
+                success('.notification-s3', 'File delete!');
             }
         });
     });

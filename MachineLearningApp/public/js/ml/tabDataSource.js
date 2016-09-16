@@ -105,6 +105,18 @@ $(document).ready(function () {
             listDataSource();
         }
     });
+    
+       $(document).on('click', '.datasource-update', function (e) {
+       e.preventDefault();
+       console.log($(this).data('model-id'));
+
+       $.post('/ml/datasource-update', {
+           id: $(this).data('source-id'),
+           name:$(this).data('source-name')}, function (data) {
+           console.log(data);
+           
+       });
+   });
 
     //    //loading data
     //    $('#describeDataSourcesContent').on('click', function() {

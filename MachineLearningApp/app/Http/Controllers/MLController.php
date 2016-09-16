@@ -501,7 +501,7 @@ class MLController extends Controller
     }
 
 
-    public function createBatchDataSourceFromS3($fileName)
+    private function createBatchDataSourceFromS3($fileName)
     {
         $DataSourceId = uniqid();
         $DataLocationS3 = 's3://' . $this->bucket . '/' . $fileName ;
@@ -524,6 +524,24 @@ class MLController extends Controller
         return $result['DataSourceId'];
       
     }
+
+
+    public function deleteRealtimeEndpoint(Request $request)
+    {
+        $MLModelId = $request->id;
+        
+        try {
+            $result = $this->client->deleteRealtimeEndpoint([
+            'MLModelId' => $MLModelId, // REQUIRED
+            ]);
+
+        } catch (MachineLearningException $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return response()->json(['data' => $result['Status']]);
+    }
+
+
 
     public function statusDataSource($DataSourceId)
     {
@@ -554,23 +572,23 @@ class MLController extends Controller
         return $result;
     }
 
-    public function updateDataSource($DataSourceId)
+    public function updateDataSource(Request $request)
     {
-        try {
 
-            $result = $this->client->getDataSource([
+        $DataSourceId = $request->id;
+        $DataSourceName = $request->name;
+
+        try {           
+            $result = $this->client->updateDataSource([
                 'DataSourceId' => $DataSourceId,
+                'DataSourceName' => '$DataSourceName',
             ]);
-
-            $this->client->updateDataSource([
-                'DataSourceId' => $result['DataSourceId'],
-                'DataSourceName' => $result['Name'],
-            ]);
-
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
+
+         return response()->json(['data' => $DataSourceId . $DataSourceName]);
     }
 
     public function updateMLModel($ModelId)
