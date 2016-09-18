@@ -21,6 +21,7 @@ $(document).ready(function() {
             }
         });
 
+        var content;
         var formData   = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
@@ -39,7 +40,12 @@ $(document).ready(function() {
                         setTimeout(formPredict(), 3000);
                     } else {
                         removePredictionProgress();
-                        $('.prediction-data').append(data);
+                        var output = $.parseJSON(data);
+                        content = "<h3><strong>Purchase:</strong> " + output.predictedLabel + "</h3>";
+                        content += "<h3><strong>Purchase:</strong> " + output.predictedScores[0] + "</h3>";
+                        content += "<h3><strong>Purchase:</strong> " + output.predictedScores[1] + "</h3>";
+                        $('.prediction-data').append(content);
+                        console.log(content);
                     }
                 },
                 error: function(jqXhr) {
