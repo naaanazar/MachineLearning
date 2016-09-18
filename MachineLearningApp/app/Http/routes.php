@@ -10,10 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// Route::get('/', function () {
+//     return redirect('prediction');
+// });
 
-Route::get('/', function () {
-    return redirect('prediction');
-});
+Route::get('/','FirstPageController@firstPage');
+
 
 Route::get('prediction', 'PredictionController@doView');
 Route::post('prediction/predict', 'PredictionController@doPredict');
@@ -54,13 +56,7 @@ Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');
 Route::get('/ml/delete-ml-model/{id}', 'MLController@deleteMLModel');
 Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
 Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPrediction');
-
-
-Route::get('/ml/sb/{BatchPredictionId}', 'MLController@statusBatch');
-Route::get('/ml/ds', 'MLController@describeDataSources');
-Route::get('/ml/getd', 'MLController@getD');
-
-
+Route::post('/ml/delete-endpoint', 'MLController@deleteRealtimeEndpoint');
 
 //ML info
 Route::get('/ml/getdatasource/{DataSourceId}', 'MLController@getDataSource');

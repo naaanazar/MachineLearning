@@ -13,7 +13,14 @@ use Aws\S3\Exception\S3Exception;
 
 class S3Controller extends Controller
 {
-    public $bucket = 'ml-datasets-test';
+    private $bucket = 'ml-datasets-test';
+    private $client;
+
+
+    public function __construct()
+    {
+        $this->client = $this->connect();
+    }
 
     private function connect()
     {
@@ -29,7 +36,7 @@ class S3Controller extends Controller
         return $s3;
     }
 
-    public function fileUpload($request)
+    private function fileUpload($request)
     {
         $this->validate($request, [
             'file' => 'required|file|mimes:csv,txt',
@@ -42,10 +49,9 @@ class S3Controller extends Controller
 
         $filepath = $storagePath . '/' . $fileName;
         $keyname = basename($filepath);
-        $client = $this->connect();
 
         try {
-            $result = $client->putObject(array(
+            $result = $this->client->putObject(array(
                 'Bucket' => $this->bucket,
                 'Key'    => $keyname,
                 'SourceFile'   => $filepath,
@@ -70,11 +76,10 @@ class S3Controller extends Controller
     public function delete()
     {
         $filename = $_POST['name'];
-        $client = $this->connect();
         $filename = urldecode($filename);    
 
         try {
-            $result = $client->deleteObject([
+            $result = $this->client->deleteObject([
                 'Bucket' => $this->bucket,
                 'Key' => $filename,
                 'RequestPayer' => 'requester'
@@ -88,10 +93,9 @@ class S3Controller extends Controller
 
     public function listS3()
     {
-        $client = $this->connect();
 
         try {
-            $result = $client->listObjects([
+            $result = $this->client->listObjects([
                 'Bucket' => $this->bucket,
                 
             ]);
@@ -106,34 +110,15 @@ class S3Controller extends Controller
 
         return view('s3.list', ['results' => $paginatedSearchResults]);
     }
-
-    public function ListObjectsS3()
-    {
-        $client = $this->connect();
-
-        try {
-            $result = $client->listObjects([
-                'Bucket' => $this->bucket,
-                
-            ]);
-
-            $results = $result['Contents'];
-
-        } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
-        }
-        
-        return $results;
-    }
+   
 
     public function getFile()
     {
-        $client = $this->connect();
         $path = storage_path('app/');
         $fileName = $path . 'dY11.txt';
         try {
-            $result = $client->getObject([
-                'Bucket' => $this->bucket, // REQUIRED
+            $result = $this->client->getObject([
+                'Bucket' => $this->bucket, 
                 'Key' => 'bathPrediction/batch-prediction/bp-57d7d30a2be64.manifest',
                 'SaveAs' => $fileName,
 
@@ -145,32 +130,20 @@ class S3Controller extends Controller
         sleep(1);
 
         return response()->download($fileName);
-        //File::delete($fileName);
+
     }
 
-    public function del()
-    {
-        $path = storage_path('app/');
-        $fileName = $path . 'dY43.tx';
-
-        $k = Storage::delete('dY43.tx');
-        echo $k;
-    }
-
-
-   public function downloadFromS3(Request $request)
-    {
-      
+    public function downloadFromS3(Request $request)
+    {      
 
         $path = $request->name;       
-        $path = urldecode($path);  
-        $client = $this->connect();
-        $client->registerStreamWrapper();
+        $path = urldecode($path);        
+        $this->client->registerStreamWrapper();
         $data = file_get_contents($path);
         $fileName = basename($path);
 
-        error_reporting(0); //Errors may corrupt download
-        ob_start(); //Insert this
+        error_reporting(0); 
+        ob_start(); 
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $fileName);
@@ -185,108 +158,15 @@ class S3Controller extends Controller
         exit;
     }
 
-
     public function fileExists(Request $request)
     {
         $path = $request->name;
         $path = urldecode($path);
-        $client = $this->connect();
-        $client->registerStreamWrapper();
+        $this->client->registerStreamWrapper();
 
         if (file_exists($path)) {
             return Response()->json(['data' => true]);
         }
-    }
-
-    public function getClient()
-    {
-        $client = $this->connect();
-        return $client;
-    }
-
-    public function getObjectACL()
-    {
-    $client = $this->connect();
-    $result = $client->getObjectAcl([
-        'Bucket' => $this->bucket, // REQUIRED
-        'Key' => 'dataset.csv', // REQUIRED
-        'RequestPayer' => 'requester',
-       
-    ]);
-
-    dd($result);
-
-    }
-
-     public function putObjectACL()
-    {
-        $client = $this->connect();
-
-//        $result = $client->putObjectAcl([
-//           'AccessControlPolicy' => [
-//                'Grants' => [
-//                    [
-//                        'Grantee' => [
-//                            'Type' => 'CanonicalUser',
-//                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
-//                        ],
-//                        'Permission' => 'READ',
-//                    ],
-//                    // ...
-//                ],
-//            ],
-//            'Bucket' => $this->bucket,
-//            'Key' => 'batch.csv', // REQUIRED
-//            'RequestPayer' => 'requester',
-//        ]);
-
-        $result = $client->putObjectAcl([    
-            'AccessControlPolicy' => [
-                'Grants' => [
-                    [
-                        'Grantee' => [
-                            'DisplayName' => '123',
-                            'ID' => '123',
-                            'Type' => 'CanonicalUser', // REQUIRED
-                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
-                        ],
-                        'Permission' => 'READ',
-                    ],
-                ],
-            ],
-            'Bucket' => $this->bucket, // REQUIRED
-            'Key' => 'dataset.csv', // REQUIRED
-        ]);
-
-//        $result = $client->putObjectAcl([
-//            'ACL' => 'public-read-write',
-//            'AccessControlPolicy' => [
-//                'Grants' => [
-//                    [
-//                        'Grantee' => [
-//                            'Type' => 'Group', // REQUIRED
-//                            'URI' => 'acs.amazonaws.com/groups/global/AllUsers',
-//                        ],
-//                        'Permission' => 'READ',
-//                    ],
-//                ],
-//            ],
-//            'Bucket' => $this->bucket, // REQUIRED
-//            'Key' => 'dataset.csv', // REQUIRED
-//            'RequestPayer' => 'requester',
-//
-//        ]);
-
-        dd($result);
-    }
-//  
-
-
-
-
-
-
-
-
+    }  
 
 }
