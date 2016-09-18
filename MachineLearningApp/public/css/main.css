@@ -66,6 +66,9 @@ body {
     padding-top: 10px;
     border-radius: 15px;
 }
+.pred-title {
+    margin-bottom: 64px;
+}
 .spinner-prediction {
     position: absolute;
     top: 18%;
@@ -74,9 +77,15 @@ body {
     font-size: 32px;
     transform: translateX(-50%);
 }
+.prediction-data {
+    font-size: 18px;
+}
+.prediction-data strong {
+    font-size: 20px;
+}
 .form-prediction {
     position: relative;
-    margin-top: 82px;
+    margin-top: 50px;
 }
 .label-pred {
     float: left;
@@ -95,12 +104,11 @@ body {
 .block-prediction {
     position: relative;
     top: -11px;
-    float: right;
     z-index: -1;
-    width: 52%;
+    width: 100%;
+    margin: 0 auto;
     margin-bottom: 30px;
-    margin-right: 117px;
-    padding: 25px;
+    padding: 30px 25px;
     background: #eee;
     border-radius: 8px;
 }

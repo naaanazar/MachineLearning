@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h3 class="title">Real time prediction</h3>
+    <h3 class="pred-title title">Real time prediction</h3>
     <div class="main-prediction clearfix">
         <div class="col-lg-8 col-md-8 col-ms-12 col-xs-12 col-md-offset-2">
             <div class="block-prediction clearfix">

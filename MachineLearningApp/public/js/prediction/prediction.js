@@ -41,11 +41,11 @@ $(document).ready(function() {
                     } else {
                         removePredictionProgress();
                         var output = $.parseJSON(data);
-                        content = "<h3><strong>Purchase:</strong> " + output.predictedLabel + "</h3>";
-                        content += "<h3><strong>Purchase:</strong> " + output.predictedScores[0] + "</h3>";
-                        content += "<h3><strong>Purchase:</strong> " + output.predictedScores[1] + "</h3>";
+                        content = "<p><strong>Purchase: </strong> " + output.predictedLabel + ";</p>";
+                        content += "<p><strong>Predicted Scores: </strong> " + output.predictedScores[0] + ", " + output.predictedScores[1] + ";</p>";
+                        content += "<p><strong>Algorithm: </strong> " + output.details.Algorithm + ";</p>";
+                        content += "<p><strong>Predictive Model Type: </strong> " + output.details.PredictiveModelType + ";</p>";
                         $('.prediction-data').append(content);
-                        console.log(content);
                     }
                 },
                 error: function(jqXhr) {

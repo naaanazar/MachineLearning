@@ -113,15 +113,7 @@ class PredictionController extends Controller
                 echo $e->getMessage() . "\n";
             }
 
-            //dd($result)
-
             $output = json_encode($result["Prediction"]);
-
-            // dd($result);
-            // $predictedLabel = $result["Prediction"]["predictedLabel"];
-            // $predict = $predictedLabel == 1 ? "Yes" : "No";
-
-            // $output = "<section class='pred-data'><h4><strong>Purchase: </strong>" . $predict . "</h4></section>";
 
             $this->deleteEndpoint($MLModelId);
 
