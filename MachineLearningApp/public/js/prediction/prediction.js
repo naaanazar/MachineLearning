@@ -21,7 +21,9 @@ $(document).ready(function() {
             }
         });
 
+        var output;
         var content;
+        var purchase;
         var formData   = $(this).serialize();
         var formAction = $(this).attr('action');
         var formMethod = $(this).attr('method');
@@ -40,12 +42,13 @@ $(document).ready(function() {
                         setTimeout(formPredict(), 3000);
                     } else {
                         removePredictionProgress();
-                        var output = $.parseJSON(data);
-                        content = "<p><strong>Purchase: </strong> " + output.predictedLabel + ";</p>";
+                        output = $.parseJSON(data);
+                        purchase = output.predictedLabel == 0 ? "No" : "Yes";
+                        content = "<p><strong>Purchase: </strong> " + purchase + ";</p>";
                         content += "<p><strong>Predicted Scores: </strong> " + output.predictedScores[0] + ", " + output.predictedScores[1] + ";</p>";
                         content += "<p><strong>Algorithm: </strong> " + output.details.Algorithm + ";</p>";
                         content += "<p><strong>Predictive Model Type: </strong> " + output.details.PredictiveModelType + ";</p>";
-                        $('.prediction-data').append(content);
+                        $('.prediction-data').append(content).show('normal');
                     }
                 },
                 error: function(jqXhr) {
@@ -85,16 +88,16 @@ $(document).ready(function() {
 
     function predDisabledBtn() {
         $('.input-pred').on('keyup mouseenter', function() {
-           var empty = false;
+           var count = 0;
             $('.input-pred').each(function() {
                 var value = $(this).val() === null ? 0 : $(this).val().length;
                 if (value === 0) {
-                    empty = true;
+                    count++;
                 }
             });
-            if (empty) {
+            if (count === 9) {
                 $('.btn-pred').attr('disabled', 'disabled');
-            } else {
+            } else if (count < 9) {
                  $('.btn-pred').removeAttr('disabled');
             }
         });
@@ -132,12 +135,12 @@ $(document).ready(function() {
     predictionValidation("#email", 1, "[^0-1]", "Enter the 0 or 1");
     predictionValidation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
     predictionValidation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-    predictionValidation("#same-email", 10, "[^0-9]", "Enter the number");
-    predictionValidation("#projects-count", 10, "[^0-9]", "Enter the number");
-    predictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
-    predictionValidation("#string-count", 10, "[^0-9]", "Enter the number");
-    predictionValidation("#members-count", 10, "[^0-9]", "Enter the number");
-    predictionValidation("#last-login", 10, "[^0-9]", "Enter the number");
+    predictionValidation("#same-email", 10, "^00|[^0-9]", "Enter the valid number");
+    predictionValidation("#projects-count", 10, "^00|[^0-9]", "Enter the valid number");
+    predictionValidation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
+    predictionValidation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
+    predictionValidation("#members-count", 10, "^00|[^0-9]", "Enter the valid number");
+    predictionValidation("#last-login", 10, "^00|[^0-9]", "Enter the valid number");
     predictionValidation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
 
 });
