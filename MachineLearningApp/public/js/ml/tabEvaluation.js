@@ -98,12 +98,12 @@ $(document).ready(function() {
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                '<td>EvaluationId</td>' +
+                '<td>Evaluation ID</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>BinaryAUC</td>' +
-                '<td>MLModelId</td>' +
-                '<td>EvaluationDataSourceId</td>' +
+                '<td>Binary AUC</td>' +
+                '<td>ML Model Id</td>' +
+                '<td>Evaluation Data Source Id</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
                 '</tr>' +

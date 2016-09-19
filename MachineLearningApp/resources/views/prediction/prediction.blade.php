@@ -1,7 +1,6 @@
 @extends('main')
 
 @section('content')
-
 <div class="container">
     <h3 class="title">Real time prediction</h3>
     <div class="main-prediction clearfix">

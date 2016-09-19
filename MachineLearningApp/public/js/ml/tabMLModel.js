@@ -110,12 +110,12 @@ $(document).ready(function() {
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                '<td>MLModelId</td>' +
+                '<td>ML Model Id</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>EndpointStatus</td>' +
-                '<td>TrainingDataSourceId</td>' +
-                '<td>MLModelType</td>' +
+                '<td>Endpoint Status</td>' +
+                '<td>Training Data Source Id</td>' +
+                '<td>ML Model Type</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
                 '</tr>' +

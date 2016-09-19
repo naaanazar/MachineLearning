@@ -137,7 +137,7 @@ $(document).ready(function () {
                 '<tr class="active">' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>DataLocationS3</td>' +
+                '<td>Data Location S3</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
                 '</tr>' +

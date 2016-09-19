@@ -116,8 +116,8 @@ $(document).ready(function() {
                 '<td>Name</td>' +
                 '<td>Status</td>' +
                 '<td>MLModelId</td>' +
-                '<td>BatchPredictionDataSourceId</td>' +
-                '<td>OutputUri</td>' +
+                '<td>Batch Prediction DataSource ID</td>' +
+                '<td>Output Uri</td>' +
                 '<td>Count</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
