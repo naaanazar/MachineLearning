@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                     <div class="site-heading">
-                        <h1 class="animated fadeInUp">Crowdin Machine Learning Platform</h1>
+                        <h1 class="animated fadeInUp" style="-webkit-animation-delay: 0.5s;">Crowdin Machine Learning Platform</h1>
                         <hr class="small">
                         <span class="subheading ">Crowdin Space</span>
                         <a href="#viewAboutContent"><button type="button" class="btn btn-primary btn-start btn-try-it animated fadeInLeft" style="-webkit-animation-delay: 0.5s;" onclick="showDiv()"> About</button></a>

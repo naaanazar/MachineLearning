@@ -44,11 +44,12 @@ blockquote {
   font-style: italic;
 }
 hr.small {
-  max-width: 100px;
-  margin: 15px auto;
-  border-width: 4px;
+  max-width: 150px;
+  margin: 17px auto;
+  border-width: 2px;
   border-color: white;
 }
+
 .navbar-custom {
   position: absolute;
   top: 0;
