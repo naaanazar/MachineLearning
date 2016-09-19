@@ -94,7 +94,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeBatchPredictionsContent', function () {
-        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
+        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create batch prediction</button>'
         $('#ml-button-create').html(button);
         if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
             listBatchPrediction();

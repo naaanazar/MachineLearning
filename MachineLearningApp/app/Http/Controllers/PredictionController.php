@@ -61,16 +61,16 @@ class PredictionController extends Controller
     public function doPredict(Request $request)
     {
         $this->validate($request, [
-            'country' => 'required|string|max:60',
+            'country' => 'string|max:60',
             'ml_model_id' => 'required',
-            'strings_count' => 'required|integer|min:0|max:10000000000',
-            'members_count' => 'required|integer|min:0|max:10000000000',
-            'projects_count' => 'required|integer|min:0|max:10000000000',
-            'email_custom_domain' => 'required|integer|digits_between:0,1',
-            'has_private_project' => 'required|integer|digits_between:0,1',
-            'days_after_last_login' => 'required|integer|min:0|max:10000000000',
-            'same_email_domain_count' => 'required|integer|min:0|max:10000000000',
-            'same_login_and_project_name' => 'required|integer|digits_between:0,1',
+            'strings_count' => 'integer|min:0|max:10000000000',
+            'members_count' => 'integer|min:0|max:10000000000',
+            'projects_count' => 'integer|min:0|max:10000000000',
+            'email_custom_domain' => 'integer|digits_between:0,1',
+            'has_private_project' => 'integer|digits_between:0,1',
+            'days_after_last_login' => 'integer|min:0|max:10000000000',
+            'same_email_domain_count' => 'integer|min:0|max:10000000000',
+            'same_login_and_project_name' => 'integer|digits_between:0,1',
         ]);
 
         $country = $request->input('country');
@@ -113,10 +113,7 @@ class PredictionController extends Controller
                 echo $e->getMessage() . "\n";
             }
 
-            $predictedLabel = $result["Prediction"]["predictedLabel"];
-            $predict = $predictedLabel == 1 ? "Yes" : "No";
-
-            $output = "<section class='pred-data'><h4><strong>Purchase: </strong>" . $predict . "</h4></section>";
+            $output = json_encode($result["Prediction"]);
 
             $this->deleteEndpoint($MLModelId);
 

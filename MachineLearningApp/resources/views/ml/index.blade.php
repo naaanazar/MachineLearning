@@ -20,7 +20,7 @@
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
                             id="describeDataSourcesContent">Data Source</a></li>
-                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">ML Models</a>
+                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a>
                         </li>
                         <li><a data-toggle="tab" href="#describeEvaluations"
                             id="describeEvaluationsContent">Evaluations</a>
@@ -43,7 +43,7 @@
                                 <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
-                                <label for="SelectDataLocationS3">Data location S3</label>
+                                <label for="SelectDataLocationS3">Dataset</label>
                                 <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
                                 </select>
                             </div>
@@ -63,7 +63,6 @@
                                     <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-primary submit-button">Submit</button>
                         </form>
                     </div>
@@ -77,13 +76,13 @@
                             <br>
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="MLModelName">ML model name</label>
+                                <label for="MLModelName">Model name</label>
                                 <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
                                        name="MLModelName">
                                 <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
-                                <label for="MLModelType">ML model type</label>
+                                <label for="MLModelType">Model type</label>
                                 <select class="form-control" id="MLModelType" name="MLModelType">
                                     <option selected value="BINARY">BINARY</option>
                                     <option value="REGRESSION">REGRESSION</option>
@@ -91,7 +90,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="SelectDataSource">Data source id</label>
+                                <label for="SelectDataSource">Data source name</label>
                                 <select class="form-control" id="SelectDataSource" name="DataSourceId">
                                 </select>
                             </div>
@@ -114,12 +113,12 @@
                                 <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
-                                <label for="SelectMLModelId">ML model id</label>
+                                <label for="SelectMLModelId">Model name</label>
                                 <select class="form-control" id="SelectMLModelId" name="MLModelId">
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="SelectEvDataSource">Data source id</label>
+                                <label for="SelectEvDataSource">Data source name</label>
                                 <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
                                 </select>
                             </div>
@@ -135,9 +134,8 @@
                               action="ml/create-batch-prediction">
                             <br>
                             {{ csrf_field() }}
-
                             <div class="form-group">
-                                <label for="SelectBathMLModel">ML model id</label>
+                                <label for="SelectBathMLModel">Model name</label>
                                 <select class="form-control" id="SelectBathMLModel" name="MLModelId">
                                 </select>
                             </div>
@@ -157,7 +155,6 @@
             </div>
         </div>
     </div>
-
     <br>
     <div id="modal" class="modal">
         <div class="modal-dialog">
