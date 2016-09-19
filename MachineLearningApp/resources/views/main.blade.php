@@ -18,6 +18,7 @@
        <script src="{{ URL::to('js/lib/jGrowl/jquery.jgrowl.min.js') }}"></script>
 
        <script src="{{ URL::to('js/common.js') }}"></script>
+       <script src="{{ URL::to('js/prediction/prediction.js') }}"></script>
        <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
        <script src="{{ URL::to('js/back-to-top.js') }}"></script>
        <script src="{{ URL::to('js/bucket.js') }}"></script>
@@ -30,10 +31,10 @@
        <![endif]-->
    </head>
    <body>
-       <nav class="navbar navbar-default">
+       <nav class="navbar navbar-default" >
            <div class="container-fluid">
                <div class="navbar-header">
-                <img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}">
+                   <a href="/"><img class="logo" alt="crowdin-space" src="{{ URL::to('images/crowdin-space.png') }}"</a></a>
                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                        <span class="icon-bar"></span>
                        <span class="icon-bar"></span>
@@ -41,10 +42,10 @@
                    </button>
                </div>
                <div class="collapse navbar-collapse" id="myNavbar">
-               <div class="navbar-menu">
-                   <ul class="nav navbar-nav">
-                           <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
-                               <a href="{{ action('S3Controller@doPredictionForm') }}">Predictions</a>
+                   <div class="navbar-menu">
+                       <ul class="nav navbar-nav">
+                           <li {{ (Request::is('prediction') ? 'class=active' : '') }}>
+                               <a href="{{ action('PredictionController@doView') }}">Prediction</a>
                            </li>
                            <li {{ (Request::is('ml') ? 'class=active' : '') }}>
                                <a href="{{ action('MLController@index') }}">ML</a>
@@ -55,8 +56,7 @@
                            <li {{ (Request::is('generator') ? 'class=active' : '') }}>
                                <a href="{{ URL::to('generator') }}">Generator</a>
                            </li>
-
-                   </ul>
+                       </ul>
                    </div>
                </div>
            </div>

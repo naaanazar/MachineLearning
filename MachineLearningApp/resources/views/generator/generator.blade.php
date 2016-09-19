@@ -5,19 +5,19 @@
 <script type="text/javascript" src="{{ URL::to('js/generate-dataset.js') }}"></script>
 
 <div class="container">    
-    <div class="row generator-form">
-        <div class="col-md-12">
-            <h3 align='center'>Generate dataset</h3>
-            <div class="col-md-6 col-md-offset-3">                
-                <input style="display: inline-block; width: 80%; margin-top: 20px;" class="form-control" id="rows-number" type="number" name="rows" placeholder="Records quantity" min="1">
-                <a id="generate-btn" class="btn btn-info" href="{{ URL::to('generate') }}">Generate</a>
-            </div>
+    <div class="row generator-form col-xs-12">
+        <h3 align='center'>Generate dataset</h3> 
+        <div class="col-md-10 col-xs-12 generator-input-container">
+            <input class="form-control" id="rows-number" ondrop="return false" name="rows" placeholder="Records quantity" min="1">
+            <div class='empty-msg'></div>
         </div>
-        <div class="col-md-12" style="text-align: center; padding-top: 50px;">
+        <div class="col-md-2 col-xs-4 generator-button-container">
+            <a id="generate-btn" class="btn btn-info disabled" href="{{ URL::to('generate') }}">Generate</a>
+        </div>
+        <div class="spinner-warapper">
             <i class="fa fa-spinner fa-4x fa-spin" style="display: none;"></i>
-        </div>
-        <div class="col-md-8 col-md-offset-2 messages"></div>
-    </div>    
+        </div> 
+    </div>
 </div>
     
 @endsection

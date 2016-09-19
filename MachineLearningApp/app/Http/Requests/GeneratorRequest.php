@@ -24,16 +24,16 @@ class GeneratorRequest extends Request
     public function rules()
     {
         return [
-            'rows' => 'required|integer|min:0',
+            'rows' => 'required|integer|min:1',
         ];
     }
 
     public function messages()
     {
         return [
-            'rows.required' => 'Records quantity is required',
-            'rows.integer'  => 'Records quantity must be an integer',
-            'rows.min'  => 'Records quantity must be positive number',
+            'rows.required' => 'This field is required',
+            'rows.integer'  => 'Quantity must be an integer',
+            'rows.min'  => 'Quantity must be positive number',
         ];
     }
 }

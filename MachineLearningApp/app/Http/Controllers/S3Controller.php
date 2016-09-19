@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
+use App\Library\Pagination\Pagination as S3Pagination;
+
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 use RecursiveIteratorIterator;
@@ -24,7 +26,7 @@ class S3Controller extends Controller
 
     public function doIndex()
     {
-        return view('s3.listS3');
+        return view('s3.list');
     }
 
     private function connect()
@@ -41,7 +43,6 @@ class S3Controller extends Controller
         return $s3;
     }
 
-
     public function doListOfBuckets()
     {
         try {
@@ -50,7 +51,8 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
-        return view('s3.listS3', ['results' => $result['Buckets']]);
+
+        return view('s3.list', ['results' => $result['Buckets']]);
     }
 
     public function allBuckets() {
@@ -125,19 +127,19 @@ class S3Controller extends Controller
             $results = $this->client->listObjects(array('Bucket' => $nameBucket))->get('Contents');
             if ($results == !null) {
                 foreach ($results as $key => $value) {
-
                     $this->client->deleteObject(array(
                         'Bucket' => $nameBucket,
                         'Key' => $value['Key'],
                     ));
                 }
-            }else{
+            } else {
                 echo "Files not found";
                 die();
             }
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
+
         return back();
     }
 
@@ -151,7 +153,7 @@ class S3Controller extends Controller
 
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $storagePath = storage_path('app/uploads');
+        $storagePath = storage_path('app/');
         $file->move($storagePath, $fileName);
 
         $filepath = $storagePath . '/' . $fileName;
@@ -168,12 +170,12 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
+
         return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
     public function doDelete($filename)
     {
-
         try {
             $this->client->deleteObject([
                 'Bucket' => $this->bucket,
@@ -181,8 +183,9 @@ class S3Controller extends Controller
                 'RequestPayer' => 'requester'
             ]);
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            return  Response()->json(['success' => (array)$e->getMessage()]);
         }
+
 
         return Response()->json(['success' => true]);
     }
@@ -191,5 +194,4 @@ class S3Controller extends Controller
     {
         return view('prediction.prediction');
     }
-
 }

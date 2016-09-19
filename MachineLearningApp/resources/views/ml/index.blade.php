@@ -2,259 +2,202 @@
 
 @section('content')
 
-<div class="container">
-<div class = "row" >
-    <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-        <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine Learning</h2>
-    </div>     
-    <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding: 0">
-            <ul class="nav nav nav-tabs nav-justified">
-              <li class="active"><a data-toggle="tab" href="#describeDataSources">Data Source</a></li>
-              <li><a data-toggle="tab" href="#describeMLModels">ML Models</a></li>
-              <li><a data-toggle="tab" href="#describeEvaluations">Evaluations</a></li>
-              <li><a data-toggle="tab" href="#describeBatchPredictions">Batch Predictions</a></li>
-            </ul>
-        </div>
-        <div class="tab-content">
-            <div id="describeDataSources" class="tab-pane fade in active">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>                    
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <form class="create-datasource" style="display:none;" method="post" action="{{ action('MLController@createDataSourceFromS3') }}">
-                        <br>
-                        {{ csrf_field() }}
-                        <br><br>
-                        <div class="form-group">
-                           <label for="DataSourceName">Data source name</label>
-                           <input type="text" class="form-control" id="DataSourceName" placeholder="Data source name" name="DataSourceName">
-                        </div>
-                        <div class="form-group">
-                           <label for="DataLocationS3">Data location S3</label>
-                           <input type="text" class="form-control" id="DataLocationS3" placeholder="s3://bucket/file.csv" name="DataLocationS3">
-                        </div>
-                        <div class="form-group">
-                           <label for="DataRearrangement">Data rearrangement</label>
-                           <input type="text" class="form-control" id="DataRearrangement" value='{"splitting":{"percentBegin":0,"percentEnd":70}}' name="DataRearrangement">
-                        </div>
-                        <div class="form-group">
-                           <label for="DataSchema">Data schema</label>
-                           <textarea class="form-control" id="DataSchema" placeholder="Data schema"  rows="10" name="DataSchema"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                <div class="container-describeDataSources">
-                    <table class="table table-bordered table-font text-center">
-                        <tr class="active">
-                            <td>DataSourceId</td>
-                            <td>Name</td>
-                            <td>Status</td>
-                            <td>DataLocationS3</td>
-                            <td>Last Updated</td>
-                            <td>&nbsp;</td>
-                        </tr>
+    <script src="{{ URL::to('js/ml/tabDataSource.js') }}"></script>
+    <script src="{{ URL::to('js/ml/tabMLModel.js') }}"></script>
+    <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
+    <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
 
-                    @foreach($result['describeDataSources'] as $key => $value)
-                        <tr>
-                            <td>{{ $value['DataSourceId'] }}</td>
-                            <td>
-                                @if (isset($value['Name']))
-                                    {{ $value['Name'] }}
-                                @endif
-                            </td>
-                            <td>{{ $value['Status'] }}</td>
-                            <td>{{ $value['DataLocationS3'] }}</td>
-                            <td>{{ $value['LastUpdatedAt'] }}</td>
-                            <td>
-                                <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-datasource/{{ $value['DataSourceId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </table>
+    <div class="container">
+        <div class="row">
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4">
+                <div id="ml-button-create">
                 </div>
-            </div>  
-            <div id="describeMLModels" class="tab-pane fade">
-                <div class="create-ml-mode">
-                    <button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>                   
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <form class="create-mlmodel" style="display:none;" method="post" action="{{ action('MLController@createMLModel') }}">
-                        <br>
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                           <label for="MLModelName">ML model name</label>
-                           <input type="text" class="form-control" id="MLModelName" placeholder="ML model name" name="MLModelName">
-                        </div>
-                        <div class="form-group">
-                           <label for="MLModelType">ML model type</label>
-                           <input type="text" class="form-control" id="MLModelType" placeholder="REGRESSION|BINARY|MULTICLASS" name="MLModelType">
-                        </div>
-                        <div class="form-group">
-                           <label for="DataSourceId">Data source id</label>
-                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                <div class="container-describeMLModels">
-                    <table class="table table-bordered table-font text-center">
-                        <tr class="active">
-                            <td>MLModelId</td>
-                            <td>Name</td>
-                            <td>Status</td>
-                            <td>TrainingDataSourceId</td>
-                            <td>MLModelType</td>
-                            <td>Last Updated</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        @foreach($result['describeMLModels'] as $key => $value)
-                        <tr>
-                            <td>{{ $value['MLModelId'] }}</td>
-                            <td>
-                            @if (isset($value['Name']))
-                                {{ $value['Name'] }}
-                            @endif
-                            </td>
-                            <td>{{ $value['Status'] }}</td>
-                            <td>{{ $value['TrainingDataSourceId'] }}</td>
-                            <td>{{ $value['MLModelType'] }}</td>
-                            <td>{{ $value['LastUpdatedAt'] }}</td>
-                            <td>
-                                <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-ml-model/{{ $value['MLModelId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>            
-            <div id="describeEvaluations" class="tab-pane fade">               
-                <div class="create-evaluation">
-                    <button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>                    
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <form class="create-evaluations" style="display:none;" method="post" action="{{ action('MLController@createEvaluation') }}">
-                        <br>
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="EvaluationName">Evaluation name</label>
-                           <input type="text" class="form-control" id="EvaluationName" placeholder="Evaluation name" name="EvaluationName">
-                        </div>
-                        <div class="form-group">
-                           <label for="MLModelId">ML model id</label>
-                           <input type="text" class="form-control" id="MLModelId" placeholder="ML model id" name="MLModelId">
-                        </div>
-                        <div class="form-group">
-                           <label for="DataSourceId">Data source id</label>
-                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                <div class="container-describeEvaluations">
-                    <table class="table table-bordered table-font text-center">
-                        <tr class="active">
-                             <td>EvaluationId</td>
-                            <td>Name</td>
-                            <td>Status</td>
-                            <td>BinaryAUC</td>
-                            <td>MLModelId</td>
-                            <td>EvaluationDataSourceId</td>
-                            <td>Last Updated</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        @foreach($result['describeEvaluations'] as $key => $value)
-                        <tr>
-                            <td>{{ $value['EvaluationId'] }}</td>
-                            <td>
-                                @if (isset($value['Name']))
-                                    {{ $value['Name'] }}
-                                @endif
-                            </td>
-                            <td>{{ $value['Status'] }}</td>
-                            <td>
-                                @if (isset($value['PerformanceMetrics']['Properties']['BinaryAUC']))
-                                    {{ $value['PerformanceMetrics']['Properties']['BinaryAUC'] }}
-                                @endif
-                            </td>
-                            <td>{{ $value['MLModelId'] }}</td>
-                            <td>{{ $value['EvaluationDataSourceId'] }}</td>
-                            <td>{{ $value['LastUpdatedAt'] }}</td>
-                            <td>
-                                <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-evaluation/{{ $value['EvaluationId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
+                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
+                    Learning</h2>
+            </div>
+            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 tabs ml-tabs" >
+                <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
+                    <ul class="nav nav nav-tabs nav-justified ">
+                        <li class="active"><a data-toggle="tab" href="#describeDataSources"
+                            id="describeDataSourcesContent">Data Source</a></li>
+                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#describeEvaluations"
+                            id="describeEvaluationsContent">Evaluations</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a></li>
+                    </ul>
                 </div>
             </div>
-            <div id="describeBatchPredictions" class="tab-pane fade">
-                <div class="create-bath-description">
-                    <button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>
+            <div class="tab-content col-md-12">
+                <div id="describeDataSources" class="tab-pane fade in active">
+                    <div class="">
+                        
+                    </div>
+                    <div class="container-describeDataSources table-scroll ML-tables-content">
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <form class="create-bath-descriptions" style="display:none;" method="post" action="{{ action('MLController@createBatchPrediction') }}">
+                <div id="describeMLModels" class="tab-pane fade">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <form class="create-mlmodel-form" style="display:none;" method="post"
+                              action="ml/create-ml-model">
+                            <br>
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="MLModelName">Model name</label>
+                                <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
+                                       name="MLModelName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="MLModelType">Model type</label>
+                                <select class="form-control" id="MLModelType" name="MLModelType">
+                                    <option selected value="BINARY">BINARY</option>
+                                    <option value="REGRESSION">REGRESSION</option>
+                                    <option value="MULTICLASS">MULTICLASS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="SelectDataSource">Data source name</label>
+                                <select class="form-control" id="SelectDataSource" name="DataSourceId">
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
+                    </div>
+                </div>
+                <div id="describeEvaluations" class="tab-pane fade">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <form class="create-evaluations-form" style="display:none;" method="post"
+                              action="ml/create-evaluation">
+                            <br>
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="EvaluationName">Evaluation name</label>
+                                <input type="text" class="form-control" id="EvaluationName"
+                                       placeholder="Evaluation name" name="EvaluationName">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="SelectMLModelId">Model name</label>
+                                <select class="form-control" id="SelectMLModelId" name="MLModelId">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="SelectEvDataSource">Data source name</label>
+                                <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
+                    </div>
+                </div>
+                <div id="describeBatchPredictions" class="tab-pane fade">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                       
+                    </div>
+                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="modal fade modalCreateDataSource" id="modalCreateDataSource" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Batch prediction</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="create-datasource-form" method="post"
+                        action="ml/create-datasource">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="BatchPredictionName">Batch prediction name</label>
-                           <input type="text" class="form-control" id="BatchPredictionName" placeholder="Batch prediction name" name="BatchPredictionName">
+                            <label for="DataSourceName">Data source name</label>
+                            <input type="text" class="form-control" id="DataSourceName"
+                                  placeholder="Data source name" name="DataSourceName">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
                         <div class="form-group">
-                           <label for="MLModelId">ML model id</label>
-                           <input type="text" class="form-control" id="MLModelId" placeholder="ML model id" name="MLModelId">
+                            <label for="SelectDataLocationS3">Dataset</label>
+                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
+                            </select>
+                        </div>
+                        <div class="">
+                            <div class="form-group">
+                                <label for="DataRearrangement">Data rearrangement Begin</label>
+                                <input type="number" class="form-control form-control-sm" id="DataRearrangementBegin"
+                                      name="DataRearrangementBegin">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="form-group">
+                                <label for="DataRearrangement">Data rearrangement End</label>
+                                <input type="number" class="form-control form-control-sm" id="DataRearrangementEnd"
+                                      name="DataRearrangementEnd">
+                               <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modalCreateBatchPrediction" id="modalCreateBatchPrediction" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Batch prediction</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="create-bath-predictios-form modal-body" method="post"
+                        action="ml/create-batch-prediction">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="SelectBathMLModel">Model name</label>
+                            <select class="form-control" id="SelectBathMLModel" name="MLModelId">
+                            </select>
                         </div>
                         <div class="form-group">
-                           <label for="DataSourceId">Data source id</label>
-                           <input type="text" class="form-control" id="DataSourceId" placeholder="Data source id" name="DataSourceId">
+                            <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
+                                <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file-source" type="file" name="file">
+                            </label>
+                            <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
-                <div class="container-describeBatchPredictions">
-                    <table class="table table-bordered table-font text-center">
-                        <tr class="active">
-                            <td>BatchPredictionId</td>
-                            <td>Name</td>
-                            <td>Status</td>
-                            <td>MLModelId</td>
-                            <td>BatchPredictionDataSourceId</td>
-                            <td>OutputUri</td>
-                            <td>Count</td>
-                            <td>TotalRecordCount</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        @foreach($result['describeBatchPredictions'] as $key => $value)
-                        <tr>
-                            <td>{{ $value['BatchPredictionId'] }}</td>
-                            <td>{{ $value['Name'] }}</td>
-                            <td>{{ $value['Status'] }}</td>
-                            <td>{{ $value['MLModelId'] }}</td>
-                            <td>{{ $value['BatchPredictionDataSourceId'] }}</td>
-                            <td>{{ $value['OutputUri'] }}</td>
-                            <td>
-                                @if (isset($value['TotalRecordCount']) > 0)
-                                {{ $value['TotalRecordCount'] }}
-                                @endif
-                            </td>
-                            <td>{{ $value['LastUpdatedAt'] }}</td>
-                            <td>
-                                <a class="btn btn-info btn-sm btn-list" href="/ml/getdatasource/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                <a class="btn btn-danger btn-sm btn-list" href="/ml/delete-batch-prediction/{{ $value['BatchPredictionId'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>   
+            </div>
         </div>
     </div>
-</div>
-</div>
-<br>     
+    <div id="modal" class="modal modal-1">
+        <div class="modal-dialog">
+            <div class="center modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 align="center">Information</h2>
+                </div>
+                <div class="center modal-body modal-body-1" id="result_info">
+                    <div class="row" id="modal_row">
+                        <div class="loader col-md-2 col-md-offset-5" id="loader">
 
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
+

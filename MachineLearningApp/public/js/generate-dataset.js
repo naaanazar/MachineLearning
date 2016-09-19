@@ -4,13 +4,37 @@ $.ajaxSetup({
     }
 });
 
-$(document).ready(function() {
+$(document).on('input', '#rows-number', function(e){
+    var value = $(e.target).val();
+    var newVal = value.replace(/^0|\D+/g, '');
+
+    $("#rows-number").val(newVal);
+
+    if($("#rows-number").val() !== "") {
+        $('#generate-btn').removeClass('disabled');
+    } else {
+        $('#generate-btn').addClass('disabled');
+    }
+});
+
+$(document).ready(function() {    
+
     $('#generate-btn').on('click', function(e) {
+
         e.preventDefault();
-        $('.messages').empty();
-        $('i.fa-spinner').show();
+        $('.empty-msg').empty();
+        $('#rows-number').removeClass('warning');
+
         var route = $(this).attr('href');
-        var rowsNumber = $('#rows-number').val();
+        var rowsNumber = $('#rows-number').val();        
+
+        if(rowsNumber === "") {
+            $(".empty-msg").html("This Field is required!");
+            $('#rows-number').addClass('warning');
+            return;
+        }
+
+        $('i.fa-spinner').css('display', 'inline-block');
         
         $.ajax({
             method: 'POST',
@@ -31,21 +55,18 @@ $(document).ready(function() {
                     var link = "<a href='datasets/" +stats.path+ "'>dataset</a>";
                     content += '<li>Link to dataset: ' +link+ '</li>';
                     content += '</ul>';
-                    $('.messages').html(content);
+                    $('.empty-msg').html(content).css('color', "#000");
                 }
             },
             error: function (xhr, status, error) {
                 $('i.fa-spinner').hide();
-//                $('body').prepend(xhr.responseText);
-                console.log(status);
-                console.log(error);
                 if(xhr.status === 500) {
                     $.jGrowl("Token Mismatch!", { sticky: true, theme: 'jgrowl-danger' });
                     return;
                 }
                 var errorMessages = xhr.responseJSON.rows;
-                console.log(errorMessages);
-                $.jGrowl(errorMessages, { sticky: true, theme: 'jgrowl-danger' });
+                $(".empty-msg").append(errorMessages);
+                $('#rows-number').addClass('warning');
             }
         });
     });
