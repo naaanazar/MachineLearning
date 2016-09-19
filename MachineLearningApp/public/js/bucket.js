@@ -1,109 +1,138 @@
-function setLocation(curLoc){
-    location.href = curLoc;
-}
-
 $(document).ready(function () {
+    if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
+        $.ajax({
+            type: "GET",
+            url: 's3/allbuckets',
+            dataType: 'json',
 
-    if(location.href.split('#').length > 1) {
-        $('.content').hide();
-
-        var name = location.href.split('#')[location.href.split('#') - 1];
-        for(var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            $('#myTable').append("<tr class='new'>" +
-                "<td class='id'>" + 1 + "</td>" +
-                "<td>" + JSON.parse(localStorage.getItem(key))[0] + "</td>" +
-                "<td>" + JSON.parse(localStorage.getItem(key))[1] + "</td>" +
-                "<td>" + JSON.parse(localStorage.getItem(key))[2] + "</td>" +
-                "<td> " +
-                "<a class='btn btn-default btn-sm' href='https://s3.amazonaws.com/ml-datasets-test/" + JSON.parse(localStorage.getItem(key))[0] + "'><span class='glyphicon glyphicon-download'></span></a>" +
-                "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + JSON.parse(localStorage.getItem(key))[0] + "'><span class='glyphicon glyphicon-trash'></span></a>" +
-                "</td>" +
-                "</tr>");
-        }
-    } else {
-        $('.reference').click(function () {
-            var $ref = $(this);
-            var name = $ref.text();
-            $('.content').hide();
-            replaceTable(name);
+            success: function (data) {
+                localStorage.clear();
+                data.forEach(function (item) {
+                    localStorage.setItem(item.name, JSON.stringify(item));
+                });
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
         });
     }
 });
 
-// $(document).ready(function () {
-//     if(!location.pathname.localeCompare('/bucket')) {
-//         $.ajax({
-//             type: "GET",
-//             url: 'bucket/allbuckets',
-//             dataType: 'json',
-//
-//             success: function (data) {
-//                 var id = 0;
-//                 // data.forEach(function (item) {
-//                 //     console.log(item);
-//                 // })
-//                 console.log(data);
-//             },
-//             error: function (data) {
-//                 console.log('Error:', data);
-//             }
-//         });
-//     }
-// });
+$(document).ready(function () {
+    $('body').on('click', '.reference', function() {
+        var $ref = $(this);
+        var name = $ref.text();
+        if (!!getLastHash()) {
+            loc = getLastHash();
+            $('.' + loc).remove();
+        }
+        setLocation('#' + name);
+        showTable(name);
+    });
+});
 
-function replaceTable(name) {
-    $.ajax({
-        type: "GET",
-        url: 's3/list' + '/' + name,
-        dataType: 'json',
+$(document).ready(function () {
+    $('body').on('click', '.back', function() {
 
-        success: function (data) {
-            var id = 1;
-            localStorage.clear();
-            if(data.length) {
-                console.log('---');
-                setLocation('#' + name);
-                console.log(data);
-                data.forEach(function (item) {
-                    localStorage.setItem(id + 'Key', JSON.stringify([item.Key, item.Size, item.LastModified]));
-
-                    $('#myTable').append("<tr class='new'>" +
-                        "<td class='id'>" + id++ + "</td>" +
-                        "<td>" + item.Key + "</td>" +
-                        "<td>" + item.Size + "</td>" +
-                        "<td>" + item.LastModified + "</td>" +
-                        "<td> " +
-                        "<a class='btn btn-default btn-sm' href='https://s3.amazonaws.com/ml-datasets-test/" + item.Key + "'><span class='glyphicon glyphicon-download'></span></a>" +
-                        "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + item.Key + "'><span class='glyphicon glyphicon-trash'></span></a>" +
-                        "</td>" +
-                        "</tr>");
-                })
-            } else {
-                console.log('+++');
-                setLocation('#' + name);
-                $('.content').remove();
+        if(location.href.split('#').length > 2) {
+            if (!!getLastHash()) {
+                loc = getLastHash();
+                $('.' + loc).hide();
             }
-        },
-        error: function (data) {
-            console.log('Error:', data);
+            history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
+            var name = location.hash.split('#')[location.hash.split('#').length -1];
+            showTable(name);
+        } else if(location.href.split('#').length == 2) {
+            if (!!getLastHash()) {
+                loc = getLastHash();
+                $('.' + loc).hide();
+            }
+            history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
+            $('.content').show();
         }
     });
+});
+
+$(document).ready(function () {
+    if(location.href.split('#').length > 1) {
+        var name = location.hash.split('#')[location.hash.split('#').length -1];
+        showTable(name);
+    }
+});
+
+function setLocation(curLoc){
+    location.href = location.href + curLoc;
 }
 
+function showFolder(level, name) {
+    var folders = [];
+    for(var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
 
+        if(JSON.parse(localStorage.getItem(key)).path.split('/').length  >= (level + 3) &&
+            JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] == name) {
 
+            folders.push(JSON.parse(localStorage.getItem(key)).path.split('/')[level + 2]);
 
+        }
+    }
+    folders = unique(folders);
 
+    return folders;
+}
 
+function unique(arr) {
+    var result = [];
 
+    nextInput:
+        for (var i = 0; i < arr.length; i++) {
+            var str = arr[i];
+            for (var j = 0; j < result.length; j++) {
+                if (result[j] == str) continue nextInput;
+            }
+            result.push(str);
+        }
 
+    return result;
+}
 
+function getLastHash() {
+    return location.hash.split('#')[location.hash.split('#').length - 1];
+}
 
+function showTable(name) {
+    $('.content').hide();
+    if("onhashchange" in window) {
+        var level = location.hash.split('#').length - 1;
+        folders = showFolder(level, name);
+        for (var item in folders) {
+            $('#myTable').append("<tr class='" + name + " bg'>" +
+                "<td class='reference'>" + folders[item] + "</td>" +
+                "<td>" + 'folder' + "</td>" +
+                "<td>" + '-' + "</td>" +
+                "<td> " + "</td>" +
+                "</tr>");
+        }
 
+        for(var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
 
-function localLoadData() {
-    if(~location.pathname.localeCompare('/bucket')) {
+            if(JSON.parse(localStorage.getItem(key)).path.split('/')[JSON.parse(localStorage.getItem(key)).path.split('/').length - 1]
+                == location.hash.split('#')[location.hash.split('#').length -1] &&
+                JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] ==
+                name) {
 
+                $('#myTable').append("<tr class='" + name + "'>" +
+                    "<td>" + JSON.parse(localStorage.getItem(key)).name + "</td>" +
+                    "<td>" + JSON.parse(localStorage.getItem(key)).size + "</td>" +
+                    "<td>" + JSON.parse(localStorage.getItem(key)).modified + "</td>" +
+                    "<td> " +
+                    "<a class='btn btn-default btn-sm' href='https://s3.amazonaws.com/ml-datasets-test/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-download'></span></a>" +
+                    "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
+                    "</td>" +
+                    "</tr>");
+
+            }
+        }
     }
 }

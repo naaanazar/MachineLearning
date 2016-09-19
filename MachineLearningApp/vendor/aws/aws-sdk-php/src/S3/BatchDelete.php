@@ -8,7 +8,7 @@ use GuzzleHttp\Promise\PromisorInterface;
 use GuzzleHttp\Promise\PromiseInterface;
 
 /**
- * Efficiently deletes many objects from a single Amazon S3 bucket using an
+ * Efficiently deletes many objects from a single Amazon S3 s3 using an
  * iterator that yields keys. Deletes are made using the DeleteObjects API
  * operation.
  *

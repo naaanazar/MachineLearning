@@ -59,7 +59,7 @@ return [
             'key' => 'your-key',
             'secret' => 'your-secret',
             'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            's3' => 'your-s3',
         ],
 
     ],

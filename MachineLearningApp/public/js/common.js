@@ -67,7 +67,7 @@ $(document).ready(function() {
     });
 
 
-    //upload file to s3 bucket using ajax
+    //upload file to s3 s3 using ajax
     $('.form-upload').on("submit", function(e){
         console.log($(".form-upload"));
         e.preventDefault();

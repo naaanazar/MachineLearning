@@ -44,20 +44,18 @@
                <div class="navbar-menu">
                    <ul class="nav navbar-nav">
                            <li {{ (Request::is('predictions') ? 'class=active' : '') }}>
-                               <a href="{{ action('S3Controller@predictionForm') }}">Predictions</a>
+                               <a href="{{ action('S3Controller@doPredictionForm') }}">Predictions</a>
                            </li>
                            <li {{ (Request::is('ml') ? 'class=active' : '') }}>
                                <a href="{{ action('MLController@index') }}">ML</a>
                            </li>
-                           <li {{ (Request::is('s3/list') ? 'class=active' : '') }}>
-                               <a class="s3-button" href="{{ action('S3Controller@listS3') }}">List S3</a>
+                           <li {{ (Request::is('s3') ? 'class=active' : '') }}>
+                               <a href="{{ action('S3Controller@doIndex') }}">S3</a>
                            </li>
                            <li {{ (Request::is('generator') ? 'class=active' : '') }}>
                                <a href="{{ URL::to('generator') }}">Generator</a>
                            </li>
-                           <li {{ (Request::is('bucket/listBucket') ? 'class=active' : '') }}>
-                               <a href="{{ action('BucketController@index') }}">Buckets</a>
-                           </li>
+
                    </ul>
                    </div>
                </div>
@@ -65,6 +63,7 @@
        </nav>
 
        @yield('content')
+
        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"  data-placement="top"><span class="glyphicon glyphicon-chevron-up"></span></a>
        <div class="footer panel panel-margin">
            <div class="panel-footer text-center">

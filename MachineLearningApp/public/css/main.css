@@ -191,6 +191,34 @@ body {
     background-color: green !important;
 }
 
+@import 'https://fonts.googleapis.com/css?family=Droid+Serif';
 .reference:hover {
     cursor: pointer;
+}
+
+.back {
+    font-size: 17px;
+    margin-right: 550px;
+    font-weight: bold;
+}
+
+.back:hover {
+    cursor: pointer;
+    background-color: #DDDDDD;
+    text-decoration: underline;
+}
+
+.bg {
+    padding: 0px;
+    margin: 0px;
+}
+
+.bg:hover {
+    cursor: pointer;
+    background-color: #F5F5F5;
+}
+
+.table-header {
+    font-size: 17px;
+    font-family: 'Droid Serif', serif;
 }

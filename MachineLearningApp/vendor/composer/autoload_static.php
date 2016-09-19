@@ -378,7 +378,7 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
-        'App\\Http\\Controllers\\BucketController' => __DIR__ . '/../..' . '/app/Http/Controllers/BucketController.php',
+        'App\\Http\\Controllers\\BucketController' => __DIR__ . '/../..',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\GeneratorController' => __DIR__ . '/../..' . '/app/Http/Controllers/GeneratorController.php',
         'App\\Http\\Controllers\\MLController' => __DIR__ . '/../..' . '/app/Http/Controllers/MLController.php',

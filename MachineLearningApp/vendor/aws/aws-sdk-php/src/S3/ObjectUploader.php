@@ -72,7 +72,7 @@ class ObjectUploader implements PromisorInterface
                 }
             };
             return (new MultipartUploader($this->client, $this->body, [
-                    'bucket' => $this->bucket,
+                    's3' => $this->bucket,
                     'key'    => $this->key,
                     'acl'    => $this->acl
                 ] + $this->options))->promise();

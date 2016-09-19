@@ -16,7 +16,7 @@ class BucketTest extends IntegrationTest
     public function testcreateBucket()
     {
         $this->click('Buckets')
-             ->seePageIs('bucket')
+             ->seePageIs('s3')
              ->type( 'ml-set-testing', 'nameBucket')
              ->press('Submit');
     }
@@ -47,7 +47,7 @@ class BucketTest extends IntegrationTest
 //    public function testcreateBucket()
 //    {
 //        $this->click('Buckets')
-//             ->seePageIs('bucket')
+//             ->seePageIs('s3')
 //             ->type( 'ml-set-testing', 'nameBucket')
 //             ->press('Submit');
 //    }
@@ -55,7 +55,7 @@ class BucketTest extends IntegrationTest
     public function testdeleteBucket()
     {
         $this->click('Buckets')
-             ->seePageIs('bucket')
-             ->clickCss("a[href='/bucket/delete/ml-test-back']");
+             ->seePageIs('s3')
+             ->clickCss("a[href='/s3/delete/ml-test-back']");
     }
 }

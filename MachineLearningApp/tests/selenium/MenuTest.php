@@ -28,7 +28,7 @@ class MenuTest extends \PHPUnit_Framework_TestCase
     public function testOpenPredictionsPage ($host, $desiredCapabilities)
     {
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
-        $this->driver->get('http://laravel:3080/bucket');
+        $this->driver->get('http://laravel:3080/s3');
 
         $Predictions = $this->driver->findElement(WebDriverBy::xpath("//nav//div[2]/ul/li[1]/a"));
         $Predictions->click();
@@ -94,6 +94,6 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $Predictions->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::titleIs("Crowdin Space Machine Learning App"));
-        $this->assertEquals('http://laravel:3080/bucket', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки
+        $this->assertEquals('http://laravel:3080/s3', $this->driver->getCurrentURL()); // getCurrentURL() - повертає url поточної сторінки
     }
 }

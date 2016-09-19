@@ -12,7 +12,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
-    'App\\Http\\Controllers\\BucketController' => $baseDir . '/app/Http/Controllers/BucketController.php',
+    'App\\Http\\Controllers\\BucketController' => $baseDir . '/app/Http/Controllers/S3Controller.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\GeneratorController' => $baseDir . '/app/Http/Controllers/GeneratorController.php',
     'App\\Http\\Controllers\\MLController' => $baseDir . '/app/Http/Controllers/MLController.php',

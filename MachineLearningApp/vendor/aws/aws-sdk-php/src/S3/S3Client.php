@@ -155,8 +155,8 @@ class S3Client extends AwsClient implements S3ClientInterface
                 'type'    => 'config',
                 'valid'   => ['bool'],
                 'doc'     => 'Set to true to send requests to a hardcoded '
-                    . 'bucket endpoint rather than create an endpoint as a '
-                    . 'result of injecting the bucket into the URL. This '
+                    . 's3 endpoint rather than create an endpoint as a '
+                    . 'result of injecting the s3 into the URL. This '
                     . 'option is useful for interacting with CNAME endpoints.',
             ],
             'use_accelerate_endpoint' => [
@@ -166,7 +166,7 @@ class S3Client extends AwsClient implements S3ClientInterface
                     . ' endpoint by default. Can be enabled or disabled on'
                     . ' individual operations by setting'
                     . ' \'@use_accelerate_endpoint\' to true or false. Note:'
-                    . ' you must enable S3 Accelerate on a bucket before it can'
+                    . ' you must enable S3 Accelerate on a s3 before it can'
                     . ' be accessed via an Accelerate endpoint.',
                 'default' => false,
             ],
@@ -191,15 +191,15 @@ class S3Client extends AwsClient implements S3ClientInterface
      * options:
      *
      * - bucket_endpoint: (bool) Set to true to send requests to a
-     *   hardcoded bucket endpoint rather than create an endpoint as a result
-     *   of injecting the bucket into the URL. This option is useful for
+     *   hardcoded s3 endpoint rather than create an endpoint as a result
+     *   of injecting the s3 into the URL. This option is useful for
      *   interacting with CNAME endpoints.
      * - calculate_md5: (bool) Set to false to disable calculating an MD5
      *   for all Amazon S3 signed uploads.
      * - use_accelerate_endpoint: (bool) Set to true to send requests to an S3
      *   Accelerate endpoint by default. Can be enabled or disabled on
      *   individual operations by setting '@use_accelerate_endpoint' to true or
-     *   false. Note: you must enable S3 Accelerate on a bucket before it can be
+     *   false. Note: you must enable S3 Accelerate on a s3 before it can be
      *   accessed via an Accelerate endpoint.
      * - use_dual_stack_endpoint: (bool) Set to true to send requests to an S3
      *   Dual Stack endpoint by default, which enables IPv6 Protocol.
@@ -230,7 +230,7 @@ class S3Client extends AwsClient implements S3ClientInterface
             ),
             's3.use_dual_stack_endpoint'
         );
-        // Use the bucket style middleware when using a "bucket_endpoint" (for cnames)
+        // Use the s3 style middleware when using a "bucket_endpoint" (for cnames)
         if ($this->getConfig('bucket_endpoint')) {
             $stack->appendBuild(BucketEndpointMiddleware::wrap(), 's3.bucket_endpoint');
         }
@@ -246,10 +246,10 @@ class S3Client extends AwsClient implements S3ClientInterface
 
     /**
      * Determine if a string is a valid name for a DNS compatible Amazon S3
-     * bucket.
+     * s3.
      *
-     * DNS compatible bucket names can be used as a subdomain in a URL (e.g.,
-     * "<bucket>.s3.amazonaws.com").
+     * DNS compatible s3 names can be used as a subdomain in a URL (e.g.,
+     * "<s3>.s3.amazonaws.com").
      *
      * @param string $bucket Bucket name to check.
      *
