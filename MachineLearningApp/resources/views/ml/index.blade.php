@@ -32,39 +32,7 @@
             <div class="tab-content col-md-12">
                 <div id="describeDataSources" class="tab-pane fade in active">
                     <div class="">
-                        <form class="create-datasource-form" style="display:none;" method="post"
-                             action="ml/create-datasource">
-                            <br>
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="DataSourceName">Data source name</label>
-                                <input type="text" class="form-control" id="DataSourceName"
-                                       placeholder="Data source name" name="DataSourceName">
-                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="SelectDataLocationS3">Dataset</label>
-                                <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
-                                </select>
-                            </div>
-                            <div class="">
-                                <div class="form-group">
-                                    <label for="DataRearrangement">Data rearrangement Begin</label>
-                                    <input type="number" class="form-control form-control-sm" id="DataRearrangementBegin"
-                                           name="DataRearrangementBegin">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                            <div class="">
-                                <div class="form-group">
-                                    <label for="DataRearrangement">Data rearrangement End</label>
-                                    <input type="number" class="form-control form-control-sm" id="DataRearrangementEnd"
-                                           name="DataRearrangementEnd">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary submit-button">Submit</button>
-                        </form>
+                        
                     </div>
                     <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
@@ -139,6 +107,51 @@
         </div>
     </div>
     <br>
+    <div class="modal fade modalCreateDataSource" id="modalCreateDataSource" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Batch prediction</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="create-datasource-form" method="post"
+                        action="ml/create-datasource">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="DataSourceName">Data source name</label>
+                            <input type="text" class="form-control" id="DataSourceName"
+                                  placeholder="Data source name" name="DataSourceName">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="SelectDataLocationS3">Dataset</label>
+                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
+                            </select>
+                        </div>
+                        <div class="">
+                            <div class="form-group">
+                                <label for="DataRearrangement">Data rearrangement Begin</label>
+                                <input type="number" class="form-control form-control-sm" id="DataRearrangementBegin"
+                                      name="DataRearrangementBegin">
+                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="form-group">
+                                <label for="DataRearrangement">Data rearrangement End</label>
+                                <input type="number" class="form-control form-control-sm" id="DataRearrangementEnd"
+                                      name="DataRearrangementEnd">
+                               <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade modalCreateBatchPrediction" id="modalCreateBatchPrediction" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

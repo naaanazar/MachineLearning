@@ -8,13 +8,15 @@ $(document).ready(function () {
 
     $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
+
         $.ajax({
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
             success: function (data) {
-                $(".create-datasource-form").toggle();
-                $(".container-describeDataSources").toggle();
+                $(".modalCreateDataSource").modal('toggle');
+                //$(".create-datasource-form").toggle();
+                //$(".container-describeDataSources").toggle();
                 listDataSource();
                 console.log(data);
             },
@@ -91,8 +93,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".btn-create-datasource", function () {
-        $(".create-datasource-form").toggle();
-        $(".container-describeDataSources").toggle();
+     //   $(".create-datasource-form").toggle();
+      //  $(".container-describeDataSources").toggle();
 
         $.get("/ml/select-S3objects", function (response) {
             var result;
@@ -108,7 +110,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
-        var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
+        var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateDataSource">Create Datasource</button>'
         $('#ml-button-create').html(button);
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
