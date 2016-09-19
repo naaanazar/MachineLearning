@@ -130,24 +130,7 @@
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                       <form class="create-bath-predictios-form" style="display:none;" method="post"
-                              action="ml/create-batch-prediction">
-                            <br>
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="SelectBathMLModel">Model name</label>
-                                <select class="form-control" id="SelectBathMLModel" name="MLModelId">
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
-                                    <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file-source" type="file" name="file">
-                                </label>
-                                <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-
+                       
                     </div>
                     <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
                     </div>
@@ -156,14 +139,43 @@
         </div>
     </div>
     <br>
-    <div id="modal" class="modal">
+    <div class="modal fade modalCreateBatchPrediction" id="modalCreateBatchPrediction" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Batch prediction</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="create-bath-predictios-form modal-body" method="post"
+                        action="ml/create-batch-prediction">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="SelectBathMLModel">Model name</label>
+                            <select class="form-control" id="SelectBathMLModel" name="MLModelId">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
+                                <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file-source" type="file" name="file">
+                            </label>
+                            <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal" class="modal modal-1">
         <div class="modal-dialog">
             <div class="center modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h2 align="center">Information</h2>
                 </div>
-                <div class="center modal-body" id="result_info">
+                <div class="center modal-body modal-body-1" id="result_info">
                     <div class="row" id="modal_row">
                         <div class="loader col-md-2 col-md-offset-5" id="loader">
 

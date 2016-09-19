@@ -2,13 +2,9 @@ $(document).ready(function() {
     $("[data-toggle='tooltip']").tooltip();
 
     if (window.location.hash == '#describeBatchPredictions') {
+        buttonCreateBathPrediction();
         listBatchPrediction();
     }
-
-    // upload button without submit
-    // $('#input-file-source').change(function () {
-    //   $('.create-bath-predictios-form').submit();
-    //});
 
     // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
@@ -18,9 +14,10 @@ $(document).ready(function() {
         console.log($(".create-bath-predictios-form"));
 
         //loading data       
-       $(".create-bath-predictios-form").toggle();
-       $(".container-describeBatchPredictions").toggle();
-       $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+      // $(".create-bath-predictios-form").toggle();
+      // $(".container-describeBatchPredictions").toggle();
+        $(".modalCreateBatchPrediction").modal('toggle');
+        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         e.preventDefault();    
         $.ajax({
             url: '/ml/upload-batch-source',
@@ -30,7 +27,8 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function (response) {
-                console.log(response.data);                
+                console.log(response.data);
+               
                 listBatchPrediction();               
             },
             error: function() {},
@@ -50,27 +48,10 @@ $(document).ready(function() {
             '</li></ul></div>').show('slow').hide(4000);
 
     }
-    //    $('.create-bath-predictios-form').submit(function (e) {
-    //        e.preventDefault();
-    //        $.ajax({
-    //            type: "post",
-    //            url: 'ml/create-batch-prediction',
-    //            data: $('.create-bath-predictios-form').serialize(),
-    //            success: function (data) {
-    //                $(".create-bath-predictios-form").toggle();
-    //                $(".container-describeBatchPredictions").toggle();
-    //                listBatchPrediction();
-    //                console.log(data);
-    //            },
-    //            error: function () {
-    //            },
-    //        });
-    //    });
-
 
     $(document).on("click", ".btn-create-bath-description", function() {
-        $(".create-bath-predictios-form").toggle();
-        $(".container-describeBatchPredictions").toggle();
+     //   $(".create-bath-predictios-form").toggle();
+      //  $(".container-describeBatchPredictions").toggle();
 
         $.get("/ml/select-ml-model", function(response) {
             var result;
@@ -94,25 +75,28 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeBatchPredictionsContent', function () {
-        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create batch prediction</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateBathPrediction();
         if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
             listBatchPrediction();
         }
     });
 
 
+    function buttonCreateBathPrediction() {
+        var button = '<button class="btn btn-primary btn-create-bath-description pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateBatchPrediction">Create batch prediction</button>';
+        $('#ml-button-create').html(button);
+    }
+
     function listBatchPrediction() {
         $('.container-describeBatchPredictions').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-//        var button = '<button class="btn btn-primary btn-create-bath-description pull-right">Create bath prediction</button>'
-//        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-batch-prediction", function(response) {
             var i = 1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                //    '<td>BatchPredictionId</td>' +
+                //'<td>BatchPredictionId</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
                 //'<td>MLModelId</td>' +

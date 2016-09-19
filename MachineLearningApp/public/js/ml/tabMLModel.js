@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
     if (window.location.hash == '#describeMLModels') {
+        buttonCreateModels();
         listMLModel();
-    }
-
+    };
   
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
@@ -58,10 +58,7 @@ $(document).ready(function() {
         } else {
             $(this).closest('form').find('button').removeClass('disabled');
         }
-
-
     });
-
 
     $(document).on("click", ".btn-create-mlmodel", function() {
         $('.create-mlmodel-form').toggle();
@@ -78,17 +75,11 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
-        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateModels();
         if(!$('.container-describeMLModels').hasClass('loaded')) {
             listMLModel();
         }
     });
-
-    //    //loading data
-    //    $('#describeMLModelsContent').on('click', function() {
-    //        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
 
     $(document).on('click', '.delete-endpoint', function (e) {
        e.preventDefault();
@@ -102,11 +93,15 @@ $(document).ready(function() {
        });
    });
 
+   
+    function buttonCreateModels() {
+        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
+        $('#ml-button-create').html(button);        
+    };
+
     function listMLModel() {
 
         $('.container-describeMLModels').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-//        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
-//        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-ml-model", function(response) {
             var i = 1;
