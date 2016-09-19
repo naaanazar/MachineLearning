@@ -109,29 +109,7 @@ class S3Controller extends Controller
         }
 
         return view('s3.list', ['results' => $paginatedSearchResults]);
-    }
-   
-
-    public function getFile()
-    {
-        $path = storage_path('app/');
-        $fileName = $path . 'dY11.txt';
-        try {
-            $result = $this->client->getObject([
-                'Bucket' => $this->bucket, 
-                'Key' => 'bathPrediction/batch-prediction/bp-57d7d30a2be64.manifest',
-                'SaveAs' => $fileName,
-
-            ]);
-
-        } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
-        }
-        sleep(1);
-
-        return response()->download($fileName);
-
-    }
+    }  
 
     public function downloadFromS3(Request $request)
     {      

@@ -127,7 +127,7 @@ $(document).ready(function() {
             case 'Data Source':
                 url = '/ml/getdatasource/';
                 break;
-            case 'ML Models':
+            case 'Models':
                 url = '/ml/getmlmodel/';
                 break;
             case 'Evaluations':
@@ -150,7 +150,7 @@ $(document).ready(function() {
                     data.DataSourceId = response.data[5];
                     data.DatasetId = response.data[6];
                     break;
-                case 'ML Models':
+                case 'Models':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.Size = response.data[1] + ' Bytes';
@@ -243,8 +243,8 @@ $(document).ready(function() {
             case 'Data Source':
                 deleteObject('Data Source', '/ml/delete-datasource/');
                 break;
-            case 'ML Models':
-                deleteObject('ML Models', '/ml/delete-ml-model/');
+            case 'Models':
+                deleteObject('Models', '/ml/delete-ml-model/');
                 break;
             case 'Evaluations':
                 deleteObject('Evaluations', '/ml/delete-evaluation/');

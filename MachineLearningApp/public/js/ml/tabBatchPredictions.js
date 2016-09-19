@@ -115,9 +115,9 @@ $(document).ready(function() {
                 //    '<td>BatchPredictionId</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>MLModelId</td>' +
-                '<td>Batch Prediction DataSource ID</td>' +
-                '<td>Output Uri</td>' +
+                //'<td>MLModelId</td>' +
+                //'<td>Batch Prediction DataSource ID</td>' +
+                //'<td>Output Uri</td>' +
                 '<td>Count</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
@@ -134,9 +134,9 @@ $(document).ready(function() {
                            // '<td>' + response.data[key].BatchPredictionId + '</td>' +
                             '<td>' + response.data[key].Name + '</td>' +
                             '<td>' + response.data[key].Status + '</td>' +
-                            '<td>' + response.data[key].MLModelId + '</td>' +
-                            '<td>' + response.data[key].BatchPredictionDataSourceId + '</td>' +
-                            '<td>' + response.data[key].OutputUri + '</td>' +
+                            //'<td>' + response.data[key].MLModelId + '</td>' +
+                            //'<td>' + response.data[key].BatchPredictionDataSourceId + '</td>' +
+                            //'<td>' + response.data[key].OutputUri + '</td>' +
                             '<td>';
                                 if (response.data[key].TotalRecordCount !== undefined) {
                                     res += response.data[key].TotalRecordCount;
