@@ -384,13 +384,11 @@ class MLController extends Controller
         } catch (MachineLearningException $e) {
             return response()->json(['data' => $e->getMessage() ]);
         }
-
     }
-
 
     public function createBatchPrediction(Request $request)
     {
-        $S3 = new S3Controller;
+        $S3 = new S3;
         $client = $S3->getClient();
         $client->registerStreamWrapper();
 
