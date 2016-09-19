@@ -73,6 +73,8 @@ class PredictionController extends Controller
             'same_login_and_project_name' => 'integer|digits_between:0,1',
         ]);
 
+        // dd($request->all());
+
         $country = $request->input('country');
         $MLModelId = $request->input('ml_model_id');
         $stringsCount = $request->input('strings_count');
@@ -83,7 +85,6 @@ class PredictionController extends Controller
         $daysAfterLastLogin = $request->input('days_after_last_login');
         $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
-
         $endPoint = $this->createEndpoint($MLModelId);
 
         $endpointStatus  = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
@@ -112,11 +113,9 @@ class PredictionController extends Controller
             } catch (MachineLearningException $e) {
                 echo $e->getMessage() . "\n";
             }
-
             $output = json_encode($result["Prediction"]);
 
             $this->deleteEndpoint($MLModelId);
-
             return $output;
         }
     }
