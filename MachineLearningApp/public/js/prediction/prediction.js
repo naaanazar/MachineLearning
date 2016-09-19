@@ -40,8 +40,6 @@
             $('.form-prediction').on('submit', function(e) {
                 e.preventDefault();
 
-                $('html, body').animate({scrollTop: 0}, '500', 'swing');
-
                 $.ajaxSetup({
                     headers: {
                         'X-XSRF-Token': $('meta[name="_token"]').attr('content')
@@ -89,7 +87,7 @@
                         this.content = "<p><strong>Purchase: </strong> ";
                         this.content += this.purchase + ";</p>";
                         this.content += "<p><strong>Predicted Scores: </strong> ";
-                        this.content += this.output.predictedScores[0] + ";</p>";
+                        this.content += this.output.predictedScores[0].toFixed(4) + ";</p>";
                         this.content += "<p><strong>Algorithm: </strong> ";
                         this.content += this.output.details.Algorithm + ";</p>";
                         this.content += "<p><strong>Predictive Model Type: </strong> "
