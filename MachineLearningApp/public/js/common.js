@@ -243,8 +243,8 @@ $(document).ready(function() {
             case 'Data Source':
                 deleteObject('Data Source', '/ml/delete-datasource/');
                 break;
-            case 'ML Models':
-                deleteObject('ML Models', '/ml/delete-ml-model/');
+            case 'Models':
+                deleteObject('Models', '/ml/delete-ml-model/');
                 break;
             case 'Evaluations':
                 deleteObject('Evaluations', '/ml/delete-evaluation/');
