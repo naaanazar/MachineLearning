@@ -37,7 +37,7 @@ class ML
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
-        //dd($result);
+
         return $result['Results'];
     }
 
@@ -186,7 +186,6 @@ class ML
         }
     }
 
-
     public function getDataSource($DataSourceId)
     {
 
@@ -205,7 +204,6 @@ class ML
         echo '<pre>';
         print_r($result);
     }
-
 
     public function getMLModel($ModelId)
     {
@@ -226,7 +224,6 @@ class ML
         print_r($result);
     }
 
-
     public function getEvaluation($EvaluationId)
     {
 
@@ -245,7 +242,6 @@ class ML
         print_r($result);
     }
 
-
     public function getBatchPrediction($getBatchPredictionId)
     {
 
@@ -262,7 +258,6 @@ class ML
         echo '<pre>';
         print_r($result);
     }
-
 
     public function createDataSourceFromS3($DataSourceId, $DataSourceName, $DataSchema)
     {
@@ -288,13 +283,7 @@ class ML
         print_r($result);
         return $result['DataSourceId'];
     }
-
-
-    /*
-    add:
-    [Status] => INPROGRESS
-    [Message] => Current Step: BASIC_STATISTICS (1/2) 0%
-    */
+  
     public function createMLModel($ModelId, $ModelName, $ModelType, $DataSourceId)
     {
 
@@ -320,7 +309,6 @@ class ML
         return $result['MLModelId'];
     }
 
-
     public function createEvaluation($EvaluationName, $EvaluationId, $ModelId, $EvaluationDataSourceId)
     {
 
@@ -343,7 +331,6 @@ class ML
 
         return $result['EvaluationId'];
     }
-
 
     public function createDataSourceBathFromS3($DataSourceId, $DataSourceName, $DataSchema)
     {
@@ -369,7 +356,6 @@ class ML
         return $result['DataSourceId'];
     }
 
-
     public function createBatchPrediction($BatchPredictionDataSourceId, $BatchPredictionId, $BatchPredictionName, $ModelId, $OutputUri)
     {
 
@@ -391,5 +377,5 @@ class ML
         print_r($result);
         return $result['BatchPredictionId'];
     }
-
+    
 }

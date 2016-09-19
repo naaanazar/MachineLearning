@@ -48,7 +48,7 @@ $(document).ready(function () {
                 }
                 break;
             case 'DataRearrangementBegin':
-                var rv_name = /^[1-9][0-9]?$|^100$/;
+                var rv_name = /^[0-9][0-9]?$|^100$/;
 
                 if (val.length > 0 && val != '' && rv_name.test(val)) {
                     $(this).removeClass('error').addClass('not_error');

@@ -113,11 +113,11 @@ $(document).ready(function() {
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                '<td>ML Model Id</td>' +
+               // '<td>ML Model Id</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
                 '<td>Endpoint Status</td>' +
-                '<td>Training Data Source Id</td>' +
+                //'<td>Training Data Source Id</td>' +
                 '<td>ML Model Type</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
@@ -134,7 +134,7 @@ $(document).ready(function() {
                 };
                 res += '' +
                     '<tr>' +
-                    '<td>' + response.data[key].MLModelId + '</td>' +
+                   // '<td>' + response.data[key].MLModelId + '</td>' +
                     '<td>';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
@@ -143,7 +143,7 @@ $(document).ready(function() {
                     '</td>' +
                     '<td>' + response.data[key].Status + '</td>' +
                     '<td class="status-endpoint">' + response.data[key].EndpointInfo.EndpointStatus + '</td>' +
-                    '<td>' + response.data[key].TrainingDataSourceId + '</td>' +
+                    //'<td>' + response.data[key].TrainingDataSourceId + '</td>' +
                     '<td>' + response.data[key].MLModelType + '</td>' +
                     '<td>' + date + '</td>' +
                     '<td style="width:140px" nowrap>' +
