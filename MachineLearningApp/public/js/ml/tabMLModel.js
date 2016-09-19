@@ -20,8 +20,9 @@ $(document).ready(function() {
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
-                $(".create-mlmodel-form").toggle();
-                $(".container-describeMLModels").toggle();
+              //  $(".create-mlmodel-form").toggle();
+               // $(".container-describeMLModels").toggle();
+                $(".modalCreateModel").modal('toggle');
                 listMLModel();
                 console.log(data);
             },
@@ -61,8 +62,8 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        $('.create-mlmodel-form').toggle();
-        $(".container-describeMLModels").toggle();
+     //   $('.create-mlmodel-form').toggle();
+       // $(".container-describeMLModels").toggle();
 
         $.get("/ml/select-data-source", function(response) {
             var result='';
@@ -95,7 +96,8 @@ $(document).ready(function() {
 
    
     function buttonCreateModels() {
-        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
+        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateModel">Create ML Mode</button>'
         $('#ml-button-create').html(button);        
     };
 
