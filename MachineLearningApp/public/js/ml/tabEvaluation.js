@@ -20,39 +20,43 @@ $(document).ready(function() {
         });
     });
 
+
+    $(document).on('blur', '.form-control', function (e) {
+        var id = e.target.id;
+        var val = e.target.value;
+        $(this).closest('div').find('span').addClass('hide');
+
+        switch (id) {
+            case 'EvaluationName':
+                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+
+                if (val.length > 2 && val != '' && rv_name.test(val)) {
+                    $(this).removeClass('error').addClass('not_error');
+                    $(this).closest('div').removeClass('has-error');
+                    $(this).closest('div').addClass('has-success has-feedback');
+                    $(this).closest('div').find('span').removeClass('hide');
+
+                }
+                else {
+                    $(this).removeClass('not_error').addClass('error');
+                    $(this).closest('div').addClass('has-error has-feedback');
+                    $(this).closest('div').find('span').addClass('hide');
+                }
+                break;
+
+        }
+
+        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
+            $(this).closest('form').find('button').addClass('disabled');
+        } else {
+            $(this).closest('form').find('button').removeClass('disabled');
+        }
+
+    });
+
     $(document).on("click", ".btn-create-evaluations", function() {
         $(".create-evaluations-form").toggle();
         $(".container-describeEvaluations").toggle();
-
-        $(document).on('blur', '.form-control', function (e) {
-            $(e.target).blur(function () {
-                console.log(e.target.value);
-                var id = e.target.id;
-                var val = e.target.value;
-                $(this).closest('div').find('span').addClass('hide');
-
-                switch (id) {
-                    case 'EvaluationName':
-                        var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                        if (val.length > 2 && val != '' && rv_name.test(val)) {
-                            $(this).removeClass('error').addClass('not_error');
-                            $(this).closest('div').removeClass('has-error');
-                            $(this).closest('div').addClass('has-success has-feedback');
-                            $(this).closest('div').find('span').removeClass('hide');
-
-                        }
-                        else {
-                            $(this).removeClass('not_error').addClass('error');
-                            $(this).closest('div').addClass('has-error has-feedback');
-                            $(this).closest('div').find('span').addClass('hide');
-                        }
-                        break;
-
-                }
-
-            });
-        });
 
         $.get("/ml/select-ml-model", function(response) {
             var result;
@@ -98,12 +102,12 @@ $(document).ready(function() {
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                '<td>EvaluationId</td>' +
+                '<td>Evaluation ID</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>BinaryAUC</td>' +
-                '<td>MLModelId</td>' +
-                '<td>EvaluationDataSourceId</td>' +
+                '<td>Binary AUC</td>' +
+                '<td>ML Model Id</td>' +
+                '<td>Evaluation Data Source Id</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
                 '</tr>' +

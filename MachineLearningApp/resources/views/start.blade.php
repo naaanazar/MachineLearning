@@ -14,11 +14,11 @@
        <link href="{{ URL::to('css/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
        <link href="{{ URL::to('css/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
        <link href="{{ URL::to('css/main.css') }}" rel="stylesheet">
+       <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet"> -->
        <script src="{{ URL::to('js/lib/jquery/jquery.min.js') }}"></script>
        <!--jGrowl-->
        <link rel="stylesheet" type="text/css" href="{{ URL::to('css/lib/jGrowl/jquery.jgrowl.min.css') }}" />
        <script src="{{ URL::to('js/lib/jGrowl/jquery.jgrowl.min.js') }}"></script>
-
        <script src="{{ URL::to('js/common.js') }}"></script>
        <script src="{{ URL::to('js/prediction/prediction.js') }}"></script>
        <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
@@ -142,56 +142,17 @@
                                 Modeling APIs
                             </h2>
                             <h3 class="post-subtitle">
-                                Amazon Machine Learning provides APIs for modeling and management that allow you to create, review, and delete data sources, models, and evaluations. This allows you to automate the creation of new models when new data becomes available. You can also use the APIs to inspect previous models, data sources, evaluations, and batch predictions for tracking and repeatability.  <hr>
+                                Amazon Machine Learning provides APIs for modeling and management that allow you to create, review, and delete data sources, models, and evaluations. This allows you to automate the creation of new models when new data becomes available. You can also use the APIs to inspect previous models, data sources, evaluations, and batch predictions for tracking and repeatability. 
                             </h3> 
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
-    <hr>
 
     <!-- Footer -->
 
    @yield('content')
-   <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">&copy; Crowdin space 2016</p>
-                </div>
-            </div>
-        </div>
-    </footer>
    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"  data-placement="top"><span class="glyphicon glyphicon-chevron-up"></span></a>
 
 </body>
