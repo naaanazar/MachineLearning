@@ -4,8 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 body {
+  height: 80%;
+  font-size: 20px;
   color: #333333;
   padding-bottom: 25px !important;
+  overflow-y: hidden;
 }
 p {
   line-height: 1.5;
@@ -14,6 +17,8 @@ p {
 p a {
   text-decoration: underline;
 }
+
+
 h1,
 h2,
 h3,
@@ -398,3 +403,5 @@ body {
 .back-to-top{
   bottom: 45px !important;
 }
+
+

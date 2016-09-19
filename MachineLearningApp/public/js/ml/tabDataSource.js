@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
     if (window.location.hash == '#describeDataSources') {
         listDataSource();
     }
@@ -142,7 +142,7 @@ $(document).ready(function () {
 
             var i = 1;
             var res = '' +
-                '<table class="table table-bordered table-font text-center">' +
+                '<table class="table  table-bordered table-font text-center">' +
                 '<tr class="active">' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
