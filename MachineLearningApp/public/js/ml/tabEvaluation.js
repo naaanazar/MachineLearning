@@ -12,8 +12,9 @@ $(document).ready(function() {
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
             success: function(data) {
-                $(".create-evaluations-form").toggle();
-                $(".container-describeEvaluations").toggle();
+                //$(".create-evaluations-form").toggle();
+              //  $(".container-describeEvaluations").toggle();
+                $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
                 console.log(data);
             },
@@ -54,8 +55,8 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-        $(".create-evaluations-form").toggle();
-        $(".container-describeEvaluations").toggle();
+      //  $(".create-evaluations-form").toggle();
+      //  $(".container-describeEvaluations").toggle();
 
         $.get("/ml/select-ml-model", function(response) {
             var result;
@@ -87,7 +88,8 @@ $(document).ready(function() {
     });
 
     function buttonCreateEvaluation() {
-       var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
+       var button = '<button class="btn btn-primary btn-create-evaluations pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateEvaluation">Create Evaluations</button>'
         $('#ml-button-create').html(button);
     };
 

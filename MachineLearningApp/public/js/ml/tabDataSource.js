@@ -81,9 +81,7 @@ $(document).ready(function () {
                     $(this).closest('div').find('span').addClass('hide');
                 }
                 break;
-
         }
-
 
         if ($(this).closest('form.create-datasource-form').find('div.has-error').hasClass('has-error') == true) {
             $(this).closest('form').find('button').addClass('disabled');
@@ -130,16 +128,9 @@ $(document).ready(function () {
        });
    });
 
-    //    //loading data
-    //    $('#describeDataSourcesContent').on('click', function() {
-    //        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
-
     function listDataSource() {
 
         $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
-        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-data-sources", function (response) {
 

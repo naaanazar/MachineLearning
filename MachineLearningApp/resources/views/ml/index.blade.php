@@ -39,59 +39,14 @@
                 </div>
                 <div id="describeMLModels" class="tab-pane fade">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <form class="create-mlmodel-form" style="display:none;" method="post"
-                              action="ml/create-ml-model">
-                            <br>
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="MLModelName">Model name</label>
-                                <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
-                                       name="MLModelName">
-                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="MLModelType">Model type</label>
-                                <select class="form-control" id="MLModelType" name="MLModelType">
-                                    <option selected value="BINARY">BINARY</option>
-                                    <option value="REGRESSION">REGRESSION</option>
-                                    <option value="MULTICLASS">MULTICLASS</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SelectDataSource">Data source name</label>
-                                <select class="form-control" id="SelectDataSource" name="DataSourceId">
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        
                     </div>
                     <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
                     </div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <form class="create-evaluations-form" style="display:none;" method="post"
-                              action="ml/create-evaluation">
-                            <br>
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="EvaluationName">Evaluation name</label>
-                                <input type="text" class="form-control" id="EvaluationName"
-                                       placeholder="Evaluation name" name="EvaluationName">
-                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="SelectMLModelId">Model name</label>
-                                <select class="form-control" id="SelectMLModelId" name="MLModelId">
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SelectEvDataSource">Data source name</label>
-                                <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        
                     </div>
                     <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
                     </div>
@@ -112,10 +67,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Create Batch prediction</h4>
+                    <h4 class="modal-title">Create Data Source</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="create-datasource-form" method="post"
+                    <form class="create-datasource-form" style="display:none;" method="post"
                         action="ml/create-datasource">
                         <br>
                         {{ csrf_field() }}
@@ -147,6 +102,77 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modalCreateModel" id="modalCreateModel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Model</h4>
+                </div>
+                <div class="modal-body">
+                   <form class="create-mlmodel-form"  method="post"
+                            action="ml/create-ml-model">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="MLModelName">Model name</label>
+                            <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
+                                  name="MLModelName">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="MLModelType">Model type</label>
+                            <select class="form-control" id="MLModelType" name="MLModelType">
+                                <option selected value="BINARY">BINARY</option>
+                                <option value="REGRESSION">REGRESSION</option>
+                                <option value="MULTICLASS">MULTICLASS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="SelectDataSource">Data source name</label>
+                            <select class="form-control" id="SelectDataSource" name="DataSourceId">
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modalCreateEvaluation" id="modalCreateEvaluation" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Evaluation</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="create-evaluations-form" method="post"
+                        action="ml/create-evaluation">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="EvaluationName">Evaluation name</label>
+                            <input type="text" class="form-control" id="EvaluationName"
+                                   placeholder="Evaluation name" name="EvaluationName">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="SelectMLModelId">Model name</label>
+                            <select class="form-control" id="SelectMLModelId" name="MLModelId">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="SelectEvDataSource">Data source name</label>
+                            <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
