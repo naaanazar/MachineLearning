@@ -74,8 +74,8 @@ body {
 }
 .spinner-prediction {
     position: absolute;
-    top: 30%;
-    left: 41%;
+    top: 42%;
+    left: 40%;
     display: none;
     font-size: 70px;
     transform: translateX(-50%);
@@ -84,8 +84,8 @@ body {
     position: relative;
     float: left;
 }
-.prediction-data {
-    font-size: 18px;
+.prediction-data span {
+    font: 18px "Courier New", monospace;
 }
 .prediction-data strong {
     font-size: 20px;
@@ -105,14 +105,26 @@ body {
     margin-right: 17%;
 }
 .block-prediction {
+    position: relative;
     min-height: 500px;
     padding: 15px 25px;
     float: right;
-    background: #eee;
+    background: #eee url(../images/logo-icon.png) center no-repeat;
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+}
+.block-prediction::before {
+    position: absolute;
+    top: 30px;
+    left: -35px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 25px 50px 25px 0;
+    border-color: transparent #eee transparent transparent;
+    content: '';
 }
 .pred-error {
     position: relative;
@@ -132,14 +144,17 @@ body {
     width: 50%;
     padding: 6px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
 @media screen and (max-width: 1000px) {
     .block-prediction {
         float: none;
         margin: 0 auto 40px;
         width: 60%;
+    }
+    .block-prediction::before {
+        display: none;
     }
     .form-prediction {
         float: none;
