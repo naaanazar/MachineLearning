@@ -1,6 +1,7 @@
 $(document).ready(function () {
     
     if (window.location.hash == '#describeDataSources') {
+        buttonCreateDataSource();
         listDataSource();
     }
 
@@ -108,9 +109,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
-        var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
-        'data-target="#modalCreateDataSource">Create Datasource</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateDataSource();
+        
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }
@@ -127,6 +127,13 @@ $(document).ready(function () {
            
        });
    });
+
+
+    function buttonCreateDataSource() {
+        var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
+            'data-target="#modalCreateDataSource">Create Datasource</button>';
+            $('#ml-button-create').html(button);
+    }
 
     function listDataSource() {
 
