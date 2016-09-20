@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
     if (window.location.hash == '#describeMLModels') {
+        buttonCreateModels();
         listMLModel();
-    }
-
+    };
   
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
@@ -20,8 +20,9 @@ $(document).ready(function() {
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
-                $(".create-mlmodel-form").toggle();
-                $(".container-describeMLModels").toggle();
+              //  $(".create-mlmodel-form").toggle();
+               // $(".container-describeMLModels").toggle();
+                $(".modalCreateModel").modal('toggle');
                 listMLModel();
                 console.log(data);
             },
@@ -32,7 +33,6 @@ $(document).ready(function() {
     $(document).on('blur', '.form-control', function (e) {
         var id = e.target.id;
         var val = e.target.value;
-        $(this).closest('div').find('span').addClass('hide');
 
         switch (id) {
             case 'MLModelName':
@@ -58,14 +58,11 @@ $(document).ready(function() {
         } else {
             $(this).closest('form').find('button').removeClass('disabled');
         }
-
-
     });
 
-
     $(document).on("click", ".btn-create-mlmodel", function() {
-        $('.create-mlmodel-form').toggle();
-        $(".container-describeMLModels").toggle();
+     //   $('.create-mlmodel-form').toggle();
+       // $(".container-describeMLModels").toggle();
 
         $.get("/ml/select-data-source", function(response) {
             var result='';
@@ -78,17 +75,11 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
-        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateModels();
         if(!$('.container-describeMLModels').hasClass('loaded')) {
             listMLModel();
         }
     });
-
-    //    //loading data
-    //    $('#describeMLModelsContent').on('click', function() {
-    //        $('.container-describeMLModels').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
 
     $(document).on('click', '.delete-endpoint', function (e) {
        e.preventDefault();
@@ -102,22 +93,27 @@ $(document).ready(function() {
        });
    });
 
+   
+    function buttonCreateModels() {
+        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateModel">Create ML Mode</button>'
+        $('#ml-button-create').html(button);        
+    };
+
     function listMLModel() {
 
         $('.container-describeMLModels').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-//        var button = '<button class="btn btn-primary btn-create-mlmodel pull-right">Create ML Mode</button>'
-//        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-ml-model", function(response) {
             var i = 1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                '<td>ML Model Id</td>' +
+               // '<td>ML Model Id</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
                 '<td>Endpoint Status</td>' +
-                '<td>Training Data Source Id</td>' +
+                //'<td>Training Data Source Id</td>' +
                 '<td>ML Model Type</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
@@ -134,7 +130,7 @@ $(document).ready(function() {
                 };
                 res += '' +
                     '<tr>' +
-                    '<td>' + response.data[key].MLModelId + '</td>' +
+                   // '<td>' + response.data[key].MLModelId + '</td>' +
                     '<td>';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
@@ -143,7 +139,7 @@ $(document).ready(function() {
                     '</td>' +
                     '<td>' + response.data[key].Status + '</td>' +
                     '<td class="status-endpoint">' + response.data[key].EndpointInfo.EndpointStatus + '</td>' +
-                    '<td>' + response.data[key].TrainingDataSourceId + '</td>' +
+                    //'<td>' + response.data[key].TrainingDataSourceId + '</td>' +
                     '<td>' + response.data[key].MLModelType + '</td>' +
                     '<td>' + date + '</td>' +
                     '<td style="width:140px" nowrap>' +

@@ -4,9 +4,23 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="notification-s3"></div>
-                <h2 class="title-s3"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> List of files</h2>
-                <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@upload') }}" method="post">
+                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">Buckets
+                </h2>
+
+                <button class="btn btn-default btn-create-datasource">Create Bucket</button>
+                <br>
+                <br>
+
+                <form class="create-datasource" method="post" action="s3/create_bucket">
+                    <br>
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input type="text" class="form-control" id="nameBucket" placeholder="ml-" name="nameBucket">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@doUpload') }}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
@@ -15,38 +29,84 @@
                         <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                     </div>
                 </form>
-                <div class="s3-pagination">
-                    <div class="pagination-list pagination-ajax-s3">
-                        <?= $results->render(); ?>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+
+                @if (count($errors) > 0)
+                    <br>
+                    <br>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    <strong>Error!</strong> {{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}
+                                </li>
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $.jGrowl("Error!", {sticky: true, theme: 'jGrowl-status-error'});
+                                    });
+                                </script>
+                            @endforeach
+                        </ul>
                     </div>
-                </div>
-                <div class="s3-table">
-                    <table class="table table-bordered table-font text-center">
-                        <tr class="active">
-                            <td>Target</td>
-                            <td>Name</td>
-                            <td>Size</td>
-                            <td>Last modified</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        @foreach($results as $key => $value)
-                            <tr>
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $value['Key'] }}</td>
-                                <td>{{ $value['Size'] }}</td>
-                                <td>{{ $value['LastModified'] }}</td>
-                                <td>
-                                    <a class="btn btn-default btn-sm download" data-download-path="s3://ml-datasets-test/{{ $value['Key'] }}"href="#do"><span class="glyphicon glyphicon-download"></span></a>
-                                    <a class="btn btn-danger btn-sm btn-delete" href="#d" id ="{{ $value['Key'] }}"><span class="glyphicon glyphicon-trash"></span></a>
-                                </td>
+                @elseif (session('status'))
+                    <br>
+                    <br>
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! session('status') !!}</li>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $.jGrowl("Success!", {sticky: true, theme: 'jGrowl-status-success'});
+                                });
+                            </script>
+                        </ul>
+                    </div>
+                @endif
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <table class="table table-bordered table-font text-center" id="myTable">
+                            <tr class="active table-header">
+                                <td>Name</td>
+                                <td>Size</td>
+                                <td>Last modified</td>
+                                <td>Action</td>
+
                             </tr>
-                        @endforeach
-                        
-                    </table>
+                            <tr class="bg">
+                                <td colspan="4" ><span class="back">...</span></td>
+                            </tr>
+                            @foreach($results as $key => $value)
+                                <tr class="content bg">
+                                    <td class="reference">{{ $value['Name'] }}</td>
+                                    <td>0</td>
+                                    <td>{{ $value['CreationDate'] }}</td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm btn-list"
+                                           href="/s3/delete/{{ $value['Name'] }}"
+                                           id="delete-{{ $key }}"><span
+                                                    class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-danger btn-sm btn-list"
+                                           href="s3/delete_all/{{ $value['Name'] }}"><span class="glyphicon"></span>Delete
+                                            all files</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <div class="pagination-list">
+                                <!--                        --><?php //echo $results->render(); ?>
+                            </div>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <br>
     <br>
-@stop
+    @stop

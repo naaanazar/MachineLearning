@@ -35,7 +35,7 @@ class MultipartUploader extends AbstractUploader
      * - before_upload: (callable) Callback to invoke before any `UploadPart`
      *   operations. The callback should have a function signature like
      *   `function (Aws\Command $command) {...}`.
-     * - bucket: (string, required) Name of the bucket to which the object is
+     * - s3: (string, required) Name of the s3 to which the object is
      *   being uploaded.
      * - concurrency: (int, default=int(5)) Maximum number of concurrent
      *   `UploadPart` operations allowed during the multipart upload.
@@ -44,7 +44,7 @@ class MultipartUploader extends AbstractUploader
      *   doing a multipart upload. This must between 5 MB and 5 GB, inclusive.
      * - state: (Aws\Multipart\UploadState) An object that represents the state
      *   of the multipart upload and that is used to resume a previous upload.
-     *   When this option is provided, the `bucket`, `key`, and `part_size`
+     *   When this option is provided, the `s3`, `key`, and `part_size`
      *   options are ignored.
      *
      * @param S3ClientInterface $client Client used for the upload.
@@ -57,7 +57,7 @@ class MultipartUploader extends AbstractUploader
         array $config = []
     ) {
         parent::__construct($client, $source, array_change_key_case($config) + [
-            'bucket' => null,
+            's3' => null,
             'key'    => null,
         ]);
     }
@@ -71,7 +71,7 @@ class MultipartUploader extends AbstractUploader
                 'complete' => 'CompleteMultipartUpload',
             ],
             'id' => [
-                'bucket'    => 'Bucket',
+                's3'    => 'Bucket',
                 'key'       => 'Key',
                 'upload_id' => 'UploadId',
             ],

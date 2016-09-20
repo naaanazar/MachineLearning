@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+
 use Aws\MachineLearning\MachineLearningClient;
 use Aws\MachineLearning\Exception\MachineLearningException;
 
@@ -28,23 +29,23 @@ class MLController extends Controller
         "dataFileContainsHeader" => true,
         "attributes" => [
             ["attributeName" => "email_custom_domain",
-                  "attributeType" => "BINARY"],
+                "attributeType" => "BINARY"],
             ["attributeName" => "same_email_domain_count",
-                  "attributeType" => "NUMERIC"],
+                "attributeType" => "NUMERIC"],
             ["attributeName" => "projects_count",
-                  "attributeType" => "NUMERIC"],
+                "attributeType" => "NUMERIC"],
             ["attributeName" => "strings_count",
-                  "attributeType" => "NUMERIC"],
+                "attributeType" => "NUMERIC"],
             ["attributeName" => "members_count",
-                  "attributeType" => "NUMERIC"],
+                "attributeType" => "NUMERIC"],
             ["attributeName" => "has_private_project",
-                  "attributeType" => "BINARY"],
+                "attributeType" => "BINARY"],
             ["attributeName" => "same_login_and_project_name",
-                  "attributeType" => "BINARY"],
+                "attributeType" => "BINARY"],
             ["attributeName" => "days_after_last_login",
-                  "attributeType" => "NUMERIC"],
+                "attributeType" => "NUMERIC"],
             ["attributeName" => "country",
-                  "attributeType" => "CATEGORICAL"],
+                "attributeType" => "CATEGORICAL"],
             ["attributeName" => "purchase","attributeType" => "BINARY"]
         ]
     ];
@@ -152,7 +153,7 @@ class MLController extends Controller
     {
         $ml = new ML;
         $result = $ml->describeMLModels();
-
+sleep (5);
         return response()->json(['data' => (array)$result]);
     }      
 
@@ -309,7 +310,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage() ]);
         }
         return response()->json(['data' => $MLModelId]);
     }
@@ -422,7 +423,7 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage() ]);
         }
 
-        return response()->json(['data' => $DataSourceId]);
+        return response()->json(['data' => 'ok']);
     }
 
 

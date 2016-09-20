@@ -1,6 +1,7 @@
 $(document).ready(function () {
-
+    
     if (window.location.hash == '#describeDataSources') {
+        buttonCreateDataSource();
         listDataSource();
     }
 
@@ -8,13 +9,15 @@ $(document).ready(function () {
 
     $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
+
         $.ajax({
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
             success: function (data) {
-                $(".create-datasource-form").toggle();
-                $(".container-describeDataSources").toggle();
+                $(".modalCreateDataSource").modal('toggle');
+                //$(".create-datasource-form").toggle();
+                //$(".container-describeDataSources").toggle();
                 listDataSource();
                 console.log(data);
             },
@@ -27,7 +30,6 @@ $(document).ready(function () {
 
         var id = e.target.id;
         var val = e.target.value;
-        $(this).closest('div').find('span').addClass('hide');
 
         switch (id) {
             case 'DataSourceName':
@@ -48,7 +50,7 @@ $(document).ready(function () {
                 }
                 break;
             case 'DataRearrangementBegin':
-                var rv_name = /^[1-9][0-9]?$|^100$/;
+                var rv_name = /^[0-9][0-9]?$|^100$/;
 
                 if (val.length > 0 && val != '' && rv_name.test(val)) {
                     $(this).removeClass('error').addClass('not_error');
@@ -79,9 +81,7 @@ $(document).ready(function () {
                     $(this).closest('div').find('span').addClass('hide');
                 }
                 break;
-
         }
-
 
         if ($(this).closest('form.create-datasource-form').find('div.has-error').hasClass('has-error') == true) {
             $(this).closest('form').find('button').addClass('disabled');
@@ -91,8 +91,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".btn-create-datasource", function () {
-        $(".create-datasource-form").toggle();
-        $(".container-describeDataSources").toggle();
+     //   $(".create-datasource-form").toggle();
+      //  $(".container-describeDataSources").toggle();
 
         $.get("/ml/select-S3objects", function (response) {
             var result;
@@ -108,8 +108,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
-        var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateDataSource();
+        
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }
@@ -127,21 +127,22 @@ $(document).ready(function () {
        });
    });
 
-    //    //loading data
-    //    $('#describeDataSourcesContent').on('click', function() {
-    //        $('.container-describeDataSources').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
+
+    function buttonCreateDataSource() {
+        var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
+            'data-target="#modalCreateDataSource">Create Datasource</button>';
+            $('#ml-button-create').html(button);
+    }
 
     function listDataSource() {
-
+        buttonCreateDataSource();
         $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        var button = '<button class="btn btn-primary btn-create-datasource pull-right">Create Datasource</button>'
-        $('#ml-button-create').html(button);
 
         $.get("/ml/describe-data-sources", function (response) {
 
             var i = 1;
             var res = '' +
+<<<<<<< HEAD
                 '<table class="table table-bordered table-font text-center">';
 //                '<thead>' +
 //                '<tr class="active">' +
@@ -154,6 +155,17 @@ $(document).ready(function () {
 //                '</thead>' +
 //                '<span class="hide">' + i + '</span>';
 
+=======
+                '<table class="table  table-bordered table-font text-center">' +
+                '<tr class="active">' +
+                '<td>Name</td>' +
+                '<td>Status</td>' +
+                '<td>Data Location S3</td>' +
+                '<td>Last Updated</td>' +
+                '<td>&nbsp;</td>' +
+                '</tr>' +
+                '<span class="hide">' + i + '</span>';
+>>>>>>> a888ce53570bbd11c6b39795a447e8bf645edd77
             for (var key in response.data) {
                 i = i + 1;
                 date = response.data[key].LastUpdatedAt.replace('T', '  ');

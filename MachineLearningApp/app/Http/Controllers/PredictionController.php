@@ -31,12 +31,14 @@ class PredictionController extends Controller
                 'secret' => 'fjLNfQRailTs60W959jF7OA9443sn+Zx9U2Dnek+'
             ]
         ]);
+
         return $ml;
     }
 
     private function createEndpoint($MLModelId)
     {
         $client = $this->connectToML();
+
         try {
             $result = $client->createRealtimeEndpoint([
                 'MLModelId' => $MLModelId
@@ -44,6 +46,7 @@ class PredictionController extends Controller
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
+
         return $result;
     }
 
@@ -83,7 +86,6 @@ class PredictionController extends Controller
         $daysAfterLastLogin = $request->input('days_after_last_login');
         $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
-
         $endPoint = $this->createEndpoint($MLModelId);
 
         $endpointStatus  = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
