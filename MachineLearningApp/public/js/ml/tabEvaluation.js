@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     if (window.location.hash == '#describeEvaluations') {
+        buttonCreateEvaluation();
         listEvaluations();
     }
 
@@ -11,8 +12,9 @@ $(document).ready(function() {
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
             success: function(data) {
-                $(".create-evaluations-form").toggle();
-                $(".container-describeEvaluations").toggle();
+                //$(".create-evaluations-form").toggle();
+              //  $(".container-describeEvaluations").toggle();
+                $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
                 console.log(data);
             },
@@ -21,29 +23,27 @@ $(document).ready(function() {
     });
 
     $(document).on('blur', '.form-control', function (e) {
-            var id = e.target.id;
-            var val = e.target.value;
-            $(this).closest('div').find('span').addClass('hide');
+        var id = e.target.id;
+        var val = e.target.value;
 
-            switch (id) {
-                case 'EvaluationName':
-                    var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+        switch (id) {
+            case 'EvaluationName':
+                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
 
-                    if (val.length > 2 && val != '' && rv_name.test(val)) {
-                        $(this).removeClass('error').addClass('not_error');
-                        $(this).closest('div').removeClass('has-error');
-                        $(this).closest('div').addClass('has-success has-feedback');
-                        $(this).closest('div').find('span').removeClass('hide');
+                if (val.length > 2 && val != '' && rv_name.test(val)) {
+                    $(this).removeClass('error').addClass('not_error');
+                    $(this).closest('div').removeClass('has-error');
+                    $(this).closest('div').addClass('has-success has-feedback');
+                    $(this).closest('div').find('span').removeClass('hide');
 
-                    }
-                    else {
-                        $(this).removeClass('not_error').addClass('error');
-                        $(this).closest('div').addClass('has-error has-feedback');
-                        $(this).closest('div').find('span').addClass('hide');
-                    }
-                    break;
-
-            }
+                }
+                else {
+                    $(this).removeClass('not_error').addClass('error');
+                    $(this).closest('div').addClass('has-error has-feedback');
+                    $(this).closest('div').find('span').addClass('hide');
+                }
+                break;
+        }
 
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
             $(this).closest('form').find('button').addClass('disabled');
@@ -54,11 +54,9 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-        $(".create-evaluations-form").toggle();
-        $(".container-describeEvaluations").toggle();
-
-
-
+      //  $(".create-evaluations-form").toggle();
+      //  $(".container-describeEvaluations").toggle();
+        $('#SelectMLModelId').addClass('loadinggif');
         $.get("/ml/select-ml-model", function(response) {
             var result;
 
@@ -80,34 +78,32 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", '#describeEvaluationsContent', function() {
-
-        if (!$('.container-describeEvaluations').hasClass('loaded') ) {
+    $(document).on("click", '#describeEvaluationsContent', function () {
+        buttonCreateEvaluation();
+        if(!$('.container-describeEvaluations').hasClass('loaded')) {
             listEvaluations();
         }
     });
 
-    //    //loading data
-    //    $('#describeEvaluationsContent').on('click', function() {
-    //        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
+    function buttonCreateEvaluation() {
+       var button = '<button class="btn btn-primary btn-create-evaluations pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateEvaluation">Create Evaluations</button>'
+        $('#ml-button-create').html(button);
+    };
 
     function listEvaluations() {
-        $('.container-describeEvaluations').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
-        $('#ml-button-create').html(button);
-
+        $('.container-describeEvaluations').html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         $.get("/ml/describe-evaluations", function(response) {
             var i = 1;
             var res = '' +
                 '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
-                '<td>EvaluationId</td>' +
+                //'<td>Evaluation ID</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>BinaryAUC</td>' +
-                '<td>MLModelId</td>' +
-                '<td>EvaluationDataSourceId</td>' +
+                '<td class="red-tooltip" >Binary AUC</td>' +
+                //'<td>ML Model Id</td>' +
+                //'<td>Evaluation Data Source Id</td>' +
                 '<td>Last Updated</td>' +
                 '<td>&nbsp;</td>' +
                 '</tr>' +
@@ -122,7 +118,7 @@ $(document).ready(function() {
                 }
                 res += '' +
                     '<tr>' +
-                    '<td>' + response.data[key].EvaluationId + '</td>' +
+                    //'<td>' + response.data[key].EvaluationId + '</td>' +
                     '<td>';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
@@ -133,8 +129,8 @@ $(document).ready(function() {
                     '<td>' +
                     auc +
                     '</td>' +
-                    '<td>' + response.data[key].MLModelId + '</td>' +
-                    '<td>' + response.data[key].EvaluationDataSourceId + '</td>' +
+                   //'<td>' + response.data[key].MLModelId + '</td>' +
+                    //'<td>' + response.data[key].EvaluationDataSourceId + '</td>' +
                     '<td>' + date + '</td>' +
                     '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +

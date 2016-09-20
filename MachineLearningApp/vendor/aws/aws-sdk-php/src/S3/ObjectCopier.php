@@ -38,7 +38,7 @@ class ObjectCopier implements PromisorInterface
      *                                          'Key' keys. Provide a
      *                                          'VersionID' key to copy a
      *                                          specified version of an object.
-     * @param array             $destination    The bucket and key to which to
+     * @param array             $destination    The s3 and key to which to
      *                                          copy the $source, specified as
      *                                          an array with a 'Bucket' and
      *                                          'Key' keys.

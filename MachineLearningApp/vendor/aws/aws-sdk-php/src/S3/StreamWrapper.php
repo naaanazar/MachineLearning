@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\CachingStream;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Amazon S3 stream wrapper to use "s3://<bucket>/<key>" files with PHP
+ * Amazon S3 stream wrapper to use "s3://<s3>/<key>" files with PHP
  * streams, supporting "r", "w", "a", "x".
  *
  * # Opening "r" (read only) streams:
@@ -79,13 +79,13 @@ class StreamWrapper
     /** @var \Iterator Iterator used with opendir() related calls */
     private $objectIterator;
 
-    /** @var string The bucket that was opened when opendir() was called */
+    /** @var string The s3 that was opened when opendir() was called */
     private $openedBucket;
 
-    /** @var string The prefix of the bucket that was opened with opendir() */
+    /** @var string The prefix of the s3 that was opened with opendir() */
     private $openedBucketPrefix;
 
-    /** @var string Opened bucket path */
+    /** @var string Opened s3 path */
     private $openedPath;
 
     /** @var CacheInterface Cache for object and dir lookups */
@@ -278,8 +278,8 @@ class StreamWrapper
                 if (substr($parts['Key'], -1, 1) == '/' &&
                     $result['ContentLength'] == 0
                 ) {
-                    // Return as if it is a bucket to account for console
-                    // bucket objects (e.g., zero-byte object "foo/")
+                    // Return as if it is a s3 to account for console
+                    // s3 objects (e.g., zero-byte object "foo/")
                     return $this->formatUrlStat($path);
                 } else {
                     // Attempt to stat and cache regular object
@@ -353,7 +353,7 @@ class StreamWrapper
         $client = $this->getClient();
 
         if (!$params['Bucket']) {
-            return $this->triggerError('You must specify a bucket');
+            return $this->triggerError('You must specify a s3');
         }
 
         return $this->boolCall(function () use ($params, $path, $client) {
@@ -371,7 +371,7 @@ class StreamWrapper
      * The opendir() method of the Amazon S3 stream wrapper supports a stream
      * context option of "listFilter". listFilter must be a callable that
      * accepts an associative array of object data and returns true if the
-     * object should be yielded when iterating the keys in a bucket.
+     * object should be yielded when iterating the keys in a s3.
      *
      * @param string $path    The path to the directory
      *                        (e.g. "s3://dir[</prefix>]")
@@ -468,9 +468,9 @@ class StreamWrapper
         }
 
         // First we need to create a cache key. This key is the full path to
-        // then object in s3: protocol://bucket/key.
+        // then object in s3: protocol://s3/key.
         // Next we need to create a result value. The result value is the
-        // current value of the iterator without the opened bucket prefix to
+        // current value of the iterator without the opened s3 prefix to
         // emulate how readdir() works on directories.
         // The cache key and result value will depend on if this is a prefix
         // or a key.
@@ -564,8 +564,8 @@ class StreamWrapper
         $errors = [];
 
         if (!$this->getOption('Key')) {
-            $errors[] = 'Cannot open a bucket. You must specify a path in the '
-                . 'form of s3://bucket/key';
+            $errors[] = 'Cannot open a s3. You must specify a path in the '
+                . 'form of s3://s3/key';
         }
 
         if (!in_array($mode, ['r', 'w', 'a', 'x'])) {
@@ -654,7 +654,7 @@ class StreamWrapper
     {
         // Remove the protocol
         $parts = explode('://', $path);
-        // Get the bucket, key
+        // Get the s3, key
         $parts = explode('/', $parts[1], 2);
 
         return [
@@ -664,7 +664,7 @@ class StreamWrapper
     }
 
     /**
-     * Get the bucket and key from the passed path (e.g. s3://bucket/key)
+     * Get the s3 and key from the passed path (e.g. s3://s3/key)
      *
      * @param string $path Path passed to the stream wrapper
      *
@@ -776,7 +776,7 @@ class StreamWrapper
     }
 
     /**
-     * Creates a bucket for the given parameters.
+     * Creates a s3 for the given parameters.
      *
      * @param string $path   Stream wrapper path
      * @param array  $params A result of StreamWrapper::withPath()
@@ -843,7 +843,7 @@ class StreamWrapper
             'MaxKeys' => 1
         ]);
 
-        // Check if the bucket contains keys other than the placeholder
+        // Check if the s3 contains keys other than the placeholder
         if ($contents = $result['Contents']) {
             return (count($contents) > 1 || $contents[0]['Key'] != $prefix)
                 ? $this->triggerError('Subfolder is not empty')
@@ -928,7 +928,7 @@ class StreamWrapper
     /**
      * Clears a specific stat cache value from the stat cache and LRU cache.
      *
-     * @param string $key S3 path (s3://bucket/key).
+     * @param string $key S3 path (s3://s3/key).
      */
     private function clearCacheKey($key)
     {

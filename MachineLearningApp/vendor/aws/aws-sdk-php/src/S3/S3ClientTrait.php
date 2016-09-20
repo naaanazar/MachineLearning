@@ -173,7 +173,7 @@ trait S3ClientTrait
 
         return $handler($command)
             ->then(static function (ResultInterface $result) {
-                return $result['@metadata']['headers']['x-amz-bucket-region'];
+                return $result['@metadata']['headers']['x-amz-s3-region'];
             });
     }
 

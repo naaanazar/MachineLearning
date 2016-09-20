@@ -60,6 +60,22 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on('click', '.download', function (e) {
+       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+       e.preventDefault();
+       $.get('/s3/file-exists', {
+           name: encodeURI($(this).data('download-path')) }, function (response) {
+            if (response.data == true ) {
+                window.location = url;
+            } else {
+                $.jGrowl('File not exists', {
+                    theme: 'jgrowl-danger'
+                });
+            }
+
+       });
+    });
+
     //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function(e) {
         console.log($(".form-upload"));
@@ -112,7 +128,7 @@ $(document).ready(function() {
             case 'Data Source':
                 url = '/ml/getdatasource/';
                 break;
-            case 'ML Models':
+            case 'Models':
                 url = '/ml/getmlmodel/';
                 break;
             case 'Evaluations':
@@ -135,7 +151,7 @@ $(document).ready(function() {
                     data.DataSourceId = response.data[5];
                     data.DatasetId = response.data[6];
                     break;
-                case 'ML Models':
+                case 'Models':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.Size = response.data[1] + ' Bytes';
@@ -228,8 +244,8 @@ $(document).ready(function() {
             case 'Data Source':
                 deleteObject('Data Source', '/ml/delete-datasource/');
                 break;
-            case 'ML Models':
-                deleteObject('ML Models', '/ml/delete-ml-model/');
+            case 'Models':
+                deleteObject('Models', '/ml/delete-ml-model/');
                 break;
             case 'Evaluations':
                 deleteObject('Evaluations', '/ml/delete-evaluation/');
@@ -243,8 +259,9 @@ $(document).ready(function() {
     });
 
     //loading data
-    $('.modal').on('hidden.bs.modal', function() {
-        $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    $('.modal-1').on('hidden.bs.modal', function() {
+        $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
 
 });
+

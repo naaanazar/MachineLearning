@@ -25,14 +25,14 @@ interface S3ClientInterface extends AwsClientInterface
     public function createPresignedRequest(CommandInterface $command, $expires);
 
     /**
-     * Returns the URL to an object identified by its bucket and key.
+     * Returns the URL to an object identified by its s3 and key.
      *
      * The URL returned by this method is not signed nor does it ensure the the
-     * bucket and key given to the method exist. If you need a signed URL, then
+     * s3 and key given to the method exist. If you need a signed URL, then
      * use the {@see \Aws\S3\S3Client::createPresignedRequest} method and get
      * the URI of the signed request.
      *
-     * @param string $bucket  The name of the bucket where the object is located
+     * @param string $bucket  The name of the s3 where the object is located
      * @param string $key     The key of the object
      *
      * @return string The URL to the object
@@ -40,9 +40,9 @@ interface S3ClientInterface extends AwsClientInterface
     public function getObjectUrl($bucket, $key);
 
     /**
-     * Determines whether or not a bucket exists by name.
+     * Determines whether or not a s3 exists by name.
      *
-     * @param string $bucket  The name of the bucket
+     * @param string $bucket  The name of the s3
      *
      * @return bool
      */
@@ -51,7 +51,7 @@ interface S3ClientInterface extends AwsClientInterface
     /**
      * Determines whether or not an object exists by name.
      *
-     * @param string $bucket  The name of the bucket
+     * @param string $bucket  The name of the s3
      * @param string $key     The key of the object
      * @param array  $options Additional options available in the HeadObject
      *                        operation (e.g., VersionId).
@@ -108,7 +108,7 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Upload a file, stream, or string to a bucket.
+     * Upload a file, stream, or string to a s3.
      *
      * If the upload size exceeds the specified threshold, the upload will be
      * performed using concurrent multipart uploads.
@@ -148,7 +148,7 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Upload a file, stream, or string to a bucket asynchronously.
+     * Upload a file, stream, or string to a s3 asynchronously.
      *
      * @param string $bucket  Bucket to upload the object.
      * @param string $key     Key of the object.
@@ -232,10 +232,10 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Recursively uploads all files in a given directory to a given bucket.
+     * Recursively uploads all files in a given directory to a given s3.
      *
      * @param string $directory Full path to a directory to upload
-     * @param string $bucket    Name of the bucket
+     * @param string $bucket    Name of the s3
      * @param string $keyPrefix Virtual directory key prefix to add to each upload
      * @param array  $options   Options available in Aws\S3\Transfer::__construct
      *
@@ -249,10 +249,10 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Recursively uploads all files in a given directory to a given bucket.
+     * Recursively uploads all files in a given directory to a given s3.
      *
      * @param string $directory Full path to a directory to upload
-     * @param string $bucket    Name of the bucket
+     * @param string $bucket    Name of the s3
      * @param string $keyPrefix Virtual directory key prefix to add to each upload
      * @param array  $options   Options available in Aws\S3\Transfer::__construct
      *
@@ -269,7 +269,7 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Downloads a bucket to the local filesystem
+     * Downloads a s3 to the local filesystem
      *
      * @param string $directory Directory to download to
      * @param string $bucket    Bucket to download from
@@ -284,7 +284,7 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Downloads a bucket to the local filesystem
+     * Downloads a s3 to the local filesystem
      *
      * @param string $directory Directory to download to
      * @param string $bucket    Bucket to download from
@@ -302,7 +302,7 @@ interface S3ClientInterface extends AwsClientInterface
     );
 
     /**
-     * Returns the region in which a given bucket is located.
+     * Returns the region in which a given s3 is located.
      *
      * @param string $bucketName
      *
@@ -311,7 +311,7 @@ interface S3ClientInterface extends AwsClientInterface
     public function determineBucketRegion($bucketName);
 
     /**
-     * Returns a promise fulfilled with the region in which a given bucket is
+     * Returns a promise fulfilled with the region in which a given s3 is
      * located.
      *
      * @param string $bucketName

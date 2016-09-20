@@ -60,6 +60,20 @@ class PredictionController extends Controller
 
     public function doPredict(Request $request)
     {
+        $this->validate($request, [
+            'country' => 'string|max:60',
+            'ml_model_id' => 'required',
+            'strings_count' => 'integer|min:0|max:10000000000',
+            'members_count' => 'integer|min:0|max:10000000000',
+            'projects_count' => 'integer|min:0|max:10000000000',
+            'email_custom_domain' => 'integer|digits_between:0,1',
+            'has_private_project' => 'integer|digits_between:0,1',
+            'days_after_last_login' => 'integer|min:0|max:10000000000',
+            'same_email_domain_count' => 'integer|min:0|max:10000000000',
+            'same_login_and_project_name' => 'integer|digits_between:0,1',
+        ]);
+
+        // dd($request->all());
 
         $country = $request->input('country');
         $MLModelId = $request->input('ml_model_id');
@@ -71,7 +85,6 @@ class PredictionController extends Controller
         $daysAfterLastLogin = $request->input('days_after_last_login');
         $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
-
         $endPoint = $this->createEndpoint($MLModelId);
 
         $endpointStatus  = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
@@ -100,14 +113,9 @@ class PredictionController extends Controller
             } catch (MachineLearningException $e) {
                 echo $e->getMessage() . "\n";
             }
-
-            $predictedLabel = $result["Prediction"]["predictedLabel"];
-            $predict = $predictedLabel == 1 ? "Yes" : "No";
-
-            $output = "<section class='pred-data'><h4><strong>Purchase: </strong>" . $predict . "</h4></section>";
+            $output = json_encode($result["Prediction"]);
 
             $this->deleteEndpoint($MLModelId);
-
             return $output;
         }
     }
