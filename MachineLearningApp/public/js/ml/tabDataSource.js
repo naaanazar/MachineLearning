@@ -136,7 +136,7 @@ $(document).ready(function () {
     }
 
     function listDataSource() {
-
+        buttonCreateDataSource();
         $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 
         $.get("/ml/describe-data-sources", function (response) {
