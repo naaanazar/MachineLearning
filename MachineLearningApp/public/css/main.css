@@ -371,7 +371,9 @@ width:140px;
     border-color: #faebcc !important;
 }
 .jgrowl-success {
-    background-color: green !important;
+    color: #3c763d  !important;
+    background-color: #dff0d8  !important;
+    border-color: #d6e9c6  !important;
 }
 
 @import 'https://fonts.googleapis.com/css?family=Droid+Serif';
