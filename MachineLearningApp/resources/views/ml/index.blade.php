@@ -70,7 +70,7 @@
                     <h4 class="modal-title">Create Data Source</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="create-datasource-form" style="display:none;" method="post"
+                    <form class="create-datasource-form"  method="post"
                         action="ml/create-datasource">
                         <br>
                         {{ csrf_field() }}
@@ -165,7 +165,10 @@
                         <div class="form-group">
                             <label for="SelectMLModelId">Model name</label>
                             <select class="form-control" id="SelectMLModelId" name="MLModelId">
+                                <option><span align="center" class="loader-select col-md-1 col-md-offset-1" id="loader"></span></option>
                             </select>
+                            <span align="center" class="loader-select col-md-1 col-md-offset-1 form-control-feedback" id="loader"></span>
+
                         </div>
                         <div class="form-group">
                             <label for="SelectEvDataSource">Data source name</label>
