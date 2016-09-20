@@ -13,7 +13,7 @@ use Iterator;
  * filesystem.
  *
  * This class does not support copying from the local filesystem to somewhere
- * else on the local filesystem or from one S3 bucket to another.
+ * else on the local filesystem or from one S3 s3 to another.
  */
 class Transfer implements PromisorInterface
 {
@@ -30,7 +30,7 @@ class Transfer implements PromisorInterface
     /**
      * When providing the $source argument, you may provide a string referencing
      * the path to a directory on disk to upload, an s3 scheme URI that contains
-     * the bucket and key (e.g., "s3://bucket/key"), or an \Iterator object
+     * the s3 and key (e.g., "s3://s3/key"), or an \Iterator object
      * that yields strings containing filenames that are the path to a file on
      * disk or an s3 scheme URI. The "/key" portion of an s3 URI is optional.
      *
@@ -38,7 +38,7 @@ class Transfer implements PromisorInterface
      * provide a 'base_dir' key value pair in the $options argument.
      *
      * The $dest argument can be the path to a directory on disk or an s3
-     * scheme URI (e.g., "s3://bucket/key").
+     * scheme URI (e.g., "s3://s3/key").
      *
      * The options array can contain the following key value pairs:
      *
@@ -317,7 +317,7 @@ class Transfer implements PromisorInterface
         $args['Key'] = $this->createS3Key($filename);
 
         return (new MultipartUploader($this->client, $filename, [
-            'bucket'          => $args['Bucket'],
+            's3'          => $args['Bucket'],
             'key'             => $args['Key'],
             'before_initiate' => $this->before,
             'before_upload'   => $this->before,

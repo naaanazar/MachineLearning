@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     if (window.location.hash == '#describeEvaluations') {
+        buttonCreateEvaluation();
         listEvaluations();
     }
 
@@ -11,15 +12,15 @@ $(document).ready(function() {
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
             success: function(data) {
-                $(".create-evaluations-form").toggle();
-                $(".container-describeEvaluations").toggle();
+                //$(".create-evaluations-form").toggle();
+              //  $(".container-describeEvaluations").toggle();
+                $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
                 console.log(data);
             },
             error: function() {},
         });
     });
-
 
     $(document).on('blur', '.form-control', function (e) {
         var id = e.target.id;
@@ -43,7 +44,6 @@ $(document).ready(function() {
                     $(this).closest('div').find('span').addClass('hide');
                 }
                 break;
-
         }
 
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
@@ -55,8 +55,8 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-        $(".create-evaluations-form").toggle();
-        $(".container-describeEvaluations").toggle();
+      //  $(".create-evaluations-form").toggle();
+      //  $(".container-describeEvaluations").toggle();
 
         $.get("/ml/select-ml-model", function(response) {
             var result;
@@ -87,16 +87,14 @@ $(document).ready(function() {
         }
     });
 
-    //    //loading data
-    //    $('#describeEvaluationsContent').on('click', function() {
-    //        $('.container-describeEvaluations').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-    //    });
+    function buttonCreateEvaluation() {
+       var button = '<button class="btn btn-primary btn-create-evaluations pull-right" data-toggle="modal" ' +
+        'data-target="#modalCreateEvaluation">Create Evaluations</button>'
+        $('#ml-button-create').html(button);
+    };
 
     function listEvaluations() {
         $('.container-describeEvaluations').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-//        var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
-//        $('#ml-button-create').html(button);
-
         $.get("/ml/describe-evaluations", function(response) {
             var i = 1;
             var res = '' +
@@ -105,7 +103,7 @@ $(document).ready(function() {
                 //'<td>Evaluation ID</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td>Binary AUC</td>' +
+                '<td class="red-tooltip" >Binary AUC</td>' +
                 //'<td>ML Model Id</td>' +
                 //'<td>Evaluation Data Source Id</td>' +
                 '<td>Last Updated</td>' +

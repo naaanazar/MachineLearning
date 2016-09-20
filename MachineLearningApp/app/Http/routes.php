@@ -16,22 +16,9 @@
 
 Route::get('/','FirstPageController@firstPage');
 
-
 Route::get('prediction', 'PredictionController@doView');
 Route::post('prediction/predict', 'PredictionController@doPredict');
 
-Route::get('s3/list/', 'S3Controller@listS3');
-Route::post('/s3/upload', 'S3Controller@upload');
-Route::post('/s3/delete', 'S3Controller@delete');
-
-Route::get('/s3/del/{name}', 'S3Controller@deleteF');
-Route::get('/s3/get', 'S3Controller@getFile');
-
-
-Route::get('/s3/download-from-s3/', 'S3Controller@downloadFromS3');
-Route::get('/s3/file-exists/', 'S3Controller@fileExists');
-
-//ML
 Route::get('ml', 'MLController@index');
 
 Route::get('/ml/describe-data-sources', 'MLController@listDataSources');
@@ -47,7 +34,6 @@ Route::post('ml/create-evaluation', 'MLController@createEvaluation');
 Route::post('/ml/upload-batch-source', 'MLController@createBatchPrediction');
 Route::get('/ml/status-batch-data-source/{DataSourceId}', 'MLController@statusDataSource');
 
-
 Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');
 Route::get('/ml/delete-ml-model/{id}', 'MLController@deleteMLModel');
 Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
@@ -59,26 +45,21 @@ Route::get('/ml/getdatasource/{DataSourceId}', 'MLController@getDataSource');
 Route::get('/ml/getmlmodel/{ModelId}', 'MLController@getMLModel');
 Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@getEvaluation');
 Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@getBatchPrediction');
-
-
-//Generator
 Route::get('/ml/select-S3objects', 'MLController@selectObjectsS3');
 Route::get('/ml/select-data-source', 'MLController@selectDataSources');
 Route::get('/ml/select-ml-model', 'MLController@selectMLModel');
 
-
+//Generator
 Route::get('generator', 'GeneratorController@index');
 Route::post('generate', 'GeneratorController@generateDataset');
 
-//Buckets
-Route::get('bucket/delete/{name_bucket}', 'BucketController@deleteBucket');
-Route::get('bucket/delete_all/{name_bucket}', 'BucketController@deleteAllObjectsFromBucket');
-Route::get('bucket', 'BucketController@index');
-Route::get('bucket', 'BucketController@listOfBuckets');
-Route::post('bucket/create_bucket', 'BucketController@createBucket');
+//S3
+Route::get('s3/allbuckets', 'S3Controller@bucketStruct');
+Route::get('s3/delete/{name_bucket}', 'S3Controller@doDeleteBucket');
+Route::get('s3/delete_all/{name_bucket}', 'S3Controller@doDeleteAllObjectsFromBucket');
+Route::get('s3', 'S3Controller@doIndex');
+Route::get('s3', 'S3Controller@doListOfBuckets');
+Route::post('s3/create_bucket', 'S3Controller@doCreateBucket');
 
-//Update
-Route::get('/ml/datasource/{DataSourceId}/update', 'MLController@updateDataSource');
-Route::get('/ml/mlmodel/{ModelId}/update', 'MLController@updateMLModel');
-Route::get('/ml/evaluation/{EvaluationId}/update', 'MLController@updateEvaluation');
-Route::get('/ml/batchprediction/{getBatchPredictionId}/update', 'MLController@updateBatchPrediction');
+Route::post('/s3/upload', 'S3Controller@doUpload');
+Route::get('/s3/delete/{name}', 'S3Controller@doDelete');

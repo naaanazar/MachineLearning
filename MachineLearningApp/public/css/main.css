@@ -80,12 +80,6 @@ body {
     font-size: 70px;
     transform: translateX(-50%);
 }
-.prediction-data {
-    font-size: 18px;
-}
-.prediction-data strong {
-    font-size: 20px;
-}
 .form-prediction {
     position: relative;
     float: left;
@@ -109,7 +103,10 @@ body {
     padding: 15px 25px;
     float: right;
     background: #eee;
-    border-radius: 8px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
 .pred-error {
     position: relative;
@@ -394,6 +391,39 @@ width:140px;
     border-color: #faebcc !important;
 }
 .jgrowl-success {
+    background-color: green !important;
+}
+
+@import 'https://fonts.googleapis.com/css?family=Droid+Serif';
+.reference:hover {
+    cursor: pointer;
+}
+
+.back {
+    font-size: 17px;
+    margin-right: 550px;
+    font-weight: bold;
+}
+
+.back:hover {
+    cursor: pointer;
+    background-color: #DDDDDD;
+    text-decoration: underline;
+}
+
+.bg {
+    padding: 0px;
+    margin: 0px;
+}
+
+.bg:hover {
+    cursor: pointer;
+    background-color: #F5F5F5;
+}
+
+.table-header {
+    font-size: 17px;
+    font-family: 'Droid Serif', serif;
     color: #3c763d !important;
     background-color: #dff0d8 !important;
     border-color: #d6e9c6 !important;
@@ -453,3 +483,6 @@ width:140px;
         transform: rotate(360deg);
     }
 }
+
+.tooltip-arrow,
+.red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}

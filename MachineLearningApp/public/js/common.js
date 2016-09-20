@@ -62,6 +62,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.download', function (e) {
        var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+       e.preventDefault();
        $.get('/s3/file-exists', {
            name: encodeURI($(this).data('download-path')) }, function (response) {
             if (response.data == true ) {
@@ -258,8 +259,9 @@ $(document).ready(function() {
     });
 
     //loading data
-    $('.modal').on('hidden.bs.modal', function() {
-        $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    $('.modal-1').on('hidden.bs.modal', function() {
+        $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
 
 });
+

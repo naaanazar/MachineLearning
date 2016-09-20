@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('content')
+
 <div class="container">
     <h3 class="pred-title title">Real time prediction</h3>
     <div class="main-prediction col-md-12 clearfix">
