@@ -30,7 +30,6 @@ $(document).ready(function () {
 
         var id = e.target.id;
         var val = e.target.value;
-        $(this).closest('div').find('span').addClass('hide');
 
         switch (id) {
             case 'DataSourceName':
