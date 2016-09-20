@@ -165,7 +165,10 @@
                         <div class="form-group">
                             <label for="SelectMLModelId">Model name</label>
                             <select class="form-control" id="SelectMLModelId" name="MLModelId">
+                                <option><span align="center" class="loader-select col-md-1 col-md-offset-1" id="loader"></span></option>
                             </select>
+                            <span align="center" class="loader-select col-md-1 col-md-offset-1 form-control-feedback" id="loader"></span>
+
                         </div>
                         <div class="form-group">
                             <label for="SelectEvDataSource">Data source name</label>

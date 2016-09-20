@@ -57,7 +57,7 @@ $(document).ready(function() {
     $(document).on("click", ".btn-create-evaluations", function() {
       //  $(".create-evaluations-form").toggle();
       //  $(".container-describeEvaluations").toggle();
-
+        $('#SelectMLModelId').addClass('loadinggif');
         $.get("/ml/select-ml-model", function(response) {
             var result;
 
@@ -93,7 +93,7 @@ $(document).ready(function() {
     };
 
     function listEvaluations() {
-        $('.container-describeEvaluations').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        $('.container-describeEvaluations').html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
         $.get("/ml/describe-evaluations", function(response) {
             var i = 1;
             var res = '' +
