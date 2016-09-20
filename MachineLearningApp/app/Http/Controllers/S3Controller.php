@@ -82,7 +82,7 @@ class S3Controller extends Controller
                     'create' => $file->getCTime(), 'modified' => $file->getMTime());
             }
         };
-        dd($files);
+
         return response()->json($files);
     }
 
