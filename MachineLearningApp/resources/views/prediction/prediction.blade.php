@@ -4,12 +4,12 @@
 <div class="container">
     <h3 class="pred-title title">Real time prediction</h3>
     <div class="main-prediction col-md-12 clearfix">
-        <div class="block-prediction clearfix col-md-4 pull-right">
-            <h1 class="text-center pred-result">Result</h1>
+        <div class="block-prediction clearfix col-md-4">
+            <h2 class="text-center pred-result">Prediction</h2>
             <div class="prediction-data"></div>
             <i class="spinner-prediction fa fa-spinner fa-spin"></i>
         </div>
-        <form class="form-horizontal form-prediction col-md-8 clearfix pull-left" method="post" action="{{ action('PredictionController@doPredict') }}">
+        <form class="form-horizontal form-prediction col-md-8 clearfix" method="post" action="{{ action('PredictionController@doPredict') }}">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="ml_model_id" class="control-label label-pred ML-model">ML model</label>
