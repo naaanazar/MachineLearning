@@ -207,7 +207,7 @@
             </div>
         </div>
     </div>
-    <div id="modal" class="modal modal-1">
+    <div id="modal" class="modal modal-1 fade">
         <div class="modal-dialog">
             <div class="center modal-content">
                 <div class="modal-header">
