@@ -1,9 +1,20 @@
-$(document).ready(function () {
+$(document).ready(function() {
+    // ML: add hash tab to url
+    $('.ml-tabs').on('click', 'a', function (e) {
+        e.preventDefault();
+        window.location.hash = $(this).attr('href');
+        $(this).tab('show');
+    });
+    if(window.location.hash){
+       $('.ml-tabs').find('a[href="'+window.location.hash+'"]').tab('show');
+    }
+
+
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
     // upload button without submit
-    $('#input-file').change(function () {
+    $('#input-file').change(function() {
         $('.form-upload').submit();
     });
 
@@ -18,26 +29,27 @@ $(document).ready(function () {
     });
 
     function success(selector, str) {
-        $(selector).append('<div class="alert alert-success upload-message-s3">'
-            + '<ul><li><strong>Success! </strong>'
-            + str + '</li></ul></div>').show('slow').hide(4000);
+        $(selector).append('<div class="alert alert-success upload-message-s3">' +
+            '<ul><li><strong>Success! </strong>' +
+            str + '</li></ul></div>').show('slow').hide(4000);
     }
 
     function errorS3(selector) {
-        $(selector).append('<div class="alert alert-danger upload-message-s3">'
-            + '<ul><li><strong>Error! File is not loaded to S3!</strong>'
-            + '</li></ul></div>').show('slow').hide(4000);
-
+        $(selector).append('<div class="alert alert-danger upload-message-s3">' +
+            '<ul><li><strong>Error! File is not loaded to S3!</strong>' +
+            '</li></ul></div>').show('slow').hide(4000);
     }
 
-    $(document).on('click', '.btn-delete', function (e) {
+    $(document).on('click', '.btn-delete', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
             url: '/s3/delete',
             method: 'post',
-            data: {name: $(this).attr('id')},
-            success: function (data) {
+            data: {
+                name: $(this).attr('id')
+            },
+            success: function(data) {
                 console.log(data);
                 if (data.success) {
 
@@ -48,8 +60,24 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click', '.download', function (e) {
+       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+       e.preventDefault();
+       $.get('/s3/file-exists', {
+           name: encodeURI($(this).data('download-path')) }, function (response) {
+            if (response.data == true ) {
+                window.location = url;
+            } else {
+                $.jGrowl('File not exists', {
+                    theme: 'jgrowl-danger'
+                });
+            }
+
+       });
+    });
+
     //upload file to s3 bucket using ajax
-    $('.form-upload').on("submit", function (e) {
+    $('.form-upload').on("submit", function(e) {
         console.log($(".form-upload"));
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
@@ -60,11 +88,11 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             processData: false,
-            success: function (data) {
+            success: function(data) {
                 getListS3();
                 success('.notification-s3', 'File uploaded to S3!');
             },
-            error: function () {
+            error: function() {
                 errorS3('.notification-s3');
             },
         });
@@ -75,115 +103,15 @@ $(document).ready(function () {
         $.ajax({
             url: '/s3/list',
             method: 'GET',
-            success: function (data) {
+            success: function(data) {
                 $('.s3-pagination').html($(data).find('div.pagination-list'));
                 $('.s3-table').html($(data).find('table'));
             }
         });
     }
 
-    // prediction: get id model
-    $.get("/ml/select-ml-model", function (response) {
-        var result;
-
-        for (var key in response.data) {
-
-            result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
-        }
-        $('#ml_model_id').html(result);
-    });
-
-    // prediction: send form
-    $('.form-prediction').on('submit', function(e) {
-        e.preventDefault();
-
-        addPredictionProgress();
-
-        $.ajaxSetup({
-            headers: { 'X-XSRF-Token': $('meta[name="_token"]').attr('content') }
-        });
-
-        var formData   = $(this).serialize();
-        var formAction = $(this).attr('action');
-        var formMethod = $(this).attr('method');
-
-        function formPredict() {
-            $.ajax({
-                type    : formMethod,
-                url     : formAction,
-                data    : formData,
-                cache   : false,
-                success : function(data) {
-                              if (data == 'Updating') {
-                                  setTimeout(formPredict(), 3000);
-                              }
-                              else {
-                                removePredictionProgress();
-                                $('.prediction-data').append(data);
-                              }
-                          },
-                error   : function() {
-                              setTimeout(formPredict(), 3000);
-                          }
-            });
-        }
-
-        formPredict();
-    });
-
-    // prediction: form processing style
-    function addPredictionProgress() {
-        $('input').attr('disabled', 'disabled');
-        $('.spinner-prediction').fadeIn('slow');
-        $('.pred-data').empty();
-    }
-
-    function removePredictionProgress() {
-        $('.spinner-prediction').hide('slow');
-        $('input').removeAttr('disabled');
-    }
-
-    // prediction: validation form
-    function predValOne(selector) {
-        $('.form-prediction').on('input', selector, function(e){
-            var value = $(e.target).val();
-            var regExp = new RegExp("[^0-1]", "g");
-            value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, 1));
-        });
-    }
-
-    function predValTwo(selector, length) {
-        $('.form-prediction').on('input', selector, function(e){
-            var value = $(e.target).val();
-            var regExp = new RegExp("[^0-9]", "g");
-            var value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
-        });
-    }
-
-    function predValCountry(selector, length) {
-        $('.form-prediction').on('input', selector, function(e){
-            var value = $(e.target).val();
-            var regExp = new RegExp("^ |[^a-zA-Z ]", "g");
-            var value = value.replace(regExp, "");
-            $(selector).val(value.substr(0, length));
-        });
-    }
-
-    predValOne("#email");
-    predValOne("#has-privat-project");
-    predValOne("#same-log-project");
-    predValTwo("#same-email", 10);
-    predValTwo("#projects-count", 10);
-    predValTwo("#string-count");
-    predValTwo("#string-count", 10);
-    predValTwo("#members-count", 10);
-    predValTwo("#last-login", 10);
-    predValCountry("#country", 60)
-
-//modal window ML
-    $(document).on("click", '.datasource-info', function (event) {
+    //modal window ML
+    $(document).on("click", '.datasource-info', function(event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
@@ -200,7 +128,7 @@ $(document).ready(function () {
             case 'Data Source':
                 url = '/ml/getdatasource/';
                 break;
-            case 'ML Models':
+            case 'Models':
                 url = '/ml/getmlmodel/';
                 break;
             case 'Evaluations':
@@ -212,7 +140,7 @@ $(document).ready(function () {
 
         }
 
-        $.get(url + datasourceId, function (response) {
+        $.get(url + datasourceId, function(response) {
             switch (tab) {
                 case 'Data Source':
                     data.Name = response.data[0];
@@ -223,7 +151,7 @@ $(document).ready(function () {
                     data.DataSourceId = response.data[5];
                     data.DatasetId = response.data[6];
                     break;
-                case 'ML Models':
+                case 'Models':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.Size = response.data[1] + ' Bytes';
@@ -288,7 +216,7 @@ $(document).ready(function () {
     });
 
     // Delete Ajax
-    $(document).on('click', '.delete', function (event) {
+    $(document).on('click', '.delete', function(event) {
         var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
         $(event.target).closest('tr').fadeOut();
@@ -297,11 +225,15 @@ $(document).ready(function () {
             var datasourceId = $(event.target).closest('a').data('delete-id');
 
             if (target == dataSourceIdVar) {
-                $.get(url + datasourceId, function (response) {
+                $.get(url + datasourceId, function(response) {
                     if (response.deleted !== 'Ok') {
-                        $.jGrowl('An error occurred during delete process', {theme: 'jgrowl-danger'});
-                    }else {
-                        $.jGrowl('Success', {theme: 'jgrowl-success'});
+                        $.jGrowl('An error occurred during delete process', {
+                            theme: 'jgrowl-danger'
+                        });
+                    } else {
+                        $.jGrowl('Success', {
+                            theme: 'jgrowl-success'
+                        });
 
                     }
                 });
@@ -312,8 +244,8 @@ $(document).ready(function () {
             case 'Data Source':
                 deleteObject('Data Source', '/ml/delete-datasource/');
                 break;
-            case 'ML Models':
-                deleteObject('ML Models', '/ml/delete-ml-model/');
+            case 'Models':
+                deleteObject('Models', '/ml/delete-ml-model/');
                 break;
             case 'Evaluations':
                 deleteObject('Evaluations', '/ml/delete-evaluation/');
@@ -326,9 +258,10 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-        //loading data
-        $('.modal').on('hidden.bs.modal', function() {
-            $('.modal-body').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
-        });
+    //loading data
+    $('.modal-1').on('hidden.bs.modal', function() {
+        $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
 
 });
+

@@ -2,31 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Library\Pagination\Pagination as S3Pagination;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 class S3Controller extends Controller
 {
-    public $bucket = 'ml-datasets-test';
+    public $s3;
+    private $client;
 
-    public function predictionForm()
+    public function __construct()
     {
-        return view('prediction.prediction');
+        $this->client = $this->connect();
+    }
+
+    public function doIndex()
+    {
+        return view('s3.list');
     }
 
     private function connect()
     {
         $s3 = new S3Client([
-            'version'     => 'latest',
-            'region'      => 'us-east-1',
+            'version' => 'latest',
+            'region' => 'us-east-1',
             'credentials' => [
-                'key'    => 'AKIAI5RJSS2CYUZ6STHQ',
+                'key' => 'AKIAI5RJSS2CYUZ6STHQ',
                 'secret' => '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'
             ]
         ]);
@@ -34,7 +43,109 @@ class S3Controller extends Controller
         return $s3;
     }
 
-    public function upload(Request $request)
+    public function doListOfBuckets()
+    {
+        try {
+            $result = $this->client->listBuckets([
+            ]);
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return view('s3.list', ['results' => $result['Buckets']]);
+    }
+
+    public function allBuckets() {
+        try {
+            $result = $this->client->listBuckets([
+            ]);
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return $result['Buckets'];
+    }
+
+    public function bucketStruct()
+    {
+        $this->client->registerStreamWrapper();
+        $buckets = $this->allBuckets();
+        $files = [];
+
+        foreach ($buckets as $bucket) {
+            $dir = 's3://' . $bucket['Name'];
+            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
+
+            foreach ($iterator as $file) {
+                $files[] = array('name' => $file->getBasename(), 'extension' => $file->getExtension(),
+                    'path' => $file->getPath(), 'size' => $file->getSize(), 'fileType' => $file->getType(),
+                    'create' => $file->getCTime(), 'modified' => $file->getMTime());
+            }
+        };
+
+        return response()->json($files);
+    }
+
+
+    public function doCreateBucket(Request $request)
+    {
+        try {
+
+            $this->client->createBucket([
+                'ACL' => 'public-read-write',
+                'Bucket' => $request->nameBucket,
+                'CreateBucketConfiguration' => [
+                    'LocationConstraint' => 'us-east-1',
+                ],
+            ]);
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+        return back();
+    }
+
+
+    public function doDeleteBucket($nameBucket)
+    {
+
+        try {
+            $this->client->deleteBucket([
+                'Bucket' => $nameBucket,
+            ]);
+
+            return back();
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
+
+
+    public function doDeleteAllObjectsFromBucket($nameBucket)
+    {
+        try {
+            $results = $this->client->listObjects(array('Bucket' => $nameBucket))->get('Contents');
+            if ($results == !null) {
+                foreach ($results as $key => $value) {
+                    $this->client->deleteObject(array(
+                        'Bucket' => $nameBucket,
+                        'Key' => $value['Key'],
+                    ));
+                }
+            } else {
+                echo "Files not found";
+                die();
+            }
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+
+        return back();
+    }
+
+    /*---------------S3-----------------*/
+
+    public function doUpload(Request $request)
     {
         $this->validate($request, [
             'file' => 'required|file|mimes:csv,txt',
@@ -47,10 +158,9 @@ class S3Controller extends Controller
 
         $filepath = $storagePath . '/' . $fileName;
         $keyname = basename($filepath);
-        $client = $this->connect();
 
         try {
-            $result = $client->putObject(array(
+            $result = $this->client->putObject(array(
                 'Bucket' => $this->bucket,
                 'Key'    => $keyname,
                 'SourceFile'   => $filepath,
@@ -61,19 +171,13 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        Storage::delete($fileName);
-
-        return redirect('s3/list');
+        return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
-    public function delete()
+    public function doDelete($filename)
     {
-        $filename = $_POST['name'];
-        $client = $this->connect();
-        $filename = urldecode($filename);    
-
         try {
-            $result = $client->deleteObject([
+            $this->client->deleteObject([
                 'Bucket' => $this->bucket,
                 'Key' => $filename,
                 'RequestPayer' => 'requester'
@@ -82,70 +186,43 @@ class S3Controller extends Controller
             return  Response()->json(['success' => (array)$e->getMessage()]);
         }
 
-       return Response()->json(['success' => (array)$result]);
+
+        return Response()->json(['success' => true]);
     }
 
-    public function listS3()
+    public function doPredictionForm()
     {
-        $client = $this->connect();
-
-        try {
-            $result = $client->listObjects([
-                'Bucket' => $this->bucket,
-                
-            ]);
-
-            $results = $result['Contents'];
-
-            $paginatedSearchResults = (new S3Pagination())->createPagination($results, 6, '/s3/list/');
-
-        } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
-        }
-
-        return view('s3.list', ['results' => $paginatedSearchResults]);
+        return view('prediction.prediction');
     }
 
-    public function ListObjectsS3()
+        public function downloadFromS3(Request $request)
     {
-        $client = $this->connect();
-
-        try {
-            $result = $client->listObjects([
-                'Bucket' => $this->bucket,
-                
-            ]);
-
-            $results = $result['Contents'];
-
-        } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
-        }
-
-        $client->deleteObject(array(
-                        'Bucket' => $this->bucket,
-                        'Key' => '/batch.csv',
-                    ));
-        dd($result);
-        return $results;
+        $path = $request->name;
+        $path = urldecode($path);
+        $this->client->registerStreamWrapper();
+        $data = file_get_contents($path);
+        $fileName = basename($path);
+        error_reporting(0);
+        ob_start();
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $fileName);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length:' . filesize($data));
+        ob_clean();
+        ob_end_flush();
+        echo $data;
+        exit;
     }
-
-    /*public function getFile()
+    public function fileExists(Request $request)
     {
-        $client = $this->connect();
-        $path = storage_path('app/download');
-        try {
-            $result = $client->getObject([
-    'Bucket' => $this->bucket, // REQUIRED
-    'Key' => 'batch.csv',
-    'SaveAs' => $path . 'datasets8.txt',
-
-]);
-
-        } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+        $path = $request->name;
+        $path = urldecode($path);
+        $this->client->registerStreamWrapper();
+        if (file_exists($path)) {
+            return Response()->json(['data' => true]);
         }
-print_r($result);
-        return $result;
-    }*/
+    }
 }

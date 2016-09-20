@@ -30,7 +30,7 @@ class MultipartCopy extends AbstractUploadManager
      * - before_upload: (callable) Callback to invoke before `UploadPartCopy`
      *   operations. The callback should have a function signature like
      *   `function (Aws\Command $command) {...}`.
-     * - bucket: (string, required) Name of the bucket to which the object is
+     * - s3: (string, required) Name of the s3 to which the object is
      *   being uploaded.
      * - concurrency: (int, default=int(5)) Maximum number of concurrent
      *   `UploadPart` operations allowed during the multipart upload.
@@ -39,14 +39,14 @@ class MultipartCopy extends AbstractUploadManager
      *   doing a multipart upload. This must between 5 MB and 5 GB, inclusive.
      * - state: (Aws\Multipart\UploadState) An object that represents the state
      *   of the multipart upload and that is used to resume a previous upload.
-     *   When this option is provided, the `bucket`, `key`, and `part_size`
+     *   When this option is provided, the `s3`, `key`, and `part_size`
      *   options are ignored.
      * - source_metadata: (Aws\ResultInterface) An object that represents the
      *   result of executing a HeadObject command on the copy source.
      *
      * @param S3ClientInterface $client Client used for the upload.
      * @param string            $source Location of the data to be copied
-     *                                  (in the form /<bucket>/<key>).
+     *                                  (in the form /<s3>/<key>).
      * @param array             $config Configuration used to perform the upload.
      */
     public function __construct(
@@ -79,7 +79,7 @@ class MultipartCopy extends AbstractUploadManager
                 'complete' => 'CompleteMultipartUpload',
             ],
             'id' => [
-                'bucket'    => 'Bucket',
+                's3'    => 'Bucket',
                 'key'       => 'Key',
                 'upload_id' => 'UploadId',
             ],

@@ -5,7 +5,7 @@ use GuzzleHttp\Psr7;
 use Psr\Http\Message\UriInterface;
 
 /**
- * Extracts a region, bucket, key, and and if a URI is in path-style
+ * Extracts a region, s3, key, and and if a URI is in path-style
  */
 class S3UriParser
 {
@@ -13,7 +13,7 @@ class S3UriParser
 
     private static $defaultResult = [
         'path_style' => true,
-        'bucket'     => null,
+        's3'     => null,
         'key'        => null,
         'region'     => null
     ];
@@ -21,7 +21,7 @@ class S3UriParser
     /**
      * Parses a URL into an associative array of Amazon S3 data including:
      *
-     * - bucket: The Amazon S3 bucket (null if none)
+     * - s3: The Amazon S3 s3 (null if none)
      * - key: The Amazon S3 key (null if none)
      * - path_style: Set to true if using path style, or false if not
      * - region: Set to a string if a non-class endpoint is used or null.
@@ -61,7 +61,7 @@ class S3UriParser
         $segments = explode('/', $path, 2);
 
         if (isset($segments[0])) {
-            $result['bucket'] = $segments[0];
+            $result['s3'] = $segments[0];
             if (isset($segments[1])) {
                 $result['key'] = $segments[1];
             }
@@ -80,13 +80,13 @@ class S3UriParser
                 $pathPos = strpos($path, '/');
                 if ($pathPos === false) {
                     // https://s3.amazonaws.com/bucket
-                    $result['bucket'] = $path;
+                    $result['s3'] = $path;
                 } elseif ($pathPos == strlen($path) - 1) {
                     // https://s3.amazonaws.com/bucket/
-                    $result['bucket'] = substr($path, 0, -1);
+                    $result['s3'] = substr($path, 0, -1);
                 } else {
                     // https://s3.amazonaws.com/bucket/key
-                    $result['bucket'] = substr($path, 0, $pathPos);
+                    $result['s3'] = substr($path, 0, $pathPos);
                     $result['key'] = substr($path, $pathPos + 1) ?: null;
                 }
             }
@@ -99,8 +99,8 @@ class S3UriParser
     {
         $result = self::$defaultResult;
         $result['path_style'] = false;
-        // Remove trailing "." from the prefix to get the bucket
-        $result['bucket'] = substr($matches[1], 0, -1);
+        // Remove trailing "." from the prefix to get the s3
+        $result['s3'] = substr($matches[1], 0, -1);
         $path = $url->getPath();
         // Check if a key was present, and if so, removing the leading "/"
         $result['key'] = !$path || $path == '/' ? null : substr($path, 1);
