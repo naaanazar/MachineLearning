@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-    if (window.location.hash == '#describeDataSources') {
+    if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreateDataSource();
         listDataSource();
     }
@@ -142,7 +142,6 @@ $(document).ready(function () {
 
             var i = 1;
             var res = '' +
-<<<<<<< HEAD
                 '<table class="table table-bordered table-font text-center">';
 //                '<thead>' +
 //                '<tr class="active">' +
@@ -155,17 +154,6 @@ $(document).ready(function () {
 //                '</thead>' +
 //                '<span class="hide">' + i + '</span>';
 
-=======
-                '<table class="table  table-bordered table-font text-center">' +
-                '<tr class="active">' +
-                '<td>Name</td>' +
-                '<td>Status</td>' +
-                '<td>Data Location S3</td>' +
-                '<td>Last Updated</td>' +
-                '<td>&nbsp;</td>' +
-                '</tr>' +
-                '<span class="hide">' + i + '</span>';
->>>>>>> a888ce53570bbd11c6b39795a447e8bf645edd77
             for (var key in response.data) {
                 i = i + 1;
                 date = response.data[key].LastUpdatedAt.replace('T', '  ');
