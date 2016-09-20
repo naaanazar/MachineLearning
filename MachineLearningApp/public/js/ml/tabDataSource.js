@@ -1,6 +1,7 @@
 $(document).ready(function () {
     
     if (window.location.hash == '#describeDataSources') {
+        buttonCreateDataSource();
         listDataSource();
     }
 
@@ -29,7 +30,6 @@ $(document).ready(function () {
 
         var id = e.target.id;
         var val = e.target.value;
-        $(this).closest('div').find('span').addClass('hide');
 
         switch (id) {
             case 'DataSourceName':
@@ -108,9 +108,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
-        var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
-        'data-target="#modalCreateDataSource">Create Datasource</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateDataSource();
+        
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }
@@ -128,8 +127,15 @@ $(document).ready(function () {
        });
    });
 
-    function listDataSource() {
 
+    function buttonCreateDataSource() {
+        var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
+            'data-target="#modalCreateDataSource">Create Datasource</button>';
+            $('#ml-button-create').html(button);
+    }
+
+    function listDataSource() {
+        buttonCreateDataSource();
         $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 
         $.get("/ml/describe-data-sources", function (response) {

@@ -194,4 +194,35 @@ class S3Controller extends Controller
     {
         return view('prediction.prediction');
     }
+
+        public function downloadFromS3(Request $request)
+    {
+        $path = $request->name;
+        $path = urldecode($path);
+        $this->client->registerStreamWrapper();
+        $data = file_get_contents($path);
+        $fileName = basename($path);
+        error_reporting(0);
+        ob_start();
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $fileName);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length:' . filesize($data));
+        ob_clean();
+        ob_end_flush();
+        echo $data;
+        exit;
+    }
+    public function fileExists(Request $request)
+    {
+        $path = $request->name;
+        $path = urldecode($path);
+        $this->client->registerStreamWrapper();
+        if (file_exists($path)) {
+            return Response()->json(['data' => true]);
+        }
+    }
 }
