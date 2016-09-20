@@ -434,3 +434,13 @@ width:140px;
         transform: rotate(360deg);
     }
 }
+.table-headers {
+    margin-left: -15px;
+}
+.table-headers > span {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #f5f5f5;
+    display: inline-block;
+    text-align: center;
+}
