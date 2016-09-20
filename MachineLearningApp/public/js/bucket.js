@@ -9,6 +9,10 @@ $(document).ready(function () {
                 localStorage.clear();
                 data.forEach(function (item) {
                     localStorage.setItem(item.name, JSON.stringify(item));
+                        $('#loader-s3-main').remove('.loader');
+                        $('tr.active').removeClass('hide');
+                        $('tr.content').removeClass('hide');
+                        $('tr.bg').removeClass('hide');
                 });
             },
             error: function (data) {
@@ -102,16 +106,20 @@ function getLastHash() {
 
 function showTable(name) {
     $('.content').hide();
+    //$('tr.active').addClass('hide');
+    //$('tr.bg').addClass('hide');
+    //$('div.loader').remove();
     if("onhashchange" in window) {
         var level = location.hash.split('#').length - 1;
         folders = showFolder(level, name);
         for (var item in folders) {
-            $('#myTable').append("<tr class='" + name + " bg'>" +
+            $('#myTable').append("<div class='loader col-md-2 col-md-offset-5' id='loader-s3-folder'><tr class='" + name + " bg hide'>" +
                 "<td class='reference'>" + folders[item] + "</td>" +
                 "<td>" + 'folder' + "</td>" +
                 "<td>" + '-' + "</td>" +
                 "<td> " + "</td>" +
                 "</tr>");
+            //$('tr.bg').remove('hide');
         }
 
         for(var i = 0; i < localStorage.length; i++) {
@@ -122,11 +130,11 @@ function showTable(name) {
                 JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] ==
                 name) {
 
-                $('#myTable').append("<tr class='" + name + "'>" +
+                $('#myTable').append("<tr class='" + name + " hide all'>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).name + "</td>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).size + "</td>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).modified + "</td>" +
-                    "<td> " +
+                    "<td>" +
                     "<a class='btn btn-default btn-sm' href='https://s3.amazonaws.com/ml-datasets-test/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-download'></span></a>" +
                     "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
                     "</td>" +
@@ -136,3 +144,4 @@ function showTable(name) {
         }
     }
 }
+
