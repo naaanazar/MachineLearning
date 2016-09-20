@@ -31,12 +31,14 @@ class PredictionController extends Controller
                 'secret' => 'fjLNfQRailTs60W959jF7OA9443sn+Zx9U2Dnek+'
             ]
         ]);
+
         return $ml;
     }
 
     private function createEndpoint($MLModelId)
     {
         $client = $this->connectToML();
+
         try {
             $result = $client->createRealtimeEndpoint([
                 'MLModelId' => $MLModelId
@@ -44,6 +46,7 @@ class PredictionController extends Controller
         } catch (MachineLearningException $e) {
             echo $e->getMessage() . "\n";
         }
+
         return $result;
     }
 
@@ -72,8 +75,6 @@ class PredictionController extends Controller
             'same_email_domain_count' => 'integer|min:0|max:10000000000',
             'same_login_and_project_name' => 'integer|digits_between:0,1',
         ]);
-
-        // dd($request->all());
 
         $country = $request->input('country');
         $MLModelId = $request->input('ml_model_id');
@@ -113,9 +114,11 @@ class PredictionController extends Controller
             } catch (MachineLearningException $e) {
                 echo $e->getMessage() . "\n";
             }
+
             $output = json_encode($result["Prediction"]);
 
             $this->deleteEndpoint($MLModelId);
+
             return $output;
         }
     }

@@ -84,14 +84,14 @@
                         this.output = $.parseJSON(response);
                         this.purchase = this.output.predictedLabel == 0 ? "No" : "Yes";
 
-                        this.content = "<p><strong>Purchase: </strong> ";
-                        this.content += this.purchase + ";</p>";
-                        this.content += "<p><strong>Predicted Scores: </strong> ";
-                        this.content += this.output.predictedScores[0].toFixed(4) + ";</p>";
-                        this.content += "<p><strong>Algorithm: </strong> ";
-                        this.content += this.output.details.Algorithm + ";</p>";
-                        this.content += "<p><strong>Predictive Model Type: </strong> "
-                        this.content += this.output.details.PredictiveModelType + ";</p>";
+                        this.content = "<p><strong>Purchase: </strong><span>";
+                        this.content += this.purchase + ";</span></p>";
+                        this.content += "<p><strong>Predicted Scores: </strong><span>";
+                        this.content += this.output.predictedScores[0].toFixed(4) + ";</span></p>";
+                        this.content += "<p><strong>Algorithm: </strong><span>";
+                        this.content += this.output.details.Algorithm + ";</span></p>";
+                        this.content += "<p><strong>Predictive Model Type: </strong><span>"
+                        this.content += this.output.details.PredictiveModelType + ";</span></p>";
 
                         $('.prediction-data').append(this.content).show('normal');
                     }
