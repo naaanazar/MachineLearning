@@ -70,7 +70,7 @@
                     <h4 class="modal-title">Create Data Source</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="create-datasource-form" style="display:none;" method="post"
+                    <form class="create-datasource-form"  method="post"
                         action="ml/create-datasource">
                         <br>
                         {{ csrf_field() }}

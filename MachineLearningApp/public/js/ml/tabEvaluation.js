@@ -80,8 +80,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
-        var button = '<button class="btn btn-primary btn-create-evaluations pull-right">Create Evaluations</button>'
-        $('#ml-button-create').html(button);
+        buttonCreateEvaluation();
         if(!$('.container-describeEvaluations').hasClass('loaded')) {
             listEvaluations();
         }
