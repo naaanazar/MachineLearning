@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $('#loader-s3-main').removeClass('hide');
+    // $('table.table').append("<div class='loader col-md-2 col-md-offset-5 hide' id='loader-s3-mai'>");
     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
         $.ajax({
             type: "GET",
@@ -9,11 +11,12 @@ $(document).ready(function () {
                 localStorage.clear();
                 data.forEach(function (item) {
                     localStorage.setItem(item.name, JSON.stringify(item));
-                        $('#loader-s3-main').remove('.loader');
-                        $('tr.active').removeClass('hide');
-                        $('tr.content').removeClass('hide');
-                        $('tr.bg').removeClass('hide');
                 });
+
+                $('tr.active').removeClass('hide');
+                $('tr.content').removeClass('hide');
+                $('tr.bg').removeClass('hide');
+                $('#loader-s3-main').remove();
             },
             error: function (data) {
                 console.log('Error:', data);
@@ -24,6 +27,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('body').on('click', '.reference', function() {
+
+
         var $ref = $(this);
         var name = $ref.text();
         if (!!getLastHash()) {
@@ -106,20 +111,17 @@ function getLastHash() {
 
 function showTable(name) {
     $('.content').hide();
-    //$('tr.active').addClass('hide');
-    //$('tr.bg').addClass('hide');
-    //$('div.loader').remove();
+    $('#loader-s3-main').remove();
     if("onhashchange" in window) {
         var level = location.hash.split('#').length - 1;
         folders = showFolder(level, name);
         for (var item in folders) {
-            $('#myTable').append("<div class='loader col-md-2 col-md-offset-5' id='loader-s3-folder'><tr class='" + name + " bg hide'>" +
+            $('#myTable').append("<tr class='" + name + " bg'>" +
                 "<td class='reference'>" + folders[item] + "</td>" +
                 "<td>" + 'folder' + "</td>" +
                 "<td>" + '-' + "</td>" +
                 "<td> " + "</td>" +
                 "</tr>");
-            //$('tr.bg').remove('hide');
         }
 
         for(var i = 0; i < localStorage.length; i++) {
@@ -130,7 +132,7 @@ function showTable(name) {
                 JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] ==
                 name) {
 
-                $('#myTable').append("<tr class='" + name + " hide all'>" +
+                $('#myTable').append("<tr class='" + name + " files'>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).name + "</td>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).size + "</td>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).modified + "</td>" +
@@ -141,7 +143,12 @@ function showTable(name) {
                     "</tr>");
 
             }
+
         }
+
+
+
+
     }
 }
 

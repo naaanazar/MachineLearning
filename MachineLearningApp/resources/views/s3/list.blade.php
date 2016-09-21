@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <table class="table table-bordered table-font text-center" id="myTable">
-                            <div class="loader col-md-2 col-md-offset-5" id="loader-s3-main">
+                            <div class="loader col-md-2 col-md-offset-5 hide" id="loader-s3-main">
                             <tr class="active table-header hide">
                                 <td>Name</td>
                                 <td>Size</td>
@@ -87,7 +87,7 @@
                                 <tr class="content bg hide">
                                     <td class="reference">{{ $value['Name'] }}</td>
                                     <td>0</td>
-                                    <td></div>{{ $value['CreationDate'] }}</td>
+                                    <td>{{ $value['CreationDate'] }}</td>
                                     <td>
                                         <a class="btn btn-danger btn-sm btn-list"
                                            href="/s3/delete/{{ $value['Name'] }}"
