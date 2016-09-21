@@ -5,10 +5,10 @@
  */
 body {
   min-width: 501px;
-  height: 80%;
+  height: 100%;
   font-size: 20px;
   color: #333333;
-  padding-bottom: 25px !important;
+  padding-bottom: 0px !important;
   overflow-y: hidden;
 }
 p {
@@ -152,7 +152,6 @@ hr.small {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  margin-bottom: 50px;
 }
 .intro-header .site-heading,
 .intro-header .post-heading,
@@ -404,3 +403,72 @@ body {
 .back-to-top{
   bottom: 45px !important;
 }
+
+.post-1{
+   margin-top: 50px;
+}
+
+.benefits{
+  display: none;
+}
+
+
+
+/***************************************
+    Buttons
+***************************************/
+
+.btn-benefits{
+  margin-bottom: 100px !important;
+  margin-top: 100px !important;
+}
+
+.btn-try-it span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn-try-it span:after {
+  content: '»'; 
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn-try-it:hover span {
+  padding-right: 25px;
+}
+
+.btn-try-it:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.btn-about span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn-about span:after {
+  content: '▼';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn-about:hover span {
+  padding-right: 25px;
+}
+
+.btn-about:hover span:after {
+  opacity: 1;
+  right: 0;
