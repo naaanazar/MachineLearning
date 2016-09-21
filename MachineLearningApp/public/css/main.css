@@ -423,29 +423,24 @@ width:140px;
 .reference:hover {
     cursor: pointer;
 }
-
 .back {
     font-size: 17px;
     margin-right: 550px;
     font-weight: bold;
 }
-
 .back:hover {
     cursor: pointer;
     background-color: #DDDDDD;
     text-decoration: underline;
 }
-
 .bg {
     padding: 0px;
     margin: 0px;
 }
-
 .bg:hover {
     cursor: pointer;
     background-color: #F5F5F5;
 }
-
 .table-header {
     font-size: 17px;
     font-family: 'Droid Serif', serif;
@@ -500,7 +495,6 @@ width:140px;
     animation: spin 2s linear infinite;
     margin-left: 45%;
 }
-
 .loader-select {
   border: 4px solid #f3f3f3;
   border-radius: 50%;
@@ -510,17 +504,14 @@ width:140px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
-
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 .remove-arrow, .remove-arrow.form-control {
   -moz-appearance: none;
    -webkit-appearance: none;
@@ -534,11 +525,9 @@ width:140px;
         transform: rotate(360deg);
     }
 }
-
 .form-group{
     position: relative;
 }
-
 .wrapper {
   cursor: help;
   margin: 1px 5px 1px 5px; 
@@ -548,7 +537,6 @@ width:140px;
   -webkit-transform: translateZ(0); 
   -webkit-font-smoothing: antialiased; 
 }
-
 .wrapper .tooltip {
      padding: 15px 20px;
   text-align: center;
@@ -579,7 +567,6 @@ width:140px;
        -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
           box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
 }
-
 .wrapper .tooltip:before {
   bottom: -20px;
   content: " ";
@@ -589,7 +576,6 @@ width:140px;
   position: absolute;
   width: 100%;
 }
-
 .wrapper .tooltip:after {
   border-left: solid transparent 10px;
   border-right: solid transparent 10px;
@@ -602,7 +588,6 @@ width:140px;
   position: absolute;
   width: 0;
 }
-
 .wrapper:hover .tooltip {
   opacity: 0.9;
   pointer-events: auto;
@@ -612,11 +597,9 @@ width:140px;
        -o-transform: translateY(0px);
           transform: translateY(0px);
 }
-
 .table-headers {
     margin-left: -15px;
 }
-
 .table-headers > span {
     border: 1px solid #ddd;
     padding: 8px;
