@@ -151,7 +151,7 @@ $(document).ready(function() {
                     '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +
                     'id="info_' + i + '" data-model-id="' + response.data[key].MLModelId + '">' +
-                        '<span class="glyphicon glyphicon glyphicon-minus"></span></a>&nbsp;' +
+                        '<span class="glyphicon glyphicon-remove-circle"></span></a>&nbsp;' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                     'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].MLModelId + '">' +
                         '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +

@@ -197,7 +197,7 @@ $(document).ready(function() {
                     if (typeof data[key] !== 'undefined') {
                         tbody += '' +
                             '<tr>' +
-                            '<td>' + key + '</td>' +
+                            '<td>' + parseName(key) + '</td>' +
                             '<td>' + data[key] + '</td>' +
                             '</tr>';
                     }
@@ -212,6 +212,17 @@ $(document).ready(function() {
             $('#result_info').html(result);
         }
 
+        function parseName(str){
+            var name = '';
+            var posFirst = 0;
+            for (var i=0; i<str.length; i++) {
+                if (str.charCodeAt(i) > 65 && str.charCodeAt(i) <90) {
+                    name += str.substring(posFirst,i) + ' ';
+                    posFirst = i;
+                }
+            }
+        return name = name + ' ' + str.substring(posFirst,str.length);
+        }
         event.preventDefault();
     });
 
