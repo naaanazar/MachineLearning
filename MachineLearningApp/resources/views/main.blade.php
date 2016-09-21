@@ -12,6 +12,7 @@
        <link href="{{ URL::to('css/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
        <link href="{{ URL::to('css/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
        <link href="{{ URL::to('css/main.css') }}" rel="stylesheet">
+       <link href="{{ URL::to('css/animate.css') }}" rel="stylesheet">
        <script src="{{ URL::to('js/lib/jquery/jquery.min.js') }}"></script>
        <!--jGrowl-->
        <link rel="stylesheet" type="text/css" href="{{ URL::to('css/lib/jGrowl/jquery.jgrowl.min.css') }}" />

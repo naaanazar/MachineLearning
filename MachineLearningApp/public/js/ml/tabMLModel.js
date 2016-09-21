@@ -124,7 +124,7 @@ $(document).ready(function() {
                 //'<td>Training Data Source Id</td>' +
                 '<td>ML Model Type</td>' +
                 '<td>Last Updated</td>' +
-                '<td>&nbsp;</td>' +
+                '<td>Action</td>' +
                 '</tr>' +
                 '<span class="hide">' + i + '</span>';
             for (var key in response.data) {
