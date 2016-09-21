@@ -52,15 +52,19 @@ $(document).ready(function() {
     $(document).on("click", ".btn-create-bath-description", function() {
      //   $(".create-bath-predictios-form").toggle();
       //  $(".container-describeBatchPredictions").toggle();
-
+        $('#SelectBathMLModel').addClass('remove-arrow');
+        var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
+            '<div align="center" class="loader-select" id="loader"></div></div>';
+        $('.create-bath-predictios-form').find('.select-load').append(load);
         $.get("/ml/select-ml-model", function(response) {
             var result;
 
             for (var key in response.data) {
-
                 result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
-            }
+            }            
             $('#SelectBathMLModel').html(result);
+            $('#SelectBathMLModel + .loader-im').remove();
+            $('#SelectBathMLModel').removeClass('remove-arrow');
         });
 
         $.get("/ml/select-data-source", function(response) {
@@ -116,7 +120,7 @@ $(document).ready(function() {
                     res +=
                         '<tr>' +
                            // '<td>' + response.data[key].BatchPredictionId + '</td>' +
-                            '<td>' + response.data[key].Name + '</td>' +
+                            '<td class="name">' + response.data[key].Name + '</td>' +
                             '<td>' + response.data[key].Status + '</td>' +
                             //'<td>' + response.data[key].MLModelId + '</td>' +
                             //'<td>' + response.data[key].BatchPredictionDataSourceId + '</td>' +

@@ -54,16 +54,22 @@ $(document).ready(function() {
 
         }
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('button').addClass('disabled');
+            $(this).closest('form').find('input#success-button-modal-ml').attr('disabled', 'disabled');
         } else {
-            $(this).closest('form').find('button').removeClass('disabled');
+            $(this).closest('form').find('input#success-button-modal-ml').removeAttr('disabled');
         }
+
+
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
      //   $('.create-mlmodel-form').toggle();
        // $(".container-describeMLModels").toggle();
 
+        $('#SelectDataSource').addClass('remove-arrow');
+        var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
+                '<div align="center" class="loader-select" id="loader"></div></div>';
+        $('.create-mlmodel-form').find('.select-load').append(load);
         $.get("/ml/select-data-source", function(response) {
             var result='';
             
@@ -71,6 +77,8 @@ $(document).ready(function() {
                 result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';             
             };
             $('#SelectDataSource').html(result);
+            $('#SelectDataSource + .loader-im').remove();
+            $('#SelectDataSource').removeClass('remove-arrow');
         });
     });
 
@@ -131,7 +139,7 @@ $(document).ready(function() {
                 res += '' +
                     '<tr>' +
                    // '<td>' + response.data[key].MLModelId + '</td>' +
-                    '<td>';
+                    '<td class="name">';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
                 }
@@ -145,7 +153,7 @@ $(document).ready(function() {
                     '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +
                     'id="info_' + i + '" data-model-id="' + response.data[key].MLModelId + '">' +
-                        '<span class="glyphicon glyphicon glyphicon-minus"></span></a>&nbsp;' +
+                        '<span class="glyphicon glyphicon-remove-circle"></span></a>&nbsp;' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                     'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].MLModelId + '">' +
                         '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +

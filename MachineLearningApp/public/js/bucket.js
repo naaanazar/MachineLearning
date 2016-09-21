@@ -1,25 +1,33 @@
-// $(document).ready(function () {
-//     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
-//         $.ajax({
-//             type: "GET",
-//             url: 's3/allbuckets',
-//             dataType: 'json',
-//
-//             success: function (data) {
-//                 localStorage.clear();
-//                 data.forEach(function (item) {
-//                     localStorage.setItem(item.name, JSON.stringify(item));
-//                 });
-//             },
-//             error: function (data) {
-//                 console.log('Error:', data);
-//             }
-//         });
-//     }
-// });
+$(document).ready(function () {
+    $('#loader-s3-main').removeClass('hide');
+    if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
+        $.ajax({
+            type: "GET",
+            url: 's3/allbuckets',
+            dataType: 'json',
+
+            success: function (data) {
+                localStorage.clear();
+                data.forEach(function (item) {
+                    localStorage.setItem(item.name, JSON.stringify(item));
+                });
+
+                $('tr.active').removeClass('hide');
+                $('tr.content').removeClass('hide');
+                $('tr.bg').removeClass('hide');
+                $('#loader-s3-main').remove();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
+});
 
 $(document).ready(function () {
     $('body').on('click', '.reference', function() {
+
+
         var $ref = $(this);
         var name = $ref.text();
         if (!!getLastHash()) {
@@ -102,6 +110,7 @@ function getLastHash() {
 
 function showTable(name) {
     $('.content').hide();
+    $('#loader-s3-main').remove();
     if("onhashchange" in window) {
         var level = location.hash.split('#').length - 1;
         folders = showFolder(level, name);
@@ -122,17 +131,18 @@ function showTable(name) {
                 JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] ==
                 name) {
 
-                $('#myTable').append("<tr class='" + name + "'>" +
+                $('#myTable').append("<tr class='" + name + " files'>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).name + "</td>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).size + "</td>" +
                     "<td>" + JSON.parse(localStorage.getItem(key)).modified + "</td>" +
-                    "<td> " +
+                    "<td>" +
                     "<a class='btn btn-default btn-sm' href='https://s3.amazonaws.com/ml-datasets-test/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-download'></span></a>" +
                     "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
                     "</td>" +
                     "</tr>");
 
             }
+
         }
     }
 }

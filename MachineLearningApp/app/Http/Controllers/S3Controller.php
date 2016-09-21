@@ -89,8 +89,8 @@ class S3Controller extends Controller
 
     public function doCreateBucket(Request $request)
     {
-        try {
 
+        try {
             $this->client->createBucket([
                 'ACL' => 'public-read-write',
                 'Bucket' => $request->nameBucket,

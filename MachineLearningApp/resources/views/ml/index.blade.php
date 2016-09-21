@@ -7,15 +7,15 @@
     <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
 
-    <div class="container">
+    <div class="container ">
         <div class="row">
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4">
+            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div id="ml-button-create">
                 </div>
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
-            <div class="row-lg-4 row-md-4 row-sm-4 row-xs-4 tabs ml-tabs" >
+            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs" >
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
@@ -80,7 +80,7 @@
                                   placeholder="Data source name" name="DataSourceName">
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectDataLocationS3">Dataset</label>
                             <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
                             </select>
@@ -101,7 +101,9 @@
                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                        <div class="row" align="center">
+                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -133,12 +135,14 @@
                                 <option value="MULTICLASS">MULTICLASS</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectDataSource">Data source name</label>
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                       <div class="row" align="center">
+                           <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button">
+                       </div>
                       </form>
                 </div>
             </div>
@@ -162,20 +166,19 @@
                                    placeholder="Evaluation name" name="EvaluationName">
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectMLModelId">Model name</label>
-                            <select class="form-control" id="SelectMLModelId" name="MLModelId">
-                                <option><span align="center" class="loader-select col-md-1 col-md-offset-1" id="loader"></span></option>
+                            <select class="form-control" id="SelectMLModelId" name="MLModelId">                               
                             </select>
-                            <span align="center" class="loader-select col-md-1 col-md-offset-1 form-control-feedback" id="loader"></span>
-
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectEvDataSource">Data source name</label>
                             <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="row" align="center">
+                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -193,10 +196,10 @@
                         action="ml/create-batch-prediction">
                         <br>
                         {{ csrf_field() }}
-                        <div class="form-group">
+                        <div class="form-group select-load" style="position: relative">
                             <label for="SelectBathMLModel">Model name</label>
                             <select class="form-control" id="SelectBathMLModel" name="MLModelId">
-                            </select>
+                            </select>                           
                         </div>
                         <div class="form-group">
                             <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">

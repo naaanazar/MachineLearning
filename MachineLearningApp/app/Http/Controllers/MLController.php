@@ -153,7 +153,6 @@ class MLController extends Controller
     {
         $ml = new ML;
         $result = $ml->describeMLModels();
-sleep (5);
         return response()->json(['data' => (array)$result]);
     }      
 
