@@ -167,7 +167,7 @@ $(document).ready(function () {
                 res += '' +
                     '<tr>' +
                     '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
-                    '<td>';
+                    '<td class="name">';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
                 }

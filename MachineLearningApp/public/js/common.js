@@ -218,11 +218,13 @@ $(document).ready(function() {
     // Delete Ajax
     $(document).on('click', '.delete', function(event) {
         var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
-
+        
         $(event.target).closest('tr').fadeOut();
+
 
         function deleteObject(dataSourceIdVar, url) {
             var datasourceId = $(event.target).closest('a').data('delete-id');
+            var name = $(event.target).closest('tr').find('.name').text();
 
             if (target == dataSourceIdVar) {
                 $.get(url + datasourceId, function(response) {
@@ -231,7 +233,8 @@ $(document).ready(function() {
                             theme: 'jgrowl-danger'
                         });
                     } else {
-                        $.jGrowl('Success', {
+
+                        $.jGrowl('successfully removed: ' + name, {
                             theme: 'jgrowl-success'
                         });
 

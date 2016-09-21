@@ -137,7 +137,7 @@ $(document).ready(function() {
                 res += '' +
                     '<tr>' +
                    // '<td>' + response.data[key].MLModelId + '</td>' +
-                    '<td>';
+                    '<td class="name">';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
                 }
