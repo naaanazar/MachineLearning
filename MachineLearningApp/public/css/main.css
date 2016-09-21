@@ -149,8 +149,14 @@ body {
 }
 @media screen and (max-width: 1000px) {
     .block-prediction {
+
+        min-height:200px !important;
+        height: 250px !important;
         float: none;
-        margin: 0 auto 40px;
+        margin-bottom:40px;
+        width: 90%;
+    }
+    .input-pred{
         width: 60%;
     }
     .block-prediction::before {
@@ -164,7 +170,7 @@ body {
 
 @media screen and (max-width: 700px) {
     .block-prediction {
-        width: 80%;
+        width: 95%;
     }
 }
 
@@ -522,6 +528,15 @@ width:140px;
         transform: rotate(360deg);
     }
 }
-
+.table-headers {
+    margin-left: -15px;
+}
+.table-headers > span {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #f5f5f5;
+    display: inline-block;
+    text-align: center;
+}
 .tooltip-arrow,
 .red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
