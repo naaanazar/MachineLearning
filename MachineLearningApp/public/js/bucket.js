@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('#loader-s3-main').removeClass('hide');
-    // $('table.table').append("<div class='loader col-md-2 col-md-offset-5 hide' id='loader-s3-mai'>");
     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
         $.ajax({
             type: "GET",
