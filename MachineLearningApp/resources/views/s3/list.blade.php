@@ -12,6 +12,7 @@
                 <br>
 
                 <form class="create-datasource" method="post" action="s3/create_bucket">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <br>
                     {{ csrf_field() }}
                     <div class="form-group">

@@ -46,9 +46,9 @@ $(document).ready(function() {
         }
 
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('button').addClass('disabled');
+            $(this).closest('form').find('input#success-button-modal-ev').attr('disabled', 'disabled');
         } else {
-            $(this).closest('form').find('button').removeClass('disabled');
+            $(this).closest('form').find('input#success-button-modal-ev').removeAttr('disabled');
         }
 
     });
@@ -134,7 +134,7 @@ $(document).ready(function() {
                 res += '' +
                     '<tr>' +
                     //'<td>' + response.data[key].EvaluationId + '</td>' +
-                    '<td>';
+                    '<td class="name">';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
                 }

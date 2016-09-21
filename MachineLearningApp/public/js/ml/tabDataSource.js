@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $(".container").css('display','none');
+    $(".container").slideDown(500);
 
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreateDataSource();
@@ -84,9 +86,9 @@ $(document).ready(function () {
         }
 
         if ($(this).closest('form.create-datasource-form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal').attr('disabled', 'disabled');
+            $(this).closest('form').find('input#success-button-modal-ds').attr('disabled', 'disabled');
         } else {
-            $(this).closest('form').find('input#success-button-modal').removeAttr('disabled');
+            $(this).closest('form').find('input#success-button-modal-ds').removeAttr('disabled');
         }
     });
 
@@ -167,7 +169,7 @@ $(document).ready(function () {
                 res += '' +
                     '<tr>' +
                     '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
-                    '<td>';
+                    '<td class="name">';
                 if (response.data[key].Name !== undefined) {
                     res += response.data[key].Name;
                 }

@@ -7,7 +7,7 @@
     <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
 
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div id="ml-button-create">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal" type="submit" class="btn btn-primary submit-button">
+                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button">
                         </div>
                     </form>
                 </div>
@@ -140,7 +140,9 @@
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                       <div class="row" align="center">
+                           <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button">
+                       </div>
                       </form>
                 </div>
             </div>
@@ -174,7 +176,9 @@
                             <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="row" align="center">
+                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button">
+                        </div>
                     </form>
                 </div>
             </div>
