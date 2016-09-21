@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $(".container").css('display','none');
+    $(".container").slideDown(500);
 
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreateDataSource();
