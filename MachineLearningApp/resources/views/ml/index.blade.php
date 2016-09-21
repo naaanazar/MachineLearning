@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal" type="submit" class="btn btn-primary submit-button">
+                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button">
                         </div>
                     </form>
                 </div>
@@ -140,7 +140,9 @@
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                       <div class="row" align="center">
+                           <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button">
+                       </div>
                       </form>
                 </div>
             </div>
@@ -174,7 +176,9 @@
                             <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="row" align="center">
+                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button">
+                        </div>
                     </form>
                 </div>
             </div>
