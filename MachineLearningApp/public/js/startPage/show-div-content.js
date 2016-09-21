@@ -3,6 +3,6 @@ function showDiv() {
     document.getElementById('overflow').style.overflow = "scroll";
 }
 
-function showBenefits(){
-	document.getElementById('benefitsToShow').style.display = "block";
+function showBenefits() {
+    document.getElementById('benefitsToShow').style.display = "block";
 }

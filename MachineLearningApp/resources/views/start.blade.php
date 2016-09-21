@@ -11,15 +11,14 @@
 <!-- CSS -->
        <link href="css/startPage.css" rel="stylesheet">
        <link href="css/animate.css" rel="stylesheet" >
-       <!-- Bootstrap -->
+<!-- Bootstrap -->
        <link href="{{ URL::to('css/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
        <link href="{{ URL::to('css/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
        <link href="{{ URL::to('css/main.css') }}" rel="stylesheet">
-       <script src="{{ URL::to('js/lib/jquery/jquery.min.js') }}"></script>
-       <!--jGrowl-->
+<!--jGrowl-->
        <link rel="stylesheet" type="text/css" href="{{ URL::to('css/lib/jGrowl/jquery.jgrowl.min.css') }}" />
-
        <script src="{{ URL::to('js/lib/jGrowl/jquery.jgrowl.min.js') }}"></script>
+       <script src="{{ URL::to('js/lib/jquery/jquery.min.js') }}"></script>
        <script src="{{ URL::to('js/common.js') }}"></script>
        <script src="{{ URL::to('js/prediction/prediction.js') }}"></script>
        <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
@@ -36,16 +35,13 @@
        <![endif]-->
 </head>
 <body id="overflow">
-
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
     <header class="intro-header" style="background-image: url('images/home-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                     <div class="site-heading">
-                        <h1 class="animated fadeInLeft"
-                         style="-webkit-animation-delay: 0.5s;">Crowdin Machine Learning Platform</h1>
+                        <h1 class="animated fadeInDown" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;">
+                         Crowdin Machine Learning Platform</h1>
                         <hr class="small">
                         <span class="subheading animated fadeInDown ">Crowdin Space</span>
                         <a href="#viewAboutContent"><button type="button" class="btn btn-primary btn-start  btn-about animated fadeInLeft" style="-webkit-animation-delay: 0.5s;" onclick="showDiv()"><span>About</span></button></a>
@@ -59,27 +55,27 @@
     <!-- Main Content -->
     <div id = "ToShow" class="container content-container" style="display:none; onclick="showDiv()">
         <div class="row">
-            <div class="about-posts post-1 clearfix">
+            <div class="about-posts post-1 first-pr clearfix">
                 <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated flipInX" style="-webkit-animation-delay: 0.5s;">
                     <img src="/images/post-image-1.png">
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7">
-                    <div id="viewAboutContent" class="post-preview">
+                    <div id="viewAboutContent" class="post-preview ">
                         <h2 class="post-title animated bounceInLeft" style="-webkit-animation-delay: 0.8s;" >Introducing Machine Learning</h2>
-                        <h3 class="post-subtitle animated zoomIn" style="-webkit-animation-delay: 1s;">
+                        <h3 class="post-subtitle animated fadeInUp" style="-webkit-animation-delay: 1s;">
                             Machine learning (ML) can help you use historical data to make better business decisions.<br> ML algorithms discover patterns in data and construct predictive models using these patterns.<br>Then, you can use the models to make predictions on future data. <br>For example, one possible application of ML would be to predict whether or not a customer will purchase a particular product based on past behavior, and use this prediction to send a personalized promotional email to that customer.
                         </h3> 
                     </div>
                 </div>
             </div>
-                <center><button type="button" class="btn btn-success btn-benefits animated slideInUp" style="-webkit-animation-delay: 2s;" id="button-benefits" onclick="showBenefits()">Our benefits</button></center>
+                <center><button type="button" class="btn btn-success btn-benefits" id="button-benefits" onclick="showBenefits()">Our benefits</button></center>
             <div class="about-posts benefits clearfix " id = "benefitsToShow">
-                <div class="about-posts post-2 clearfix animated fadeInRight" style="-webkit-animation-delay: 0.4s;">
-                    <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5">
+                <div class="about-posts post-2 clearfix">
+                    <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated fadeInLeft" style="-webkit-animation-delay: 0.5s;">
                         <img src="/images/post-image-2.png">
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7">
-                        <div id="viewAboutContent" class="post-preview">
+                        <div id="viewAboutContent" class="post-preview animated fadeInRight" style="-webkit-animation-delay: 0.5s;">
                             <h2 class="post-title benefits-title">
                                 Crowdin Machine Learning  (Crowdin-ML) Allow you:
                             </h2>
@@ -93,29 +89,29 @@
                         </div>
                     </div>
                 </div>
-                    <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated fadeInRight" style="-webkit-animation-delay: 1s;">
+                    <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated fadeInLeft" style="-webkit-animation-delay: 1.5s;">
                         <img src="/images/post-image-3.png">
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7 animated fadeInRight" style="-webkit-animation-delay: 1s;">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7 animated fadeInRight" style="-webkit-animation-delay: 1.5s;">
                         <div id="viewAboutContent" class="post-preview">
                             <h2 class="post-title">
                                 Benefits of Crowdin-ML:
                             </h2>
                             <h3 class="post-subtitle">
-                            <div class="benefit-1">
-                            <ul>
-                                 <li>Crowdin Machine Learning prediction can be used to generate billions of predictions for your applications. You can request predictions for large numbers of data records all at once using the batch prediction</li> <br>
-
-                            <div class="benefit-2" >
-                                 <li>You can also use the real-time API to obtain predictions for individual data records, and use them within interactive web, mobile, or desktop applications</li>
-                            </ul>
+                                 <ul>
+                                    <div class="benefit-1">
+                                         <li>Crowdin Machine Learning prediction can be used to generate billions of predictions for your applications. You can request predictions for large numbers of data records all at once using the batch prediction</li> <br>
+                                    </div>
+                                    <div class="benefit-2">
+                                        <li>You can also use the real-time API to obtain predictions for individual data records, and use them within interactive web, mobile, or desktop applications</li><br><br><br><br><br>
+                                    </div>
+                                </ul>
                             </h3> 
                         </div>
                     </div>
             </div>
         </div>
     </div>
-
     <!-- Footer -->
    @yield('content')
    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"  data-placement="top"><span class="glyphicon glyphicon-chevron-up"></span></a>
