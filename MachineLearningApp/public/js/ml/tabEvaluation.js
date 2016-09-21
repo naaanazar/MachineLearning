@@ -46,9 +46,9 @@ $(document).ready(function() {
         }
 
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('button').addClass('disabled');
+            $(this).closest('form').find('input#success-button-modal-ev').attr('disabled', 'disabled');
         } else {
-            $(this).closest('form').find('button').removeClass('disabled');
+            $(this).closest('form').find('input#success-button-modal-ev').removeAttr('disabled');
         }
 
     });

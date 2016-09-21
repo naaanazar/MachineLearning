@@ -86,9 +86,9 @@ $(document).ready(function () {
         }
 
         if ($(this).closest('form.create-datasource-form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal').attr('disabled', 'disabled');
+            $(this).closest('form').find('input#success-button-modal-ds').attr('disabled', 'disabled');
         } else {
-            $(this).closest('form').find('input#success-button-modal').removeAttr('disabled');
+            $(this).closest('form').find('input#success-button-modal-ds').removeAttr('disabled');
         }
     });
 
