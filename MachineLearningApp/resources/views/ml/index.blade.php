@@ -101,7 +101,9 @@
                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                        <div class="row" align="center">
+                            <input id="success-button-modal" type="submit" class="btn btn-primary submit-button">
+                        </div>
                     </form>
                 </div>
             </div>
