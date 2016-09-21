@@ -7,7 +7,7 @@
     <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
 
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div id="ml-button-create">

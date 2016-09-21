@@ -120,7 +120,7 @@ $(document).ready(function() {
                     res +=
                         '<tr>' +
                            // '<td>' + response.data[key].BatchPredictionId + '</td>' +
-                            '<td>' + response.data[key].Name + '</td>' +
+                            '<td class="name">' + response.data[key].Name + '</td>' +
                             '<td>' + response.data[key].Status + '</td>' +
                             //'<td>' + response.data[key].MLModelId + '</td>' +
                             //'<td>' + response.data[key].BatchPredictionDataSourceId + '</td>' +
