@@ -95,6 +95,10 @@ $(document).ready(function () {
      //   $(".create-datasource-form").toggle();
       //  $(".container-describeDataSources").toggle();
 
+        $('#SelectDataLocationS3').addClass('remove-arrow');
+        var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
+                '<div align="center" class="loader-select" id="loader"></div></div>';
+        $('.create-datasource-form').find('.select-load').append(load);
         $.get("/ml/select-S3objects", function (response) {
             var result;
             for (var key in response.data) {
@@ -105,6 +109,8 @@ $(document).ready(function () {
                 }
             }
             $('#SelectDataLocationS3').html(result);
+            $('#SelectDataLocationS3 + .loader-im').remove();
+            $('#SelectDataLocationS3').removeClass('remove-arrow');
         });
     });
 

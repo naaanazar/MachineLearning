@@ -55,17 +55,23 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-      //  $(".create-evaluations-form").toggle();
+      //  $(".create-evaluations-form").togg    le();
       //  $(".container-describeEvaluations").toggle();
-        $('#SelectMLModelId').addClass('loadinggif');
+        $('#SelectMLModelId').addClass('remove-arrow');
+        $('#SelectEvDataSource').addClass('remove-arrow');
+        var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
+                                '<div align="center" class="loader-select" id="loader"></div></div>';
+        $('.create-evaluations-form').find('.select-load').append(load);
         $.get("/ml/select-ml-model", function(response) {
             var result;
 
             for (var key in response.data) {
 
                 result += '<option value="' + response.data[key].MLModelId + '">' + response.data[key].Name + '</option>';
-            }
+            }            
             $('#SelectMLModelId').html(result);
+            $('#SelectMLModelId + .loader-im').remove();
+            $('#SelectMLModelId').removeClass('remove-arrow');
         });
 
         $.get("/ml/select-data-source", function(response) {
@@ -75,7 +81,11 @@ $(document).ready(function() {
 
                 result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
             }
+            
             $('#SelectEvDataSource').html(result);
+            $('#SelectEvDataSource + .loader-im').remove();
+            $('#SelectEvDataSource').removeClass('remove-arrow');
+            
         });
     });
 
@@ -102,7 +112,12 @@ $(document).ready(function() {
                 //'<td>Evaluation ID</td>' +
                 '<td>Name</td>' +
                 '<td>Status</td>' +
-                '<td class="red-tooltip" >Binary AUC</td>' +
+                '<td>' +
+                    '<div class="wrapper">' +
+                        'Binary AUC' +
+                        '<div class="tooltip">Area Under the Curve (AUC) - measures the ability of the model to predict a higher score for positive examples as compared to negative examples.</div>' +
+                    '</div>' +
+                '</td>' +
                 //'<td>ML Model Id</td>' +
                 //'<td>Evaluation Data Source Id</td>' +
                 '<td>Last Updated</td>' +

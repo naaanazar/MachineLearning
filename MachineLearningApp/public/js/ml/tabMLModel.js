@@ -65,6 +65,10 @@ $(document).ready(function() {
      //   $('.create-mlmodel-form').toggle();
        // $(".container-describeMLModels").toggle();
 
+        $('#SelectDataSource').addClass('remove-arrow');
+        var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
+                '<div align="center" class="loader-select" id="loader"></div></div>';
+        $('.create-mlmodel-form').find('.select-load').append(load);
         $.get("/ml/select-data-source", function(response) {
             var result='';
             
@@ -72,6 +76,8 @@ $(document).ready(function() {
                 result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';             
             };
             $('#SelectDataSource').html(result);
+            $('#SelectDataSource + .loader-im').remove();
+            $('#SelectDataSource').removeClass('remove-arrow');
         });
     });
 
