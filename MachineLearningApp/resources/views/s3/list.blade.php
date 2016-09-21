@@ -72,18 +72,19 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <table class="table table-bordered table-font text-center" id="myTable">
-                            <tr class="active table-header">
+                            <div class="loader col-md-2 col-md-offset-5 hide" id="loader-s3-main">
+                            <tr class="active table-header hide">
                                 <td>Name</td>
                                 <td>Size</td>
                                 <td>Last modified</td>
                                 <td>Action</td>
 
                             </tr>
-                            <tr class="bg">
+                            <tr class="bg hide">
                                 <td colspan="4" ><span class="back">...</span></td>
                             </tr>
                             @foreach($results as $key => $value)
-                                <tr class="content bg">
+                                <tr class="content bg hide">
                                     <td class="reference">{{ $value['Name'] }}</td>
                                     <td>0</td>
                                     <td>{{ $value['CreationDate'] }}</td>

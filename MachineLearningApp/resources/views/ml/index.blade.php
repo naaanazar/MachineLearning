@@ -80,7 +80,7 @@
                                   placeholder="Data source name" name="DataSourceName">
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectDataLocationS3">Dataset</label>
                             <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
                             </select>
@@ -101,7 +101,9 @@
                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                        <div class="row" align="center">
+                            <input id="success-button-modal" type="submit" class="btn btn-primary submit-button">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -133,7 +135,7 @@
                                 <option value="MULTICLASS">MULTICLASS</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectDataSource">Data source name</label>
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
@@ -162,15 +164,12 @@
                                    placeholder="Evaluation name" name="EvaluationName">
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectMLModelId">Model name</label>
-                            <select class="form-control" id="SelectMLModelId" name="MLModelId">
-                                <option><span align="center" class="loader-select col-md-1 col-md-offset-1" id="loader"></span></option>
+                            <select class="form-control" id="SelectMLModelId" name="MLModelId">                               
                             </select>
-                            <span align="center" class="loader-select col-md-1 col-md-offset-1 form-control-feedback" id="loader"></span>
-
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-load">
                             <label for="SelectEvDataSource">Data source name</label>
                             <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
                             </select>
@@ -193,10 +192,10 @@
                         action="ml/create-batch-prediction">
                         <br>
                         {{ csrf_field() }}
-                        <div class="form-group">
+                        <div class="form-group select-load" style="position: relative">
                             <label for="SelectBathMLModel">Model name</label>
                             <select class="form-control" id="SelectBathMLModel" name="MLModelId">
-                            </select>
+                            </select>                           
                         </div>
                         <div class="form-group">
                             <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">

@@ -28,7 +28,6 @@
             $('.prediction-data').empty();
             $('input').attr('disabled', 'disabled');
             $('.spinner-prediction').fadeIn('slow');
-            $('.pred-data').empty();
         },
 
         removeProgress: function () {

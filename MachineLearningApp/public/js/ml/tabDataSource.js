@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreateDataSource();
         listDataSource();
@@ -84,54 +84,60 @@ $(document).ready(function () {
         }
 
         if ($(this).closest('form.create-datasource-form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('button').addClass('disabled');
+            $(this).closest('form').find('input#success-button-modal').attr('disabled', 'disabled');
         } else {
-            $(this).closest('form').find('button').removeClass('disabled');
+            $(this).closest('form').find('input#success-button-modal').removeAttr('disabled');
         }
     });
 
     $(document).on("click", ".btn-create-datasource", function () {
-     //   $(".create-datasource-form").toggle();
-      //  $(".container-describeDataSources").toggle();
+        //   $(".create-datasource-form").toggle();
+        //  $(".container-describeDataSources").toggle();
 
+        $('#SelectDataLocationS3').addClass('remove-arrow');
+        var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
+            '<div align="center" class="loader-select" id="loader"></div></div>';
+        $('.create-datasource-form').find('.select-load').append(load);
         $.get("/ml/select-S3objects", function (response) {
             var result;
             for (var key in response.data) {
                 ext = response.data[key].Key.substr(-3);
-                
+
                 if ( ext == 'csv') {
                     result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
                 }
             }
             $('#SelectDataLocationS3').html(result);
+            $('#SelectDataLocationS3 + .loader-im').remove();
+            $('#SelectDataLocationS3').removeClass('remove-arrow');
         });
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
         buttonCreateDataSource();
-        
+
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         }
     });
-    
-       $(document).on('click', '.datasource-update', function (e) {
-       e.preventDefault();
-       console.log($(this).data('model-id'));
 
-       $.post('/ml/datasource-update', {
-           id: $(this).data('source-id'),
-           name:$(this).data('source-name')}, function (data) {
-           console.log(data);
-           
-       });
-   });
+    $(document).on('click', '.datasource-update', function (e) {
+        e.preventDefault();
+        console.log($(this).data('model-id'));
+
+        $.post('/ml/datasource-update', {
+            id: $(this).data('source-id'),
+            name:$(this).data('source-name')}, function (data) {
+            console.log(data);
+
+        });
+    });
 
 
     function buttonCreateDataSource() {
         var button = '<button class="btn btn-primary btn-create-datasource pull-right" data-toggle="modal" ' +
             'data-target="#modalCreateDataSource">Create Datasource</button>';
-            $('#ml-button-create').html(button);
+        $('#ml-button-create').html(button);
     }
 
     function listDataSource() {
@@ -182,13 +188,13 @@ $(document).ready(function () {
 
             var headers = ''+
                 '<div class="table-headers">' +
-                    '<span>Name</span>' +
-                    '<span>Status</span>' +
-                    '<span>Data Location S3</span>' +
-                    '<span>Last Updated</span>' +
-                    '<span>&nbsp;</span>' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>Data Location S3</span>' +
+                '<span>Last Updated</span>' +
+                '<span>&nbsp;</span>' +
                 '</div>';
-            
+
             $('.container-describeDataSources').html(res);
             $('.container-describeDataSources').before(headers);
             setTableHeadersWidth();
@@ -203,7 +209,7 @@ function setTableHeadersWidth()
 {
     var headerCols = $('.table-headers > span');
     var cols = $('#describeDataSources table tbody tr:first-child td');
-    
+
     for(var i = 1; i < cols.length; i++ ) {
         var colWidth = $(cols[i]).outerWidth();
         console.log(colWidth);
