@@ -25,7 +25,6 @@ $(document).ready(function() {
     $(document).on('blur', '.form-control', function (e) {
         var id = e.target.id;
         var val = e.target.value;
-        $(this).closest('div').find('span').addClass('hide');
 
         switch (id) {
             case 'EvaluationName':
