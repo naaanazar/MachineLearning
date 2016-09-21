@@ -1,14 +1,14 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $('#loader-s3-main').removeClass('hide');
-    if (!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
+    if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
         $.ajax({
             type: "GET",
             url: 's3/allbuckets',
             dataType: 'json',
 
-            success: function(data) {
+            success: function (data) {
                 localStorage.clear();
-                data.forEach(function(item) {
+                data.forEach(function (item) {
                     localStorage.setItem(item.name, JSON.stringify(item));
                 });
 
@@ -17,14 +17,14 @@ $(document).ready(function() {
                 $('tr.bg').removeClass('hide');
                 $('#loader-s3-main').remove();
             },
-            error: function(data) {
+            error: function (data) {
                 console.log('Error:', data);
             }
         });
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('body').on('click', '.reference', function() {
 
 
@@ -39,18 +39,18 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('body').on('click', '.back', function() {
 
-        if (location.href.split('#').length > 2) {
+        if(location.href.split('#').length > 2) {
             if (!!getLastHash()) {
                 loc = getLastHash();
                 $('.' + loc).hide();
             }
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
-            var name = location.hash.split('#')[location.hash.split('#').length - 1];
+            var name = location.hash.split('#')[location.hash.split('#').length -1];
             showTable(name);
-        } else if (location.href.split('#').length == 2) {
+        } else if(location.href.split('#').length == 2) {
             if (!!getLastHash()) {
                 loc = getLastHash();
                 $('.' + loc).hide();
@@ -61,23 +61,23 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    if (location.href.split('#').length > 1) {
-        var name = location.hash.split('#')[location.hash.split('#').length - 1];
+$(document).ready(function () {
+    if(location.href.split('#').length > 1) {
+        var name = location.hash.split('#')[location.hash.split('#').length -1];
         showTable(name);
     }
 });
 
-function setLocation(curLoc) {
+function setLocation(curLoc){
     location.href = location.href + curLoc;
 }
 
 function showFolder(level, name) {
     var folders = [];
-    for (var i = 0; i < localStorage.length; i++) {
+    for(var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
 
-        if (JSON.parse(localStorage.getItem(key)).path.split('/').length >= (level + 3) &&
+        if(JSON.parse(localStorage.getItem(key)).path.split('/').length  >= (level + 3) &&
             JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] == name) {
 
             folders.push(JSON.parse(localStorage.getItem(key)).path.split('/')[level + 2]);
@@ -111,7 +111,7 @@ function getLastHash() {
 function showTable(name) {
     $('.content').hide();
     $('#loader-s3-main').remove();
-    if ("onhashchange" in window) {
+    if("onhashchange" in window) {
         var level = location.hash.split('#').length - 1;
         folders = showFolder(level, name);
         for (var item in folders) {
@@ -123,11 +123,11 @@ function showTable(name) {
                 "</tr>");
         }
 
-        for (var i = 0; i < localStorage.length; i++) {
+        for(var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
 
-            if (JSON.parse(localStorage.getItem(key)).path.split('/')[JSON.parse(localStorage.getItem(key)).path.split('/').length - 1] ==
-                location.hash.split('#')[location.hash.split('#').length - 1] &&
+            if(JSON.parse(localStorage.getItem(key)).path.split('/')[JSON.parse(localStorage.getItem(key)).path.split('/').length - 1]
+                == location.hash.split('#')[location.hash.split('#').length -1] &&
                 JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] ==
                 name) {
 
@@ -140,7 +140,14 @@ function showTable(name) {
                     "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + JSON.parse(localStorage.getItem(key)).name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
                     "</td>" +
                     "</tr>");
+
             }
+
         }
+
+
+
+
     }
 }
+
