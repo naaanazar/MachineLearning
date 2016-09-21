@@ -6,7 +6,7 @@
     <h3 class="pred-title title">Real time prediction</h3>
     <div class="main-prediction col-md-12 clearfix">
         <div class="block-prediction clearfix col-md-4">
-            <h2 class="text-center pred-result">Prediction</h2>
+            <h2 class="text-center pred-result">Prediction results</h2>
             <div class="prediction-data"></div>
             <i class="spinner-prediction fa fa-spinner fa-spin"></i>
         </div>
