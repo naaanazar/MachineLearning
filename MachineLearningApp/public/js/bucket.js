@@ -1,16 +1,33 @@
 $(document).ready(function () {
     $('#loader-s3-main').removeClass('hide');
     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
+        var result = [];
+
         $.ajax({
             type: "GET",
             url: 's3/allbuckets',
             dataType: 'json',
-
             success: function (data) {
-                localStorage.clear();
                 data.forEach(function (item) {
-                    localStorage.setItem(item.name, JSON.stringify(item));
+                    for (var i = 0; i < result.length; i++) {
+                        if (item.path.split('/')[2] == result[i].name) {
+                            break;
+                        }
+                    }
+
+                    if(i == result.length) {
+                        var object = {};
+                        result.push(createTree(object, item));
+                    } else {
+                        createTree(result[i], item);
+                    }
                 });
+
+                localStorage.clear();
+
+                for (var i = 0; i < result.length; i++) {
+                    localStorage.setItem(result[i].name, JSON.stringify( result[i]));
+                }
 
                 $('tr.active').removeClass('hide');
                 $('tr.content').removeClass('hide');
@@ -24,18 +41,34 @@ $(document).ready(function () {
     }
 });
 
+// $(document).ready(function () {
+//     $('body').on('click', '.reference', function() {
+//
+//
+//         var $ref = $(this);
+//         var name = $ref.text();
+//         if (!!getLastHash()) {
+//             loc = getLastHash();
+//             $('.' + loc).remove();
+//         }
+//         setLocation('#' + name);
+//         showTable(name);
+//     });
+// });
 $(document).ready(function () {
     $('body').on('click', '.reference', function() {
-
-
         var $ref = $(this);
         var name = $ref.text();
         if (!!getLastHash()) {
             loc = getLastHash();
             $('.' + loc).remove();
+            setLocation('#' + name);
+        } else {
+            setLocation('#' + name);
+            var bucket = findBucket(location.hash.split('#')[1]);
         }
-        setLocation('#' + name);
-        showTable(name);
+        findItem(bucket, name);
+
     });
 });
 
@@ -68,46 +101,47 @@ $(document).ready(function () {
     }
 });
 
-function setLocation(curLoc){
-    location.href = location.href + curLoc;
-}
-
-function showFolder(level, name) {
-    var folders = [];
-    for(var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-
-        if(JSON.parse(localStorage.getItem(key)).path.split('/').length  >= (level + 3) &&
-            JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] == name) {
-
-            folders.push(JSON.parse(localStorage.getItem(key)).path.split('/')[level + 2]);
-
-        }
-    }
-    folders = unique(folders);
-
-    return folders;
-}
-
-function unique(arr) {
-    var result = [];
-
-    nextInput:
-        for (var i = 0; i < arr.length; i++) {
-            var str = arr[i];
-            for (var j = 0; j < result.length; j++) {
-                if (result[j] == str) continue nextInput;
-            }
-            result.push(str);
-        }
-
-    return result;
-}
-
 function getLastHash() {
     return location.hash.split('#')[location.hash.split('#').length - 1];
 }
 
+function setLocation(curLoc){
+    location.href = location.href + curLoc;
+}
+
+// function showFolder(level, name) {
+//     var folders = [];
+//     for(var i = 0; i < localStorage.length; i++) {
+//         var key = localStorage.key(i);
+//
+//         if(JSON.parse(localStorage.getItem(key)).path.split('/').length  >= (level + 3) &&
+//             JSON.parse(localStorage.getItem(key)).path.split('/')[level + 1] == name) {
+//
+//             folders.push(JSON.parse(localStorage.getItem(key)).path.split('/')[level + 2]);
+//
+//         }
+//     }
+//     folders = unique(folders);
+//
+//     return folders;
+// }
+//
+// function unique(arr) {
+//     var result = [];
+//
+//     nextInput:
+//         for (var i = 0; i < arr.length; i++) {
+//             var str = arr[i];
+//             for (var j = 0; j < result.length; j++) {
+//                 if (result[j] == str) continue nextInput;
+//             }
+//             result.push(str);
+//         }
+//
+//     return result;
+// }
+//
+//
 function showTable(name) {
     $('.content').hide();
     $('#loader-s3-main').remove();
@@ -146,4 +180,64 @@ function showTable(name) {
         }
     }
 }
+
+function createTree(folder, item ) {
+    if (!!item) {
+        createTree.item = item;
+        createTree.level = 0;
+    }
+    ++createTree.level;
+    if (!(folder.name == createTree.item.path.split('/')[createTree.level + 1])) {
+        folder.name = createTree.item.path.split('/')[createTree.level + 1];
+    }
+
+    if(!!createTree.item.path.split('/')[createTree.level + 2]) {
+        if(!(folder.hasOwnProperty('folders'))) {
+            var obj = {};
+            obj.name = createTree.item.path.split('/')[createTree.level + 2];
+            folder.folders = [obj];
+        } else {
+            if (folder.folders[folder.folders.length - 1].name != createTree.item.path.split('/')[createTree.level + 2]) {
+                    var obj = {};
+                    obj.name = createTree.item.path.split('/')[createTree.level + 2];
+                    folder.folders.push(obj);
+            }
+        }
+        createTree(folder.folders[folder.folders.length - 1]);
+    } else {
+        if(!(folder.hasOwnProperty('file'))) {
+            folder.file = [createTree.item];
+        } else {
+            folder.file.push(createTree.item);
+        }
+    }
+
+    return folder;
+}
+
+function findBucket(bucketName) {
+    for(var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+
+        if (JSON.parse(localStorage.getItem(key)).name == bucketName){
+            return JSON.parse(localStorage.getItem(key));
+        }
+    }
+}
+
+function findItem(bucket, itemName) {
+    if (!!itemName) {
+        findItem.itemName = itemName;
+        console.log(findItem.itemName);
+    }
+
+    if (bucket.name == findItem.itemName) {
+        return bucket;
+    } else {
+        bucket.folders.forEach(function (content) {
+            findItem(content);
+        })
+    }
+}
+
 
