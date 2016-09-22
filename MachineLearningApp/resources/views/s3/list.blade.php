@@ -9,7 +9,7 @@
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">Buckets
                 </h2>
 
-                <a class="btn btn-default" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket">Create Bucket</a>
+                <a class="btn btn-default" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket">+ Create</a>
 
                 <div class="modal fade modalCreateBucket" id="modalCreateBucket" role="dialog">
 

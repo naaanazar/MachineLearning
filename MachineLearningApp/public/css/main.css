@@ -193,6 +193,17 @@ body {
         left: 40%;
     }
 }
+@media screen and (max-width: 443px) {
+   .datasource-info{
+    margin-bottom: 10px;
+   }
+
+   .delete{
+    margin-left: -2px;
+   }
+
+    }
+
 
 /***************************************
     Tables

@@ -69,7 +69,7 @@
                 </div>
             </div>
                 <center><button type="button" class="btn btn-success btn-benefits" id="button-benefits" onclick="showBenefits()">Our benefits</button></center>
-            <div class="about-posts benefits clearfix " id = "benefitsToShow">
+            <div class="about-posts benefits clearfix" id = "benefitsToShow">
                 <div class="about-posts post-2 clearfix">
                     <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated fadeInLeft" style="-webkit-animation-delay: 0.5s;">
                         <img src="/images/post-image-2.png">
@@ -89,11 +89,11 @@
                         </div>
                     </div>
                 </div>
-                    <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated fadeInLeft" style="-webkit-animation-delay: 1.5s;">
+                    <div class="post-images col-lg-3 col-md-3 col-sm-3 col-xs-5 animated fadeInLeft" style="-webkit-animation-delay: 0.5s;">
                         <img src="/images/post-image-3.png">
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7 animated fadeInRight" style="-webkit-animation-delay: 1.5s;">
-                        <div id="viewAboutContent" class="post-preview">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7">
+                        <div id="viewAboutContent" class="post-preview animated fadeInRight" style="-webkit-animation-delay: 0.5s;">
                             <h2 class="post-title">
                                 Benefits of Crowdin-ML:
                             </h2>
