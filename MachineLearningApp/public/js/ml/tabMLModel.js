@@ -4,7 +4,7 @@ $(document).ready(function() {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel();
     };
-  
+
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
 
@@ -13,39 +13,9 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('blur', '.form-control', function (e) {
-        var id = e.target.id;
-        var val = e.target.value;
-
-        switch (id) {
-            case 'MLModelName':
-                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                if (val.length > 2 && val != '' && rv_name.test(val)) {
-                    $(this).removeClass('error').addClass('not_error');
-                    $(this).closest('div').removeClass('has-error');
-                    $(this).closest('div').addClass('has-success has-feedback');
-                    $(this).closest('div').find('span').removeClass('hide');
-
-                }
-                else {
-                    $(this).removeClass('not_error').addClass('error');
-                    $(this).closest('div').addClass('has-error has-feedback');
-                    $(this).closest('div').find('span').addClass('hide');
-                }
-                break;
-
-        }
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-ml').attr('disabled', 'disabled');
-        } else {
-            $(this).closest('form').find('input#success-button-modal-ml').removeAttr('disabled');
-        }
-
-    });
-
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
+
 
         $.ajax({
             type: "post",
@@ -61,8 +31,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        addSelectLoader('#SelectDataSource', '.create-mlmodel-form');
-        selectDatasourceName('/ml/select-data-source', '#SelectDataSource');
+        selectName('/ml/select-data-source', '#SelectDataSource', '.create-mlmodel-form');
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
@@ -74,20 +43,20 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.delete-endpoint', function (e) {
-        e.preventDefault();   
+        e.preventDefault();
 
         $.post('/ml/delete-endpoint', {
-           id: $(this).data('model-id') }, function (data) { 
+           id: $(this).data('model-id') }, function (data) {
            $(e.target).closest("tr").find('.status-endpoint').text('NONE');
 
            $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
-   }); 
+   });
 });
 
 function listMLModel()
 {
-    addLoader('.container-describeMLModels'); 
+    showLoader('.container-describeMLModels');
 
     $.get("/ml/describe-ml-model", function(response) {
         var i = 1;
@@ -110,11 +79,11 @@ function listMLModel()
 
             if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
                 endpointDisabled = '';
-                endpointStatus = 'ENABLE';
+                endpointStatus = 'ENABLED';
                 colorTextEndpointStatus = 'text-danger';
             } else {
                 endpointDisabled = 'disabled btn-default';
-                endpointStatus = 'DISABLE';
+                endpointStatus = 'DISABLED';
                 colorTextEndpointStatus = 'text-success';
             };
 
@@ -147,7 +116,7 @@ function listMLModel()
         };
 
         res += '</table>';
-        
+
         $('.container-describeMLModels').html(res);
         $('.container-describeMLModels').addClass('loaded');
     });

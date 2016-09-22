@@ -12,7 +12,7 @@ $(document).ready(function() {
             type: "post",
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
-            success: function(data) {                
+            success: function(data) {
                 $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
                 console.log(data);
@@ -21,41 +21,9 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('blur', '.form-control', function (e) {
-        var id = e.target.id;
-        var val = e.target.value;
-
-        switch (id) {
-            case 'EvaluationName':
-                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                if (val.length > 2 && val != '' && rv_name.test(val)) {
-                    $(this).removeClass('error').addClass('not_error');
-                    $(this).closest('div').removeClass('has-error');
-                    $(this).closest('div').addClass('has-success has-feedback');
-                    $(this).closest('div').find('span').removeClass('hide');
-
-                }
-                else {
-                    $(this).removeClass('not_error').addClass('error');
-                    $(this).closest('div').addClass('has-error has-feedback');
-                    $(this).closest('div').find('span').addClass('hide');
-                }
-                break;
-        }
-
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-ev').attr('disabled', 'disabled');
-        } else {
-            $(this).closest('form').find('input#success-button-modal-ev').removeAttr('disabled');
-        }
-
-    });
-
     $(document).on("click", ".btn-create-evaluations", function() {
-        addSelectLoader('#SelectMLModelId, #SelectEvDataSource', '.create-evaluations-form');
-        selectModelName('/ml/select-ml-model', '#SelectMLModelId');
-        selectDatasourceName('/ml/select-data-source', '#SelectEvDataSource');
+        selectName('/ml/select-ml-model', '#SelectMLModelId', '.create-evaluations-form');
+        selectName('/ml/select-data-source', '#SelectEvDataSource', '.create-evaluations-form');
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
@@ -65,13 +33,13 @@ $(document).ready(function() {
             listEvaluations();
         }
     });
-    
+
 });
 
 function listEvaluations()
 {
-    addLoader('.container-describeEvaluations');
-  
+    showLoader('.container-describeEvaluations');
+
     $.get("/ml/describe-evaluations", function(response) {
         var i = 1;
         var auc;
@@ -95,12 +63,12 @@ function listEvaluations()
             i = i + 1;
             auc = '';
             var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);            
+            var classText = statusTextColor(response.data[key].Status);
 
             if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
                 auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
             };
-                
+
             res += '' +
                 '<tr>' +
                     '<td class="name">';
@@ -129,7 +97,7 @@ function listEvaluations()
         };
 
         res += '</table>';
-        
+
         $('.container-describeEvaluations').html(res);
         $('.container-describeEvaluations').addClass('loaded');
     });
