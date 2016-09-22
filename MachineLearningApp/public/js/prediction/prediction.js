@@ -169,22 +169,26 @@ RT_PREDICTION.Validation = {
 
             $(selector).val(this.newValue.substr(0, lengthVal));
 
-            $(selector).focusout(function (event) {
+            $(selector).focusout(function (e) {
                 $(this.errorTarget).fadeOut('slow');
                 $(selector).removeClass('pred-input-error');
+            });
+
+            $(selector).on('keyup', function(e){
+                if (e.keyCode === 8) {
+                    $(this.errorTarget).fadeOut('slow');
+                    $(selector).removeClass('pred-input-error');
+                } else if (e.key.match(regexp)){
+                    $(this.errorTarget).fadeIn('slow');
+                    $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
+                    $(selector + ":focus").addClass('pred-input-error');
+                }
             });
 
             if (this.newValue.length > lengthVal) {
                 $(this.errorTarget).fadeIn('slow');
                 $(this.errorTarget).html(RT_PREDICTION.Validation.error("Length no more " + lengthVal));
                 $(selector + ":focus").addClass('pred-input-error');
-            } else if (!this.newValue) {
-                $(selector + ":focus").addClass('pred-input-error');
-                $(this.errorTarget).fadeIn('slow');
-                $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
-            } else {
-                $(this.errorTarget).fadeOut('slow');
-                $(selector).removeClass('pred-input-error');
             }
         });
     },
@@ -194,12 +198,12 @@ RT_PREDICTION.Validation = {
         this.validation("#email", 1, "[^0-1]", "Enter the 0 or 1");
         this.validation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
         this.validation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-        this.validation("#same-email", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#projects-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#members-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#last-login", 10, "^00|[^0-9]", "Enter the valid number");
+        this.validation("#same-email", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#projects-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#members-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#last-login", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
         this.validation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
     }
 
