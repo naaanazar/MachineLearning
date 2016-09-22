@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button">
+                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create">
                         </div>
                     </form>
                 </div>
@@ -142,7 +142,7 @@
                             </select>
                         </div>
                        <div class="row" align="center">
-                           <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button">
+                           <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create">
                        </div>
                       </form>
                 </div>
@@ -178,7 +178,7 @@
                             </select>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button">
+                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button" value="Create">
                         </div>
                     </form>
                 </div>
