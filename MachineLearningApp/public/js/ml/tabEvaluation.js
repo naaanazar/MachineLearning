@@ -15,7 +15,6 @@ $(document).ready(function() {
             success: function(data) {                
                 $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
-                console.log(data);
             },
             error: function() {},
         });
@@ -92,10 +91,8 @@ function listEvaluations()
 
         for (var key in response.data) {
             i = i + 1;
-            auc = '';
-            var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);            
-
+            auc = '';                 
+            
             if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
                 auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
             };
@@ -110,10 +107,9 @@ function listEvaluations()
 
             res += '' +
                 '</td>' +
-                '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
-                '<td>' + auc +
-                '</td>' +
-                '<td>' + date + '</td>' +
+                '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
+                '<td>' + auc + '</td>' +
+                '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                         'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].EvaluationId + '">' +

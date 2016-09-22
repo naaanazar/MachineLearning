@@ -77,16 +77,12 @@ $(document).ready(function () {
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function (data) {
+            success: function (response) {
                 $(".modalCreateDataSource").modal('toggle');
-                listDataSource();
-                console.log(data);
-            },
-            error: function () {
-            },
+                listDataSource();                
+            }           
         });
     });
-
 
     $(document).on("click", ".btn-create-datasource", function () {  
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form');
@@ -123,9 +119,7 @@ function listDataSource()
 //                '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1;
-            var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);
+            i = i + 1;          
             res += '' +
             '<tr>' +
                 '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
@@ -137,9 +131,9 @@ function listDataSource()
 
             res += '' +
                 '</td>' +
-                '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
+                '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + response.data[key].DataLocationS3 + '</td>' +
-                '<td>' + date + '</td>' +
+                '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' + 'data-toggle="modal" id="info_' + i
                         + '" data-source-id="' + response.data[key].DataSourceId + '">' +

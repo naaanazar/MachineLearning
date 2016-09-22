@@ -1,5 +1,4 @@
 $(document).ready(function() {
-//modal window ML
     $(document).on("click", '.datasource-info', function(event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
@@ -133,7 +132,7 @@ $(document).ready(function() {
                         });
                     } else {
 
-                        $.jGrowl('successfully removed: ' + name, {
+                        $.jGrowl('Successfully removed: ' + name, {
                             theme: 'jgrowl-success'
                         });
 

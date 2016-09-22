@@ -34,7 +34,6 @@ $(document).ready(function() {
                     $(this).closest('div').find('span').addClass('hide');
                 }
                 break;
-
         }
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
             $(this).closest('form').find('input#success-button-modal-ml').attr('disabled', 'disabled');
@@ -45,8 +44,7 @@ $(document).ready(function() {
     });
 
     $('.create-mlmodel-form').submit(function(e) {
-        e.preventDefault();
-        
+        e.preventDefault();      
 
         $.ajax({
             type: "post",
@@ -55,7 +53,6 @@ $(document).ready(function() {
             success: function(data) {
                 $(".modalCreateModel").modal('toggle');
                 listMLModel();
-                console.log(data);
             },
             error: function() {},
         });
@@ -78,8 +75,10 @@ $(document).ready(function() {
 
         $.post('/ml/delete-endpoint', {
            id: $(this).data('model-id') }, function (data) { 
-           $(e.target).closest("tr").find('.status-endpoint').text('NONE');
-
+           $(e.target).closest("tr").find('.status-endpoint').text('DISABLED');
+           
+           $(e.target).closest("tr").find('.status-endpoint').removeClass('text-danger');
+           $(e.target).closest("tr").find('.status-endpoint').addClass('text-success');
            $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
    }); 
@@ -105,8 +104,6 @@ function listMLModel()
 
         for (var key in response.data) {
             i = i + 1;
-            var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);
 
             if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
                 endpointDisabled = '';
@@ -128,19 +125,22 @@ function listMLModel()
 
             res += '' +
                 '</td>' +
-                '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
+                '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +
                 '<td>' + response.data[key].MLModelType + '</td>' +
-                '<td>' + date + '</td>' +
+                '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +
                         'id="info_' + i + '" data-model-id="' + response.data[key].MLModelId + '">' +
-                        '<span class="glyphicon glyphicon-remove-circle"></span></a>&nbsp;' +
+                        '<span class="glyphicon glyphicon-remove-circle"></span>' +
+                    '</a>&nbsp;' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                         'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].MLModelId + '">' +
-                        '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
+                        '<span class="glyphicon glyphicon-info-sign"></span>' +
+                    '</a>&nbsp;' +
                     '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].MLModelId + '">\n' +
-                        '<span class="glyphicon glyphicon-trash"></span></a>' +
+                        '<span class="glyphicon glyphicon-trash"></span>' +
+                    '</a>' +
                 '</td>' +
             '</tr>' +
             '<span class="hide">' + i + '</span>';
