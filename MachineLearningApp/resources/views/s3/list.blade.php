@@ -1,15 +1,24 @@
 @extends('main')
 
 @section('content')
+    <script src="{{ URL::to('js/s3/tabS3.js') }}"></script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">Buckets
                 </h2>
 
-                <button class="btn btn-default btn-create-datasource">Create Bucket</button>
-                <br>
-                <br>
+                <a class="btn btn-default" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket">Create Bucket</a>
+
+                <div class="modal fade modalCreateBucket" id="modalCreateBucket" role="dialog">
+
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h2 align="center">Create Bucket</h2>
 
                 <form class="create-datasource" method="post" action="s3/create_bucket">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -19,8 +28,15 @@
                         <label for="exampleInputEmail1">Name</label>
                         <input type="text" class="form-control" id="nameBucket" placeholder="ml-" name="nameBucket">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </form>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <br>
+                <br>
+                <br>
                 <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@doUpload') }}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -33,6 +49,7 @@
             </div>
 
             <br>
+
 
             <div class="form-group">
 

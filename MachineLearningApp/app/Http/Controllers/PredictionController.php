@@ -11,10 +11,6 @@ class PredictionController extends Controller
 {
     private $client;
 
-    public function doView()
-    {
-        return view('prediction.prediction');
-    }
 
     public function __construct()
     {
@@ -33,6 +29,11 @@ class PredictionController extends Controller
         ]);
 
         return $ml;
+    }
+
+    public function doView()
+    {
+        return view('prediction.prediction');
     }
 
     private function createEndpoint($MLModelId)
@@ -93,6 +94,7 @@ class PredictionController extends Controller
 
         if ($endpointStatus != 'READY') {
             $status = 'Updating';
+
             return $status;
         } else {
             try {
