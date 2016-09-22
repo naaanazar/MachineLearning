@@ -328,7 +328,7 @@ class MLController extends Controller
                 'ComputeStatistics' => true,
                 'DataSourceId' => $DataSourceId,
                 'DataSourceName' => $DataSourceName,
-                'DataSpec' => [ // REQUIRED
+                'DataSpec' => [
                     'DataLocationS3' => $DataLocationS3,
                     'DataRearrangement' => $DataRearrangement,
                     'DataSchema' => $DataSchema
