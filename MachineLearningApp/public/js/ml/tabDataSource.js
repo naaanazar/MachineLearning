@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
-        buttonCreateDataSource('btn-create-datasource', '#ml-button-create', 'Create Datasource');
+        buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
         listDataSource();
     };
 
@@ -88,11 +88,11 @@ $(document).ready(function () {
 
     $(document).on("click", ".btn-create-datasource", function () {       
         elementSelectAddLoader('#SelectDataLocationS3', '.create-datasource-form');
-        getSelectData('/ml/select-S3objects', '#SelectDataLocationS3');        
+        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3');
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
-        buttonCreateDataSource('btn-create-datasource', '#ml-button-create', 'Create Datasource');
+        buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
 
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
@@ -101,8 +101,8 @@ $(document).ready(function () {
     
 });
 
-function listDataSource() {
-    buttonCreateDataSource('btn-create-datasource', '#ml-button-create', 'Create Datasource');
+function listDataSource()
+{   
     $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 
     $.get("/ml/describe-data-sources", function (response) {
@@ -152,11 +152,11 @@ function listDataSource() {
 
         var headers = ''+
             '<div class="table-headers">' +
-            '<span>Name</span>' +
-            '<span>Status</span>' +
-            '<span>Dataset</span>' +
-            '<span>Last Updated</span>' +
-            '<span>Action</span>' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>Dataset</span>' +
+                '<span>Last Updated</span>' +
+                '<span>Action</span>' +
             '</div>';
 
         $('.container-describeDataSources').html(res);
