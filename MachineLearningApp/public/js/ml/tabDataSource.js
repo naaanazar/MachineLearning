@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    $(".container").css('display','none');
-    $(".container").slideDown(500);
 
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreateDataSource();
@@ -18,10 +16,8 @@ $(document).ready(function () {
             data: $('.create-datasource-form').serialize(),
             success: function (data) {
                 $(".modalCreateDataSource").modal('toggle');
-                //$(".create-datasource-form").toggle();
-                //$(".container-describeDataSources").toggle();
                 listDataSource();
-                console.log(data);
+                console.log(data);                
             },
             error: function () {
             },
@@ -95,7 +91,6 @@ $(document).ready(function () {
     $(document).on("click", ".btn-create-datasource", function () {
         //   $(".create-datasource-form").toggle();
         //  $(".container-describeDataSources").toggle();
-
         $('#SelectDataLocationS3').addClass('remove-arrow');
         var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
             '<div align="center" class="loader-select" id="loader"></div></div>';
@@ -109,7 +104,7 @@ $(document).ready(function () {
                     result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
                 }
             }
-            $('#SelectDataLocationS3').html(result);
+            $('#SelectDataLocationS3').html(result);            
             $('#SelectDataLocationS3 + .loader-im').remove();
             $('#SelectDataLocationS3').removeClass('remove-arrow');
         });
@@ -166,6 +161,14 @@ $(document).ready(function () {
                 i = i + 1;
                 date = response.data[key].LastUpdatedAt.replace('T', '  ');
                 date = date.substring(0, date.indexOf('+'));
+                if (response.data[key].Status === 'COMPLETED') {
+                    classText = 'text-success';
+                } else if (response.data[key].Status === 'PENDING' || response.data[key].Status === 'INPROGRESS') {
+                    classText = 'text-warning';
+                } else if (response.data[key].Status === 'FAILED') {
+                     classText = 'text-danger';
+                }
+
                 res += '' +
                     '<tr>' +
                     '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
@@ -175,7 +178,7 @@ $(document).ready(function () {
                 }
                 res += '' +
                     '</td>' +
-                    '<td>' + response.data[key].Status + '</td>' +
+                    '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
                     '<td>' + response.data[key].DataLocationS3 + '</td>' +
                     '<td>' + date + '</td>' +
                     '<td>' +
@@ -192,9 +195,9 @@ $(document).ready(function () {
                 '<div class="table-headers">' +
                 '<span>Name</span>' +
                 '<span>Status</span>' +
-                '<span>Data Location S3</span>' +
+                '<span>Dataset</span>' +
                 '<span>Last Updated</span>' +
-                '<span>&nbsp;</span>' +
+                '<span>Action</span>' +
                 '</div>';
 
             $('.container-describeDataSources').html(res);
