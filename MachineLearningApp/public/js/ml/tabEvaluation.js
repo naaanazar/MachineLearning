@@ -120,7 +120,7 @@ $(document).ready(function() {
                 //'<td>ML Model Id</td>' +
                 //'<td>Evaluation Data Source Id</td>' +
                 '<td>Last Updated</td>' +
-                '<td>&nbsp;</td>' +
+                '<td>Action</td>' +
                 '</tr>' +
                 '<span class="hide">' + i + '</span>';
             for (var key in response.data) {
@@ -131,6 +131,15 @@ $(document).ready(function() {
                 if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
                     auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
                 }
+
+                if (response.data[key].Status === 'COMPLETED') {
+                    classText = 'text-success';
+                } else if (response.data[key].Status === 'PENDING' || response.data[key].Status === 'INPROGRESS') {
+                    classText = 'text-warning';
+                } else if (response.data[key].Status === 'FAILED') {
+                     classText = 'text-danger';
+                }
+                
                 res += '' +
                     '<tr>' +
                     //'<td>' + response.data[key].EvaluationId + '</td>' +
@@ -140,7 +149,7 @@ $(document).ready(function() {
                 }
                 res += '' +
                     '</td>' +
-                    '<td>' + response.data[key].Status + '</td>' +
+                    '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
                     '<td>' +
                     auc +
                     '</td>' +

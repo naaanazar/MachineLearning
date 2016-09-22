@@ -161,6 +161,14 @@ $(document).ready(function () {
                 i = i + 1;
                 date = response.data[key].LastUpdatedAt.replace('T', '  ');
                 date = date.substring(0, date.indexOf('+'));
+                if (response.data[key].Status === 'COMPLETED') {
+                    classText = 'text-success';
+                } else if (response.data[key].Status === 'PENDING' || response.data[key].Status === 'INPROGRESS') {
+                    classText = 'text-warning';
+                } else if (response.data[key].Status === 'FAILED') {
+                     classText = 'text-danger';
+                }
+
                 res += '' +
                     '<tr>' +
                     '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
@@ -170,7 +178,7 @@ $(document).ready(function () {
                 }
                 res += '' +
                     '</td>' +
-                    '<td>' + response.data[key].Status + '</td>' +
+                    '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
                     '<td>' + response.data[key].DataLocationS3 + '</td>' +
                     '<td>' + date + '</td>' +
                     '<td>' +
