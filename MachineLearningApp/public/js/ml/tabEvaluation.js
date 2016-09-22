@@ -53,7 +53,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-        elementSelectAddLoader('#SelectMLModelId, #SelectEvDataSource', '.create-evaluations-form');
+        addSelectLoader('#SelectMLModelId, #SelectEvDataSource', '.create-evaluations-form');
         selectModelName('/ml/select-ml-model', '#SelectMLModelId');
         selectDatasourceName('/ml/select-data-source', '#SelectEvDataSource');
     });
@@ -70,9 +70,11 @@ $(document).ready(function() {
 
 function listEvaluations()
 {
-    $('.container-describeEvaluations').html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    addLoader('.container-describeEvaluations');
+  
     $.get("/ml/describe-evaluations", function(response) {
         var i = 1;
+        var auc;
         var res = '' +
         '<table class="table table-bordered table-font text-center">' +
             '<tr class="active">' +
@@ -90,18 +92,18 @@ function listEvaluations()
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            var i = i + 1;
+            i = i + 1;
+            auc = '';
             var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);
-            var auc = '';
+            var classText = statusTextColor(response.data[key].Status);            
 
             if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
                 auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
             };
                 
             res += '' +
-            '<tr>' +
-                '<td class="name">';
+                '<tr>' +
+                    '<td class="name">';
 
             if (response.data[key].Name !== undefined) {
                 res += response.data[key].Name;
@@ -110,22 +112,24 @@ function listEvaluations()
             res += '' +
                 '</td>' +
                 '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
-                '<td>' +
-                    auc +
+                '<td>' + auc +
                 '</td>' +
                 '<td>' + date + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                         'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].EvaluationId + '">' +
-                        '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].EvaluationId +
-                        '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                        '<span class="glyphicon glyphicon-info-sign"></span>' +
+                    '</a>&nbsp;' +
+                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].EvaluationId +'">' +
+                        '<span class="glyphicon glyphicon-trash"></span>' +
+                    '</a>' +
                 '</td>' +
             '</tr>' +
             '<span class="hide">' + i + '</span>';
         };
 
         res += '</table>';
+        
         $('.container-describeEvaluations').html(res);
         $('.container-describeEvaluations').addClass('loaded');
     });

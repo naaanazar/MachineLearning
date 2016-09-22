@@ -1,6 +1,5 @@
 function statusTextColor(str)
 {
-
     if (str === 'COMPLETED') {
         classText = 'text-success';
     } else if (str === 'PENDING' || str === 'INPROGRESS') {
@@ -22,7 +21,6 @@ function parseDate(str)
 
 function selectDatasourceName(uri, elementId)
 {
-
     $.get(uri, function (response) {
         var result;
 
@@ -31,13 +29,12 @@ function selectDatasourceName(uri, elementId)
         };
 
         $(elementId).html(result);
-        elementSelectRemoveLoader(elementId);
+        removeSelectLoader(elementId);
     });
 };
 
 function selectModelName(uri, elementId)
 {
-
     $.get(uri, function (response) {
         var result;
 
@@ -46,13 +43,12 @@ function selectModelName(uri, elementId)
         };
 
         $(elementId).html(result);
-        elementSelectRemoveLoader(elementId);
+        removeSelectLoader(elementId);
     });
 };
 
 function selectDataFromS3(uri, elementId)
 {
-
     $.get(uri, function (response) {
         var result;
 
@@ -65,12 +61,13 @@ function selectDataFromS3(uri, elementId)
         };
 
         $(elementId).html(result);
-        elementSelectRemoveLoader(elementId)
+        removeSelectLoader(elementId);
+
 
     });
 };
 
-function elementSelectAddLoader(elementId, formClass)
+function addSelectLoader(elementId, formClass)
 {
     $(elementId).addClass('remove-arrow');
     var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
@@ -78,10 +75,14 @@ function elementSelectAddLoader(elementId, formClass)
     $(formClass).find('.select-load').append(load);
 };
 
-function elementSelectRemoveLoader(elementId)
+function removeSelectLoader(elementId)
 {
     $(elementId + ' + .loader-im').remove();
     $(elementId).removeClass('remove-arrow');
+};
+
+function addLoader(destinationClass) {
+        $(destinationClass).html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 };
 
 function buttonCreate(elementClass, destinationId, name, dataTarget)
@@ -89,4 +90,9 @@ function buttonCreate(elementClass, destinationId, name, dataTarget)
     var button = '<button class="btn btn-primary ' + elementClass + ' pull-right" data-toggle="modal" ' +
         'data-target="' + dataTarget + '">' + name + '</button>';
     $(destinationId).html(button);
+}
+
+function addLoader(destinationClass)
+{
+    $(destinationClass).html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 }

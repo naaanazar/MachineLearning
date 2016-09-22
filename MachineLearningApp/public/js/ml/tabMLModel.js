@@ -7,6 +7,7 @@ $(document).ready(function() {
   
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
+
         $.jGrowl('delete RealtimeEndpoint', {
             theme: 'jgrowl-notification'
         });
@@ -45,6 +46,7 @@ $(document).ready(function() {
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
+
         $.ajax({
             type: "post",
             url: 'ml/create-ml-model',
@@ -59,7 +61,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        elementSelectAddLoader('#SelectDataSource', '.create-mlmodel-form');
+        addSelectLoader('#SelectDataSource', '.create-mlmodel-form');
         selectDatasourceName('/ml/select-data-source', '#SelectDataSource');
     });
 
@@ -72,13 +74,12 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.delete-endpoint', function (e) {
-        e.preventDefault();
-        console.log($(this).data('model-id'));
+        e.preventDefault();   
 
         $.post('/ml/delete-endpoint', {
-           id: $(this).data('model-id') }, function (data) {
-           console.log(data);
+           id: $(this).data('model-id') }, function (data) { 
            $(e.target).closest("tr").find('.status-endpoint').text('NONE');
+
            $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
    }); 
@@ -86,7 +87,7 @@ $(document).ready(function() {
 
 function listMLModel()
 {
-    $('.container-describeMLModels').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    addLoader('.container-describeMLModels'); 
 
     $.get("/ml/describe-ml-model", function(response) {
         var i = 1;
@@ -101,6 +102,7 @@ function listMLModel()
                     '<td>Action</td>' +
                 '</tr>' +
             '<span class="hide">' + i + '</span>';
+
         for (var key in response.data) {
             i = i + 1;
             var date = parseDate(response.data[key].LastUpdatedAt);
@@ -145,6 +147,7 @@ function listMLModel()
         };
 
         res += '</table>';
+        
         $('.container-describeMLModels').html(res);
         $('.container-describeMLModels').addClass('loaded');
     });
