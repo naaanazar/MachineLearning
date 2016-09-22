@@ -87,6 +87,7 @@ $(document).ready(function () {
         });
     });
 
+
     $(document).on("click", ".btn-create-datasource", function () {  
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form');
     });
@@ -97,12 +98,12 @@ $(document).ready(function () {
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         };
-    }); 
-    
+    });
+
 });
 
 function listDataSource()
-{   
+{
     showLoader('.container-describeDataSources');
 
     $.get("/ml/describe-data-sources", function (response) {

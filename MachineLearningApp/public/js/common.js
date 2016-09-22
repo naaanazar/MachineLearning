@@ -1,19 +1,19 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // ML: add hash tab to url
     $('.ml-tabs').on('click', 'a', function (e) {
         e.preventDefault();
         window.location.hash = $(this).attr('href');
         $(this).tab('show');
     });
-    if(window.location.hash){
-       $('.ml-tabs').find('a[href="'+window.location.hash+'"]').tab('show');
+    if (window.location.hash) {
+        $('.ml-tabs').find('a[href="' + window.location.hash + '"]').tab('show');
     }
 
     // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
     // upload button without submit
-    $('#input-file').change(function() {
+    $('#input-file').change(function () {
         $('.form-upload').submit();
     });
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
             '</li></ul></div>').show('slow').hide(4000);
     }
 
-    $(document).on('click', '.btn-delete', function(e) {
+    $(document).on('click', '.btn-delete', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
@@ -48,7 +48,7 @@ $(document).ready(function() {
             data: {
                 name: $(this).attr('id')
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
                 if (data.success) {
 
@@ -60,11 +60,12 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.download', function (e) {
-       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
-       e.preventDefault();
-       $.get('/s3/file-exists', {
-           name: encodeURI($(this).data('download-path')) }, function (response) {
-            if (response.data == true ) {
+        var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+        e.preventDefault();
+        $.get('/s3/file-exists', {
+            name: encodeURI($(this).data('download-path'))
+        }, function (response) {
+            if (response.data == true) {
                 window.location = url;
             } else {
                 $.jGrowl('File not exists', {
@@ -72,11 +73,11 @@ $(document).ready(function() {
                 });
             }
 
-       });
+        });
     });
 
     //upload file to s3 bucket using ajax
-    $('.form-upload').on("submit", function(e) {
+    $('.form-upload').on("submit", function (e) {
         console.log($(".form-upload"));
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
@@ -87,11 +88,11 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
                 getListS3();
                 success('.notification-s3', 'File uploaded to S3!');
             },
-            error: function() {
+            error: function () {
                 errorS3('.notification-s3');
             },
         });
@@ -102,12 +103,13 @@ $(document).ready(function() {
         $.ajax({
             url: '/s3/list',
             method: 'GET',
-            success: function(data) {
+            success: function (data) {
                 $('.s3-pagination').html($(data).find('div.pagination-list'));
                 $('.s3-table').html($(data).find('table'));
             }
         });
-    }    
+
+    }  
 
 });
 

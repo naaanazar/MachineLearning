@@ -14,7 +14,7 @@
 //     return redirect('prediction');
 // });
 
-Route::get('/','FirstPageController@firstPage');
+Route::get('/', 'FirstPageController@firstPage');
 
 Route::get('prediction', 'PredictionController@doView');
 Route::post('prediction/predict', 'PredictionController@doPredict');

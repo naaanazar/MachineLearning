@@ -6,8 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">Buckets
-                </h2>
+                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">Buckets</h2>
 
                 <a class="btn btn-default" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket">Create Bucket</a>
 
@@ -91,18 +90,18 @@
                     <div class="col-md-8 col-md-offset-2">
                         <table class="table table-bordered table-font text-center" id="myTable">
                             <div class="loader col-md-2 col-md-offset-5 hide" id="loader-s3-main">
-                            <tr class="active table-header hide">
+                            <tr class="active table-header">
                                 <td>Name</td>
                                 <td>Size</td>
                                 <td>Last modified</td>
                                 <td>Action</td>
 
                             </tr>
-                            <tr class="bg hide">
+                            <tr class="bg">
                                 <td colspan="4" ><span class="back">...</span></td>
                             </tr>
                             @foreach($results as $key => $value)
-                                <tr class="content bg hide">
+                                <tr class="content bg">
                                     <td class="reference">{{ $value['Name'] }}</td>
                                     <td>0</td>
                                     <td>{{ $value['CreationDate'] }}</td>

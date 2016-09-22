@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $('#loader-s3-main').removeClass('hide');
     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
+        $('tr.active').addClass('hide');
+        $('tr.content').addClass('hide');
+        $('tr.bg').addClass('hide');
         $.ajax({
             type: "GET",
             url: 's3/allbuckets',
