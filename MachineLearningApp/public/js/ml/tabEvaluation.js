@@ -59,7 +59,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
-        buttonCreate(' btn-create-evaluations', '#ml-button-create', 'Create Evaluations', '#modalCreateEvaluation');
+        buttonCreate('btn-create-evaluations', '#ml-button-create', 'Create Evaluations', '#modalCreateEvaluation');
 
         if(!$('.container-describeEvaluations').hasClass('loaded')) {
             listEvaluations();
@@ -95,9 +95,9 @@ function listEvaluations()
             var classText = statusTextColor(response.data[key].Status);
             var auc = '';
 
-                if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
-                    auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
-                };
+            if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
+                auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
+            };
                 
             res += '' +
             '<tr>' +
@@ -105,7 +105,7 @@ function listEvaluations()
 
             if (response.data[key].Name !== undefined) {
                 res += response.data[key].Name;
-            }
+            };
 
             res += '' +
                 '</td>' +
@@ -123,10 +123,10 @@ function listEvaluations()
                 '</td>' +
             '</tr>' +
             '<span class="hide">' + i + '</span>';
-        }
+        };
 
         res += '</table>';
         $('.container-describeEvaluations').html(res);
         $('.container-describeEvaluations').addClass('loaded');
     });
-}
+};

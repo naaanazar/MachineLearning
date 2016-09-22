@@ -132,7 +132,7 @@ function listDataSource()
 
             if (response.data[key].Name !== undefined) {
                 res += response.data[key].Name;
-            }
+            };
 
             res += '' +
                 '</td>' +
@@ -146,7 +146,7 @@ function listDataSource()
                 '</td>' +
             '</tr>' +
             '<span class="hide">' + i + '</span>';
-        }
+        };
 
         res += '</table>';
 

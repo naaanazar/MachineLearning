@@ -122,7 +122,7 @@ function listMLModel()
 
             if (response.data[key].Name !== undefined) {
                 res += response.data[key].Name;
-            }
+            };
 
             res += '' +
                 '</td>' +
@@ -147,6 +147,5 @@ function listMLModel()
         res += '</table>';
         $('.container-describeMLModels').html(res);
         $('.container-describeMLModels').addClass('loaded');
-
     });
 };
