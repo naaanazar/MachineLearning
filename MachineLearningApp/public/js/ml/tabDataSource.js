@@ -11,15 +11,15 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            type: "post",
-            url: '/ml/create-datasource',
-            data: $('.create-datasource-form').serialize(),
+            type   : "post",
+            url    : '/ml/create-datasource',
+            data   : $('.create-datasource-form').serialize(),
             success: function (data) {
                 $(".modalCreateDataSource").modal('toggle');
                 listDataSource();
-                console.log(data);                
+                console.log(data);
             },
-            error: function () {
+            error  : function () {
             },
         });
     });
@@ -100,11 +100,11 @@ $(document).ready(function () {
             for (var key in response.data) {
                 ext = response.data[key].Key.substr(-3);
 
-                if ( ext == 'csv') {
+                if (ext == 'csv') {
                     result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
                 }
             }
-            $('#SelectDataLocationS3').html(result);            
+            $('#SelectDataLocationS3').html(result);
             $('#SelectDataLocationS3 + .loader-im').remove();
             $('#SelectDataLocationS3').removeClass('remove-arrow');
         });
@@ -123,8 +123,9 @@ $(document).ready(function () {
         console.log($(this).data('model-id'));
 
         $.post('/ml/datasource-update', {
-            id: $(this).data('source-id'),
-            name:$(this).data('source-name')}, function (data) {
+            id  : $(this).data('source-id'),
+            name: $(this).data('source-name')
+        }, function (data) {
             console.log(data);
 
         });
@@ -166,7 +167,7 @@ $(document).ready(function () {
                 } else if (response.data[key].Status === 'PENDING' || response.data[key].Status === 'INPROGRESS') {
                     classText = 'text-warning';
                 } else if (response.data[key].Status === 'FAILED') {
-                     classText = 'text-danger';
+                    classText = 'text-danger';
                 }
 
                 res += '' +
@@ -191,7 +192,7 @@ $(document).ready(function () {
             }
             res += '</table>';
 
-            var headers = ''+
+            var headers = '' +
                 '<div class="table-headers">' +
                 '<span>Name</span>' +
                 '<span>Status</span>' +
@@ -209,15 +210,13 @@ $(document).ready(function () {
 });
 
 
-
-function setTableHeadersWidth()
-{
+function setTableHeadersWidth() {
     var headerCols = $('.table-headers > span');
     var cols = $('#describeDataSources table tbody tr:first-child td');
 
-    for(var i = 1; i < cols.length; i++ ) {
+    for (var i = 1; i < cols.length; i++) {
         var colWidth = $(cols[i]).outerWidth();
         console.log(colWidth);
-        $(headerCols[i-1]).outerWidth(colWidth);
+        $(headerCols[i - 1]).outerWidth(colWidth);
     }
 }
