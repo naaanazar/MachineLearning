@@ -114,7 +114,6 @@ RT_PREDICTION.Form = {
         });
     },
 
-
     error: function (message) {
         RT_PREDICTION.Form.removeProgress();
 

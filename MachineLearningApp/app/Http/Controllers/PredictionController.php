@@ -17,7 +17,6 @@ class PredictionController extends Controller
         $this->client = $this->connectToML();
     }
 
-
     private function connectToML()
     {
         $ml = new MachineLearningClient([
@@ -32,12 +31,10 @@ class PredictionController extends Controller
         return $ml;
     }
 
-
     public function doView()
     {
         return view('prediction.prediction');
     }
-
 
     private function createEndpoint($MLModelId)
     {
@@ -71,7 +68,6 @@ class PredictionController extends Controller
 
         return response(['status' => $status, 'result' => $result]);
     }
-
 
     public function doPredict(Request $request)
     {
