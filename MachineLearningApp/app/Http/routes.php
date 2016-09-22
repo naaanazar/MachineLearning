@@ -1,18 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-// Route::get('/', function () {
-//     return redirect('prediction');
-// });
 
 Route::get('/', 'FirstPageController@firstPage');
 
@@ -32,7 +19,6 @@ Route::get('/ml/describe-batch-prediction', 'MLController@listBatchPredictions')
 Route::post('ml/create-datasource', 'MLController@createDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@createMLModel');
 Route::post('ml/create-evaluation', 'MLController@createEvaluation');
-//Route::post('/ml/create-batch-prediction', 'MLController@createBatchPrediction');
 
 Route::post('/ml/upload-batch-source', 'MLController@createBatchPrediction');
 Route::get('/ml/status-batch-data-source/{DataSourceId}', 'MLController@statusDataSource');

@@ -21,37 +21,6 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('blur', '.form-control', function (e) {
-        var id = e.target.id;
-        var val = e.target.value;
-
-        switch (id) {
-            case 'EvaluationName':
-                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                if (val.length > 2 && val != '' && rv_name.test(val)) {
-                    $(this).removeClass('error').addClass('not_error');
-                    $(this).closest('div').removeClass('has-error');
-                    $(this).closest('div').addClass('has-success has-feedback');
-                    $(this).closest('div').find('span').removeClass('hide');
-
-                }
-                else {
-                    $(this).removeClass('not_error').addClass('error');
-                    $(this).closest('div').addClass('has-error has-feedback');
-                    $(this).closest('div').find('span').addClass('hide');
-                }
-                break;
-        }
-
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-ev').attr('disabled', 'disabled');
-        } else {
-            $(this).closest('form').find('input#success-button-modal-ev').removeAttr('disabled');
-        }
-
-    });
-
     $(document).on("click", ".btn-create-evaluations", function() {
         addSelectLoader('#SelectMLModelId, #SelectEvDataSource', '.create-evaluations-form');
         selectModelName('/ml/select-ml-model', '#SelectMLModelId');
