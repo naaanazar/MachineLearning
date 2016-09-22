@@ -86,7 +86,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("click", ".btn-create-datasource", function () {       
+    $(document).on("click", ".btn-create-datasource", function () {
         elementSelectAddLoader('#SelectDataLocationS3', '.create-datasource-form');
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3');
     });
@@ -97,12 +97,12 @@ $(document).ready(function () {
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource();
         };
-    }); 
-    
+    });
+
 });
 
 function listDataSource()
-{   
+{
     $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 
     $.get("/ml/describe-data-sources", function (response) {

@@ -11,27 +11,28 @@ use App\Library\Generators\DatasetGenerator;
 
 class GeneratorController extends Controller
 {
+
     public function index()
-    {        
+    {
         return view('generator.generator');
-    }    
+    }
+
 
     public function generateDataset(GeneratorRequest $request)
     {
 
-        $datasetFeeder = new DatasetGenerator();
+        $datasetFeeder            = new DatasetGenerator();
         $datasetFeeder->rowsCount = $request->rows;
         $datasetFeeder->feed();
 
-        $stats = array(
-            'recordsNumber' => $datasetFeeder->rowsCount,
-            'purchaseNumber' => $datasetFeeder->total,
+        $stats = [
+            'recordsNumber'      => $datasetFeeder->rowsCount,
+            'purchaseNumber'     => $datasetFeeder->total,
             'purchasePercentage' => $datasetFeeder->percents,
-            'path' => basename($datasetFeeder->targetFile),
-        );
+            'path'               => basename($datasetFeeder->targetFile),
+        ];
 
-        return json_encode(array('stats' => $stats));
+        return json_encode(['stats' => $stats]);
     }
 
-    
 }
