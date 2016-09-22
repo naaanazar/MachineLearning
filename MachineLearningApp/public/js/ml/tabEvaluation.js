@@ -12,7 +12,7 @@ $(document).ready(function() {
             type: "post",
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
-            success: function(data) {                
+            success: function(data) {
                 $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
                 console.log(data);
@@ -33,13 +33,13 @@ $(document).ready(function() {
             listEvaluations();
         }
     });
-    
+
 });
 
 function listEvaluations()
 {
     showLoader('.container-describeEvaluations');
-  
+
     $.get("/ml/describe-evaluations", function(response) {
         var i = 1;
         var auc;
@@ -63,12 +63,12 @@ function listEvaluations()
             i = i + 1;
             auc = '';
             var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);            
+            var classText = statusTextColor(response.data[key].Status);
 
             if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
                 auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
             };
-                
+
             res += '' +
                 '<tr>' +
                     '<td class="name">';
@@ -97,7 +97,7 @@ function listEvaluations()
         };
 
         res += '</table>';
-        
+
         $('.container-describeEvaluations').html(res);
         $('.container-describeEvaluations').addClass('loaded');
     });

@@ -24,7 +24,7 @@ $(document).ready(function () {
     });
 
 
-    $(document).on("click", ".btn-create-datasource", function () {  
+    $(document).on("click", ".btn-create-datasource", function () {
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form');
     });
 

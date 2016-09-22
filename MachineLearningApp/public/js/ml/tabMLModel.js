@@ -4,7 +4,7 @@ $(document).ready(function() {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel();
     };
-  
+
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
 
@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
-        
+
 
         $.ajax({
             type: "post",
@@ -43,15 +43,15 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.delete-endpoint', function (e) {
-        e.preventDefault();   
+        e.preventDefault();
 
         $.post('/ml/delete-endpoint', {
-           id: $(this).data('model-id') }, function (data) { 
+           id: $(this).data('model-id') }, function (data) {
            $(e.target).closest("tr").find('.status-endpoint').text('NONE');
 
            $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
-   }); 
+   });
 });
 
 function listMLModel()
@@ -116,7 +116,7 @@ function listMLModel()
         };
 
         res += '</table>';
-        
+
         $('.container-describeMLModels').html(res);
         $('.container-describeMLModels').addClass('loaded');
     });
