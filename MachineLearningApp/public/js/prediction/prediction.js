@@ -182,6 +182,9 @@ RT_PREDICTION.Validation = {
                     $(this.errorTarget).fadeIn('slow');
                     $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
                     $(selector + ":focus").addClass('pred-input-error');
+                } else {
+                    $(this.errorTarget).fadeOut('slow');
+                    $(selector).removeClass('pred-input-error');
                 }
             });
 
