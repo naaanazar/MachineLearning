@@ -11,7 +11,6 @@ class PredictionController extends Controller
 {
     private $client;
 
-
     public function __construct()
     {
         $this->client = $this->connectToML();
@@ -41,25 +40,31 @@ class PredictionController extends Controller
         $client = $this->connectToML();
 
         try {
+            $status = true;
             $result = $client->createRealtimeEndpoint([
                 'MLModelId' => $MLModelId
             ]);
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            $status = false;
+            $result = $e->getMessage();
         }
 
-        return $result;
+        return response(['status' => $status, 'result' => $result]);
     }
 
     private function deleteEndpoint($MLModelId)
     {
         try {
+            $status = true;
             $result = $this->client->deleteRealtimeEndpoint([
                 'MLModelId' => $MLModelId,
             ]);
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            $status = false;
+            $result =  $e->getMessage();
         }
+
+        return response(['status' => $status, 'result' => $result]);
     }
 
     public function doPredict(Request $request)
@@ -87,15 +92,26 @@ class PredictionController extends Controller
         $daysAfterLastLogin = $request->input('days_after_last_login');
         $sameEmailDomainCount = $request->input('same_email_domain_count');
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
-        $endPoint = $this->createEndpoint($MLModelId);
 
-        $endpointStatus  = $endPoint["RealtimeEndpointInfo"]["EndpointStatus"];
-        $predictEndpoint = $endPoint["RealtimeEndpointInfo"]["EndpointUrl"];
+        $createEndPoint = $this->createEndpoint($MLModelId);
+        $endPointData = $createEndPoint->original;
+        $endPointStatus = $endPointData["status"];
+
+        if (!$endPointStatus) {
+            $status = false;
+            $result = "Endpoint is not created! Try again!";
+
+            return response()->json(["status" => $status, "result" => $result]);
+        }
+
+        $endPointResult = $endPointData["result"];
+        $endpointStatus = $endPointResult["RealtimeEndpointInfo"]["EndpointStatus"];
+        $predictEndpoint = $endPointResult["RealtimeEndpointInfo"]["EndpointUrl"];
 
         if ($endpointStatus != 'READY') {
-            $status = 'Updating';
+            $status = false;
 
-            return $status;
+            return response()->json(["status" => $status]);
         } else {
             try {
                 $result = $this->client->predict([
@@ -113,15 +129,17 @@ class PredictionController extends Controller
                         "same_login_and_project_name" => $sameLoginAndProjectName,
                     ]
                 ]);
-            } catch (MachineLearningException $e) {
-                echo $e->getMessage() . "\n";
-            }
 
-            $output = json_encode($result["Prediction"]);
+                $status = true;
+                $result = $result["Prediction"];
+            } catch (MachineLearningException $e) {
+                $status = false;
+                $result = "Fail prediction! Try again!";
+            }
 
             $this->deleteEndpoint($MLModelId);
 
-            return $output;
+            return response()->json(["status" => $status, "result" => $result]);
         }
     }
 }
