@@ -207,7 +207,7 @@ RT_PREDICTION.Validation = {
         this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
         this.validation("#members-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
         this.validation("#last-login", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
+        this.validation("#country", 60, "^ |  |[^a-zA-Z ]", "Enter the letter");
     }
 
 }
