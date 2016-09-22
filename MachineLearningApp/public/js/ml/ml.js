@@ -30,7 +30,6 @@ function selectDatasourceName(uri, elementId)
             result += '<option value="' + response.data[key].DataSourceId + '">' + response.data[key].Name + '</option>';
         };
 
-
         $(elementId).html(result);
         elementSelectRemoveLoader(elementId);
     });
