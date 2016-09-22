@@ -15,6 +15,7 @@ $(document).ready(function() {
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
+        
 
         $.ajax({
             type: "post",
@@ -30,8 +31,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        addSelectLoader('#SelectDataSource', '.create-mlmodel-form');
-        selectDatasourceName('/ml/select-data-source', '#SelectDataSource');
+        selectName('/ml/select-data-source', '#SelectDataSource', '.create-mlmodel-form');
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 function listMLModel()
 {
-    addLoader('.container-describeMLModels'); 
+    showLoader('.container-describeMLModels');
 
     $.get("/ml/describe-ml-model", function(response) {
         var i = 1;
@@ -79,11 +79,11 @@ function listMLModel()
 
             if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
                 endpointDisabled = '';
-                endpointStatus = 'ENABLE';
+                endpointStatus = 'ENABLED';
                 colorTextEndpointStatus = 'text-danger';
             } else {
                 endpointDisabled = 'disabled btn-default';
-                endpointStatus = 'DISABLE';
+                endpointStatus = 'DISABLED';
                 colorTextEndpointStatus = 'text-success';
             };
 

@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
+        showLoader('.container-describeDataSources');
 
         $.ajax({
             type: "post",
@@ -22,9 +23,9 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("click", ".btn-create-datasource", function () {
-        elementSelectAddLoader('#SelectDataLocationS3', '.create-datasource-form');
-        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3');
+
+    $(document).on("click", ".btn-create-datasource", function () {  
+        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form');
     });
 
     $(document).on("click", '#describeDataSourcesContent', function () {
@@ -39,7 +40,7 @@ $(document).ready(function () {
 
 function listDataSource()
 {
-    $('.container-describeDataSources').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    showLoader('.container-describeDataSources');
 
     $.get("/ml/describe-data-sources", function (response) {
 
@@ -76,9 +77,13 @@ function listDataSource()
                 '<td>' + response.data[key].DataLocationS3 + '</td>' +
                 '<td>' + date + '</td>' +
                 '<td>' +
-                    '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' + 'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].DataSourceId + '"><span ' +
-                    'class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
-                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].DataSourceId + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                    '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' + 'data-toggle="modal" id="info_' + i
+                        + '" data-source-id="' + response.data[key].DataSourceId + '">' +
+                        '<span class="glyphicon glyphicon-info-sign"></span>' +
+                    '</a>&nbsp;' +
+                    '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].DataSourceId + '">' +
+                        '<span class="glyphicon glyphicon-trash"></span>'
+                    '</a>' +
                 '</td>' +
             '</tr>' +
             '<span class="hide">' + i + '</span>';

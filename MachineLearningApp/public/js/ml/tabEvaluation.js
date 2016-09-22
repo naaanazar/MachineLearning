@@ -22,9 +22,8 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-        addSelectLoader('#SelectMLModelId, #SelectEvDataSource', '.create-evaluations-form');
-        selectModelName('/ml/select-ml-model', '#SelectMLModelId');
-        selectDatasourceName('/ml/select-data-source', '#SelectEvDataSource');
+        selectName('/ml/select-ml-model', '#SelectMLModelId', '.create-evaluations-form');
+        selectName('/ml/select-data-source', '#SelectEvDataSource', '.create-evaluations-form');
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
@@ -39,7 +38,7 @@ $(document).ready(function() {
 
 function listEvaluations()
 {
-    addLoader('.container-describeEvaluations');
+    showLoader('.container-describeEvaluations');
   
     $.get("/ml/describe-evaluations", function(response) {
         var i = 1;

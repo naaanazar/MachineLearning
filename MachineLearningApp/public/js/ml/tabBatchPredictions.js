@@ -9,8 +9,7 @@ $(document).ready(function() {
 
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault(); 
-        $(".modalCreateBatchPrediction").modal('toggle');
-        $('.container-describeBatchPredictions').html('<br><div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+        $(".modalCreateBatchPrediction").modal('toggle');        
            
         $.ajax({
             url: '/ml/upload-batch-source',
@@ -26,8 +25,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-bath-description", function() {
-        elementSelectAddLoader('#SelectBathMLModel', '.create-bath-predictios-form');
-        selectModelName('/ml/select-ml-model', '#SelectBathMLModel');
+        selectName('/ml/select-ml-model', '#SelectBathMLModel', '.create-bath-predictios-form');
     });
 
     $(document).on("click", '#describeBatchPredictionsContent', function () {
@@ -40,8 +38,9 @@ $(document).ready(function() {
     
 });
 
-function listBatchPrediction() {
-    $('.container-describeBatchPredictions').html('<br><div class="" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+function listBatchPrediction()
+{   
+    showLoader('.container-describeBatchPredictions');
 
     $.get("/ml/describe-batch-prediction", function(response) {
         var i = 1;
