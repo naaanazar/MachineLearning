@@ -1,12 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // ML: add hash tab to url
     $('.ml-tabs').on('click', 'a', function (e) {
         e.preventDefault();
         window.location.hash = $(this).attr('href');
         $(this).tab('show');
     });
-    if(window.location.hash){
-       $('.ml-tabs').find('a[href="'+window.location.hash+'"]').tab('show');
+    if (window.location.hash) {
+        $('.ml-tabs').find('a[href="' + window.location.hash + '"]').tab('show');
     }
 
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
     $("[data-toggle='tooltip']").tooltip();
 
     // upload button without submit
-    $('#input-file').change(function() {
+    $('#input-file').change(function () {
         $('.form-upload').submit();
     });
 
@@ -40,7 +40,7 @@ $(document).ready(function() {
             '</li></ul></div>').show('slow').hide(4000);
     }
 
-    $(document).on('click', '.btn-delete', function(e) {
+    $(document).on('click', '.btn-delete', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
@@ -49,7 +49,7 @@ $(document).ready(function() {
             data: {
                 name: $(this).attr('id')
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
                 if (data.success) {
 
@@ -61,11 +61,12 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.download', function (e) {
-       var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
-       e.preventDefault();
-       $.get('/s3/file-exists', {
-           name: encodeURI($(this).data('download-path')) }, function (response) {
-            if (response.data == true ) {
+        var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
+        e.preventDefault();
+        $.get('/s3/file-exists', {
+            name: encodeURI($(this).data('download-path'))
+        }, function (response) {
+            if (response.data == true) {
                 window.location = url;
             } else {
                 $.jGrowl('File not exists', {
@@ -73,11 +74,11 @@ $(document).ready(function() {
                 });
             }
 
-       });
+        });
     });
 
     //upload file to s3 bucket using ajax
-    $('.form-upload').on("submit", function(e) {
+    $('.form-upload').on("submit", function (e) {
         console.log($(".form-upload"));
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
@@ -88,11 +89,11 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
                 getListS3();
                 success('.notification-s3', 'File uploaded to S3!');
             },
-            error: function() {
+            error: function () {
                 errorS3('.notification-s3');
             },
         });
@@ -103,7 +104,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/s3/list',
             method: 'GET',
-            success: function(data) {
+            success: function (data) {
                 $('.s3-pagination').html($(data).find('div.pagination-list'));
                 $('.s3-table').html($(data).find('table'));
             }
@@ -111,7 +112,7 @@ $(document).ready(function() {
     }
 
     //modal window ML
-    $(document).on("click", '.datasource-info', function(event) {
+    $(document).on("click", '.datasource-info', function (event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
@@ -140,7 +141,7 @@ $(document).ready(function() {
 
         }
 
-        $.get(url + datasourceId, function(response) {
+        $.get(url + datasourceId, function (response) {
             switch (tab) {
                 case 'Data Source':
                     data.Name = response.data[0];
@@ -212,24 +213,25 @@ $(document).ready(function() {
             $('#result_info').html(result);
         }
 
-        function parseName(str){
+        function parseName(str) {
             var name = '';
             var posFirst = 0;
-            for (var i=0; i<str.length; i++) {
-                if (str.charCodeAt(i) > 65 && str.charCodeAt(i) <90) {
-                    name += str.substring(posFirst,i) + ' ';
+            for (var i = 0; i < str.length; i++) {
+                if (str.charCodeAt(i) > 65 && str.charCodeAt(i) < 90) {
+                    name += str.substring(posFirst, i) + ' ';
                     posFirst = i;
                 }
             }
-        return name = name + ' ' + str.substring(posFirst,str.length);
+            return name = name + ' ' + str.substring(posFirst, str.length);
         }
+
         event.preventDefault();
     });
 
     // Delete Ajax
-    $(document).on('click', '.delete', function(event) {
+    $(document).on('click', '.delete', function (event) {
         var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
-        
+
         $(event.target).closest('tr').fadeOut();
 
 
@@ -238,7 +240,7 @@ $(document).ready(function() {
             var name = $(event.target).closest('tr').find('.name').text();
 
             if (target == dataSourceIdVar) {
-                $.get(url + datasourceId, function(response) {
+                $.get(url + datasourceId, function (response) {
                     if (response.deleted !== 'Ok') {
                         $.jGrowl('An error occurred during delete process', {
                             theme: 'jgrowl-danger'
@@ -270,11 +272,6 @@ $(document).ready(function() {
         }
 
         event.preventDefault();
-    });
-
-    //loading data
-    $('.modal-1').on('hidden.bs.modal', function() {
-        $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
 
 });
