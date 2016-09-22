@@ -144,10 +144,6 @@ function showTable(name) {
             }
 
         }
-
-
-
-
     }
 }
 

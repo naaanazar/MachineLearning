@@ -4,7 +4,6 @@
 
 html {
     height: 100%;
-    min-width: 530px;
     min-height: 700px;
 }
 body {
@@ -12,7 +11,6 @@ body {
     margin: 0;
     padding-bottom: 70px;
     min-height: 100%;
-    min-width: 530px;
 }
 .footer {
     position: absolute;
@@ -25,6 +23,7 @@ body {
     font-weight: bold;
     font-size: 13px;
 }
+
 /***************************************
     S3 Style
 ***************************************/
@@ -46,27 +45,28 @@ body {
     width: 100%;
     transform: translateX(-50%);
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
 .preload-s3 {
     display: none;
     float: right;
     margin: 3px 10px;
 }
+
 /***************************************
     Prediction
 ***************************************/
 
 .main-prediction {
     position: relative;
-    margin-top: -46px;
     float: left;
     width: 100%;
+    margin-top: -46px;
     padding-top: 10px;
     border-radius: 15px;
 }
-.pred-title {
+.title-pred {
     margin-bottom: 64px;
 }
 .pred-result {
@@ -84,10 +84,10 @@ body {
     position: relative;
     float: left;
 }
-.prediction-data span {
+.data-prediction span {
     font: 18px "Courier New", monospace;
 }
-.prediction-data strong {
+.data-prediction strong {
     font-size: 20px;
 }
 .label-pred {
@@ -106,9 +106,9 @@ body {
 }
 .block-prediction {
     position: relative;
+    float: right;
     min-height: 500px;
     padding: 15px 25px;
-    float: right;
     background: #eee url(../images/logo-icon.png) center no-repeat;
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
@@ -140,8 +140,8 @@ body {
     position: relative;
     top: 4px;
     right: -242px;
-    margin-bottom: 0;
     width: 50%;
+    margin-bottom: 0;
     padding: 6px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
        -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
@@ -149,14 +149,12 @@ body {
 }
 @media screen and (max-width: 1000px) {
     .block-prediction {
-
-        min-height:200px !important;
-        height: 250px !important;
         float: none;
+        height: 270px;
+        min-height:200px;
         margin-bottom:40px;
-        width: 90%;
     }
-    .input-pred{
+    .input-pred {
         width: 60%;
     }
     .block-prediction::before {
@@ -166,14 +164,16 @@ body {
         float: none;
         width: 100%;
     }
+    .spinner-prediction {
+        top: 36%;
+        left: 44%;
+    }
 }
-
 @media screen and (max-width: 700px) {
     .block-prediction {
         width: 95%;
     }
 }
-
 @media screen and (max-width: 500px) {
     .block-prediction {
         width: 100%;
@@ -188,6 +188,9 @@ body {
     .btn-pred {
         float: none;
         width: 100%;
+    }
+    .spinner-prediction {
+        left: 40%;
     }
 }
 
@@ -234,7 +237,7 @@ body {
 }
 
 .ml-table-data {
-width:140px;
+    width:140px;
 }
 
 @media screen and (max-width: 992px) {
