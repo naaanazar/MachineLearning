@@ -88,7 +88,9 @@ $(document).ready(function () {
         }
     });
 
-    if(location.href.split('#').length > 1) {
+    if(~location.href.lastIndexOf('#')) {
+        bucket = findBucket(location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0]);
+
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
 
