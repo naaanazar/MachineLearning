@@ -5,16 +5,8 @@
     <link href="css/hover.css" rel="stylesheet" media="all">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-<<<<<<< HEAD
-                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3">&nbsp;&nbsp;&nbsp;Buckets</h2>
-
-                <a class="btn btn-default" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket">Create Bucket</a>
-
-=======
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> Buckets
                 <a class="btn-sm btn-success btn-create-bucket hvr-sweep-to-right" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket"> + Add bucket</a></h2>
->>>>>>> 4c2c7353f4f9e364464070850b46718a86167896
                 <div class="modal fade modalCreateBucket" id="modalCreateBucket" role="dialog">
 
                     <div class="modal-dialog">
