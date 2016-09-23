@@ -3,8 +3,8 @@ var RT_PREDICTION = RT_PREDICTION || {};
 RT_PREDICTION.MLModel = {
     result: "",
 
-    getId: function() {
-        $.get("/ml/select-ml-model", function(response) {
+    getId: function () {
+        $.get("/ml/select-ml-model", function (response) {
             for (var key in response.data) {
                 this.result +=
                     '<option value="' + response.data[key].MLModelId + '">' +  response.data[key].Name + '</option>';
@@ -16,15 +16,15 @@ RT_PREDICTION.MLModel = {
 }
 
 RT_PREDICTION.Form = {
-    output: "",
+    result: "",
     content: "",
     purchase: "",
     formData: "",
-    error422 : "",
     formAction: "",
     formMethod: "",
 
     addProgress: function () {
+        $('.norification-pred').fadeOut('slow');
         $('.data-prediction').empty();
         $('input').attr('disabled', 'disabled');
         $('.spinner-prediction').fadeIn('slow');
@@ -50,7 +50,7 @@ RT_PREDICTION.Form = {
         });
     },
 
-    ajax: function() {
+    ajax: function () {
         this.formData = {
             country: $('input[name=country]').val(),
             ml_model_id: $('select[name=ml_model_id').val(),
@@ -66,46 +66,64 @@ RT_PREDICTION.Form = {
 
         this.formAction = $('.form-prediction').attr('action');
         this.formMethod = $('.form-prediction').attr('method');
-        this.error422 = '<h4 class="error text-center">No valid data!</h4>';
 
         $.ajax({
             type: this.formMethod,
             url: this.formAction,
             data: this.formData,
             cache: false,
-            success: function(response) {
-                if (response == 'Updating') {
-                    setTimeout(RT_PREDICTION.Form.ajax(), 3000);
+            success: function (response) {
+                var endPointErr =  "Endpoint is not created! Try again or contact support!!";
+                var predictionErr = "Fail prediction! Try again or contact support!!";
+
+                if (response.status ===  false) {
+                    if(response.result === endPointErr) {
+                        RT_PREDICTION.Form.error(endPointErr);
+                    } else if (response.result === predictionErr) {
+                        RT_PREDICTION.Form.error(predictionErr);
+                    } else {
+                        setTimeout(RT_PREDICTION.Form.ajax(), 3000);
+                    }
                 } else {
                     RT_PREDICTION.Form.removeProgress();
 
-                    this.output = $.parseJSON(response);
-                    this.purchase = this.output.predictedLabel == 0 ? "No" : "Yes";
+                    this.result = response.result;
+                    this.purchase = response.result.predictedLabel == 0 ? "No" : "Yes";
 
                     this.content = "<p><strong>Purchase: </strong><span>";
                     this.content += this.purchase + ";</span></p>";
                     this.content += "<p><strong>Predicted Scores: </strong><span>";
-                    this.content += this.output.predictedScores[0].toFixed(4) + ";</span></p>";
+                    this.content += this.result.predictedScores[0].toFixed(4) + ";</span></p>";
                     this.content += "<p><strong>Algorithm: </strong><span>";
-                    this.content += this.output.details.Algorithm + ";</span></p>";
+                    this.content += this.result.details.Algorithm + ";</span></p>";
                     this.content += "<p><strong>Predictive Model Type: </strong><span>"
-                    this.content += this.output.details.PredictiveModelType + ";</span></p>";
+                    this.content += this.result.details.PredictiveModelType + ";</span></p>";
 
                     $('.data-prediction').append(this.content).show('normal');
                 }
             },
-            error: function(jqXhr) {
+            error: function (jqXhr) {
                 if(jqXhr.status === 422) {
-                    RT_PREDICTION.Form.removeProgress();
-
-                    $('.data-prediction').empty();
-                    $('.data-prediction').append(this.error422);
+                    RT_PREDICTION.Form.error("Сheck the validity of the data");
+                } else if (jqXhr.status === 500 || jqXhr.status === 400 || jqXhr.status === 405) {
+                    RT_PREDICTION.Form.error("Something is wrong! Try later or contact support!");
                 } else {
                     setTimeout(RT_PREDICTION.Form.ajax(), 3000);
                 }
             }
         });
     },
+
+    error: function (message) {
+        RT_PREDICTION.Form.removeProgress();
+
+        $('.data-prediction').empty();
+        $('body,html').animate({scrollTop: 0}, 500);
+        $('.notif-data').empty();
+        $('.notif-data').append(message);
+        $('.norification-pred').show().fadeIn();
+        $('.notif-close').on('click', function () { $('.norification-pred').fadeOut(); });
+    }
 }
 
 RT_PREDICTION.Validation = {
@@ -114,36 +132,29 @@ RT_PREDICTION.Validation = {
     newValue: "",
     valueField: "",
     errorTarget: "",
-    lengthField: "",
+    lengthField: 0,
 
-    error: function (err) {
-        this.errorMsg = '<div class="alert alert-danger pred-alert">'
-        this.errorMsg += '<ul><li><strong>' + err + '</strong></li></ul></div>';
+    checkRequired: function () {
+        $('.input-pred').on("keyup click",function(e) {
+            var empty = false;
 
-        return this.errorMsg;
-    },
-
-    disabledBtn: function () {
-        $('.input-pred').on('keyup mouseenter', function() {
-            var count = 0;
-            $('.input-pred').each(function() {
-                this.lengthField = $(this).val() === null ? 0 : $(this).val().length;
-
-                if (this.lengthField === 0) {
-                    count++;
+            $('.input-pred').each(function () {
+                if($(this).val()) {
+                    empty = true;
                 }
             });
 
-            if (count === 9) {
+            if (!empty) {
                 $('.btn-pred').attr('disabled', 'disabled');
-            } else if (count < 9) {
+            } else if (empty) {
                  $('.btn-pred').removeAttr('disabled');
             }
         });
+
     },
 
     validation: function (selector, lengthVal, regexp, message) {
-        $('.form-prediction').on('input', selector, function(e){
+        $('.form-prediction').on('input', selector, function (e){
             this.valueField = $(e.target).val();
             this.errorTarget = selector + " + .pred-error";
             this.regExp = new RegExp(regexp, "g");
@@ -151,39 +162,54 @@ RT_PREDICTION.Validation = {
 
             $(selector).val(this.newValue.substr(0, lengthVal));
 
-            $(selector).focusout(function(event) {
+            $(selector).focusout(function (e) {
                 $(this.errorTarget).fadeOut('slow');
                 $(selector).removeClass('pred-input-error');
+            });
+
+            $(selector).on('keyup', function(e){
+                if (e.keyCode === 8) {
+                    $(this.errorTarget).fadeOut('slow');
+                    $(selector).removeClass('pred-input-error');
+                } else if (e.key.match(regexp)){
+                    $(this.errorTarget).fadeIn('slow');
+                    $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
+                    $(selector + ":focus").addClass('pred-input-error');
+                } else {
+                    $(this.errorTarget).fadeOut('slow');
+                    $(selector).removeClass('pred-input-error');
+                }
             });
 
             if (this.newValue.length > lengthVal) {
                 $(this.errorTarget).fadeIn('slow');
                 $(this.errorTarget).html(RT_PREDICTION.Validation.error("Length no more " + lengthVal));
                 $(selector + ":focus").addClass('pred-input-error');
-            } else if (!this.newValue) {
-                $(selector + ":focus").addClass('pred-input-error');
-                $(this.errorTarget).fadeIn('slow');
-                $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
-            } else {
-                $(this.errorTarget).fadeOut('slow');
-                $(selector).removeClass('pred-input-error');
             }
         });
     },
 
+    error: function (message) {
+        this.errorMsg = '<div class="alert alert-danger pred-alert">'
+        this.errorMsg += '<ul><li><strong>' + message + '</strong></li></ul></div>';
+
+        return this.errorMsg;
+    },
+
     init: function() {
-        this.disabledBtn();
+        this.checkRequired();
         this.validation("#email", 1, "[^0-1]", "Enter the 0 or 1");
         this.validation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
         this.validation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-        this.validation("#same-email", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#projects-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#members-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#last-login", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
+        this.validation("#same-email", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#projects-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#members-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#last-login", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#country", 60, "^ |  |[^a-zA-Z ]", "Enter the letter");
     }
+
 }
 
 $(document).ready(function() {

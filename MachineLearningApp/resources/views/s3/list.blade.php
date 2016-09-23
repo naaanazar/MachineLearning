@@ -7,9 +7,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> Buckets
-                
                 <a class="btn-sm btn-success btn-create-bucket hvr-sweep-to-right" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket"> + Add bucket</a></h2>
-
                 <div class="modal fade modalCreateBucket" id="modalCreateBucket" role="dialog">
 
                     <div class="modal-dialog">

@@ -48,16 +48,6 @@ body {
     float: left;
     margin-top: 20px;
 }
-.upload-message-s3 {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    width: 100%;
-    transform: translateX(-50%);
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-}
 .preload-s3 {
     display: none;
     float: right;
@@ -122,7 +112,8 @@ a:focus, a:hover{
     margin-right: 20px;
     text-align: left;
 }
-.input-pred {
+.input-pred,
+.select-pred {
     width: 50%;
 }
 .btn-pred {
@@ -173,6 +164,20 @@ a:focus, a:hover{
        -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
             box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
+.norification-pred {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    display: none;
+    width: 100%;
+    transform: translateX(-50%);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
+}
+.norification-pred .close {
+    margin-left: 0;
+}
 @media screen and (max-width: 1000px) {
     .block-prediction {
         float: none;
@@ -180,7 +185,8 @@ a:focus, a:hover{
         min-height:200px;
         margin-bottom:40px;
     }
-    .input-pred {
+    .input-pred,
+    .select-pred {
         width: 60%;
     }
     .block-prediction::before {
@@ -208,7 +214,8 @@ a:focus, a:hover{
         float: none;
         width: 100%;
     }
-    .input-pred {
+    .input-pred,
+    .select-pred {
         width: 100%;
     }
     .btn-pred {
@@ -351,7 +358,7 @@ a:focus, a:hover{
     margin-left: 1%;
 }
 .error {
-    color: red;
+    color: #a94442;
 }
 #input-file,
 #input-file-source {

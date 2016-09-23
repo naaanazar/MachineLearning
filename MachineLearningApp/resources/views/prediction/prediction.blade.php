@@ -5,6 +5,10 @@
         <h3 class="title title-pred">Real time prediction</h3>
         <div class="main-prediction col-md-12 clearfix">
             <div class="block-prediction clearfix col-md-4">
+                <div class="norification-pred alert alert-danger">
+                    <a href="#" class="notif-close close">&times;</a>
+                    <strong>Error! </strong><span class="notif-data"></span>
+                </div>
                 <h2 class="text-center pred-result">Prediction results</h2>
                 <div class="data-prediction"></div>
                 <i class="spinner-prediction fa fa-spinner fa-spin"></i>
@@ -13,7 +17,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="control-label label-pred ML-model" for="ml_model_id">ML model</label>
-                    <select id="ml_model_id" class="form-control input-pred" name="ml_model_id"></select>
+                    <select id="ml_model_id" class="form-control select-pred" name="ml_model_id"></select>
                 </div>
                 <hr>
                 <div class="form-group">
