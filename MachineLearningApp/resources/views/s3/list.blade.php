@@ -32,15 +32,15 @@
                 <br>
                 <br>
                 <br>
-                <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@doUpload') }}" method="post">
-                    {{ csrf_field() }}
-                    <div class="form-group form-group-upload">
-                        <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
-                            <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">
-                        </label>
-                        <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
-                    </div>
-                </form>
+                {{--<form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@doUpload') }}" method="post">--}}
+                    {{--{{ csrf_field() }}--}}
+                    {{--<div class="form-group form-group-upload">--}}
+                        {{--<label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">--}}
+                            {{--<span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">--}}
+                        {{--</label>--}}
+                        {{--<span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>--}}
+                    {{--</div>--}}
+                {{--</form>--}}
             </div>
 
             <br>
@@ -96,9 +96,15 @@
                                         <a class="btn btn-danger btn-sm btn-list btn-list-bucket"
                                             href="/s3/delete/{{ $value['Name'] }}"
                                             id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top" title="delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
-                                        <a class="btn btn-danger btn-sm btn-list" 
+                                        <a class="btn btn-danger btn-sm btn-list"
                                             href="s3/delete_all/{{ $value['Name'] }}"  data-toggle="tooltip" data-placement="top" title="Delete
                                             files"><span class="glyphicon glyphicon-minus"></span></a>
+                                        <label for="s3-upload-file-{{ $key }}" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="top" title="Upload file">
+                                            <span class="glyphicon glyphicon-upload">
+                                                <input id="s3-upload-file-{{ $key }}" class="s3-upload-file" type="file" name="file" style="display: none">
+                                            </span>
+                                        </label>
+                                        <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                                     </td>
                                 </tr>
                             @endforeach

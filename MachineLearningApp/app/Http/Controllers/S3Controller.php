@@ -168,10 +168,10 @@ class S3Controller extends Controller
         $file        = $request->file('file');
         $fileName    = $file->getClientOriginalName();
         $storagePath = storage_path('app/');
-        $file->move($storagePath, $fileName);
-
         $filepath = $storagePath . '/' . $fileName;
         $keyname  = basename($filepath);
+
+        $file->move($storagePath, $fileName);
 
         try {
             $result = $this->client->putObject([
@@ -180,16 +180,15 @@ class S3Controller extends Controller
                 'SourceFile' => $filepath,
                 'ACL'        => 'public-read'
             ]);
-
         } catch (S3Exception $e) {
             return Response()->json(['data' => $e->getMessage()]);
         }
+
         $file = $fileName;
         Storage::delete($fileName);
 
         return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
-
 
     public function doDelete($filename)
     {

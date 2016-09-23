@@ -88,6 +88,34 @@ $(document).ready(function () {
         }
     });
 
+    $('body').on('change', '.s3-upload-file', function(event) {
+        console.log(event.target.files.length);
+
+        var data = new FormData();
+        data.append('file', event.target.files[0]);
+
+        // $.post('s3/upload', {
+        //     data: data
+        // }, function(response) {
+        //     console.log('Response: \n');
+        //     console.log(response);
+        // });
+
+        $.ajax({
+            url: "s3/upload",
+            type:"post",
+            cache : false,
+            contentType : false,
+            processData : false,
+            data: data,
+            success: function(response) {
+
+            }
+        });
+
+        event.preventDefault();
+    });
+
     if(location.href.split('#').length > 1) {
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];

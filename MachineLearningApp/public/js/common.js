@@ -10,9 +10,9 @@ $(document).ready(function () {
 
     $("[data-toggle='tooltip']").tooltip();
 
-    $('#input-file').change(function () {
-        $('.form-upload').submit();
-    });
+    // $('#input-file').change(function () {
+    //     $('.form-upload').submit();
+    // });
 
     $(".upload-message").show().delay(1500).fadeOut(1000);
 
