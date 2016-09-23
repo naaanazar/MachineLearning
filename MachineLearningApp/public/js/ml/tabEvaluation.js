@@ -43,20 +43,20 @@ function listEvaluations(status)
     $.get("/ml/describe-evaluations?Obj=ml", function(response) {
         var i = 1;       
         var res = '' +
-        '<table class="table table-bordered table-font text-center">' +
-            '<tr class="active">' +
-                '<td>Name</td>' +
-                '<td>Status</td>' +
-                '<td>' +
-                    '<div class="wrapper">' +
-                        'Binary AUC' +
-                        '<div class="tooltip">Area Under the Curve (AUC) - measures the ability of the model to predict a higher score for positive examples as compared to negative examples.</div>' +
-                    '</div>' +
-                '</td>' +
-                '<td>Last Updated</td>' +
-                '<td>Action</td>' +
-            '</tr>' +
-            '<span class="hide">' + i + '</span>';
+        '<table class="table table-bordered table-font text-center">';
+//            '<tr class="active">' +
+//                '<td>Name</td>' +
+//                '<td>Status</td>' +
+//                '<td>' +
+//                    '<div class="wrapper">' +
+//                        'Binary AUC' +
+//                        '<div class="tooltip">Area Under the Curve (AUC) - measures the ability of the model to predict a higher score for positive examples as compared to negative examples.</div>' +
+//                    '</div>' +
+//                '</td>' +
+//                '<td>Last Updated</td>' +
+//                '<td>Action</td>' +
+//            '</tr>' +
+//            '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
             i = i + 1; 
@@ -82,7 +82,23 @@ function listEvaluations(status)
 
         res += '</table>';
 
+        var headers = ''+
+            '<div class="table-headers">' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>' +
+                    '<div class="wrapper">' +
+                        'Binary AUC' +
+                        '<div class="tooltip">Area Under the Curve (AUC) - measures the ability of the model to predict a higher score for positive examples as compared to negative examples.</div>' +
+                    '</div>' +
+                '</span>' +
+                '<span>Last Updated</span>' +
+                '<span>Action</span>' +
+            '</div>';
+
         $('.container-describeEvaluations').html(res);
+        $('.container-describeEvaluations').before(headers);
+        setTableHeadersWidth('describeEvaluations');
         $('.container-describeEvaluations').addClass('loaded');
     });
 };

@@ -46,15 +46,15 @@ function listBatchPrediction(status)
     $.get("/ml/describe-batch-prediction?Obj=ml", function(response) {
         var i = 1;
         var res = '' +
-            '<table class="table table-bordered table-font text-center">' +
-                '<tr class="active">' +
-                    '<td>Name</td>' +
-                    '<td>Status</td>' +
-                    '<td>Count</td>' +
-                    '<td>Last Updated</td>' +
-                    '<td>Action</td>' +
-                '</tr>' +
-                '<span class="hide">'+ i +'</span>';
+            '<table class="table table-bordered table-font text-center">';
+//                '<tr class="active">' +
+//                    '<td>Name</td>' +
+//                    '<td>Status</td>' +
+//                    '<td>Count</td>' +
+//                    '<td>Last Updated</td>' +
+//                    '<td>Action</td>' +
+//                '</tr>' +
+//                '<span class="hide">'+ i +'</span>';
 
         for (var key in response.data) {
             i = i+1;
@@ -84,7 +84,19 @@ function listBatchPrediction(status)
         };
 
         res += '</table>';
+
+        var headers = ''+
+            '<div class="table-headers">' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>Count</span>' +
+                '<span>Last Updated</span>' +
+                '<span>Action</span>' +
+            '</div>';
+
         $('.container-describeBatchPredictions').html(res);
+        $('.container-describeBatchPredictions').before(headers);
+        setTableHeadersWidth('describeBatchPredictions');
         $('.container-describeBatchPredictions').addClass('loaded');
     });
 };

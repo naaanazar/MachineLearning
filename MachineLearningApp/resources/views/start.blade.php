@@ -38,6 +38,10 @@
     <header class="intro-header" style="background-image: url('images/home-bg.jpg')">
         <div class="container">
             <div class="row">
+             <button onclick="showGame()" id="game" class="startGameButton"> </button>
+                  <div class="game" id="showGame"> <object type=application/x-shockwave-flash data=http://htmlka.com/wp-content/uploads/2014/07/chatnoir.swf width=780 height=640><param name=movie value=http://htmlka.com/wp-content/uploads/2014/07/chatnoir.swf></object>
+                  <button onclick="closeGame()" class="btn btn-danger endGame" id="closeGame">End game</button>
+                  </div>
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                     <div class="site-heading">
                         <h1 class="animated fadeInDown" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;">

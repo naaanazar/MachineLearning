@@ -60,7 +60,7 @@ function listDataSource(status)
             i = i + 1;          
             res += '' +
             '<tr>' +
-                '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
+//                '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
@@ -92,19 +92,7 @@ function listDataSource(status)
 
         $('.container-describeDataSources').html(res);
         $('.container-describeDataSources').before(headers);
-        setTableHeadersWidth();
+        setTableHeadersWidth('describeDataSources');
         $('.container-describeDataSources').addClass('loaded');
     });
 };
-
-function setTableHeadersWidth()
-{
-    var headerCols = $('.table-headers > span');
-    var cols = $('#describeDataSources table tbody tr:first-child td');
-
-    for(var i = 1; i < cols.length; i++ ) {
-        var colWidth = $(cols[i]).outerWidth();
-        console.log(colWidth);
-        $(headerCols[i-1]).outerWidth(colWidth);
-    }
-}
