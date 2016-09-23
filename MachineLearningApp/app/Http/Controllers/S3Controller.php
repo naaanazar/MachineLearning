@@ -20,7 +20,7 @@ class S3Controller extends Controller
     public $s3;
 
     private $client;
-
+    public $bucket = 'ml-set-testing';
 
     public function __construct()
     {
@@ -174,6 +174,7 @@ class S3Controller extends Controller
         $filepath = $storagePath.'/'.$fileName;
         $keyname  = basename($filepath);
 
+
         try {
             $result = $this->client->putObject([
                 'Bucket'     => $this->bucket,
@@ -185,6 +186,8 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             return Response()->json(['data' => $e->getMessage()]);
         }
+        $file = $fileName;
+        Storage::delete($fileName);
 
         return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }

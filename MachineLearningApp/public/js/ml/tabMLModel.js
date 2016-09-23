@@ -13,35 +13,6 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('blur', '.form-control', function (e) {
-        var id = e.target.id;
-        var val = e.target.value;
-
-        switch (id) {
-            case 'MLModelName':
-                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                if (val.length > 2 && val != '' && rv_name.test(val)) {
-                    $(this).removeClass('error').addClass('not_error');
-                    $(this).closest('div').removeClass('has-error');
-                    $(this).closest('div').addClass('has-success has-feedback');
-                    $(this).closest('div').find('span').removeClass('hide');
-
-                }
-                else {
-                    $(this).removeClass('not_error').addClass('error');
-                    $(this).closest('div').addClass('has-error has-feedback');
-                    $(this).closest('div').find('span').addClass('hide');
-                }
-                break;
-        }
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-ml').attr('disabled', 'disabled');
-        } else {
-            $(this).closest('form').find('input#success-button-modal-ml').removeAttr('disabled');
-        }
-    });
-
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();      
 
