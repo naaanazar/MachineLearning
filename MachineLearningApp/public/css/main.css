@@ -401,7 +401,7 @@ a:focus, a:hover{
         margin-right: 7%;
     }
     .table-headers {
-        margin-left: -3px !important;
+        margin-left: 0px !important;
     }
 }
 
