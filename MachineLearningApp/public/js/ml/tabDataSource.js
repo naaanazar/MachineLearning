@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
-        listDataSource();
+        listDataSource('ok');
     };
 
     $('.create-datasource-form').submit(function (e) {
@@ -16,7 +16,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response.data);
                 $(".modalCreateDataSource").modal('toggle');
-                listDataSource();                
+                listDataSource(data);
             }           
         });
     });
@@ -29,15 +29,16 @@ $(document).ready(function () {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
 
         if (!$('.container-describeDataSources').hasClass('loaded')) {
-            listDataSource();
+            listDataSource('ok');
         };
     });
 
 });
 
-function listDataSource()
+function listDataSource(status)
 {
     showLoader('.container-describeDataSources');
+    statusAction(status);
 
     $.get("/ml/describe-data-sources?Obj=ml", function (response) {
 

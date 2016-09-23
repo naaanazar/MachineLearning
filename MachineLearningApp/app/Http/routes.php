@@ -10,33 +10,32 @@ Route::get('/s3/file-exists/', 'S3Controller@fileExists');
 
 Route::get('ml', 'MLController@index');
 
-Route::get('/ml/describe-data-sources', 'MLController@listDataSources');
-Route::get('/ml/describe-ml-model', 'MLController@listMLModels');
-Route::get('/ml/describe-evaluations', 'MLController@listEvaluations');
-Route::get('/ml/describe-batch-prediction', 'MLController@listBatchPredictions');
+Route::get('/ml/describe-data-sources', 'MLController@doListDataSources');
+Route::get('/ml/describe-ml-model', 'MLController@doListMLModels');
+Route::get('/ml/describe-evaluations', 'MLController@doListEvaluations');
+Route::get('/ml/describe-batch-prediction', 'MLController@doListBatchPredictions');
 
-Route::post('ml/create-datasource', 'MLController@createDataSourceFromS3');
-Route::post('ml/create-ml-model', 'MLController@createMLModel');
-Route::post('ml/create-evaluation', 'MLController@createEvaluation');
+Route::post('ml/create-datasource', 'MLController@doCreateDataSourceFromS3');
+Route::post('ml/create-ml-model', 'MLController@doCreateMLModel');
+Route::post('ml/create-evaluation', 'MLController@doCreateEvaluation');
 
-Route::post('/ml/upload-batch-source', 'MLController@createBatchPrediction');
-Route::get('/ml/status-batch-data-source/{DataSourceId}', 'MLController@statusDataSource');
+Route::post('/ml/upload-batch-source', 'MLController@doCreateBatchPrediction');
 
-Route::get('/ml/delete-datasource/{id}', 'MLController@deleteDataSource');
-Route::get('/ml/delete-ml-model/{id}', 'MLController@deleteMLModel');
-Route::get('/ml/delete-evaluation/{id}', 'MLController@deleteEvaluation');
-Route::get('/ml/delete-batch-prediction/{id}', 'MLController@deleteBatchPrediction');
-Route::post('/ml/delete-endpoint', 'MLController@deleteRealtimeEndpoint');
+Route::get('/ml/delete-datasource/{id}', 'MLController@doDeleteDataSource');
+Route::get('/ml/delete-ml-model/{id}', 'MLController@doDeleteMLModel');
+Route::get('/ml/delete-evaluation/{id}', 'MLController@doDeleteEvaluation');
+Route::get('/ml/delete-batch-prediction/{id}', 'MLController@doDeleteBatchPrediction');
+Route::post('/ml/delete-endpoint', 'MLController@doDeleteRealtimeEndpoint');
 
 //ML info
-Route::get('/ml/getdatasource/{DataSourceId}', 'MLController@getDataSource');
-Route::get('/ml/getmlmodel/{ModelId}', 'MLController@getMLModel');
-Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@getEvaluation');
-Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@getBatchPrediction');
-Route::get('/ml/select-S3objects', 'MLController@selectObjectsS3');
-Route::get('/ml/select-data-source', 'MLController@selectDataSources');
+Route::get('/ml/getdatasource/{DataSourceId}', 'MLController@doGetDataSource');
+Route::get('/ml/getmlmodel/{ModelId}', 'MLController@doGetMLModel');
+Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@doGetEvaluation');
+Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@doGetBatchPrediction');
 
-Route::get('/ml/select-ml-model', 'MLController@selectMLModel');
+Route::get('/ml/select-S3objects', 'MLController@doSelectObjectsS3');
+Route::get('/ml/select-data-source', 'MLController@doSelectDataSources');
+Route::get('/ml/select-ml-model', 'MLController@doSelectMLModel');
 
 //Generator
 Route::get('generator', 'GeneratorController@index');

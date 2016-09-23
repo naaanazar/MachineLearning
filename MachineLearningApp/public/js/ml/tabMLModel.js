@@ -2,16 +2,8 @@ $(document).ready(function() {
 
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
-        listMLModel();
-    };
-
-    $(document).on('mouseenter', '.delete-endpoint', function (e) {
-        e.preventDefault();
-
-        $.jGrowl('delete RealtimeEndpoint', {
-            theme: 'jgrowl-notification'
-        });
-    });
+        listMLModel('ok');
+    };    
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();      
@@ -22,7 +14,7 @@ $(document).ready(function() {
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
                 $(".modalCreateModel").modal('toggle');
-                listMLModel();
+                listMLModel(data);
             },
             error: function() {},
         });
@@ -36,7 +28,7 @@ $(document).ready(function() {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
 
         if(!$('.container-describeMLModels').hasClass('loaded')) {
-            listMLModel();
+            listMLModel('ok');
         }
     });
 
@@ -54,9 +46,10 @@ $(document).ready(function() {
    });
 });
 
-function listMLModel()
+function listMLModel(status)
 {
     showLoader('.container-describeMLModels');
+    statusAction(status);
 
     $.get("/ml/describe-ml-model?Obj=ml", function(response) {
         var i = 1;

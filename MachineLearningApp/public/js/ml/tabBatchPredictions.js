@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     if (window.location.hash == '#describeBatchPredictions') {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
-        listBatchPrediction();
+        listBatchPrediction('ok');
     }
 
     $('.create-bath-predictios-form').on("submit", function(e) {
@@ -19,7 +19,7 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function (response) {                
-                listBatchPrediction();               
+                listBatchPrediction(data);
             }           
         });
     });
@@ -32,15 +32,16 @@ $(document).ready(function() {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
 
         if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
-            listBatchPrediction();
+            listBatchPrediction('ok');
         }
     });  
     
 });
 
-function listBatchPrediction()
+function listBatchPrediction(status)
 {   
     showLoader('.container-describeBatchPredictions');
+    statusAction(status);
 
     $.get("/ml/describe-batch-prediction?Obj=ml", function(response) {
         var i = 1;
