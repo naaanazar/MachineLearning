@@ -13,8 +13,7 @@ $(document).ready(function () {
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function (response) {
-                console.log(response.data);
+            success: function (data) {            
                 $(".modalCreateDataSource").modal('toggle');
                 listDataSource(data);
             }           
