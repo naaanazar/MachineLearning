@@ -14,6 +14,7 @@ $(document).ready(function () {
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
             success: function (response) {
+                console.log(response.data);
                 $(".modalCreateDataSource").modal('toggle');
                 listDataSource();                
             }           
