@@ -101,6 +101,9 @@ class S3Controller extends Controller
 
     public function doCreateBucket(Request $request)
     {
+        $this->validate($request, [
+            'nameBucket' => 'required|string|min:0|max:255',
+        ]);
 
         try {
             $this->client->createBucket([
@@ -121,16 +124,17 @@ class S3Controller extends Controller
 
     public function doDeleteBucket($nameBucket)
     {
-
         try {
             $this->client->deleteBucket([
                 'Bucket' => $nameBucket,
             ]);
 
-            return back();
+            $status = true;
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            $status = false;
         }
+
+        return response()->json(["status" => $status]);
     }
 
 
@@ -191,20 +195,41 @@ class S3Controller extends Controller
     }
 
 
-    public function doDelete($filename)
+//    public function doDelete($filename)
+//    {
+//        try {
+//            $this->client->deleteObject([
+//                'Bucket'       => $this->bucket,
+//                'Key'          => $filename,
+//                'RequestPayer' => 'requester'
+//            ]);
+//        } catch (S3Exception $e) {
+//            return Response()->json(['success' => $e->getMessage()]);
+//        }
+//
+//        return Response()->json(['success' => true]);
+//    }
+
+
+    public function doDelete()
     {
+        $filename = $_POST['name'];
+        $url = parse_url($filename);
+ 
+        $client = $this->connect();
+        $filename = urldecode($filename);
         try {
-            $this->client->deleteObject([
-                'Bucket'       => $this->bucket,
-                'Key'          => $filename,
+            $result = $client->deleteObject([
+                'Bucket' => $url['host'],
+                'Key' => substr($url['path'], 1),
                 'RequestPayer' => 'requester'
             ]);
         } catch (S3Exception $e) {
-            return Response()->json(['success' => $e->getMessage()]);
+            return  Response()->json(['success' => (array)$e->getMessage()]);
         }
-
-        return Response()->json(['success' => true]);
+       return Response()->json(['success' => (array)$result]);
     }
+
 
 
     public function doPredictionForm()
@@ -215,41 +240,36 @@ class S3Controller extends Controller
 
     public function downloadFromS3(Request $request)
     {
-//        $path = $request->name;
-//        $path = urldecode($path);
-//        $this->client->registerStreamWrapper();
-//        $data     = file_get_contents($path);
-//        $fileName = basename($path);
-//
-//        error_reporting(0);
-//        ob_start();
-//
-//        header('Content-Description: File Transfer');
-//        header('Content-Type: application/octet-stream');
-//        header('Content-Disposition: attachment; filename=' . $fileName);
-//        header('Expires: 0');
-//        header('Cache-Control: must-revalidate');
-//        header('Pragma: public');
-//        header('Content-Length:' . filesize($data));
-//
-//        ob_clean();
-//        ob_end_flush();
-//        echo $data;
-//        exit;
-//        $result = $this->client->getObject(array(
-//            'Bucket' => 'this-is-sparta',
-//            'Key'    => 'test-dataset.csv',
-//            'SaveAs' => 'this-is-sparta/test-dataset.csv'
-//        ));
-//        $result = $this->client->getObject(array(
-//            'Bucket' => 'ml-datasets-test',
-//            'Key'    => 'batch (2).csv',
-//            'SaveAs' => 'ml-datasets-test/batch (2).csv'
-//        ));
-        $this->client->putObject(array(
-            'Bucket'     => 'ml-datasets-test',
-            'Key'        => 'batch (2).csv',
-            'SourceFile' => 'ml-datasets-test/batch (2).csv'
+        $path = $request->name;
+        $path = urldecode($path);
+        $this->client->registerStreamWrapper();
+        $data     = file_get_contents($path);
+        $fileName = basename($path);
+
+        error_reporting(0);
+        ob_start();
+
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $fileName);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length:' . filesize($data));
+
+        ob_clean();
+        ob_end_flush();
+        echo $data;
+        exit;
+        $result = $this->client->getObject(array(
+            'Bucket' => 'this-is-sparta',
+            'Key'    => 'test-dataset.csv',
+            'SaveAs' => 'this-is-sparta/test-dataset.csv'
+        ));
+        $result = $this->client->getObject(array(
+            'Bucket' => 'ml-datasets-test',
+            'Key'    => 'batch (2).csv',
+            'SaveAs' => 'ml-datasets-test/batch (2).csv'
         ));
     }
 

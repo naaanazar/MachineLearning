@@ -70,7 +70,7 @@ $(document).ready(function () {
                 loc = getLastHash();
                 $('.' + loc).hide();
             }
-
+            
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
 
             var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
@@ -120,7 +120,7 @@ function showTable(content) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
                         "<td class='reference'>" + item.name + "</td>" +
-                        "<td>" + 'folder' + "</td>" +
+                        "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
                         "<td> " + "</td>" +
                         "</tr>");
@@ -135,7 +135,7 @@ function showTable(content) {
                         "<td>" + item.modified + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default btn-sm btn-download-s3' href='https://s3.amazonaws.com/" + item.path.slice(item.path.lastIndexOf('//') + 2, item.path.length) + '/' + item.name + "'><span class='glyphicon glyphicon-download '></span></a>" +
-                        "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + item.name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
+                        '<a class="btn btn-danger btn-sm btn-delete" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                         "</td>" +
                         "</tr>");
                 });
