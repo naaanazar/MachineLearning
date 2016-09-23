@@ -84,21 +84,21 @@
                                 <td>Action</td>
 
                             </tr>
-                            <tr class="bg">
+                            <tr class="bg back">
                                 <td colspan="4" ><span class="back">...</span></td>
                             </tr>
                             @foreach($results as $key => $value)
                                 <tr class="content bg">
-                                    <td class="reference">{{ $value['Name'] }}<a class="btn btn-danger btn-sm btn-list btn-list-bucket"
-                                            href="/s3/delete/{{ $value['Name'] }}"
-                                            id="delete-{{ $key }}" data-toggle="tooltip" data-placement="right" title="delete bucket"><span class="glyphicon glyphicon-trash"></span></a></td>
+                                    <td class="reference">{{ $value['Name'] }}</td>
                                     <td>0</td>
                                     <td>{{ $value['CreationDate'] }}</td>
-                                    <td>
-                                        
+                                    <td> 
+                                        <a class="btn btn-danger btn-sm btn-list btn-list-bucket"
+                                            href="/s3/delete/{{ $value['Name'] }}"
+                                            id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top" title="delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list" 
-                                            href="s3/delete_all/{{ $value['Name'] }}"><span class="glyphicon"></span>Delete
-                                            files</a>
+                                            href="s3/delete_all/{{ $value['Name'] }}"  data-toggle="tooltip" data-placement="top" title="Delete
+                                            files"><span class="glyphicon glyphicon-minus"></span></a>
                                     </td>
                                 </tr>
                             @endforeach
