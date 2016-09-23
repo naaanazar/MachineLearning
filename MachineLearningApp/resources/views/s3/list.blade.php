@@ -55,33 +55,24 @@
                 @if (count($errors) > 0)
                     <br>
                     <br>
-                    <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>
-                                    <strong>Error!</strong> {{ (strpos($error, ', txt') != false) ? str_replace(", txt", "", $error) : $error }}
-                                </li>
-                                <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        $.jGrowl("Error!", {sticky: true, theme: 'jGrowl-status-error'});
-                                    });
-                                </script>
-                            @endforeach
-                        </ul>
-                    </div>
-                @elseif (session('status'))
-                    <br>
-                    <br>
-                    <div class="alert alert-success">
-                        <ul>
-                            <li>{!! session('status') !!}</li>
                             <script type="text/javascript">
                                 $(document).ready(function () {
-                                    $.jGrowl("Success!", {sticky: true, theme: 'jGrowl-status-success'});
+                                    $.jGrowl("Error!", {sticky: true, theme: 'jGrowl-status-error'});
                                 });
                             </script>
                         </ul>
-                    </div>
+                @elseif (session('status'))
+                    <br>
+                    <br>
+                    <ul>
+                        <li>{!! session('status') !!}</li>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $.jGrowl("Success!", {sticky: true, theme: 'jGrowl-status-success'});
+                            });
+                        </script>
+                    </ul>
                 @endif
             </div>
 

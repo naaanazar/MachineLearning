@@ -78,7 +78,6 @@ $(document).ready(function () {
 
     //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function (e) {
-        console.log($(".form-upload"));
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
         $.ajax({
@@ -89,27 +88,27 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
-                getListS3();
-                success('.notification-s3', 'File uploaded to S3!');
+                // getListS3();
+                // success('.notification-s3', 'File uploaded to S3!');
             },
             error: function () {
-                errorS3('.notification-s3');
+                console.log(1);
+                // errorS3('.notification-s3');
             },
         });
     });
 
     // update list s3
-    function getListS3() {
-        $.ajax({
-            url: '/s3/list',
-            method: 'GET',
-            success: function (data) {
-                $('.s3-pagination').html($(data).find('div.pagination-list'));
-                $('.s3-table').html($(data).find('table'));
-            }
-        });
-
-    }
+    // function getListS3() {
+    //     $.ajax({
+    //         url: '/s3/list',
+    //         method: 'GET',
+    //         success: function (data) {
+    //             $('.s3-pagination').html($(data).find('div.pagination-list'));
+    //             $('.s3-table').html($(data).find('table'));
+    //         }
+    //     });
+    // }
 
     
 
