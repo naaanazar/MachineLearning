@@ -772,19 +772,26 @@ a:focus, a:hover{
     -o-transform: translateY(0px);
     transform: translateY(0px);
 }
-
+.tab-content {
+    margin: 0;
+    padding: 0;
+    margin-left: 15px;
+}
 .table-headers {
     margin-left: -15px;
-    width: 95%
+    /*width: 95%*/
 }
 
 .table-headers > span {
-    width: 20% !important;
+    /*width: 20% !important;*/
     border: 1px solid #ddd;
     padding: 8px;
     background-color: #f5f5f5;
     display: inline-block;
     text-align: center;
+}
+#describeEvaluations .table-headers span {
+    min-height: 40px;
 }
 
 @keyframes fadeOutDownBig {
