@@ -116,13 +116,7 @@ function listMLModel()
 
             res += '' +
             '<tr>' +
-                '<td class="name">';
-
-            if (response.data[key].Name !== undefined) {
-                res += response.data[key].Name;
-            };
-
-            res += '' +
+                '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +

@@ -173,14 +173,6 @@ function statusTextColor(str)
     return classText;
 };
 
-function parseDate(str)
-{
-    var date = str.replace('T', '  ');
-    date = date.substring(0, date.indexOf('+'));
-
-    return date;
-};
-
 function selectName(uri, elementId, formClass)
 {
     addSelectLoader(elementId, formClass);
@@ -259,6 +251,14 @@ function showLoader(destinationClass)
 
 function checkVariable(variable) {
     if (variable !== undefined) {
+
         return variable;
     };
 };
+
+function getAUC(variable) {
+    var auc = checkVariable(variable);
+    auc = +Math.round(auc * 1000) / 1000;
+
+    return auc;
+}

@@ -40,8 +40,7 @@ function listEvaluations()
     showLoader('.container-describeEvaluations');
 
     $.get("/ml/describe-evaluations", function(response) {
-        var i = 1;
-        var auc;
+        var i = 1;       
         var res = '' +
         '<table class="table table-bordered table-font text-center">' +
             '<tr class="active">' +
@@ -59,19 +58,13 @@ function listEvaluations()
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1;
-            auc = '';
-
-            if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
-                auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
-            };
-
+            i = i + 1; 
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
-                '<td>' + auc + '</td>' +
+                '<td>' + getAUC(response.data[key].PerformanceMetrics.Properties.BinaryAUC) + '</td>' +
                 '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
