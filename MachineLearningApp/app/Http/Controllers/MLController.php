@@ -404,7 +404,7 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage()]);
         }
 
-        return response()->json(['data' => (array)$result]);
+        return response()->json(['data' => $result]);
     }
 
 
