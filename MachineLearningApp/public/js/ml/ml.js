@@ -258,7 +258,10 @@ function checkVariable(variable) {
     if (variable !== undefined) {
 
         return variable;
-    };
+    } else {
+        
+        return '';
+    }
 };
 
 function getAUC(variable) {

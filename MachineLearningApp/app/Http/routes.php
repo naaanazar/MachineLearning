@@ -36,6 +36,7 @@ Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@getEvaluation');
 Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@getBatchPrediction');
 Route::get('/ml/select-S3objects', 'MLController@selectObjectsS3');
 Route::get('/ml/select-data-source', 'MLController@selectDataSources');
+
 Route::get('/ml/select-ml-model', 'MLController@selectMLModel');
 
 //Generator

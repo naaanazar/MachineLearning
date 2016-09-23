@@ -58,7 +58,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        selectName('/ml/select-data-source', '#SelectDataSource', '.create-mlmodel-form');
+        selectName('/ml/select-data-source?Obj=ml', '#SelectDataSource', '.create-mlmodel-form');
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
@@ -87,7 +87,7 @@ function listMLModel()
 {
     showLoader('.container-describeMLModels');
 
-    $.get("/ml/describe-ml-model", function(response) {
+    $.get("/ml/describe-ml-model?Obj=ml", function(response) {
         var i = 1;
         var res = '' +
             '<table class="table table-bordered table-font text-center">' +

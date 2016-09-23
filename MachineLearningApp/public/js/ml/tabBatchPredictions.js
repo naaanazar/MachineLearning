@@ -8,7 +8,8 @@ $(document).ready(function() {
     }
 
     $('.create-bath-predictios-form').on("submit", function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
+        $(".modalCreateBatchPrediction").modal('toggle');
            
         $.ajax({
             url: '/ml/upload-batch-source',
@@ -17,15 +18,14 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function (response) {
-                $(".modalCreateBatchPrediction").modal('toggle');
+            success: function (response) {                
                 listBatchPrediction();               
             }           
         });
     });
 
     $(document).on("click", ".btn-create-bath-description", function() {
-        selectName('/ml/select-ml-model', '#SelectBathMLModel', '.create-bath-predictios-form');
+        selectName('/ml/select-ml-model?Obj=ml', '#SelectBathMLModel', '.create-bath-predictios-form');
     });
 
     $(document).on("click", '#describeBatchPredictionsContent', function () {
@@ -42,7 +42,7 @@ function listBatchPrediction()
 {   
     showLoader('.container-describeBatchPredictions');
 
-    $.get("/ml/describe-batch-prediction", function(response) {
+    $.get("/ml/describe-batch-prediction?Obj=ml", function(response) {
         var i = 1;
         var res = '' +
             '<table class="table table-bordered table-font text-center">' +

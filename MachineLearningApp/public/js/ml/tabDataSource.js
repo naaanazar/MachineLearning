@@ -38,7 +38,7 @@ function listDataSource()
 {
     showLoader('.container-describeDataSources');
 
-    $.get("/ml/describe-data-sources", function (response) {
+    $.get("/ml/describe-data-sources?Obj=ml", function (response) {
 
         var i = 1;
         var res = '' +
