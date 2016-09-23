@@ -1,26 +1,21 @@
 $(document).ready(function () {
-    // ML: add hash tab to url
     $('.ml-tabs').on('click', 'a', function (e) {
         e.preventDefault();
-        window.location.hash = $(this).attr('href');
+             window.location.hash = $(this).attr('href');
         $(this).tab('show');
     });
-    if (window.location.hash) {
-        $('.ml-tabs').find('a[href="' + window.location.hash + '"]').tab('show');
+        if (window.location.hash) {
+            $('.ml-tabs').find('a[href="' + window.location.hash + '"]').tab('show');
     }
 
-    // tooltip from upload button
     $("[data-toggle='tooltip']").tooltip();
 
-    // upload button without submit
     $('#input-file').change(function () {
         $('.form-upload').submit();
     });
 
-    // upload show/hide message
     $(".upload-message").show().delay(1500).fadeOut(1000);
 
-    // delete row from s3 table using ajax
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -42,6 +37,7 @@ $(document).ready(function () {
     $(document).on('click', '.btn-delete', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
+
         $.ajax({
             url: '/s3/delete',
             method: 'post',
@@ -49,11 +45,11 @@ $(document).ready(function () {
                 name: $(this).attr('id')
             },
             success: function (data) {
-                console.log(data);
+            console.log(data);
                 if (data.success) {
 
-                    $(e.target).closest('tr').hide("fast");
-                }
+                $(e.target).closest('tr').hide("fast");
+            }
                 success('.notification-s3', 'File delete!');
             }
         });
@@ -61,7 +57,8 @@ $(document).ready(function () {
 
     $(document).on('click', '.download', function (e) {
         var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));
-        e.preventDefault();
+            e.preventDefault();
+
         $.get('/s3/file-exists', {
             name: encodeURI($(this).data('download-path'))
         }, function (response) {
@@ -72,14 +69,13 @@ $(document).ready(function () {
                     theme: 'jgrowl-danger'
                 });
             }
-
         });
     });
 
-    //upload file to s3 bucket using ajax
     $('.form-upload').on("submit", function (e) {
         e.preventDefault();
         $('.preload-s3').show('fast').delay(4000).fadeOut(400);
+
         $.ajax({
             url: '/s3/upload',
             method: 'POST',
@@ -115,15 +111,15 @@ $(document).ready(function () {
 
 function timeConverter(time) {
     UnixTimestamp = Date.parse(time);
-    var a = new Date(UnixTimestamp);
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+        var a = new Date(UnixTimestamp);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
 
     return time;
 };
