@@ -273,7 +273,7 @@ function getAUC(variable) {
 
  function statusAction(status) {
         if (status.hasOwnProperty('error')) {
-            $.jGrowl('Error' + status.error, {
+            $.jGrowl('Error created' , {
                 theme: 'jgrowl-danger'
             });
         } else if (status.hasOwnProperty('success')) {
