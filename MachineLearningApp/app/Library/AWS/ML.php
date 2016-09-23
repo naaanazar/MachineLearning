@@ -18,7 +18,6 @@ class ML
         $this->client = $this->connectToML();
     }
 
-
     private function connectToML()
     {
         $ml = new MachineLearningClient([
