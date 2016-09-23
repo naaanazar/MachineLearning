@@ -8,6 +8,7 @@
     <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
     <script src="{{ URL::to('js/ml/validationForms.js') }}"></script>
+    <script src="{{ URL::to('js/ml/setTableHeadersWidth.js') }}"></script>
 
     <div class="container ">
         <div class="row">
@@ -35,30 +36,30 @@
             </div>
             <div class="tab-content col-md-12">
                 <div id="describeDataSources" class="tab-pane fade in active">
-                    <div class="">
+<!--                    <div class="">
 
-                    </div>
+                    </div>-->
                     <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
                 </div>
                 <div id="describeMLModels" class="tab-pane fade">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+<!--                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 
-                    </div>
+                    </div>-->
                     <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
                     </div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+<!--                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 
-                    </div>
+                    </div>-->
                     <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
                     </div>
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+<!--                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 
-                    </div>
+                    </div>-->
                     <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
                     </div>
                 </div>

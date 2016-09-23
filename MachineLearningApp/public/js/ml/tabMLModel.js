@@ -61,16 +61,16 @@ function listMLModel()
     $.get("/ml/describe-ml-model", function(response) {
         var i = 1;
         var res = '' +
-            '<table class="table table-bordered table-font text-center">' +
-                '<tr class="active">' +
-                    '<td>Name</td>' +
-                    '<td>Status</td>' +
-                    '<td>Endpoint Status</td>' +
-                    '<td>ML Model Type</td>' +
-                    '<td>Last Updated</td>' +
-                    '<td>Action</td>' +
-                '</tr>' +
-            '<span class="hide">' + i + '</span>';
+            '<table class="table table-bordered table-font text-center">';
+//                '<tr class="active">' +
+//                    '<td>Name</td>' +
+//                    '<td>Status</td>' +
+//                    '<td>Endpoint Status</td>' +
+//                    '<td>ML Model Type</td>' +
+//                    '<td>Last Updated</td>' +
+//                    '<td>Action</td>' +
+//                '</tr>' +
+//            '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
             i = i + 1;          
@@ -112,7 +112,19 @@ function listMLModel()
 
         res += '</table>';
 
+        var headers = ''+
+            '<div class="table-headers">' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>Endpoint Status</span>' +
+                '<span>ML Model Type</span>' +
+                '<span>Last Updated</span>' +
+                '<span>Action</span>' +
+            '</div>';
+
         $('.container-describeMLModels').html(res);
+        $('.container-describeMLModels').before(headers);
+        setTableHeadersWidth('describeMLModels');
         $('.container-describeMLModels').addClass('loaded');
     });
 };

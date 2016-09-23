@@ -391,10 +391,10 @@ class MLController extends Controller
         try {
             $result = $this->client->createDataSourceFromS3([
                 'ComputeStatistics' => true,
-                'DataSourceId' => $DataSourceId,
-                'DataSourceName' => $DataSourceName,
-                'DataSpec' => [
-                    'DataLocationS3' => $DataLocationS3,
+                'DataSourceId'      => $DataSourceId,
+                'DataSourceName'    => $DataSourceName,
+                'DataSpec'          => [
+                    'DataLocationS3'    => $DataLocationS3,
                     'DataRearrangement' => $DataRearrangement,
                     'DataSchema'        => $DataSchema
                 ],
