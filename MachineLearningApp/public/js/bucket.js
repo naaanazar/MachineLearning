@@ -70,7 +70,7 @@ $(document).ready(function () {
                 loc = getLastHash();
                 $('.' + loc).hide();
             }
-
+            
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
 
             var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
@@ -88,7 +88,9 @@ $(document).ready(function () {
         }
     });
 
-    if(location.href.split('#').length > 1) {
+    if(~location.href.lastIndexOf('#')) {
+        bucket = findBucket(location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0]);
+
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
 
@@ -118,7 +120,7 @@ function showTable(content) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
                         "<td class='reference'>" + item.name + "</td>" +
-                        "<td>" + 'folder' + "</td>" +
+                        "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
                         "<td> " + "</td>" +
                         "</tr>");

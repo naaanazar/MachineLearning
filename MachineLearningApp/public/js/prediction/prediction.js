@@ -4,14 +4,16 @@ RT_PREDICTION.MLModel = {
     result: "",
 
     getId: function () {
-        $.get("/ml/select-ml-model?Obj=ml", function (response) {
-            for (var key in response.data) {
-                this.result +=
-                    '<option value="' + response.data[key].MLModelId + '">' +  response.data[key].Name + '</option>';
-            }
+        if ($('div').hasClass('main-prediction')) {
+            $.get("/ml/select-ml-model?Obj=ml", function (response) {
+                for (var key in response.data) {
+                    this.result +=
+                        '<option value="' + response.data[key].MLModelId + '">' +  response.data[key].Name + '</option>';
+                }
 
-           $('#ml_model_id').html(this.result);
-        });
+               $('#ml_model_id').html(this.result);
+            });
+        }
     }
 }
 
@@ -95,13 +97,13 @@ RT_PREDICTION.Form = {
                                            this.result.predictedScores[1];
 
                     this.content = "<p><strong>Purchase: </strong><span>";
-                    this.content += this.purchase + ";</span></p>";
+                    this.content += this.purchase + "</span></p>";
                     this.content += "<p><strong>Predicted Scores: </strong><span>";
-                    this.content += this.predictedScores.toFixed(4) + ";</span></p>";
+                    this.content += this.predictedScores.toFixed(4) + "</span></p>";
                     this.content += "<p><strong>Algorithm: </strong><span>";
-                    this.content += this.result.details.Algorithm + ";</span></p>";
+                    this.content += this.result.details.Algorithm + "</span></p>";
                     this.content += "<p><strong>Predictive Model Type: </strong><span>"
-                    this.content += this.result.details.PredictiveModelType + ";</span></p>";
+                    this.content += this.result.details.PredictiveModelType + "</span></p>";
 
                     $('.data-prediction').append(this.content).show('normal');
                 }
