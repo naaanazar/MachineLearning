@@ -104,7 +104,7 @@ RT_PREDICTION.Form = {
             },
             error: function (jqXhr) {
                 if(jqXhr.status === 422) {
-                    RT_PREDICTION.Form.error("No valid data! Сheck the validity of the data");
+                    RT_PREDICTION.Form.error("Сheck the validity of the data");
                 } else if (jqXhr.status === 500 || jqXhr.status === 400 || jqXhr.status === 405) {
                     RT_PREDICTION.Form.error("Something is wrong! Try later or contact support!");
                 } else {
@@ -133,13 +133,6 @@ RT_PREDICTION.Validation = {
     valueField: "",
     errorTarget: "",
     lengthField: 0,
-
-    error: function (message) {
-        this.errorMsg = '<div class="alert alert-danger pred-alert">'
-        this.errorMsg += '<ul><li><strong>' + message + '</strong></li></ul></div>';
-
-        return this.errorMsg;
-    },
 
     checkRequired: function () {
         $('.input-pred').on("keyup click",function(e) {
@@ -194,6 +187,13 @@ RT_PREDICTION.Validation = {
                 $(selector + ":focus").addClass('pred-input-error');
             }
         });
+    },
+    
+    error: function (message) {
+        this.errorMsg = '<div class="alert alert-danger pred-alert">'
+        this.errorMsg += '<ul><li><strong>' + message + '</strong></li></ul></div>';
+
+        return this.errorMsg;
     },
 
     init: function() {
