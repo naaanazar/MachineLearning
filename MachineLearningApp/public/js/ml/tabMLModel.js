@@ -4,7 +4,7 @@ $(document).ready(function() {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel();
     };
-  
+
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
 
@@ -40,7 +40,6 @@ $(document).ready(function() {
         } else {
             $(this).closest('form').find('input#success-button-modal-ml').removeAttr('disabled');
         }
-
     });
 
     $('.create-mlmodel-form').submit(function(e) {
@@ -71,7 +70,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.delete-endpoint', function (e) {
-        e.preventDefault();   
+        e.preventDefault();
 
         $.post('/ml/delete-endpoint', {
            id: $(this).data('model-id') }, function (data) { 
@@ -81,7 +80,7 @@ $(document).ready(function() {
            $(e.target).closest("tr").find('.status-endpoint').addClass('text-success');
            $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
-   }); 
+   });
 });
 
 function listMLModel()
@@ -147,7 +146,7 @@ function listMLModel()
         };
 
         res += '</table>';
-        
+
         $('.container-describeMLModels').html(res);
         $('.container-describeMLModels').addClass('loaded');
     });
