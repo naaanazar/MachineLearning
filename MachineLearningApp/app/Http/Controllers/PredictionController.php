@@ -9,15 +9,12 @@ use Aws\MachineLearning\Exception\MachineLearningException;
 
 class PredictionController extends Controller
 {
-
     private $client;
-
 
     public function __construct()
     {
         $this->client = $this->connectToML();
     }
-
 
     private function connectToML()
     {
@@ -33,12 +30,10 @@ class PredictionController extends Controller
         return $ml;
     }
 
-
     public function doView()
     {
         return view('prediction.prediction');
     }
-
 
     private function createEndpoint($MLModelId)
     {
@@ -57,7 +52,6 @@ class PredictionController extends Controller
         return response(['status' => $status, 'result' => $result]);
     }
 
-
     private function deleteEndpoint($MLModelId)
     {
         try {
@@ -72,7 +66,6 @@ class PredictionController extends Controller
 
         return response(['status' => $status, 'result' => $result]);
     }
-
 
     public function doPredict(Request $request)
     {
