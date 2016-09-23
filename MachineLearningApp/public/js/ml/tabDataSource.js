@@ -60,13 +60,7 @@ function listDataSource()
             res += '' +
             '<tr>' +
                 '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
-                '<td class="name">';
-
-            if (response.data[key].Name !== undefined) {
-                res += response.data[key].Name;
-            };
-
-            res += '' +
+                '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + response.data[key].DataLocationS3 + '</td>' +
