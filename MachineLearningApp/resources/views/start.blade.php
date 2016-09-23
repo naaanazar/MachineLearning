@@ -45,7 +45,7 @@
                         <hr class="small">
                         <span class="subheading animated fadeInDown ">Crowdin Space</span>
                         <a href="#viewAboutContent"><button type="button" class="btn btn-primary btn-start  btn-about animated fadeInLeft" style="-webkit-animation-delay: 0.5s;" onclick="showDiv()"><span>About</span></button></a>
-                        <a href="{{ action('PredictionController@doView') }}"><button type="button" class="btn btn-primary btn-start btn-try-it animated fadeInRight" style="-webkit-animation-delay: 0.5s;"><span>Try It!</span></button></a>
+                        <a href="{{ action('PredictionController@doView') }}"><button type="button" class="btn btn-primary btn-start btn-try-it animated fadeInRight" style="-webkit-animation-delay: 0.5s;"><span>Try It</span></button></a>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7">
                     <div id="viewAboutContent" class="post-preview ">
-                        <h2 class="post-title animated bounceInLeft" style="-webkit-animation-delay: 0.8s;" >Introducing Machine Learning</h2>
+                        <h2 class="post-title animated bounceInLeft" style="-webkit-animation-delay: 0.8s;" ><br>Introducing Machine Learning</h2>
                         <h3 class="post-subtitle animated fadeInUp" style="-webkit-animation-delay: 1s;">
                             Machine learning (ML) can help you use historical data to make better business decisions.<br> ML algorithms discover patterns in data and construct predictive models using these patterns.<br>Then, you can use the models to make predictions on future data. <br>For example, one possible application of ML would be to predict whether or not a customer will purchase a particular product based on past behavior, and use this prediction to send a personalized promotional email to that customer.
                         </h3> 
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-7">
                         <div id="viewAboutContent" class="post-preview animated fadeInRight" style="-webkit-animation-delay: 0.5s;">
-                            <h2 class="post-title benefits-title">
+                            <h2 class="post-title benefits-title"><br>
                                 Crowdin Machine Learning  (Crowdin-ML) Allow you:
                             </h2>
                             <h3 class="post-subtitle">

@@ -23,6 +23,16 @@ body {
     font-weight: bold;
     font-size: 13px;
 }
+.navbar-default{
+    border-radius: 0px !important;
+}
+/***************************************
+   ML style
+***************************************/
+.logo-ML{
+    height: 100px;
+    width: 145px;
+}
 
 /***************************************
     S3 Style
@@ -53,7 +63,23 @@ body {
     float: right;
     margin: 3px 10px;
 }
+.btn-create-bucket{
+    margin-left: 3%;
+    font-size: 16px;
+    background-color: #60af5a !important;
+}
+a:focus, a:hover{
+    text-decoration: none;
+}
+.hvr-sweep-to-right:before{
+    background:#337ab7 !important;
+}
+.btn-list-bucket{
+    padding:2.5px 5px;
+    font-size: 10px;
+    border-radius: 1.5px;
 
+}
 /***************************************
     Prediction
 ***************************************/
@@ -194,12 +220,12 @@ body {
     }
 }
 @media screen and (max-width: 443px) {
-   .datasource-info{
+   /*.datasource-info{
     margin-bottom: 10px;
-   }
+   }*/
 
    .delete{
-    margin-left: -2px;
+    margin-left: -3px;
    }
 
     }
@@ -296,6 +322,9 @@ body {
     .table {
         width: 96%;
         margin-left: 2%;
+    }
+    .btn-create-datasource{
+        margin-right: 2%;
     }
 }
 /***************************************
