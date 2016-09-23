@@ -19,7 +19,6 @@ class S3Controller extends Controller
 
     public $bucket = 'ml-datasets-test';
 
-
     public function __construct()
     {
         $this->client = $this->connect();
@@ -77,8 +76,9 @@ class S3Controller extends Controller
         $buckets = $this->allBuckets();
         $files   = [];
 
-        foreach ($buckets as $bucket) {
-            $dir      = 's3://' . $bucket['Name'];
+        //foreach ($buckets as $bucket) {
+           // $dir      = 's3://' . $bucket['Name'];
+            $dir      = 's3://' . $this->bucket;
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
 
             try {
@@ -96,7 +96,7 @@ class S3Controller extends Controller
             } catch (S3Exception $e) {
                 return Response()->json($e->getMessage());
             }
-        };
+      //  };
 
         return response()->json($files);
     }
