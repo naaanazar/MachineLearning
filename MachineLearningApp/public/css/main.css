@@ -177,12 +177,10 @@ a:focus, a:hover{
     border-color: transparent #eee transparent transparent;
     content: '';
 }
-
 .pred-error {
     position: relative;
     display: none;
 }
-
 .pred-input-error:focus {
     border: 2px solid #ebccd1;
     -webkit-box-shadow: 0 0 24px rgba(242, 222, 222, 1);

@@ -23,42 +23,34 @@
                 <div class="form-group">
                     <label class="control-label label-pred" for="email">Email custom domain</label>
                     <input id="email" class="form-control input-pred" name="email_custom_domain" type="number" placeholder="Number [0 or 1]" min="0" max="1">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label label-pred" for="same-email">Same email domain count</label>
                     <input id="same-email" class="form-control input-pred" name="same_email_domain_count" type="number" placeholder="Number" min="0">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label label-pred" for="projects-count">Projects count</label>
                     <input id="projects-count" class="form-control input-pred" name="projects_count" type="number" placeholder="Number" min="0">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label label-pred" for="string-count">Strings count</label>
                     <input id="string-count" class="form-control input-pred" name="strings_count" type="number" placeholder="Number" min="0">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label  class="control-label label-pred" for="members-count">Members count</label>
                     <input id="members-count" class="form-control input-pred" name="members_count" type="number" placeholder="Number" min="0">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label label-pred" for="has-privat-project">Has private project</label>
                     <input id="has-privat-project" class="form-control input-pred" name="has_private_project" type="number" placeholder="Number [0 or 1]" min="0" max="1">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label label-pred" for="same-log-project">Same login and project name</label>
                     <input id="same-log-project" class="form-control input-pred" name="same_login_and_project_name" type="number" placeholder="Number [0 or 1]" min="0" max="1">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label label-pred" for="last-login">Days after last login</label>
                     <input id="last-login" class="form-control input-pred" name="days_after_last_login" type="number" placeholder="Number">
-                    <div class="pred-error"></div>
                 </div>
                 <div class="form-group">
                     <label  class="control-label label-pred" for="country">Country</label>
@@ -72,4 +64,3 @@
         </div>
     </div>
 @stop
-
