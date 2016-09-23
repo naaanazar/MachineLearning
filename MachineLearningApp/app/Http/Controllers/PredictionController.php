@@ -23,8 +23,8 @@ class PredictionController extends Controller
             'version'     => 'latest',
             'region'      => 'us-east-1',
             'credentials' => [
-                'key'    => 'AKIAI5RJSS2CYUZ6STHQ',
-                'secret' => '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'
+                'key'    => getenv('ML_KEY'),
+                'secret' => getenv('ML_SECRET')
             ]
         ]);
 
@@ -52,7 +52,6 @@ class PredictionController extends Controller
 
         return response(['status' => $status, 'result' => $result]);
     }
-
 
     private function deleteEndpoint($MLModelId)
     {
@@ -101,7 +100,7 @@ class PredictionController extends Controller
 
         if (!$endPointStatus) {
             $status = false;
-            $result = "Endpoint is not created! Try again!";
+            $result = "Endpoint is not created! Try again or contact support!!";
 
             return response()->json(["status" => $status, "result" => $result]);
         }
@@ -136,7 +135,7 @@ class PredictionController extends Controller
                 $result = $result["Prediction"];
             } catch (MachineLearningException $e) {
                 $status = false;
-                $result = "Fail prediction! Try again!";
+                $result = "Fail prediction! Try again or contact support!";
             }
 
             $this->deleteEndpoint($MLModelId);

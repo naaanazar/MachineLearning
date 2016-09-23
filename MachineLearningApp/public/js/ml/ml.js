@@ -1,5 +1,4 @@
 $(document).ready(function() {
-//modal window ML
     $(document).on("click", '.datasource-info', function(event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
@@ -133,7 +132,7 @@ $(document).ready(function() {
                         });
                     } else {
 
-                        $.jGrowl('successfully removed: ' + name, {
+                        $.jGrowl('Successfully removed: ' + name, {
                             theme: 'jgrowl-success'
                         });
 
@@ -160,7 +159,7 @@ $(document).ready(function() {
         event.preventDefault();
     });
 
-    //loading data
+    //loading data(info button)
     $('.modal-1').on('hidden.bs.modal', function() {
         $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
@@ -177,14 +176,6 @@ function statusTextColor(str)
     }
 
     return classText;
-};
-
-function parseDate(str)
-{
-    var date = str.replace('T', '  ');
-    date = date.substring(0, date.indexOf('+'));
-
-    return date;
 };
 
 function selectName(uri, elementId, formClass)
@@ -261,4 +252,18 @@ function buttonCreate(elementClass, destinationId, name, dataTarget)
 function showLoader(destinationClass)
 {
     $(destinationClass).html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+}
+
+function checkVariable(variable) {
+    if (variable !== undefined) {
+
+        return variable;
+    };
+};
+
+function getAUC(variable) {
+    var auc = checkVariable(variable);
+    auc = +Math.round(auc * 1000) / 1000;
+
+    return auc;
 }

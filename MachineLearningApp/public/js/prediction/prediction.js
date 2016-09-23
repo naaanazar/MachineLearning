@@ -73,8 +73,8 @@ RT_PREDICTION.Form = {
             data: this.formData,
             cache: false,
             success: function (response) {
-                var endPointErr =  "Endpoint is not created! Try again!";
-                var predictionErr = "Fail prediction! Try again!";
+                var endPointErr =  "Endpoint is not created! Try again or contact support!!";
+                var predictionErr = "Fail prediction! Try again or contact support!!";
 
                 if (response.status ===  false) {
                     if(response.result === endPointErr) {
@@ -104,7 +104,7 @@ RT_PREDICTION.Form = {
             },
             error: function (jqXhr) {
                 if(jqXhr.status === 422) {
-                    RT_PREDICTION.Form.error("No valid data!");
+                    RT_PREDICTION.Form.error("Сheck the validity of the data");
                 } else if (jqXhr.status === 500 || jqXhr.status === 400 || jqXhr.status === 405) {
                     RT_PREDICTION.Form.error("Something is wrong! Try later or contact support!");
                 } else {
@@ -134,26 +134,19 @@ RT_PREDICTION.Validation = {
     errorTarget: "",
     lengthField: 0,
 
-    error: function (message) {
-        this.errorMsg = '<div class="alert alert-danger pred-alert">'
-        this.errorMsg += '<ul><li><strong>' + message + '</strong></li></ul></div>';
-
-        return this.errorMsg;
-    },
-
     checkRequired: function () {
         $('.input-pred').on("keyup click",function(e) {
-            var count = 0;
+            var empty = false;
 
             $('.input-pred').each(function () {
                 if($(this).val()) {
-                    count++;
+                    empty = true;
                 }
             });
 
-            if (count === 0) {
+            if (!empty) {
                 $('.btn-pred').attr('disabled', 'disabled');
-            } else if (count > 0) {
+            } else if (empty) {
                  $('.btn-pred').removeAttr('disabled');
             }
         });
@@ -169,24 +162,38 @@ RT_PREDICTION.Validation = {
 
             $(selector).val(this.newValue.substr(0, lengthVal));
 
-            $(selector).focusout(function (event) {
+            $(selector).focusout(function (e) {
                 $(this.errorTarget).fadeOut('slow');
                 $(selector).removeClass('pred-input-error');
+            });
+
+            $(selector).on('keyup', function(e){
+                if (e.keyCode === 8) {
+                    $(this.errorTarget).fadeOut('slow');
+                    $(selector).removeClass('pred-input-error');
+                } else if (e.key.match(regexp)){
+                    $(this.errorTarget).fadeIn('slow');
+                    $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
+                    $(selector + ":focus").addClass('pred-input-error');
+                } else {
+                    $(this.errorTarget).fadeOut('slow');
+                    $(selector).removeClass('pred-input-error');
+                }
             });
 
             if (this.newValue.length > lengthVal) {
                 $(this.errorTarget).fadeIn('slow');
                 $(this.errorTarget).html(RT_PREDICTION.Validation.error("Length no more " + lengthVal));
                 $(selector + ":focus").addClass('pred-input-error');
-            } else if (!this.newValue) {
-                $(selector + ":focus").addClass('pred-input-error');
-                $(this.errorTarget).fadeIn('slow');
-                $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
-            } else {
-                $(this.errorTarget).fadeOut('slow');
-                $(selector).removeClass('pred-input-error');
             }
         });
+    },
+
+    error: function (message) {
+        this.errorMsg = '<div class="alert alert-danger pred-alert">'
+        this.errorMsg += '<ul><li><strong>' + message + '</strong></li></ul></div>';
+
+        return this.errorMsg;
     },
 
     init: function() {
@@ -194,13 +201,13 @@ RT_PREDICTION.Validation = {
         this.validation("#email", 1, "[^0-1]", "Enter the 0 or 1");
         this.validation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
         this.validation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-        this.validation("#same-email", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#projects-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#members-count", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#last-login", 10, "^00|[^0-9]", "Enter the valid number");
-        this.validation("#country", 60, "^ |[^a-zA-Z ]", "Enter the letter");
+        this.validation("#same-email", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#projects-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#members-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#last-login", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
+        this.validation("#country", 60, "^ |  |[^a-zA-Z ]", "Enter the letter");
     }
 
 }

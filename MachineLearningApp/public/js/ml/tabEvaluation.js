@@ -12,44 +12,12 @@ $(document).ready(function() {
             type: "post",
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
-            success: function(data) {                
+            success: function(data) {
                 $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations();
-                console.log(data);
             },
             error: function() {},
         });
-    });
-
-    $(document).on('blur', '.form-control', function (e) {
-        var id = e.target.id;
-        var val = e.target.value;
-
-        switch (id) {
-            case 'EvaluationName':
-                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                if (val.length > 2 && val != '' && rv_name.test(val)) {
-                    $(this).removeClass('error').addClass('not_error');
-                    $(this).closest('div').removeClass('has-error');
-                    $(this).closest('div').addClass('has-success has-feedback');
-                    $(this).closest('div').find('span').removeClass('hide');
-
-                }
-                else {
-                    $(this).removeClass('not_error').addClass('error');
-                    $(this).closest('div').addClass('has-error has-feedback');
-                    $(this).closest('div').find('span').addClass('hide');
-                }
-                break;
-        }
-
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-ev').attr('disabled', 'disabled');
-        } else {
-            $(this).closest('form').find('input#success-button-modal-ev').removeAttr('disabled');
-        }
-
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
@@ -64,16 +32,15 @@ $(document).ready(function() {
             listEvaluations();
         }
     });
-    
+
 });
 
 function listEvaluations()
 {
     showLoader('.container-describeEvaluations');
-  
+
     $.get("/ml/describe-evaluations", function(response) {
-        var i = 1;
-        var auc;
+        var i = 1;       
         var res = '' +
         '<table class="table table-bordered table-font text-center">' +
             '<tr class="active">' +
@@ -91,29 +58,14 @@ function listEvaluations()
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1;
-            auc = '';
-            var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);            
-
-            if (response.data[key].PerformanceMetrics.Properties.BinaryAUC !== undefined) {
-                auc = +Math.round(response.data[key].PerformanceMetrics.Properties.BinaryAUC * 1000) / 1000;
-            };
-                
+            i = i + 1; 
             res += '' +
-                '<tr>' +
-                    '<td class="name">';
-
-            if (response.data[key].Name !== undefined) {
-                res += response.data[key].Name;
-            };
-
-            res += '' +
+            '<tr>' +
+                '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
-                '<td>' + auc +
-                '</td>' +
-                '<td>' + date + '</td>' +
+                '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
+                '<td>' + getAUC(response.data[key].PerformanceMetrics.Properties.BinaryAUC) + '</td>' +
+                '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                         'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].EvaluationId + '">' +
@@ -128,7 +80,7 @@ function listEvaluations()
         };
 
         res += '</table>';
-        
+
         $('.container-describeEvaluations').html(res);
         $('.container-describeEvaluations').addClass('loaded');
     });

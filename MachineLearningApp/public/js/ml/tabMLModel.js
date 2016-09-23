@@ -4,7 +4,7 @@ $(document).ready(function() {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel();
     };
-  
+
     $(document).on('mouseenter', '.delete-endpoint', function (e) {
         e.preventDefault();
 
@@ -13,40 +13,8 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('blur', '.form-control', function (e) {
-        var id = e.target.id;
-        var val = e.target.value;
-
-        switch (id) {
-            case 'MLModelName':
-                var rv_name = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-                if (val.length > 2 && val != '' && rv_name.test(val)) {
-                    $(this).removeClass('error').addClass('not_error');
-                    $(this).closest('div').removeClass('has-error');
-                    $(this).closest('div').addClass('has-success has-feedback');
-                    $(this).closest('div').find('span').removeClass('hide');
-
-                }
-                else {
-                    $(this).removeClass('not_error').addClass('error');
-                    $(this).closest('div').addClass('has-error has-feedback');
-                    $(this).closest('div').find('span').addClass('hide');
-                }
-                break;
-
-        }
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-ml').attr('disabled', 'disabled');
-        } else {
-            $(this).closest('form').find('input#success-button-modal-ml').removeAttr('disabled');
-        }
-
-    });
-
     $('.create-mlmodel-form').submit(function(e) {
-        e.preventDefault();
-        
+        e.preventDefault();      
 
         $.ajax({
             type: "post",
@@ -55,7 +23,6 @@ $(document).ready(function() {
             success: function(data) {
                 $(".modalCreateModel").modal('toggle');
                 listMLModel();
-                console.log(data);
             },
             error: function() {},
         });
@@ -74,15 +41,17 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.delete-endpoint', function (e) {
-        e.preventDefault();   
+        e.preventDefault();
 
         $.post('/ml/delete-endpoint', {
            id: $(this).data('model-id') }, function (data) { 
-           $(e.target).closest("tr").find('.status-endpoint').text('NONE');
-
+           $(e.target).closest("tr").find('.status-endpoint').text('DISABLED');
+           
+           $(e.target).closest("tr").find('.status-endpoint').removeClass('text-danger');
+           $(e.target).closest("tr").find('.status-endpoint').addClass('text-success');
            $(e.target).closest("tr").find('.delete-endpoint').addClass('disabled');
        });
-   }); 
+   });
 });
 
 function listMLModel()
@@ -104,10 +73,8 @@ function listMLModel()
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1;
-            var date = parseDate(response.data[key].LastUpdatedAt);
-            var classText = statusTextColor(response.data[key].Status);
-
+            i = i + 1;          
+          
             if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
                 endpointDisabled = '';
                 endpointStatus = 'ENABLED';
@@ -116,38 +83,35 @@ function listMLModel()
                 endpointDisabled = 'disabled btn-default';
                 endpointStatus = 'DISABLED';
                 colorTextEndpointStatus = 'text-success';
-            };
+            };          
 
             res += '' +
             '<tr>' +
-                '<td class="name">';
-
-            if (response.data[key].Name !== undefined) {
-                res += response.data[key].Name;
-            };
-
-            res += '' +
+                '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                '<td class="' + classText + '">' + response.data[key].Status + '</td>' +
+                '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +
                 '<td>' + response.data[key].MLModelType + '</td>' +
-                '<td>' + date + '</td>' +
+                '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +
                         'id="info_' + i + '" data-model-id="' + response.data[key].MLModelId + '">' +
-                        '<span class="glyphicon glyphicon-remove-circle"></span></a>&nbsp;' +
+                        '<span class="glyphicon glyphicon-remove-circle"></span>' +
+                    '</a>&nbsp;' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
                         'data-toggle="modal" id="info_' + i + '" data-source-id="' + response.data[key].MLModelId + '">' +
-                        '<span class="glyphicon glyphicon-info-sign"></span></a>&nbsp;' +
+                        '<span class="glyphicon glyphicon-info-sign"></span>' +
+                    '</a>&nbsp;' +
                     '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].MLModelId + '">\n' +
-                        '<span class="glyphicon glyphicon-trash"></span></a>' +
+                        '<span class="glyphicon glyphicon-trash"></span>' +
+                    '</a>' +
                 '</td>' +
             '</tr>' +
             '<span class="hide">' + i + '</span>';
         };
 
         res += '</table>';
-        
+
         $('.container-describeMLModels').html(res);
         $('.container-describeMLModels').addClass('loaded');
     });
