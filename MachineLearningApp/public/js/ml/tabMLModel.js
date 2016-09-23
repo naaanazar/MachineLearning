@@ -102,8 +102,8 @@ function listMLModel()
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1;
-
+            i = i + 1;          
+          
             if (response.data[key].EndpointInfo.EndpointStatus == 'READY') {
                 endpointDisabled = '';
                 endpointStatus = 'ENABLED';
@@ -112,7 +112,7 @@ function listMLModel()
                 endpointDisabled = 'disabled btn-default';
                 endpointStatus = 'DISABLED';
                 colorTextEndpointStatus = 'text-success';
-            };
+            };          
 
             res += '' +
             '<tr>' +
