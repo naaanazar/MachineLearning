@@ -1,6 +1,5 @@
 <?php
 
-
 Route::get('/', 'FirstPageController@firstPage');
 
 Route::get('prediction', 'PredictionController@doView');
