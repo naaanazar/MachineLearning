@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name</label>
-                        <input type="text" class="form-control" id="nameBucket" placeholder="ml-" name="nameBucket">
+                        <input type="text" class="form-control" id="nameBucket" placeholder="ml-" name="nameBucket" min="7">
                     </div>
                     <button type="submit" class="btn-bucket btn btn-primary" disabled>Create</button>
                 </form>
@@ -92,7 +92,7 @@
                                     <td>0</td>
                                     <td>{{ $value['CreationDate'] }}</td>
                                     <td> 
-                                        <a class="btn btn-danger btn-sm btn-list btn-list-bucket"
+                                        <a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"
                                             href="/s3/delete/{{ $value['Name'] }}"
                                             id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top" title="Delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list" 
@@ -102,7 +102,6 @@
                                 </tr>
                             @endforeach
                             <div class="pagination-list">
-                                <!----><?php //echo $results->render(); ?>
                             </div>
                         </table>
                     </div>

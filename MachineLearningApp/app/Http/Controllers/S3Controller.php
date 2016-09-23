@@ -124,16 +124,17 @@ class S3Controller extends Controller
 
     public function doDeleteBucket($nameBucket)
     {
-
         try {
             $this->client->deleteBucket([
                 'Bucket' => $nameBucket,
             ]);
 
-            return back();
+            $status = true;
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            $status = false;
         }
+
+        return response()->json(["status" => $status]);
     }
 
 

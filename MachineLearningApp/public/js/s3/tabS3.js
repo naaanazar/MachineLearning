@@ -7,11 +7,12 @@ $(document).ready(function () {
             this.newValue = this.valueField.replace(this.regExp, "");
             $(selector).val(this.newValue.substr(0, lengthVal));
         });
+
         $(selector).on("keyup click",function(e) {
             var empty = false;
 
             $(selector).each(function () {
-                if($(this).val()) {
+                if($(this).val().length >= 7) {
                     empty = true;
                 }
             });
@@ -23,6 +24,17 @@ $(document).ready(function () {
             }
         });
     }
+
+    $(".btn-delete-bucket").on("click", function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+
+        $.post(url, function(response) {
+            if (response.status = true) {
+                $(e.target).closest("tr").fadeOut("slow");
+            }
+        });
+    });
 
     validationBucket("#nameBucket", 255, "^ |[^0-9a-zA-Z-._]");
 });
