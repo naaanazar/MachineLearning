@@ -104,7 +104,7 @@ RT_PREDICTION.Form = {
             },
             error: function (jqXhr) {
                 if(jqXhr.status === 422) {
-                    RT_PREDICTION.Form.error("No valid data!");
+                    RT_PREDICTION.Form.error("No valid data! Сheck the validity of the data");
                 } else if (jqXhr.status === 500 || jqXhr.status === 400 || jqXhr.status === 405) {
                     RT_PREDICTION.Form.error("Something is wrong! Try later or contact support!");
                 } else {
@@ -143,17 +143,17 @@ RT_PREDICTION.Validation = {
 
     checkRequired: function () {
         $('.input-pred').on("keyup click",function(e) {
-            var count = 0;
+            var empty = false;
 
             $('.input-pred').each(function () {
                 if($(this).val()) {
-                    count++;
+                    empty = true;
                 }
             });
 
-            if (count === 0) {
+            if (!empty) {
                 $('.btn-pred').attr('disabled', 'disabled');
-            } else if (count > 0) {
+            } else if (empty) {
                  $('.btn-pred').removeAttr('disabled');
             }
         });
