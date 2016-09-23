@@ -22,9 +22,10 @@ RT_PREDICTION.Form = {
     formData: "",
     formAction: "",
     formMethod: "",
+    predictedScores: "",
 
     addProgress: function () {
-        $('.norification-pred').fadeOut('slow');
+        $('.notification-pred').fadeOut('slow');
         $('.data-prediction').empty();
         $('input').attr('disabled', 'disabled');
         $('.spinner-prediction').fadeIn('slow');
@@ -89,11 +90,14 @@ RT_PREDICTION.Form = {
 
                     this.result = response.result;
                     this.purchase = response.result.predictedLabel == 0 ? "No" : "Yes";
+                    this.predictedScores = this.purchase === "No" ?
+                                           this.result.predictedScores[0] :
+                                           this.result.predictedScores[1];
 
                     this.content = "<p><strong>Purchase: </strong><span>";
                     this.content += this.purchase + ";</span></p>";
                     this.content += "<p><strong>Predicted Scores: </strong><span>";
-                    this.content += this.result.predictedScores[0].toFixed(4) + ";</span></p>";
+                    this.content += this.predictedScores.toFixed(4) + ";</span></p>";
                     this.content += "<p><strong>Algorithm: </strong><span>";
                     this.content += this.result.details.Algorithm + ";</span></p>";
                     this.content += "<p><strong>Predictive Model Type: </strong><span>"
@@ -121,8 +125,8 @@ RT_PREDICTION.Form = {
         $('body,html').animate({scrollTop: 0}, 500);
         $('.notif-data').empty();
         $('.notif-data').append(message);
-        $('.norification-pred').show().fadeIn();
-        $('.notif-close').on('click', function () { $('.norification-pred').fadeOut(); });
+        $('.notification-pred').show().fadeIn();
+        $('.notif-close').on('click', function () { $('.notification-pred').fadeOut(); });
     }
 }
 
@@ -150,7 +154,6 @@ RT_PREDICTION.Validation = {
                  $('.btn-pred').removeAttr('disabled');
             }
         });
-
     },
 
     validation: function (selector, lengthVal, regexp, message) {
@@ -175,17 +178,15 @@ RT_PREDICTION.Validation = {
                     $(this.errorTarget).fadeIn('slow');
                     $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
                     $(selector + ":focus").addClass('pred-input-error');
+                } else if (this.newValue.length > lengthVal) {
+                    $(this.errorTarget).fadeIn('slow');
+                    $(this.errorTarget).html(RT_PREDICTION.Validation.error("Length no more " + lengthVal));
+                    $(selector + ":focus").addClass('pred-input-error');
                 } else {
                     $(this.errorTarget).fadeOut('slow');
                     $(selector).removeClass('pred-input-error');
                 }
             });
-
-            if (this.newValue.length > lengthVal) {
-                $(this.errorTarget).fadeIn('slow');
-                $(this.errorTarget).html(RT_PREDICTION.Validation.error("Length no more " + lengthVal));
-                $(selector + ":focus").addClass('pred-input-error');
-            }
         });
     },
 
@@ -209,7 +210,6 @@ RT_PREDICTION.Validation = {
         this.validation("#last-login", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
         this.validation("#country", 60, "^ |  |[^a-zA-Z ]", "Enter the letter");
     }
-
 }
 
 $(document).ready(function() {

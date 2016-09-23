@@ -53,20 +53,6 @@ body {
     float: right;
     margin: 3px 10px;
 }
-<<<<<<< HEAD
-.norification-s3 {
-    position: absolute;
-    top: -80px;
-    left: 50%;
-    display: none;
-    width: 100%;
-    transform: translateX(-50%);
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-       -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
-}
-
-=======
 .btn-create-bucket{
     margin-left: 3%;
     font-size: 16px;
@@ -82,7 +68,6 @@ a:focus, a:hover{
     padding:2.5px 5px;
     font-size: 10px;
     border-radius: 1.5px;
->>>>>>> 4c2c7353f4f9e364464070850b46718a86167896
 
 }
 /***************************************
@@ -179,7 +164,7 @@ a:focus, a:hover{
        -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
             box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
-.norification-pred {
+.notification-pred {
     position: absolute;
     top: -80px;
     left: 50%;
@@ -190,7 +175,7 @@ a:focus, a:hover{
        -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
             box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .2);
 }
-.norification-pred .close {
+.notification-pred .close {
     margin-left: 0;
 }
 @media screen and (max-width: 1000px) {
