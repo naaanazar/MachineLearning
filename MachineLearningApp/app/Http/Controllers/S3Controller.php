@@ -19,7 +19,6 @@ class S3Controller extends Controller
 
     public $bucket = 'ml-datasets-test';
 
-
     public function __construct()
     {
         $this->client = $this->connect();
@@ -58,8 +57,7 @@ class S3Controller extends Controller
         return view('s3.list', ['results' => $result['Buckets']]);
     }
 
-
-    public function allBuckets()
+    private function allBuckets()
     {
         try {
             $result = $this->client->listBuckets([]);
@@ -70,18 +68,17 @@ class S3Controller extends Controller
         return $result['Buckets'];
     }
 
-
-    public function bucketStruct()
+    public function doBucketStruct()
     {
+        $files = [];
+
         $this->client->registerStreamWrapper();
-        $buckets = $this->allBuckets();
-        $files   = [];
 
-        foreach ($buckets as $bucket) {
-            $dir      = 's3://' . $bucket['Name'];
-            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
-
+        foreach ($this->allBuckets() as $bucket) {
             try {
+                $dir = 's3://' . $bucket['Name'];
+                $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
+
                 foreach ($iterator as $file) {
                     $files[] = [
                         'name'      => $file->getBasename(),
@@ -94,13 +91,13 @@ class S3Controller extends Controller
                     ];
                 }
             } catch (S3Exception $e) {
-                return Response()->json($e->getMessage());
+                // Supressing all errors. We have unremovable bucket :)
+//                return Response()->json($e->getMessage());
             }
-        };
+        }
 
         return response()->json($files);
     }
-
 
     public function doCreateBucket(Request $request)
     {
