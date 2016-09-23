@@ -72,6 +72,19 @@ hr.small {
     font-weight: 800;
     letter-spacing: 1px;
 }
+.game{
+    display: none;
+}
+.endGame{
+    position: fixed;
+}
+.startGameButton{
+    height: 30px;
+    width: 30px;
+    background: transparent;
+    border: none !important;
+    font-size:0   
+}
 @media only screen and (min-width: 768px) {
     .navbar-custom {
         background: transparent;

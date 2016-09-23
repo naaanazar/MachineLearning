@@ -42,7 +42,7 @@ body {
     width: 100px;
 }
 .title-s3 {
-    margin-top: 40px;
+
 }
 .form-upload {
     float: right;
@@ -83,7 +83,9 @@ a:focus, a:hover{
     padding:2.5px 5px;
     font-size: 10px;
     border-radius: 1.5px;
-
+}
+.form-group-upload{
+    margin-bottom: 0px !important;
 }
 /***************************************
     Prediction
@@ -353,7 +355,7 @@ a:focus, a:hover{
     }
         .form-upload {
     margin-right: 7%;
-}
+} 
 }
 /***************************************
     Other
