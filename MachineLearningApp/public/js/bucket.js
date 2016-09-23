@@ -70,7 +70,7 @@ $(document).ready(function () {
                 loc = getLastHash();
                 $('.' + loc).hide();
             }
-
+            
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
 
             var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
@@ -118,7 +118,7 @@ function showTable(content) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
                         "<td class='reference'>" + item.name + "</td>" +
-                        "<td>" + 'folder' + "</td>" +
+                        "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
                         "<td> " + "</td>" +
                         "</tr>");

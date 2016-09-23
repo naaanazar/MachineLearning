@@ -75,14 +75,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <table class="table table-bordered table-font text-center" id="myTable">
+                        <table class="table table-bordered table-font text-left" id="myTable">
                             <div class="loader col-md-2 col-md-offset-5 hide" id="loader-s3-main">
                             <tr class="active table-header">
                                 <td>Name</td>
                                 <td>Size</td>
                                 <td>Last modified</td>
                                 <td>Action</td>
-
                             </tr>
                             <tr class="bg back">
                                 <td colspan="4" ><span class="back">...</span></td>
@@ -95,7 +94,7 @@
                                     <td> 
                                         <a class="btn btn-danger btn-sm btn-list btn-list-bucket"
                                             href="/s3/delete/{{ $value['Name'] }}"
-                                            id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top" title="delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
+                                            id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top" title="Delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
                                         <a class="btn btn-danger btn-sm btn-list" 
                                             href="s3/delete_all/{{ $value['Name'] }}"  data-toggle="tooltip" data-placement="top" title="Delete
                                             files"><span class="glyphicon glyphicon-minus"></span></a>

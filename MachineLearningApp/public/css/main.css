@@ -564,10 +564,10 @@ a:focus, a:hover{
     border-color: #d6e9c6 !important;
 }
 
-.reference{
+/*.reference{
     text-align: left;
-    margin-left: 25%;
 }
+*/
 .reference:hover {
     cursor: pointer;
 }
