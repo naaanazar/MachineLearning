@@ -12,10 +12,12 @@ class PredictionController extends Controller
 
     private $client;
 
+
     public function __construct()
     {
         $this->client = $this->connectToML();
     }
+
 
     private function connectToML()
     {
@@ -31,10 +33,12 @@ class PredictionController extends Controller
         return $ml;
     }
 
+
     public function doView()
     {
         return view('prediction.prediction');
     }
+
 
     private function createEndpoint($MLModelId)
     {
@@ -53,6 +57,7 @@ class PredictionController extends Controller
         return response(['status' => $status, 'result' => $result]);
     }
 
+
     private function deleteEndpoint($MLModelId)
     {
         try {
@@ -62,11 +67,12 @@ class PredictionController extends Controller
             ]);
         } catch (MachineLearningException $e) {
             $status = false;
-            $result =  $e->getMessage();
+            $result = $e->getMessage();
         }
 
         return response(['status' => $status, 'result' => $result]);
     }
+
 
     public function doPredict(Request $request)
     {
@@ -95,18 +101,18 @@ class PredictionController extends Controller
         $sameLoginAndProjectName = $request->input('same_login_and_project_name');
 
         $createEndPoint = $this->createEndpoint($MLModelId);
-        $endPointData = $createEndPoint->original;
+        $endPointData   = $createEndPoint->original;
         $endPointStatus = $endPointData["status"];
 
-        if (!$endPointStatus) {
+        if ( ! $endPointStatus) {
             $status = false;
             $result = "Endpoint is not created! Try again or contact support!!";
 
             return response()->json(["status" => $status, "result" => $result]);
         }
 
-        $endPointResult = $endPointData["result"];
-        $endpointStatus = $endPointResult["RealtimeEndpointInfo"]["EndpointStatus"];
+        $endPointResult  = $endPointData["result"];
+        $endpointStatus  = $endPointResult["RealtimeEndpointInfo"]["EndpointStatus"];
         $predictEndpoint = $endPointResult["RealtimeEndpointInfo"]["EndpointUrl"];
 
         if ($endpointStatus != 'READY') {

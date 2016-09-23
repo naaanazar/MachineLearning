@@ -5,7 +5,7 @@
         <h3 class="title title-pred">Real time prediction</h3>
         <div class="main-prediction col-md-12 clearfix">
             <div class="block-prediction clearfix col-md-4">
-                <div class="norification-pred alert alert-danger">
+                <div class="notification-pred alert alert-danger">
                     <a href="#" class="notif-close close">&times;</a>
                     <strong>Error! </strong><span class="notif-data"></span>
                 </div>
