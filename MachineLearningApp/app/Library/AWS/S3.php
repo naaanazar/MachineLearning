@@ -21,8 +21,8 @@ class S3
             'version'     => 'latest',
             'region'      => 'us-east-1',
             'credentials' => [
-                'key'    => 'AKIAI5RJSS2CYUZ6STHQ',
-                'secret' => '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'
+                'key'    => getenv('ML_KEY'),
+                'secret' => getenv('ML_SECRET')
             ]
         ]);
 
