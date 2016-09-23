@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     if (window.location.hash == '#describeEvaluations') {
         buttonCreate(' btn-create-evaluations', '#ml-button-create', 'Create Evaluations', '#modalCreateEvaluation');
-        listEvaluations();
+        listEvaluations('ok');
     }
 
     $('.create-evaluations-form').submit(function(e) {
@@ -14,32 +14,33 @@ $(document).ready(function() {
             data: $('.create-evaluations-form').serialize(),
             success: function(data) {
                 $(".modalCreateEvaluation").modal('toggle');
-                listEvaluations();
+                listEvaluations(data);
             },
             error: function() {},
         });
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
-        selectName('/ml/select-ml-model', '#SelectMLModelId', '.create-evaluations-form');
-        selectName('/ml/select-data-source', '#SelectEvDataSource', '.create-evaluations-form');
+        selectName('/ml/select-ml-model?Obj=ml', '#SelectMLModelId', '.create-evaluations-form');
+        selectName('/ml/select-data-source?Obj=ml', '#SelectEvDataSource', '.create-evaluations-form');
     });
 
     $(document).on("click", '#describeEvaluationsContent', function () {
         buttonCreate('btn-create-evaluations', '#ml-button-create', 'Create Evaluations', '#modalCreateEvaluation');
 
         if(!$('.container-describeEvaluations').hasClass('loaded')) {
-            listEvaluations();
+            listEvaluations('ok');
         }
     });
 
 });
 
-function listEvaluations()
+function listEvaluations(status)
 {
     showLoader('.container-describeEvaluations');
+    statusAction(status); 
 
-    $.get("/ml/describe-evaluations", function(response) {
+    $.get("/ml/describe-evaluations?Obj=ml", function(response) {
         var i = 1;       
         var res = '' +
         '<table class="table table-bordered table-font text-center">';

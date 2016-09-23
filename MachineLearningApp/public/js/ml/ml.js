@@ -258,7 +258,10 @@ function checkVariable(variable) {
     if (variable !== undefined) {
 
         return variable;
-    };
+    } else {
+        
+        return '';
+    }
 };
 
 function getAUC(variable) {
@@ -267,3 +270,15 @@ function getAUC(variable) {
 
     return auc;
 }
+
+ function statusAction(status) {
+        if (status.hasOwnProperty('error')) {
+            $.jGrowl('Error' + status.error, {
+                theme: 'jgrowl-danger'
+            });
+        } else if (status.hasOwnProperty('success')) {
+            $.jGrowl('Successfully created: ' + status.success, {
+                theme: 'jgrowl-success'
+            });
+        }
+ }
