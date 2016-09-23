@@ -158,6 +158,11 @@ $(document).ready(function() {
 
         event.preventDefault();
     });
+
+    //loading data(info button)
+    $('.modal-1').on('hidden.bs.modal', function() {
+        $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
 });
 
 function statusTextColor(str)

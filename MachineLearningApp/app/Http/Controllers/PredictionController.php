@@ -53,7 +53,6 @@ class PredictionController extends Controller
         return response(['status' => $status, 'result' => $result]);
     }
 
-
     private function deleteEndpoint($MLModelId)
     {
         try {
@@ -101,7 +100,7 @@ class PredictionController extends Controller
 
         if (!$endPointStatus) {
             $status = false;
-            $result = "Endpoint is not created! Try again!";
+            $result = "Endpoint is not created! Try again or contact support!!";
 
             return response()->json(["status" => $status, "result" => $result]);
         }
@@ -136,7 +135,7 @@ class PredictionController extends Controller
                 $result = $result["Prediction"];
             } catch (MachineLearningException $e) {
                 $status = false;
-                $result = "Fail prediction! Try again!";
+                $result = "Fail prediction! Try again or contact support!";
             }
 
             $this->deleteEndpoint($MLModelId);
