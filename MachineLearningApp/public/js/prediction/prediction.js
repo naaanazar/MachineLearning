@@ -74,8 +74,8 @@ RT_PREDICTION.Form = {
             data: this.formData,
             cache: false,
             success: function (response) {
-                var endPointErr =  "Endpoint is not created! Try again or contact support!!";
-                var predictionErr = "Fail prediction! Try again or contact support!!";
+                var endPointErr =  "Endpoint is not created! Try again or contact support!";
+                var predictionErr = "Fail prediction! Try again or contact support!";
 
                 if (response.status ===  false) {
                     if(response.result === endPointErr) {
