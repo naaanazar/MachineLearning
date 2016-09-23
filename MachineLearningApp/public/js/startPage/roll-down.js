@@ -7,10 +7,8 @@ $(document).ready(function() {
         }, 1200, 'swing');
         return false;
     });
-});
 
-$(document).ready(function() {
-    $("#button-benefits").click(function() {
+    $("#button-benefits").click(function() { 
         $('html,body').animate({
                 scrollTop: $(".benefits-title").offset().top
             },

@@ -14,14 +14,14 @@
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
                 <div id="ml-button-create">
                 </div>
-                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
+                <h2 class="title"><img class="logo-ML" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeDataSources"
-                                              id="describeDataSourcesContent">Data Source</a></li>
+                            id="describeDataSourcesContent">Data Source</a></li>
                         <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a>
                         </li>
                         <li><a data-toggle="tab" href="#describeEvaluations"
