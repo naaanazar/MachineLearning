@@ -4,7 +4,7 @@ RT_PREDICTION.MLModel = {
     result: "",
 
     getId: function () {
-        $.get("/ml/select-ml-model", function (response) {
+        $.get("/ml/select-ml-model?Obj=ml", function (response) {
             for (var key in response.data) {
                 this.result +=
                     '<option value="' + response.data[key].MLModelId + '">' +  response.data[key].Name + '</option>';
