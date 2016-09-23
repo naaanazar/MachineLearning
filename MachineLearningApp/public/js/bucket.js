@@ -134,7 +134,7 @@ function showTable(content) {
                         "<td>" + item.size + "</td>" +
                         "<td>" + item.modified + "</td>" +
                         "<td>" +
-                        "<a class='btn btn-default btn-sm btn-download-s3' href='https://s3.amazonaws.com/ml-datasets-test/" + item.name + "'><span class='glyphicon glyphicon-download '></span></a>" +
+                        "<a class='btn btn-default btn-sm btn-download-s3' href='https://s3.amazonaws.com/" + item.path.slice(item.path.lastIndexOf('//') + 2, item.path.length) + '/' + item.name + "'><span class='glyphicon glyphicon-download '></span></a>" +
                         "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + item.name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
                         "</td>" +
                         "</tr>");
