@@ -2,16 +2,8 @@ $(document).ready(function() {
 
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
-        listMLModel();
-    };
-
-    $(document).on('mouseenter', '.delete-endpoint', function (e) {
-        e.preventDefault();
-
-        $.jGrowl('delete RealtimeEndpoint', {
-            theme: 'jgrowl-notification'
-        });
-    });
+        listMLModel('ok');
+    };    
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();      
@@ -22,21 +14,21 @@ $(document).ready(function() {
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
                 $(".modalCreateModel").modal('toggle');
-                listMLModel();
+                listMLModel(data);
             },
             error: function() {},
         });
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        selectName('/ml/select-data-source', '#SelectDataSource', '.create-mlmodel-form');
+        selectName('/ml/select-data-source?Obj=ml', '#SelectDataSource', '.create-mlmodel-form');
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
 
         if(!$('.container-describeMLModels').hasClass('loaded')) {
-            listMLModel();
+            listMLModel('ok');
         }
     });
 
@@ -54,23 +46,24 @@ $(document).ready(function() {
    });
 });
 
-function listMLModel()
+function listMLModel(status)
 {
     showLoader('.container-describeMLModels');
+    statusAction(status);
 
-    $.get("/ml/describe-ml-model", function(response) {
+    $.get("/ml/describe-ml-model?Obj=ml", function(response) {
         var i = 1;
         var res = '' +
-            '<table class="table table-bordered table-font text-center">' +
-                '<tr class="active">' +
-                    '<td>Name</td>' +
-                    '<td>Status</td>' +
-                    '<td>Endpoint Status</td>' +
-                    '<td>ML Model Type</td>' +
-                    '<td>Last Updated</td>' +
-                    '<td>Action</td>' +
-                '</tr>' +
-            '<span class="hide">' + i + '</span>';
+            '<table class="table table-bordered table-font text-center">';
+//                '<tr class="active">' +
+//                    '<td>Name</td>' +
+//                    '<td>Status</td>' +
+//                    '<td>Endpoint Status</td>' +
+//                    '<td>ML Model Type</td>' +
+//                    '<td>Last Updated</td>' +
+//                    '<td>Action</td>' +
+//                '</tr>' +
+//            '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
             i = i + 1;          
@@ -112,7 +105,19 @@ function listMLModel()
 
         res += '</table>';
 
+        var headers = ''+
+            '<div class="table-headers">' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>Endpoint Status</span>' +
+                '<span>ML Model Type</span>' +
+                '<span>Last Updated</span>' +
+                '<span>Action</span>' +
+            '</div>';
+
         $('.container-describeMLModels').html(res);
+        $('.container-describeMLModels').before(headers);
+        setTableHeadersWidth('describeMLModels');
         $('.container-describeMLModels').addClass('loaded');
     });
 };

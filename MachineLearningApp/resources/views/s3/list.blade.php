@@ -34,7 +34,7 @@
                 <br>
                 <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@doUpload') }}" method="post">
                     {{ csrf_field() }}
-                    <div class="form-group ">
+                    <div class="form-group form-group-upload">
                         <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
                             <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">
                         </label>

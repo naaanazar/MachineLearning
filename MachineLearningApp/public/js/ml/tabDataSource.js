@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
-        listDataSource();
+        listDataSource('ok');
     };
 
     $('.create-datasource-form').submit(function (e) {
@@ -14,8 +14,9 @@ $(document).ready(function () {
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
             success: function (response) {
+                console.log(response.data);
                 $(".modalCreateDataSource").modal('toggle');
-                listDataSource();                
+                listDataSource(data);
             }           
         });
     });
@@ -28,17 +29,18 @@ $(document).ready(function () {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
 
         if (!$('.container-describeDataSources').hasClass('loaded')) {
-            listDataSource();
+            listDataSource('ok');
         };
     });
 
 });
 
-function listDataSource()
+function listDataSource(status)
 {
     showLoader('.container-describeDataSources');
+    statusAction(status);
 
-    $.get("/ml/describe-data-sources", function (response) {
+    $.get("/ml/describe-data-sources?Obj=ml", function (response) {
 
         var i = 1;
         var res = '' +
@@ -58,7 +60,7 @@ function listDataSource()
             i = i + 1;          
             res += '' +
             '<tr>' +
-                '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
+//                '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
@@ -90,19 +92,7 @@ function listDataSource()
 
         $('.container-describeDataSources').html(res);
         $('.container-describeDataSources').before(headers);
-        setTableHeadersWidth();
+        setTableHeadersWidth('describeDataSources');
         $('.container-describeDataSources').addClass('loaded');
     });
 };
-
-function setTableHeadersWidth()
-{
-    var headerCols = $('.table-headers > span');
-    var cols = $('#describeDataSources table tbody tr:first-child td');
-
-    for(var i = 1; i < cols.length; i++ ) {
-        var colWidth = $(cols[i]).outerWidth();
-        console.log(colWidth);
-        $(headerCols[i-1]).outerWidth(colWidth);
-    }
-}

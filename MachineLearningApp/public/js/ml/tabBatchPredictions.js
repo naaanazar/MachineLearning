@@ -4,12 +4,13 @@ $(document).ready(function() {
 
     if (window.location.hash == '#describeBatchPredictions') {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
-        listBatchPrediction();
+        listBatchPrediction('ok');
     }
 
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
-
+        $(".modalCreateBatchPrediction").modal('toggle');
+           
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -17,43 +18,43 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function (response) {
-                $(".modalCreateBatchPrediction").modal('toggle');
-                listBatchPrediction();
-            }
+            success: function (response) {                
+                listBatchPrediction(data);
+            }           
         });
     });
 
     $(document).on("click", ".btn-create-bath-description", function() {
-        selectName('/ml/select-ml-model', '#SelectBathMLModel', '.create-bath-predictios-form');
+        selectName('/ml/select-ml-model?Obj=ml', '#SelectBathMLModel', '.create-bath-predictios-form');
     });
 
     $(document).on("click", '#describeBatchPredictionsContent', function () {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
 
         if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
-            listBatchPrediction();
+            listBatchPrediction('ok');
         }
-    });
-
+    });  
+    
 });
 
-function listBatchPrediction()
-{
+function listBatchPrediction(status)
+{   
     showLoader('.container-describeBatchPredictions');
+    statusAction(status);
 
-    $.get("/ml/describe-batch-prediction", function(response) {
+    $.get("/ml/describe-batch-prediction?Obj=ml", function(response) {
         var i = 1;
         var res = '' +
-            '<table class="table table-bordered table-font text-center">' +
-                '<tr class="active">' +
-                    '<td>Name</td>' +
-                    '<td>Status</td>' +
-                    '<td>Count</td>' +
-                    '<td>Last Updated</td>' +
-                    '<td>Action</td>' +
-                '</tr>' +
-                '<span class="hide">'+ i +'</span>';
+            '<table class="table table-bordered table-font text-center">';
+//                '<tr class="active">' +
+//                    '<td>Name</td>' +
+//                    '<td>Status</td>' +
+//                    '<td>Count</td>' +
+//                    '<td>Last Updated</td>' +
+//                    '<td>Action</td>' +
+//                '</tr>' +
+//                '<span class="hide">'+ i +'</span>';
 
         for (var key in response.data) {
             i = i+1;
@@ -83,7 +84,19 @@ function listBatchPrediction()
         };
 
         res += '</table>';
+
+        var headers = ''+
+            '<div class="table-headers">' +
+                '<span>Name</span>' +
+                '<span>Status</span>' +
+                '<span>Count</span>' +
+                '<span>Last Updated</span>' +
+                '<span>Action</span>' +
+            '</div>';
+
         $('.container-describeBatchPredictions').html(res);
+        $('.container-describeBatchPredictions').before(headers);
+        setTableHeadersWidth('describeBatchPredictions');
         $('.container-describeBatchPredictions').addClass('loaded');
     });
 };

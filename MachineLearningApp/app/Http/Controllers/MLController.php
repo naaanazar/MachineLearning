@@ -21,6 +21,8 @@ class MLController extends Controller
 
     private $client;
 
+    private $ml;
+
     private $DataSchema = [
         "version"                => "1.0",
         "rowId"                  => null,
@@ -119,6 +121,10 @@ class MLController extends Controller
     public function __construct()
     {
         $this->client = $this->connectToML();
+
+        if (isset($_GET['Obj'])) {
+            $this->ml  = new ML;
+        }
     }
 
 
@@ -130,7 +136,7 @@ class MLController extends Controller
 
     private function connectToML()
     {
-        $ml = new MachineLearningClient([
+        $mlClient = new MachineLearningClient([
             'version'     => 'latest',
             'region'      => 'us-east-1',
             'credentials' => [
@@ -139,48 +145,43 @@ class MLController extends Controller
             ]
         ]);
 
-        return $ml;
+        return $mlClient;
     }
 
 
-    public function listDataSources()
+    public function doListDataSources()
     {
-
-        $ml     = new ML;
-        $result = $ml->describeDataSources();
+        $result = $this->ml->describeDataSources();
 
         return response()->json(['data' => (array)$result]);
     }
 
 
-    public function listMLModels()
+    public function doListMLModels()
     {
-        $ml     = new ML;
-        $result = $ml->describeMLModels();
+        $result = $this->ml->describeMLModels();
 
         return response()->json(['data' => (array)$result]);
     }
 
 
-    public function listEvaluations()
+    public function doListEvaluations()
     {
-        $ml     = new ML;
-        $result = $ml->describeEvaluations();
+        $result = $this->ml->describeEvaluations();
 
         return response()->json(['data' => (array)$result]);
     }
 
 
-    public function listBatchPredictions()
+    public function doListBatchPredictions()
     {
-        $ml     = new ML;
-        $result = $ml->describeBatchPredictions();
+        $result = $this->ml->describeBatchPredictions();
 
         return response()->json(['data' => (array)$result]);
     }
 
 
-    public function selectObjectsS3()
+    public function doSelectObjectsS3()
     {
         $s3     = new S3;
         $result = $s3->ListObjectsS3();
@@ -189,25 +190,23 @@ class MLController extends Controller
     }
 
 
-    public function selectDataSources()
+    public function doSelectDataSources()
     {
-        $ml     = new ML;
-        $result = $ml->describeDataSources();
+        $result = $this->ml->describeDataSources();
 
         return response()->json(['data' => (array)$result]);
     }
 
 
-    public function selectMLModel()
+    public function doSelectMLModel()
     {
-        $ml     = new ML;
-        $result = $ml->describeMLModels();
+        $result = $this->ml->describeMLModels();
 
         return response()->json(['data' => (array)$result]);
     }
 
 
-    public function getDataSource($DataSourceId)
+    public function doGetDataSource($DataSourceId)
     {
         try {
             $result = $this->client->getDataSource([
@@ -216,7 +215,8 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
         $arr = [
             $result['Name'],
@@ -231,7 +231,7 @@ class MLController extends Controller
     }
 
 
-    public function getMLModel($ModelId)
+    public function doGetMLModel($ModelId)
     {
         try {
             $result = $this->client->getMLModel([
@@ -240,7 +240,8 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
         $arr = [
             $result['Name'],
@@ -255,7 +256,7 @@ class MLController extends Controller
     }
 
 
-    public function getEvaluation($EvaluationId)
+    public function doGetEvaluation($EvaluationId)
     {
         try {
             $result = $this->client->getEvaluation([
@@ -263,7 +264,8 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
         $arr = [
             $result['Name'],
@@ -279,7 +281,7 @@ class MLController extends Controller
     }
 
 
-    public function getBatchPrediction($getBatchPredictionId)
+    public function doGetBatchPrediction($getBatchPredictionId)
     {
         try {
             $result = $this->client->getBatchPrediction([
@@ -287,7 +289,8 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
         $arr = [
             $result['Name'],
@@ -303,7 +306,7 @@ class MLController extends Controller
     }
 
 
-    public function deleteDataSource($DataSourceId)
+    public function doDeleteDataSource($DataSourceId)
     {
         try {
             $result = $this->client->deleteDataSource([
@@ -313,12 +316,12 @@ class MLController extends Controller
             return response()->json(['deleted' => 'Ok']);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
     }
 
 
-    public function deleteEvaluation($EvaluationId)
+    public function doDeleteEvaluation($EvaluationId)
     {
         try {
             $result = $this->client->deleteEvaluation([
@@ -328,27 +331,27 @@ class MLController extends Controller
             return response()->json(['deleted' => 'Ok']);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
     }
 
 
-    public function deleteMLModel($MLModelId)
+    public function doDeleteMLModel($MLModelId)
     {
         try {
             $result = $this->client->deleteMLModel([
                 'MLModelId' => $MLModelId,
             ]);
 
-            return response()->json(['deleted' => 'Ok']);
-
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
+
+        return response()->json(['deleted' => 'Ok']);
     }
 
 
-    public function deleteBatchPrediction($BatchPredictionId)
+    public function doDeleteBatchPrediction($BatchPredictionId)
     {
         try {
             $result = $this->client->deleteBatchPrediction([
@@ -356,14 +359,14 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage()."\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
 
         return response()->json(['deleted' => 'Ok']);
     }
 
 
-    public function deleteRealtimeEndpoint(Request $request)
+    public function DoDeleteRealtimeEndpoint(Request $request)
     {
         $MLModelId = $request->id;
 
@@ -380,13 +383,18 @@ class MLController extends Controller
     }
 
 
-    public function createDataSourceFromS3(Request $request)
+    public function DoCreateDataSourceFromS3(Request $request)
     {
         $DataSourceId      = uniqid();
         $DataSourceName    = $request->input('DataSourceName');
         $DataLocationS3    = 's3://'.$this->bucket.'/'.$request->input('DataLocationS3');
         $DataSchema        = json_encode($this->DataSchema);
-        $DataRearrangement = '{"splitting":{"percentBegin":'.$request->input("DataRearrangementBegin").',"percentEnd":'.$request->input("DataRearrangementEnd").'}}';
+        $dataRearrangement = ["splitting" => [
+           "percentBegin"  =>  strval($request->input('DataRearrangementBegin')),
+           "percentEnd"    =>  strval($request->input('DataRearrangementEnd')),
+           ]
+       ];
+       $data= json_encode($dataRearrangement);       
 
         try {
             $result = $this->client->createDataSourceFromS3([
@@ -395,20 +403,20 @@ class MLController extends Controller
                 'DataSourceName'    => $DataSourceName,
                 'DataSpec'          => [
                     'DataLocationS3'    => $DataLocationS3,
-                    'DataRearrangement' => $DataRearrangement,
+                    'DataRearrangement' => $data,
                     'DataSchema'        => $DataSchema
                 ],
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()]);
         }
 
-        return response()->json(['data' => $result]);
+        return response()->json(['success' => $result['DataSourceId']]);
     }
 
 
-    public function createMLModel(Request $request)
+    public function doCreateMLModel(Request $request)
     {
         $ModelId      = 'ml-'.uniqid();
         $ModelName    = $request->input('MLModelName');
@@ -425,13 +433,16 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage()]);
+
+            return response()->json(['error' => $e->getMessage()]);
         }
+
+        return response()->json(['success' => $result['MLModelId']]);
 
     }
 
 
-    public function createEvaluation(Request $request)
+    public function doCreateEvaluation(Request $request)
     {
         $DataSourceId   = $request->input('DataSourceId');
         $EvaluationId   = 'ev-'.uniqid();
@@ -448,12 +459,14 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()]);
         }
+
+            return response()->json(['success' => $result['EvaluationId']]);
     }
 
 
-    public function createBatchPrediction(Request $request)
+    public function doCreateBatchPrediction(Request $request)
     {
         $S3     = new S3;
         $client = $S3->getClient();
@@ -486,10 +499,10 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()]);
         }
 
-        return response()->json(['data' => 'ok']);
+        return response()->json(['success' => $result['BatchPredictionId']]);
     }
 
 
@@ -511,7 +524,7 @@ class MLController extends Controller
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage()]);
+            //return response()->json(['data' => $e->getMessage()]);
         }
 
         return $result['DataSourceId'];
