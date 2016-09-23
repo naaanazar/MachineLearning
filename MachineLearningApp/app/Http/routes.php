@@ -42,7 +42,7 @@ Route::get('generator', 'GeneratorController@index');
 Route::post('generate', 'GeneratorController@generateDataset');
 
 //S3
-Route::get('s3/allbuckets', 'S3Controller@bucketStruct');
+Route::get('s3/allbuckets', 'S3Controller@doBucketStruct');
 Route::get('s3/delete/{name_bucket}', 'S3Controller@doDeleteBucket');
 Route::get('s3/delete_all/{name_bucket}', 'S3Controller@doDeleteAllObjectsFromBucket');
 Route::get('s3', 'S3Controller@doIndex');
