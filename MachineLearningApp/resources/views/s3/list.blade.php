@@ -89,8 +89,7 @@
                             </tr>
                             @foreach($results as $key => $value)
                                 <tr class="content bg">
-                                    <td class="reference">{{ $value['Name'] }}
-                                    <a class="btn btn-danger btn-sm btn-list btn-list-bucket"
+                                    <td class="reference">{{ $value['Name'] }}<a class="btn btn-danger btn-sm btn-list btn-list-bucket"
                                             href="/s3/delete/{{ $value['Name'] }}"
                                             id="delete-{{ $key }}" data-toggle="tooltip" data-placement="right" title="delete bucket""><span class="glyphicon glyphicon-trash"></span></a></td>
                                     <td>0</td>

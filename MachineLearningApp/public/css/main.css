@@ -492,7 +492,7 @@ a:focus, a:hover{
     border-color: #d6e9c6  !important;
 }
 
-@import 'https://fonts.googleapis.com/css?family=Droid+Serif';
+
 .reference:hover {
     cursor: pointer;
 }
@@ -516,7 +516,6 @@ a:focus, a:hover{
 }
 .table-header {
     font-size: 17px;
-    font-family: 'Droid Serif', serif;
     color: #3c763d !important;
     background-color: #dff0d8 !important;
     border-color: #d6e9c6 !important;

@@ -42,7 +42,7 @@ $(document).ready(function () {
                 $('#loader-s3-main').remove();
             },
             error: function (data) {
-                console.log('Error:', data);
+
             }
         });
     }
@@ -53,11 +53,10 @@ $(document).ready(function () {
         if (!!getLastHash()) {
             loc = getLastHash();
             $('.' + loc).remove();
-            console.log('---');
             setLocation('/' + name);
         } else {
-            console.log('+++');
             setLocation('#' + name);
+
             bucket = findBucket(location.hash.split('#')[1]);
         }
 
@@ -73,26 +72,27 @@ $(document).ready(function () {
             }
 
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
+
             var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
                 [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
+
             showTable(findItem(bucket, name));
         } else {
             if (!!getLastHash()) {
                 loc = getLastHash();
                 $('.' + loc).hide();
+
                 history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
             }
             $('.content').show();
         }
     });
-});
 
-
-
-$(document).ready(function () {
     if(location.href.split('#').length > 1) {
-        var name = location.hash.split('#')[location.hash.split('#').length -1];
-        showTable(name);
+        var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
+            [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
+
+        showTable(findItem(bucket, name));
     }
 });
 
@@ -191,16 +191,20 @@ function findItem(bucket, itemName) {
         if (!!itemName) {
             findItem.itemName = itemName;
             findItem.folder;
-            findItem.path = location.href.slice(location.href.lastIndexOf('#'), location.href.length);
+            findItem.path = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length);
+            findItem.level = 0;
         }
 
-        if (bucket.name == findItem.itemName) {
+        if (bucket.name == findItem.path.split('/')[findItem.level] && findItem.level == (findItem.path.split('/').length - 1)) {
             findItem.folder = bucket;
-
         } else {
             if (typeof(bucket.folders) == 'object') {
                 bucket.folders.forEach(function (content) {
-                    findItem(content);
+                    if(content.name == findItem.path.split('/')[findItem.level + 1]) {
+                        findItem.level++;
+
+                        findItem(content);
+                    }
                 })
             }
         }
