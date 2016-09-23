@@ -42,7 +42,7 @@ $(document).ready(function () {
             url: '/s3/delete',
             method: 'post',
             data: {
-                name: $(this).attr('id')
+            name: $(this).attr('id')
             },
             success: function (data) {
             console.log(data);
