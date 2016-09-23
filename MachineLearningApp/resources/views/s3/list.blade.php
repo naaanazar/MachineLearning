@@ -23,7 +23,7 @@
                         <label for="exampleInputEmail1">Name</label>
                         <input type="text" class="form-control" id="nameBucket" placeholder="ml-" name="nameBucket">
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn-bucket btn btn-primary" disabled>Create</button>
                 </form>
                     </div>
                     </div>

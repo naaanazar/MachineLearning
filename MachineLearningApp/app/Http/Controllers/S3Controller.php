@@ -101,6 +101,9 @@ class S3Controller extends Controller
 
     public function doCreateBucket(Request $request)
     {
+        $this->validate($request, [
+            'nameBucket' => 'required|string|min:0|max:255',
+        ]);
 
         try {
             $this->client->createBucket([
