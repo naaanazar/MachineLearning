@@ -17,7 +17,7 @@ class S3Controller extends Controller
 
     private $client;
 
-    public $bucket = 'ml-set-testing';
+    public $bucket = 'ml-datasets-test';
 
 
     public function __construct()
