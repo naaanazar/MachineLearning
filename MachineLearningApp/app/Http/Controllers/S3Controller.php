@@ -194,20 +194,41 @@ class S3Controller extends Controller
     }
 
 
-    public function doDelete($filename)
+//    public function doDelete($filename)
+//    {
+//        try {
+//            $this->client->deleteObject([
+//                'Bucket'       => $this->bucket,
+//                'Key'          => $filename,
+//                'RequestPayer' => 'requester'
+//            ]);
+//        } catch (S3Exception $e) {
+//            return Response()->json(['success' => $e->getMessage()]);
+//        }
+//
+//        return Response()->json(['success' => true]);
+//    }
+
+
+    public function doDelete()
     {
+        $filename = $_POST['name'];
+        $url = parse_url($filename);
+ 
+        $client = $this->connect();
+        $filename = urldecode($filename);
         try {
-            $this->client->deleteObject([
-                'Bucket'       => $this->bucket,
-                'Key'          => $filename,
+            $result = $client->deleteObject([
+                'Bucket' => $url['host'],
+                'Key' => substr($url['path'], 1),
                 'RequestPayer' => 'requester'
             ]);
         } catch (S3Exception $e) {
-            return Response()->json(['success' => $e->getMessage()]);
+            return  Response()->json(['success' => (array)$e->getMessage()]);
         }
-
-        return Response()->json(['success' => true]);
+       return Response()->json(['success' => (array)$result]);
     }
+
 
 
     public function doPredictionForm()
