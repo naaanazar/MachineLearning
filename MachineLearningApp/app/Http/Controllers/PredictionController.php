@@ -9,15 +9,12 @@ use Aws\MachineLearning\Exception\MachineLearningException;
 
 class PredictionController extends Controller
 {
-
     private $client;
-
 
     public function __construct()
     {
         $this->client = $this->connectToML();
     }
-
 
     private function connectToML()
     {
@@ -33,12 +30,10 @@ class PredictionController extends Controller
         return $ml;
     }
 
-
     public function doView()
     {
         return view('prediction.prediction');
     }
-
 
     private function createEndpoint($MLModelId)
     {
@@ -57,7 +52,6 @@ class PredictionController extends Controller
         return response(['status' => $status, 'result' => $result]);
     }
 
-
     private function deleteEndpoint($MLModelId)
     {
         try {
@@ -73,7 +67,6 @@ class PredictionController extends Controller
         return response(['status' => $status, 'result' => $result]);
     }
 
-
     public function doPredict(Request $request)
     {
         $this->validate($request, [
@@ -82,11 +75,11 @@ class PredictionController extends Controller
             'strings_count'               => 'integer|min:0|max:10000000000',
             'members_count'               => 'integer|min:0|max:10000000000',
             'projects_count'              => 'integer|min:0|max:10000000000',
-            'email_custom_domain'         => 'integer|digits_between:0,1',
-            'has_private_project'         => 'integer|digits_between:0,1',
+            'email_custom_domain'         => 'integer|min:0|max:1',
+            'has_private_project'         => 'integer|min:0|max:1',
             'days_after_last_login'       => 'integer|min:0|max:10000000000',
             'same_email_domain_count'     => 'integer|min:0|max:10000000000',
-            'same_login_and_project_name' => 'integer|digits_between:0,1',
+            'same_login_and_project_name' => 'integer|min:0|max:1',
         ]);
 
         $country                 = $request->input('country');
@@ -106,7 +99,7 @@ class PredictionController extends Controller
 
         if ( ! $endPointStatus) {
             $status = false;
-            $result = "Endpoint is not created! Try again or contact support!!";
+            $result = "Endpoint is not created! Try again or contact support!";
 
             return response()->json(["status" => $status, "result" => $result]);
         }

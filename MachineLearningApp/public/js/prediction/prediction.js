@@ -74,8 +74,8 @@ RT_PREDICTION.Form = {
             data: this.formData,
             cache: false,
             success: function (response) {
-                var endPointErr =  "Endpoint is not created! Try again or contact support!!";
-                var predictionErr = "Fail prediction! Try again or contact support!!";
+                var endPointErr =  "Endpoint is not created! Try again or contact support!";
+                var predictionErr = "Fail prediction! Try again or contact support!";
 
                 if (response.status ===  false) {
                     if(response.result === endPointErr) {
@@ -159,34 +159,10 @@ RT_PREDICTION.Validation = {
     validation: function (selector, lengthVal, regexp, message) {
         $('.form-prediction').on('input', selector, function (e){
             this.valueField = $(e.target).val();
-            this.errorTarget = selector + " + .pred-error";
             this.regExp = new RegExp(regexp, "g");
+
             this.newValue = this.valueField.replace(this.regExp, "");
-
             $(selector).val(this.newValue.substr(0, lengthVal));
-
-            $(selector).focusout(function (e) {
-                $(this.errorTarget).fadeOut('slow');
-                $(selector).removeClass('pred-input-error');
-            });
-
-            $(selector).on('keyup', function(e){
-                if (e.keyCode === 8) {
-                    $(this.errorTarget).fadeOut('slow');
-                    $(selector).removeClass('pred-input-error');
-                } else if (e.key.match(regexp)){
-                    $(this.errorTarget).fadeIn('slow');
-                    $(this.errorTarget).html(RT_PREDICTION.Validation.error(message));
-                    $(selector + ":focus").addClass('pred-input-error');
-                } else if (this.newValue.length > lengthVal) {
-                    $(this.errorTarget).fadeIn('slow');
-                    $(this.errorTarget).html(RT_PREDICTION.Validation.error("Length no more " + lengthVal));
-                    $(selector + ":focus").addClass('pred-input-error');
-                } else {
-                    $(this.errorTarget).fadeOut('slow');
-                    $(selector).removeClass('pred-input-error');
-                }
-            });
         });
     },
 
