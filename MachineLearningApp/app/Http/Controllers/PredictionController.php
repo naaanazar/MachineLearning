@@ -53,7 +53,6 @@ class PredictionController extends Controller
         return response(['status' => $status, 'result' => $result]);
     }
 
-
     private function deleteEndpoint($MLModelId)
     {
         try {
