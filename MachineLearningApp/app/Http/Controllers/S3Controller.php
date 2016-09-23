@@ -16,7 +16,9 @@ class S3Controller extends Controller
     public $s3;
 
     private $client;
+
     public $bucket = 'ml-datasets-test';
+
 
     public function __construct()
     {
@@ -50,7 +52,7 @@ class S3Controller extends Controller
         try {
             $result = $this->client->listBuckets([]);
         } catch (S3Exception $e) {
-            echo $e->getMessage()."\n";
+            echo $e->getMessage() . "\n";
         }
 
         return view('s3.list', ['results' => $result['Buckets']]);
@@ -62,7 +64,7 @@ class S3Controller extends Controller
         try {
             $result = $this->client->listBuckets([]);
         } catch (S3Exception $e) {
-            echo $e->getMessage()."\n";
+            echo $e->getMessage() . "\n";
         }
 
         return $result['Buckets'];
@@ -76,19 +78,19 @@ class S3Controller extends Controller
         $files   = [];
 
         foreach ($buckets as $bucket) {
-            $dir      = 's3://'.$bucket['Name'];
+            $dir      = 's3://' . $bucket['Name'];
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
 
             try {
                 foreach ($iterator as $file) {
                     $files[] = [
-                        'name' => $file->getBasename(),
+                        'name'      => $file->getBasename(),
                         'extension' => $file->getExtension(),
-                        'path' => $file->getPath(),
-                        'size' => $file->getSize(),
-                        'fileType' => $file->getType(),
-                        'create' => $file->getCTime(),
-                        'modified' => $file->getMTime()
+                        'path'      => $file->getPath(),
+                        'size'      => $file->getSize(),
+                        'fileType'  => $file->getType(),
+                        'create'    => $file->getCTime(),
+                        'modified'  => $file->getMTime()
                     ];
                 }
             } catch (S3Exception $e) {
@@ -113,7 +115,7 @@ class S3Controller extends Controller
             ]);
 
         } catch (S3Exception $e) {
-            echo $e->getMessage()."\n";
+            echo $e->getMessage() . "\n";
         }
 
         return back();
@@ -130,7 +132,7 @@ class S3Controller extends Controller
 
             return back();
         } catch (S3Exception $e) {
-            echo $e->getMessage()."\n";
+            echo $e->getMessage() . "\n";
         }
     }
 
@@ -139,7 +141,7 @@ class S3Controller extends Controller
     {
         try {
             $results = $this->client->listObjects(['Bucket' => $nameBucket])->get('Contents');
-            if ($results == ! null) {
+            if ($results == !null) {
                 foreach ($results as $key => $value) {
                     $this->client->deleteObject([
                         'Bucket' => $nameBucket,
@@ -151,7 +153,7 @@ class S3Controller extends Controller
                 die();
             }
         } catch (S3Exception $e) {
-            echo $e->getMessage()."\n";
+            echo $e->getMessage() . "\n";
         }
 
         return back();
@@ -166,12 +168,12 @@ class S3Controller extends Controller
             'file' => 'required|file|mimes:csv,txt',
         ]);
 
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
+        $file        = $request->file('file');
+        $fileName    = $file->getClientOriginalName();
         $storagePath = storage_path('app/');
         $file->move($storagePath, $fileName);
 
-        $filepath = $storagePath.'/'.$fileName;
+        $filepath = $storagePath . '/' . $fileName;
         $keyname  = basename($filepath);
 
         try {
@@ -219,7 +221,7 @@ class S3Controller extends Controller
         $path = $request->name;
         $path = urldecode($path);
         $this->client->registerStreamWrapper();
-        $data = file_get_contents($path);
+        $data     = file_get_contents($path);
         $fileName = basename($path);
 
         error_reporting(0);
@@ -227,11 +229,11 @@ class S3Controller extends Controller
 
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename='.$fileName);
+        header('Content-Disposition: attachment; filename=' . $fileName);
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length:'.filesize($data));
+        header('Content-Length:' . filesize($data));
 
         ob_clean();
         ob_end_flush();
