@@ -110,21 +110,20 @@ $(document).ready(function () {
     //     });
     // }
 
-    
 
 });
 
-function timeConverter(time){
+function timeConverter(time) {
     UnixTimestamp = Date.parse(time);
     var a = new Date(UnixTimestamp);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var year = a.getFullYear();
     var month = months[a.getMonth()];
     var date = a.getDate();
     var hour = a.getHours();
     var min = a.getMinutes();
     var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
 
     return time;
 };

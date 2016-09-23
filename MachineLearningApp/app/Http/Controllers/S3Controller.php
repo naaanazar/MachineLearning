@@ -20,7 +20,9 @@ class S3Controller extends Controller
     public $s3;
 
     private $client;
+
     public $bucket = 'ml-set-testing';
+
 
     public function __construct()
     {
@@ -173,7 +175,6 @@ class S3Controller extends Controller
 
         $filepath = $storagePath.'/'.$fileName;
         $keyname  = basename($filepath);
-
 
         try {
             $result = $this->client->putObject([

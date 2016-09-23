@@ -8,8 +8,8 @@ $(document).ready(function() {
     }
 
     $('.create-bath-predictios-form').on("submit", function(e) {
-        e.preventDefault(); 
-           
+        e.preventDefault();
+
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -19,8 +19,8 @@ $(document).ready(function() {
             processData: false,
             success: function (response) {
                 $(".modalCreateBatchPrediction").modal('toggle');
-                listBatchPrediction();               
-            }           
+                listBatchPrediction();
+            }
         });
     });
 
@@ -34,12 +34,12 @@ $(document).ready(function() {
         if(!$('.container-describeBatchPredictions').hasClass('loaded')) {
             listBatchPrediction();
         }
-    });  
-    
+    });
+
 });
 
 function listBatchPrediction()
-{   
+{
     showLoader('.container-describeBatchPredictions');
 
     $.get("/ml/describe-batch-prediction", function(response) {
