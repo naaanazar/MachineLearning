@@ -184,7 +184,7 @@ function selectName(uri, elementId, formClass)
 
     $.get(uri, function (response) {
         var result;
-        var id;       
+        var id;
 
         for (var key in response.data) {
             if (response.data[key].hasOwnProperty('MLModelId')) {

@@ -5,7 +5,7 @@
     <link href="css/hover.css" rel="stylesheet" media="all">
     <div class="container">
         <div class="row">
-                <h2 class="title"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> Buckets
+                <h2 class="title title-s3"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> Buckets
                 <a class="btn-sm btn-success btn-create-bucket hvr-sweep-to-right" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket"> + Add bucket</a></h2>
                 <div class="modal fade modalCreateBucket" id="modalCreateBucket" role="dialog">
 
@@ -34,7 +34,7 @@
                 <br>
                 <form class="form form-upload" enctype="multipart/form-data" action="{{ action('S3Controller@doUpload') }}" method="post">
                     {{ csrf_field() }}
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="input-file" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
                             <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file" type="file" name="file">
                         </label>

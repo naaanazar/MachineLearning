@@ -7,13 +7,17 @@ use Aws\S3\Exception\S3Exception;
 
 class S3
 {
+
     private $bucket = 'ml-datasets-test';
+
     private $client;
 
-       function __construct()
+
+    function __construct()
     {
         $this->client = $this->connect();
     }
+
 
     private function connect()
     {
@@ -29,13 +33,16 @@ class S3
         return $s3;
     }
 
+
     public function getClient()
     {
         $client = $this->connect();
+
         return $client;
     }
 
-     public function ListObjectsS3()
+
+    public function ListObjectsS3()
     {
         $client = $this->connect();
 
@@ -48,7 +55,7 @@ class S3
             $results = $result['Contents'];
 
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            echo $e->getMessage()."\n";
         }
 
         return $results;
@@ -57,14 +64,14 @@ class S3
 
     public function getObjectACL()
     {
-    $client = $this->connect();
-    $result = $client->getObjectAcl([
-        'Bucket' => $this->bucket, // REQUIRED
-        'Key' => 'dataset.csv', // REQUIRED
-        'RequestPayer' => 'requester',
+        $client = $this->connect();
+        $result = $client->getObjectAcl([
+            'Bucket'       => $this->bucket, // REQUIRED
+            'Key'          => 'dataset.csv', // REQUIRED
+            'RequestPayer' => 'requester',
 
-    ]);
+        ]);
 
-    dd($result);
+        dd($result);
     }
 }
