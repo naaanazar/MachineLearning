@@ -48,6 +48,10 @@
                         <a href="{{ action('PredictionController@doView') }}"><button type="button" class="btn btn-primary btn-start btn-try-it animated fadeInRight" style="-webkit-animation-delay: 0.5s;"><span>Try It</span></button></a>
                     </div>
                 </div>
+                <button onclick="showGame()" id="game" class="startGameButton"> </button>
+                  <div class="game" id="showGame"> <object type=application/x-shockwave-flash data=http://htmlka.com/wp-content/uploads/2014/07/chatnoir.swf width=780 height=640><param name=movie value=http://htmlka.com/wp-content/uploads/2014/07/chatnoir.swf></object>
+                  <button onclick="closeGame()" class="btn btn-danger endGame" id="closeGame">End game</button>
+                  </div>
             </div>
         </div>
     </header>
