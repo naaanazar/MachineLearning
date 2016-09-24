@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'WebDriver' => array($vendorDir . '/instaclick/php-webdriver/lib'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'ParaTest' => array($vendorDir . '/brianium/paratest/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),

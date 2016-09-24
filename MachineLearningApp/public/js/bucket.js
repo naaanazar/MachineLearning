@@ -47,6 +47,35 @@ $(document).ready(function () {
         });
     }
 
+    $('body').on('change', '.s3-upload-file', function(event) {
+        console.log(event.target.files.length);
+var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
+        console.log(nameBucket);
+        var data = new FormData();
+        data.append('file', event.target.files[0]);
+
+        // $.post('s3/upload', {
+        //     data: data
+        // }, function(response) {
+        //     console.log('Response: \n');
+        //     console.log(response);
+        // });
+
+        $.ajax({
+            url: "s3/upload",
+            type:"post",
+            cache : false,
+            contentType : false,
+            processData : false,
+            data: data,
+            success: function(response) {
+
+            }
+        });
+
+        event.preventDefault();
+    });
+
     $('body').on('click', '.reference', function() {
         var $ref = $(this);
         var name = $ref.text();

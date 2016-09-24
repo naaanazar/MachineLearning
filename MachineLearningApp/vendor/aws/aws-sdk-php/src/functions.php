@@ -193,7 +193,7 @@ function dir_iterator($path, $context = null)
  * will read the first file from a stream wrapper, then rewind, then read
  * it again).
  *
- * @param string   $path    Path to traverse (e.g., s3://s3/key, /tmp)
+ * @param string   $path    Path to traverse (e.g., s3://bucket/key, /tmp)
  * @param resource $context Stream context options.
  *
  * @return \Generator Yields absolute filenames.
