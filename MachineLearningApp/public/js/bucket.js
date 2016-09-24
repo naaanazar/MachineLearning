@@ -88,35 +88,9 @@ $(document).ready(function () {
         }
     });
 
-    $('body').on('change', '.s3-upload-file', function(event) {
-        console.log(event.target.files.length);
+    if(~location.href.lastIndexOf('#')) {
+        bucket = findBucket(location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0]);
 
-        var data = new FormData();
-        data.append('file', event.target.files[0]);
-
-        // $.post('s3/upload', {
-        //     data: data
-        // }, function(response) {
-        //     console.log('Response: \n');
-        //     console.log(response);
-        // });
-
-        $.ajax({
-            url: "s3/upload",
-            type:"post",
-            cache : false,
-            contentType : false,
-            processData : false,
-            data: data,
-            success: function(response) {
-
-            }
-        });
-
-        event.preventDefault();
-    });
-
-    if(location.href.split('#').length > 1) {
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
 
@@ -146,7 +120,7 @@ function showTable(content) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
                         "<td class='reference'>" + item.name + "</td>" +
-                        "<td>" + 'folder' + "</td>" +
+                        "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
                         "<td> " + "</td>" +
                         "</tr>");
@@ -160,8 +134,8 @@ function showTable(content) {
                         "<td>" + item.size + "</td>" +
                         "<td>" + item.modified + "</td>" +
                         "<td>" +
-                        "<a class='btn btn-default btn-sm btn-download-s3' href='https://s3.amazonaws.com/ml-datasets-test/" + item.name + "'><span class='glyphicon glyphicon-download '></span></a>" +
-                        "<a class='btn btn-danger btn-sm btn-delete' href='/s3/delete/" + item.name + "'><span class='glyphicon glyphicon-trash'></span></a>" +
+                        "<a class='btn btn-default btn-sm btn-download-s3' href='https://s3.amazonaws.com/" + item.path.slice(item.path.lastIndexOf('//') + 2, item.path.length) + '/' + item.name + "'><span class='glyphicon glyphicon-download '></span></a>" +
+                        '<a class="btn btn-danger btn-sm btn-delete" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                         "</td>" +
                         "</tr>");
                 });
