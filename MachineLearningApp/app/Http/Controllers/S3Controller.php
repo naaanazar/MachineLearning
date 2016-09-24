@@ -169,6 +169,7 @@ class S3Controller extends Controller
             'file' => 'required|file|mimes:csv,txt',
         ]);
 
+
         $file        = $request->file('file');
         $fileName    = $file->getClientOriginalName();
         $storagePath = storage_path('app/');
@@ -179,7 +180,7 @@ class S3Controller extends Controller
 
         try {
             $result = $this->client->putObject([
-                'Bucket'     => $this->bucket,
+                'Bucket'     => $request->nameBucket,
                 'Key'        => $keyname,
                 'SourceFile' => $filepath,
                 'ACL'        => 'public-read'

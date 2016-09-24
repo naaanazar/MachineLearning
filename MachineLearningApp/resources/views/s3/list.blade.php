@@ -103,7 +103,6 @@
                                                 <input id="s3-upload-file-{{ $key }}" class="s3-upload-file" type="file" name="file" style="display: none">
                                             </span>
                                         </label>
-                                        <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                                     </td>
                                 </tr>
                             @endforeach

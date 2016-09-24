@@ -48,18 +48,11 @@ $(document).ready(function () {
     }
 
     $('body').on('change', '.s3-upload-file', function(event) {
-        console.log(event.target.files.length);
-var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
-        console.log(nameBucket);
+        var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
         var data = new FormData();
-        data.append('file', event.target.files[0]);
 
-        // $.post('s3/upload', {
-        //     data: data
-        // }, function(response) {
-        //     console.log('Response: \n');
-        //     console.log(response);
-        // });
+        data.append('file', event.target.files[0]);
+        data.append('nameBucket', nameBucket);
 
         $.ajax({
             url: "s3/upload",
@@ -69,7 +62,9 @@ var nameBucket = $(event.target).closest('tr.content').find('td.reference').text
             processData : false,
             data: data,
             success: function(response) {
-
+                $.jGrowl('Success upload', {
+                    theme: 'jgrowl-success'
+                });
             }
         });
 
