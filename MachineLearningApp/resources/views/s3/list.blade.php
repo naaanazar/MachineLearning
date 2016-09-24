@@ -90,23 +90,36 @@
                                 <tr class="content bg">
                                     <td class="reference">{{ $value['Name'] }}</td>
                                     <td>0</td>
-                                    <td>{{ $value['CreationDate'] }}</td>
-                                    <td> 
-                                        <a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"
-                                            href="/s3/delete/{{ $value['Name'] }}"
-                                            id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top" title="Delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
-                                        <a class="btn btn-danger btn-sm btn-list" 
-                                            href="s3/delete_all/{{ $value['Name'] }}"  data-toggle="tooltip" data-placement="top" title="Delete
+                                    <td>{{ $value['CreationDate'] }} </td>
+                                    <td>
+
+                                        <p align="center">
+                                            <a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"
+                                               href="/s3/delete/{{ $value['Name'] }}"
+                                               id="delete-{{ $key }}" data-toggle="tooltip" data-placement="top"
+                                               title="Delete bucket"><span class="glyphicon glyphicon-trash"></span></a>
+
+                                            <a class="btn btn-danger btn-sm btn-list"
+                                               href="s3/delete_all/{{ $value['Name'] }}" data-toggle="tooltip"
+                                               data-placement="top" title="Delete
                                             files"><span class="glyphicon glyphicon-minus"></span></a>
-                                        <label for="s3-upload-file-{{ $key }}" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="top" title="Upload file">
-                                            <span class="glyphicon glyphicon-upload">
-                                                <input id="s3-upload-file-{{ $key }}" class="s3-upload-file" type="file" name="file" style="display: none">
-                                            </span>
-                                        </label>
+                                        </p>
+
+                                        <p align="center">
+                                            <label for="s3-upload-file-{{ $key }}"
+                                                   class="btn btn-primary btn-file upload-file" data-toggle="tooltip"
+                                                   data-placement="top" title="Upload file">
+                                                <span class="glyphicon glyphicon-upload">
+                                                    <input id="s3-upload-file-{{ $key }}" class="s3-upload-file"
+                                                           type="file" name="file" style="display: none">
+                                                 </span>
+                                            </label>
+                                        </p>
                                     </td>
                                 </tr>
                             @endforeach
                             <div class="pagination-list">
+                            </div>
                             </div>
                         </table>
                     </div>

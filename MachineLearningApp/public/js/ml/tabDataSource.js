@@ -71,7 +71,7 @@ function listDataSource(status)
                         '<span class="glyphicon glyphicon-info-sign"></span>' +
                     '</a>&nbsp;' +
                     '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' + response.data[key].DataSourceId + '">' +
-                        '<span class="glyphicon glyphicon-trash"></span>'
+                        '<span class="glyphicon glyphicon-trash"></span>' +
                     '</a>' +
                 '</td>' +
             '</tr>' +

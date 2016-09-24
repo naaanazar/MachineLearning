@@ -65,6 +65,10 @@ $(document).ready(function () {
                 $.jGrowl('Success upload', {
                     theme: 'jgrowl-success'
                 });
+
+                $('table.table').ready(function() {
+                    location.reload();
+                });
             }
         });
 
