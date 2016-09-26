@@ -385,7 +385,7 @@ class MLController extends Controller
 
     public function DoCreateDataSourceFromS3(Request $request)
     {
-        $DataSourceId      = uniqid();
+        $DataSourceId      = '1' . uniqid();
         $DataSourceName    = $request->input('DataSourceName');
         $DataLocationS3    = 's3://'.$this->bucket.'/'.$request->input('DataLocationS3');
         $DataSchema        = json_encode($this->DataSchema);
@@ -484,7 +484,7 @@ class MLController extends Controller
         ]);
 
         $DataSourceId        = $this->createBatchDataSourceFromS3($fileName);
-        $BatchPredictionId   = 'bp-'.uniqid();
+        $BatchPredictionId   = '1'.uniqid();
         $BatchPredictionName = $BatchPredictionId;
         $MLModelId           = $request->input('MLModelId');
         $OutputUri           = 's3://'.$this->bucket.'/';
