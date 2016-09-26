@@ -147,7 +147,8 @@ function showTable(content) {
             if (!!content.folders) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
-                        "<td class='reference'>" + item.name + "</td>" +
+                        "<td ><p><span style='color:#f0ad4e;'  class='glyphicon glyphicon-book'></span>&nbsp;<span class='reference'>" +
+                        item.name + "</span></p></td>" +
                         "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
                         "<td> " + "</td>" +
@@ -158,8 +159,9 @@ function showTable(content) {
             if (!!content.file) {
                 content.file.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " files'>" +
-                        "<td>" + item.name + "</td>" +
-                        "<td>" + item.size + "</td>" +
+                        "<td><p style='margin:0;'><span style='color:#777; margin:0;' class='glyphicon glyphicon-file'></span> " +
+                        item.name + "</p></td>" +
+                        "<td>" + fileSize(item.size) + "</td>" +
                         "<td>" + item.modified + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default download btn-sm' data-download-path='" + item.path + '/'+ item.name + "' href='#d'><span class='glyphicon glyphicon-download '></span></a>" +
@@ -170,6 +172,19 @@ function showTable(content) {
             }
         }
     }
+}
+
+
+function fileSize(size) {
+    if (size > 1048576) {
+        size = Math.round(( size/1048576) * 100) / 100;
+
+        return size + ' MB';
+    } else {
+        size = Math.round(( size/1024) * 100) / 100;
+
+        return size + ' KB';
+    };
 }
 
 function createTree(folder, item ) {

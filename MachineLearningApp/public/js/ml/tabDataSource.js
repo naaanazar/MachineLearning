@@ -22,10 +22,10 @@ $(document).ready(function () {
 
     $(document).on("click", ".btn-create-datasource", function () {        
         selectBuckets('/s3/get-buckets', '#SelectBuckets', '.create-datasource-form');
-         $('.select-datasource-field').hide();
+        $('.select-datasource-field').hide();
     });
 
-    $(document).on("click", "#SelectBuckets", function(e){
+    $(document).on("change", "#SelectBuckets", function(e){
         var bucket =$("#SelectBuckets option:selected").text();
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form', bucket);
         $('.select-datasource-field').show('slow');
