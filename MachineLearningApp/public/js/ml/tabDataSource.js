@@ -43,23 +43,20 @@ function listDataSource(status)
 
         var i = 1;
         var res = '' +
-            '<table class="table table-bordered table-font text-center">';
-//                '<thead>' +
-//                '<tr class="active">' +
-//                '<th>Name</th>' +
-//                '<th>Status</th>' +
-//                '<th>Data Location S3</th>' +
-//                '<th>Last Updated</th>' +
-//                '<th>&nbsp;</th>' +
-//                '</tr>' +
-//                '</thead>' +
-//                '<span class="hide">' + i + '</span>';
+            '<table class="table table-bordered table-font text-center">' +
+                '<tr class="active">' +
+                    '<td>Name</th>' +
+                    '<td>Status</th>' +
+                    '<td>Data Location S3</th>' +
+                    '<td>Last Updated</th>' +
+                    '<td>Action</th>' +
+                '</tr>' +
+                '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
             i = i + 1;          
             res += '' +
             '<tr>' +
-//                '<td class="hide">' + response.data[key].DataSourceId + '</td>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
@@ -80,18 +77,8 @@ function listDataSource(status)
 
         res += '</table>';
 
-        var headers = ''+
-            '<div class="table-headers">' +
-                '<span>Name</span>' +
-                '<span>Status</span>' +
-                '<span>Dataset</span>' +
-                '<span>Last Updated</span>' +
-                '<span>Action</span>' +
-            '</div>';
-
         $('.container-describeDataSources').html(res);
-        $('.container-describeDataSources').before(headers);
-        setTableHeadersWidth('describeDataSources');
+     
         $('.container-describeDataSources').addClass('loaded');
     });
 };
