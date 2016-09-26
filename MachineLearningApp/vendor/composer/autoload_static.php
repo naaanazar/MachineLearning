@@ -65,6 +65,7 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         'P' => 
         array (
             'Psy\\' => 4,
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'PhpParser\\' => 10,
         ),
@@ -213,6 +214,10 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src/Psy',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -317,10 +322,6 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         ),
         'P' => 
         array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
@@ -378,11 +379,12 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
-        'App\\Http\\Controllers\\BucketController' => __DIR__ . '/../..',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\FirstPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/FirstPageController.php',
         'App\\Http\\Controllers\\GeneratorController' => __DIR__ . '/../..' . '/app/Http/Controllers/GeneratorController.php',
         'App\\Http\\Controllers\\MLController' => __DIR__ . '/../..' . '/app/Http/Controllers/MLController.php',
         'App\\Http\\Controllers\\MainController' => __DIR__ . '/../..' . '/app/Http/Controllers/MainController.php',
+        'App\\Http\\Controllers\\PredictionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PredictionController.php',
         'App\\Http\\Controllers\\S3Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/S3Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -393,12 +395,14 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         'App\\Http\\Requests\\Request' => __DIR__ . '/../..' . '/app/Http/Requests/Request.php',
         'App\\Jobs\\Job' => __DIR__ . '/../..' . '/app/Jobs/Job.php',
         'App\\Library\\AWS\\ML' => __DIR__ . '/../..' . '/app/Library/AWS/ML.php',
+        'App\\Library\\AWS\\S3' => __DIR__ . '/../..' . '/app/Library/AWS/S3.php',
         'App\\Library\\Generators\\DatasetGenerator' => __DIR__ . '/../..' . '/app/Library/Generators/DatasetGenerator.php',
         'App\\Library\\Pagination\\Pagination' => __DIR__ . '/../..' . '/app/Library/Pagination/Pagination.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Tests\\RequestBucketExt' => __DIR__ . '/../..' . '/app/Tests/RequestBucketExt.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Aws\\Acm\\AcmClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Acm/AcmClient.php',
         'Aws\\Acm\\Exception\\AcmException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Acm/Exception/AcmException.php',
@@ -1296,6 +1300,14 @@ class ComposerStaticInit482d06c8530e12e984fdaa9ed58864ae
         'GuzzleHttp\\Exception\\TooManyRedirectsException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/TooManyRedirectsException.php',
         'GuzzleHttp\\Exception\\TransferException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/TransferException.php',
         'GuzzleHttp\\Exception\\XmlParseException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/XmlParseException.php',
+        'GuzzleHttp\\Handler\\CurlFactory' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlFactory.php',
+        'GuzzleHttp\\Handler\\CurlFactoryInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlFactoryInterface.php',
+        'GuzzleHttp\\Handler\\CurlHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlHandler.php',
+        'GuzzleHttp\\Handler\\CurlMultiHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlMultiHandler.php',
+        'GuzzleHttp\\Handler\\EasyHandle' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/EasyHandle.php',
+        'GuzzleHttp\\Handler\\MockHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/MockHandler.php',
+        'GuzzleHttp\\Handler\\Proxy' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/Proxy.php',
+        'GuzzleHttp\\Handler\\StreamHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/StreamHandler.php',
         'GuzzleHttp\\HasDataTrait' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/HasDataTrait.php',
         'GuzzleHttp\\Message\\AbstractMessage' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Message/AbstractMessage.php',
         'GuzzleHttp\\Message\\AppliesHeadersInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Message/AppliesHeadersInterface.php',

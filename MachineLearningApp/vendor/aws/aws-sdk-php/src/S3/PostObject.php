@@ -63,7 +63,7 @@ class PostObject
     }
 
     /**
-     * Gets the s3 name.
+     * Gets the bucket name.
      *
      * @return string
      */

@@ -28,7 +28,7 @@ class LogFileReader
     /**
      * Downloads, unzips, and reads a CloudTrail log file from Amazon S3
      *
-     * @param string $s3BucketName The s3 name of the log file in Amazon S3
+     * @param string $s3BucketName The bucket name of the log file in Amazon S3
      * @param string $logFileKey   The key of the log file in Amazon S3
      *
      * @return array

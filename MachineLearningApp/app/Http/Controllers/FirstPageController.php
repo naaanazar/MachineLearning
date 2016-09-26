@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 
 class FirstPageController extends Controller
 {
-   	public function firstPage()
+
+    public function firstPage()
     {
         return view("start");
     }

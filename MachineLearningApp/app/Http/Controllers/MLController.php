@@ -14,161 +14,212 @@ use Aws\MachineLearning\Exception\MachineLearningException;
 use App\Library\AWS\S3;
 use App\Library\AWS\ML;
 
-
 class MLController extends Controller
 {
 
     private $bucket = 'ml-datasets-test';
+
     private $client;
+
+    private $ml;
+
     private $DataSchema = [
-        "version" => "1.0",
-        "rowId" => null,
-        "rowWeight" => null,
-        "targetAttributeName" => "purchase",
-        "dataFormat" => "CSV",
+        "version"                => "1.0",
+        "rowId"                  => null,
+        "rowWeight"              => null,
+        "targetAttributeName"    => "purchase",
+        "dataFormat"             => "CSV",
         "dataFileContainsHeader" => true,
-        "attributes" => [
-            ["attributeName" => "email_custom_domain",
-                "attributeType" => "BINARY"],
-            ["attributeName" => "same_email_domain_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "projects_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "strings_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "members_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "has_private_project",
-                "attributeType" => "BINARY"],
-            ["attributeName" => "same_login_and_project_name",
-                "attributeType" => "BINARY"],
-            ["attributeName" => "days_after_last_login",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "country",
-                "attributeType" => "CATEGORICAL"],
-            ["attributeName" => "purchase","attributeType" => "BINARY"]
+        "attributes"             => [
+            [
+                "attributeName" => "email_custom_domain",
+                "attributeType" => "BINARY"
+            ],
+            [
+                "attributeName" => "same_email_domain_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "projects_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "strings_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "members_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "has_private_project",
+                "attributeType" => "BINARY"
+            ],
+            [
+                "attributeName" => "same_login_and_project_name",
+                "attributeType" => "BINARY"
+            ],
+            [
+                "attributeName" => "days_after_last_login",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "country",
+                "attributeType" => "CATEGORICAL"
+            ],
+            ["attributeName" => "purchase", "attributeType" => "BINARY"]
         ]
     ];
 
-    private $DataSchemaBatch = ["version" => "1.0",
-        "rowId" => null,
-        "rowWeight" => null,
-        "dataFormat" => "CSV",
+    private $DataSchemaBatch = [
+        "version"                => "1.0",
+        "rowId"                  => null,
+        "rowWeight"              => null,
+        "dataFormat"             => "CSV",
         "dataFileContainsHeader" => true,
-        "attributes" => [
-            ["attributeName" => "email_custom_domain",
-                "attributeType" => "BINARY"],
-            ["attributeName" => "same_email_domain_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "projects_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "strings_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "members_count",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "has_private_project",
-                "attributeType" => "BINARY"],
-            ["attributeName" => "same_login_and_project_name",
-                "attributeType" => "BINARY"],
-            ["attributeName" => "days_after_last_login",
-                "attributeType" => "NUMERIC"],
-            ["attributeName" => "country",
-                "attributeType" => "CATEGORICAL"]
-        ]   
+        "attributes"             => [
+            [
+                "attributeName" => "email_custom_domain",
+                "attributeType" => "BINARY"
+            ],
+            [
+                "attributeName" => "same_email_domain_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "projects_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "strings_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "members_count",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "has_private_project",
+                "attributeType" => "BINARY"
+            ],
+            [
+                "attributeName" => "same_login_and_project_name",
+                "attributeType" => "BINARY"
+            ],
+            [
+                "attributeName" => "days_after_last_login",
+                "attributeType" => "NUMERIC"
+            ],
+            [
+                "attributeName" => "country",
+                "attributeType" => "CATEGORICAL"
+            ]
+        ]
     ];
+
 
     public function __construct()
     {
         $this->client = $this->connectToML();
+
+        if (isset($_GET['Obj'])) {
+            $this->ml  = new ML;
+        }
     }
+
 
     public function index()
     {
         return view('ml.index');
     }
 
+
     private function connectToML()
     {
-        $ml = new MachineLearningClient([
-            'version' => 'latest',
-            'region' => 'us-east-1',
+        $mlClient = new MachineLearningClient([
+            'version'     => 'latest',
+            'region'      => 'us-east-1',
             'credentials' => [
-                'key' => 'AKIAI5RJSS2CYUZ6STHQ',
-                'secret' => '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'
+                'key'    => getenv('ML_KEY'),
+                'secret' => getenv('ML_SECRET')
             ]
         ]);
-        return $ml;
+
+        return $mlClient;
     }
 
-    public function listDataSources()
-    {
 
-        $ml = new ML;
-        $result = $ml->describeDataSources();
+    public function doListDataSources()
+    {
+        $result = $this->ml->describeDataSources();
 
         return response()->json(['data' => (array)$result]);
     }
 
-    public function listMLModels()
+
+    public function doListMLModels()
     {
-        $ml = new ML;
-        $result = $ml->describeMLModels();
+        $result = $this->ml->describeMLModels();
 
         return response()->json(['data' => (array)$result]);
     }
 
-    public function listEvaluations()
+
+    public function doListEvaluations()
     {
-        $ml = new ML;
-        $result = $ml->describeEvaluations();
+        $result = $this->ml->describeEvaluations();
 
         return response()->json(['data' => (array)$result]);
     }
 
-    public function listBatchPredictions()
+
+    public function doListBatchPredictions()
     {
-        $ml = new ML;
-        $result = $ml->describeBatchPredictions();
+        $result = $this->ml->describeBatchPredictions();
 
         return response()->json(['data' => (array)$result]);
     }
 
-    public function selectObjectsS3()
+
+    public function doSelectObjectsS3()
     {
-        $s3 = new S3;
+        $s3     = new S3;
         $result = $s3->ListObjectsS3();
 
         return response()->json(['data' => (array)$result]);
     }
 
-    public function selectDataSources()
+
+    public function doSelectDataSources()
     {
-        $ml = new ML;
-        $result = $ml->describeDataSources();
+        $result = $this->ml->describeDataSources();
 
         return response()->json(['data' => (array)$result]);
     }
 
-    public function selectMLModel()
-    {
-        $ml = new ML;
-        $result = $ml->describeMLModels();
-sleep (5);
-        return response()->json(['data' => (array)$result]);
-    }      
 
-    public function getDataSource($DataSourceId)
+    public function doSelectMLModel()
+    {
+        $result = $this->ml->describeMLModels();
+
+        return response()->json(['data' => (array)$result]);
+    }
+
+
+    public function doGetDataSource($DataSourceId)
     {
         try {
             $result = $this->client->getDataSource([
                 'DataSourceId' => $DataSourceId,
-                'Verbose' => true || false,
+                'Verbose'      => true || false,
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
-        $arr = [$result['Name'],
+        $arr = [
+            $result['Name'],
             $result['DataSizeInBytes'],
             $result['NumberOfFiles'],
             $result['Message'],
@@ -179,28 +230,33 @@ sleep (5);
         return response()->json(['data' => (array)$arr]);
     }
 
-    public function getMLModel($ModelId)
+
+    public function doGetMLModel($ModelId)
     {
         try {
             $result = $this->client->getMLModel([
                 'MLModelId' => $ModelId,
-                'Verbose' => true,
+                'Verbose'   => true,
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
-        $arr = [$result['Name'],
+        $arr = [
+            $result['Name'],
             $result['SizeInBytes'],
             $result['InputDataLocationS3'],
             $result['Message'],
             $result['MLModelId'],
             $result['TrainingDataSourceId']
         ];
+
         return response()->json(['data' => (array)$arr]);
     }
 
-    public function getEvaluation($EvaluationId)
+
+    public function doGetEvaluation($EvaluationId)
     {
         try {
             $result = $this->client->getEvaluation([
@@ -208,9 +264,11 @@ sleep (5);
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
-        $arr = [$result['Name'],
+        $arr = [
+            $result['Name'],
             $result['ComputeTime'],
             $result['InputDataLocationS3'],
             $result['Message'],
@@ -222,7 +280,8 @@ sleep (5);
         return response()->json(['data' => (array)$arr]);
     }
 
-    public function getBatchPrediction($getBatchPredictionId)
+
+    public function doGetBatchPrediction($getBatchPredictionId)
     {
         try {
             $result = $this->client->getBatchPrediction([
@@ -230,9 +289,11 @@ sleep (5);
             ]);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+
+            return response()->json(['data' => $e->getMessage()]);
         }
-        $arr = [$result['Name'],
+        $arr = [
+            $result['Name'],
             $result['ComputeTime'],
             $result['InputDataLocationS3'],
             $result['Message'],
@@ -244,7 +305,8 @@ sleep (5);
         return response()->json(['data' => (array)$arr]);
     }
 
-    public function deleteDataSource($DataSourceId)
+
+    public function doDeleteDataSource($DataSourceId)
     {
         try {
             $result = $this->client->deleteDataSource([
@@ -254,11 +316,12 @@ sleep (5);
             return response()->json(['deleted' => 'Ok']);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
     }
 
-    public function deleteEvaluation($EvaluationId)
+
+    public function doDeleteEvaluation($EvaluationId)
     {
         try {
             $result = $this->client->deleteEvaluation([
@@ -268,39 +331,42 @@ sleep (5);
             return response()->json(['deleted' => 'Ok']);
 
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
     }
 
-    public function deleteMLModel($MLModelId)
+
+    public function doDeleteMLModel($MLModelId)
     {
         try {
             $result = $this->client->deleteMLModel([
                 'MLModelId' => $MLModelId,
             ]);
 
-            return response()->json(['deleted' => 'Ok']);
-
         } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
-        }
-    }
-
-    public function deleteBatchPrediction($BatchPredictionId)
-    {
-        try {
-            $result = $this->client->deleteBatchPrediction([
-                'BatchPredictionId' => $BatchPredictionId,
-            ]);            
-
-        } catch (MachineLearningException $e) {
-            echo $e->getMessage() . "\n";
+            return response()->json(['data' => $e->getMessage()]);
         }
 
         return response()->json(['deleted' => 'Ok']);
     }
 
-    public function deleteRealtimeEndpoint(Request $request)
+
+    public function doDeleteBatchPrediction($BatchPredictionId)
+    {
+        try {
+            $result = $this->client->deleteBatchPrediction([
+                'BatchPredictionId' => $BatchPredictionId,
+            ]);
+
+        } catch (MachineLearningException $e) {
+            return response()->json(['data' => $e->getMessage()]);
+        }
+
+        return response()->json(['deleted' => 'Ok']);
+    }
+
+
+    public function DoDeleteRealtimeEndpoint(Request $request)
     {
         $MLModelId = $request->id;
 
@@ -310,143 +376,157 @@ sleep (5);
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
+            return response()->json(['data' => $e->getMessage()]);
         }
+
         return response()->json(['data' => $MLModelId]);
     }
 
-    public function createDataSourceFromS3(Request $request)
+
+    public function DoCreateDataSourceFromS3(Request $request)
     {
-        $DataSourceId = uniqid();
-        $DataSourceName = $request->input('DataSourceName');
-        $DataLocationS3 = 's3://' . $this->bucket . '/' . $request->input('DataLocationS3');
-        $DataSchema = json_encode($this->DataSchema);
-        $DataRearrangement = '{"splitting":{"percentBegin":' . $request->input("DataRearrangementBegin")
-            . ',"percentEnd":' . $request->input("DataRearrangementEnd") . '}}';
+        $DataSourceId      = '1' . uniqid();
+        $DataSourceName    = $request->input('DataSourceName');
+        $DataLocationS3    = 's3://'.$this->bucket.'/'.$request->input('DataLocationS3');
+        $DataSchema        = json_encode($this->DataSchema);
+        $dataRearrangement = ["splitting" => [
+           "percentBegin"  =>  strval($request->input('DataRearrangementBegin')),
+           "percentEnd"    =>  strval($request->input('DataRearrangementEnd')),
+           ]
+       ];
+       $data= json_encode($dataRearrangement);       
 
         try {
             $result = $this->client->createDataSourceFromS3([
                 'ComputeStatistics' => true,
-                'DataSourceId' => $DataSourceId,
-                'DataSourceName' => $DataSourceName,
-                'DataSpec' => [ // REQUIRED
-                    'DataLocationS3' => $DataLocationS3,
-                    'DataRearrangement' => $DataRearrangement,
-                    'DataSchema' => $DataSchema
+                'DataSourceId'      => $DataSourceId,
+                'DataSourceName'    => $DataSourceName,
+                'DataSpec'          => [
+                    'DataLocationS3'    => $DataLocationS3,
+                    'DataRearrangement' => $data,
+                    'DataSchema'        => $DataSchema
                 ],
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
+            return response()->json(['error' => $e->getMessage()]);
         }
 
-        return response()->json(['data' => (array)$result]);
+        return response()->json(['success' => $result['DataSourceId']]);
     }
 
-    public function createMLModel(Request $request)
+
+    public function doCreateMLModel(Request $request)
     {
-        $ModelId = 'ml-' . uniqid();
-        $ModelName = $request->input('MLModelName');
-        $ModelType = $request->input('MLModelType');
+        $ModelId      = 'ml-'.uniqid();
+        $ModelName    = $request->input('MLModelName');
+        $ModelType    = $request->input('MLModelType');
         $DataSourceId = $request->input('DataSourceId');
 
         try {
 
             $result = $this->client->createMLModel([
-                'MLModelId' => $ModelId,
-                'MLModelName' => $ModelName,
-                'MLModelType' => $ModelType,
+                'MLModelId'            => $ModelId,
+                'MLModelName'          => $ModelName,
+                'MLModelType'          => $ModelType,
                 'TrainingDataSourceId' => $DataSourceId,
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
+
+            return response()->json(['error' => $e->getMessage()]);
         }
+
+        return response()->json(['success' => $result['MLModelId']]);
 
     }
 
 
-    public function createEvaluation(Request $request)
+    public function doCreateEvaluation(Request $request)
     {
-        $DataSourceId = $request->input('DataSourceId');
-        $EvaluationId = 'ev-' . uniqid();
+        $DataSourceId   = $request->input('DataSourceId');
+        $EvaluationId   = 'ev-'.uniqid();
         $EvaluationName = $request->input('EvaluationName');
-        $MLModelId = $request->input('MLModelId');
+        $MLModelId      = $request->input('MLModelId');
 
         try {
 
             $result = $this->client->createEvaluation([
                 'EvaluationDataSourceId' => $DataSourceId,
-                'EvaluationId' => $EvaluationId,
-                'EvaluationName' => $EvaluationName,
-                'MLModelId' => $MLModelId,
+                'EvaluationId'           => $EvaluationId,
+                'EvaluationName'         => $EvaluationName,
+                'MLModelId'              => $MLModelId,
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
+            return response()->json(['error' => $e->getMessage()]);
         }
+
+            return response()->json(['success' => $result['EvaluationId']]);
     }
 
-    public function createBatchPrediction(Request $request)
+
+    public function doCreateBatchPrediction(Request $request)
     {
-        $S3 = new S3;
+        $S3     = new S3;
         $client = $S3->getClient();
         $client->registerStreamWrapper();
 
-        $file = $request->file('file');
+        $file     = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $data = file_get_contents($file);
+        $data     = file_get_contents($file);
 
-        $result = $client->putObject(array(
-                'Bucket' => $this->bucket,
-                'Key'    => $fileName,
-                'Body'   => $data,
-                'ACL'    => 'public-read',
-        ));
+        $result = $client->putObject([
+            'Bucket' => $this->bucket,
+            'Key'    => $fileName,
+            'Body'   => $data,
+            'ACL'    => 'public-read',
+        ]);
 
-        $DataSourceId = $this->createBatchDataSourceFromS3($fileName);
-        $BatchPredictionId = 'bp-' . uniqid();
+        $DataSourceId        = $this->createBatchDataSourceFromS3($fileName);
+        $BatchPredictionId   = '1'.uniqid();
         $BatchPredictionName = $BatchPredictionId;
-        $MLModelId = $request->input('MLModelId');
-        $OutputUri = 's3://' . $this->bucket . '/';
+        $MLModelId           = $request->input('MLModelId');
+        $OutputUri           = 's3://'.$this->bucket.'/';
 
         try {
             $result = $this->client->createBatchPrediction([
                 'BatchPredictionDataSourceId' => $DataSourceId,
-                'BatchPredictionId' => $BatchPredictionId,
-                'BatchPredictionName' => $BatchPredictionName,
-                'MLModelId' => $MLModelId,
-                'OutputUri' => $OutputUri,
+                'BatchPredictionId'           => $BatchPredictionId,
+                'BatchPredictionName'         => $BatchPredictionName,
+                'MLModelId'                   => $MLModelId,
+                'OutputUri'                   => $OutputUri,
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
+            return response()->json(['error' => $e->getMessage()]);
         }
 
-        return response()->json(['data' => 'ok']);
+        return response()->json(['success' => $result['BatchPredictionId']]);
     }
 
 
     private function createBatchDataSourceFromS3($fileName)
     {
-        $DataSourceId = uniqid();
-        $DataLocationS3 = 's3://' . $this->bucket . '/' . $fileName ;
-        $DataSchema = json_encode($this->DataSchemaBatch);
+        $DataSourceId   = uniqid();
+        $DataLocationS3 = 's3://'.$this->bucket.'/'.$fileName;
+        $DataSchema     = json_encode($this->DataSchemaBatch);
 
         try {
             $result = $this->client->createDataSourceFromS3([
                 'ComputeStatistics' => true,
-                'DataSourceId' => $DataSourceId,
-                'DataSourceName' => $DataSourceId,
-                'DataSpec' => [ // REQUIRED
+                'DataSourceId'      => $DataSourceId,
+                'DataSourceName'    => $DataSourceId,
+                'DataSpec'          => [ // REQUIRED
                     'DataLocationS3' => $DataLocationS3,
-                    'DataSchema' => $DataSchema
+                    'DataSchema'     => $DataSchema
                 ],
             ]);
 
         } catch (MachineLearningException $e) {
-            return response()->json(['data' => $e->getMessage() ]);
+            //return response()->json(['data' => $e->getMessage()]);
         }
+
         return $result['DataSourceId'];
 
     }

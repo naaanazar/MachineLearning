@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use Illuminate\Support\Collection;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Library\Pagination\Pagination as S3Pagination;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
@@ -16,38 +12,44 @@ use RecursiveDirectoryIterator;
 
 class S3Controller extends Controller
 {
+
     public $s3;
+
     private $client;
+
+    public $bucket = 'ml-datasets-test';
 
     public function __construct()
     {
         $this->client = $this->connect();
     }
 
+
     public function doIndex()
     {
         return view('s3.list');
     }
 
+
     private function connect()
     {
         $s3 = new S3Client([
-            'version' => 'latest',
-            'region' => 'us-east-1',
+            'version'     => 'latest',
+            'region'      => 'us-east-1',
             'credentials' => [
-                'key' => 'AKIAI5RJSS2CYUZ6STHQ',
-                'secret' => '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'
+                'key'    => getenv('ML_KEY'),
+                'secret' => getenv('ML_SECRET')
             ]
         ]);
 
         return $s3;
     }
 
+
     public function doListOfBuckets()
     {
         try {
-            $result = $this->client->listBuckets([
-            ]);
+            $result = $this->client->listBuckets([]);
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
@@ -55,10 +57,10 @@ class S3Controller extends Controller
         return view('s3.list', ['results' => $result['Buckets']]);
     }
 
-    public function allBuckets() {
+    private function allBuckets()
+    {
         try {
-            $result = $this->client->listBuckets([
-            ]);
+            $result = $this->client->listBuckets([]);
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
@@ -66,34 +68,47 @@ class S3Controller extends Controller
         return $result['Buckets'];
     }
 
-    public function bucketStruct()
+    public function doBucketStruct()
     {
-        $this->client->registerStreamWrapper();
-        $buckets = $this->allBuckets();
         $files = [];
 
-        foreach ($buckets as $bucket) {
-            $dir = 's3://' . $bucket['Name'];
-            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
+        $this->client->registerStreamWrapper();
 
-            foreach ($iterator as $file) {
-                $files[] = array('name' => $file->getBasename(), 'extension' => $file->getExtension(),
-                    'path' => $file->getPath(), 'size' => $file->getSize(), 'fileType' => $file->getType(),
-                    'create' => $file->getCTime(), 'modified' => $file->getMTime());
+        foreach ($this->allBuckets() as $bucket) {
+            try {
+                $dir = 's3://' . $bucket['Name'];
+                $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
+
+                foreach ($iterator as $file) {
+                    $files[] = [
+                        'name'      => $file->getBasename(),
+                        'extension' => $file->getExtension(),
+                        'path'      => $file->getPath(),
+                        'size'      => $file->getSize(),
+                        'fileType'  => $file->getType(),
+                        'create'    => $file->getCTime(),
+                        'modified'  => $file->getMTime()
+                    ];
+                }
+            } catch (S3Exception $e) {
+                // Supressing all errors. We have unremovable bucket :)
+//                return Response()->json($e->getMessage());
             }
-        };
+        }
 
         return response()->json($files);
     }
 
-
     public function doCreateBucket(Request $request)
     {
-        try {
+        $this->validate($request, [
+            'nameBucket' => 'required|string|min:0|max:255',
+        ]);
 
+        try {
             $this->client->createBucket([
-                'ACL' => 'public-read-write',
-                'Bucket' => $request->nameBucket,
+                'ACL'                       => 'public-read-write',
+                'Bucket'                    => $request->nameBucket,
                 'CreateBucketConfiguration' => [
                     'LocationConstraint' => 'us-east-1',
                 ],
@@ -102,35 +117,37 @@ class S3Controller extends Controller
         } catch (S3Exception $e) {
             echo $e->getMessage() . "\n";
         }
+
         return back();
     }
 
 
     public function doDeleteBucket($nameBucket)
     {
-
         try {
             $this->client->deleteBucket([
                 'Bucket' => $nameBucket,
             ]);
 
-            return back();
+            $status = true;
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            $status = false;
         }
+
+        return response()->json(["status" => $status]);
     }
 
 
     public function doDeleteAllObjectsFromBucket($nameBucket)
     {
         try {
-            $results = $this->client->listObjects(array('Bucket' => $nameBucket))->get('Contents');
+            $results = $this->client->listObjects(['Bucket' => $nameBucket])->get('Contents');
             if ($results == !null) {
                 foreach ($results as $key => $value) {
-                    $this->client->deleteObject(array(
+                    $this->client->deleteObject([
                         'Bucket' => $nameBucket,
-                        'Key' => $value['Key'],
-                    ));
+                        'Key'    => $value['Key'],
+                    ]);
                 }
             } else {
                 echo "Files not found";
@@ -143,6 +160,7 @@ class S3Controller extends Controller
         return back();
     }
 
+
     /*---------------S3-----------------*/
 
     public function doUpload(Request $request)
@@ -151,59 +169,87 @@ class S3Controller extends Controller
             'file' => 'required|file|mimes:csv,txt',
         ]);
 
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
+
+        $file        = $request->file('file');
+        $fileName    = $file->getClientOriginalName();
         $storagePath = storage_path('app/');
         $file->move($storagePath, $fileName);
 
         $filepath = $storagePath . '/' . $fileName;
-        $keyname = basename($filepath);
+        $keyname  = basename($filepath);
 
         try {
-            $result = $this->client->putObject(array(
-                'Bucket' => $this->bucket,
-                'Key'    => $keyname,
-                'SourceFile'   => $filepath,
-                'ACL'    => 'public-read'
-            ));
+            $result = $this->client->putObject([
+                'Bucket'     => $request->nameBucket,
+                'Key'        => $keyname,
+                'SourceFile' => $filepath,
+                'ACL'        => 'public-read'
+            ]);
 
         } catch (S3Exception $e) {
-            echo $e->getMessage() . "\n";
+            return Response()->json(['data' => $e->getMessage()]);
         }
+        $file = $fileName;
+        Storage::delete($fileName);
 
         return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 
-    public function doDelete($filename)
+
+//    public function doDelete($filename)
+//    {
+//        try {
+//            $this->client->deleteObject([
+//                'Bucket'       => $this->bucket,
+//                'Key'          => $filename,
+//                'RequestPayer' => 'requester'
+//            ]);
+//        } catch (S3Exception $e) {
+//            return Response()->json(['success' => $e->getMessage()]);
+//        }
+//
+//        return Response()->json(['success' => true]);
+//    }
+
+
+    public function doDelete()
     {
+        $filename = $_POST['name'];
+        $url = parse_url($filename);
+ 
+        $client = $this->connect();
+        $filename = urldecode($filename);
         try {
-            $this->client->deleteObject([
-                'Bucket' => $this->bucket,
-                'Key' => $filename,
+            $result = $client->deleteObject([
+                'Bucket' => $url['host'],
+                'Key' => substr($url['path'], 1),
                 'RequestPayer' => 'requester'
             ]);
         } catch (S3Exception $e) {
             return  Response()->json(['success' => (array)$e->getMessage()]);
         }
-
-
-        return Response()->json(['success' => true]);
+       return Response()->json(['success' => (array)$result]);
     }
+
+
 
     public function doPredictionForm()
     {
         return view('prediction.prediction');
     }
 
-        public function downloadFromS3(Request $request)
+
+    public function doDownloadFromS3(Request $request)
     {
         $path = $request->name;
         $path = urldecode($path);
         $this->client->registerStreamWrapper();
-        $data = file_get_contents($path);
+        $data     = file_get_contents($path);
         $fileName = basename($path);
+
         error_reporting(0);
         ob_start();
+
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $fileName);
@@ -211,12 +257,25 @@ class S3Controller extends Controller
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
         header('Content-Length:' . filesize($data));
+
         ob_clean();
         ob_end_flush();
         echo $data;
         exit;
+        $result = $this->client->getObject(array(
+            'Bucket' => 'this-is-sparta',
+            'Key'    => 'test-dataset.csv',
+            'SaveAs' => 'this-is-sparta/test-dataset.csv'
+        ));
+        $result = $this->client->getObject(array(
+            'Bucket' => 'ml-datasets-test',
+            'Key'    => 'batch (2).csv',
+            'SaveAs' => 'ml-datasets-test/batch (2).csv'
+        ));
     }
-    public function fileExists(Request $request)
+
+
+    public function doFileExists(Request $request)
     {
         $path = $request->name;
         $path = urldecode($path);

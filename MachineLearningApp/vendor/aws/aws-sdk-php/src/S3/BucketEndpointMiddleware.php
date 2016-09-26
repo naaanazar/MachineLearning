@@ -6,7 +6,7 @@ use Psr\Http\Message\RequestInterface;
 
 /**
  * Used to update the host used for S3 requests in the case of using a
- * "s3 endpoint" or CNAME s3.
+ * "bucket endpoint" or CNAME bucket.
  *
  * IMPORTANT: this middleware must be added after the "build" step.
  *

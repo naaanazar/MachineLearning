@@ -50,7 +50,7 @@ class PermanentRedirectMiddleware
                         'Encountered a permanent redirect while requesting '
                         . $result->search('"@metadata".effectiveUri') . '. '
                         . 'Are you sure you are using the correct region for '
-                        . 'this s3?',
+                        . 'this bucket?',
                         $command,
                         ['result' => $result]
                     );
