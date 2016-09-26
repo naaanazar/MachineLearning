@@ -239,7 +239,7 @@ class S3Controller extends Controller
     }
 
 
-    public function downloadFromS3(Request $request)
+    public function doDownloadFromS3(Request $request)
     {
         $path = $request->name;
         $path = urldecode($path);
@@ -275,7 +275,7 @@ class S3Controller extends Controller
     }
 
 
-    public function fileExists(Request $request)
+    public function doFileExists(Request $request)
     {
         $path = $request->name;
         $path = urldecode($path);
