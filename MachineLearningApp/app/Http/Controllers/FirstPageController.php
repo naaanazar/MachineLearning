@@ -11,6 +11,6 @@ class FirstPageController extends Controller
 {
    	public function firstPage()
     {
-        return view ("start");
+        return view("start");
     }
 }
