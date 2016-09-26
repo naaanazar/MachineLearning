@@ -65,7 +65,7 @@
                     <div class="col-md-10 col-md-offset-1">
                         <table class="table table-bordered table-font text-left" id="myTable">
                             <div class="loader col-md-2 col-md-offset-5 hide" id="loader-s3-main">
-                            <tr class="active table-header">
+                            <tr class="active ">
                                 <td>Name</td>
                                 <td>Size</td>
                                 <td>Last modified</td>

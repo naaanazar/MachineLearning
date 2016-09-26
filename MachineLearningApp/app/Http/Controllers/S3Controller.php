@@ -68,6 +68,13 @@ class S3Controller extends Controller
         return $result['Buckets'];
     }
 
+    public function doGetBuckets()
+    {
+        $result = $this->allBuckets();
+
+        return response()->json(['data' => (array)$result]);
+    }
+
     public function doBucketStruct()
     {
         $files = [];

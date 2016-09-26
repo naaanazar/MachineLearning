@@ -33,7 +33,7 @@ Route::get('/ml/getmlmodel/{ModelId}', 'MLController@doGetMLModel');
 Route::get('/ml/getevaluation/{EvaluationId}', 'MLController@doGetEvaluation');
 Route::get('/ml/getbatchprediction/{getBatchPredictionId}', 'MLController@doGetBatchPrediction');
 
-Route::get('/ml/select-S3objects', 'MLController@doSelectObjectsS3');
+Route::get('/ml/select-S3objects/{bucket}', 'MLController@doSelectObjectsS3');
 Route::get('/ml/select-data-source', 'MLController@doSelectDataSources');
 Route::get('/ml/select-ml-model', 'MLController@doSelectMLModel');
 
@@ -51,3 +51,5 @@ Route::post('s3/create_bucket', 'S3Controller@doCreateBucket');
 
 Route::post('/s3/upload', 'S3Controller@doUpload');
 Route::post('/s3/delete', 'S3Controller@doDelete');
+Route::get('/s3/get-buckets', 'S3Controller@doGetBuckets');
+

@@ -200,12 +200,30 @@ function selectName(uri, elementId, formClass)
     });
 };
 
-function selectDataFromS3(uri, elementId, formClass)
+function selectBuckets(uri, elementId, formClass)
 {
     addSelectLoader(elementId, formClass);
 
     $.get(uri, function (response) {
-        var result;
+        var result ='"<option value="" disabled selected style="display: none;">Please change bucket</option>"';
+        var id;
+
+        for (var key in response.data) {
+
+            result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+        };
+
+        $(elementId).html(result);
+        removeSelectLoader(elementId);
+    });
+};
+
+function selectDataFromS3(uri, elementId, formClass, bucket)
+{
+    addSelectLoader(elementId, formClass);
+
+    $.get(uri + '/' + bucket, function (response) {
+        var result ='"<option value="" disabled selected style="display: none;">Please change dataset</option>"';
 
         for (var key in response.data) {
             var extension = response.data[key].Key.substr(-3);
