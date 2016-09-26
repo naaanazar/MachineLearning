@@ -8,11 +8,7 @@ $(document).ready(function () {
             $('.ml-tabs').find('a[href="' + window.location.hash + '"]').tab('show');
     }
 
-    $("[data-toggle='tooltip']").tooltip();
-
-    // $('#input-file').change(function () {
-    //     $('.form-upload').submit();
-    // });
+    $("[data-toggle='tooltip']").tooltip();   
 
     $(".upload-message").show().delay(1500).fadeOut(1000);
 
@@ -62,29 +58,10 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             processData: false,
-            success: function (data) {
-                // getListS3();
-                // success('.notification-s3', 'File uploaded to S3!');
-            },
-            error: function () {
-                console.log(1);
-                // errorS3('.notification-s3');
+            success: function (data) {        
             },
         });
     });
-
-    // update list s3
-    // function getListS3() {
-    //     $.ajax({
-    //         url: '/s3/list',
-    //         method: 'GET',
-    //         success: function (data) {
-    //             $('.s3-pagination').html($(data).find('div.pagination-list'));
-    //             $('.s3-table').html($(data).find('table'));
-    //         }
-    //     });
-    // }
-
 
 });
 
