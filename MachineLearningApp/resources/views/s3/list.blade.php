@@ -74,11 +74,11 @@
                             <tr class="bg back">
                                 <td colspan="4" ><span class="back">...</span></td>
                             </tr>
-                            @foreach($results as $key => $value)
+                            @foreach ($results as $key => $value)
                                 <tr class="content bg">
                                     <td class="reference">{{ $value['Name'] }}</td>
                                     <td>0</td>
-                                    <td>{{ $value['CreationDate'] }} </td>
+                                    <td class="date">{{ date('d M Y H:i:s', strtotime($value['CreationDate'])) }} </td>
                                     <td style="width: 150px">
 
                                             <a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"

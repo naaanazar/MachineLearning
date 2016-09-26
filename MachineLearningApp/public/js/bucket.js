@@ -160,7 +160,7 @@ function showTable(content) {
                     $('#myTable').append("<tr class='" + content.name + " files'>" +
                         "<td>" + item.name + "</td>" +
                         "<td>" + item.size + "</td>" +
-                        "<td>" + item.modified + "</td>" +
+                        "<td>" + timeConverter2(item.modified) + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default download btn-sm' data-download-path='" + item.path + '/'+ item.name + "' href='#d'><span class='glyphicon glyphicon-download '></span></a>" +
                         '<a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
@@ -259,5 +259,4 @@ function deleteFile(file) {
     localStorage.removeItem(bucket.name);
     localStorage.setItem(bucket.name, JSON.stringify(bucket));
 }
-
 
