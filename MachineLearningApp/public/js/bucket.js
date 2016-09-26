@@ -85,7 +85,7 @@ $(document).ready(function () {
         } else {
             setLocation('#' + name);
 
-            bucket = findBucket(location.hash.split('#')[1]);
+            bucket = findBucket();
         }
 
         showTable(findItem(bucket, name));
@@ -117,7 +117,7 @@ $(document).ready(function () {
     });
 
     if(~location.href.lastIndexOf('#')) {
-        bucket = findBucket(location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0]);
+        bucket = findBucket();
 
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
@@ -163,7 +163,7 @@ function showTable(content) {
                         "<td>" + item.modified + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default btn-sm btn-download-s3' href='https://s3.amazonaws.com/" + item.path.slice(item.path.lastIndexOf('//') + 2, item.path.length) + '/' + item.name + "'><span class='glyphicon glyphicon-download '></span></a>" +
-                        '<a class="btn btn-danger btn-sm btn-delete" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                        '<a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                         "</td>" +
                         "</tr>");
                 });
@@ -206,7 +206,8 @@ function createTree(folder, item ) {
     return folder;
 }
 
-function findBucket(bucketName) {
+function findBucket() {
+    bucketName = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0];
     for(var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
 
@@ -241,6 +242,22 @@ function findItem(bucket, itemName) {
 
         return findItem.folder;
     }
+}
+
+function deleteFile(file) {
+    var bucket = findBucket();
+    var folder = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
+        [location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/').length - 1];
+    var folder = findItem(bucket, folder);
+
+    for (var i in folder.file) {
+        if(file == folder.file[i].name) {
+            folder.file.splice(i, 1);
+        }
+    }
+    console.log(folder.file);
+    localStorage.removeItem(bucket.name);
+    localStorage.setItem(bucket.name, JSON.stringify(bucket));
 }
 
 
