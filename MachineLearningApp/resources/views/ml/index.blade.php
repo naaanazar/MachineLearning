@@ -77,8 +77,13 @@
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
                         <div class="form-group select-load">
+                            <label for="SelectBuckets">Buckets</label>
+                            <select class="form-control" id="SelectBuckets" name="SelectBuckets">                                 
+                            </select>
+                        </div>
+                        <div style="display:none" class="form-group select-load select-datasource-field">
                             <label for="SelectDataLocationS3">Dataset</label>
-                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
+                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">                               
                             </select>
                         </div>
                         <div class="">
