@@ -32,33 +32,7 @@ $(document).ready(function () {
         $(selector).append('<div class="alert alert-danger upload-message-s3">' +
             '<ul><li><strong>Error! File is not loaded to S3!</strong>' +
             '</li></ul></div>').show('slow').hide(4000);
-    }
-
-    $(document).on('click', '.btn-delete', function (e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        var name = $(this).attr('id');
-        $.ajax({
-            url: '/s3/delete',
-            method: 'post',
-            data: {
-            name: $(this).attr('id')
-            },
-            success: function (data) {            
-                if (data.success) {
-                    $(e.target).closest('tr').remove("tr");
-                }
-                $.jGrowl('Successfully removed: ' + name, {
-                    theme: 'jgrowl-success'
-                });
-            },
-            error: function () {
-                $.jGrowl('An error occurred during delete process', {
-                    theme: 'jgrowl-danger'
-                });
-            }
-        });
-    });
+    }    
 
     $(document).on('click', '.download', function (e) {
         var url = encodeURI('/s3/download-from-s3?name=' + $(this).data('download-path'));

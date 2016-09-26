@@ -37,4 +37,32 @@ $(document).ready(function () {
     });
 
     validationBucket("#nameBucket", 255, "^ |[^0-9a-zA-Z-._]");
+
+    $(document).on('click', '.btn-delete', function (e) {
+        e.preventDefault();
+        var name = $(this).attr('id');
+
+        $.ajax({
+            url: '/s3/delete',
+            method: 'post',
+            data: {
+            name: $(this).attr('id')
+            },
+            success: function (data) {
+
+                if (data.success) {
+                    $(e.target).closest('tr').remove("tr");
+                }
+                
+                $.jGrowl('Successfully removed: ' + name, {
+                    theme: 'jgrowl-success'
+                });
+            },
+            error: function () {
+                $.jGrowl('An error occurred during delete process', {
+                    theme: 'jgrowl-danger'
+                });
+            }
+        });
+    });
 });
