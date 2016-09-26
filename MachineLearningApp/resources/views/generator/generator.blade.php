@@ -7,7 +7,7 @@
 <div class="container">    
     <div class="row generator-form col-xs-12">
         <h3 align='center'>Generate dataset</h3> 
-        <div class="col-md-10 col-xs-12 generator-input-container">
+        <div class="col-md-offset-4 col-md-4 col-xs-12 generator-input-container">
             <input class="form-control" id="rows-number" ondrop="return false" name="rows" placeholder="Records quantity" min="1">
             <div class='empty-msg'></div>
         </div>
