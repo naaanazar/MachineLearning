@@ -8,7 +8,6 @@
     <script src="{{ URL::to('js/ml/tabEvaluation.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
     <script src="{{ URL::to('js/ml/validationForms.js') }}"></script>
-    <script src="{{ URL::to('js/ml/setTableHeadersWidth.js') }}"></script>
 
     <div class="container ">
         <div class="row">
