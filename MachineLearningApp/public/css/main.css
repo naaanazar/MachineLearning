@@ -613,7 +613,8 @@ a:focus, a:hover{
 
 .generator-input-container,
 .generator-button-container {
-    margin: 4% 0;
+    margin-top: 4%;
+    margin-bottom: 4%;
 }
 
 #rows-number.warning {
