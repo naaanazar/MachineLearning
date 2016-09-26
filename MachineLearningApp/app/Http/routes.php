@@ -5,8 +5,8 @@ Route::get('/', 'FirstPageController@firstPage');
 Route::get('prediction', 'PredictionController@doView');
 Route::post('prediction/predict', 'PredictionController@doPredict');
 
-Route::get('/s3/download-from-s3/', 'S3Controller@downloadFromS3');
-Route::get('/s3/file-exists/', 'S3Controller@fileExists');
+Route::get('/s3/download-from-s3/', 'S3Controller@doDownloadFromS3');
+Route::get('/s3/file-exists/', 'S3Controller@doFileExists');
 
 Route::get('ml', 'MLController@index');
 
