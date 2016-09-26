@@ -49,7 +49,9 @@
                         <hr class="small">
                         <span class="subheading animated fadeInDown ">Crowdin Space</span>
                         <a href="#viewAboutContent"><button type="button" class="btn btn-primary btn-start  btn-about animated fadeInLeft" style="-webkit-animation-delay: 0.5s;" onclick="showDiv()"><span>About</span></button></a>
-                        <a href="{{ action('PredictionController@doView') }}"><button type="button" class="btn btn-primary btn-start btn-try-it animated fadeInRight" style="-webkit-animation-delay: 0.5s;"><span>Try It</span></button></a>
+                      
+                        <a href="{{ action('PredictionController@doView') }}"><button type="button" class="btn btn-primary btn-start btn-try-it animated fadeInRight" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Try It" style="-webkit-animation-delay: 0.5s;"><span>Try It</span></button></a>
+                        <script type="text/javascript">$('.btn-try-it').on('click', function(){var $this = $(this);$this.button('loading');setTimeout(function() {$this.button('reset');},8000);});</script>
                     </div>
                 </div>
             </div>
