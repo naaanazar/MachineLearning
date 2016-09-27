@@ -56,9 +56,9 @@ $(document).ready(function () {
     }
 
     $('body').on('change', '.s3-upload-file', function(event) {
-        var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
+        var nameBucket = $(event.target).closest('td.buttons').find('label.upload-file').data('delete-name');
         var data = new FormData();
-
+console.log(nameBucket);
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
 
@@ -156,10 +156,10 @@ function showTable(content) {
         content.forEach(function (item) {
             $('#myTable').append(
                 '<tr class="content bg">' +
-                '<td class="reference">' + item.name + '</td>' +
+                '<td class="reference"><img src="images/bucket.png" alt="bucket" width=18px height="18px">' + item.name + '</td>' +
                 '<td>0</td>' +
                 '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
-                '<td style="width: 130px">' +
+                '<td class="buttons" style="width: 130px">' +
                 '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
                 'href="/s3/delete/' + item.name + '"' +
                 'data-name="' + item.name + '"' +
@@ -174,7 +174,7 @@ function showTable(content) {
                 '</a>' +
                 '&nbsp<label for="s3-upload-file-' + key + '"' +
                 'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
-                'data-placement="top" title="Upload file">' +
+                'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
                 '<span class="glyphicon glyphicon-upload">' +
                 '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
                 'type="file" name="file" style="display: none">' +
@@ -247,9 +247,9 @@ function createTree(folder, item ) {
             folder.folders = [obj];
         } else {
             if (folder.folders[folder.folders.length - 1].name != createTree.item.path.split('/')[createTree.level + 2]) {
-                    var obj = {};
-                    obj.name = createTree.item.path.split('/')[createTree.level + 2];
-                    folder.folders.push(obj);
+                var obj = {};
+                obj.name = createTree.item.path.split('/')[createTree.level + 2];
+                folder.folders.push(obj);
             }
         }
         createTree(folder.folders[folder.folders.length - 1]);
