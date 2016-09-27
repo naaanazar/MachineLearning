@@ -25,7 +25,7 @@ $(document).ready(function () {
         });
     }
 
-    $(".btn-delete-bucket").on("click", function(e) {
+    $(document).on('click', '.btn-delete-bucket', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
 
