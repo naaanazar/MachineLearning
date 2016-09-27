@@ -117,13 +117,14 @@ $(document).ready(function () {
 
                 history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
             }
+
+            result = getBuckets();
             showTable(result);
         }
     });
 
     if(~location.href.lastIndexOf('#')) {
         bucket = findBucket();
-        result = getBuckets();
 
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
@@ -159,6 +160,7 @@ function showTable(content) {
                 '<td style="width: 135px">' +
                 '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
                 'href="/s3/delete/' + item.name + '"' +
+                'data-name="' + item.name + '"' +
                 'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
                 'title="Delete bucket"><span class="glyphicon glyphicon-trash"></span>' +
                 '</a>' +
@@ -297,6 +299,16 @@ function deleteFile(file) {
     console.log(folder.file);
     localStorage.removeItem(bucket.name);
     localStorage.setItem(bucket.name, JSON.stringify(bucket));
+}
+
+function deleteBucket(bucketName) {
+    for(var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+
+        if (JSON.parse(localStorage.getItem(key)).name == bucketName){
+            localStorage.removeItem(key);
+        }
+    }
 }
 
 function getBuckets() {
