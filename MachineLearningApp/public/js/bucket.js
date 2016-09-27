@@ -56,7 +56,7 @@ $(document).ready(function () {
     }
 
     $('body').on('change', '.s3-upload-file', function(event) {
-        var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
+        var nameBucket = $(event.target).closest('td.buttons').find('label.upload-file').data('delete-name');
         var data = new FormData();
 
         data.append('file', event.target.files[0]);
@@ -156,7 +156,7 @@ function showTable(content) {
                 '<td><img src="images/bucket.png" alt="bucket" width=18px height="18px"><span  class="reference">' + item.name + '</span></td>' +
                 '<td>0</td>' +
                 '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
-                '<td style="width: 130px">' +
+                '<td class="buttons" style="width: 130px">' +
                 '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
                 'href="/s3/delete/' + item.name + '"' +
                 'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
@@ -170,7 +170,7 @@ function showTable(content) {
                 '</a>' +
                 '&nbsp<label for="s3-upload-file-' + key + '"' +
                 'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
-                'data-placement="top" title="Upload file">' +
+                'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
                 '<span class="glyphicon glyphicon-upload">' +
                 '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
                 'type="file" name="file" style="display: none">' +
@@ -204,7 +204,7 @@ function showTable(content) {
                         "<td>" + timeConverter2(item.modified) + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default download btn-sm' data-download-path='" + item.path + '/'+ item.name + "' href='#d'><span class='glyphicon glyphicon-download '></span></a>" +
-                        '<a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                        ' <a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                         "</td>" +
                         "</tr>");
                 });
