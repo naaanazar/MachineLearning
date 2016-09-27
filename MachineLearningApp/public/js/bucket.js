@@ -90,7 +90,7 @@ $(document).ready(function () {
             setLocation('/' + name);
         } else {
             setLocation('#' + name);
-
+            $('.back').show();
             bucket = findBucket();
         }
 
@@ -114,15 +114,14 @@ $(document).ready(function () {
             if (!!getLastHash()) {
                 loc = getLastHash();
                 $('.' + loc).hide();
-
                 history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
             }
-
+            $('.back').hide();
             result = getBuckets();
             showTable(result);
         }
     });
-    if(location.href.split('/')[3] == 's3') {
+    if(location.href.split('/')[3].split('#')[0] == 's3') {
         if(~location.href.lastIndexOf('#')) {
             bucket = findBucket();
 
@@ -153,6 +152,7 @@ function showTable(content) {
     $('#loader-s3-main').remove();
     if(!content.hasOwnProperty('name')) {
         var key = 0;
+        $('.back').hide();
         content.forEach(function (item) {
             console.log(item.creationDate);
             $('#myTable').append(
