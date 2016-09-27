@@ -46,7 +46,7 @@ Route::get('s3/allbuckets', 'S3Controller@doBucketStruct');
 Route::post('s3/delete/{name_bucket}', 'S3Controller@doDeleteBucket');
 Route::get('s3/delete_all/{name_bucket}', 'S3Controller@doDeleteAllObjectsFromBucket');
 Route::get('s3', 'S3Controller@doIndex');
-Route::get('s3', 'S3Controller@doListOfBuckets');
+Route::get('s3', 'S3Controller@doS3');
 Route::post('s3/create_bucket', 'S3Controller@doCreateBucket');
 
 Route::post('/s3/upload', 'S3Controller@doUpload');
