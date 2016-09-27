@@ -13,10 +13,11 @@ $(document).ready(function () {
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function (data) {            
+            success: function (data) {
+                $('#DataSourceName').val('');
                 $(".modalCreateDataSource").modal('toggle');
                 listDataSource(data);
-            }           
+            }
         });
     });
 

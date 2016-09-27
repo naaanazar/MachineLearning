@@ -5,13 +5,14 @@ $(document).ready(function() {
     };    
 
     $('.create-mlmodel-form').submit(function(e) {
-        e.preventDefault();      
+        e.preventDefault();
 
         $.ajax({
             type: "post",
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
+                $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data);
             },
@@ -20,7 +21,6 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        $(".ml-table").hide();
         selectName('/ml/select-data-source?Obj=ml', '#SelectDataSource', '.create-mlmodel-form');
     });
 

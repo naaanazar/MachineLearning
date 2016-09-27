@@ -77,7 +77,7 @@ $(document).ready(function () {
         }
 
         if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-' + tab).attr('disabled', 'disabled');
+            $(this).closest('form').find('input#success-button-modal-' + tab).attr('disabled', true);
         } else {
             $(this).closest('form').find('input#success-button-modal-' + tab).removeAttr('disabled');
         }
@@ -87,18 +87,15 @@ $(document).ready(function () {
 
 function startPageValidation() {
     $('input#MLModelName').addClass('error');
-    $('input#success-button-modal-ml').addClass('disabled');
     $('input#MLModelName').closest('div').addClass('has-error');
 
 
     $('input#EvaluationName').addClass('error');
-    $('input#success-button-modal-ev').addClass('disabled');
     $('input#EvaluationName').closest('div').addClass('has-error');
 
     $('input#DataSourceName').addClass('error');
     $('input#DataRearrangementBegin').addClass('error');
     $('input#DataRearrangementEnd').addClass('error');
-    $('input#success-button-modal-ds').addClass('disabled');
     $('input#DataSourceName').closest('div').addClass('has-error');
     $('input#DataRearrangementBegin').closest('div').addClass('has-error');
     $('input#DataRearrangementEnd').closest('div').addClass('has-error');

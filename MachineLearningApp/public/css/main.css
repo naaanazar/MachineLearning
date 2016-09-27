@@ -53,6 +53,10 @@ body {
     margin-bottom: 25px;
 }
 
+.ml-table .table-font tr td:first-child {
+    width: 30%;
+}
+
 /***************************************
     S3 Style
 ***************************************/

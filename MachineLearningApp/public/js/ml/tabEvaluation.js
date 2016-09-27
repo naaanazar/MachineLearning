@@ -13,6 +13,7 @@ $(document).ready(function() {
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
             success: function(data) {
+                $('#EvaluationName').val('');
                 $(".modalCreateEvaluation").modal('toggle');
                 listEvaluations(data);
             },
