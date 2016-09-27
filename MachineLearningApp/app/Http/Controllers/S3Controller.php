@@ -46,7 +46,7 @@ class S3Controller extends Controller
     }
 
 
-    public function doListOfBuckets()
+    public function doS3()
     {
         try {
             $result = $this->client->listBuckets([]);
@@ -54,7 +54,7 @@ class S3Controller extends Controller
             echo $e->getMessage() . "\n";
         }
 
-        return view('s3.list', ['results' => $result['Buckets']]);
+        return view('s3.list');
     }
 
     private function allBuckets()
@@ -78,10 +78,12 @@ class S3Controller extends Controller
     public function doBucketStruct()
     {
         $files = [];
+        $buckets = [];
 
         $this->client->registerStreamWrapper();
-
+        $i = 0;
         foreach ($this->allBuckets() as $bucket) {
+            $buckets[] = $bucket;
             try {
                 $dir = 's3://' . $bucket['Name'];
                 $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
@@ -103,7 +105,7 @@ class S3Controller extends Controller
             }
         }
 
-        return response()->json($files);
+        return response()->json(['content' => $files, 'buckets' => $buckets]);
     }
 
     public function doCreateBucket(Request $request)
