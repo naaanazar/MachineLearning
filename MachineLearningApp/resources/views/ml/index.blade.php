@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create">
+                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" data-toggle="modal" data-target="#lodadCreateEvaluationModal">
                         </div>
                     </form>
                 </div>
