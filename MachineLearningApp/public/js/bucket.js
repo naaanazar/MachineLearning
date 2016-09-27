@@ -154,6 +154,7 @@ function showTable(content) {
     if(!content.hasOwnProperty('name')) {
         var key = 0;
         content.forEach(function (item) {
+            console.log(item.creationDate);
             $('#myTable').append(
                 '<tr class="content bg">' +
                 '<td class="reference">' + item.name + '</td>' +

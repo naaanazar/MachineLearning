@@ -7,13 +7,13 @@ $(document).ready(function() {
 
     $('.create-evaluations-form').submit(function(e) {
         e.preventDefault();
+        $(".modalCreateEvaluation").modal('toggle');
 
         $.ajax({
             type: "post",
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
-            success: function(data) {
-                $(".modalCreateEvaluation").modal('toggle');
+            success: function(data) {                
                 listEvaluations(data);
             },
             error: function() {},
@@ -21,6 +21,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-evaluations", function() {
+        $('.create-evaluations-form')[0].reset();
         selectName('/ml/select-ml-model?Obj=ml', '#SelectMLModelId', '.create-evaluations-form');
         selectName('/ml/select-data-source?Obj=ml', '#SelectEvDataSource', '.create-evaluations-form');
     });
@@ -46,6 +47,7 @@ function listEvaluations(status)
         '<table class="table table-bordered table-font text-center">' +
             '<tr class="active">' +
                 '<td>Name</td>' +
+                '<td>Model ID</td>' +
                 '<td>Status</td>' +
                 '<td>' +
                     '<div class="wrapper">' +
@@ -63,6 +65,8 @@ function listEvaluations(status)
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
+                '</td>' +
+                '<td >' + response.data[key].MLModelId +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + getAUC(response.data[key].PerformanceMetrics.Properties.BinaryAUC) + '</td>' +
