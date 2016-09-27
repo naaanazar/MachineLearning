@@ -163,6 +163,14 @@ $(document).ready(function() {
     $('.modal-1').on('hidden.bs.modal', function() {
         $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
+
+    //overlay
+    $('#modalCreateModel, #modalCreateEvaluation').append('<div id="myNav" class="overlay">' +
+        '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
+        '<div class="overlay-content">' +
+        '<div class="loader"></div>' +
+        '</div>' +
+        '</div>');
 });
 
 function statusTextColor(str)
@@ -294,3 +302,12 @@ function statusAction(status) {
         });
     }
  }
+
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}

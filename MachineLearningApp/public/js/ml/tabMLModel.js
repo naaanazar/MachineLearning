@@ -14,6 +14,7 @@ $(document).ready(function() {
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();      
 
+        openNav();
         $.ajax({
             type: "post",
             url: 'ml/create-ml-model',
@@ -21,6 +22,7 @@ $(document).ready(function() {
             success: function(data) {
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data);
+                closeNav();
             },
             error: function() {},
         });

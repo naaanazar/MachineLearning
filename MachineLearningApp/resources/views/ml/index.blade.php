@@ -121,6 +121,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade modalCreateModel" id="modalCreateModel" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -129,6 +130,9 @@
                     <h4 class="modal-title">Create Model</h4>
                 </div>
                 <div class="modal-body">
+
+                    <button class="btn btn-primary"><span onclick="openNav()">Test overlay</span></button>
+
                     <form class="create-mlmodel-form" method="post"
                           action="ml/create-ml-model">
                         <br>
