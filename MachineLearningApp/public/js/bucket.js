@@ -57,9 +57,8 @@ $(document).ready(function () {
     }
 
     $('body').on('change', '.s3-upload-file', function(event) {
-        var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
+        var nameBucket = $(event.target).closest('td.buttons').find('label.upload-file').data('delete-name');
         var data = new FormData();
-
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
 
@@ -123,15 +122,17 @@ $(document).ready(function () {
             showTable(result);
         }
     });
+    if(location.href.split('/')[3] == 's3') {
+        if(~location.href.lastIndexOf('#')) {
+            bucket = findBucket();
 
-    if(~location.href.lastIndexOf('#')) {
-        bucket = findBucket();
+            var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
+                [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
 
-        var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
-            [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
-
-        showTable(findItem(bucket, name));
+            showTable(findItem(bucket, name));
+        }
     }
+    
 });
 
 function getLastHash() {
@@ -254,9 +255,9 @@ function createTree(folder, item ) {
             folder.folders = [obj];
         } else {
             if (folder.folders[folder.folders.length - 1].name != createTree.item.path.split('/')[createTree.level + 2]) {
-                    var obj = {};
-                    obj.name = createTree.item.path.split('/')[createTree.level + 2];
-                    folder.folders.push(obj);
+                var obj = {};
+                obj.name = createTree.item.path.split('/')[createTree.level + 2];
+                folder.folders.push(obj);
             }
         }
         createTree(folder.folders[folder.folders.length - 1]);
@@ -320,7 +321,7 @@ function deleteFile(file) {
             folder.file.splice(i, 1);
         }
     }
-    console.log(folder.file);
+
     localStorage.removeItem(bucket.name);
     localStorage.setItem(bucket.name, JSON.stringify(bucket));
 }
