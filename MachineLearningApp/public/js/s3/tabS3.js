@@ -28,8 +28,10 @@ $(document).ready(function () {
     $(document).on('click', '.btn-delete-bucket', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
+        var fileName = $(this).data('name');
 
         $.post(url, function(response) {
+            deleteBucket(fileName);
             if (response.status = true) {
                 $(e.target).closest("tr").fadeOut("slow");
             }
