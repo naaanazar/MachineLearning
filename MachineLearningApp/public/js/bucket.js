@@ -58,7 +58,6 @@ $(document).ready(function () {
     $('body').on('change', '.s3-upload-file', function(event) {
         var nameBucket = $(event.target).closest('td.buttons').find('label.upload-file').data('delete-name');
         var data = new FormData();
-console.log(nameBucket);
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
 

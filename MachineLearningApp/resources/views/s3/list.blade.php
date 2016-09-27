@@ -69,7 +69,7 @@
                                 <td>Action</td>
                             </tr>
                             <tr class="bg back">
-                                <td colspan="4" ><span class="back">...</span></td>
+                                <td colspan="4" ><span class="back-s3">...</span></td>
                             </tr>
 
                         </div>

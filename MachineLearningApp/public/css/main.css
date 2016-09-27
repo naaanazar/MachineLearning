@@ -588,20 +588,18 @@ a:focus, a:hover{
 .reference:hover {
     cursor: pointer;
 }
-
-.back {
-    font-size: 17px;
-    margin-right: 98%;
-    font-weight: bold;
-    
+.back{
+    /*display: none;*/
 }
-
 .back:hover {
     cursor: pointer;
     background-color: #DDDDDD;
-    text-decoration: underline;
+    text-decoration: none;
 }
-
+.back-s3{
+    font-size: 17px;
+    float: left;
+}
 .bg {
     padding: 0px;
     margin: 0px;
