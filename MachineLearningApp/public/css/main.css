@@ -74,17 +74,20 @@ body {
     font-size: 16px;
     background-color: #60af5a !important;
 }
+.modal-header{
+    border-bottom: 0px;
+}
 a:focus, a:hover{
     text-decoration: none;
 }
 .hvr-sweep-to-right:before{
     background:#337ab7 !important;
 }
+.table-s3{
+    table-layout: fixed;
+}
 /*.btn-list-bucket{
-    padding:2.5px 5px;
-    font-size: 10px;
-    border-radius: 1.5px;
-    float: right;
+   margin-left: -5px;
 }*/
 .form-group-upload{
     margin-bottom: 0px !important;
@@ -288,7 +291,11 @@ a:focus, a:hover{
 }
 
 .table-font tr td:last-child {
-    width: 110px;
+    width: 130px;
+    text-align:center;
+}
+.back:hover{
+    margin-left: -20%;
 }
 
 .table-scroll {
@@ -564,8 +571,9 @@ a:focus, a:hover{
 
 .back {
     font-size: 17px;
-    margin-right: 550px;
+    margin-right: 98%;
     font-weight: bold;
+    
 }
 
 .back:hover {
