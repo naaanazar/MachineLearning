@@ -36,7 +36,10 @@ class ML
     public function describeDataSources()
     {
         try {
-            $result = $this->client->describeDataSources([]);
+            $result = $this->client->describeDataSources([
+                'SortOrder' => 'asc',              
+                
+            ]);            
         } catch (MachineLearningException $e) {
             echo $e->getMessage()."\n";
         }
@@ -52,7 +55,6 @@ class ML
             $result = $this->client->describeMLModels([
                 'SortOrder' => 'asc'
             ]);
-
         } catch (MachineLearningException $e) {
             echo $e->getMessage()."\n";
         }
