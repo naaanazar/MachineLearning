@@ -122,15 +122,17 @@ console.log(nameBucket);
             showTable(result);
         }
     });
+    if(location.href.split('/')[3] == 's3') {
+        if(~location.href.lastIndexOf('#')) {
+            bucket = findBucket();
 
-    if(~location.href.lastIndexOf('#')) {
-        bucket = findBucket();
+            var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
+                [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
 
-        var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
-            [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
-
-        showTable(findItem(bucket, name));
+            showTable(findItem(bucket, name));
+        }
     }
+    
 });
 
 function getLastHash() {
@@ -311,7 +313,7 @@ function deleteFile(file) {
             folder.file.splice(i, 1);
         }
     }
-    console.log(folder.file);
+
     localStorage.removeItem(bucket.name);
     localStorage.setItem(bucket.name, JSON.stringify(bucket));
 }
