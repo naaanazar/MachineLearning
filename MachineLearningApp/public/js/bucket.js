@@ -117,13 +117,14 @@ $(document).ready(function () {
 
                 history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
             }
+
+            result = getBuckets();
             showTable(result);
         }
     });
 
     if(~location.href.lastIndexOf('#')) {
         bucket = findBucket();
-        result = getBuckets();
 
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
@@ -153,12 +154,13 @@ function showTable(content) {
         content.forEach(function (item) {
             $('#myTable').append(
                 '<tr class="content bg">' +
-                '<td class="reference"><img src="images/bucket.png" alt="bucket" width=18px height="18px">' + item.name + '</td>' +
+                '<td class="reference">' + item.name + '</td>' +
                 '<td>0</td>' +
                 '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
                 '<td style="width: 130px">' +
                 '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
                 'href="/s3/delete/' + item.name + '"' +
+                'data-name="' + item.name + '"' +
                 'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
                 'title="Delete bucket"><span class="glyphicon glyphicon-trash"></span>' +
                 '</a>' +
@@ -186,7 +188,7 @@ function showTable(content) {
             if (!!content.folders) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
-                        "<td ><p><span style='color:#f0ad4e;'  class='glyphicon glyphicon-book'></span>&nbsp;<span class='reference'>" +
+                        "<td  ><p style='margin: 5px 0 5px;'><span style='color:#f0ad4e;' class='glyphicon glyphicon-book'></span>&nbsp;<span  class='reference dir-position'>" +
                         item.name + "</span></p></td>" +
                         "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
@@ -204,7 +206,7 @@ function showTable(content) {
                         "<td>" + timeConverter2(item.modified) + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default download btn-sm' data-download-path='" + item.path + '/'+ item.name + "' href='#d'><span class='glyphicon glyphicon-download '></span></a>" +
-                        '<a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                        ' <a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                         "</td>" +
                         "</tr>");
                 });
@@ -312,6 +314,16 @@ function deleteFile(file) {
     console.log(folder.file);
     localStorage.removeItem(bucket.name);
     localStorage.setItem(bucket.name, JSON.stringify(bucket));
+}
+
+function deleteBucket(bucketName) {
+    for(var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+
+        if (JSON.parse(localStorage.getItem(key)).name == bucketName){
+            localStorage.removeItem(key);
+        }
+    }
 }
 
 function getBuckets() {
