@@ -20,26 +20,26 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("click", ".btn-create-datasource", function () {        
+    $(document).on("click", ".btn-create-datasource", function() {
         selectBuckets('/s3/get-buckets', '#SelectBuckets', '.create-datasource-form');
         $('.select-datasource-field').hide();
     });
 
-    $(document).on("change", "#SelectBuckets", function(e){
-        var bucket =$("#SelectBuckets option:selected").text();
+    $(document).on("change", "#SelectBuckets", function() {
+        var bucket = $("#SelectBuckets option:selected").text();
+
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form', bucket);
-        $('.select-datasource-field').show('slow');
+
+        $('.select-datasource-field').slideDown();
     });
 
-
-    $(document).on("click", '#describeDataSourcesContent', function () {
+    $(document).on("click", '#describeDataSourcesContent', function() {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
 
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource('ok');
         };
     });
-
 });
 
 function listDataSource(status)
