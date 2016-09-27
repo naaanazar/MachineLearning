@@ -34,6 +34,7 @@ $(document).ready(function () {
             return;
         }
 
+        $("#generate-btn").addClass("disabled");
         $('i.fa-spinner').css('display', 'inline-block');
 
         $.ajax({
@@ -46,6 +47,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 $('i.fa-spinner').hide();
+                $("#generate-btn").removeClass("disabled");
                 if (!$.isEmptyObject(data)) {
                     var stats = data.stats;
                     var content = '<ul>';
@@ -60,6 +62,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 $('i.fa-spinner').hide();
+                $("#generate-btn").removeClass("disabled");
                 if (xhr.status === 500) {
                     $.jGrowl("Token Mismatch!", {sticky: true, theme: 'jgrowl-danger'});
                     return;
