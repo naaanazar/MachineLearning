@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <label for="MLModelName">Model name</label>
                             <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
-                                   name="MLModelName">
+                                   name="MLModelName" autofocus>
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
                         <div class="form-group">
@@ -164,7 +164,7 @@
                         <div class="form-group">
                             <label for="EvaluationName">Evaluation name</label>
                             <input type="text" class="form-control" id="EvaluationName"
-                                   placeholder="Evaluation name" name="EvaluationName">
+                                   placeholder="Evaluation name" name="EvaluationName" autofocus>
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
                         <div class="form-group select-load">
