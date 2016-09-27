@@ -11,12 +11,23 @@
 
     <div class="container ">
         <div class="row">
-            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6">
-                <div id="ml-button-create">
-                </div>
+            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 ml-logo-block">
+  <!--               <div id="ml-button-create">
+                </div> -->
                 <h2 class="title"><img class="logo-ML" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
                     Learning</h2>
             </div>
+            <!-- <div class="col-md-6">
+                <a href="#" class="btn-create-mlmodel btn btn-primary btn-block btn-lg" data-dismiss="modal">Create Model</a>
+            </div>
+            -->
+            <div class="col-md-6" >
+                <button class="btn btn-primary btn-create-mlmodel pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateModel">Create ML Mode</button>
+            </div>
+            <div class="col-md-6">
+                <a href="#" class="ml-setting btn btn-primary btn-block btn-lg">Advance setting</a>
+            </div> 
+        <div class="ml-table">
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
@@ -213,6 +224,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div id="modal" class="modal modal-1 fade">
         <div class="modal-dialog">
