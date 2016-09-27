@@ -45,6 +45,9 @@ body {
     width: 100px;
 }
 
+.container-s3{
+    min-width: 500px;
+}
 .form-upload {
     float: right;
     margin-right: 17%;
@@ -291,7 +294,7 @@ a:focus, a:hover{
 }
 
 .table-font tr td:last-child {
-    width: 12%;
+    width: 17%;
     text-align:center;
 }
 .table-font tr td:first-child {
@@ -347,6 +350,14 @@ a:focus, a:hover{
     .ML-tables-content {
         width: 100%;
         margin-bottom: 25px;
+        min-width: 515px;
+    }
+    .table-font tr td:last-child {
+    width: 20%;
+    text-align:center;
+    }
+    .table-font tr td:first-child {
+    width: 40%;
     }
 
     .footer {
@@ -379,6 +390,9 @@ a:focus, a:hover{
     .ML-tables-content {
         width: 100%;
         margin-bottom: 25px;
+    }
+     .table-font tr td:last-child {
+    width: 30%;
     }
 
     .back-to-top {
