@@ -153,7 +153,7 @@ function showTable(content) {
         content.forEach(function (item) {
             $('#myTable').append(
                 '<tr class="content bg">' +
-                '<td class="reference"><img src="images/bucket.png" alt="bucket" width=18px height="18px">' + item.name + '</td>' +
+                '<td><img src="images/bucket.png" alt="bucket" width=18px height="18px"><span  class="reference">' + item.name + '</span></td>' +
                 '<td>0</td>' +
                 '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
                 '<td style="width: 130px">' +
