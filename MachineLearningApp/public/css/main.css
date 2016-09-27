@@ -819,3 +819,9 @@ a:focus, a:hover{
 a.btn.btn-warning.btn-sm.btn-list.delete-endpoint.disabled {
     background: rgb(155, 160, 160);
 }
+
+.dir-position {
+margin-left: 16px;
+display: block;
+margin-top: -16px;
+}

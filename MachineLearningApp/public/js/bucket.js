@@ -153,7 +153,7 @@ function showTable(content) {
         content.forEach(function (item) {
             $('#myTable').append(
                 '<tr class="content bg">' +
-                '<td><img src="images/bucket.png" alt="bucket" width=18px height="18px"><span  class="reference">' + item.name + '</span></td>' +
+                '<td class="reference">' + item.name + '</td>' +
                 '<td>0</td>' +
                 '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
                 '<td style="width: 130px">' +
@@ -186,7 +186,7 @@ function showTable(content) {
             if (!!content.folders) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
-                        "<td ><p><span style='color:#f0ad4e;'  class='glyphicon glyphicon-book'></span>&nbsp;<span class='reference'>" +
+                        "<td  ><p style='margin: 5px 0 5px;'><span style='color:#f0ad4e;' class='glyphicon glyphicon-book'></span>&nbsp;<span  class='reference dir-position'>" +
                         item.name + "</span></p></td>" +
                         "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
