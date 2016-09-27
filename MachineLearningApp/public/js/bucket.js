@@ -156,20 +156,20 @@ function showTable(content) {
                 '<td class="reference"><img src="images/bucket.png" alt="bucket" width=18px height="18px">' + item.name + '</td>' +
                 '<td>0</td>' +
                 '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
-                '<td style="width: 150px">' +
+                '<td style="width: 130px">' +
                 '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
                 'href="/s3/delete/' + item.name + '"' +
                 'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
                 'title="Delete bucket"><span class="glyphicon glyphicon-trash"></span>' +
                 '</a>' +
 
-                '<a class="btn btn-danger btn-sm btn-list"' +
+                '&nbsp<a class="btn btn-danger btn-sm btn-list"' +
                 'href="s3/delete_all/' + item.name + '" data-toggle="tooltip"' +
                 'data-placement="top" title="Delete files">' +
                 '<span class="glyphicon glyphicon-minus"></span>' +
                 '</a>' +
-                '<label for="s3-upload-file-' + key + '"' +
-                'class="btn btn-primary btn-file upload-file" data-toggle="tooltip"' +
+                '&nbsp<label for="s3-upload-file-' + key + '"' +
+                'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
                 'data-placement="top" title="Upload file">' +
                 '<span class="glyphicon glyphicon-upload">' +
                 '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
@@ -322,4 +322,3 @@ function getBuckets() {
     }
     return result;
 }
-
