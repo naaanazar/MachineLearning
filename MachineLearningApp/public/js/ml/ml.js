@@ -3,8 +3,6 @@ $(document).ready(function() {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
-        var temp = $(event.target).closest('a').attr('href');
-
         var data = {
             Name: "",
             Message: ""
@@ -102,14 +100,17 @@ $(document).ready(function() {
         function parseName(str){
             var name = '';
             var posFirst = 0;
+
             for (var i=0; i<str.length; i++) {
                 if (str.charCodeAt(i) > 65 && str.charCodeAt(i) <90) {
                     name += str.substring(posFirst,i) + ' ';
                     posFirst = i;
                 }
             }
-        return name = name + ' ' + str.substring(posFirst,str.length);
+
+            return name = name + ' ' + str.substring(posFirst,str.length);
         }
+
         event.preventDefault();
     });
 
@@ -118,7 +119,6 @@ $(document).ready(function() {
         var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
         $(event.target).closest('tr').fadeOut();
-
 
         function deleteObject(dataSourceIdVar, url) {
             var datasourceId = $(event.target).closest('a').data('delete-id');
@@ -200,12 +200,28 @@ function selectName(uri, elementId, formClass)
     });
 };
 
-function selectDataFromS3(uri, elementId, formClass)
+function selectBuckets(uri, elementId, formClass)
 {
     addSelectLoader(elementId, formClass);
 
     $.get(uri, function (response) {
-        var result;
+        var result ='"<option value="" disabled selected style="display: none;">Please select bucket</option>"';
+
+        for (var key in response.data) {
+            result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
+        };
+
+        $(elementId).html(result);
+        removeSelectLoader(elementId);
+    });
+};
+
+function selectDataFromS3(uri, elementId, formClass, bucket)
+{
+    addSelectLoader(elementId, formClass);
+
+    $.get(uri + '/' + bucket, function (response) {
+        var result ='"<option value="" disabled selected style="display: none;">Please select dataset</option>"';
 
         for (var key in response.data) {
             var extension = response.data[key].Key.substr(-3);
@@ -217,8 +233,6 @@ function selectDataFromS3(uri, elementId, formClass)
 
         $(elementId).html(result);
         removeSelectLoader(elementId);
-
-
     });
 };
 
@@ -256,10 +270,8 @@ function showLoader(destinationClass)
 
 function checkVariable(variable) {
     if (variable !== undefined) {
-
         return variable;
     } else {
-        
         return '';
     }
 };
@@ -271,14 +283,14 @@ function getAUC(variable) {
     return auc;
 }
 
- function statusAction(status) {
-        if (status.hasOwnProperty('error')) {
-            $.jGrowl('Error created' , {
-                theme: 'jgrowl-danger'
-            });
-        } else if (status.hasOwnProperty('success')) {
-            $.jGrowl('Successfully created: ' + status.success, {
-                theme: 'jgrowl-success'
-            });
-        }
+function statusAction(status) {
+    if (status.hasOwnProperty('error')) {
+        $.jGrowl('Error created' , {
+            theme: 'jgrowl-danger'
+        });
+    } else if (status.hasOwnProperty('success')) {
+        $.jGrowl('Successfully created: ' + status.success, {
+            theme: 'jgrowl-success'
+        });
+    }
  }

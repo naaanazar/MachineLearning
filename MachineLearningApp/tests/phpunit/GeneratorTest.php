@@ -27,16 +27,9 @@ class GeneratorTest extends PHPUnit_Framework_TestCase
     {
         $generatorRequest = new \App\Http\Requests\GeneratorRequest();
         $generatorRequest->rows = 500;
-        $dataset = $this->fixture->generateDataset($generatorRequest);
-        $dataset = json_decode($dataset);
-        
-        
-        $expectedArray = array(
-            'recordsNumber',
-            'purchaseNumber',
-            'purchasePercentage',
-            'path'
-        );
+        $dataset = json_decode($this->fixture->generateDataset($generatorRequest), true);
+        $dataset = $dataset['stats'];
+
         $this->assertArrayHasKey('recordsNumber', $dataset);
         $this->assertArrayHasKey('purchaseNumber', $dataset);
         $this->assertArrayHasKey('purchasePercentage', $dataset);

@@ -180,11 +180,23 @@ class MLController extends Controller
         return response()->json(['data' => (array)$result]);
     }
 
-
-    public function doSelectObjectsS3()
+    
+    public function doSelectObjectsS3(Request $request)
     {
-        $s3     = new S3;
-        $result = $s3->ListObjectsS3();
+        $bucket= $request->bucket;
+        $s3 = new S3;
+        $client= $s3->getClient();
+        try {
+            $result = $client->listObjects([
+                'Bucket' => $bucket,
+
+            ]);
+
+            $result = $result['Contents'];
+
+        } catch (S3Exception $e) {
+            echo $e->getMessage()."\n";
+        }
 
         return response()->json(['data' => (array)$result]);
     }
@@ -362,6 +374,8 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage()]);
         }
 
+
+
         return response()->json(['deleted' => 'Ok']);
     }
 
@@ -484,7 +498,7 @@ class MLController extends Controller
         ]);
 
         $DataSourceId        = $this->createBatchDataSourceFromS3($fileName);
-        $BatchPredictionId   = '1'.uniqid();
+        $BatchPredictionId   = '1'. uniqid();
         $BatchPredictionName = $BatchPredictionId;
         $MLModelId           = $request->input('MLModelId');
         $OutputUri           = 's3://'.$this->bucket.'/';

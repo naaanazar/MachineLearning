@@ -10,7 +10,7 @@ $(document).ready(function() {
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
         $(".modalCreateBatchPrediction").modal('toggle');
-           
+        showLoader('.container-describeBatchPredictions');
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',

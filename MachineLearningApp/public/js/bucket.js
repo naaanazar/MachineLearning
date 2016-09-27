@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var bucket;
+    var result = [];
+
     $('#loader-s3-main').removeClass('hide');
 
     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
-
-        var result = [];
 
         $('tr.active').addClass('hide');
         $('tr.content').addClass('hide');
@@ -15,7 +15,14 @@ $(document).ready(function () {
             url: 's3/allbuckets',
             dataType: 'json',
             success: function (data) {
-                data.forEach(function (item) {
+                data.buckets.forEach(function (bucket) {
+                    var obj = {};
+                    obj.name = bucket.Name;
+                    obj.creationDate = bucket.CreationDate;
+                    result.push(obj);
+                });
+
+                data.content.forEach(function (item) {
                     for (var i = 0; i < result.length; i++) {
                         if (item.path.split('/')[2] == result[i].name) {
                             break;
@@ -40,6 +47,7 @@ $(document).ready(function () {
                 $('tr.content').removeClass('hide');
                 $('tr.bg').removeClass('hide');
                 $('#loader-s3-main').remove();
+                showTable(result);
             },
             error: function (data) {
 
@@ -48,9 +56,9 @@ $(document).ready(function () {
     }
 
     $('body').on('change', '.s3-upload-file', function(event) {
-        var nameBucket = $(event.target).closest('tr.content').find('td.reference').text();
+        var nameBucket = $(event.target).closest('td.buttons').find('label.upload-file').data('delete-name');
         var data = new FormData();
-
+console.log(nameBucket);
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
 
@@ -76,16 +84,14 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.reference', function() {
-        var $ref = $(this);
-        var name = $ref.text();
+        var name = $(this).text();
         if (!!getLastHash()) {
-            loc = getLastHash();
-            $('.' + loc).remove();
+            $('.' + getLastHash()).hide();
             setLocation('/' + name);
         } else {
             setLocation('#' + name);
 
-            bucket = findBucket(location.hash.split('#')[1]);
+            bucket = findBucket();
         }
 
         showTable(findItem(bucket, name));
@@ -95,8 +101,7 @@ $(document).ready(function () {
     $('body').on('click', '.back', function() {
         if(location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length > 1) {
             if (!!getLastHash()) {
-                loc = getLastHash();
-                $('.' + loc).hide();
+                $('.' + getLastHash()).hide();
             }
 
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
@@ -112,18 +117,22 @@ $(document).ready(function () {
 
                 history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
             }
-            $('.content').show();
+
+            result = getBuckets();
+            showTable(result);
         }
     });
+    if(location.href.split('/')[3] == 's3') {
+        if(~location.href.lastIndexOf('#')) {
+            bucket = findBucket();
 
-    if(~location.href.lastIndexOf('#')) {
-        bucket = findBucket(location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0]);
+            var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
+                [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
 
-        var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
-            [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
-
-        showTable(findItem(bucket, name));
+            showTable(findItem(bucket, name));
+        }
     }
+    
 });
 
 function getLastHash() {
@@ -142,12 +151,47 @@ function setLocation(curLoc){
 function showTable(content) {
     $('.content').hide();
     $('#loader-s3-main').remove();
-    if("onhashchange" in window) {
+    if(!content.hasOwnProperty('name')) {
+        var key = 0;
+        content.forEach(function (item) {
+            $('#myTable').append(
+                '<tr class="content bg">' +
+                '<td class="reference"><img src="images/bucket.png" alt="bucket" width=18px height="18px">' + item.name + '</td>' +
+                '<td>0</td>' +
+                '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
+                '<td class="buttons" style="width: 130px">' +
+                '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
+                'href="/s3/delete/' + item.name + '"' +
+                'data-name="' + item.name + '"' +
+                'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
+                'title="Delete bucket"><span class="glyphicon glyphicon-trash"></span>' +
+                '</a>' +
+
+                '&nbsp<a class="btn btn-danger btn-sm btn-list"' +
+                'href="s3/delete_all/' + item.name + '" data-toggle="tooltip"' +
+                'data-placement="top" title="Delete files">' +
+                '<span class="glyphicon glyphicon-minus"></span>' +
+                '</a>' +
+                '&nbsp<label for="s3-upload-file-' + key + '"' +
+                'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
+                'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
+                '<span class="glyphicon glyphicon-upload">' +
+                '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
+                'type="file" name="file" style="display: none">' +
+                '</span>' +
+                '</label>' +
+                '</td>' +
+                '</tr>'
+            );
+            key++;
+        });
+    }else if("onhashchange" in window) {
         if (!!content) {
             if (!!content.folders) {
                 content.folders.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " bg'>" +
-                        "<td class='reference'>" + item.name + "</td>" +
+                        "<td  ><p style='margin: 5px 0 5px;'><span style='color:#f0ad4e;' class='glyphicon glyphicon-book'></span>&nbsp;<span  class='reference dir-position'>" +
+                        item.name + "</span></p></td>" +
                         "<td >" + 'folder' + "</td>" +
                         "<td>" + '-' + "</td>" +
                         "<td> " + "</td>" +
@@ -158,18 +202,32 @@ function showTable(content) {
             if (!!content.file) {
                 content.file.forEach(function (item) {
                     $('#myTable').append("<tr class='" + content.name + " files'>" +
-                        "<td>" + item.name + "</td>" +
-                        "<td>" + item.size + "</td>" +
-                        "<td>" + item.modified + "</td>" +
+                        "<td><p style='margin:0;'><span style='color:#777; margin:0;' class='glyphicon glyphicon-file'></span> " +
+                        item.name + "</p></td>" +
+                        "<td>" + fileSize(item.size) + "</td>" +
+                        "<td>" + timeConverter2(item.modified) + "</td>" +
                         "<td>" +
                         "<a class='btn btn-default download btn-sm' data-download-path='" + item.path + '/'+ item.name + "' href='#d'><span class='glyphicon glyphicon-download '></span></a>" +
-                        '<a class="btn btn-danger btn-sm btn-delete" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
+                        ' <a class="btn btn-danger btn-sm btn-delete" data-name="' + item.name + '" href="#d" id ="'+ item.path + '/'+ item.name + '"><span class="glyphicon glyphicon-trash"></span></a>' +
                         "</td>" +
                         "</tr>");
                 });
             }
         }
     }
+}
+
+
+function fileSize(size) {
+    if (size > 1048576) {
+        size = Math.round(( size/1048576) * 100) / 100;
+
+        return size + ' MB';
+    } else {
+        size = Math.round(( size/1024) * 100) / 100;
+
+        return size + ' KB';
+    };
 }
 
 function createTree(folder, item ) {
@@ -189,9 +247,9 @@ function createTree(folder, item ) {
             folder.folders = [obj];
         } else {
             if (folder.folders[folder.folders.length - 1].name != createTree.item.path.split('/')[createTree.level + 2]) {
-                    var obj = {};
-                    obj.name = createTree.item.path.split('/')[createTree.level + 2];
-                    folder.folders.push(obj);
+                var obj = {};
+                obj.name = createTree.item.path.split('/')[createTree.level + 2];
+                folder.folders.push(obj);
             }
         }
         createTree(folder.folders[folder.folders.length - 1]);
@@ -206,7 +264,8 @@ function createTree(folder, item ) {
     return folder;
 }
 
-function findBucket(bucketName) {
+function findBucket() {
+    bucketName = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')[0];
     for(var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
 
@@ -243,4 +302,37 @@ function findItem(bucket, itemName) {
     }
 }
 
+function deleteFile(file) {
+    var bucket = findBucket();
+    var folder = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
+        [location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/').length - 1];
+    var folder = findItem(bucket, folder);
 
+    for (var i in folder.file) {
+        if(file == folder.file[i].name) {
+            folder.file.splice(i, 1);
+        }
+    }
+
+    localStorage.removeItem(bucket.name);
+    localStorage.setItem(bucket.name, JSON.stringify(bucket));
+}
+
+function deleteBucket(bucketName) {
+    for(var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+
+        if (JSON.parse(localStorage.getItem(key)).name == bucketName){
+            localStorage.removeItem(key);
+        }
+    }
+}
+
+function getBuckets() {
+    var result = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        result.push(JSON.parse(localStorage.getItem(key)));
+    }
+    return result;
+}
