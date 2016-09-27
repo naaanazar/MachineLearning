@@ -46,7 +46,12 @@ class DatasetGenerator
     public function __construct()
     {
         $this->targetFile = public_path().'/datasets/dataset.csv';
-        $this->file       = fopen($this->targetFile, 'w+');
+
+        if (file_exists($this->targetFile)) {
+            chmod($this->targetFile, 755);
+        }         
+   
+        $this->file       = fopen($this->targetFile, 'w');
     }
 
 
