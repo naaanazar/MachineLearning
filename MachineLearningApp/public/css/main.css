@@ -75,7 +75,7 @@ body {
 .btn-create-bucket{
     margin-left: 3%;
     font-size: 16px;
-    background-color: #60af5a !important;
+    background-color: #337ab7 !important;
 }
 .modal-header{
     border-bottom: 0px;
@@ -84,7 +84,7 @@ a:focus, a:hover{
     text-decoration: none;
 }
 .hvr-sweep-to-right:before{
-    background:#337ab7 !important;
+    background:#60af5a !important;
 }
 .table-s3{
     table-layout: fixed;
