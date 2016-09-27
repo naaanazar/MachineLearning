@@ -1,11 +1,4 @@
 $(document).ready(function() {
-
-    $(".ml-setting").on("click", function(e) {
-        e.preventDefault();
-
-        $(".ml-table").toggle();
-    });
-
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel('ok');
