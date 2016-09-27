@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    $(".ml-setting").on("click", function(e) {
+        e.preventDefault();
+
+        $(".ml-table").toggle();
+    });
+
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel('ok');
@@ -21,6 +27,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
+        $(".ml-table").hide();
         selectName('/ml/select-data-source?Obj=ml', '#SelectDataSource', '.create-mlmodel-form');
     });
 

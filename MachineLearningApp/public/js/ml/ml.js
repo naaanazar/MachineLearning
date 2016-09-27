@@ -191,9 +191,9 @@ function selectName(uri, elementId, formClass)
                 id = response.data[key].MLModelId;
             } else if (response.data[key].hasOwnProperty('DataSourceId')) {
                 id = response.data[key].DataSourceId;
-            };
+            }
             result += '<option value="' + id + '">' + response.data[key].Name + '</option>';
-        };
+        }
 
         $(elementId).html(result);
         removeSelectLoader(elementId);

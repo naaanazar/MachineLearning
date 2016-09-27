@@ -37,6 +37,15 @@ body {
     width: 145px;
 }
 
+.ml-logo-block {
+    margin-bottom: 40px;
+}
+
+.ml-table {
+    margin-top: 110px;
+    display: none;
+}
+
 /***************************************
     S3 Style
 ***************************************/
