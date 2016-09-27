@@ -273,15 +273,10 @@ a:focus, a:hover{
     }
 }
 @media screen and (max-width: 443px) {
-   /*.datasource-info{
-    margin-bottom: 10px;
-   }*/
-
    .delete{
     margin-left: -3px;
    }
-
-    }
+}
 
 
 /***************************************
@@ -313,7 +308,6 @@ a:focus, a:hover{
 }
 
 .table-scroll-evaluation {
-    /*overflow-y: auto;*/
     height: 350px;
     width: 100%;
     position: absolute;
@@ -338,7 +332,6 @@ a:focus, a:hover{
 
 @media screen and (max-width: 992px) {
     .ML-tables-content {
-        /*margin-top: 40px;*/
         width: 100%;
         margin-bottom: 25px;
     }
@@ -371,7 +364,6 @@ a:focus, a:hover{
 
 @media screen and (max-width: 767px) {
     .ML-tables-content {
-        /*margin-top: 200px;*/
         width: 100%;
         margin-bottom: 25px;
     }
@@ -384,7 +376,6 @@ a:focus, a:hover{
     }
 
     .table-scroll {
-        /*margin-top: 200px;*/
         position: absolute;
         width: 100%;
         margin-bottom: 25px;
@@ -567,10 +558,6 @@ a:focus, a:hover{
     border-color: #d6e9c6 !important;
 }
 
-/*.reference{
-    text-align: left;
-}
-*/
 .reference:hover {
     cursor: pointer;
 }
