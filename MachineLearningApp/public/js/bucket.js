@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var bucket;
+    var result = [];
+
     $('#loader-s3-main').removeClass('hide');
 
     if(!location.pathname.localeCompare('/s3') && !location.hash.localeCompare('')) {
-
-        var result = [];
 
         $('tr.active').addClass('hide');
         $('tr.content').addClass('hide');
@@ -15,7 +15,14 @@ $(document).ready(function () {
             url: 's3/allbuckets',
             dataType: 'json',
             success: function (data) {
-                data.forEach(function (item) {
+                data.buckets.forEach(function (bucket) {
+                    var obj = {};
+                    obj.name = bucket.Name;
+                    obj.creationDate = bucket.CreationDate;
+                    result.push(obj);
+                });
+
+                data.content.forEach(function (item) {
                     for (var i = 0; i < result.length; i++) {
                         if (item.path.split('/')[2] == result[i].name) {
                             break;
@@ -40,6 +47,7 @@ $(document).ready(function () {
                 $('tr.content').removeClass('hide');
                 $('tr.bg').removeClass('hide');
                 $('#loader-s3-main').remove();
+                showTable(result);
             },
             error: function (data) {
 
@@ -76,11 +84,9 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.reference', function() {
-        var $ref = $(this);
-        var name = $ref.text();
+        var name = $(this).text();
         if (!!getLastHash()) {
-            loc = getLastHash();
-            $('.' + loc).remove();
+            $('.' + getLastHash()).hide();
             setLocation('/' + name);
         } else {
             setLocation('#' + name);
@@ -95,8 +101,7 @@ $(document).ready(function () {
     $('body').on('click', '.back', function() {
         if(location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length > 1) {
             if (!!getLastHash()) {
-                loc = getLastHash();
-                $('.' + loc).hide();
+                $('.' + getLastHash()).hide();
             }
 
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
@@ -112,12 +117,13 @@ $(document).ready(function () {
 
                 history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('#')));
             }
-            $('.content').show();
+            showTable(result);
         }
     });
 
     if(~location.href.lastIndexOf('#')) {
         bucket = findBucket();
+        result = getBuckets();
 
         var name = location.href.slice(location.href.lastIndexOf('#') + 1, location.href.length).split('/')
             [location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length - 1];
@@ -142,7 +148,40 @@ function setLocation(curLoc){
 function showTable(content) {
     $('.content').hide();
     $('#loader-s3-main').remove();
-    if("onhashchange" in window) {
+    if(!content.hasOwnProperty('name')) {
+        var key = 0;
+        content.forEach(function (item) {
+            $('#myTable').append(
+                '<tr class="content bg">' +
+                '<td class="reference">' + item.name + '</td>' +
+                '<td>0</td>' +
+                '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
+                '<td style="width: 150px">' +
+                '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket"' +
+                'href="/s3/delete/' + item.name + '"' +
+                'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
+                'title="Delete bucket"><span class="glyphicon glyphicon-trash"></span>' +
+                '</a>' +
+
+                '<a class="btn btn-danger btn-sm btn-list"' +
+                'href="s3/delete_all/' + item.name + '" data-toggle="tooltip"' +
+                'data-placement="top" title="Delete files">' +
+                '<span class="glyphicon glyphicon-minus"></span>' +
+                '</a>' +
+                '<label for="s3-upload-file-' + key + '"' +
+                'class="btn btn-primary btn-file upload-file" data-toggle="tooltip"' +
+                'data-placement="top" title="Upload file">' +
+                '<span class="glyphicon glyphicon-upload">' +
+                '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
+                'type="file" name="file" style="display: none">' +
+                '</span>' +
+                '</label>' +
+                '</td>' +
+                '</tr>'
+            );
+            key++;
+        });
+    }else if("onhashchange" in window) {
         if (!!content) {
             if (!!content.folders) {
                 content.folders.forEach(function (item) {
@@ -273,5 +312,14 @@ function deleteFile(file) {
     console.log(folder.file);
     localStorage.removeItem(bucket.name);
     localStorage.setItem(bucket.name, JSON.stringify(bucket));
+}
+
+function getBuckets() {
+    var result = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        result.push(JSON.parse(localStorage.getItem(key)));
+    }
+    return result;
 }
 
