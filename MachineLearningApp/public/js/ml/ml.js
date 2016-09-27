@@ -126,8 +126,8 @@ $(document).ready(function() {
 
     // Delete Ajax
     $(document).on('click', '.delete', function(event) {
-        var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
-
+        var target = $(event.target).closest('.ml-table').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
+        console.log(target);
         $(event.target).closest('tr').fadeOut();
 
         function deleteObject(dataSourceIdVar, url) {
