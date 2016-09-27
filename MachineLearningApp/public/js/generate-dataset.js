@@ -48,6 +48,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('i.fa-spinner').hide();
                 $("#generate-btn").removeClass("disabled");
+                $("#rows-number").val("");
                 if (!$.isEmptyObject(data)) {
                     var stats = data.stats;
                     var content = '<ul>';
