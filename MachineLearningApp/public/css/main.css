@@ -690,6 +690,19 @@ a:focus, a:hover {
     animation: spin 2s linear infinite;
     margin-left: 45%;
 }
+.loader-big {
+    border: 24px solid #f3f3f3;
+    /* Light grey */
+
+    border-top: 24px solid #3498db;
+    /* Blue */
+
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    animation: spin 2s linear infinite;
+    margin-left: 45%;
+}
 
 .loader-select {
     border: 4px solid #f3f3f3;
