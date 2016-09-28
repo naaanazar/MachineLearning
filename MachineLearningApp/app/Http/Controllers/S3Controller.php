@@ -197,9 +197,6 @@ class S3Controller extends Controller
             return Response()->json(['data' => $e->getMessage()]);
         }
 
-        Storage::delete($fileName);
-
-
         return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
 

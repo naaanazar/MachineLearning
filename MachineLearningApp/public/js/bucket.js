@@ -69,8 +69,6 @@ $(document).ready(function () {
             processData : false,
             data: data,
             success: function(response) {
-                console.log(1);
-                console.log(response);
                 $.jGrowl('Success upload', {
                     theme: 'jgrowl-success'
                 });
@@ -80,8 +78,6 @@ $(document).ready(function () {
                 });
             },
             error: function (data) {
-                console.log('2');
-                console.log(data);
             }
         });
 
