@@ -38,13 +38,14 @@
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
                         <li class="active"><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a></li>
-                        <li><a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Data Source</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#describeEvaluations"
-                               id="describeEvaluationsContent">Evaluations</a>
+                        <li>
+                            <a data-toggle="tab" href="#describeEvaluations" id="describeEvaluationsContent">Evaluations</a>
                         </li>
                         <li>
                             <a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a>
+                        </li>                        
+                        <li>
+                            <a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Data Source</a>
                         </li>
                     </ul>
                 </div>

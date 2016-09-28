@@ -453,7 +453,7 @@ class MLController extends Controller
 //        $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
 //
 //        $model = $this->createMLModel($name, $dsTraining['success']);
-//        $evaluation = $this->createEvaluation($model['success'], 'Ev-for-model: ' . $name, $dsEvaluate['success']);
+//        $evaluation = $this->createEvaluation($model['success'], 'Ev-: ' . $name, $dsEvaluate['success'] .  '<- ds-evaluate: ' . $name) ;
 //
 //        return response()->json([(array)$result]);
 

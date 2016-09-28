@@ -8,10 +8,9 @@ $(document).ready(function() {
         $(".ml-button-block").hide().fadeOut();
         $(".ml-table").fadeIn();
         window.location.hash = '#describeMLModels';
-        $('#describeMLModels').show();
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel('ok');
-        $('#describeMLModels').show();
+
     });
 
     $(".ml-button-back").on("click", function(e) {
