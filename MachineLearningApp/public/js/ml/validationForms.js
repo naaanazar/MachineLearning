@@ -5,6 +5,7 @@ $(document).ready(function () {
     function checkFormData(selector) {
         $('.modal').on('hidden.bs.modal', function () {
             validationError($(selector));
+            $(selector).val('');
         });
     }
 
