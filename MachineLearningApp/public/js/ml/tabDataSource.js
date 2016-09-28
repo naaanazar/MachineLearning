@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
+
         showLoader('.container-describeDataSources');
 
         $.ajax({
@@ -16,12 +17,17 @@ $(document).ready(function () {
             success: function (data) {
                 $('#DataSourceName').val('');
                 $(".modalCreateDataSource").modal('toggle');
+
                 listDataSource(data);
             }
         });
+        
     });
 
-    $(document).on("click", ".btn-create-datasource", function() {
+
+    $(document).on("click", ".btn-create-datasource", function () {
+        $('.create-datasource-form')[0].reset();      
+
         selectBuckets('/s3/get-buckets', '#SelectBuckets', '.create-datasource-form');
         $('.select-datasource-field').hide();
     });
