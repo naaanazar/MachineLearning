@@ -444,12 +444,30 @@ class MLController extends Controller
         return $res;
     }
 
+    public function doCreateMainMLModel(Request $request)
+    {
+//        $name    = $request->input('MLModelName');
+//        $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
+//
+//        $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
+//        $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
+//
+//        $model = $this->createMLModel($name, $dsTraining['success']);
+//        $evaluation = $this->createEvaluation($model['success'], 'Ev-for-model: ' . $name, $dsEvaluate['success']);
+//
+//        return response()->json([(array)$result]);
+
+        return response()->json(['asdas']);
+
+    }
+
 
     public function doCreateMLModel(Request $request)
     {
       
         $ModelName    = $request->input('MLModelName');      
         $DataSourceId = $request->input('DataSourceId');
+
         $result = $this->createMLModel($ModelName, $DataSourceId);
        
         return response()->json([(array)$result]);
@@ -458,7 +476,7 @@ class MLController extends Controller
 
     private function createMLModel($ModelName, $DataSourceId)
     {
-        $ModelId      = uniqid();       
+        $ModelId      = uniqid();
         $ModelType    = 'BINARY';
 
         try {

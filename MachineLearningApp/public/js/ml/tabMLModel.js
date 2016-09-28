@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel('ok');

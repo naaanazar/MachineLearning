@@ -18,6 +18,8 @@ Route::get('/ml/describe-batch-prediction', 'MLController@doListBatchPredictions
 Route::post('ml/create-datasource', 'MLController@doCreateDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@doCreateMLModel');
 Route::post('ml/create-evaluation', 'MLController@doCreateEvaluation');
+Route::post('ml/create-main-ml-model', 'MLController@doCreateMainMLModel');
+
 
 Route::post('/ml/upload-batch-source', 'MLController@doCreateBatchPrediction');
 

@@ -37,9 +37,8 @@
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
-                        <li class="active"><a data-toggle="tab" href="#describeDataSources"
-                            id="describeDataSourcesContent">Data Source</a></li>
-                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a>
+                        <li class="active"><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a></li>
+                        <li><a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Data Source</a>
                         </li>
                         <li><a data-toggle="tab" href="#describeEvaluations"
                                id="describeEvaluationsContent">Evaluations</a>
@@ -51,14 +50,15 @@
                 </div>
             </div>
             <div class="tab-content col-md-12">
-                <div id="describeDataSources" class="tab-pane fade in active">
-
-                    <div class="container-describeDataSources table-scroll ML-tables-content">
-                    </div>
-                </div>
-                <div id="describeMLModels" class="tab-pane fade">
+              
+                <div id="describeMLModels" class="tab-pane fade in active">
 
                     <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
+                    </div>
+                </div>
+                  <div id="describeDataSources" class="tab-pane fade">
+
+                    <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">

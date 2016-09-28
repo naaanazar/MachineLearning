@@ -7,9 +7,11 @@ $(document).ready(function() {
     $(".ml-setting").on("click", function(e) {
         $(".ml-button-block").hide().fadeOut();
         $(".ml-table").fadeIn();
-        window.location.hash = '#describeDataSources';
-        buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
-        listDataSource('ok');
+        window.location.hash = '#describeMLModels';
+        $('#describeMLModels').show();
+        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+        listMLModel('ok');
+        $('#describeMLModels').show();
     });
 
     $(".ml-button-back").on("click", function(e) {
@@ -31,7 +33,7 @@ $(document).ready(function() {
         $('.select-datasource-field-main').slideDown();
     });
 
-    $('.create-mlmodel-form').submit(function(e) {
+    $('.create-main-mlmodel-form').submit(function(e) {
         e.preventDefault();
 
         $.ajax({
@@ -41,6 +43,11 @@ $(document).ready(function() {
             success: function(data) {
                 $('#MLModelName').val('');
                 $(".modalCreateMainModel").modal('toggle');
+                window.location.hash = '#describeMLModels';
+                buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+                listMLModel('ok');
+                $(".ml-button-block").hide().fadeOut();
+                $(".ml-table").fadeIn();
             },
             error: function() {},
         });
