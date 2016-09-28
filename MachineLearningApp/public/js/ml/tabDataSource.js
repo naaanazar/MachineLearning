@@ -21,6 +21,7 @@ $(document).ready(function () {
                 $(".modalCreateDataSource").modal('toggle');
 
                 listDataSource(data);
+                waitMeClose('#modal-ds-id');
             }
         });
 

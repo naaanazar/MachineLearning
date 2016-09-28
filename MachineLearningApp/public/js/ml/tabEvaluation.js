@@ -19,6 +19,7 @@ $(document).ready(function() {
                 $(".modalCreateEvaluation").modal('toggle');
 
                 listEvaluations(data[0]);
+                waitMeClose('#modal-ev-id');
             },
             error: function() {},
         });

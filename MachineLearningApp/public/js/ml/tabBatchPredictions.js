@@ -23,6 +23,8 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
+                waitMeClose('#modal-bp-id');
+
             }
         });
     });
