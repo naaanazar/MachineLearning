@@ -16,7 +16,7 @@ $(document).ready(function() {
                 $('#EvaluationName').val('');
                 $(".modalCreateEvaluation").modal('toggle');
 
-                listEvaluations(data);
+                listEvaluations(data[0]);
             },
             error: function() {},
         });
