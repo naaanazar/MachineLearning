@@ -154,7 +154,6 @@ function showTable(content) {
         var key = 0;
         $('.back').hide();
         content.forEach(function (item) {
-            console.log(item.creationDate);
             $('#myTable').append(
                 '<tr class="content bg">' +
                     '<td class="reference">' + item.name + '</td>' +
