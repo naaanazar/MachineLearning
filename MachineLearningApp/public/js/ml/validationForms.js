@@ -1,129 +1,57 @@
-$(document).ready(function () {
+$(document).ready(function() {
+    $("#ml-button-create").on('click', '.btn', function (e) {
+        function checkFormData(selector) {
+            $('.modal').on('input', selector, function (e){
+                var valueField = $(e.target).val();
+                var regExp = new RegExp("^ |  |^[^a-zA-Z ]|[^a-zA-Z0-9-_\.]", "g");
 
-    startPageValidation();
-
-    function checkFormData(selector) {
-        $('.modal').on('hidden.bs.modal', function () {
-            validationError($(selector));
-            $(".submit-button").attr("disabled", true);
-            $(selector).val('');
-        });
-    }
-
-    function validationSuccess($element) {
-        $element.removeClass('error').addClass('not_error');
-        $element.closest('div').removeClass('has-error');
-        $element.closest('div').addClass('has-success has-feedback');
-        $element.closest('div').find('span').removeClass('hide');
-    }
-
-    function validationError($element) {
-        $element.removeClass('not_error').addClass('error');
-        $element.closest('div').addClass('has-error has-feedback');
-        $element.closest('div').find('span').addClass('hide');
-    }
-
-    $(document).on('blur', '.form-control', function (e) {
-
-        var id = e.target.id;
-        var val = e.target.value;
-        var tab = '';
-        var nameValidation = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-        var countValidation = /^[0-9][0-9]?$|^100$/;
-        var clickDatasource = false;
-
-        switch (id) {
-            case 'DataSourceName':
-                tab = 'ds';
-
-                checkFormData(this);
-
-                if (val.length > 2 && val != '' && nameValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'DataRearrangementBegin':
-                tab = 'ds';
-
-                checkFormData(this);
-
-                if (val.length > 0 && val != '' && countValidation.test(val)) {
-                    validationSuccess($(this));
-
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'DataRearrangementEnd':
-                tab = 'ds';
-
-                checkFormData(this);
-
-                if (val.length > 0 && val != '' && countValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'MLModelName':
-                tab = 'ml';
-
-                checkFormData(this);
-
-                if (val.length > 2 && val != '' && nameValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'EvaluationName':
-                tab = 'ev';
-
-                checkFormData(this);
-
-                if (val.length > 2 && val != '' && nameValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
+                newValue = valueField.replace(regExp, "");
+                $(selector).val(newValue.substr(0, 20));
+            });
         }
 
-        if ($("#DataSourceName").val().length > 0) {
-            $("#modalCreateDataSource").on("change", "#SelectBuckets, #SelectDataLocationS3", function() {
-                var bucket = $("#SelectBuckets option:selected").val();
-                var s3File = $("#SelectDataLocationS3 option:selected").val();
+        function checkRequired(selector, tab) {
+            $(selector).on("keyup click",function(e) {
+                var empty = false;
 
-                if (bucket != '' && (s3File != '' && s3File != undefined)) {
-                    $("#success-button-modal-ds").removeAttr('disabled');
+                if($(this).val().length >= 5) {
+                    empty = true;
+                }
+
+                if (!empty) {
+                    $('input#success-button-modal-' + tab).attr('disabled', true);
+                } else if (empty) {
+                     $('input#success-button-modal-' + tab).removeAttr('disabled');
                 }
             });
-        } else if ($(this).closest('form').find('divsubmit-button.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-' + tab).attr('disabled', true);
-        }  else {
-            $(this).closest('form').find('input#success-button-modal-' + tab).removeAttr('disabled');
+
+            $('.modal').on('hidden.bs.modal', function () {
+                $(selector).val('');
+                $('input#success-button-modal-' + tab).attr('disabled', true);
+            });
         }
+
+        function checkDatasourceField() {
+            $('.modal').on('change keyup', "#SelectBuckets, #SelectDataLocationS3, #DataSourceName", function(e) {
+                var bucket = $("#SelectBuckets").val();
+                var s3Value = $("#SelectDataLocationS3").val();
+                var ds = $('#DataSourceName').val();
+
+                if (bucket != '' && (s3Value != null && s3Value != '') && ds.length >= 5) {
+                    $('input#success-button-modal-ds').removeAttr('disabled');
+                } else {
+                    $('input#success-button-modal-ds').attr('disabled', true);
+                }
+
+            });
+        }
+
+        checkFormData("#DataSourceName");
+        checkFormData("#MLModelName");
+        checkFormData("#EvaluationName");
+        checkRequired("#DataSourceName", "ds");
+        checkRequired("#MLModelName", "ml");
+        checkRequired("#EvaluationName", "ev");
+        checkDatasourceField();
     });
 });
-
-function startPageValidation() {
-    $('input#MLModelName').addClass('error');
-    $('input#MLModelName').closest('div').addClass('has-error');
-
-
-    $('input#EvaluationName').addClass('error');
-    $('input#EvaluationName').closest('div').addClass('has-error');
-
-    $('input#DataSourceName').addClass('error');
-    $('input#DataRearrangementBegin').addClass('error');
-    $('input#DataRearrangementEnd').addClass('error');
-    $('input#DataSourceName').closest('div').addClass('has-error');
-    $('input#DataRearrangementBegin').closest('div').addClass('has-error');
-    $('input#DataRearrangementEnd').closest('div').addClass('has-error');
-}
