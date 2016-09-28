@@ -1,12 +1,55 @@
 $(document).ready(function() {
+    if (window.location.hash == '#advancedSettings') {
+        $(".ml-table").hide().fadeOut();
+        $(".ml-button-block").fadeIn();
+    }
+
     $(".ml-setting").on("click", function(e) {
         $(".ml-button-block").hide().fadeOut();
         $(".ml-table").fadeIn();
+        window.location.hash = '#describeMLModels';
+        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+        listMLModel('ok');
+
     });
 
     $(".ml-button-back").on("click", function(e) {
         $(".ml-table").hide().fadeOut();
         $(".ml-button-block").fadeIn();
+    });
+
+    $(document).on("click", ".btn-create-mlmodel-main", function () {
+
+        selectBuckets('/s3/get-buckets', '#SelectBucketsMain', '.create-main-mlmodel-form');
+        $('.select-datasource-field-main').hide();
+    });
+
+    $(document).on("change", "#SelectBucketsMain", function() {
+        var bucket = $("#SelectBucketsMain option:selected").text();
+
+        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3Main', '.create-main-mlmodel-form', bucket);
+
+        $('.select-datasource-field-main').slideDown();
+    });
+
+    $('.create-main-mlmodel-form').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "post",
+            url: 'ml/create-main-ml-model',
+            data: $('.create-main-mlmodel-form').serialize(),
+            success: function(data) {
+                $('#MLModelName').val('');
+                $(".modalCreateMainModel").modal('toggle');
+                window.location.hash = '#describeMLModels';
+                buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+                listMLModel('ok');
+                $(".ml-button-block").hide().fadeOut();
+                $(".ml-table").fadeIn();
+            },
+            error: function() {},
+        });
     });
 
     $(document).on("click", '.datasource-info', function(event) {

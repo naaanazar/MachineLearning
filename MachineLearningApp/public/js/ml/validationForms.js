@@ -2,6 +2,13 @@ $(document).ready(function () {
 
     startPageValidation();
 
+    function checkFormData(selector) {
+        $('.modal').on('hidden.bs.modal', function () {
+            validationError($(selector));
+            $(selector).val('');
+        });
+    }
+
     function validationSuccess($element) {
         $element.removeClass('error').addClass('not_error');
         $element.closest('div').removeClass('has-error');
@@ -27,6 +34,8 @@ $(document).ready(function () {
             case 'DataSourceName':
                 tab = 'ds';
 
+                checkFormData(this);
+
                 if (val.length > 2 && val != '' && nameValidation.test(val)) {
                     validationSuccess($(this));
                 } else {
@@ -36,6 +45,8 @@ $(document).ready(function () {
 
             case 'DataRearrangementBegin':
                 tab = 'ds';
+
+                checkFormData(this);
 
                 if (val.length > 0 && val != '' && countValidation.test(val)) {
                     validationSuccess($(this));
@@ -48,6 +59,8 @@ $(document).ready(function () {
             case 'DataRearrangementEnd':
                 tab = 'ds';
 
+                checkFormData(this);
+
                 if (val.length > 0 && val != '' && countValidation.test(val)) {
                     validationSuccess($(this));
                 } else {
@@ -58,6 +71,8 @@ $(document).ready(function () {
             case 'MLModelName':
                 tab = 'ml';
 
+                checkFormData(this);
+
                 if (val.length > 2 && val != '' && nameValidation.test(val)) {
                     validationSuccess($(this));
                 } else {
@@ -67,6 +82,8 @@ $(document).ready(function () {
 
             case 'EvaluationName':
                 tab = 'ev';
+
+                checkFormData(this);
 
                 if (val.length > 2 && val != '' && nameValidation.test(val)) {
                     validationSuccess($(this));

@@ -20,46 +20,47 @@
             </div>
         </div>
             <div class="ml-button-block">
-                <div class="col-md-6" >
-                    <button class="btn-ml-model btn btn-primary btn-create-mlmodel pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateModel">Create ML Model</button>
+                <div class="col-md-6 clearfix" >
+                    <button class="btn-ml-model btn btn-primary btn-create-mlmodel-main pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateMainModel">Create ML Model</button>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 clearfix">
                     <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
                 </div>
             </div>
         <div class="ml-table">
             <div class="ml-table-button clearfix">
-                <button class="ml-button-back ml-setting btn btn-primary">
+                <a href="#advancedSettings" class="ml-button-back ml-setting btn btn-primary">
                      <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                      Back
-                </button>
+                </a>
                 <div id="ml-button-create" class="pull-right"></div>
             </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
-                        <li class="active"><a data-toggle="tab" href="#describeDataSources"
-                            id="describeDataSourcesContent">Data Source</a></li>
-                        <li><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#describeEvaluations"
-                               id="describeEvaluationsContent">Evaluations</a>
+                        <li class="active"><a data-toggle="tab" href="#describeMLModels" id="describeMLModelsContent">Models</a></li>
+                        <li>
+                            <a data-toggle="tab" href="#describeEvaluations" id="describeEvaluationsContent">Evaluations</a>
                         </li>
                         <li>
                             <a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a>
+                        </li>                        
+                        <li>
+                            <a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Data Source</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="tab-content col-md-12">
-                <div id="describeDataSources" class="tab-pane fade in active">
-
-                    <div class="container-describeDataSources table-scroll ML-tables-content">
-                    </div>
-                </div>
-                <div id="describeMLModels" class="tab-pane fade">
+              
+                <div id="describeMLModels" class="tab-pane fade in active">
 
                     <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
+                    </div>
+                </div>
+                  <div id="describeDataSources" class="tab-pane fade">
+
+                    <div class="container-describeDataSources table-scroll ML-tables-content">
                     </div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
@@ -103,23 +104,7 @@
                             <label for="SelectDataLocationS3">Dataset</label>
                             <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">                               
                             </select>
-                        </div>
-                        <div class="">
-                            <div class="form-group">
-                                <label for="DataRearrangement">Data rearrangement Begin</label>
-                                <input type="number" class="form-control form-control-sm" id="DataRearrangementBegin"
-                                       name="DataRearrangementBegin">
-                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                            </div>
-                        </div>
-                        <div class="">
-                            <div class="form-group">
-                                <label for="DataRearrangement">Data rearrangement End</label>
-                                <input type="number" class="form-control form-control-sm" id="DataRearrangementEnd"
-                                       name="DataRearrangementEnd">
-                                <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                            </div>
-                        </div>
+                        </div>                       
                         <div class="row" align="center">
                             <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
@@ -150,6 +135,42 @@
                         <div class="form-group select-load">
                             <label for="SelectDataSource">Datasource name</label>
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
+                            </select>
+                        </div>
+                        <div class="row" align="center">
+                            <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modalCreateMainModel" id="modalCreateMainModel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create  ML Model</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="create-main-mlmodel-form" method="post"
+                          action="ml/create-ml-model">
+                        <br>
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="MLModelName">Model name</label>
+                            <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
+                                   name="MLModelName" autofocus>
+                            <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group select-load">
+                            <label for="SelectBucketsMain">Buckets</label>
+                            <select class="form-control" id="SelectBucketsMain" name="SelectBuckets">
+                            </select>
+                        </div>
+                        <div style="display:none" class="form-group select-load select-datasource-field-main">
+                            <label for="SelectDataLocationS3Main">Dataset</label>
+                            <select class="form-control" id="SelectDataLocationS3Main" name="DataLocationS3">
                             </select>
                         </div>
                         <div class="row" align="center">

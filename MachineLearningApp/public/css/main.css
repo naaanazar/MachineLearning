@@ -59,6 +59,19 @@ body {
     width: 30%;
 }
 
+@media screen and (max-width: 1200px) {
+    .title {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .ml-button-block div {
+        width: 60%;
+        margin-bottom: 30px;
+    }
+}
+
 /***************************************
     S3 Style
 ***************************************/

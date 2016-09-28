@@ -1,8 +1,11 @@
 $(document).ready(function() {
+
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel('ok');
-    };    
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
+    };
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
@@ -15,7 +18,7 @@ $(document).ready(function() {
             success: function(data) {
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
-                listMLModel(data);
+                listMLModel(data[0]);
             },
             error: function() {},
         });
