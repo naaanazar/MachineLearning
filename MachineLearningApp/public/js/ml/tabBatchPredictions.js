@@ -10,9 +10,8 @@ $(document).ready(function() {
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
         $(".modalCreateBatchPrediction").modal('toggle');
-        
         showLoader('.container-describeBatchPredictions');
-        openOverlayBp();
+        run_waitMe('#modal-bp-id');
 
         $.ajax({
             url: '/ml/upload-batch-source',
@@ -23,8 +22,7 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
-                closeOverlayBp();
-            }           
+            }
         });
     });
 

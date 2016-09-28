@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     $('.create-evaluations-form').submit(function(e) {
         e.preventDefault();
-        openOverlayEv();
+        run_waitMe('#modal-ev-id');
 
         $.ajax({
             type: "post",
@@ -17,7 +17,6 @@ $(document).ready(function() {
                 $('#EvaluationName').val('');
                 $(".modalCreateEvaluation").modal('toggle');
 
-                closeOverlayEv();
                 listEvaluations(data);
             },
             error: function() {},

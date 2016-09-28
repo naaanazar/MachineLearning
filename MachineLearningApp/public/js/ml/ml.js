@@ -174,6 +174,12 @@ $(document).ready(function() {
         $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
 
+    $('#demo').click(function () {
+        run_waitMe();
+    });
+    $('#demo-close').click(function () {
+        waitMeClose();
+    });
 });
 
 function statusTextColor(str) {
@@ -299,35 +305,24 @@ function statusAction(status) {
             theme: 'jgrowl-success'
         });
     }
+
 }
 
-function openOverlayMl() {
-    document.getElementById("overlay-ml").style.width = "100%";
+function run_waitMe(element) {
+
+    $(element).waitMe({
+        effect: 'stretch',
+        text: '',
+        bg: 'rgba(255,255,255,0.7)',
+        color: '#000',
+        onClose: function () {
+        }
+    });
+
+}
+function waitMeClose() {
+    elem.removeClass(elemClass + '_container');
+    elem.find('.' + elemClass).remove();
 }
 
-function closeOverlayMl() {
-    document.getElementById("overlay-ml").style.width = "0%";
-}
-function openOverlayEv() {
-    document.getElementById("overlay-ev").style.width = "100%";
-}
 
-function closeOverlayEv() {
-    document.getElementById("overlay-ev").style.width = "0%";
-}
-
-function openOverlayDs() {
-    document.getElementById("overlay-ds").style.width = "100%";
-}
-
-function closeOverlayDs() {
-    document.getElementById("overlay-ds").style.width = "0%";
-}
-
-function openOverlayBp() {
-    document.getElementById("overlay-bp").style.width = "100%";
-}
-
-function closeOverlayBp() {
-    document.getElementById("overlay-bp").style.width = "0%";
-}

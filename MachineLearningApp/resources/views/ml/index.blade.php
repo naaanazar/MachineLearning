@@ -77,13 +77,8 @@
     </div>
     <br>
     <div class="modal fade modalCreateDataSource" id="modalCreateDataSource" role="dialog">
-        <div id="overlay-ds" class="overlay">
-            <div class="overlay-content">
-                <div class="loader-big"></div>
-            </div>
-        </div>
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-ds-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Datasource</h4>
@@ -134,18 +129,14 @@
         </div>
     </div>
     <div class="modal fade modalCreateModel" id="modalCreateModel" role="dialog">
-        <div id="overlay-ml" class="overlay">
-            <div class="overlay-content">
-                <div class="loader-big"></div>
-            </div>
-        </div>
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-ml-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Model</h4>
                 </div>
                 <div class="modal-body">
+
                     <form class="create-mlmodel-form" method="post"
                           action="ml/create-ml-model">
                         <br>
@@ -170,13 +161,8 @@
         </div>
     </div>
     <div class="modal fade modalCreateEvaluation" id="modalCreateEvaluation" role="dialog">
-        <div id="overlay-ev" class="overlay">
-            <div class="overlay-content">
-                <div class="loader-big"></div>
-            </div>
-            </div>
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-ev-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Evaluation</h4>
@@ -211,13 +197,8 @@
         </div>
     </div>
     <div class="modal fade modalCreateBatchPrediction" id="modalCreateBatchPrediction" role="dialog">
-        <div id="overlay-bp" class="overlay">
-            <div class="overlay-content">
-                <div class="loader-big"></div>
-            </div>
-        </div>
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-bp-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Batch prediction</h4>

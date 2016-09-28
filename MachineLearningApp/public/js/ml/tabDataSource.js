@@ -10,7 +10,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         showLoader('.container-describeDataSources');
-        openOverlayDs();
+        run_waitMe('#modal-ds-id');
 
         $.ajax({
             type: "post",
@@ -21,7 +21,6 @@ $(document).ready(function () {
                 $(".modalCreateDataSource").modal('toggle');
 
                 closeOverlayDs();
-                listDataSource(data);
             }
         });
 

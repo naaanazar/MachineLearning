@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
-        openOverlayMl();
+        run_waitMe('#modal-ml-id');
 
         $.ajax({
             type: "post",
@@ -16,8 +16,6 @@ $(document).ready(function() {
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data);
-
-                closeOverlayMl();
             },
             error: function() {},
         });
