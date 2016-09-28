@@ -5,6 +5,7 @@ $(document).ready(function () {
     function checkFormData(selector) {
         $('.modal').on('hidden.bs.modal', function () {
             validationError($(selector));
+            $(".submit-button").attr("disabled", true);
             $(selector).val('');
         });
     }
@@ -29,6 +30,7 @@ $(document).ready(function () {
         var tab = '';
         var nameValidation = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
         var countValidation = /^[0-9][0-9]?$|^100$/;
+        var clickDatasource = false;
 
         switch (id) {
             case 'DataSourceName':
@@ -93,12 +95,20 @@ $(document).ready(function () {
                 break;
         }
 
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
+        if ($("#DataSourceName").val().length > 0) {
+            $("#modalCreateDataSource").on("change", "#SelectBuckets, #SelectDataLocationS3", function() {
+                var bucket = $("#SelectBuckets option:selected").val();
+                var s3File = $("#SelectDataLocationS3 option:selected").val();
+
+                if (bucket != '' && (s3File != '' && s3File != undefined)) {
+                    $("#success-button-modal-ds").removeAttr('disabled');
+                }
+            });
+        } else if ($(this).closest('form').find('divsubmit-button.has-error').hasClass('has-error') == true) {
             $(this).closest('form').find('input#success-button-modal-' + tab).attr('disabled', true);
-        } else {
+        }  else {
             $(this).closest('form').find('input#success-button-modal-' + tab).removeAttr('disabled');
         }
-
     });
 });
 

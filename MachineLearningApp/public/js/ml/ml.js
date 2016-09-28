@@ -262,7 +262,7 @@ function selectBuckets(uri, elementId, formClass) {
     addSelectLoader(elementId, formClass);
 
     $.get(uri, function (response) {
-        var result = '"<option value="" disabled selected style="display: none;">Please select bucket</option>"';
+        var result = '"<option value="" disabled selected style="display:none;">Please select bucket</option>"';
 
         for (var key in response.data) {
             result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';

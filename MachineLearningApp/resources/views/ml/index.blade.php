@@ -78,7 +78,7 @@
     </div>
     <br>
     <div class="modal fade modalCreateDataSource" id="modalCreateDataSource" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" data-clicked="">
             <div class="modal-content" id="modal-ds-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
