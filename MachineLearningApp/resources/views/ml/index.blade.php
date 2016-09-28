@@ -19,10 +19,10 @@
             </div>
         </div>
             <div class="ml-button-block">
-                <div class="col-md-6" >
+                <div class="col-md-6 clearfix" >
                     <button class="btn-ml-model btn btn-primary btn-create-mlmodel pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateModel">Create ML Model</button>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 clearfix">
                     <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
                 </div> 
             </div>
