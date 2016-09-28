@@ -1,18 +1,11 @@
 $(document).ready(function() {
-
-    $(".ml-setting").on("click", function(e) {
-        e.preventDefault();
-
-        $(".ml-table").toggle();
-    });
-
     if (window.location.hash == '#describeMLModels') {
         buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
         listMLModel('ok');
     };    
 
     $('.create-mlmodel-form').submit(function(e) {
-        e.preventDefault();      
+        e.preventDefault();
 
         openNav();
         $.ajax({
@@ -20,6 +13,7 @@ $(document).ready(function() {
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
+                $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data);
                 closeNav();
@@ -29,7 +23,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-mlmodel", function() {
-        $(".ml-table").hide();
+       $('.create-mlmodel-form')[0].reset();
         selectName('/ml/select-data-source?Obj=ml', '#SelectDataSource', '.create-mlmodel-form');
     });
 
@@ -67,8 +61,7 @@ function listMLModel(status)
                 '<tr class="active">' +
                     '<td>Name</td>' +
                     '<td>Status</td>' +
-                    '<td>Endpoint Status</td>' +
-                    '<td>ML Model Type</td>' +
+                    '<td>Endpoint Status</td>' +                    
                     '<td>Last Updated</td>' +
                     '<td>Action</td>' +
                 '</tr>' +
@@ -92,8 +85,7 @@ function listMLModel(status)
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
-                '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +
-                '<td>' + response.data[key].MLModelType + '</td>' +
+                '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +               
                 '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-warning btn-sm btn-list delete-endpoint ' + endpointDisabled + '" href="#modal"' +

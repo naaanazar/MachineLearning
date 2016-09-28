@@ -434,7 +434,7 @@ class MLController extends Controller
     {
         $ModelId      = 'ml-'.uniqid();
         $ModelName    = $request->input('MLModelName');
-        $ModelType    = $request->input('MLModelType');
+        $ModelType    = 'BINARY';
         $DataSourceId = $request->input('DataSourceId');
 
         try {

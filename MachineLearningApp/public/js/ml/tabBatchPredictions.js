@@ -10,6 +10,7 @@ $(document).ready(function() {
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
         $(".modalCreateBatchPrediction").modal('toggle');
+        
         showLoader('.container-describeBatchPredictions');
         $.ajax({
             url: '/ml/upload-batch-source',
@@ -25,6 +26,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".btn-create-bath-description", function() {
+        $('.create-bath-predictios-form')[0].reset();
         selectName('/ml/select-ml-model?Obj=ml', '#SelectBathMLModel', '.create-bath-predictios-form');
     });
 

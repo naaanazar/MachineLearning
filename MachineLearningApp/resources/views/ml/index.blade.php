@@ -9,25 +9,31 @@
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
     <script src="{{ URL::to('js/ml/validationForms.js') }}"></script>
 
-    <div class="container ">
-        <div class="row">
-            <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 ml-logo-block">
-  <!--               <div id="ml-button-create">
-                </div> -->
-                <h2 class="title"><img class="logo-ML" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">Machine
-                    Learning</h2>
+    <div class="container">
+        <div class="row ml-logo-block">
+            <div class="col-md-5 col-md-offset-4">
+                <h2 class="title">
+                    <img class="logo-ML" src="{{ URL::to('images/aws-ML.png') }}" alt="ml">
+                    Machine Learning
+                </h2>
             </div>
-            <!-- <div class="col-md-6">
-                <a href="#" class="btn-create-mlmodel btn btn-primary btn-block btn-lg" data-dismiss="modal">Create Model</a>
+        </div>
+            <div class="ml-button-block">
+                <div class="col-md-6" >
+                    <button class="btn-ml-model btn btn-primary btn-create-mlmodel pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateModel">Create ML Model</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
+                </div>
             </div>
-            -->
-            <div class="col-md-6" >
-                <button class="btn btn-primary btn-create-mlmodel pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateModel">Create ML Mode</button>
-            </div>
-            <div class="col-md-6">
-                <a href="#" class="ml-setting btn btn-primary btn-block btn-lg">Advance setting</a>
-            </div> 
         <div class="ml-table">
+            <div class="ml-table-button clearfix">
+                <button class="ml-button-back ml-setting btn btn-primary">
+                     <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                     Back
+                </button>
+                <div id="ml-button-create" class="pull-right"></div>
+            </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs">
                 <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ML-tabs" style="padding: 0">
                     <ul class="nav nav nav-tabs nav-justified ">
@@ -74,17 +80,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Create Data Source</h4>
+                    <h4 class="modal-title">Create Datasource</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="create-datasource-form" method="post"
+                    <form class="create-datasource-form" id="create-datasource-form-id" method="post"
                           action="ml/create-datasource">
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="DataSourceName">Data source name</label>
+                            <label for="DataSourceName">Datasource name</label>
                             <input type="text" class="form-control" id="DataSourceName"
-                                   placeholder="Data source name" name="DataSourceName">
+                                   placeholder="Datasource name" name="DataSourceName">
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
                         <div class="form-group select-load">
@@ -114,14 +120,13 @@
                             </div>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" data-toggle="modal" data-target="#lodadCreateEvaluationModal">
+                            <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="modal fade modalCreateModel" id="modalCreateModel" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -140,21 +145,13 @@
                                    name="MLModelName" autofocus>
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
-                            <label for="MLModelType">Model type</label>
-                            <select class="form-control" id="MLModelType" name="MLModelType">
-                                <option selected value="BINARY">BINARY</option>
-                                <option value="REGRESSION">REGRESSION</option>
-                                <option value="MULTICLASS">MULTICLASS</option>
-                            </select>
-                        </div>
                         <div class="form-group select-load">
-                            <label for="SelectDataSource">Data source name</label>
+                            <label for="SelectDataSource">Datasource name</label>
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create">
+                            <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
                 </div>
@@ -185,12 +182,12 @@
                             </select>
                         </div>
                         <div class="form-group select-load">
-                            <label for="SelectEvDataSource">Data source name</label>
+                            <label for="SelectEvDataSource">Datasource name</label>
                             <select class="form-control" id="SelectEvDataSource" name="DataSourceId">
                             </select>
                         </div>
                         <div class="row" align="center">
-                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button" value="Create">
+                            <input id="success-button-modal-ev" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
                 </div>
@@ -216,11 +213,12 @@
                         </div>
                         <div class="form-group">
                             <label for="input-file-source" class="btn btn-primary btn-file" data-toggle="tooltip" data-placement="bottom" title="csv">
-                                <span class="glyphicon glyphicon-upload"></span>&nbsp;Upload Dataset in CSV<input id="input-file-source" type="file" name="file">
+                                <span class="glyphicon glyphicon-upload"></span>&nbsp;Choose dataset file
+                                <input id="input-file-source" type="file" name="file" accept=".csv">
                             </label>
                             <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </form>
                 </div>
             </div>

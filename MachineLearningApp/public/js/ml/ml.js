@@ -1,7 +1,17 @@
-$(document).ready(function () {
-    $(document).on("click", '.datasource-info', function (event) {
+$(document).ready(function() {
+    $(".ml-setting").on("click", function(e) {
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
+    });
+
+    $(".ml-button-back").on("click", function(e) {
+        $(".ml-table").hide().fadeOut();
+        $(".ml-button-block").fadeIn();
+    });
+
+    $(document).on("click", '.datasource-info', function(event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
-        var tab = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
+        var tab = $(event.target).closest('.ml-table').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
 
         var data = {
             Name: "",
@@ -115,9 +125,9 @@ $(document).ready(function () {
     });
 
     // Delete Ajax
-    $(document).on('click', '.delete', function (event) {
-        var target = $(event.target).closest('div.container').find('div.row').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
-
+    $(document).on('click', '.delete', function(event) {
+        var target = $(event.target).closest('.ml-table').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
+        console.log(target);
         $(event.target).closest('tr').fadeOut();
 
         function deleteObject(dataSourceIdVar, url) {
