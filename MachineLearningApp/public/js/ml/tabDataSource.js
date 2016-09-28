@@ -20,10 +20,9 @@ $(document).ready(function () {
                 $('#DataSourceName').val('');
                 $(".modalCreateDataSource").modal('toggle');
 
-                listDataSource(data);
+                listDataSource(data[0]);
             }
-        });
-        
+        });        
     });
 
 

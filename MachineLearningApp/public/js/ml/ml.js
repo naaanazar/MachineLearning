@@ -17,6 +17,35 @@ $(document).ready(function() {
         $(".ml-button-block").fadeIn();
     });
 
+    $(document).on("click", ".btn-create-mlmodel-main", function () {
+
+        selectBuckets('/s3/get-buckets', '#SelectBucketsMain', '.create-main-mlmodel-form');
+        $('.select-datasource-field-main').hide();
+    });
+
+    $(document).on("change", "#SelectBucketsMain", function() {
+        var bucket = $("#SelectBucketsMain option:selected").text();
+
+        selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3Main', '.create-main-mlmodel-form', bucket);
+
+        $('.select-datasource-field-main').slideDown();
+    });
+
+    $('.create-mlmodel-form').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "post",
+            url: 'ml/create-main-ml-model',
+            data: $('.create-main-mlmodel-form').serialize(),
+            success: function(data) {
+                $('#MLModelName').val('');
+                $(".modalCreateMainModel").modal('toggle');
+            },
+            error: function() {},
+        });
+    });
+
     $(document).on("click", '.datasource-info', function(event) {
         var datasourceId = $(event.target).closest('a').data('source-id');
         var tab = $(event.target).closest('.ml-table').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();

@@ -16,7 +16,7 @@ $(document).ready(function() {
             success: function(data) {
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
-                listMLModel(data);
+                listMLModel(data[0]);
             },
             error: function() {},
         });
