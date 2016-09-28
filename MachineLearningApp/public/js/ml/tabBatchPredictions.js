@@ -12,6 +12,8 @@ $(document).ready(function() {
         $(".modalCreateBatchPrediction").modal('toggle');
         
         showLoader('.container-describeBatchPredictions');
+        openOverlayBp();
+
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -21,6 +23,7 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
+                closeOverlayBp();
             }           
         });
     });

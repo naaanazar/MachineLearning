@@ -174,13 +174,6 @@ $(document).ready(function() {
         $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
     });
 
-    //overlay
-    $('#modalCreateModel, #modalCreateEvaluation, #modalCreateDataSource, #modalCreateBatchPrediction').append('<div id="myNav" class="overlay">' +
-        '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
-        '<div class="overlay-content">' +
-        '<div class="loader-big"></div>' +
-        '</div>' +
-        '</div>');
 });
 
 function statusTextColor(str) {
@@ -308,10 +301,33 @@ function statusAction(status) {
     }
 }
 
-function openNav() {
-    document.getElementById("myNav").style.width = "100%";
+function openOverlayMl() {
+    document.getElementById("overlay-ml").style.width = "100%";
 }
 
-function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
+function closeOverlayMl() {
+    document.getElementById("overlay-ml").style.width = "0%";
+}
+function openOverlayEv() {
+    document.getElementById("overlay-ev").style.width = "100%";
+}
+
+function closeOverlayEv() {
+    document.getElementById("overlay-ev").style.width = "0%";
+}
+
+function openOverlayDs() {
+    document.getElementById("overlay-ds").style.width = "100%";
+}
+
+function closeOverlayDs() {
+    document.getElementById("overlay-ds").style.width = "0%";
+}
+
+function openOverlayBp() {
+    document.getElementById("overlay-bp").style.width = "100%";
+}
+
+function closeOverlayBp() {
+    document.getElementById("overlay-bp").style.width = "0%";
 }

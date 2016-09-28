@@ -9,6 +9,7 @@
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
     <script src="{{ URL::to('js/ml/validationForms.js') }}"></script>
 
+
     <div class="container">
         <div class="row ml-logo-block">
             <div class="col-md-5 col-md-offset-4">
@@ -76,6 +77,11 @@
     </div>
     <br>
     <div class="modal fade modalCreateDataSource" id="modalCreateDataSource" role="dialog">
+        <div id="overlay-ds" class="overlay">
+            <div class="overlay-content">
+                <div class="loader-big"></div>
+            </div>
+        </div>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,6 +134,11 @@
         </div>
     </div>
     <div class="modal fade modalCreateModel" id="modalCreateModel" role="dialog">
+        <div id="overlay-ml" class="overlay">
+            <div class="overlay-content">
+                <div class="loader-big"></div>
+            </div>
+        </div>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,6 +170,11 @@
         </div>
     </div>
     <div class="modal fade modalCreateEvaluation" id="modalCreateEvaluation" role="dialog">
+        <div id="overlay-ev" class="overlay">
+            <div class="overlay-content">
+                <div class="loader-big"></div>
+            </div>
+            </div>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -195,6 +211,11 @@
         </div>
     </div>
     <div class="modal fade modalCreateBatchPrediction" id="modalCreateBatchPrediction" role="dialog">
+        <div id="overlay-bp" class="overlay">
+            <div class="overlay-content">
+                <div class="loader-big"></div>
+            </div>
+        </div>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
