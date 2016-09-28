@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
-        $(".modalCreateModel").modal('toggle');
 
         $.ajax({
             type: "post",

@@ -7,7 +7,6 @@ $(document).ready(function() {
 
     $('.create-evaluations-form').submit(function(e) {
         e.preventDefault();
-        $(".modalCreateEvaluation").modal('toggle');
 
         $.ajax({
             type: "post",
