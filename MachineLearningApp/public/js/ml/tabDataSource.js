@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     if (window.location.hash == '#describeDataSources') {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
         listDataSource('ok');
@@ -20,9 +19,10 @@ $(document).ready(function () {
                 $('#DataSourceName').val('');
                 $(".modalCreateDataSource").modal('toggle');
 
-                listDataSource(data[0]);
+                listDataSource(data);
             }
-        });        
+        });
+        
     });
 
 
