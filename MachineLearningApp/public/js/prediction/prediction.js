@@ -89,7 +89,7 @@ RT_PREDICTION.Form = {
                     }
                 } else {
                     RT_PREDICTION.Form.removeProgress();
-                    console.log(response);
+
                     this.result = response.result;
                     this.purchase = response.result.predictedLabel == 0 ? "No" : "Yes";
                     this.predictedScores = this.purchase === "No" ?

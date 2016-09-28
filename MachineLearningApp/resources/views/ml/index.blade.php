@@ -28,10 +28,10 @@
             </div>
         <div class="ml-table">
             <div class="ml-table-button clearfix">
-                <button class="ml-button-back ml-setting btn btn-primary">
+                <a href="#advancedSettings" class="ml-button-back ml-setting btn btn-primary">
                      <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                      Back
-                </button>
+                </a>
                 <div id="ml-button-create" class="pull-right"></div>
             </div>
             <div class="row-lg-6 row-md-6 row-sm-6 row-xs-6 tabs ml-tabs">

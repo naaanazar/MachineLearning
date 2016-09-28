@@ -1,7 +1,15 @@
 $(document).ready(function() {
+    if (window.location.hash == '#advancedSettings') {
+        $(".ml-table").hide().fadeOut();
+        $(".ml-button-block").fadeIn();
+    }
+
     $(".ml-setting").on("click", function(e) {
         $(".ml-button-block").hide().fadeOut();
         $(".ml-table").fadeIn();
+        window.location.hash = '#describeDataSources';
+        buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
+        listDataSource('ok');
     });
 
     $(".ml-button-back").on("click", function(e) {

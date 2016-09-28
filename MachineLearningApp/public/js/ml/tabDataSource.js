@@ -1,8 +1,10 @@
 $(document).ready(function () {
 
-    if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
+    if (window.location.hash == '#describeDataSources') {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
         listDataSource('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     };
 
     $('.create-datasource-form').submit(function (e) {
