@@ -19,6 +19,7 @@ $(document).ready(function() {
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data[0]);
+                waitMeClose('#modal-ml-id');
             },
             error: function() {},
         });

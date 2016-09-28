@@ -34,6 +34,7 @@ $(document).ready(function() {
 
     $('.create-main-mlmodel-form').submit(function(e) {
         e.preventDefault();
+        run_waitMe('#modal-main-ml-id');
 
         $.ajax({
             type: "post",
@@ -47,6 +48,7 @@ $(document).ready(function() {
                 listMLModel('ok');
                 $(".ml-button-block").hide().fadeOut();
                 $(".ml-table").fadeIn();
+                waitMeClose('#modal-main-ml-id');
             },
             error: function() {},
         });
@@ -363,9 +365,8 @@ function run_waitMe(element) {
     });
 
 }
-function waitMeClose() {
-    elem.removeClass(elemClass + '_container');
-    elem.find('.' + elemClass).remove();
+function waitMeClose(element) {
+    $(element).waitMe("hide");
 }
 
 
