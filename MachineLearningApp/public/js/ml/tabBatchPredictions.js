@@ -1,11 +1,12 @@
 $(document).ready(function() {
-
-    $("[data-toggle='tooltip']").tooltip();
-
     if (window.location.hash == '#describeBatchPredictions') {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
         listBatchPrediction('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     }
+
+    $("[data-toggle='tooltip']").tooltip();
 
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
@@ -21,7 +22,7 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
-            }           
+            }
         });
     });
 

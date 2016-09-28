@@ -1,8 +1,9 @@
 $(document).ready(function() {
-
     if (window.location.hash == '#describeEvaluations') {
         buttonCreate(' btn-create-evaluations', '#ml-button-create', 'Create Evaluations', '#modalCreateEvaluation');
         listEvaluations('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     }
 
     $('.create-evaluations-form').submit(function(e) {
