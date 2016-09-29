@@ -39,8 +39,8 @@ Route::get('/ml/select-data-source', 'MLController@doSelectDataSources');
 Route::get('/ml/select-ml-model', 'MLController@doSelectMLModel');
 
 //Generator
-Route::get('generator', 'GeneratorController@index');
-Route::post('generate', 'GeneratorController@generateDataset');
+Route::get('generator', 'GeneratorController@doIndex');
+Route::post('generate', 'GeneratorController@doGenerateDataset');
 
 //S3
 Route::get('s3/allbuckets', 'S3Controller@doBucketStruct');
