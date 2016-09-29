@@ -58,8 +58,8 @@ function hideMessage() {
 }
 
 function bindEvents() {
-    $(document).on('input', '#rows-number', function (e) {
-        var value = $(e.target).val();
+    $(document).on('input', '#rows-number', function (event) {
+        var value = $(event.target).val();
         var newValue = value.replace(/^0|\D+/g, '');
         var maxLength = MAX_ROWS_COUNT.toString().length;
 
@@ -67,6 +67,8 @@ function bindEvents() {
             newValue = parseInt(newValue.toString().substr(0, newValue.length - 1));
         } else if (newValue.length > maxLength) {
             newValue = parseInt(newValue.toString().substr(0, maxLength));
+        } else {
+            hideMessage();
         }
 
         $("#rows-number").val(newValue);
