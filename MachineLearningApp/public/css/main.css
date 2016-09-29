@@ -962,3 +962,15 @@ a.btn.btn-warning.btn-sm.btn-list.delete-endpoint.disabled {
         right: 35px;
     }
 }
+
+.modal-button-create-position {
+    height:40px;
+}
+
+.modal-body {
+    padding-top: 0px;
+}
+
+.modal-header{
+    padding-bottom: 0px;
+}

@@ -105,7 +105,7 @@
                             <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">                               
                             </select>
                         </div>                       
-                        <div class="row" align="center">
+                        <div class="row modal-button-create-position" align="center">
                             <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
@@ -137,7 +137,7 @@
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <div class="row" align="center">
+                        <div class="row modal-button-create-position" align="center">
                             <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
@@ -173,7 +173,7 @@
                             <select class="form-control" id="SelectDataLocationS3Main" name="DataLocationS3">
                             </select>
                         </div>
-                        <div class="row" align="center">
+                        <div class="row modal-button-create-position" align="center">
                             <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
