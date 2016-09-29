@@ -195,7 +195,7 @@ $(document).ready(function() {
         }
 
         switch (target) {
-            case 'Datasource':
+            case 'Datasources':
                 deleteObject('Datasources', '/ml/delete-datasource/');
                 break;
             case 'Models':

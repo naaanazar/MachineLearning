@@ -196,10 +196,7 @@ class MLController extends Controller
             $result[$key]['EvDatasourceName'] = $resultDs['Name'];
         }
 
-
         return response()->json(['data' => (array)$result]);
-
-
     }
 
 
@@ -438,8 +435,6 @@ class MLController extends Controller
 
     public function DoCreateDataSourceFromS3(Request $request)
     {
-
-
         $DataSourceName    = $request->input('DataSourceName');
         $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
         $percentBegin  =  '0';
@@ -487,12 +482,11 @@ class MLController extends Controller
     {
         $name    = $request->input('MLModelName');
         $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
-
         $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
         $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
-
         $model = $this->createMLModel($name, $dsTraining['success']);
-        $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success'] .  '<- ds-evaluate: ' . $name) ;
+
+        $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success']) ;
 
         $result['success'] = $model['success'];
 
