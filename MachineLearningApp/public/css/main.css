@@ -70,9 +70,23 @@ body {
 }
 
 @media screen and (max-width: 1000px) {
-    .ml-button-block div {
+    .ml-logo-block {
+        text-align: center;
+    }
+
+    .ml-button-block {
         width: 60%;
+        margin: 0 auto;
+    }
+
+    .ml-button-block div {
         margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .ml-button-block {
+        width: 90%;
     }
 }
 

@@ -376,10 +376,10 @@ function statusAction(status) {
 function run_waitMe(element) {
 
     $(element).waitMe({
-        effect: 'stretch',
+        effect: 'rotation',
         text: '',
         bg: 'rgba(255,255,255,0.7)',
-        color: '#000',
+        color: '#3498db',
         onClose: function () {
         }
     });

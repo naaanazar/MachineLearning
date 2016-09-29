@@ -158,7 +158,7 @@ RT_PREDICTION.Validation = {
         });
     },
 
-    validation: function (selector, lengthVal, regexp, message) {
+    validation: function (selector, lengthVal, regexp) {
         $('.form-prediction').on('input', selector, function (e){
             this.valueField = $(e.target).val();
             this.regExp = new RegExp(regexp, "g");
@@ -168,25 +168,18 @@ RT_PREDICTION.Validation = {
         });
     },
 
-    error: function (message) {
-        this.errorMsg = '<div class="alert alert-danger pred-alert">'
-        this.errorMsg += '<ul><li><strong>' + message + '</strong></li></ul></div>';
-
-        return this.errorMsg;
-    },
-
     init: function() {
         this.checkRequired();
-        this.validation("#email", 1, "[^0-1]", "Enter the 0 or 1");
-        this.validation("#has-privat-project", 1, "[^0-1]", "Enter the 0 or 1");
-        this.validation("#same-log-project", 1, "[^0-1]", "Enter the 0 or 1");
-        this.validation("#same-email", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#projects-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#string-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#members-count", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#last-login", 10, "^0[0-9]|[^0-9]", "Enter the valid number");
-        this.validation("#country", 60, "^ |  |[^a-zA-Z ]", "Enter the letter");
+        this.validation("#email", 1, "[^0-1]");
+        this.validation("#has-privat-project", 1, "[^0-1]");
+        this.validation("#same-log-project", 1, "[^0-1]");
+        this.validation("#same-email", 10, "^0[0-9]|[^0-9]");
+        this.validation("#projects-count", 10, "^0[0-9]|[^0-9]");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]");
+        this.validation("#string-count", 10, "^0[0-9]|[^0-9]");
+        this.validation("#members-count", 10, "^0[0-9]|[^0-9]");
+        this.validation("#last-login", 10, "^0[0-9]|[^0-9]");
+        this.validation("#country", 60, "^ |  |[^a-zA-Z ]");
     }
 }
 

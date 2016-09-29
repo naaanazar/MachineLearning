@@ -9,7 +9,7 @@ function checkMLData(selector) {
 }
 
 function checkMLRequired(selector, tab) {
-    $(selector).on("keyup click",function(e) {
+    $(selector).on('keyup click',function(e) {
         var empty = false;
 
         if($(this).val().length >= 5) {
@@ -51,7 +51,7 @@ function checkBatchPredictionField() {
     });
 }
 
-function checkDatasourceField(selector, bucket, s3, tab) {
+function checkMLSelecField(selector, bucket, s3, tab) {
     $('.modal').on('change keyup', bucket + ", " + s3 + ", "+ selector, function(e) {
         var bucket = $(bucket).val();
         var s3Value = $(s3).val();
@@ -65,6 +65,8 @@ function checkDatasourceField(selector, bucket, s3, tab) {
     });
 
     $('.modal').on('hidden.bs.modal', function () {
+        $(s3).val('');
+        $(bucket).val('');
         $(selector).val('');
         $('input#success-button-modal-' + tab).attr('disabled', true);
     });
@@ -77,13 +79,12 @@ $(document).ready(function() {
         checkMLData("#EvaluationName");
         checkMLRequired("#MLModelName", "ml");
         checkMLRequired("#EvaluationName", "ev");
-        checkDatasourceField("#DataSourceName", "#SelectBuckets", "#SelectDataLocationS3", "ds");
+        checkMLSelecField("#DataSourceName", "#SelectBuckets", "#SelectDataLocationS3", "ds");
         checkBatchPredictionField();
     });
 
     $('.ml-button-block').on('click', '.btn-create-mlmodel-main', function(e) {
         checkMLData("#MLMainModelName");
-        checkDatasourceField("#MLMainModelName", "#SelectBucketsMain", "#SelectDataLocationS3Main", "ml");
+        checkMLSelecField("#MLMainModelName", "#SelectBucketsMain", "#SelectDataLocationS3Main", "ml");
     });
-
 });

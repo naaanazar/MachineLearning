@@ -14,6 +14,16 @@ $(document).ready(function() {
             type: "post",
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
+            error: function(XMLHttpRequest){
+                if (XMLHttpRequest.status == '422') {
+                    $(document).ready(function () {
+                        $.jGrowl("Incorrect name. Please reload page or try again later!", {
+                            sticky: true,
+                            theme: 'jgrowl-danger'
+                        });
+                    });
+                }
+            },
             success: function(data) {
                 $('#EvaluationName').val('');
                 $(".modalCreateEvaluation").modal('toggle');
@@ -21,6 +31,7 @@ $(document).ready(function() {
                 listEvaluations(data[0]);
                 waitMeClose('#modal-ev-id');
             },           
+
         });
     });
 

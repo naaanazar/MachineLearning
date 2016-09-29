@@ -15,13 +15,22 @@ $(document).ready(function() {
             type: "post",
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
-            success: function(data) {            
+            error: function(XMLHttpRequest){
+                if (XMLHttpRequest.status == '422') {
+                    $(document).ready(function () {
+                        $.jGrowl("Incorrect name. Please reload page or try again later!", {
+                            sticky: true,
+                            theme: 'jgrowl-danger'
+                        });
+                    });
+                }
+            },
+            success: function(data) {
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data[0]);
                 waitMeClose('#modal-ml-id');
             },
-            error: function() {},
         });
     });
 
