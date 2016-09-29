@@ -512,7 +512,7 @@ class MLController extends Controller
     public function doCreateMLModel(Request $request)
     {
         $this->validate($request, [
-            'MLModelName' => 'required|alpha_dash|min:6|max:255|regex:/^[a-zA-Z]/',
+            'MLModelName' => 'required|alpha_dash|min:5|max:255|regex:/^[a-zA-Z]/',
         ]);
 
         $DataSourceId = $request->input('DataSourceId');
@@ -564,7 +564,7 @@ class MLController extends Controller
     public function doCreateEvaluation(Request $request)
     {
         $this->validate($request, [
-            'EvaluationName' => 'required|alpha_dash|min:6|max:255|regex:/^[a-zA-Z]/',
+            'EvaluationName' => 'required|alpha_dash|min:5|max:255|regex:/^[a-zA-Z]/',
         ]);
 
         $DataSourceId   = $request->input('DataSourceId'); 
