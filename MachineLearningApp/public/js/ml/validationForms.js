@@ -85,5 +85,4 @@ $(document).ready(function() {
         checkMLData("#MLMainModelName");
         checkDatasourceField("#MLMainModelName", "#SelectBucketsMain", "#SelectDataLocationS3Main", "ml");
     });
-
 });
