@@ -102,6 +102,7 @@ $(document).ready(function () {
         if(location.href.slice(location.href.lastIndexOf('#'), location.href.length).split('/').length > 1) {
             if (!!getLastHash()) {
                 $('.' + getLastHash()).hide();
+////////// 
             }
 
             history.pushState('', '', location.href.slice(0, location.href.lastIndexOf('/')));
@@ -119,6 +120,7 @@ $(document).ready(function () {
             $('.back').hide();
             result = getBuckets();
             showTable(result);
+            
         }
     });
     if(location.href.split('/')[3].split('#')[0] == 's3') {

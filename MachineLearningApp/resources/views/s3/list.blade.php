@@ -3,7 +3,7 @@
 @section('content')
     <script src="{{ URL::to('js/s3/tabS3.js') }}"></script>
     <link href="css/hover.css" rel="stylesheet" media="all"> 
-    <div class="container">
+    <div class="container"> 
         <div class="row">
             <h2 class="title title-s3"><img class="logo-s3" src="{{ URL::to('images/aws-s3.png') }}" alt="s3"> Buckets
                 <a class="btn-sm btn-success btn-create-bucket hvr-sweep-to-right" href="#modalCreateBucket" id="describeCreateBucketContent" data-toggle="modal" data-target="#modalCreateBucket"> + Add bucket</a></h2>
