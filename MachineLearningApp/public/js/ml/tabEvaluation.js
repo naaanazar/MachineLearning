@@ -50,7 +50,8 @@ function listEvaluations(status)
         '<table class="table table-bordered table-font text-center">' +
             '<tr class="active">' +
                 '<td>Name</td>' +
-                '<td>Model ID</td>' +
+                '<td>Model</td>' +
+                '<td>Datasource</td>' +
                 '<td>Status</td>' +
                 '<td>' +
                     '<div class="wrapper">' +
@@ -64,12 +65,15 @@ function listEvaluations(status)
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1; 
+            i = i + 1;
+            console.log(response.data[key].ModelName);
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                '<td >' + response.data[key].MLModelId +
+                '<td >' + checkVariable(response.data[key].ModelName) +
+                '</td>' +
+                '<td >' + response.data[key].EvDatasourceName +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + getAUC(response.data[key].PerformanceMetrics.Properties.BinaryAUC) + '</td>' +

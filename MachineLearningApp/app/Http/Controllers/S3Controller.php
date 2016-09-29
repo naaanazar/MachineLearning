@@ -175,9 +175,8 @@ class S3Controller extends Controller
     public function doUpload(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|file|mimes:csv,txt',
+            'file' => 'required|file|mimes:czzsv,txt',
         ]);
-
 
         $file        = $request->file('file');
         $fileName    = $file->getClientOriginalName();

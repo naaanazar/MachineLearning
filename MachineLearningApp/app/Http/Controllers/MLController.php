@@ -151,7 +151,7 @@ class MLController extends Controller
 
     public function doListDataSources()
     {
-        $result = $this->ml->describeDataSources();
+        $result = $this->ml->describeDataSources();      
 
         return response()->json(['data' => (array)$result]);
     }
@@ -161,6 +161,16 @@ class MLController extends Controller
     {
         $result = $this->ml->describeMLModels();
 
+        foreach ($result as $key => $value) {
+
+            $resultDs = $this->client->getDataSource([
+            'DataSourceId' => $value['TrainingDataSourceId'], // REQUIRED
+            'Verbose' =>  false,
+            ]);
+
+            $result[$key]['TrainingDataSourceName'] = $resultDs['Name'];
+        }
+
         return response()->json(['data' => (array)$result]);
     }
 
@@ -169,13 +179,42 @@ class MLController extends Controller
     {
         $result = $this->ml->describeEvaluations();
 
+        foreach ($result as $key => $value) {
+       
+
+            $resultML = $this->client->getMLModel([
+                'MLModelId' => $value['MLModelId'],
+                'Verbose' => false,
+            ]);
+            $result[$key]['ModelName'] = $resultML['Name'];
+
+            $resultDs = $this->client->getDataSource([
+            'DataSourceId' => $value['EvaluationDataSourceId'], // REQUIRED
+            'Verbose' =>  false,
+            ]);
+
+            $result[$key]['EvDatasourceName'] = $resultDs['Name'];
+        }
+
+
         return response()->json(['data' => (array)$result]);
+
+
     }
 
 
     public function doListBatchPredictions()
     {
         $result = $this->ml->describeBatchPredictions();
+
+        foreach ($result as $key => $value) {
+
+            $resultML = $this->client->getMLModel([
+                'MLModelId' => $value['MLModelId'],
+                'Verbose' => false,
+            ]);
+            $result[$key]['ModelName'] = $resultML['Name'];
+        }
 
         return response()->json(['data' => (array)$result]);
     }
@@ -446,32 +485,42 @@ class MLController extends Controller
 
     public function doCreateMainMLModel(Request $request)
     {
-//        $name    = $request->input('MLModelName');
-//        $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
-//
-//        $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
-//        $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
-//
-//        $model = $this->createMLModel($name, $dsTraining['success']);
-//        $evaluation = $this->createEvaluation($model['success'], 'Ev-: ' . $name, $dsEvaluate['success'] .  '<- ds-evaluate: ' . $name) ;
-//
-//        return response()->json([(array)$result]);
+        $name    = $request->input('MLModelName');
+        $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
 
-        return response()->json(['asdas']);
+        $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
+        $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
 
+        $model = $this->createMLModel($name, $dsTraining['success']);
+        $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success'] .  '<- ds-evaluate: ' . $name) ;
+
+        $result['success'] = $model['success'];
+
+        return response()->json([(array)$result]);
     }
 
 
     public function doCreateMLModel(Request $request)
     {
-      
-        $ModelName    = $request->input('MLModelName');      
         $DataSourceId = $request->input('DataSourceId');
 
-        $result = $this->createMLModel($ModelName, $DataSourceId);
-       
-        return response()->json([(array)$result]);
+        $result = $this->client->getDataSource([
+            'DataSourceId' => $DataSourceId, // REQUIRED
+            'Verbose' =>  false,
+        ]);
 
+        $ModelName    = 'ml: ' . $request->input('MLModelName');
+
+        $s3 = new S3;       
+
+        if ($s3->fileExists($result['DataLocationS3']) == true) {
+            $result = $this->createMLModel($ModelName, $DataSourceId);
+            return response()->json([(array)$result]);
+
+        } else {        
+            $res['noExistDataset'] = true;
+            return response()->json([(array)$res]);
+        } 
     }
 
     private function createMLModel($ModelName, $DataSourceId)
@@ -504,10 +553,27 @@ class MLController extends Controller
         $DataSourceId   = $request->input('DataSourceId'); 
         $EvaluationName = $request->input('EvaluationName');
         $MLModelId      = $request->input('MLModelId');
-        
-        $result = $this->createEvaluation($MLModelId, $EvaluationName, $DataSourceId);
 
-        return response()->json([(array)$result]);
+        $result = $this->client->getDataSource([
+            'DataSourceId' => $DataSourceId,
+            'Verbose' =>  false,
+        ]);
+
+
+        $EvaluationName = 'ev: ' . $request->input('EvaluationName');
+
+        $s3 = new S3;
+
+        if ($s3->fileExists($result['DataLocationS3']) == true) {
+            $result = $this->createEvaluation($MLModelId, $EvaluationName, $DataSourceId);
+
+            return response()->json([(array)$result]);
+        } else {
+            $res['noExistDataset'] = true;
+
+            return response()->json([(array)$res]);
+        }
+        
     }
 
 
@@ -538,6 +604,7 @@ class MLController extends Controller
     public function doCreateBatchPrediction(Request $request)
     {
         $S3     = new S3;
+
         $client = $S3->getClient();
         $client->registerStreamWrapper();
 

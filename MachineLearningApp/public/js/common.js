@@ -72,7 +72,6 @@ function timeConverter(time) {
         var year = a.getFullYear();
         var month = months[a.getMonth()];
         var date = a.getDate();
-
         var hour = addZero(a.getHours());
         var min = addZero(a.getMinutes());
         var sec = addZero(a.getSeconds());

@@ -64,7 +64,7 @@ $(document).ready(function() {
         var url;
 
         switch (tab) {
-            case 'Data Source':
+            case 'Datasources':
                 url = '/ml/getdatasource/';
                 break;
             case 'Models':
@@ -80,7 +80,7 @@ $(document).ready(function() {
 
         $.get(url + datasourceId, function(response) {
             switch (tab) {
-                case 'Data Source':
+                case 'Datasources':
                     data.Name = response.data[0];
                     data.Message = response.data[3];
                     data.Size = response.data[1] + ' Bytes';
@@ -195,8 +195,8 @@ $(document).ready(function() {
         }
 
         switch (target) {
-            case 'Data Source':
-                deleteObject('Data Source', '/ml/delete-datasource/');
+            case 'Datasource':
+                deleteObject('Datasources', '/ml/delete-datasource/');
                 break;
             case 'Models':
                 deleteObject('Models', '/ml/delete-ml-model/');
@@ -322,7 +322,7 @@ function showLoader(destinationClass)
 }
 
 function checkVariable(variable) {
-    if (variable !== undefined) {
+    if (variable !== undefined && variable !== null) {
         return variable;
     } else {
         return '';
@@ -345,5 +345,11 @@ function statusAction(status) {
         $.jGrowl('Successfully created: ' + status.success, {
             theme: 'jgrowl-success'
         });
+    } else  if (status.hasOwnProperty('noExistDataset')) {
+        $.jGrowl('Training dataset file not exist' , {
+            theme: 'jgrowl-danger'
+        });
     }
+
+
  }
