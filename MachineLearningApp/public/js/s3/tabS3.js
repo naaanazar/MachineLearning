@@ -1,11 +1,11 @@
 $(document).ready(function () {
     function validationBucket(selector, lengthVal, regexp) {
         $('.create-datasource').on('input', selector, function (e){
-            this.valueField = $(e.target).val();
-            this.regExp = new RegExp(regexp, "g");
+            var valueField = $(e.target).val();
+            var regExp = new RegExp(regexp, "g");
 
-            this.newValue = this.valueField.replace(this.regExp, "");
-            $(selector).val(this.newValue.substr(0, lengthVal));
+            var newValue = valueField.replace(regExp, "");
+            $(selector).val(newValue.substr(0, lengthVal));
         });
 
         $(selector).on("keyup click",function(e) {
