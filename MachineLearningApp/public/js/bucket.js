@@ -61,6 +61,9 @@ $(document).ready(function () {
         var data = new FormData();
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
+        $(event.target).closest('span.glyphicon-upload').addClass('hide');
+        $(event.target).closest('label.upload-file').addClass('hide');
+        $(event.target).closest('td.buttons').find('div.loader-s3-upload').removeClass('hide');
 
         $.ajax({
             url: "s3/upload",
@@ -77,6 +80,12 @@ $(document).ready(function () {
                 $('table.table').ready(function() {
                     location.reload();
                 });
+
+                $(event.target).closest('span.glyphicon-upload').removeClass('hide');
+                $(event.target).closest('label.upload-file').removeClass('hide');
+                $(event.target).closest('td.buttons').find('div.loader-s3-upload').addClass('hide');
+            },
+            error: function (data) {
             }
         });
 
@@ -156,19 +165,18 @@ function showTable(content) {
         var key = 0;
         $('.back').hide();
         content.forEach(function (item) {
-            console.log(item.creationDate);
             $('#myTable').append(
                 '<tr class="content bg">' +
                     '<td class="reference">' + item.name + '</td>' +
                     '<td>0</td>' +
                     '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
-                    '<td style="width: 130px">' +
+                    '<td class="buttons" style="width: 150px">' +
                         '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket '+
                         (item.hasOwnProperty('file') ? 'disabled':'') + '"' +
                         'href="/s3/delete/' + item.name + '"' +
                         'data-name="' + item.name + '"' +
                         'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
-                        'title="Delete bucket"' +
+                        'title="Delete bucket" style="position: static"' +
                         '>' +
                             '<span class="glyphicon glyphicon-trash"></span>' +
                         '</a>' +
@@ -180,15 +188,18 @@ function showTable(content) {
                         '>' +
                             '<span class="glyphicon glyphicon-minus"></span>' +
                         '</a>' +
-                        '&nbsp<label for="s3-upload-file-' + key + '"' +
+                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide">' +
+               '<div class="loader-button-upload" id="loader-btn-upload-s3"></div>' +
+                '</div>' +
+                '&nbsp<label for="s3-upload-file-' + key + '"' +
                         'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
-                        'data-placement="top" title="Upload file">' +
+                        'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
                             '<span class="glyphicon glyphicon-upload">' +
-                            '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
-                            'type="file" name="file" style="display: none">' +
+                                '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
+                                'type="file" name="file" style="display: none">' +
                             '</span>' +
                         '</label>' +
-                    '</td>' +
+                '</td>' +
                 '</tr>'
             );
             key++;

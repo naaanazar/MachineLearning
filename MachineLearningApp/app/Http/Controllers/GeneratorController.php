@@ -11,28 +11,24 @@ use App\Library\Generators\DatasetGenerator;
 
 class GeneratorController extends Controller
 {
-
-    public function index()
+    public function doIndex()
     {
-        return view('generator.generator');
+        return view('generator.generator', ['maxRowsCount' => DatasetGenerator::MAX_ROWS_COUNT]);
     }
 
-
-    public function generateDataset(GeneratorRequest $request)
+    public function doGenerateDataset(GeneratorRequest $request)
     {
-
-        $datasetFeeder            = new DatasetGenerator();
-        $datasetFeeder->rowsCount = $request->rows;
-        $datasetFeeder->feed();
+        $generator = new DatasetGenerator();
+        $generator->setRowsCount($request->rows);
+        $generator->generate();
 
         $stats = [
-            'recordsNumber'      => $datasetFeeder->rowsCount,
-            'purchaseNumber'     => $datasetFeeder->total,
-            'purchasePercentage' => $datasetFeeder->percents,
-            'path'               => basename($datasetFeeder->targetFile),
+            'recordsNumber'      => $generator->getRowsCount(),
+            'purchaseNumber'     => $generator->getTotal(),
+            'purchasePercentage' => $generator->getPurchasePersentage(),
+            'path'               => basename($generator->getTargetFile()),
         ];
 
-        return json_encode(['stats' => $stats]);
+        return response()->json(['stats' => $stats]);
     }
-
 }

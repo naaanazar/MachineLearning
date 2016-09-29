@@ -18,6 +18,7 @@ Route::get('/ml/describe-batch-prediction', 'MLController@doListBatchPredictions
 Route::post('ml/create-datasource', 'MLController@doCreateDataSourceFromS3');
 Route::post('ml/create-ml-model', 'MLController@doCreateMLModel');
 Route::post('ml/create-evaluation', 'MLController@doCreateEvaluation');
+Route::post('ml/create-main-ml-model', 'MLController@doCreateMainMLModel');
 
 Route::post('/ml/upload-batch-source', 'MLController@doCreateBatchPrediction');
 
@@ -38,8 +39,8 @@ Route::get('/ml/select-data-source', 'MLController@doSelectDataSources');
 Route::get('/ml/select-ml-model', 'MLController@doSelectMLModel');
 
 //Generator
-Route::get('generator', 'GeneratorController@index');
-Route::post('generate', 'GeneratorController@generateDataset');
+Route::get('generator', 'GeneratorController@doIndex');
+Route::post('generate', 'GeneratorController@doGenerateDataset');
 
 //S3
 Route::get('s3/allbuckets', 'S3Controller@doBucketStruct');

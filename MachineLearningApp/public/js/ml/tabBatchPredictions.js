@@ -1,17 +1,19 @@
 $(document).ready(function() {
-
-    $("[data-toggle='tooltip']").tooltip();
-
     if (window.location.hash == '#describeBatchPredictions') {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
         listBatchPrediction('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     }
+
+    $("[data-toggle='tooltip']").tooltip();
 
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
         $(".modalCreateBatchPrediction").modal('toggle');
-        
         showLoader('.container-describeBatchPredictions');
+        run_waitMe('#modal-bp-id');
+
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -21,7 +23,9 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
-            }           
+                waitMeClose('#modal-bp-id');
+
+            }
         });
     });
 
@@ -51,6 +55,8 @@ function listBatchPrediction(status)
             '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
                     '<td>Name</td>' +
+                    '<td>Model</td>' +
+                    '<td>Datasorce location</td>' +
                     '<td>Status</td>' +
                     '<td>Count</td>' +
                     '<td>Last Updated</td>' +
@@ -65,20 +71,28 @@ function listBatchPrediction(status)
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
+                '<td>' + checkVariable(response.data[key].ModelName) +
+                '</td>' +
+                '<td><a class="download link-download" data-download-path="' +
+                    checkVariable(response.data[key].InputDataLocationS3) + '" href="#d">' +
+                    response.data[key].InputDataLocationS3 + ' <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>' +
+                '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + checkVariable(response.data[key].TotalRecordCount) +
                 '</td>' +
                 '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
-                       'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId + '">' +
-                        '<span class="glyphicon glyphicon-info-sign"></span>' +
+                       'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId +
+                       '"title="info">' +
+                       '<span class="glyphicon glyphicon-info-sign"></span>' +
                     '</a>&nbsp;' +
-                    '<a class="btn btn-success btn-sm btn-list download" href="#" data-download-path="' + path +'" >' +
+                    '<a class="btn btn-success btn-sm btn-list download" href="#" data-download-path="' + path +
+                        '" title="Download batch prediction">' +
                         '<span class="glyphicon glyphicon-cloud-download"></span>' +
                     '</a>&nbsp;' +
                     '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' +
-                        response.data[key].BatchPredictionId + '"><span class="glyphicon glyphicon-trash"></span>' +
+                        response.data[key].BatchPredictionId + '" title="Delete batch prediction"><span class="glyphicon glyphicon-trash"></span>' +
                     '</a>' +
                 '</td>' +
             '</tr>' +

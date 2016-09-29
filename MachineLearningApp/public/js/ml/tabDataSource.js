@@ -1,36 +1,51 @@
 $(document).ready(function () {
-
-    if (window.location.hash == '#describeDataSources' || window.location.hash === '') {
+    if (window.location.hash == '#describeDataSources') {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
         listDataSource('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     };
 
     $('.create-datasource-form').submit(function (e) {
         e.preventDefault();
 
         showLoader('.container-describeDataSources');
+        run_waitMe('#modal-ds-id');
 
         $.ajax({
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
-            success: function (data) {            
-                
+            error: function(XMLHttpRequest){
+                if (XMLHttpRequest.status == '422') {
+                    $(document).ready(function () {
+                        $.jGrowl("Incorrect name. Please reload page or try again later!", {
+                            sticky: true,
+                            theme: 'jgrowl-danger'
+                        });
+                    });
+                }
+            },
+            success: function (data) {
+                $('#DataSourceName').val('');
+                $(".modalCreateDataSource").modal('toggle');
+
                 listDataSource(data);
-            }           
+                waitMeClose('#modal-ds-id');
+            }
         });
-        
+
     });
 
 
     $(document).on("click", ".btn-create-datasource", function () {
-        $('.create-datasource-form')[0].reset();      
+        $('.create-datasource-form')[0].reset();
 
         selectBuckets('/s3/get-buckets', '#SelectBuckets', '.create-datasource-form');
         $('.select-datasource-field').hide();
     });
 
-    $(document).on("change", "#SelectBuckets", function() {
+    $(document).on("change", "#SelectBuckets", function () {
         var bucket = $("#SelectBuckets option:selected").text();
 
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form', bucket);
@@ -38,17 +53,17 @@ $(document).ready(function () {
         $('.select-datasource-field').slideDown();
     });
 
-    $(document).on("click", '#describeDataSourcesContent', function() {
+    $(document).on("click", '#describeDataSourcesContent', function () {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
 
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource('ok');
-        };
+        }
+        ;
     });
 });
 
-function listDataSource(status)
-{
+function listDataSource(status) {
     showLoader('.container-describeDataSources');
     statusAction(status);
 
@@ -73,7 +88,10 @@ function listDataSource(status)
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
-                '<td>' + response.data[key].DataLocationS3 + '</td>' +
+                '<td><a class="download link-download" data-download-path="' +
+                    checkVariable(response.data[key].DataLocationS3) + '" href="#d">' +
+                    response.data[key].DataLocationS3 + ' <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>' +
+                '</td>' +    
                 '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' + 'data-toggle="modal" id="info_' + i

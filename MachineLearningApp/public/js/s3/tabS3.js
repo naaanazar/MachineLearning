@@ -1,18 +1,18 @@
 $(document).ready(function () {
     function validationBucket(selector, lengthVal, regexp) {
         $('.create-datasource').on('input', selector, function (e){
-            this.valueField = $(e.target).val();
-            this.regExp = new RegExp(regexp, "g");
+            var valueField = $(e.target).val();
+            var regExp = new RegExp(regexp, "g");
 
-            this.newValue = this.valueField.replace(this.regExp, "");
-            $(selector).val(this.newValue.substr(0, lengthVal));
+            var newValue = valueField.replace(regExp, "");
+            $(selector).val(newValue.substr(0, lengthVal));
         });
 
         $(selector).on("keyup click",function(e) {
             var empty = false;
 
             $(selector).each(function () {
-                if($(this).val().length >= 7) {
+                if($(this).val().length >= 3) {
                     empty = true;
                 }
             });
@@ -38,7 +38,7 @@ $(document).ready(function () {
         });
     });
 
-    validationBucket("#nameBucket", 255, "^ |[^0-9a-zA-Z-._]");
+    validationBucket("#nameBucket", 63, "^ |[^0-9a-zA-Z-._]");
 
     $(document).on('click', '.btn-delete', function (e) {
         e.preventDefault();

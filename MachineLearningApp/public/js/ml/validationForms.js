@@ -1,105 +1,90 @@
-$(document).ready(function () {
+function checkMLData(selector) {
+    $('.modal').on('input', selector, function(e){
+        var valueField = $(e.target).val();
+        var regExp = new RegExp("^ |  |^[^a-zA-Z ]|[^a-zA-Z0-9-_\.]", "g");
+        var newValue = valueField.replace(regExp, "");
 
-    startPageValidation();
+        $(selector).val(newValue.substr(0, 20));
+    });
+}
 
-    function validationSuccess($element) {
-        $element.removeClass('error').addClass('not_error');
-        $element.closest('div').removeClass('has-error');
-        $element.closest('div').addClass('has-success has-feedback');
-        $element.closest('div').find('span').removeClass('hide');
-    }
+function checkMLRequired(selector, tab) {
+    $(selector).on('keyup click',function(e) {
+        var empty = false;
 
-    function validationError($element) {
-        $element.removeClass('not_error').addClass('error');
-        $element.closest('div').addClass('has-error has-feedback');
-        $element.closest('div').find('span').addClass('hide');
-    }
-
-    $(document).on('blur', '.form-control', function (e) {
-
-        var id = e.target.id;
-        var val = e.target.value;
-        var tab = '';
-        var nameValidation = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-        var countValidation = /^[0-9][0-9]?$|^100$/;
-
-        switch (id) {
-            case 'DataSourceName':
-                tab = 'ds';
-
-                if (val.length > 2 && val != '' && nameValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'DataRearrangementBegin':
-                tab = 'ds';
-
-                if (val.length > 0 && val != '' && countValidation.test(val)) {
-                    validationSuccess($(this));
-
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'DataRearrangementEnd':
-                tab = 'ds';
-
-                if (val.length > 0 && val != '' && countValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'MLModelName':
-                tab = 'ml';
-
-                if (val.length > 2 && val != '' && nameValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
-
-            case 'EvaluationName':
-                tab = 'ev';
-
-                if (val.length > 2 && val != '' && nameValidation.test(val)) {
-                    validationSuccess($(this));
-                } else {
-                    validationError($(this));
-                }
-                break;
+        if($(this).val().length >= 5) {
+            empty = true;
         }
 
-        if ($(this).closest('form').find('div.has-error').hasClass('has-error') == true) {
-            $(this).closest('form').find('input#success-button-modal-' + tab).attr('disabled', 'disabled');
+        if (!empty) {
+            $('input#success-button-modal-' + tab).attr('disabled', true);
+        } else if (empty) {
+            $('input#success-button-modal-' + tab).removeAttr('disabled');
+        }
+    });
+
+    $('.modal').on('hidden.bs.modal', function () {
+        $(selector).val('');
+        $('input#success-button-modal-' + tab).attr('disabled', true);
+    });
+}
+
+function checkBatchPredictionField() {
+    $('#input-file-source').on('change', function(e) {
+        var fileData = $('#input-file-source').val();
+        var fileName = fileData.substr(fileData.lastIndexOf("\\")+1);
+
+        $('.batch-file-name').empty();
+        $('.batch-file-name').append(fileName);
+
+        if (!fileData) {
+            $('.btn-create-batch').attr('disabled', true);
         } else {
-            $(this).closest('form').find('input#success-button-modal-' + tab).removeAttr('disabled');
+            $('.btn-create-batch').removeAttr('disabled');
         }
+    });
 
+    $('.modal').on('hidden.bs.modal', function () {
+        $('#input-file-source').val('');
+        $('.batch-file-name').empty();
+        $('.btn-create-batch').attr('disabled', true);
+    });
+}
+
+function checkMLSelecField(selector, bucket, s3, tab) {
+    $('.modal').on('change keyup', bucket + ", " + s3 + ", "+ selector, function(e) {
+        var bucket = $(bucket).val();
+        var s3Value = $(s3).val();
+        var ds = $(selector).val();
+
+        if (ds.length >= 5 && bucket != '' && (s3Value != null && s3Value != '')) {
+            $('input#success-button-modal-' + tab).removeAttr('disabled');
+        } else {
+            $('input#success-button-modal-' + tab).attr('disabled', true);
+        }
+    });
+
+    $('.modal').on('hidden.bs.modal', function () {
+        $(s3).val('');
+        $(bucket).val('');
+        $(selector).val('');
+        $('input#success-button-modal-' + tab).attr('disabled', true);
+    });
+}
+
+$(document).ready(function() {
+    $("#ml-button-create").on('click', '.btn', function(e) {
+        checkMLData("#DataSourceName");
+        checkMLData("#MLModelName");
+        checkMLData("#EvaluationName");
+        checkMLRequired("#MLModelName", "ml");
+        checkMLRequired("#EvaluationName", "ev");
+        checkMLSelecField("#DataSourceName", "#SelectBuckets", "#SelectDataLocationS3", "ds");
+        checkBatchPredictionField();
+    });
+
+    $('.ml-button-block').on('click', '.btn-create-mlmodel-main', function(e) {
+        checkMLData("#MLMainModelName");
+        checkMLSelecField("#MLMainModelName", "#SelectBucketsMain", "#SelectDataLocationS3Main", "ml");
     });
 });
-
-function startPageValidation() {
-    $('input#MLModelName').addClass('error');
-    $('input#success-button-modal-ml').addClass('disabled');
-    $('input#MLModelName').closest('div').addClass('has-error');
-
-
-    $('input#EvaluationName').addClass('error');
-    $('input#success-button-modal-ev').addClass('disabled');
-    $('input#EvaluationName').closest('div').addClass('has-error');
-
-    $('input#DataSourceName').addClass('error');
-    $('input#DataRearrangementBegin').addClass('error');
-    $('input#DataRearrangementEnd').addClass('error');
-    $('input#success-button-modal-ds').addClass('disabled');
-    $('input#DataSourceName').closest('div').addClass('has-error');
-    $('input#DataRearrangementBegin').closest('div').addClass('has-error');
-    $('input#DataRearrangementEnd').closest('div').addClass('has-error');
-}

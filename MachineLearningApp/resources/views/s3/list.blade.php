@@ -13,6 +13,8 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h2 align="center">Create Bucket</h2>
+                        </div>
+                        <div class="modal-body">
                             <form class="create-datasource" method="post" action="s3/create_bucket">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <br>
@@ -21,7 +23,9 @@
                                     <label for="exampleInputEmail1">Name</label>
                                     <input type="text" class="form-control" id="nameBucket" placeholder="ml-" name="nameBucket" min="7">
                                 </div>
-                                <button type="submit" class="btn-bucket btn btn-primary" disabled>Create</button>
+                                 <div class="row modal-button-create-position" align="center">
+                                    <button type="submit" class="btn-bucket btn btn-primary" disabled>Create</button>
+                                </div>
                             </form>
                         </div>
                     </div>

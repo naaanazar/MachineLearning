@@ -1,22 +1,36 @@
 $(document).ready(function() {
 
     if (window.location.hash == '#describeMLModels') {
-        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Model', '#modalCreateModel');
         listMLModel('ok');
-    };    
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
+    };
 
     $('.create-mlmodel-form').submit(function(e) {
-        e.preventDefault();      
-        $(".modalCreateModel").modal('toggle');
+        e.preventDefault();
+        run_waitMe('#modal-ml-id');
 
         $.ajax({
             type: "post",
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
-            success: function(data) {                
-                listMLModel(data);
+            error: function(XMLHttpRequest){
+                if (XMLHttpRequest.status == '422') {
+                    $(document).ready(function () {
+                        $.jGrowl("Incorrect name. Please reload page or try again later!", {
+                            sticky: true,
+                            theme: 'jgrowl-danger'
+                        });
+                    });
+                }
             },
-            error: function() {},
+            success: function(data) {
+                $('#MLModelName').val('');
+                $(".modalCreateModel").modal('toggle');
+                listMLModel(data[0]);
+                waitMeClose('#modal-ml-id');
+            },
         });
     });
 
@@ -26,7 +40,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
-        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Model', '#modalCreateModel');
 
         if(!$('.container-describeMLModels').hasClass('loaded')) {
             listMLModel('ok');
@@ -58,6 +72,7 @@ function listMLModel(status)
             '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
                     '<td>Name</td>' +
+                    '<td>Training Datasource</td>' +
                     '<td>Status</td>' +
                     '<td>Endpoint Status</td>' +                    
                     '<td>Last Updated</td>' +
@@ -81,6 +96,8 @@ function listMLModel(status)
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
+                '</td>' +
+                '<td>' + checkVariable(response.data[key].TrainingDataSourceName) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +               
