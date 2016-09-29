@@ -16,6 +16,16 @@ $(document).ready(function () {
             type: "post",
             url: '/ml/create-datasource',
             data: $('.create-datasource-form').serialize(),
+            error: function(XMLHttpRequest){
+                if (XMLHttpRequest.status == '422') {
+                    $(document).ready(function () {
+                        $.jGrowl("Incorrect name. Please reload page or try again later!", {
+                            sticky: true,
+                            theme: 'jgrowl-danger'
+                        });
+                    });
+                }
+            },
             success: function (data) {
                 $('#DataSourceName').val('');
                 $(".modalCreateDataSource").modal('toggle');

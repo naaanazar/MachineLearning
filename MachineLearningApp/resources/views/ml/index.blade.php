@@ -9,8 +9,7 @@
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
     <script src="{{ URL::to('js/ml/validationForms.js') }}"></script>
 
-
-    <div class="container">
+       <div class="container">
         <div class="row ml-logo-block">
             <div class="col-md-5 col-md-offset-4">
                 <h2 class="title">

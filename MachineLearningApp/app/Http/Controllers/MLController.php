@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Validation\Validator;
 use URL;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -435,11 +436,15 @@ class MLController extends Controller
 
     public function DoCreateDataSourceFromS3(Request $request)
     {
+        $this->validate($request, [
+            'DataSourceName' => 'required|alpha_dash|min:5|max:255|regex:/^[a-zA-Z]/',
+        ]);
+
         $DataSourceName    = $request->input('DataSourceName');
         $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
         $percentBegin  =  '0';
         $percentEnd    =  '100';
-       
+
         $result = $this->createDataSourceFromS3($DataSourceName, $DataLocationS3, $percentBegin, $percentEnd);
 
         return response()->json([(array)$result]);
@@ -480,6 +485,10 @@ class MLController extends Controller
 
     public function doCreateMainMLModel(Request $request)
     {
+        $this->validate($request, [
+            'MLModelName' => 'required|alpha_dash|min:5|max:255|regex:/^[a-zA-Z]/',
+        ]);
+
         $name    = $request->input('MLModelName');
         $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
         $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
@@ -496,6 +505,10 @@ class MLController extends Controller
 
     public function doCreateMLModel(Request $request)
     {
+        $this->validate($request, [
+            'MLModelName' => 'required|alpha_dash|min:6|max:255|regex:/^[a-zA-Z]/',
+        ]);
+
         $DataSourceId = $request->input('DataSourceId');
 
         $result = $this->client->getDataSource([
@@ -544,6 +557,10 @@ class MLController extends Controller
 
     public function doCreateEvaluation(Request $request)
     {
+        $this->validate($request, [
+            'EvaluationName' => 'required|alpha_dash|min:6|max:255|regex:/^[a-zA-Z]/',
+        ]);
+
         $DataSourceId   = $request->input('DataSourceId'); 
         $EvaluationName = $request->input('EvaluationName');
         $MLModelId      = $request->input('MLModelId');
@@ -552,7 +569,6 @@ class MLController extends Controller
             'DataSourceId' => $DataSourceId,
             'Verbose' =>  false,
         ]);
-
 
         $EvaluationName = 'ev: ' . $request->input('EvaluationName');
 
@@ -659,6 +675,11 @@ class MLController extends Controller
 
         return $result['DataSourceId'];
 
+    }
+
+    protected function formatValidationErrors(Validator $validator)
+    {
+        return $validator->errors()->all();
     }
 
 }
