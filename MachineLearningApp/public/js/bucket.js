@@ -61,25 +61,28 @@ $(document).ready(function () {
         var data = new FormData();
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
-        $.ajax({
-            url: "s3/upload",
-            type:"post",
-            cache : false,
-            contentType : false,
-            processData : false,
-            data: data,
-            success: function(response) {
-                $.jGrowl('Success upload', {
-                    theme: 'jgrowl-success'
-                });
-
-                $('table.table').ready(function() {
-                    location.reload();
-                });
-            },
-            error: function (data) {
-            }
-        });
+        $(event.target).closest('span.glyphicon-upload').addClass('hide');
+        $(event.target).closest('label.upload-file').addClass('hide');
+        $(event.target).closest('td.buttons').find('label.loader-s3-upload').find('div').removeClass('hide');
+        // $.ajax({
+        //     url: "s3/upload",
+        //     type:"post",
+        //     cache : false,
+        //     contentType : false,
+        //     processData : false,
+        //     data: data,
+        //     success: function(response) {
+        //         $.jGrowl('Success upload', {
+        //             theme: 'jgrowl-success'
+        //         });
+        //
+        //         $('table.table').ready(function() {
+        //             location.reload();
+        //         });
+        //     },
+        //     error: function (data) {
+        //     }
+        // });
 
         event.preventDefault();
     });
@@ -166,7 +169,7 @@ function showTable(content) {
                         'href="/s3/delete/' + item.name + '"' +
                         'data-name="' + item.name + '"' +
                         'id="delete-' + key + '" data-toggle="tooltip" data-placement="top"' +
-                        'title="Delete bucket"' +
+                        'title="Delete bucket" style="position: static"' +
                         '>' +
                             '<span class="glyphicon glyphicon-trash"></span>' +
                         '</a>' +
@@ -178,7 +181,8 @@ function showTable(content) {
                         '>' +
                             '<span class="glyphicon glyphicon-minus"></span>' +
                         '</a>' +
-                        '&nbsp<label for="s3-upload-file-' + key + '"' +
+                '<label class="btn btn-primary btn-file upload-file btn-sm btn-list loader-s3-upload"><div align="center" class="loader-button-upload hide" id="loader-btn-upload-s3' + key +'"></div></label>' +
+                '&nbsp<label for="s3-upload-file-' + key + '"' +
                         'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
                         'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
                             '<span class="glyphicon glyphicon-upload">' +
@@ -186,7 +190,7 @@ function showTable(content) {
                                 'type="file" name="file" style="display: none">' +
                             '</span>' +
                         '</label>' +
-                    '</td>' +
+                '</td>' +
                 '</tr>'
             );
             key++;

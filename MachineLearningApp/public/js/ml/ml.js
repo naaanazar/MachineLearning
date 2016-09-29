@@ -373,8 +373,6 @@ function statusAction(status) {
     }
 }
 
-
-
 function run_waitMe(element) {
 
     $(element).waitMe({
