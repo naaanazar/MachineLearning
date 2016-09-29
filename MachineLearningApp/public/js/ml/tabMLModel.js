@@ -15,8 +15,7 @@ $(document).ready(function() {
             type: "post",
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
-            success: function(data) {
-                console.log(data);
+            success: function(data) {            
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data[0]);

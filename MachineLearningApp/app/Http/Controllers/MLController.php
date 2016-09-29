@@ -482,21 +482,46 @@ class MLController extends Controller
     {
         $name    = $request->input('MLModelName');
         $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
-       // $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
-       // $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
-      //  $model = $this->createMLModel($name, $dsTraining['success']);
 
-       // $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success']) ;
+        $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
 
-      //  $result['dsTraining'] = $dsTraining;
-      //  $result['dsEvaluate'] = $dsEvaluate;
-       // $result['model'] = $model;
-       // $result['evaluate'] = $evaluation;
-        $result['evaluate'] = "evaluation";
-    
+        if (array_key_exists('error', $dsTraining)){
+            $dsTraining['description'] = 'Error created training datasource';
 
+                return response()->json([(array)$dsTraining]);
+        }
 
-        return response()->json(['data' =>(array)$result]);
+        $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
+
+        if (array_key_exists('error', $dsEvaluate)) {
+            $dsEvaluate['description'] = 'Error created evaluate datasource';
+
+            return response()->json([(array)$dsEvaluate]);
+        }        
+
+        $model = $this->createMLModel($name, $dsTraining['success']);
+
+        if (array_key_exists('error', $model )) {
+            $model['description'] = 'Error created model';
+
+            return response()->json([(array)$model]);
+        }
+
+        $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success']) ;
+
+        if (array_key_exists('error', $evaluation )) {
+            $evaluation['description'] = 'Error created evaluatin';
+
+            return response()->json([(array)$evaluation]);
+        }
+        
+        $result['success'] =
+            'model: ' . $name. '<br>' .
+            'ds-training: ' . $name . '<br>' .
+            'ds-evaluate: ' . $name . '<br>' .            
+            'ev-: ' . $name . '<br>';   
+
+        return response()->json([(array)$result]);
     }
 
 

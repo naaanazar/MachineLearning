@@ -44,14 +44,22 @@ $(document).ready(function() {
                 console.log(data);
                 $('#MLModelName').val('');
                 $(".modalCreateMainModel").modal('toggle');
-                window.location.reload();
-                window.location.hash = '#describeMLModels';
                 $(".ml-button-block").hide().fadeOut();
-                $(".ml-table").fadeIn();                
-              //  buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
-              //  listMLModel('ok');
-              //  waitMeClose('#modal-main-ml-id');
-                
+                $(".ml-table").fadeIn();
+                window.location.hash = '#describeMLModels';
+                $('.nav-tabs').find('li').removeClass('active');
+                $('.tab-content').find('.tab-pane').removeClass('active in');
+                $('#describeMLModels').addClass('active in');
+                $('#describeMLModelsContent').attr('aria-expanded', true);
+                $('#describeMLModelsContent').closest('li').addClass('active');
+                buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');                
+                waitMeClose('#modal-main-ml-id');
+                listMLModel(data[0]);
+
+//                 $.jGrowl('Error created', {
+//            theme: 'jgrowl-danger'
+//        });
+              
             },
             error: function() {},
         });
@@ -345,11 +353,16 @@ function getAUC(variable) {
 
 function statusAction(status) {
     if (status.hasOwnProperty('error')) {
-        $.jGrowl('Error created', {
+        var description = '';
+        if (status.hasOwnProperty('description')) {
+            description = status['description'];
+        }
+        $.jGrowl('Error created <br> ' + description, {
             theme: 'jgrowl-danger'
         });
     } else if (status.hasOwnProperty('success')) {
-        $.jGrowl('Successfully created: ' + status.success, {
+
+        $.jGrowl('Successfully created:<br>' + status.success, {
             theme: 'jgrowl-success'
         });
     } else  if (status.hasOwnProperty('noExistDataset')) {

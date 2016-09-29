@@ -20,8 +20,7 @@ $(document).ready(function() {
 
                 listEvaluations(data[0]);
                 waitMeClose('#modal-ev-id');
-            },
-            error: function() {},
+            },           
         });
     });
 

@@ -106,7 +106,6 @@
                             </select>
                         </div>                       
                         <div class="row modal-button-create-position" align="center">
-
                             <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
