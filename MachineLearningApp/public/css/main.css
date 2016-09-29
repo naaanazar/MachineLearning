@@ -986,3 +986,7 @@ a.btn.btn-warning.btn-sm.btn-list.delete-endpoint.disabled {
 .modal-header{
     padding-bottom: 0px;
 }
+
+.link-download{
+    color:#333;
+}

@@ -71,9 +71,11 @@ function listBatchPrediction(status)
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                 '<td>' + checkVariable(response.data[key].ModelName) +
+                '<td>' + checkVariable(response.data[key].ModelName) +
                 '</td>' +
-                 '<td>' + checkVariable(response.data[key].InputDataLocationS3) +
+                '<td><a class="download link-download" data-download-path="' +
+                    checkVariable(response.data[key].InputDataLocationS3) + '" href="#d">' +
+                    response.data[key].InputDataLocationS3 + ' <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>' +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + checkVariable(response.data[key].TotalRecordCount) +
@@ -81,14 +83,16 @@ function listBatchPrediction(status)
                 '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td style="width:140px" nowrap>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' +
-                       'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId + '">' +
-                        '<span class="glyphicon glyphicon-info-sign"></span>' +
+                       'data-toggle="modal" id="info_' + i +'" data-source-id="' + response.data[key].BatchPredictionId +
+                       '"title="info">' +
+                       '<span class="glyphicon glyphicon-info-sign"></span>' +
                     '</a>&nbsp;' +
-                    '<a class="btn btn-success btn-sm btn-list download" href="#" data-download-path="' + path +'" >' +
+                    '<a class="btn btn-success btn-sm btn-list download" href="#" data-download-path="' + path +
+                        '" title="Download batch prediction">' +
                         '<span class="glyphicon glyphicon-cloud-download"></span>' +
                     '</a>&nbsp;' +
                     '<a class="btn btn-danger btn-sm btn-list delete" href="#" data-delete-id="' +
-                        response.data[key].BatchPredictionId + '"><span class="glyphicon glyphicon-trash"></span>' +
+                        response.data[key].BatchPredictionId + '" title="Delete batch prediction"><span class="glyphicon glyphicon-trash"></span>' +
                     '</a>' +
                 '</td>' +
             '</tr>' +

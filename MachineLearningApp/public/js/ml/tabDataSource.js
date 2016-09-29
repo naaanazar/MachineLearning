@@ -88,7 +88,10 @@ function listDataSource(status) {
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
-                '<td>' + response.data[key].DataLocationS3 + '</td>' +
+                '<td><a class="download link-download" data-download-path="' +
+                    checkVariable(response.data[key].DataLocationS3) + '" href="#d">' +
+                    response.data[key].DataLocationS3 + ' <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>' +
+                '</td>' +    
                 '<td>' + timeConverter(response.data[key].LastUpdatedAt) + '</td>' +
                 '<td>' +
                     '<a class="btn btn-info btn-sm btn-list datasource-info" href="#modal"' + 'data-toggle="modal" id="info_' + i
