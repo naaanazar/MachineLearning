@@ -43,14 +43,14 @@ $(document).ready(function() {
             success: function(data) {
                 console.log(data);
                 $('#MLModelName').val('');
-                $(".modalCreateMainModel").modal('toggle');               
+                $(".modalCreateMainModel").modal('toggle');
                 window.location.reload();
-                $(".ml-button-block").hide().fadeOut();
-                $(".ml-table").fadeIn();
                 window.location.hash = '#describeMLModels';
-                buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
-                listMLModel('ok');
-                waitMeClose('#modal-main-ml-id');
+                $(".ml-button-block").hide().fadeOut();
+                $(".ml-table").fadeIn();                
+              //  buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+              //  listMLModel('ok');
+              //  waitMeClose('#modal-main-ml-id');
                 
             },
             error: function() {},
