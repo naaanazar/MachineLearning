@@ -19,14 +19,14 @@
                 </h2>
             </div>
         </div>
-            <div class="ml-button-block">
-                <div class="col-md-6 clearfix" >
-                    <button class="btn-ml-model btn btn-primary btn-create-mlmodel-main pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateMainModel">Create ML Model</button>
-                </div>
-                <div class="col-md-6 clearfix">
-                    <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
-                </div>
+        <div class="ml-button-block">
+            <div class="col-md-6 clearfix" >
+                <button class="btn-ml-model btn btn-primary btn-create-mlmodel-main pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateMainModel">Create ML Model</button>
             </div>
+            <div class="col-md-6 clearfix">
+                <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
+            </div>
+        </div>
         <div class="ml-table">
             <div class="ml-table-button clearfix">
                 <a href="#advancedSettings" class="ml-button-back ml-setting btn btn-primary">
@@ -54,24 +54,16 @@
             <div class="tab-content col-md-12">
               
                 <div id="describeMLModels" class="tab-pane fade in active">
-
-                    <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
-                    </div>
+                    <div class="container-describeMLModels table-scroll-ML ML-tables-content "></div>
                 </div>
                   <div id="describeDataSources" class="tab-pane fade">
-
-                    <div class="container-describeDataSources table-scroll ML-tables-content">
-                    </div>
+                    <div class="container-describeDataSources table-scroll ML-tables-content"></div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
-
-                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
-                    </div>
+                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content"></div>
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
-
-                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
-                    </div>
+                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content"></div>
                 </div>
             </div>
         </div>

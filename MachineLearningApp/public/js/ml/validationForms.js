@@ -9,7 +9,7 @@ function checkMLData(selector) {
 }
 
 function checkMLRequired(selector, tab) {
-    $(selector).on("keyup click",function(e) {
+    $(selector).on('keyup click',function(e) {
         var empty = false;
 
         if($(this).val().length >= 5) {
