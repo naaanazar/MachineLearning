@@ -41,14 +41,17 @@ $(document).ready(function() {
             url: 'ml/create-main-ml-model',
             data: $('.create-main-mlmodel-form').serialize(),
             success: function(data) {
+                console.log(data);
                 $('#MLModelName').val('');
                 $(".modalCreateMainModel").modal('toggle');
+                window.location.reload();
                 window.location.hash = '#describeMLModels';
-                buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
-                listMLModel('ok');
                 $(".ml-button-block").hide().fadeOut();
-                $(".ml-table").fadeIn();
-                waitMeClose('#modal-main-ml-id');
+                $(".ml-table").fadeIn();                
+              //  buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+              //  listMLModel('ok');
+              //  waitMeClose('#modal-main-ml-id');
+                
             },
             error: function() {},
         });
@@ -172,7 +175,7 @@ $(document).ready(function() {
     // Delete Ajax
     $(document).on('click', '.delete', function(event) {
         var target = $(event.target).closest('.ml-table').find('div.tabs').find('div.ML-tabs').find('ul.nav-tabs').find('li.active').find('a').text();
-        console.log(target);
+     
         $(event.target).closest('tr').fadeOut();
 
         function deleteObject(dataSourceIdVar, url) {
