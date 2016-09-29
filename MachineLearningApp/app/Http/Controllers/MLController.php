@@ -164,7 +164,7 @@ class MLController extends Controller
         foreach ($result as $key => $value) {
 
             $resultDs = $this->client->getDataSource([
-            'DataSourceId' => $value['TrainingDataSourceId'], // REQUIRED
+            'DataSourceId' => $value['TrainingDataSourceId'], 
             'Verbose' =>  false,
             ]);
 
@@ -189,7 +189,7 @@ class MLController extends Controller
             $result[$key]['ModelName'] = $resultML['Name'];
 
             $resultDs = $this->client->getDataSource([
-            'DataSourceId' => $value['EvaluationDataSourceId'], // REQUIRED
+            'DataSourceId' => $value['EvaluationDataSourceId'],
             'Verbose' =>  false,
             ]);
 
@@ -628,7 +628,7 @@ class MLController extends Controller
 
     public function doCreateBatchPrediction(Request $request)
     {
-        $S3     = new S3;
+        $S3     = new S3; 
 
         $client = $S3->getClient();
         $client->registerStreamWrapper();
@@ -664,6 +664,7 @@ class MLController extends Controller
         }
 
         return response()->json(['success' => $result['BatchPredictionId']]);
+
     }
 
 

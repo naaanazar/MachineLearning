@@ -361,7 +361,6 @@ function statusAction(status) {
             theme: 'jgrowl-danger'
         });
     } else if (status.hasOwnProperty('success')) {
-
         $.jGrowl('Successfully created:<br>' + status.success, {
             theme: 'jgrowl-success'
         });

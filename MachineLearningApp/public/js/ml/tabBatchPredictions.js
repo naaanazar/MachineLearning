@@ -71,9 +71,9 @@ function listBatchPrediction(status)
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                 '<td class="name">' + checkVariable(response.data[key].ModelName) +
+                 '<td>' + checkVariable(response.data[key].ModelName) +
                 '</td>' +
-                 '<td class="name">' + checkVariable(response.data[key].InputDataLocationS3) +
+                 '<td>' + checkVariable(response.data[key].InputDataLocationS3) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + checkVariable(response.data[key].TotalRecordCount) +

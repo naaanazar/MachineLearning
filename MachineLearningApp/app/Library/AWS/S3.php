@@ -44,10 +44,9 @@ class S3
 
     public function ListObjectsS3()
     {
-        $client = $this->connect();
-
+        
         try {
-            $result = $client->listObjects([
+            $result = $this->client->listObjects([
                 'Bucket' => $this->bucket,
 
             ]);
@@ -63,9 +62,8 @@ class S3
 
 
     public function getObjectACL()
-    {
-        $client = $this->connect();
-        $result = $client->getObjectAcl([
+    {        
+        $result =$this->client->getObjectAcl([
             'Bucket'       => $this->bucket, // REQUIRED
             'Key'          => 'dataset.csv', // REQUIRED
             'RequestPayer' => 'requester',
@@ -83,5 +81,21 @@ class S3
         if (file_exists($path)) {
             return true;
         }
+    }
+
+    public function bucketExists($bucket)
+    {
+       try {
+           $result = $this->client->headBucket([
+                'Bucket' => $bucket
+           ]);
+
+        } catch (S3Exceptione $e) {
+          $res = $e->getMessage()."\n";
+
+          return false;
+        }
+
+        return true ;
     }
 }

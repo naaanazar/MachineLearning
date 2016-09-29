@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     if (window.location.hash == '#describeMLModels') {
-        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Model', '#modalCreateModel');
         listMLModel('ok');
         $(".ml-button-block").hide().fadeOut();
         $(".ml-table").fadeIn();
@@ -31,7 +31,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '#describeMLModelsContent', function () {
-        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');
+        buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Model', '#modalCreateModel');
 
         if(!$('.container-describeMLModels').hasClass('loaded')) {
             listMLModel('ok');
@@ -88,7 +88,7 @@ function listMLModel(status)
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                '<td class="name">' + checkVariable(response.data[key].TrainingDataSourceName) +
+                '<td>' + checkVariable(response.data[key].TrainingDataSourceName) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +               
