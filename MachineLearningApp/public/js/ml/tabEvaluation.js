@@ -1,20 +1,25 @@
 $(document).ready(function() {
-
     if (window.location.hash == '#describeEvaluations') {
         buttonCreate(' btn-create-evaluations', '#ml-button-create', 'Create Evaluations', '#modalCreateEvaluation');
         listEvaluations('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     }
 
     $('.create-evaluations-form').submit(function(e) {
         e.preventDefault();
-        $(".modalCreateEvaluation").modal('toggle');
+        run_waitMe('#modal-ev-id');
 
         $.ajax({
             type: "post",
             url: 'ml/create-evaluation',
             data: $('.create-evaluations-form').serialize(),
-            success: function(data) {                
-                listEvaluations(data);
+            success: function(data) {
+                $('#EvaluationName').val('');
+                $(".modalCreateEvaluation").modal('toggle');
+
+                listEvaluations(data[0]);
+                waitMeClose('#modal-ev-id');
             },
             error: function() {},
         });
@@ -47,7 +52,8 @@ function listEvaluations(status)
         '<table class="table table-bordered table-font text-center">' +
             '<tr class="active">' +
                 '<td>Name</td>' +
-                '<td>Model ID</td>' +
+                '<td>Model</td>' +
+                '<td>Datasource</td>' +
                 '<td>Status</td>' +
                 '<td>' +
                     '<div class="wrapper">' +
@@ -61,12 +67,14 @@ function listEvaluations(status)
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1; 
+            i = i + 1;     
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
                 '</td>' +
-                '<td >' + response.data[key].MLModelId +
+                '<td >' + checkVariable(response.data[key].ModelName) +
+                '</td>' +
+                '<td >' + response.data[key].EvDatasourceName +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + getAUC(response.data[key].PerformanceMetrics.Properties.BinaryAUC) + '</td>' +
@@ -91,3 +99,4 @@ function listEvaluations(status)
         $('.container-describeEvaluations').addClass('loaded');
     });
 };
+

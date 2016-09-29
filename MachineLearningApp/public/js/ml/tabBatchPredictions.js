@@ -1,17 +1,19 @@
 $(document).ready(function() {
-
-    $("[data-toggle='tooltip']").tooltip();
-
     if (window.location.hash == '#describeBatchPredictions') {
         buttonCreate('btn-create-bath-description', '#ml-button-create', 'Create batch prediction', '#modalCreateBatchPrediction');
         listBatchPrediction('ok');
+        $(".ml-button-block").hide().fadeOut();
+        $(".ml-table").fadeIn();
     }
+
+    $("[data-toggle='tooltip']").tooltip();
 
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
         $(".modalCreateBatchPrediction").modal('toggle');
-        
         showLoader('.container-describeBatchPredictions');
+        run_waitMe('#modal-bp-id');
+
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -21,7 +23,9 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
-            }           
+                waitMeClose('#modal-bp-id');
+
+            }
         });
     });
 
@@ -51,6 +55,8 @@ function listBatchPrediction(status)
             '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
                     '<td>Name</td>' +
+                    '<td>Model</td>' +
+                    '<td>Datasorce location</td>' +
                     '<td>Status</td>' +
                     '<td>Count</td>' +
                     '<td>Last Updated</td>' +
@@ -64,6 +70,10 @@ function listBatchPrediction(status)
             res +=
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
+                '</td>' +
+                 '<td class="name">' + checkVariable(response.data[key].ModelName) +
+                '</td>' +
+                 '<td class="name">' + checkVariable(response.data[key].InputDataLocationS3) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + checkVariable(response.data[key].TotalRecordCount) +
