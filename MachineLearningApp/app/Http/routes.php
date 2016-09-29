@@ -20,7 +20,6 @@ Route::post('ml/create-ml-model', 'MLController@doCreateMLModel');
 Route::post('ml/create-evaluation', 'MLController@doCreateEvaluation');
 Route::post('ml/create-main-ml-model', 'MLController@doCreateMainMLModel');
 
-
 Route::post('/ml/upload-batch-source', 'MLController@doCreateBatchPrediction');
 
 Route::get('/ml/delete-datasource/{id}', 'MLController@doDeleteDataSource');

@@ -55,6 +55,8 @@ function listBatchPrediction(status)
             '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
                     '<td>Name</td>' +
+                    '<td>Model</td>' +
+                    '<td>Datasorce location</td>' +
                     '<td>Status</td>' +
                     '<td>Count</td>' +
                     '<td>Last Updated</td>' +
@@ -68,6 +70,10 @@ function listBatchPrediction(status)
             res +=
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
+                '</td>' +
+                 '<td class="name">' + checkVariable(response.data[key].ModelName) +
+                '</td>' +
+                 '<td class="name">' + checkVariable(response.data[key].InputDataLocationS3) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td>' + checkVariable(response.data[key].TotalRecordCount) +

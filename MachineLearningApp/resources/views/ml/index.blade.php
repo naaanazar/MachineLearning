@@ -46,7 +46,7 @@
                             <a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Data Source</a>
+                            <a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Datasources</a>
                         </li>
                     </ul>
                 </div>

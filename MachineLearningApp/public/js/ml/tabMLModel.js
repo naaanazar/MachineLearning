@@ -16,6 +16,7 @@ $(document).ready(function() {
             url: 'ml/create-ml-model',
             data: $('.create-mlmodel-form').serialize(),
             success: function(data) {
+                console.log(data);
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data[0]);
@@ -63,6 +64,7 @@ function listMLModel(status)
             '<table class="table table-bordered table-font text-center">' +
                 '<tr class="active">' +
                     '<td>Name</td>' +
+                    '<td>Training Datasource</td>' +
                     '<td>Status</td>' +
                     '<td>Endpoint Status</td>' +                    
                     '<td>Last Updated</td>' +
@@ -86,6 +88,8 @@ function listMLModel(status)
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +
+                '</td>' +
+                '<td class="name">' + checkVariable(response.data[key].TrainingDataSourceName) +
                 '</td>' +
                 '<td class="' + statusTextColor(response.data[key].Status) + '">' + response.data[key].Status + '</td>' +
                 '<td class="status-endpoint ' + colorTextEndpointStatus + '">' + endpointStatus + '</td>' +               

@@ -74,4 +74,14 @@ class S3
 
         dd($result);
     }
+
+    public function fileExists($path)
+    {
+      
+        $path = urldecode($path);
+        $this->client->registerStreamWrapper();
+        if (file_exists($path)) {
+            return true;
+        }
+    }
 }
