@@ -13,13 +13,11 @@ class GeneratorController extends Controller
 {
     public function doIndex()
     {
-        return view('generator.generator');
+        return view('generator.generator', ['maxRowsCount' => DatasetGenerator::MAX_ROWS_COUNT]);
     }
 
     public function doGenerateDataset(GeneratorRequest $request)
     {
-        set_time_limit(180);
-
         $generator = new DatasetGenerator();
         $generator->setRowsCount($request->rows);
         $generator->generate();

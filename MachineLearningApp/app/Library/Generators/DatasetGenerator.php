@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of DatasetGenerator
  *
@@ -16,6 +10,7 @@ namespace App\Library\Generators;
 
 class DatasetGenerator
 {
+    const MAX_ROWS_COUNT = 100000;
 
     private $title = [
         'email_custom_domain',
@@ -33,7 +28,7 @@ class DatasetGenerator
     private $targetFile;
     private $file;
 
-    private $rowsCount = 15000;
+    private $rowsCount = 0;
     private $total = 0;
     private $percents = 0;
 
@@ -57,9 +52,13 @@ class DatasetGenerator
 
     public function setRowsCount($rowsCount)
     {
-        $this->rowsCount = (int)$rowsCount;
+        if ((int)$rowsCount > self::MAX_ROWS_COUNT) {
+            $this->rowsCount = self::MAX_ROWS_COUNT;
+        } else {
+            $this->rowsCount = (int)$rowsCount;
+        }
     }
-    
+
     public function getRowsCount()
     {
         return $this->rowsCount;

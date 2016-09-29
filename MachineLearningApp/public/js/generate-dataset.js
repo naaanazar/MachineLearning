@@ -61,9 +61,11 @@ function bindEvents() {
     $(document).on('input', '#rows-number', function (e) {
         var value = $(e.target).val();
         var newValue = value.replace(/^0|\D+/g, '');
-        var maxLength = 6;
+        var maxLength = MAX_ROWS_COUNT.toString().length;
 
-        if (newValue.length > maxLength) {
+        if (newValue > MAX_ROWS_COUNT) {
+            newValue = parseInt(newValue.toString().substr(0, newValue.length - 1));
+        } else if (newValue.length > maxLength) {
             newValue = parseInt(newValue.toString().substr(0, maxLength));
         }
 
@@ -79,7 +81,7 @@ function bindEvents() {
     $('#generate-btn').click(function () {
         var rowsNumber = $('#rows-number').val();
         if (rowsNumber === '') {
-            showMessage('This field is required!', true);
+            showMessage('This field is required', true);
             return;
         }
 
