@@ -44,7 +44,7 @@
                         </li>
                         <li>
                             <a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a>
-                        </li>                        
+                        </li>
                         <li>
                             <a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Datasources</a>
                         </li>
@@ -97,15 +97,16 @@
                         </div>
                         <div class="form-group select-load">
                             <label for="SelectBuckets">Buckets</label>
-                            <select class="form-control" id="SelectBuckets" name="SelectBuckets">                                 
+                            <select class="form-control" id="SelectBuckets" name="SelectBuckets">
                             </select>
                         </div>
                         <div style="display:none" class="form-group select-load select-datasource-field">
                             <label for="SelectDataLocationS3">Dataset</label>
-                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">                               
+                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
                             </select>
                         </div>                       
                         <div class="row modal-button-create-position" align="center">
+
                             <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
@@ -121,7 +122,6 @@
                     <h4 class="modal-title">Create Model</h4>
                 </div>
                 <div class="modal-body">
-
                     <form class="create-mlmodel-form" method="post"
                           action="ml/create-ml-model">
                         <br>
@@ -158,8 +158,8 @@
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="MLModelName">Model name</label>
-                            <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
+                            <label for="MLMainModelName">Model name</label>
+                            <input type="text" class="form-control MLModelName" id="MLMainModelName" placeholder="ML model name"
                                    name="MLModelName" autofocus>
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
@@ -239,9 +239,9 @@
                                 <span class="glyphicon glyphicon-upload"></span>&nbsp;Choose dataset file
                                 <input id="input-file-source" type="file" name="file" accept=".csv">
                             </label>
-                            <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
+                            <span class="batch-file-name"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-create-batch" disabled>Create</button>
                     </form>
                 </div>
             </div>
