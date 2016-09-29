@@ -9,6 +9,7 @@ $(document).ready(function() {
 
     $('.create-mlmodel-form').submit(function(e) {
         e.preventDefault();
+        run_waitMe('#modal-ml-id');
 
         $.ajax({
             type: "post",
@@ -19,6 +20,7 @@ $(document).ready(function() {
                 $('#MLModelName').val('');
                 $(".modalCreateModel").modal('toggle');
                 listMLModel(data[0]);
+                waitMeClose('#modal-ml-id');
             },
             error: function() {},
         });

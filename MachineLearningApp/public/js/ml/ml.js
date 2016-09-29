@@ -34,6 +34,7 @@ $(document).ready(function() {
 
     $('.create-main-mlmodel-form').submit(function(e) {
         e.preventDefault();
+        run_waitMe('#modal-main-ml-id');
 
         $.ajax({
             type: "post",
@@ -47,6 +48,7 @@ $(document).ready(function() {
                 listMLModel('ok');
                 $(".ml-button-block").hide().fadeOut();
                 $(".ml-table").fadeIn();
+                waitMeClose('#modal-main-ml-id');
             },
             error: function() {},
         });
@@ -78,7 +80,7 @@ $(document).ready(function() {
                 break;
         }
 
-        $.get(url + datasourceId, function(response) {
+        $.get(url + datasourceId, function (response) {
             switch (tab) {
                 case 'Datasources':
                     data.Name = response.data[0];
@@ -150,18 +152,18 @@ $(document).ready(function() {
             $('#result_info').html(result);
         }
 
-        function parseName(str){
+        function parseName(str) {
             var name = '';
             var posFirst = 0;
 
-            for (var i=0; i<str.length; i++) {
-                if (str.charCodeAt(i) > 65 && str.charCodeAt(i) <90) {
-                    name += str.substring(posFirst,i) + ' ';
+            for (var i = 0; i < str.length; i++) {
+                if (str.charCodeAt(i) > 65 && str.charCodeAt(i) < 90) {
+                    name += str.substring(posFirst, i) + ' ';
                     posFirst = i;
                 }
             }
 
-            return name = name + ' ' + str.substring(posFirst,str.length);
+            return name = name + ' ' + str.substring(posFirst, str.length);
         }
 
         event.preventDefault();
@@ -178,7 +180,7 @@ $(document).ready(function() {
             var name = $(event.target).closest('tr').find('.name').text();
 
             if (target == dataSourceIdVar) {
-                $.get(url + datasourceId, function(response) {
+                $.get(url + datasourceId, function (response) {
                     if (response.deleted !== 'Ok') {
                         $.jGrowl('An error occurred during delete process', {
                             theme: 'jgrowl-danger'
@@ -213,26 +215,31 @@ $(document).ready(function() {
     });
 
     //loading data(info button)
-    $('.modal-1').on('hidden.bs.modal', function() {
+    $('.modal-1').on('hidden.bs.modal', function () {
         $('.modal-body-1').html('<div class="row" id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    });
+
+    $('#demo').click(function () {
+        run_waitMe();
+    });
+    $('#demo-close').click(function () {
+        waitMeClose();
     });
 });
 
-function statusTextColor(str)
-{
+function statusTextColor(str) {
     if (str === 'COMPLETED') {
         classText = 'text-success';
     } else if (str === 'PENDING' || str === 'INPROGRESS') {
         classText = 'text-warning';
     } else if (str === 'FAILED') {
-         classText = 'text-danger';
+        classText = 'text-danger';
     }
 
     return classText;
 };
 
-function selectName(uri, elementId, formClass)
-{
+function selectName(uri, elementId, formClass) {
     addSelectLoader(elementId, formClass);
 
     $.get(uri, function (response) {
@@ -253,44 +260,44 @@ function selectName(uri, elementId, formClass)
     });
 };
 
-function selectBuckets(uri, elementId, formClass)
-{
+function selectBuckets(uri, elementId, formClass) {
     addSelectLoader(elementId, formClass);
 
     $.get(uri, function (response) {
-        var result ='"<option value="" disabled selected style="display: none;">Please select bucket</option>"';
+        var result = '"<option value="" disabled selected style="display:none;">Please select bucket</option>"';
 
         for (var key in response.data) {
             result += '<option value="' + response.data[key].Name + '">' + response.data[key].Name + '</option>';
-        };
+        }
+        ;
 
         $(elementId).html(result);
         removeSelectLoader(elementId);
     });
 };
 
-function selectDataFromS3(uri, elementId, formClass, bucket)
-{
+function selectDataFromS3(uri, elementId, formClass, bucket) {
     addSelectLoader(elementId, formClass);
 
     $.get(uri + '/' + bucket, function (response) {
-        var result ='"<option value="" disabled selected style="display: none;">Please select dataset</option>"';
+        var result = '"<option value="" disabled selected style="display: none;">Please select dataset</option>"';
 
         for (var key in response.data) {
             var extension = response.data[key].Key.substr(-3);
 
-            if ( extension == 'csv') {
+            if (extension == 'csv') {
                 result += '<option value="' + response.data[key].Key + '">' + response.data[key].Key + '</option>';
-            };
-        };
+            }
+            ;
+        }
+        ;
 
         $(elementId).html(result);
         removeSelectLoader(elementId);
     });
 };
 
-function addSelectLoader(elementId, formClass)
-{
+function addSelectLoader(elementId, formClass) {
     $(elementId).addClass('remove-arrow');
     var load = '<div class="loader-im" style="width: 28px; height: 28px; float: left;right: 4px;top: 30px;position: absolute;">' +
         '<div align="center" class="loader-select" id="loader"></div></div>';
@@ -298,26 +305,23 @@ function addSelectLoader(elementId, formClass)
     $(formClass).find(elementId).parents('.select-load').append(load);
 };
 
-function removeSelectLoader(elementId)
-{
+function removeSelectLoader(elementId) {
     $(elementId + ' + .loader-im').remove();
     $(elementId).removeClass('remove-arrow');
 };
 
 function addLoader(destinationClass) {
-        $(destinationClass).html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
+    $(destinationClass).html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 };
 
-function buttonCreate(elementClass, destinationId, name, dataTarget)
-{
+function buttonCreate(elementClass, destinationId, name, dataTarget) {
     var button = '<button class="btn btn-primary ' + elementClass + ' pull-right" data-toggle="modal" ' +
         'data-target="' + dataTarget + '">' + name + '</button>';
 
     $(destinationId).html(button);
 }
 
-function showLoader(destinationClass)
-{
+function showLoader(destinationClass) {
     $(destinationClass).html('<br><div id="modal_row"><div align="center" class="loader col-md-2 col-md-offset-5" id="loader"></div></div>');
 }
 
@@ -338,7 +342,7 @@ function getAUC(variable) {
 
 function statusAction(status) {
     if (status.hasOwnProperty('error')) {
-        $.jGrowl('Error created' , {
+        $.jGrowl('Error created', {
             theme: 'jgrowl-danger'
         });
     } else if (status.hasOwnProperty('success')) {
@@ -350,6 +354,23 @@ function statusAction(status) {
             theme: 'jgrowl-danger'
         });
     }
+}
 
 
- }
+
+function run_waitMe(element) {
+
+    $(element).waitMe({
+        effect: 'stretch',
+        text: '',
+        bg: 'rgba(255,255,255,0.7)',
+        color: '#000',
+        onClose: function () {
+        }
+    });
+
+}
+function waitMeClose(element) {
+    $(element).waitMe("hide");
+}
+

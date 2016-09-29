@@ -10,6 +10,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         showLoader('.container-describeDataSources');
+        run_waitMe('#modal-ds-id');
 
         $.ajax({
             type: "post",
@@ -20,20 +21,21 @@ $(document).ready(function () {
                 $(".modalCreateDataSource").modal('toggle');
 
                 listDataSource(data);
+                waitMeClose('#modal-ds-id');
             }
         });
-        
+
     });
 
 
     $(document).on("click", ".btn-create-datasource", function () {
-        $('.create-datasource-form')[0].reset();      
+        $('.create-datasource-form')[0].reset();
 
         selectBuckets('/s3/get-buckets', '#SelectBuckets', '.create-datasource-form');
         $('.select-datasource-field').hide();
     });
 
-    $(document).on("change", "#SelectBuckets", function() {
+    $(document).on("change", "#SelectBuckets", function () {
         var bucket = $("#SelectBuckets option:selected").text();
 
         selectDataFromS3('/ml/select-S3objects', '#SelectDataLocationS3', '.create-datasource-form', bucket);
@@ -41,17 +43,17 @@ $(document).ready(function () {
         $('.select-datasource-field').slideDown();
     });
 
-    $(document).on("click", '#describeDataSourcesContent', function() {
+    $(document).on("click", '#describeDataSourcesContent', function () {
         buttonCreate('btn-create-datasource', '#ml-button-create', 'Create Datasource', '#modalCreateDataSource');
 
         if (!$('.container-describeDataSources').hasClass('loaded')) {
             listDataSource('ok');
-        };
+        }
+        ;
     });
 });
 
-function listDataSource(status)
-{
+function listDataSource(status) {
     showLoader('.container-describeDataSources');
     statusAction(status);
 

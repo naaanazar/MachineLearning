@@ -573,7 +573,7 @@ class MLController extends Controller
 
     private function createEvaluation($MLModelId, $EvaluationName, $DataSourceId)
     {
-        $EvaluationId   = 'ev-'.uniqid();      
+        $EvaluationId   = uniqid();      
 
         try {
 

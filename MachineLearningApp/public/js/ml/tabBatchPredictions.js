@@ -11,8 +11,9 @@ $(document).ready(function() {
     $('.create-bath-predictios-form').on("submit", function(e) {
         e.preventDefault();
         $(".modalCreateBatchPrediction").modal('toggle');
-        
         showLoader('.container-describeBatchPredictions');
+        run_waitMe('#modal-bp-id');
+
         $.ajax({
             url: '/ml/upload-batch-source',
             method: 'POST',
@@ -22,6 +23,8 @@ $(document).ready(function() {
             processData: false,
             success: function (data) {
                 listBatchPrediction(data);
+                waitMeClose('#modal-bp-id');
+
             }
         });
     });

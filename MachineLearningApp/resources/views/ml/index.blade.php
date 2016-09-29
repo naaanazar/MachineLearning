@@ -9,6 +9,7 @@
     <script src="{{ URL::to('js/ml/tabBatchPredictions.js') }}"></script>
     <script src="{{ URL::to('js/ml/validationForms.js') }}"></script>
 
+
     <div class="container">
         <div class="row ml-logo-block">
             <div class="col-md-5 col-md-offset-4">
@@ -24,7 +25,7 @@
                 </div>
                 <div class="col-md-6 clearfix">
                     <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
-                </div> 
+                </div>
             </div>
         <div class="ml-table">
             <div class="ml-table-button clearfix">
@@ -77,8 +78,8 @@
     </div>
     <br>
     <div class="modal fade modalCreateDataSource" id="modalCreateDataSource" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog" data-clicked="">
+            <div class="modal-content" id="modal-ds-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Datasource</h4>
@@ -114,12 +115,13 @@
     </div>
     <div class="modal fade modalCreateModel" id="modalCreateModel" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-ml-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Model</h4>
                 </div>
                 <div class="modal-body">
+
                     <form class="create-mlmodel-form" method="post"
                           action="ml/create-ml-model">
                         <br>
@@ -129,7 +131,7 @@
                             <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
                                    name="MLModelName" autofocus>
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
-                        </div>                        
+                        </div>
                         <div class="form-group select-load">
                             <label for="SelectDataSource">Datasource name</label>
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
@@ -145,7 +147,7 @@
     </div>
     <div class="modal fade modalCreateMainModel" id="modalCreateMainModel" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-main-ml-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create  ML Model</h4>
@@ -181,7 +183,7 @@
     </div>
     <div class="modal fade modalCreateEvaluation" id="modalCreateEvaluation" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-ev-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Evaluation</h4>
@@ -217,7 +219,7 @@
     </div>
     <div class="modal fade modalCreateBatchPrediction" id="modalCreateBatchPrediction" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal-bp-id">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Batch prediction</h4>

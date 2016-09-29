@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     $('.create-evaluations-form').submit(function(e) {
         e.preventDefault();
+        run_waitMe('#modal-ev-id');
 
         $.ajax({
             type: "post",
@@ -18,6 +19,7 @@ $(document).ready(function() {
                 $(".modalCreateEvaluation").modal('toggle');
 
                 listEvaluations(data[0]);
+                waitMeClose('#modal-ev-id');
             },
             error: function() {},
         });
@@ -98,3 +100,4 @@ function listEvaluations(status)
         $('.container-describeEvaluations').addClass('loaded');
     });
 };
+

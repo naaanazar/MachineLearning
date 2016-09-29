@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
@@ -178,46 +179,26 @@ class S3Controller extends Controller
             'file' => 'required|file|mimes:czzsv,txt',
         ]);
 
-        $file        = $request->file('file');
-        $fileName    = $file->getClientOriginalName();
-        $storagePath = storage_path('app/');
-        $file->move($storagePath, $fileName);
+        $this->client->registerStreamWrapper();
 
-        $filepath = $storagePath . '/' . $fileName;
-        $keyname  = basename($filepath);
+        $file     = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $data     = file_get_contents($file);
 
         try {
             $result = $this->client->putObject([
                 'Bucket'     => $request->nameBucket,
-                'Key'        => $keyname,
-                'SourceFile' => $filepath,
+                'Key'    => $fileName,
+                'Body'   => $data,
                 'ACL'        => 'public-read'
             ]);
 
         } catch (S3Exception $e) {
             return Response()->json(['data' => $e->getMessage()]);
         }
-        $file = $fileName;
-        Storage::delete($fileName);
 
         return redirect('s3')->with('status', '<strong>Success!</strong> File successfully uploaded to S3');
     }
-
-
-//    public function doDelete($filename)
-//    {
-//        try {
-//            $this->client->deleteObject([
-//                'Bucket'       => $this->bucket,
-//                'Key'          => $filename,
-//                'RequestPayer' => 'requester'
-//            ]);
-//        } catch (S3Exception $e) {
-//            return Response()->json(['success' => $e->getMessage()]);
-//        }
-//
-//        return Response()->json(['success' => true]);
-//    }
 
 
     public function doDelete()
