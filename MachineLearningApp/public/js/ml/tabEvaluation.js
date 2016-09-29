@@ -76,8 +76,7 @@ function listEvaluations(status)
             '<span class="hide">' + i + '</span>';
 
         for (var key in response.data) {
-            i = i + 1;
-            console.log(response.data[key].ModelName);
+            i = i + 1;     
             res += '' +
             '<tr>' +
                 '<td class="name">' + checkVariable(response.data[key].Name) +

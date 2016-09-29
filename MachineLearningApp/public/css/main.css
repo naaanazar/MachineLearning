@@ -59,6 +59,10 @@ body {
     width: 30%;
 }
 
+.batch-file-name {
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 1200px) {
     .title {
         font-size: 26px;
@@ -961,4 +965,16 @@ a.btn.btn-warning.btn-sm.btn-list.delete-endpoint.disabled {
         top: 15px;
         right: 35px;
     }
+}
+
+.modal-button-create-position {
+    height:40px;
+}
+
+.modal-body {
+    padding-top: 0px;
+}
+
+.modal-header{
+    padding-bottom: 0px;
 }

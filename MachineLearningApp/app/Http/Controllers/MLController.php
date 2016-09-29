@@ -491,15 +491,21 @@ class MLController extends Controller
 
         $name    = $request->input('MLModelName');
         $DataLocationS3    = 's3://'. $request->input('SelectBuckets').  '/'.$request->input('DataLocationS3');
-        $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
-        $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
-        $model = $this->createMLModel($name, $dsTraining['success']);
+       // $dsTraining = $this->createDataSourceFromS3('ds-training: ' . $name, $DataLocationS3, '0', '70');
+       // $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
+      //  $model = $this->createMLModel($name, $dsTraining['success']);
 
-        $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success']) ;
+       // $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success']) ;
 
-        $result['success'] = $model['success'];
+      //  $result['dsTraining'] = $dsTraining;
+      //  $result['dsEvaluate'] = $dsEvaluate;
+       // $result['model'] = $model;
+       // $result['evaluate'] = $evaluation;
+        $result['evaluate'] = "evaluation";
+    
 
-        return response()->json([(array)$result]);
+
+        return response()->json(['data' =>(array)$result]);
     }
 
 
@@ -589,7 +595,7 @@ class MLController extends Controller
 
     private function createEvaluation($MLModelId, $EvaluationName, $DataSourceId)
     {
-        $EvaluationId   = uniqid();      
+        $EvaluationId   = uniqid('e');
 
         try {
 

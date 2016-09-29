@@ -18,14 +18,14 @@
                 </h2>
             </div>
         </div>
-            <div class="ml-button-block">
-                <div class="col-md-6 clearfix" >
-                    <button class="btn-ml-model btn btn-primary btn-create-mlmodel-main pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateMainModel">Create ML Model</button>
-                </div>
-                <div class="col-md-6 clearfix">
-                    <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
-                </div>
+        <div class="ml-button-block">
+            <div class="col-md-6 clearfix" >
+                <button class="btn-ml-model btn btn-primary btn-create-mlmodel-main pull-right btn-block btn-lg" data-toggle="modal" data-target="#modalCreateMainModel">Create ML Model</button>
             </div>
+            <div class="col-md-6 clearfix">
+                <button class="btn-ml-model ml-setting btn btn-primary btn-block btn-lg">Advanced settings</button>
+            </div>
+        </div>
         <div class="ml-table">
             <div class="ml-table-button clearfix">
                 <a href="#advancedSettings" class="ml-button-back ml-setting btn btn-primary">
@@ -43,7 +43,7 @@
                         </li>
                         <li>
                             <a data-toggle="tab" href="#describeBatchPredictions" id="describeBatchPredictionsContent">Batch Predictions</a>
-                        </li>                        
+                        </li>
                         <li>
                             <a data-toggle="tab" href="#describeDataSources" id="describeDataSourcesContent">Datasources</a>
                         </li>
@@ -53,24 +53,16 @@
             <div class="tab-content col-md-12">
               
                 <div id="describeMLModels" class="tab-pane fade in active">
-
-                    <div class="container-describeMLModels table-scroll-ML ML-tables-content ">
-                    </div>
+                    <div class="container-describeMLModels table-scroll-ML ML-tables-content "></div>
                 </div>
                   <div id="describeDataSources" class="tab-pane fade">
-
-                    <div class="container-describeDataSources table-scroll ML-tables-content">
-                    </div>
+                    <div class="container-describeDataSources table-scroll ML-tables-content"></div>
                 </div>
                 <div id="describeEvaluations" class="tab-pane fade">
-
-                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content">
-                    </div>
+                    <div class="container-describeEvaluations table-scroll-evaluation ML-tables-content"></div>
                 </div>
                 <div id="describeBatchPredictions" class="tab-pane fade">
-
-                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content">
-                    </div>
+                    <div class="container-describeBatchPredictions table-scroll-batch ML-tables-content"></div>
                 </div>
             </div>
         </div>
@@ -96,15 +88,16 @@
                         </div>
                         <div class="form-group select-load">
                             <label for="SelectBuckets">Buckets</label>
-                            <select class="form-control" id="SelectBuckets" name="SelectBuckets">                                 
+                            <select class="form-control" id="SelectBuckets" name="SelectBuckets">
                             </select>
                         </div>
                         <div style="display:none" class="form-group select-load select-datasource-field">
                             <label for="SelectDataLocationS3">Dataset</label>
-                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">                               
+                            <select class="form-control" id="SelectDataLocationS3" name="DataLocationS3">
                             </select>
                         </div>                       
-                        <div class="row" align="center">
+                        <div class="row modal-button-create-position" align="center">
+
                             <input id="success-button-modal-ds" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
@@ -120,7 +113,6 @@
                     <h4 class="modal-title">Create Model</h4>
                 </div>
                 <div class="modal-body">
-
                     <form class="create-mlmodel-form" method="post"
                           action="ml/create-ml-model">
                         <br>
@@ -136,7 +128,7 @@
                             <select class="form-control" id="SelectDataSource" name="DataSourceId">
                             </select>
                         </div>
-                        <div class="row" align="center">
+                        <div class="row modal-button-create-position" align="center">
                             <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
@@ -157,8 +149,8 @@
                         <br>
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="MLModelName">Model name</label>
-                            <input type="text" class="form-control" id="MLModelName" placeholder="ML model name"
+                            <label for="MLMainModelName">Model name</label>
+                            <input type="text" class="form-control MLModelName" id="MLMainModelName" placeholder="ML model name"
                                    name="MLModelName" autofocus>
                             <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
                         </div>
@@ -172,7 +164,7 @@
                             <select class="form-control" id="SelectDataLocationS3Main" name="DataLocationS3">
                             </select>
                         </div>
-                        <div class="row" align="center">
+                        <div class="row modal-button-create-position" align="center">
                             <input id="success-button-modal-ml" type="submit" class="btn btn-primary submit-button" value="Create" disabled>
                         </div>
                     </form>
@@ -238,9 +230,9 @@
                                 <span class="glyphicon glyphicon-upload"></span>&nbsp;Choose dataset file
                                 <input id="input-file-source" type="file" name="file" accept=".csv">
                             </label>
-                            <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
+                            <span class="batch-file-name"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-create-batch" disabled>Create</button>
                     </form>
                 </div>
             </div>
