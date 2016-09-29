@@ -19,13 +19,35 @@ function checkMLRequired(selector, tab) {
         if (!empty) {
             $('input#success-button-modal-' + tab).attr('disabled', true);
         } else if (empty) {
-             $('input#success-button-modal-' + tab).removeAttr('disabled');
+            $('input#success-button-modal-' + tab).removeAttr('disabled');
         }
     });
 
     $('.modal').on('hidden.bs.modal', function () {
         $(selector).val('');
         $('input#success-button-modal-' + tab).attr('disabled', true);
+    });
+}
+
+function checkBatchPredictionField() {
+    $('#input-file-source').on('change', function(e) {
+        var fileData = $('#input-file-source').val();
+        var fileName = fileData.substr(fileData.lastIndexOf("\\")+1);
+
+        $('.batch-file-name').empty();
+        $('.batch-file-name').append(fileName);
+
+        if (!fileData) {
+            $('.btn-create-batch').attr('disabled', true);
+        } else {
+            $('.btn-create-batch').removeAttr('disabled');
+        }
+    });
+
+    $('.modal').on('hidden.bs.modal', function () {
+        $('#input-file-source').val('');
+        $('.batch-file-name').empty();
+        $('.btn-create-batch').attr('disabled', true);
     });
 }
 
@@ -56,10 +78,12 @@ $(document).ready(function() {
         checkMLRequired("#MLModelName", "ml");
         checkMLRequired("#EvaluationName", "ev");
         checkDatasourceField("#DataSourceName", "#SelectBuckets", "#SelectDataLocationS3", "ds");
+        checkBatchPredictionField();
     });
 
     $('.ml-button-block').on('click', '.btn-create-mlmodel-main', function(e) {
         checkMLData("#MLMainModelName");
         checkDatasourceField("#MLMainModelName", "#SelectBucketsMain", "#SelectDataLocationS3Main", "ml");
     });
+
 });

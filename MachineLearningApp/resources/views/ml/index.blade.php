@@ -238,9 +238,9 @@
                                 <span class="glyphicon glyphicon-upload"></span>&nbsp;Choose dataset file
                                 <input id="input-file-source" type="file" name="file" accept=".csv">
                             </label>
-                            <span class="preload-s3"><i class="s3-preload fa fa-spinner fa-spin" style="font-size: 24px"></i></span>
+                            <span class="batch-file-name"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-create-batch" disabled>Create</button>
                     </form>
                 </div>
             </div>
