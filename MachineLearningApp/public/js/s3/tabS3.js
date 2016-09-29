@@ -12,7 +12,7 @@ $(document).ready(function () {
             var empty = false;
 
             $(selector).each(function () {
-                if($(this).val().length >= 7) {
+                if($(this).val().length >= 3) {
                     empty = true;
                 }
             });
@@ -38,7 +38,7 @@ $(document).ready(function () {
         });
     });
 
-    validationBucket("#nameBucket", 255, "^ |[^0-9a-zA-Z-._]");
+    validationBucket("#nameBucket", 63, "^ |[^0-9a-zA-Z-._]");
 
     $(document).on('click', '.btn-delete', function (e) {
         e.preventDefault();
