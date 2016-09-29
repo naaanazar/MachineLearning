@@ -63,26 +63,31 @@ $(document).ready(function () {
         data.append('nameBucket', nameBucket);
         $(event.target).closest('span.glyphicon-upload').addClass('hide');
         $(event.target).closest('label.upload-file').addClass('hide');
-        $(event.target).closest('td.buttons').find('label.loader-s3-upload').find('div').removeClass('hide');
-        // $.ajax({
-        //     url: "s3/upload",
-        //     type:"post",
-        //     cache : false,
-        //     contentType : false,
-        //     processData : false,
-        //     data: data,
-        //     success: function(response) {
-        //         $.jGrowl('Success upload', {
-        //             theme: 'jgrowl-success'
-        //         });
-        //
-        //         $('table.table').ready(function() {
-        //             location.reload();
-        //         });
-        //     },
-        //     error: function (data) {
-        //     }
-        // });
+        $(event.target).closest('td.buttons').find('div.loader-s3-upload').removeClass('hide');
+
+        $.ajax({
+            url: "s3/upload",
+            type:"post",
+            cache : false,
+            contentType : false,
+            processData : false,
+            data: data,
+            success: function(response) {
+                $.jGrowl('Success upload', {
+                    theme: 'jgrowl-success'
+                });
+
+                $('table.table').ready(function() {
+                    location.reload();
+                });
+
+                $(event.target).closest('span.glyphicon-upload').removeClass('hide');
+                $(event.target).closest('label.upload-file').removeClass('hide');
+                $(event.target).closest('td.buttons').find('div.loader-s3-upload').addClass('hide');
+            },
+            error: function (data) {
+            }
+        });
 
         event.preventDefault();
     });
@@ -163,7 +168,7 @@ function showTable(content) {
                     '<td class="reference">' + item.name + '</td>' +
                     '<td>0</td>' +
                     '<td class="date">' + timeConverter(item.creationDate) + '</td>' +
-                    '<td class="buttons" style="width: 130px">' +
+                    '<td class="buttons" style="width: 150px">' +
                         '<a class="btn btn-danger btn-sm btn-list btn-list-bucket btn-delete-bucket '+
                         (item.hasOwnProperty('file') ? 'disabled':'') + '"' +
                         'href="/s3/delete/' + item.name + '"' +
@@ -181,7 +186,9 @@ function showTable(content) {
                         '>' +
                             '<span class="glyphicon glyphicon-minus"></span>' +
                         '</a>' +
-                '<label class="btn btn-primary btn-file upload-file btn-sm btn-list loader-s3-upload"><div align="center" class="loader-button-upload hide" id="loader-btn-upload-s3' + key +'"></div></label>' +
+                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide">' +
+               '<div class="loader-button-upload" id="loader-btn-upload-s3"></div>' +
+                '</div>' +
                 '&nbsp<label for="s3-upload-file-' + key + '"' +
                         'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
                         'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
