@@ -30,7 +30,7 @@
        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
        <![endif]-->
    </head>
-   <body>
+   <body style="min-width: 400px">
        <nav class="navbar navbar-default" >
            <div class="container-fluid">
                <div class="navbar-header">

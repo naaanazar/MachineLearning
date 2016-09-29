@@ -624,8 +624,7 @@ a:focus, a:hover{
     color: #2e2d2d;
 }
 
-.generator-input-container,
-.generator-button-container {
+.generator-input-container {
     margin-top: 4%;
     margin-bottom: 4%;
 }
@@ -641,7 +640,6 @@ a:focus, a:hover{
 }
 
 .generator-form .empty-msg {
-    color: red;
     margin-top: 10px;
     font-size: 16px;
 }

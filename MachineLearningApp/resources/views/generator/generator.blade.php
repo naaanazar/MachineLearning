@@ -5,20 +5,20 @@
 <script type="text/javascript" src="{{ URL::to('js/generate-dataset.js') }}"></script>
 
 <div class="container">    
-    <div class="row generator-form col-xs-12">
+    <div class="row generator-form col-xs-6 col-xs-offset-3">
         <h3 align='center'>Generate dataset</h3> 
-        <div class="col-md-offset-4 col-md-4 col-xs-12 generator-input-container">
-            <input class="form-control" id="rows-number" ondrop="return false" name="rows" placeholder="Records quantity" min="1">
-            <div class='empty-msg'></div>
+
+        <div class="input-group generator-input-container">
+            <input id="rows-number" name="rows" class="form-control" min="1" max="999999" type="number" placeholder="Number of rows (max 6 numbers)">
+            <span class="input-group-btn">
+                <button id="generate-btn" class="btn btn-primary disabled" type="button" disabled>Generate</button>
+            </span>
         </div>
-        <div class="col-md-2 col-xs-4 generator-button-container">
-            <a id="generate-btn" class="btn btn-info disabled" href="{{ URL::to('generate') }}">Generate</a>
-        </div>
+        <span class="empty-msg error"></span>
         <div class="spinner-warapper">
             <i class="fa fa-spinner fa-4x fa-spin" style="display: none;"></i>
-        </div> 
+        </div>
     </div>
 </div>
     
 @endsection
-

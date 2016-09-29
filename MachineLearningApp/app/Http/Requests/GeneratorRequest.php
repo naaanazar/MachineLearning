@@ -24,7 +24,7 @@ class GeneratorRequest extends Request
     public function rules()
     {
         return [
-            'rows' => 'required|integer|min:1',
+            'rows' => 'bail|required|integer|min:1|max:999999',
         ];
     }
 
@@ -32,8 +32,9 @@ class GeneratorRequest extends Request
     {
         return [
             'rows.required' => 'This field is required',
-            'rows.integer'  => 'Quantity must be an integer',
-            'rows.min'  => 'Quantity must be positive number',
+            'rows.integer' => 'Value must be a number',
+            'rows.min' => 'Value must be positive number',
+            'rows.max' => 'Value cannot be higher than 999999',
         ];
     }
 }

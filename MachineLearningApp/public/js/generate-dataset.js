@@ -4,74 +4,136 @@ $.ajaxSetup({
     }
 });
 
-$(document).on('input', '#rows-number', function (e) {
-    var value = $(e.target).val();
-    var newVal = value.replace(/^0|\D+/g, '');
+function showLoader() {
+    $('i.fa-spinner').css('display', 'inline-block');
+}
 
-    $("#rows-number").val(newVal);
+function hideLoader() {
+    $('i.fa-spinner').hide();
+}
 
-    if ($("#rows-number").val() !== "") {
-        $('#generate-btn').removeClass('disabled');
-    } else {
-        $('#generate-btn').addClass('disabled');
+function enableGenerateProcess(withInput) {
+    $('#generate-btn').removeClass('disabled');
+    $('#generate-btn').prop('disabled', false);
+
+    if (withInput) {
+        $('#rows-number').prop('disabled', false);
     }
-});
+}
 
-$(document).ready(function () {
+function disableGenerateProcess(withInput) {
+    $('#generate-btn').addClass('disabled');
+    $('#generate-btn').prop('disabled', true);
 
-    $('#generate-btn').on('click', function (e) {
+    if (withInput) {
+        $('#rows-number').prop('disabled', true);
+    }
+}
 
-        e.preventDefault();
-        $('.empty-msg').empty();
+function showMessage(message, error) {
+    var $input = $('#rows-number');
+    var $message = $('.empty-msg');
+
+    $message.html(message);
+
+    if (error) {
+        $input.addClass('warning');
+        $message.addClass('error');
+    } else {
+        $input.removeClass('warning');
+        $message.removeClass('error');
+    }
+}
+
+function hideMessage() {
+    $('.empty-msg').empty();
+
+    if ($('#rows-number').hasClass('warning')) {
         $('#rows-number').removeClass('warning');
+    }
 
-        var route = $(this).attr('href');
+    if (!$('.empty-msg').hasClass('error')) {
+        $('.empty-msg').addClass('error');
+    }
+}
+
+function bindEvents() {
+    $(document).on('input', '#rows-number', function (e) {
+        var value = $(e.target).val();
+        var newValue = value.replace(/^0|\D+/g, '');
+        var maxLength = 6;
+
+        if (newValue.length > maxLength) {
+            newValue = parseInt(newValue.toString().substr(0, maxLength));
+        }
+
+        $("#rows-number").val(newValue);
+
+        if ($("#rows-number").val() !== "") {
+            enableGenerateProcess();
+        } else {
+            disableGenerateProcess();
+        }
+    });
+
+    $('#generate-btn').click(function () {
         var rowsNumber = $('#rows-number').val();
-
-        if (rowsNumber === "") {
-            $(".empty-msg").html("This Field is required!");
-            $('#rows-number').addClass('warning');
+        if (rowsNumber === '') {
+            showMessage('This field is required!', true);
             return;
         }
 
-        $("#generate-btn").addClass("disabled");
-        $('i.fa-spinner').css('display', 'inline-block');
+        hideMessage();
+        disableGenerateProcess(true);
+        showLoader();
 
         $.ajax({
             method: 'POST',
-            url: route,
+            url: 'generate',
             dataType: 'JSON',
             data: {
                 rows: rowsNumber,
                 "_token": $('meta[name=csrf-token]').attr('content')
             },
             success: function (data) {
-                $('i.fa-spinner').hide();
-                $("#generate-btn").removeClass("disabled");
+                enableGenerateProcess(true);
+                hideLoader();
+
                 $("#rows-number").val("");
+
                 if (!$.isEmptyObject(data)) {
                     var stats = data.stats;
+                    var link = "<a href='datasets/" + stats.path + "'>dataset</a>";
+
                     var content = '<ul>';
                     content += '<li>Records number: ' + stats.recordsNumber + '</li>';
                     content += '<li>Purchase number: ' + stats.purchaseNumber + '</li>';
                     content += '<li>Purchase percentage: ' + stats.purchasePercentage + '</li>';
-                    var link = "<a href='datasets/" + stats.path + "'>dataset</a>";
                     content += '<li>Link to dataset: ' + link + '</li>';
                     content += '</ul>';
-                    $('.empty-msg').html(content).css('color', "#000");
+
+                    showMessage(content, false);
                 }
             },
-            error: function (xhr, status, error) {
-                $('i.fa-spinner').hide();
-                $("#generate-btn").removeClass("disabled");
-                if (xhr.status === 500) {
-                    $.jGrowl("Token Mismatch!", {sticky: true, theme: 'jgrowl-danger'});
-                    return;
+            error: function (response) {
+                enableGenerateProcess(true);
+                hideLoader();
+
+                if (response.responseJSON) {
+                    showMessage(response.responseJSON.rows.join('<br>'), true);
+                } else {
+                    $.jGrowl(
+                        "Internal error! Server responded with: " + 
+                        "Code " + response.status + " " + response.statusText, {
+                        theme: 'jgrowl-danger',
+                        sticky: true
+                    });
                 }
-                var errorMessages = xhr.responseJSON.rows;
-                $(".empty-msg").append(errorMessages);
-                $('#rows-number').addClass('warning');
             }
         });
     });
+}
+
+$(document).ready(function () {
+    bindEvents();
 });
