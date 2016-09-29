@@ -49,7 +49,6 @@ $(document).ready(function() {
         checkFormData("#DataSourceName");
         checkFormData("#MLModelName");
         checkFormData("#EvaluationName");
-        checkRequired("#DataSourceName", "ds");
         checkRequired("#MLModelName", "ml");
         checkRequired("#EvaluationName", "ev");
         checkDatasourceField();
