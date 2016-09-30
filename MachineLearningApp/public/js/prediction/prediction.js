@@ -22,11 +22,11 @@ RT_PREDICTION.MLModel = {
 
     addMlLoader: function (selector) {
         var load = '<div class="loader-select loader-select-pred" id="loader"></div>';
+
         $(selector).append(load);
     },
 
     removeMlLoader: function (selector) {
-        console.log(2);
         $(selector).find('#loader').remove();
     }
 }
