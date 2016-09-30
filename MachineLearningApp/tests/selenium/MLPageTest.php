@@ -52,7 +52,7 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
 
         $selectDataSourceId = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectDataSource')));
         sleep(1);
-        $selectDataSourceId->selectByValue('157ed3c3201fb3');
+        $selectDataSourceId->selectByValue('1475237803');
 
         $submit = $this->driver->findElement(WebDriverBy::id('success-button-modal-ml'));
         $submit->click();
@@ -111,11 +111,11 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
 
         $selectModelName = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectMLModelId')));
         sleep(1);
-        $selectModelName->selectByValue('57ed070f67ec2');
+        $selectModelName->selectByValue('1475237784');
 
         $selectDatasourceName = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectEvDataSource')));
         sleep(1);
-        $selectDatasourceName->selectByValue('157ed05c686f6b');
+        $selectDatasourceName->selectByValue('1475237803');
 
         $submit = $this->driver->findElement(WebDriverBy::id('success-button-modal-ev'));
         $submit->click();
