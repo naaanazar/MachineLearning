@@ -285,6 +285,17 @@ a:focus, a:hover {
     margin-left: 0;
 }
 
+.loader-ml-pred {
+    position: relative;
+}
+
+.loader-select-pred {
+    position: absolute;
+    top: 5px;
+    right: 134px;
+    background: #fff;
+}
+
 @media screen and (max-width: 1000px) {
     .block-prediction {
         float: none;

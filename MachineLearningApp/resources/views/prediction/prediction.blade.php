@@ -15,7 +15,7 @@
             </div>
             <form class="form-horizontal form-prediction col-md-8 clearfix" method="post" action="{{ action('PredictionController@doPredict') }}">
                 {{ csrf_field() }}
-                <div class="form-group">
+                <div class="form-group loader-ml-pred">
                     <label class="control-label label-pred ML-model" for="ml_model_id">ML model</label>
                     <select id="ml_model_id" class="form-control select-pred" name="ml_model_id"></select>
                 </div>
