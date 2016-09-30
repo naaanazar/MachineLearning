@@ -8,7 +8,7 @@ function checkMLData(selector) {
     });
 }
 
-function checkMLRequired(selector, tab) {
+function checkMLFieldRequired(selector, tab) {
     $(selector).on('keyup click',function(e) {
         var empty = false;
 
@@ -77,8 +77,8 @@ $(document).ready(function() {
         checkMLData("#DataSourceName");
         checkMLData("#MLModelName");
         checkMLData("#EvaluationName");
-        checkMLRequired("#MLModelName", "ml");
-        checkMLRequired("#EvaluationName", "ev");
+        checkMLFieldRequired("#MLModelName", "ml");
+        checkMLFieldRequired("#EvaluationName", "ev");
         checkMLSelecField("#DataSourceName", "#SelectBuckets", "#SelectDataLocationS3", "ds");
         checkBatchPredictionField();
     });

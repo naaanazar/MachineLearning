@@ -92,9 +92,7 @@ RT_PREDICTION.Form = {
 
                     this.result = response.result;
                     this.purchase = response.result.predictedLabel == 0 ? "No" : "Yes";
-                    this.predictedScores = this.purchase === "No" ?
-                                           this.result.predictedScores[0] :
-                                           this.result.predictedScores[1];
+                    this.predictedScores = this.purchase === "No" ? this.result.predictedScores[0] : this.result.predictedScores[1];
 
                     this.content = "<p><strong>Purchase: </strong><span>";
                     this.content += this.purchase + "</span></p>";
