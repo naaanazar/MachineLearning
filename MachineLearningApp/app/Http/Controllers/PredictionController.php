@@ -114,7 +114,7 @@ class PredictionController extends Controller
             return response()->json(["status" => $status]);
         } else {
             try {
-                $result = $this->client->predict([
+                $data = $this->client->predict([
                     'MLModelId'       => $MLModelId,
                     'PredictEndpoint' => $predictEndpoint,
                     'Record'          => [
@@ -131,7 +131,7 @@ class PredictionController extends Controller
                 ]);
 
                 $status = true;
-                $result = $result["Prediction"];
+                $result = $data["Prediction"];
             } catch (MachineLearningException $e) {
                 $status = false;
                 $result = "Fail prediction! Try again or contact support!";

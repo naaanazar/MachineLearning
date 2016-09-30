@@ -5,6 +5,8 @@ RT_PREDICTION.MLModel = {
 
     getId: function () {
         if ($('div').hasClass('main-prediction')) {
+            this.addMlLoader('.loader-ml-pred');
+
             $.get("/ml/select-ml-model?Obj=ml", function (response) {
                 for (var key in response.data) {
                     this.result +=
@@ -12,8 +14,20 @@ RT_PREDICTION.MLModel = {
                 }
 
                $('#ml_model_id').html(this.result);
+
+               RT_PREDICTION.MLModel.removeMlLoader('.loader-ml-pred');
             });
         }
+    },
+
+    addMlLoader: function (selector) {
+        var load = '<div class="loader-select loader-select-pred" id="loader"></div>';
+
+        $(selector).append(load);
+    },
+
+    removeMlLoader: function (selector) {
+        $(selector).find('#loader').remove();
     }
 }
 
