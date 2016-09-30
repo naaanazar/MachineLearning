@@ -152,9 +152,6 @@ a:focus, a:hover {
     table-layout: fixed;
 }
 
-/*.btn-list-bucket{
-   margin-left: -5px;
-}*/
 .form-group-upload {
     margin-bottom: 0px !important;
 }
@@ -406,6 +403,7 @@ a:focus, a:hover {
 }
 
 .table-scroll-evaluation {
+    overflow-y: auto;
     height: 350px;
     width: 100%;
     position: absolute;
@@ -924,6 +922,7 @@ a:focus, a:hover {
 #describeEvaluations .table-headers span {
     min-height: 40px;
 }
+
 
 @keyframes fadeOutDownBig {
     from {

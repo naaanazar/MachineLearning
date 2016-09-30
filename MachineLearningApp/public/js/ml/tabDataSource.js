@@ -29,8 +29,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#DataSourceName').val('');
                 $(".modalCreateDataSource").modal('toggle');
-
-                listDataSource(data);
+                listDataSource(data[0]);
                 waitMeClose('#modal-ds-id');
             }
         });
@@ -65,6 +64,7 @@ $(document).ready(function () {
 
 function listDataSource(status) {
     showLoader('.container-describeDataSources');
+    console.log(status);
     statusAction(status);
 
     $.get("/ml/describe-data-sources?Obj=ml", function (response) {

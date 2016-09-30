@@ -1,7 +1,6 @@
 @extends('main')
 
 @section('content')
-
     <script src="{{ URL::to('js/ml/ml.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabDataSource.js') }}"></script>
     <script src="{{ URL::to('js/ml/tabMLModel.js') }}"></script>

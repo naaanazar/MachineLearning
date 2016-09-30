@@ -411,8 +411,6 @@ class MLController extends Controller
             return response()->json(['data' => $e->getMessage()]);
         }
 
-
-
         return response()->json(['deleted' => 'Ok']);
     }
 
@@ -452,7 +450,7 @@ class MLController extends Controller
 
     private function createDataSourceFromS3($DataSourceName, $DataLocationS3, $percentBegin, $percentEnd)
     {
-        $DataSourceId      = '1' . uniqid();
+        $DataSourceId      = strval(time());
         $DataSchema        = json_encode($this->DataSchema);
         $dataRearrangement = ["splitting" => [
            "percentBegin"  =>  $percentBegin,
@@ -497,7 +495,7 @@ class MLController extends Controller
         if (array_key_exists('error', $dsTraining)){
             $dsTraining['description'] = 'Error created training datasource';
 
-                return response()->json([(array)$dsTraining]);
+            return response()->json([(array)$dsTraining]);
         }
 
         $dsEvaluate = $this->createDataSourceFromS3('ds-evaluate: ' . $name, $DataLocationS3, '70', '100');
@@ -613,8 +611,7 @@ class MLController extends Controller
             $res['noExistDataset'] = true;
 
             return response()->json([(array)$res]);
-        }
-        
+        }        
     }
 
 
@@ -680,7 +677,6 @@ class MLController extends Controller
         }
 
         return response()->json(['success' => $result['BatchPredictionId']]);
-
     }
 
 
@@ -706,7 +702,6 @@ class MLController extends Controller
         }
 
         return $result['DataSourceId'];
-
     }
 
     protected function formatValidationErrors(Validator $validator)
