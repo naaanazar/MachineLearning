@@ -65,29 +65,29 @@ $(document).ready(function () {
         $(event.target).closest('label.upload-file').addClass('hide');
         $(event.target).closest('td.buttons').find('div.loader-s3-upload').removeClass('hide');
 
-        // $.ajax({
-        //     url: "s3/upload",
-        //     type:"post",
-        //     cache : false,
-        //     contentType : false,
-        //     processData : false,
-        //     data: data,
-        //     success: function(response) {
-        //         $.jGrowl('Success upload', {
-        //             theme: 'jgrowl-success'
-        //         });
-        //
-        //         $('table.table').ready(function() {
-        //             location.reload();
-        //         });
-        //
-        //         $(event.target).closest('span.glyphicon-upload').removeClass('hide');
-        //         $(event.target).closest('label.upload-file').removeClass('hide');
-        //         $(event.target).closest('td.buttons').find('div.loader-s3-upload').addClass('hide');
-        //     },
-        //     error: function (data) {
-        //     }
-        // });
+        $.ajax({
+            url: "s3/upload",
+            type:"post",
+            cache : false,
+            contentType : false,
+            processData : false,
+            data: data,
+            success: function(response) {
+                $.jGrowl('Success upload', {
+                    theme: 'jgrowl-success'
+                });
+
+                $('table.table').ready(function() {
+                    location.reload();
+                });
+
+                $(event.target).closest('span.glyphicon-upload').removeClass('hide');
+                $(event.target).closest('label.upload-file').removeClass('hide');
+                $(event.target).closest('td.buttons').find('div.loader-s3-upload').addClass('hide');
+            },
+            error: function (data) {
+            }
+        });
 
         event.preventDefault();
     });
