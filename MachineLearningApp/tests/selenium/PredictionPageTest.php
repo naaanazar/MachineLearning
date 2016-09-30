@@ -36,8 +36,8 @@ class PredictionPageTest extends \PHPUnit_Framework_TestCase
         $this->driver->wait()->until(WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('country')));
 
         $selectDataSourceId = new WebDriverSelect($this->driver->findElement(WebDriverBy::id("ml_model_id")));
-        sleep(2);
-        $selectDataSourceId->selectByValue('57ed070f67ec2');
+        sleep(3);
+        $selectDataSourceId->selectByValue('57ed06fe327be');
 
 
         $email = $this->driver->findElement(WebDriverBy::id('email'));
@@ -70,6 +70,7 @@ class PredictionPageTest extends \PHPUnit_Framework_TestCase
         $send = $this->driver->findElement(WebDriverBy::xpath("//*[starts-with(attribute::value, 'Send')]"));
         $send->click();
 
+        sleep(5);
         $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Predicted Scores:')]")));
         $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'Predicted Scores:')]"))->isDisplayed();
     }

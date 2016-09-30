@@ -111,11 +111,11 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
 
         $selectModelName = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectMLModelId')));
         sleep(1);
-        $selectModelName->selectByValue('57ed05db27861');
+        $selectModelName->selectByValue('57ed070f67ec2');
 
         $selectDatasourceName = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectEvDataSource')));
         sleep(1);
-        $selectDatasourceName->selectByValue('157ed21a224115');
+        $selectDatasourceName->selectByValue('157ed05c686f6b');
 
         $submit = $this->driver->findElement(WebDriverBy::id('success-button-modal-ev'));
         $submit->click();
