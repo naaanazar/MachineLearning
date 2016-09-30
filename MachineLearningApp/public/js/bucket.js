@@ -56,7 +56,7 @@ $(document).ready(function () {
         });
     }
 
-    $('body').on('change', '.s3-upload-file', function(event) {
+    $('body').on('change', '.s3-upload-file', function (event) {
         var nameBucket = $(event.target).closest('td.buttons').find('label.upload-file').data('delete-name');
         var data = new FormData();
         data.append('file', event.target.files[0]);
@@ -65,17 +65,17 @@ $(document).ready(function () {
 
         $.ajax({
             url: "s3/upload",
-            type:"post",
-            cache : false,
-            contentType : false,
-            processData : false,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
             data: data,
-            success: function(response) {
+            success: function (response) {
                 $.jGrowl('Success upload', {
                     theme: 'jgrowl-success'
                 });
 
-                $('table.table').ready(function() {
+                $('table.table').ready(function () {
                     location.reload();
                 });
                 loaderButtonUploadS3Next();
@@ -154,7 +154,7 @@ function setLocation(curLoc){
 }
 
 function showTable(content) {
-    $('.content').hide();
+    $('.content').remove();
     $('#loader-s3-main').remove();
     if(!content.hasOwnProperty('name')) {
         var key = 0;
@@ -183,15 +183,15 @@ function showTable(content) {
                         '>' +
                             '<span class="glyphicon glyphicon-minus"></span>' +
                         '</a>' +
-                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide" style="margin-right: 0px;padding-top: 0;padding-bottom: 0;padding-left: 8px;padding-right: 0;margin-left: -2px;">' +
-               '&nbsp&nbsp&nbsp<div class="loader-button-upload" id="loader-btn-upload-s3" style="padding-right: 0;padding-left: 9px;padding-top: 0;padding-bottom: 0;margin-left: 0px;margin-top: -18px;"></div>' +
-                '</div>' +
-                '&nbsp<label for="s3-upload-file-' + key + '"' +
-                        'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
-                        'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
-                            '<span class="glyphicon glyphicon-upload">' +
-                                '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
-                                'type="file" name="file" style="display: none">' +
+                        '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide" style="margin-right: 0px;padding-top: 0;padding-bottom: 0;padding-left: 8px;padding-right: 0;margin-left: -2px;">' +
+                            '&nbsp&nbsp&nbsp<div class="loader-button-upload" id="loader-btn-upload-s3" style="padding-right: 0;padding-left: 9px;padding-top: 0;padding-bottom: 0;margin-left: 0px;margin-top: -18px;"></div>' +
+                        '</div>' +
+                                '&nbsp<label for="s3-upload-file-' + key + '"' +
+                                'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
+                                'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
+                                    '<span class="glyphicon glyphicon-upload">' +
+                                        '<input id="s3-upload-file-' + key + '" class="s3-upload-file"' +
+                                        'type="file" name="file" style="display: none">' +
                             '</span>' +
                         '</label>' +
                 '</td>' +
