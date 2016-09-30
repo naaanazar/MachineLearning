@@ -514,7 +514,7 @@ class MLController extends Controller
             return response()->json([(array)$model]);
         }
 
-        $evaluation = $this->createEvaluation($model['success'], 'ev-: ' . $name, $dsEvaluate['success']) ;
+        $evaluation = $this->createEvaluation($model['success'], 'ev: ' . $name, $dsEvaluate['success']) ;
 
         if (array_key_exists('error', $evaluation )) {
             $evaluation['description'] = 'Error created evaluatin';
@@ -691,7 +691,7 @@ class MLController extends Controller
                 'ComputeStatistics' => true,
                 'DataSourceId'      => $DataSourceId,
                 'DataSourceName'    => $DataSourceId,
-                'DataSpec'          => [ // REQUIRED
+                'DataSpec'          => [ 
                     'DataLocationS3' => $DataLocationS3,
                     'DataSchema'     => $DataSchema
                 ],
