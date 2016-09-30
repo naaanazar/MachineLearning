@@ -20,6 +20,8 @@ body {
     bottom: 0;
     width: 100%;
     height: 45px;
+
+
 }
 
 .copy {
@@ -489,8 +491,14 @@ a:focus, a:hover {
     .table-headers {
         margin-left: 0px !important;
     }
+    .ML-tables-content{
+        margin-bottom: 100px;
+    }
+    .panel-margin{
+        margin-bottom: 
+    }
 }
-
+    
 /***************************************
     Other
 ***************************************/
@@ -532,7 +540,7 @@ a:focus, a:hover {
 }
 
 .panel-margin {
-    margin-bottom: 0;
+    margin-bottom: -50px;
 }
 
 .block-add {
