@@ -61,33 +61,28 @@ $(document).ready(function () {
         var data = new FormData();
         data.append('file', event.target.files[0]);
         data.append('nameBucket', nameBucket);
-        $(event.target).closest('span.glyphicon-upload').addClass('hide');
-        $(event.target).closest('label.upload-file').addClass('hide');
-        $(event.target).closest('td.buttons').find('div.loader-s3-upload').removeClass('hide');
+        loaderButtonUploadS3Prev();
 
-        // $.ajax({
-        //     url: "s3/upload",
-        //     type:"post",
-        //     cache : false,
-        //     contentType : false,
-        //     processData : false,
-        //     data: data,
-        //     success: function(response) {
-        //         $.jGrowl('Success upload', {
-        //             theme: 'jgrowl-success'
-        //         });
-        //
-        //         $('table.table').ready(function() {
-        //             location.reload();
-        //         });
-        //
-        //         $(event.target).closest('span.glyphicon-upload').removeClass('hide');
-        //         $(event.target).closest('label.upload-file').removeClass('hide');
-        //         $(event.target).closest('td.buttons').find('div.loader-s3-upload').addClass('hide');
-        //     },
-        //     error: function (data) {
-        //     }
-        // });
+        $.ajax({
+            url: "s3/upload",
+            type:"post",
+            cache : false,
+            contentType : false,
+            processData : false,
+            data: data,
+            success: function(response) {
+                $.jGrowl('Success upload', {
+                    theme: 'jgrowl-success'
+                });
+
+                $('table.table').ready(function() {
+                    location.reload();
+                });
+                loaderButtonUploadS3Next();
+            },
+            error: function (data) {
+            }
+        });
 
         event.preventDefault();
     });
@@ -188,8 +183,8 @@ function showTable(content) {
                         '>' +
                             '<span class="glyphicon glyphicon-minus"></span>' +
                         '</a>' +
-                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide" style="margin-right: -13px;">' +
-               '&nbsp&nbsp&nbsp<div class="loader-button-upload" id="loader-btn-upload-s3" style="padding-right: 0; padding-left: 9px; padding-top: 0; padding-bottom: 0; margin-left: 0px; margin-top: -25px;"></div>' +
+                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide" style="margin-right: 0px;padding-top: 0;padding-bottom: 0;padding-left: 8px;padding-right: 0;margin-left: -2px;">' +
+               '&nbsp&nbsp&nbsp<div class="loader-button-upload" id="loader-btn-upload-s3" style="padding-right: 0;padding-left: 9px;padding-top: 0;padding-bottom: 0;margin-left: 0px;margin-top: -18px;"></div>' +
                 '</div>' +
                 '&nbsp<label for="s3-upload-file-' + key + '"' +
                         'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
@@ -357,4 +352,20 @@ function getBuckets() {
         result.push(JSON.parse(localStorage.getItem(key)));
     }
     return result;
+}
+
+function loaderButtonUploadS3Prev() {
+    $(event.target).closest('span.glyphicon-upload').addClass('hide');
+    $(event.target).closest('label.upload-file').addClass('hide');
+    $(event.target).closest('td.buttons').find('div.loader-s3-upload').removeClass('hide');
+
+    $("td.reference").each(function(){
+        $(this).removeClass('reference');
+    });
+}
+
+function loaderButtonUploadS3Next() {
+    $(event.target).closest('span.glyphicon-upload').removeClass('hide');
+    $(event.target).closest('label.upload-file').removeClass('hide');
+    $(event.target).closest('td.buttons').find('div.loader-s3-upload').addClass('hide');
 }
