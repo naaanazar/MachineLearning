@@ -8,16 +8,15 @@ use Facebook\WebDriver\WebDriverSelect;
 
 class MLPageTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $driver;
 
     public function addDataProvider()
     {
         return array (
-            array ('http://192.168.2.134:9515', DesiredCapabilities::chrome()),
-            array ('http://192.168.2.134:4444/wd/hub', DesiredCapabilities::firefox())
-//            array ('http://192.168.0.101:4444/wd/hub', DesiredCapabilities::firefox()),
+//            array ('http://192.168.2.134:9515', DesiredCapabilities::chrome()),
 //            array ('http://192.168.0.101:9515', DesiredCapabilities::chrome()),
+            array ('http://192.168.2.134:4444/wd/hub', DesiredCapabilities::firefox())
+//            array ('http://192.168.0.101:4444/wd/hub', DesiredCapabilities::firefox())
         );
     }
 
@@ -29,23 +28,20 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider addDataProvider
      */
-    public function testOpenPredictionsPage ($host, $desiredCapabilities)
+    public function testCreateMLModel ($host, $desiredCapabilities)
     {
         $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
         $this->driver->get('http://laravel:3080/ml');
 
-        $insetMLModels = WebDriverBy::id('describeMLModelsContent');
         $buttonCreateMLMode = WebDriverBy::xpath("//*[@id='ml-button-create']/button");
         $inputAreaMLModelName = WebDriverBy::id('MLModelName');
-        $dropdownmenuMLmodeltype = WebDriverBy::id('MLModelType');
-        $dropdownmenuDataSourceId = WebDriverBy::id('SelectDataSource');
-        $buttonSubmit = WebDriverBy::xpath("//*[@id='describeMLModels']//button");
 
-        $this->driver->wait()->until(WebDriverExpectedCondition::elementToBeClickable($insetMLModels));
-        $MLModels = $this->driver->findElement($insetMLModels);
-        $MLModels->click();
+        $openAdvancedSettings = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'Advanced settings')]"));
+        $openAdvancedSettings->click();
 
         $this->driver->wait()->until(WebDriverExpectedCondition::elementToBeClickable($buttonCreateMLMode));
+        $this->assertEquals('http://laravel:3080/ml#describeMLModels', $this->driver->getCurrentURL());
+
         $createDatasource = $this->driver->findElement($buttonCreateMLMode);
         $createDatasource->click();
 
@@ -54,30 +50,105 @@ class MLPageTest extends \PHPUnit_Framework_TestCase
         $inputMLModelName->clear();
         $inputMLModelName->sendKeys('selenium-test');
 
-        $selectMLmodeltype = new WebDriverSelect($this->driver->findElement($dropdownmenuMLmodeltype));
-        $selectMLmodeltype->selectByValue('BINARY');
-
-        $selectDataSourceId = new WebDriverSelect($this->driver->findElement($dropdownmenuDataSourceId));
+        $selectDataSourceId = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectDataSource')));
         sleep(1);
-        $selectDataSourceId->selectByValue('d-57d7f4d9a323a');
+        $selectDataSourceId->selectByValue('157ed3c3201fb3');
 
-        $submit = $this->driver->findElement($buttonSubmit);
+        $submit = $this->driver->findElement(WebDriverBy::id('success-button-modal-ml'));
         $submit->click();
 
-        sleep(2);
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Successfully created:')]")));
 
-        $this->driver->wait()->until(WebDriverExpectedCondition::elementToBeClickable($insetMLModels));
-        $MLModels1 = $this->driver->findElement($insetMLModels);
-        $MLModels1->click();
+        $this->driver->navigate()->refresh();
 
-        sleep(1);
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'ml: selenium-test')]")));
 
-        $a = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'selenium-test')]"))->getText();
-        $b = 'selenium-test';
+        $a = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'ml: selenium-test')]"))->getText();
+        $b = 'ml: selenium-test';
         $this->assertEquals($a, $b);
 
-        $deleteMLMode = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'selenium-test')]//..//a[2]"));
+        $openInfo = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'ml: selenium-test')]//..//a[2]"));
+        $openInfo->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[@id='modal']//button")));
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Model  Id')]")));
+        
+        $a1 = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'Model  Id')]"))->getText();
+        $b1 = 'Model Id';
+        $this->assertEquals($a1, $b1);
+
+        $closeInfo = $this->driver->findElement(WebDriverBy::xpath("//*[@id='modal']//button"));
+        $closeInfo->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'ml: selenium-test')]")));
+        sleep(1);
+        
+        $deleteMLMode = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'ml: selenium-test')]//..//a[3]"));
         $deleteMLMode->click();
-        sleep(2);
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Successfully removed: ml: selenium-test')]")));
+    }
+
+    /**
+     * @dataProvider addDataProvider
+     */
+    public function testCreateEvaluation ($host, $desiredCapabilities)
+    {
+        $this->driver = RemoteWebDriver::create($host, $desiredCapabilities);
+        $this->driver->get('http://laravel:3080/ml#describeEvaluations');
+
+        $buttonCreateMLMode = WebDriverBy::xpath("//*[@id='ml-button-create']/button");
+        $inputAreaEvaluationName = WebDriverBy::id('EvaluationName');
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::elementToBeClickable($buttonCreateMLMode));
+        $createDatasource = $this->driver->findElement($buttonCreateMLMode);
+        $createDatasource->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($inputAreaEvaluationName));
+        $inputMLModelName = $this->driver->findElement($inputAreaEvaluationName);
+        $inputMLModelName->clear();
+        $inputMLModelName->sendKeys('selenium-test');
+
+        $selectModelName = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectMLModelId')));
+        sleep(1);
+        $selectModelName->selectByValue('57ed05db27861');
+
+        $selectDatasourceName = new WebDriverSelect($this->driver->findElement(WebDriverBy::id('SelectEvDataSource')));
+        sleep(1);
+        $selectDatasourceName->selectByValue('157ed21a224115');
+
+        $submit = $this->driver->findElement(WebDriverBy::id('success-button-modal-ev'));
+        $submit->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Successfully created:')]")));
+
+        $this->driver->navigate()->refresh();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'ev: selenium-test')]")));
+
+        $a = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'ev: selenium-test')]"))->getText();
+        $b = 'ev: selenium-test';
+        $this->assertEquals($a, $b);
+
+        $openInfo = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'ev: selenium-test')]//..//a[1]"));
+        $openInfo->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[@id='modal']//button")));
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Model  Id')]")));
+
+        $a1 = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'Model  Id')]"))->getText();
+        $b1 = 'Model Id';
+        $this->assertEquals($a1, $b1);
+
+        $closeInfo = $this->driver->findElement(WebDriverBy::xpath("//*[@id='modal']//button"));
+        $closeInfo->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'ev: selenium-test')]")));
+        sleep(1);
+
+        $deleteEvaluations = $this->driver->findElement(WebDriverBy::xpath("//*[contains(text(),'ev: selenium-test')]//..//a[2]"));
+        $deleteEvaluations->click();
+
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::xpath("//*[contains(text(),'Successfully removed: ev: selenium-test')]")));
     }
 }
