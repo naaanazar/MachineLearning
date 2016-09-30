@@ -12,8 +12,10 @@ class MenuTest extends \PHPUnit_Framework_TestCase
     public function addDataProvider()
     {
         return array (
-            array ('http://192.168.2.134:9515', DesiredCapabilities::chrome()),
+//            array ('http://192.168.2.134:9515', DesiredCapabilities::chrome()),
+//            array ('http://192.168.0.101:9515', DesiredCapabilities::chrome()),
             array ('http://192.168.2.134:4444/wd/hub', DesiredCapabilities::firefox())
+//            array ('http://192.168.0.101:4444/wd/hub', DesiredCapabilities::firefox())
         );
     }
 
