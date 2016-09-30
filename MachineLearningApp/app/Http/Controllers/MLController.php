@@ -523,10 +523,10 @@ class MLController extends Controller
         }
         
         $result['success'] =
-            'model: ' . $name. '<br>' .
+            'model:' . $name. '<br>' .
             'ds-training: ' . $name . '<br>' .
             'ds-evaluate: ' . $name . '<br>' .            
-            'ev-: ' . $name . '<br>';   
+            'ev :' . $name . '<br>';
 
         return response()->json([(array)$result]);
     }
@@ -558,6 +558,7 @@ class MLController extends Controller
             return response()->json([(array)$res]);
         } 
     }
+    
 
     private function createMLModel($ModelName, $DataSourceId)
     {
