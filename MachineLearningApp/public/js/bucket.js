@@ -188,8 +188,9 @@ function showTable(content) {
                         '>' +
                             '<span class="glyphicon glyphicon-minus"></span>' +
                         '</a>' +
-                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload" style="margin-right: 0px;padding-top: 0;padding-bottom: 0;padding-left: 8px;padding-right: 0;margin-left: -2px;">' +
-                '&nbsp;&nbsp;&nbsp;<div class="loader-button-upload" id="loader-btn-upload-s3" style="padding-right: 0;padding-left: 9px;padding-top: 0;padding-bottom: 0;margin-left: 0px;margin-top: -18px;"></div></div>' +
+                '<div class="btn btn-sm btn-list btn-list-bucket btn-delete-bucket loader-s3-upload hide" style="margin-right: -13px;">' +
+               '&nbsp&nbsp&nbsp<div class="loader-button-upload" id="loader-btn-upload-s3" style="padding-right: 0; padding-left: 9px; padding-top: 0; padding-bottom: 0; margin-left: 0px; margin-top: -25px;"></div>' +
+                '</div>' +
                 '&nbsp<label for="s3-upload-file-' + key + '"' +
                         'class="btn btn-primary btn-file upload-file btn-sm btn-list" data-toggle="tooltip"' +
                         'data-placement="top" title="Upload file" data-delete-name="' + item.name + '">' +
