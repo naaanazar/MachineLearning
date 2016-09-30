@@ -37,7 +37,7 @@ class PredictionPageTest extends \PHPUnit_Framework_TestCase
 
         $selectDataSourceId = new WebDriverSelect($this->driver->findElement(WebDriverBy::id("ml_model_id")));
         sleep(3);
-        $selectDataSourceId->selectByValue('57ed06fe327be');
+        $selectDataSourceId->selectByValue('1475237784');
 
 
         $email = $this->driver->findElement(WebDriverBy::id('email'));
