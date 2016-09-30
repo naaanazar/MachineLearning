@@ -561,7 +561,7 @@ class MLController extends Controller
 
     private function createMLModel($ModelName, $DataSourceId)
     {
-        $ModelId      = uniqid();
+        $ModelId      = strval(time());
         $ModelType    = 'BINARY';
 
         try {
@@ -617,7 +617,7 @@ class MLController extends Controller
 
     private function createEvaluation($MLModelId, $EvaluationName, $DataSourceId)
     {
-        $EvaluationId   = uniqid('e');
+        $EvaluationId   = strval(time());
 
         try {
 
@@ -682,7 +682,7 @@ class MLController extends Controller
 
     private function createBatchDataSourceFromS3($fileName)
     {
-        $DataSourceId   = uniqid();
+        $DataSourceId   = strval(time());
         $DataLocationS3 = 's3://'.$this->bucket.'/'.$fileName;
         $DataSchema     = json_encode($this->DataSchemaBatch);
 

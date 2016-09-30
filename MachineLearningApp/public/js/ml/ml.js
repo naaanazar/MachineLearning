@@ -14,7 +14,6 @@ $(document).ready(function() {
     });
 
 
-
     $(".ml-button-back").on("click", function(e) {
         $(".ml-table").hide().fadeOut();
         $(".ml-button-block").fadeIn();
@@ -54,14 +53,10 @@ $(document).ready(function() {
                 $('#describeMLModels').addClass('active in');
                 $('#describeMLModelsContent').attr('aria-expanded', true);
                 $('#describeMLModelsContent').closest('li').addClass('active');
+                $('.tab-content').find('.ML-tables-content ').removeClass('loaded');
                 buttonCreate('btn-create-mlmodel', '#ml-button-create', 'Create ML Mode', '#modalCreateModel');                
                 waitMeClose('#modal-main-ml-id');
-                listMLModel(data[0]);
-
-//                 $.jGrowl('Error created', {
-//            theme: 'jgrowl-danger'
-//        });
-              
+                listMLModel(data[0]);              
             },
             error: function() {},
         });
