@@ -20,7 +20,6 @@
        <link rel="stylesheet" type="text/css" href="{{ URL::to('css/lib/jGrowl/jquery.jgrowl.min.css') }}" />
        <script src="{{ URL::to('js/lib/jGrowl/jquery.jgrowl.min.js') }}"></script>
        <script src="{{ URL::to('js/common.js') }}"></script>
-       <script src="{{ URL::to('js/ml/ml.js') }}"></script>
        <script src="{{ URL::to('js/prediction/prediction.js') }}"></script>
        <script src="{{ URL::to('js/lib/bootstrap/bootstrap.min.js') }}"></script>
        <script src="{{ URL::to('js/back-to-top.js') }}"></script>

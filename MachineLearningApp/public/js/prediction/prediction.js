@@ -4,7 +4,7 @@ RT_PREDICTION.MLModel = {
     result: "",
 
     getId: function () {
-        if ($('div').hasClass('main-prediction')) {
+        if ($('form').hasClass('form-prediction')) {
             this.addMlLoader('.loader-ml-pred');
 
             $.get("/ml/select-ml-model?Obj=ml", function (response) {
